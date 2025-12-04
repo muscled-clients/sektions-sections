@@ -1,0 +1,719 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+  #collection-carousel-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+    overflow: hidden;
+  }
+
+  #collection-carousel-{{ section.id }} .carousel-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px;
+  }
+
+  #collection-carousel-{{ section.id }} .section-title {
+    text-align: center;
+    font-size: {{ section.settings.section_title_size }}px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    color: #000;
+  }
+
+  #collection-carousel-{{ section.id }} .swiper-container {
+    position: relative;
+    width: 100%;
+    padding: 80px 0 60px;
+  }
+
+  #collection-carousel-{{ section.id }} .swiper-wrapper {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  #collection-carousel-{{ section.id }} .swiper-slide {
+    width: 280px;
+    height: {{ section.settings.active_card_height }}px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  #collection-carousel-{{ section.id }} .card {
+    width: 100%;
+    height: {{ section.settings.card_height }}px;
+    border-radius: {{ section.settings.card_border_radius }}px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: height {{ section.settings.card_transition_speed }}ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s ease;
+  }
+
+  #collection-carousel-{{ section.id }} .swiper-slide-active .card {
+    height: {{ section.settings.active_card_height }}px;
+  }
+
+  #collection-carousel-{{ section.id }} .swiper-slide-active .card {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  #collection-carousel-{{ section.id }} .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #collection-carousel-{{ section.id }} .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px;
+    background: rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  #collection-carousel-{{ section.id }} .swiper-slide-active .card-overlay {
+    opacity: 1;
+  }
+
+  #collection-carousel-{{ section.id }} .card-title {
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: {{ section.settings.title_font_weight }};
+    color: {{ section.settings.title_color }};
+    text-align: center;
+    margin: 0;
+    padding: 12px 24px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+  }
+
+  #collection-carousel-{{ section.id }} .card-button {
+    display: inline-block;
+    padding: {{ section.settings.button_padding_vertical }}px {{ section.settings.button_padding_horizontal }}px;
+    background: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: {{ section.settings.button_font_size }}px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  #collection-carousel-{{ section.id }} .card-button:hover {
+    background: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text_color }};
+    transform: scale(1.05);
+  }
+
+  /* Navigation Arrows */
+  #collection-carousel-{{ section.id }} .swiper-button-prev,
+  #collection-carousel-{{ section.id }} .swiper-button-next {
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    border-radius: {{ section.settings.arrow_border_radius }}px !important;
+    color: {{ section.settings.arrow_color }} !important;
+    border: {{ section.settings.arrow_border_size }}px solid #000000 !important;
+    box-shadow: none !important;
+    position: absolute !important;
+    top: 145px !important;
+    margin-top: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: {{ section.settings.arrow_padding }}px !important;
+    transition: all 0.3s ease-in !important;
+    box-sizing: content-box !important;
+    z-index: 1 !important;
+  }
+
+  #collection-carousel-{{ section.id }} .swiper-button-prev:after,
+  #collection-carousel-{{ section.id }} .swiper-button-next:after {
+    font-size: 14px !important;
+    font-weight: bold !important;
+    width: {{ section.settings.arrow_size }}px !important;
+    height: {{ section.settings.arrow_size }}px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  #collection-carousel-{{ section.id }} .swiper-button-prev {
+    left: 50% !important;
+    margin-left: -230px !important;
+  }
+
+  #collection-carousel-{{ section.id }} .swiper-button-next {
+    right: 50% !important;
+    margin-right: -230px !important;
+  }
+
+  #collection-carousel-{{ section.id }} .swiper-button-prev:hover,
+  #collection-carousel-{{ section.id }} .swiper-button-next:hover {
+    background: {{ section.settings.arrow_hover_background }} !important;
+    color: {{ section.settings.arrow_hover_color }} !important;
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 1024px) {
+    #collection-carousel-{{ section.id }} .swiper-slide {
+      width: 250px;
+      height: {{ section.settings.active_card_height | minus: 50 }}px;
+    }
+
+    #collection-carousel-{{ section.id }} .card {
+      height: {{ section.settings.card_height | minus: 50 }}px;
+    }
+
+    #collection-carousel-{{ section.id }} .swiper-slide-active .card {
+      height: {{ section.settings.active_card_height | minus: 50 }}px;
+    }
+
+    #collection-carousel-{{ section.id }} .swiper-button-prev,
+    #collection-carousel-{{ section.id }} .swiper-button-next {
+      top: 145px !important;
+    }
+
+    #collection-carousel-{{ section.id }} .swiper-button-prev {
+      left: 10px !important;
+      margin-left: 0 !important;
+    }
+
+    #collection-carousel-{{ section.id }} .swiper-button-next {
+      right: 10px !important;
+      margin-right: 0 !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #collection-carousel-{{ section.id }} .swiper-slide {
+      width: 220px;
+      height: {{ section.settings.active_card_height | minus: 100 }}px;
+    }
+
+    #collection-carousel-{{ section.id }} .card {
+      height: {{ section.settings.card_height | minus: 100 }}px;
+    }
+
+    #collection-carousel-{{ section.id }} .swiper-slide-active .card {
+      height: {{ section.settings.active_card_height | minus: 100 }}px;
+    }
+
+    #collection-carousel-{{ section.id }} .card-title {
+      font-size: {{ section.settings.title_font_size | minus: 4 }}px;
+      padding: 10px 18px;
+    }
+
+    #collection-carousel-{{ section.id }} .card-button {
+      font-size: {{ section.settings.button_font_size | minus: 2 }}px;
+      padding: {{ section.settings.button_padding_vertical | minus: 2 }}px {{ section.settings.button_padding_horizontal | minus: 8 }}px;
+    }
+
+    #collection-carousel-{{ section.id }} .swiper-button-prev,
+    #collection-carousel-{{ section.id }} .swiper-button-next {
+      width: {{ section.settings.arrow_size | minus: 10 }}px !important;
+      height: {{ section.settings.arrow_size | minus: 10 }}px !important;
+      top: 145px !important;
+    }
+  }
+</style>
+
+<section id="collection-carousel-{{ section.id }}">
+  <div class="carousel-container">
+    {% if section.settings.section_title != blank %}
+      <h2 class="section-title">{{ section.settings.section_title }}</h2>
+    {% endif %}
+
+    <div class="swiper-container swiper-{{ section.id }}">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide" {{ block.shopify_attributes }}>
+            <div class="card">
+              {% if block.settings.image %}
+                <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.title }}" class="card-image" loading="lazy">
+              {% else %}
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500'%3E%3Crect fill='%23e5e5e5' width='400' height='500'/%3E%3Ctext fill='%23999' x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='18'%3EAdd Image%3C/text%3E%3C/svg%3E" alt="Placeholder" class="card-image">
+              {% endif %}
+              <div class="card-overlay">
+                <h3 class="card-title">{{ block.settings.title }}</h3>
+                <a href="{{ block.settings.button_link }}" class="card-button">{{ block.settings.button_text }}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.show_arrows %}
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const swiperEl = document.querySelector('.swiper-{{ section.id }}');
+    const slides = Array.from(swiperEl.querySelectorAll('.swiper-slide'));
+    const totalSlides = slides.length;
+
+    // Clone slides multiple times to ensure smooth looping
+    const wrapper = swiperEl.querySelector('.swiper-wrapper');
+
+    // Add clones before (in reverse order to maintain sequence)
+    for (let i = 0; i < 5; i++) {
+      for (let j = slides.length - 1; j >= 0; j--) {
+        const clone = slides[j].cloneNode(true);
+        wrapper.insertBefore(clone, wrapper.firstChild);
+      }
+    }
+
+    // Add clones after
+    for (let i = 0; i < 5; i++) {
+      slides.forEach(function(slide) {
+        const clone = slide.cloneNode(true);
+        wrapper.appendChild(clone);
+      });
+    }
+
+    let isResetting = false;
+
+    const swiper = new Swiper('.swiper-{{ section.id }}', {
+      slidesPerView: 'auto',
+      spaceBetween: {{ section.settings.space_between }},
+      centeredSlides: true,
+      speed: {{ section.settings.transition_speed }},
+      slideToClickedSlide: true,
+      initialSlide: totalSlides * 5,
+      {% if section.settings.autoplay %}
+      autoplay: {
+        delay: {{ section.settings.autoplay_delay }},
+        disableOnInteraction: false,
+      },
+      {% endif %}
+      navigation: {
+        nextEl: '#collection-carousel-{{ section.id }} .swiper-button-next',
+        prevEl: '#collection-carousel-{{ section.id }} .swiper-button-prev',
+      },
+      on: {
+        slideChangeTransitionEnd: function() {
+          if (isResetting) return;
+
+          const currentIndex = this.activeIndex;
+          const realIndex = currentIndex % totalSlides;
+
+          // Reset position when going backwards - trigger earlier for smoother reset
+          if (currentIndex < totalSlides * 2) {
+            isResetting = true;
+            setTimeout(() => {
+              this.slideTo(totalSlides * 5 + realIndex, 0, false);
+              setTimeout(() => { isResetting = false; }, 100);
+            }, 10);
+          }
+
+          // Reset position when going forwards - trigger earlier for smoother reset
+          if (currentIndex >= totalSlides * 9) {
+            isResetting = true;
+            setTimeout(() => {
+              this.slideTo(totalSlides * 5 + realIndex, 0, false);
+              setTimeout(() => { isResetting = false; }, 100);
+            }, 10);
+          }
+        }
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collection Carousel",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title"
+    },
+    {
+      "type": "range",
+      "id": "section_title_size",
+      "label": "Section Title Size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Card Settings"
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "label": "Card Height (Non-Active)",
+      "min": 250,
+      "max": 500,
+      "step": 10,
+      "default": 350,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "active_card_height",
+      "label": "Card Height (Active)",
+      "min": 300,
+      "max": 600,
+      "step": 10,
+      "default": 450,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card Border Radius",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_transition_speed",
+      "label": "Card Height Transition Speed",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "default": 500,
+      "unit": "ms"
+    },
+    {
+      "type": "header",
+      "content": "Title Settings"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title Font Size",
+      "min": 18,
+      "max": 40,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_font_weight",
+      "label": "Title Font Weight",
+      "min": 400,
+      "max": 900,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button Hover Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button Font Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Button Vertical Padding",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Button Horizontal Padding",
+      "min": 20,
+      "max": 50,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button Border Radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Navigation Arrows"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Navigation Arrows",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "arrow_background",
+      "label": "Arrow Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_background",
+      "label": "Arrow Hover Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_color",
+      "label": "Arrow Hover Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "label": "Arrow Size",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "default": 45,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "arrow_border_radius",
+      "label": "Arrow Border Radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "arrow_border_size",
+      "label": "Arrow Border Size",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 2,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "arrow_padding",
+      "label": "Arrow Padding",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "range",
+      "id": "space_between",
+      "label": "Space Between Slides",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay",
+      "label": "Autoplay Delay",
+      "min": 2000,
+      "max": 8000,
+      "step": 500,
+      "default": 3000,
+      "unit": "ms"
+    },
+    {
+      "type": "range",
+      "id": "transition_speed",
+      "label": "Transition Speed",
+      "min": 300,
+      "max": 1000,
+      "step": 100,
+      "default": 600,
+      "unit": "ms"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Collection Name"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [
+    {
+      "name": "Collection Carousel",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Bracelets",
+            "button_text": "Shop now"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Earrings",
+            "button_text": "Shop now"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Necklaces",
+            "button_text": "Shop now"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Rings",
+            "button_text": "Shop now"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Accessories",
+            "button_text": "Shop now"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

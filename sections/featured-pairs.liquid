@@ -1,0 +1,487 @@
+{%- liquid
+  assign container_width = section.settings.container_width | append: 'px'
+  assign text_align = section.settings.text_align
+  assign gap_desktop = section.settings.gap_desktop | append: 'px'
+  assign gap_mobile = section.settings.gap_mobile | append: 'px'
+  assign pad_top = section.settings.pad_top | append: 'px'
+  assign pad_bottom = section.settings.pad_bottom | append: 'px'
+  assign pad_side = section.settings.pad_side | append: 'px'
+  assign eyebrow_font_size = section.settings.eyebrow_font_size | append: 'px'
+  assign heading_font_size = section.settings.heading_font_size | append: 'px'
+  assign eyebrow_font_size_mobile = section.settings.eyebrow_font_size | times: 0.85 | round | append: 'px'
+  assign heading_font_size_mobile = section.settings.heading_font_size | times: 0.75 | round | append: 'px'
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --container-width: {{ container_width }};
+    --text-align: {{ text_align }};
+    --gap-desktop: {{ gap_desktop }};
+    --gap-mobile: {{ gap_mobile }};
+    --pad-top: {{ pad_top }};
+    --pad-bottom: {{ pad_bottom }};
+    --pad-side: {{ pad_side }};
+    --eyebrow-font-size: {{ eyebrow_font_size }};
+    --heading-font-size: {{ heading_font_size }};
+    --eyebrow-font-size-mobile: {{ eyebrow_font_size_mobile }};
+    --heading-font-size-mobile: {{ heading_font_size_mobile }};
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs {
+    padding-top: var(--pad-top);
+    padding-bottom: var(--pad-bottom);
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding-left: var(--pad-side);
+    padding-right: var(--pad-side);
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__grid {
+    display: grid;
+    gap: var(--gap-mobile);
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (min-width: 640px) {
+    #shopify-section-{{ section.id }} .featured-pairs__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--gap-desktop);
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .featured-pairs__grid {
+      gap: var(--gap-desktop);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__card {
+    display: flex;
+    flex-direction: column;
+    text-align: var(--text-align);
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__card--link {
+    transition: transform 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__card--link:hover {
+    transform: translateY(-2px);
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__image-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__image-wrapper--natural {
+    aspect-ratio: auto;
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__image-wrapper--4-3 {
+    aspect-ratio: 4 / 3;
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__image-wrapper--3-2 {
+    aspect-ratio: 3 / 2;
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__image-wrapper--1-1 {
+    aspect-ratio: 1 / 1;
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__image--shadow {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__content {
+    padding-top: 1.25rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__eyebrow {
+    font-size: var(--eyebrow-font-size);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+    opacity: 0.8;
+    line-height: 1.4;
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__title {
+    font-size: var(--heading-font-size);
+    font-weight: bold;
+    line-height: 1.1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: 639px) {
+    #shopify-section-{{ section.id }} .featured-pairs__eyebrow {
+      font-size: var(--eyebrow-font-size-mobile);
+    }
+
+    #shopify-section-{{ section.id }} .featured-pairs__title {
+      font-size: var(--heading-font-size-mobile);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .featured-pairs__divider {
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    margin: 0 auto var(--pad-top);
+    max-width: var(--container-width);
+    width: calc(100% - var(--pad-side) * 2);
+  }
+</style>
+
+<section class="featured-pairs" id="featured-pairs-{{ section.id }}">
+  {%- if section.settings.show_divider -%}
+    <hr class="featured-pairs__divider">
+  {%- endif -%}
+
+  <div class="featured-pairs__container">
+    <div class="featured-pairs__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign aspect_ratio_class = 'featured-pairs__image-wrapper--' | append: block.settings.aspect_ratio | replace: '_', '-'
+          assign shadow_class = ''
+          if block.settings.show_shadow
+            assign shadow_class = ' featured-pairs__image--shadow'
+          endif
+          
+          assign card_styles = ''
+          if block.settings.card_bg and block.settings.card_bg != 'transparent' and block.settings.card_bg != ''
+            assign card_styles = 'background-color: ' | append: block.settings.card_bg | append: '; padding: 1.5rem; border-radius: 0.5rem;'
+          endif
+          
+          assign eyebrow_styles = ''
+          if block.settings.eyebrow_color and block.settings.eyebrow_color != ''
+            assign eyebrow_styles = 'color: ' | append: block.settings.eyebrow_color | append: ';'
+          endif
+          
+          assign title_styles = ''
+          if block.settings.title_color and block.settings.title_color != ''
+            assign title_styles = 'color: ' | append: block.settings.title_color | append: ';'
+          endif
+          
+          assign card_class = 'featured-pairs__card'
+          if block.settings.make_card_clickable and block.settings.link_url != blank
+            assign card_class = card_class | append: ' featured-pairs__card--link'
+          endif
+          
+          assign aria_label = block.settings.link_aria_label
+          if aria_label == blank
+            assign aria_label = block.settings.title
+          endif
+        -%}
+
+        {%- if block.settings.make_card_clickable and block.settings.link_url != blank -%}
+          <a href="{{ block.settings.link_url }}" class="{{ card_class }}" aria-label="{{ aria_label }}" style="{{ card_styles }}" {{ block.shopify_attributes }}>
+        {%- else -%}
+          <div class="{{ card_class }}" style="{{ card_styles }}" {{ block.shopify_attributes }}>
+        {%- endif -%}
+
+          <div class="featured-pairs__image-wrapper {{ aspect_ratio_class }}">
+            {%- if block.settings.image != blank -%}
+              {%- assign image_class = 'featured-pairs__image' | append: shadow_class -%}
+              {{
+                block.settings.image
+                | image_url: width: 1600
+                | image_tag:
+                  loading: 'lazy',
+                  class: image_class,
+                  alt: block.settings.image_alt | default: block.settings.image.alt,
+                  sizes: '(min-width: 1024px) 50vw, (min-width: 640px) 50vw, 100vw',
+                  widths: '400, 600, 800, 1000, 1200, 1600'
+              }}
+            {%- else -%}
+              {%- assign placeholder_class = 'featured-pairs__image' | append: shadow_class -%}
+              {{ 'product-1' | placeholder_svg_tag: placeholder_class }}
+            {%- endif -%}
+          </div>
+
+          <div class="featured-pairs__content">
+            {%- if block.settings.eyebrow != blank -%}
+              <p class="featured-pairs__eyebrow" style="{{ eyebrow_styles }}">
+                {{ block.settings.eyebrow }}
+              </p>
+            {%- endif -%}
+
+            {%- if block.settings.title != blank -%}
+              <h3 class="featured-pairs__title" style="{{ title_styles }}">
+                {{ block.settings.title }}
+              </h3>
+            {%- endif -%}
+          </div>
+
+        {%- if block.settings.make_card_clickable and block.settings.link_url != blank -%}
+          </a>
+        {%- else -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Pairs",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Subheading font size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading font size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "options": [
+        {
+          "value": "1200",
+          "label": "1200px"
+        },
+        {
+          "value": "1280",
+          "label": "1280px"
+        },
+        {
+          "value": "1440",
+          "label": "1440px"
+        }
+      ],
+      "default": "1280"
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "label": "Desktop gap",
+      "min": 16,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Mobile gap",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "pad_side",
+      "label": "Side padding",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Show divider",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_card",
+      "name": "Feature Card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
+        },
+        {
+          "type": "select",
+          "id": "aspect_ratio",
+          "label": "Image aspect ratio",
+          "options": [
+            {
+              "value": "natural",
+              "label": "Natural"
+            },
+            {
+              "value": "4_3",
+              "label": "4:3"
+            },
+            {
+              "value": "3_2",
+              "label": "3:2"
+            },
+            {
+              "value": "1_1",
+              "label": "1:1"
+            }
+          ],
+          "default": "natural"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_shadow",
+          "label": "Show image shadow",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow text",
+          "default": "Bright. Light. Fruity."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Super Detox Smoothies"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        },
+        {
+          "type": "text",
+          "id": "link_aria_label",
+          "label": "Link aria label",
+          "info": "For accessibility. Defaults to title if not set."
+        },
+        {
+          "type": "checkbox",
+          "id": "make_card_clickable",
+          "label": "Make entire card clickable",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "eyebrow_color",
+          "label": "Eyebrow color"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title color"
+        },
+        {
+          "type": "color",
+          "id": "card_bg",
+          "label": "Card background",
+          "default": "transparent"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Pairs",
+      "blocks": [
+        {
+          "type": "feature_card",
+          "settings": {
+            "eyebrow": "Bright. Light. Fruity.",
+            "title": "Super Detox Smoothies"
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "eyebrow": "Cleansing. Refreshing. Flavourful.",
+            "title": "Energy Boosting Smoothies"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

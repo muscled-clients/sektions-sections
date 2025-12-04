@@ -1,0 +1,379 @@
+<style>
+  #signup-steps-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  #signup-steps-{{ section.id }} .container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  #signup-steps-{{ section.id }} .section-title {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.title_color }};
+  }
+
+  #signup-steps-{{ section.id }} .steps-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  #signup-steps-{{ section.id }} .steps-container::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background-color: {{ section.settings.line_color }};
+    z-index: 1;
+  }
+
+  #signup-steps-{{ section.id }} .step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  #signup-steps-{{ section.id }} .step-circle {
+    width: 80px;
+    height: 80px;
+    border: 3px solid {{ section.settings.circle_border_color }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ section.settings.background_color }};
+    margin-bottom: 25px;
+  }
+
+  #signup-steps-{{ section.id }} .step-number {
+    font-size: 36px;
+    font-weight: 700;
+    color: {{ section.settings.number_color }};
+  }
+
+  #signup-steps-{{ section.id }} .step-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  #signup-steps-{{ section.id }} .step-title {
+    font-size: {{ section.settings.step_title_font_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.step_title_color }};
+    margin-bottom: {{ section.settings.step_title_gap }}px;
+    line-height: 1.2;
+  }
+
+  #signup-steps-{{ section.id }} .step-description {
+    font-size: {{ section.settings.step_description_font_size }}px;
+    color: {{ section.settings.step_description_color }};
+    line-height: 1.4;
+    max-width: 280px;
+  }
+
+  /* Tablet & Mobile - vertical layout, left aligned with padding */
+  @media (max-width: 768px) {
+    #signup-steps-{{ section.id }} .steps-container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      max-width: none;
+      margin: 0;
+      position: relative;
+      padding-left: 0;
+    }
+
+    #signup-steps-{{ section.id }} .steps-container::before {
+      display: none;
+    }
+
+    #signup-steps-{{ section.id }} .step {
+      max-width: 100%;
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    #signup-steps-{{ section.id }} .step:not(:last-child) .step-circle::after {
+      content: '';
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 80px;
+      background-color: {{ section.settings.line_color }};
+      z-index: -1;
+    }
+
+    #signup-steps-{{ section.id }} .step-circle {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 0;
+      margin-right: 20px;
+      flex-shrink: 0;
+      position: relative;
+      border: 2px solid {{ section.settings.circle_border_color }};
+    }
+
+    #signup-steps-{{ section.id }} .step-number {
+      font-size: 24px;
+    }
+
+    #signup-steps-{{ section.id }} .step-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    #signup-steps-{{ section.id }} .step-title {
+      margin-bottom: {{ section.settings.step_title_gap_mobile }}px;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    #signup-steps-{{ section.id }} .step-description {
+      max-width: none;
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 0;
+    }
+
+    #signup-steps-{{ section.id }} .section-title {
+      margin-bottom: 40px;
+      font-size: 24px;
+      text-align: center;
+    }
+  }
+
+</style>
+
+<section id="signup-steps-{{ section.id }}">
+  <div class="container">
+    <h2 class="section-title">{{ section.settings.section_title }}</h2>
+
+    <div class="steps-container">
+      {% for block in section.blocks %}
+        {% if block.type == 'step' %}
+          <div class="step">
+            <div class="step-circle">
+              <span class="step-number">{{ forloop.index }}</span>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">{{ block.settings.title }}</h3>
+              <p class="step-description">{{ block.settings.description }}</p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Signup Steps",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Signup steps"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f7f2eb"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#2c5530"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title Font Size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "circle_border_color",
+      "label": "Circle Border Color",
+      "default": "#2c5530"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Number Color",
+      "default": "#2c5530"
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Connecting Line Color",
+      "default": "#2c5530"
+    },
+    {
+      "type": "color",
+      "id": "step_title_color",
+      "label": "Step Title Color",
+      "default": "#2c5530"
+    },
+    {
+      "type": "range",
+      "id": "step_title_font_size",
+      "label": "Step Title Font Size",
+      "min": 18,
+      "max": 32,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "step_description_color",
+      "label": "Step Description Color",
+      "default": "#2c5530"
+    },
+    {
+      "type": "range",
+      "id": "step_description_font_size",
+      "label": "Step Description Font Size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "step_title_gap",
+      "label": "Gap between Title & Description",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "step_title_gap_mobile",
+      "label": "Gap between Title & Description (Mobile)",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 5,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum Width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "default": 1200,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Signup Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Create account",
+            "description": "You must be 18+ and eligible to work in the U.S to signup."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Set up account in app",
+            "description": "Take photos of your driver's license, and enter bank account info to get paid."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Start earning money",
+            "description": "You'll start seeing orders once your account is approved."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

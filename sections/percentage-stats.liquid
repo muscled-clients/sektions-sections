@@ -1,0 +1,455 @@
+<div class="percentage-stats-section" id="percentage-stats-{{ section.id }}">
+  <div class="percentage-stats-container">
+    {% if section.settings.title != blank %}
+      <h2 class="percentage-stats-title">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <div class="percentage-stats-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'stat' %}
+          {% unless forloop.first %}
+            <div class="percentage-stat-divider"></div>
+          {% endunless %}
+          <div class="percentage-stat-item" {{ block.shopify_attributes }}>
+            <div class="percentage-stat-number-wrapper">
+              <span class="percentage-stat-number" data-target="{{ block.settings.percentage }}">0</span>
+              <span class="percentage-stat-symbol">%</span>
+            </div>
+            <p class="percentage-stat-description">{{ block.settings.description }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.footnote != blank %}
+      <p class="percentage-stats-footnote">{{ section.settings.footnote }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  #percentage-stats-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  #percentage-stats-{{ section.id }} .percentage-stats-container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  #percentage-stats-{{ section.id }} .percentage-stats-title {
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #9B8B7E;
+    margin-bottom: 50px;
+    text-align: left;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  #percentage-stats-{{ section.id }} .percentage-stats-grid {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  #percentage-stats-{{ section.id }} .percentage-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 {{ section.settings.stat_padding }}px;
+  }
+
+  #percentage-stats-{{ section.id }} .percentage-stat-item:first-child {
+    padding-left: 0;
+  }
+
+  #percentage-stats-{{ section.id }} .percentage-stat-divider {
+    width: 1px;
+    min-width: 1px;
+    height: 80px;
+    background-color: #000000;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  #percentage-stats-{{ section.id }} .percentage-stat-number-wrapper {
+    display: flex;
+    align-items: baseline;
+    flex-shrink: 0;
+  }
+
+  #percentage-stats-{{ section.id }} .percentage-stat-number {
+    font-size: {{ section.settings.percentage_size }}px;
+    font-weight: {{ section.settings.percentage_weight }};
+    color: #2e402d;
+    line-height: 1;
+    letter-spacing: -2px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  #percentage-stats-{{ section.id }} .percentage-stat-symbol {
+    font-size: {{ section.settings.percentage_size }}px;
+    font-weight: {{ section.settings.percentage_weight }};
+    color: #2e402d;
+    margin-left: 2px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  #percentage-stats-{{ section.id }} .percentage-stat-description {
+    font-size: {{ section.settings.description_size }}px;
+    line-height: 1.4;
+    color: #2e402d;
+    margin: 0;
+    font-weight: 400;
+    max-width: 400px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  #percentage-stats-{{ section.id }} .percentage-stats-footnote {
+    font-size: {{ section.settings.footnote_size }}px;
+    font-style: italic;
+    color: #6B6B6B;
+    text-align: left;
+    margin-top: 40px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  @media screen and (max-width: 1200px) {
+    #percentage-stats-{{ section.id }} .percentage-stat-divider {
+      margin: 0 30px;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stat-item {
+      gap: 20px;
+    }
+  }
+
+  /* Tablet & Mobile - vertical layout, left aligned */
+  @media screen and (max-width: 992px) {
+    #percentage-stats-{{ section.id }} .percentage-stats-container {
+      max-width: 100%;
+      margin: 0;
+      padding: 0 20px;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stats-grid {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 0;
+      width: 100%;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stat-item {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: left;
+      gap: 20px;
+      padding: 25px 0;
+      border-bottom: 1px solid #e0e0e0;
+      width: 100%;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stat-item:first-child {
+      padding-top: 0;
+      padding-left: 0;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stat-item:last-child {
+      border-bottom: none;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stat-divider {
+      display: none;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stat-number-wrapper {
+      justify-content: flex-start;
+      min-width: 100px;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stat-number {
+      font-size: 44px;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stat-symbol {
+      font-size: 44px;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stats-title {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stats-footnote {
+      text-align: left;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stat-description {
+      text-align: left;
+      font-size: 14px;
+      max-width: none;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #percentage-stats-{{ section.id }} .percentage-stat-number {
+      font-size: 36px;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stat-symbol {
+      font-size: 36px;
+    }
+
+    #percentage-stats-{{ section.id }} .percentage-stat-number-wrapper {
+      min-width: 80px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const sectionId = 'percentage-stats-{{ section.id }}';
+    const section = document.getElementById(sectionId);
+
+    if (!section) return;
+
+    const statNumbers = section.querySelectorAll('.percentage-stat-number');
+    let hasAnimated = false;
+
+    function animateNumbers() {
+      statNumbers.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+
+        const updateNumber = () => {
+          current += increment;
+          if (current < target) {
+            stat.textContent = Math.floor(current);
+            requestAnimationFrame(updateNumber);
+          } else {
+            stat.textContent = target;
+          }
+        };
+
+        updateNumber();
+      });
+    }
+
+    function checkScroll() {
+      const sectionTop = section.getBoundingClientRect().top;
+      const triggerPoint = window.innerHeight * 0.75;
+
+      if (sectionTop < triggerPoint && !hasAnimated) {
+        hasAnimated = true;
+        animateNumbers();
+        window.removeEventListener('scroll', checkScroll);
+      }
+    }
+
+    window.addEventListener('scroll', checkScroll);
+    checkScroll();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Percentage Stats",
+  "tag": "section",
+  "class": "percentage-stats",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "THE DIFFERENCE"
+    },
+    {
+      "type": "text",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "*Based on a survey including 500+ current users evaluating self-perceived efficacy."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FAFAFA"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Maximum Section Width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "stat_padding",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Between Stats",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "percentage_size",
+      "min": 40,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Percentage Size",
+      "default": 72
+    },
+    {
+      "type": "select",
+      "id": "percentage_weight",
+      "label": "Percentage Font Weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Text Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "footnote_size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Footnote Size",
+      "default": 12
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "number",
+          "id": "percentage",
+          "label": "Percentage",
+          "default": 90
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Of users found the blender easy to clean and maintain."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Percentage Stats",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "percentage": 94,
+            "description": "Experienced smoother and more consistent results."
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "percentage": 90,
+            "description": "Of users found the blender easy to clean and maintain."
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "percentage": 93,
+            "description": "Of customers would recommend this blender to friends."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

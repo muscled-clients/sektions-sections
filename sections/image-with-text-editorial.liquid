@@ -1,0 +1,354 @@
+{% comment %}
+  Section: Image with Text Editorial
+  Two-column layout with full-height image and centered text content
+{% endcomment %}
+
+<section class="image-text-editorial">
+  <div class="image-text-editorial__container">
+
+    <div class="image-text-editorial__image-column">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                  {{ section.settings.image | image_url: width: 900 }} 900w,
+                  {{ section.settings.image | image_url: width: 1200 }} 1200w"
+          sizes="(min-width: 990px) 50vw, 100vw"
+          alt="{{ section.settings.image.alt | escape }}"
+          class="image-text-editorial__image"
+          loading="lazy"
+        >
+      {%- else -%}
+        <div class="image-text-editorial__placeholder">
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="image-text-editorial__content-column">
+      <div class="image-text-editorial__content">
+
+        {%- if section.settings.label != blank -%}
+          <p class="image-text-editorial__label">{{ section.settings.label }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="image-text-editorial__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="image-text-editorial__text">
+            {{ section.settings.text }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.subtext != blank -%}
+          <p class="image-text-editorial__subtext">{{ section.settings.subtext }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.button_text != blank -%}
+          <a href="{{ section.settings.button_url }}" class="image-text-editorial__button">
+            {{ section.settings.button_text }}
+          </a>
+        {%- endif -%}
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .image-text-editorial {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 120px;
+  }
+
+  .image-text-editorial__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    min-height: 600px;
+  }
+
+  .image-text-editorial__image-column {
+    position: relative;
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+
+  .image-text-editorial__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .image-text-editorial__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+  }
+
+  .placeholder-svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.3;
+  }
+
+  .image-text-editorial__content-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 60px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .image-text-editorial__content {
+    max-width: 520px;
+    width: 100%;
+  }
+
+  .image-text-editorial__label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ section.settings.label_color }};
+    margin: 0 0 20px 0;
+  }
+
+  .image-text-editorial__heading {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 24px 0;
+  }
+
+  .image-text-editorial__text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 16px;
+  }
+
+  .image-text-editorial__text p {
+    margin: 0 0 16px 0;
+  }
+
+  .image-text-editorial__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .image-text-editorial__subtext {
+    font-size: 13px;
+    font-weight: 500;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 24px 0;
+  }
+
+  .image-text-editorial__button {
+    display: inline-block;
+    padding: 14px 32px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: {{ section.settings.button_text_color }};
+    background-color: {{ section.settings.button_background_color }};
+    border: 2px solid {{ section.settings.button_border_color }};
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .image-text-editorial__button:hover {
+    background-color: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text }};
+    border-color: {{ section.settings.button_hover_border }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .image-text-editorial__container {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .image-text-editorial__image-column {
+      min-height: 400px;
+    }
+
+    .image-text-editorial__content-column {
+      padding: 60px 40px;
+    }
+
+    .image-text-editorial__heading {
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .image-text-editorial__container {
+      padding: 0 16px;
+    }
+
+    .image-text-editorial__image-column {
+      min-height: 300px;
+    }
+
+    .image-text-editorial__content-column {
+      padding: 40px 20px;
+    }
+
+    .image-text-editorial__heading {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .image-text-editorial__text {
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .image-text-editorial__button {
+      width: 100%;
+      text-align: center;
+      padding: 12px 24px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Image with Text Editorial",
+  "class": "section-image-text-editorial",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Our Story"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "CELEBRATING EVERY HEALTHCARE HERO WITH SCRUBS DESIGNED FOR COMFORT & CONFIDENCE"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et magna vel orci scelerisque consequat. Praesent suscipit metus ex, ac auctor tempor id. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Warranty Study 2015"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button Border Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text",
+      "label": "Button Hover Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button Hover Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border",
+      "label": "Button Hover Border",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with Text Editorial"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,419 @@
+{% comment %}
+  Follow us on Instagram Slider Section
+  Displays Instagram feed with horizontal slider and social icons
+{% endcomment %}
+
+<style>
+  .instagram-section {
+    padding: 60px 20px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .instagram-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .instagram-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto 50px;
+    padding: 0 100px;
+  }
+
+  .instagram-title {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin: 0;
+    color: #000;
+  }
+
+  .instagram-title .italic-bold {
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .instagram-handle {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 32px;
+    border: 2px solid #000;
+    border-radius: 50px;
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: #fff;
+  }
+
+  .instagram-handle:hover {
+    background: #000;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .instagram-slider-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .instagram-slider {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .instagram-slider-track {
+    display: flex;
+    gap: 20px;
+    animation: scroll-right {{ section.settings.animation_speed }}s linear infinite;
+    will-change: transform;
+  }
+
+  .instagram-slider-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-right {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .instagram-slide {
+    flex: 0 0 auto;
+    width: 260px;
+    height: 260px;
+    position: relative;
+  }
+
+  .instagram-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .instagram-slide:hover img {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 50px auto 0;
+    padding: 0 20px;
+  }
+
+  .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: #000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .social-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .social-icon:hover {
+    transform: scale(1.2) translateY(-2px);
+    color: #333;
+  }
+
+  @media (max-width: 1024px) {
+    .instagram-title {
+      font-size: calc({{ section.settings.heading_size }}px * 0.83);
+    }
+
+    .instagram-slide {
+      width: 220px;
+      height: 220px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .instagram-section {
+      padding: 40px 0;
+    }
+
+    .instagram-header {
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto 30px;
+      gap: 15px;
+      padding: 0 15px;
+      text-align: center;
+    }
+
+    .instagram-title {
+      font-size: calc({{ section.settings.heading_size }}px * 0.67);
+    }
+
+    .instagram-handle {
+      padding: 10px 24px;
+      font-size: 16px;
+    }
+
+    .instagram-slider-track {
+      gap: 15px;
+    }
+
+    .instagram-slide {
+      width: 180px;
+      height: 180px;
+    }
+
+    .social-icons {
+      margin: 35px auto 0;
+      gap: 25px;
+    }
+
+    .social-icon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .instagram-title {
+      font-size: calc({{ section.settings.heading_size }}px * 0.58);
+    }
+
+    .instagram-slide {
+      width: 150px;
+      height: 150px;
+    }
+  }
+</style>
+
+<section class="instagram-section">
+  <div class="instagram-container">
+    <!-- Header with title and handle -->
+    <div class="instagram-header">
+      <h2 class="instagram-title">
+        {{ section.settings.heading_text }}
+        <span class="italic-bold">{{ section.settings.heading_italic }}</span>
+      </h2>
+      {% if section.settings.instagram_handle != blank %}
+        <a href="{{ section.settings.instagram_url }}" class="instagram-handle" target="_blank" rel="noopener noreferrer">
+          {{ section.settings.instagram_handle }}
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- Slider wrapper -->
+    <div class="instagram-slider-wrapper">
+      <div class="instagram-slider" id="instagramSlider-{{ section.id }}">
+        <div class="instagram-slider-track">
+          {% for block in section.blocks %}
+            {% if block.type == 'image' %}
+              <div class="instagram-slide" {{ block.shopify_attributes }}>
+                {% if block.settings.image != blank %}
+                  {% if block.settings.link != blank %}
+                    <a href="{{ block.settings.link }}" target="_blank" rel="noopener noreferrer">
+                      {{ block.settings.image | image_url: width: 520 | image_tag: loading: 'lazy', alt: block.settings.image.alt }}
+                    </a>
+                  {% else %}
+                    {{ block.settings.image | image_url: width: 520 | image_tag: loading: 'lazy', alt: block.settings.image.alt }}
+                  {% endif %}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+
+          <!-- Duplicate slides for seamless loop -->
+          {% for block in section.blocks %}
+            {% if block.type == 'image' %}
+              <div class="instagram-slide">
+                {% if block.settings.image != blank %}
+                  {% if block.settings.link != blank %}
+                    <a href="{{ block.settings.link }}" target="_blank" rel="noopener noreferrer">
+                      {{ block.settings.image | image_url: width: 520 | image_tag: loading: 'lazy', alt: block.settings.image.alt }}
+                    </a>
+                  {% else %}
+                    {{ block.settings.image | image_url: width: 520 | image_tag: loading: 'lazy', alt: block.settings.image.alt }}
+                  {% endif %}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="social-icons">
+      {% if section.settings.tiktok_url != blank %}
+        <a href="{{ section.settings.tiktok_url }}" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3v178.8A162.6 162.6 0 1 1 185 188.3V278a74.6 74.6 0 1 0 52.2 71.2V0h88a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"/>
+          </svg>
+        </a>
+      {% endif %}
+
+      {% if section.settings.youtube_url != blank %}
+        <a href="{{ section.settings.youtube_url }}" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+            <path d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"/>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Instagram slider with infinite auto-scroll animation
+  // Animation is handled purely by CSS for better performance
+</script>
+
+{% schema %}
+{
+  "name": "Instagram Slider",
+  "tag": "section",
+  "class": "section-instagram-slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Heading Text (Regular)",
+      "default": "Follow us on"
+    },
+    {
+      "type": "text",
+      "id": "heading_italic",
+      "label": "Heading Text (Italic Bold)",
+      "default": "Instagram"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 48
+    },
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram Handle",
+      "default": "@namingthislater",
+      "info": "Include @ symbol"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram Profile URL"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Animation Speed",
+      "default": 30,
+      "info": "Duration for one complete scroll cycle (lower = faster)"
+    },
+    {
+      "type": "header",
+      "content": "Social Media Links"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL",
+      "info": "Leave blank to hide icon"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL",
+      "info": "Leave blank to hide icon"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Instagram Image",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Optional Link",
+          "info": "Link to Instagram post (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Slider",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

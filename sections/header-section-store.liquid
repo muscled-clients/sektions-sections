@@ -1,0 +1,524 @@
+{% comment %}
+  Section Store Header - Sticky header with top announcement bar and main navigation
+{% endcomment %}
+
+<div class="section-store-header" style="
+  --top-bar-bg: {{ section.settings.top_bar_bg }};
+  --top-bar-text-color: {{ section.settings.top_bar_text_color }};
+  --nav-bg: {{ section.settings.nav_bg }};
+  --nav-text-color: {{ section.settings.nav_text_color }};
+  --bag-button-bg: {{ section.settings.bag_button_bg }};
+  --bag-button-text: {{ section.settings.bag_button_text }};
+">
+  <!-- Top Announcement Bar -->
+  {% if section.settings.top_bar_text != blank %}
+    <div class="header-top">
+      <p class="header-top__text">{{ section.settings.top_bar_text }}</p>
+    </div>
+  {% endif %}
+
+  <!-- Main Navigation Bar -->
+  <div class="header-main">
+    <div class="header-main__container">
+      <!-- Mobile Menu Toggle -->
+      <button class="header-mobile-toggle" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Left Navigation Links -->
+      <nav class="nav-links">
+        {% if section.settings.menu != blank %}
+          {% for link in linklists[section.settings.menu].links %}
+            <a href="{{ link.url }}" class="nav-links__item">{{ link.title }}</a>
+          {% endfor %}
+        {% else %}
+          <a href="#" class="nav-links__item">Women</a>
+          <a href="#" class="nav-links__item">Men</a>
+          <a href="#" class="nav-links__item">About</a>
+        {% endif %}
+      </nav>
+
+      <!-- Center Logo -->
+      <div class="header-logo">
+        <a href="/" class="header-logo__link">
+          {% if section.settings.logo != blank %}
+            <img src="{{ section.settings.logo | img_url: '80x' }}" alt="{{ shop.name }}" class="header-logo__image">
+          {% else %}
+            <div class="header-logo__icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="6" fill="#000000"/>
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="20" font-weight="bold" font-family="Arial, sans-serif">S</text>
+              </svg>
+            </div>
+          {% endif %}
+          <span class="header-logo__text">{{ section.settings.logo_text | default: 'section.store' }}</span>
+        </a>
+      </div>
+
+      <!-- Right Icons -->
+      <div class="header-icons">
+        <!-- Search Icon -->
+        <a href="/search" class="header-icons__item" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </a>
+
+        <!-- Account Icon -->
+        <a href="/account" class="header-icons__item" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+
+        <!-- Cart Button -->
+        <a href="/cart" class="cart-button">
+          {{ section.settings.bag_button_label | default: 'Bag' }}: {{ cart.item_count }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay">
+    <div class="mobile-menu">
+      <button class="mobile-menu__close" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <nav class="mobile-menu__nav">
+        {% if section.settings.menu != blank %}
+          {% for link in linklists[section.settings.menu].links %}
+            <a href="{{ link.url }}" class="mobile-menu__item">{{ link.title }}</a>
+          {% endfor %}
+        {% else %}
+          <a href="#" class="mobile-menu__item">Women</a>
+          <a href="#" class="mobile-menu__item">Men</a>
+          <a href="#" class="mobile-menu__item">About</a>
+        {% endif %}
+      </nav>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Header Container */
+.section-store-header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Top Announcement Bar */
+.header-top {
+  width: 100%;
+  background-color: var(--top-bar-bg, #FFFFFF);
+  padding: 12px 20px;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.header-top__text {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--top-bar-text-color, #000000);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Main Navigation Bar */
+.header-main {
+  width: 100%;
+  background-color: var(--nav-bg, #FFFFFF);
+  padding: 16px 40px;
+}
+
+.header-main__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* Mobile Menu Toggle */
+.header-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--nav-text-color, #000000);
+}
+
+.header-mobile-toggle:hover {
+  opacity: 0.7;
+}
+
+/* Left Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex: 1;
+}
+
+.nav-links__item {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--nav-text-color, #000000);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-links__item:hover {
+  opacity: 0.6;
+}
+
+/* Center Logo */
+.header-logo {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.header-logo__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.header-logo__icon svg {
+  display: block;
+}
+
+.header-logo__image {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.header-logo__text {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Right Icons */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.header-icons__item {
+  display: flex;
+  align-items: center;
+  color: var(--nav-text-color, #000000);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  padding: 8px;
+}
+
+.header-icons__item:hover {
+  opacity: 0.6;
+}
+
+/* Cart Button */
+.cart-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--bag-button-bg, #E5FF00);
+  color: var(--bag-button-text, #000000);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.cart-button:hover {
+  opacity: 0.85;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  max-width: 320px;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 24px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-overlay.active .mobile-menu {
+  transform: translateX(0);
+}
+
+.mobile-menu__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-bottom: 24px;
+  color: #000000;
+}
+
+.mobile-menu__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mobile-menu__item {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  text-decoration: none;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Tablet and Mobile Responsive */
+@media screen and (max-width: 1024px) {
+  .header-main {
+    padding: 16px 24px;
+  }
+
+  .nav-links {
+    gap: 24px;
+  }
+
+  .header-icons {
+    gap: 16px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header-mobile-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .header-main__container {
+    gap: 16px;
+  }
+
+  .header-icons {
+    gap: 12px;
+  }
+
+  .header-logo__text {
+    font-size: 16px;
+  }
+
+  .cart-button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .header-icons__item {
+    padding: 4px;
+  }
+
+  .header-icons__item svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header-main {
+    padding: 12px 16px;
+  }
+
+  .header-top {
+    padding: 10px 16px;
+  }
+
+  .header-top__text {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+
+  .header-logo__text {
+    display: none;
+  }
+
+  .cart-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+</style>
+
+<script>
+  // Mobile menu toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.header-mobile-toggle');
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    const close = document.querySelector('.mobile-menu__close');
+
+    if (toggle && overlay && close) {
+      toggle.addEventListener('click', function() {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+
+      close.addEventListener('click', function() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Section Store Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Top Announcement Bar"
+    },
+    {
+      "type": "text",
+      "id": "top_bar_text",
+      "label": "Announcement Text",
+      "default": "FREE SHIPPING ON ORDERS ABOVE $100"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_bg",
+      "label": "Top Bar Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "top_bar_text_color",
+      "label": "Top Bar Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Main Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "color",
+      "id": "nav_bg",
+      "label": "Navigation Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "nav_text_color",
+      "label": "Navigation Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "section.store"
+    },
+    {
+      "type": "header",
+      "content": "Cart Button"
+    },
+    {
+      "type": "text",
+      "id": "bag_button_label",
+      "label": "Bag Button Label",
+      "default": "Bag"
+    },
+    {
+      "type": "color",
+      "id": "bag_button_bg",
+      "label": "Bag Button Background",
+      "default": "#E5FF00"
+    },
+    {
+      "type": "color",
+      "id": "bag_button_text",
+      "label": "Bag Button Text Color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section Store Header"
+    }
+  ]
+}
+{% endschema %}

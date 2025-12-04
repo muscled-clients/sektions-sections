@@ -1,0 +1,733 @@
+<!-- Vertical Sliders Section -->
+<style>
+  @keyframes slideUp-{{ section.id }} {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  @keyframes slideDown-{{ section.id }} {
+    0% {
+      transform: translateY(-50%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  #vertical-sliders-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  #vertical-sliders-{{ section.id }} .container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 {{ section.settings.container_padding }}px;
+  }
+
+  #vertical-sliders-{{ section.id }} .content-wrapper {
+    display: grid;
+    grid-template-columns: {{ section.settings.left_column_width }}% 1fr;
+    gap: {{ section.settings.column_gap }}px;
+    align-items: center;
+  }
+
+  /* Left Column - Content */
+  #vertical-sliders-{{ section.id }} .content-column {
+    padding-right: {{ section.settings.content_padding_right }}px;
+  }
+
+  #vertical-sliders-{{ section.id }} .heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.heading_color }};
+    line-height: {{ section.settings.heading_line_height }};
+    margin-bottom: {{ section.settings.heading_margin_bottom }}px;
+    letter-spacing: -0.02em;
+  }
+
+  #vertical-sliders-{{ section.id }} .description {
+    font-size: {{ section.settings.description_size }}px;
+    color: {{ section.settings.description_color }};
+    line-height: {{ section.settings.description_line_height }};
+    margin-bottom: {{ section.settings.description_margin_bottom }}px;
+  }
+
+  #vertical-sliders-{{ section.id }} .cta-button {
+    display: inline-block;
+    padding: {{ section.settings.button_padding_y }}px {{ section.settings.button_padding_x }}px;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    border: {{ section.settings.button_border_width }}px solid {{ section.settings.button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: {{ section.settings.button_font_size }}px;
+    font-weight: {{ section.settings.button_font_weight }};
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  #vertical-sliders-{{ section.id }} .cta-button:hover {
+    background-color: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text_color }};
+    transform: translateY(-2px);
+  }
+
+  /* Right Column - Sliders */
+  #vertical-sliders-{{ section.id }} .sliders-column {
+    display: flex;
+    gap: {{ section.settings.slider_gap }}px;
+    height: {{ section.settings.slider_height }}px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #vertical-sliders-{{ section.id }} .slider-track {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ section.settings.image_border_radius }}px;
+  }
+
+  #vertical-sliders-{{ section.id }} .slider-content {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.image_gap }}px;
+    position: absolute;
+    width: 100%;
+  }
+
+  #vertical-sliders-{{ section.id }} .slider-content.up {
+    animation: slideUp-{{ section.id }} {{ section.settings.animation_duration }}s linear infinite;
+  }
+
+  #vertical-sliders-{{ section.id }} .slider-content.down {
+    animation: slideDown-{{ section.id }} {{ section.settings.animation_duration }}s linear infinite;
+  }
+
+  {% if section.settings.pause_on_hover %}
+  #vertical-sliders-{{ section.id }} .slider-track:hover .slider-content {
+    animation-play-state: paused;
+  }
+  {% endif %}
+
+  #vertical-sliders-{{ section.id }} .slider-image {
+    width: 100%;
+    aspect-ratio: {{ section.settings.image_aspect_ratio }};
+    object-fit: cover;
+    border-radius: {{ section.settings.image_border_radius }}px;
+    display: block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    #vertical-sliders-{{ section.id }} .content-wrapper {
+      grid-template-columns: 1fr;
+      gap: {{ section.settings.mobile_gap }}px;
+    }
+
+    #vertical-sliders-{{ section.id }} .content-column {
+      padding-right: 0;
+      text-align: {{ section.settings.mobile_text_align }};
+    }
+
+    #vertical-sliders-{{ section.id }} .heading {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+    }
+
+    #vertical-sliders-{{ section.id }} .description {
+      font-size: {{ section.settings.description_size_mobile }}px;
+    }
+
+    #vertical-sliders-{{ section.id }} .cta-button {
+      {% if section.settings.mobile_text_align == 'center' %}
+        margin: 0 auto;
+        display: table;
+      {% endif %}
+    }
+
+    #vertical-sliders-{{ section.id }} .sliders-column {
+      height: {{ section.settings.slider_height_mobile }}px;
+    }
+  }
+</style>
+
+<section id="vertical-sliders-{{ section.id }}">
+  <div class="container">
+    <div class="content-wrapper">
+      <!-- Left Column - Content -->
+      <div class="content-column">
+        {% if section.settings.heading != blank %}
+          <h2 class="heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <p class="description">{{ section.settings.description }}</p>
+        {% endif %}
+
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="cta-button">
+            {{ section.settings.button_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- Right Column - Sliders -->
+      <div class="sliders-column">
+        <!-- Left Slider (Moving Up) -->
+        <div class="slider-track">
+          <div class="slider-content up">
+            {% assign left_images = section.blocks | where: 'type', 'left_slider_image' %}
+            {% for block in left_images %}
+              {% if block.settings.image %}
+                <img class="slider-image"
+                     src="{{ block.settings.image | image_url: width: 600 }}"
+                     alt="{{ block.settings.image_alt | escape }}"
+                     loading="lazy">
+              {% endif %}
+            {% endfor %}
+            <!-- Duplicate for seamless loop -->
+            {% for block in left_images %}
+              {% if block.settings.image %}
+                <img class="slider-image"
+                     src="{{ block.settings.image | image_url: width: 600 }}"
+                     alt="{{ block.settings.image_alt | escape }}"
+                     loading="lazy">
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Right Slider (Moving Down) -->
+        <div class="slider-track">
+          <div class="slider-content down">
+            {% assign right_images = section.blocks | where: 'type', 'right_slider_image' %}
+            {% for block in right_images %}
+              {% if block.settings.image %}
+                <img class="slider-image"
+                     src="{{ block.settings.image | image_url: width: 600 }}"
+                     alt="{{ block.settings.image_alt | escape }}"
+                     loading="lazy">
+              {% endif %}
+            {% endfor %}
+            <!-- Duplicate for seamless loop -->
+            {% for block in right_images %}
+              {% if block.settings.image %}
+                <img class="slider-image"
+                     src="{{ block.settings.image | image_url: width: 600 }}"
+                     alt="{{ block.settings.image_alt | escape }}"
+                     loading="lazy">
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vertical Sliders",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "default": 1400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "container_padding",
+      "label": "Container padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "left_column_width",
+      "label": "Left column width",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "default": 40,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Gap between columns",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_right",
+      "label": "Content padding right",
+      "min": 0,
+      "max": 60,
+      "step": 10,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Section padding top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Section padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Throw rugs you'll own for a lifetime"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "NTL creates products that inspire conscious living. It rejects mindless consumerism, choosing not to participate in seasonal sales. NTL ships globally, delivering to more than 40 countries. Thanks for being here."
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 32,
+      "max": 72,
+      "step": 4,
+      "default": 56,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (Mobile)",
+      "min": 24,
+      "max": 48,
+      "step": 4,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra bold"},
+        {"value": "900", "label": "Black"}
+      ],
+      "default": "800"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height",
+      "label": "Heading line height",
+      "min": 1,
+      "max": 1.5,
+      "step": 0.1,
+      "default": 1.1
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Heading margin bottom",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "default": 25,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 17,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "label": "Description size (Mobile)",
+      "min": 14,
+      "max": 18,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "description_line_height",
+      "label": "Description line height",
+      "min": 1.2,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.6
+    },
+    {
+      "type": "range",
+      "id": "description_margin_bottom",
+      "label": "Description margin bottom",
+      "min": 20,
+      "max": 50,
+      "step": 5,
+      "default": 35,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "label": "Button horizontal padding",
+      "min": 20,
+      "max": 50,
+      "step": 5,
+      "default": 35,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "label": "Button vertical padding",
+      "min": 10,
+      "max": 25,
+      "step": 5,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 10,
+      "step": 2,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Button font weight",
+      "options": [
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Button border width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button border color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "range",
+      "id": "slider_height",
+      "label": "Slider height",
+      "min": 400,
+      "max": 800,
+      "step": 50,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "slider_height_mobile",
+      "label": "Slider height (Mobile)",
+      "min": 300,
+      "max": 600,
+      "step": 50,
+      "default": 450,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "slider_gap",
+      "label": "Gap between sliders",
+      "min": 10,
+      "max": 30,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_gap",
+      "label": "Gap between images",
+      "min": 10,
+      "max": 30,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {"value": "1/1", "label": "Square (1:1)"},
+        {"value": "3/4", "label": "Portrait (3:4)"},
+        {"value": "4/5", "label": "Portrait (4:5)"},
+        {"value": "2/3", "label": "Portrait (2:3)"}
+      ],
+      "default": "3/4"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 20,
+      "step": 4,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation duration",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30,
+      "unit": "s",
+      "info": "Time for one complete cycle"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "Mobile gap between sections",
+      "min": 20,
+      "max": 60,
+      "step": 10,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_align",
+      "label": "Mobile text alignment",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "center"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "left_slider_image",
+      "name": "Left Slider Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
+        }
+      ]
+    },
+    {
+      "type": "right_slider_image",
+      "name": "Right Slider Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vertical Sliders",
+      "category": "Media",
+      "blocks": [
+        {
+          "type": "left_slider_image"
+        },
+        {
+          "type": "left_slider_image"
+        },
+        {
+          "type": "left_slider_image"
+        },
+        {
+          "type": "left_slider_image"
+        },
+        {
+          "type": "left_slider_image"
+        },
+        {
+          "type": "left_slider_image"
+        },
+        {
+          "type": "right_slider_image"
+        },
+        {
+          "type": "right_slider_image"
+        },
+        {
+          "type": "right_slider_image"
+        },
+        {
+          "type": "right_slider_image"
+        },
+        {
+          "type": "right_slider_image"
+        },
+        {
+          "type": "right_slider_image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

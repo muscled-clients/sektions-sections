@@ -1,0 +1,124 @@
+{% comment %}
+  EXAMPLE: Add this block definition to your product-information.liquid section schema
+  This shows how to integrate the payment trust as a block
+{% endcomment %}
+
+{% comment %}
+  In your product-information.liquid file, add this to the blocks array in the schema:
+{% endcomment %}
+
+{
+  "type": "payment_trust",
+  "name": "Payment Trust",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Trust text",
+      "default": "Safe payment on our website"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "logo_size",
+      "label": "Logo size",
+      "min": 40,
+      "max": 70,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Payment Methods"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gpay",
+      "label": "Show Google Pay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_apple_pay",
+      "label": "Show Apple Pay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_paypal",
+      "label": "Show PayPal",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mastercard",
+      "label": "Show Mastercard",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_visa",
+      "label": "Show Visa",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_amex",
+      "label": "Show American Express",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_klarna",
+      "label": "Show Klarna",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_amazon_pay",
+      "label": "Show Amazon Pay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Custom Logos"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_logo_1",
+      "label": "Custom logo 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_logo_2",
+      "label": "Custom logo 2"
+    }
+  ]
+}
+
+{% comment %}
+  Then in the main template part of product-information.liquid, 
+  where you loop through blocks, add this case:
+{% endcomment %}
+
+{% case block.type %}
+  {% when 'payment_trust' %}
+    {% include 'payment-trust-block' %}
+{% endcase %}

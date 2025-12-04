@@ -1,0 +1,1248 @@
+<style>
+  #handmade-ceramics-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  #handmade-ceramics-{{ section.id }} .ceramics-container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 {{ section.settings.horizontal_padding }}px;
+    display: grid;
+    grid-template-columns: {{ section.settings.left_side_width }}% {{ section.settings.right_side_width }}%;
+    gap: {{ section.settings.desktop_gap }}px;
+    align-items: start;
+  }
+
+  /* Product Slider Styles */
+  #handmade-ceramics-{{ section.id }} .products-slider {
+    position: relative;
+    overflow: hidden;
+    height: {{ section.settings.slider_height }}px;
+    min-height: 600px;
+  }
+
+  #handmade-ceramics-{{ section.id }} .slider-track {
+    display: flex;
+    gap: {{ section.settings.product_gap }}px;
+    animation: slide-right-to-left {{ section.settings.animation_speed }}s linear infinite;
+    width: max-content;
+  }
+
+  #handmade-ceramics-{{ section.id }} .product-card {
+    flex-shrink: 0;
+    width: 360px;
+    min-height: 550px;
+    background: {{ section.settings.card_background }};
+    border-radius: {{ section.settings.card_border_radius }}px;
+    overflow: visible;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #handmade-ceramics-{{ section.id }} .product-card:hover {
+    transform: translateY(-{{ section.settings.hover_lift }}px);
+  }
+
+  #handmade-ceramics-{{ section.id }} .product-image-wrapper {
+    position: relative;
+    width: 360px;
+    height: 487px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    margin: 0 auto;
+    flex-shrink: 0;
+  }
+
+  #handmade-ceramics-{{ section.id }} .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #handmade-ceramics-{{ section.id }} .product-badge {
+    position: absolute;
+    top: {{ section.settings.badge_top }}px;
+    left: {{ section.settings.badge_left }}px;
+    background: {{ section.settings.badge_background }};
+    color: {{ section.settings.badge_text_color }};
+    padding: {{ section.settings.badge_padding_y }}px {{ section.settings.badge_padding_x }}px;
+    border-radius: {{ section.settings.badge_border_radius }}px;
+    font-size: {{ section.settings.badge_font_size }}px;
+    font-weight: {{ section.settings.badge_font_weight }};
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  #handmade-ceramics-{{ section.id }} .product-info {
+    padding: {{ section.settings.product_info_padding }}px !important;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    min-height: 60px !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+
+  #handmade-ceramics-{{ section.id }} .product-title {
+    font-size: {{ section.settings.product_title_size }}px !important;
+    font-weight: {{ section.settings.product_title_weight }} !important;
+    color: {{ section.settings.product_title_color }} !important;
+    margin-bottom: {{ section.settings.title_margin_bottom }}px !important;
+    line-height: 1.3 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  #handmade-ceramics-{{ section.id }} .product-price {
+    font-size: {{ section.settings.product_price_size }}px !important;
+    font-weight: {{ section.settings.product_price_weight }} !important;
+    color: {{ section.settings.product_price_color }} !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Content Section Styles */
+  #handmade-ceramics-{{ section.id }} .content-section {
+    padding-left: {{ section.settings.content_padding_left }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  #handmade-ceramics-{{ section.id }} .ceramics-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.heading_color }};
+    margin-bottom: {{ section.settings.heading_margin_bottom }}px;
+    line-height: {{ section.settings.heading_line_height }};
+    font-family: {{ section.settings.heading_font_family }};
+  }
+
+  #handmade-ceramics-{{ section.id }} .ceramics-description {
+    font-size: {{ section.settings.description_size }}px;
+    line-height: {{ section.settings.description_line_height }};
+    color: {{ section.settings.description_color }};
+    margin-bottom: {{ section.settings.description_margin_bottom }}px;
+  }
+
+  #handmade-ceramics-{{ section.id }} .ceramics-description p {
+    margin-bottom: 16px;
+  }
+
+  #handmade-ceramics-{{ section.id }} .ceramics-description p:last-child {
+    margin-bottom: 0;
+  }
+
+  #handmade-ceramics-{{ section.id }} .see-more-link {
+    color: {{ section.settings.link_color }} !important;
+    text-decoration: {{ section.settings.link_decoration }} !important;
+    font-size: {{ section.settings.link_size }}px !important;
+    font-weight: {{ section.settings.link_weight }} !important;
+    transition: color 0.3s ease;
+    display: inline-block !important;
+    margin-top: 8px;
+  }
+
+  #handmade-ceramics-{{ section.id }} .see-more-link:hover {
+    color: {{ section.settings.link_hover_color }} !important;
+    text-decoration: underline !important;
+  }
+
+  /* Animation Keyframes */
+  @keyframes slide-right-to-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Mobile Responsive */
+  @media screen and (max-width: 768px) {
+    #handmade-ceramics-{{ section.id }} {
+      padding: {{ section.settings.mobile_padding_top }}px 0 {{ section.settings.mobile_padding_bottom }}px 0;
+    }
+
+    #handmade-ceramics-{{ section.id }} .ceramics-container {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      gap: {{ section.settings.mobile_gap }}px;
+      padding: 0 {{ section.settings.mobile_horizontal_padding }}px;
+    }
+
+    /* Mobile: Content first, slider second */
+    #handmade-ceramics-{{ section.id }} .content-section {
+      order: 1;
+      padding-left: 0;
+      text-align: {{ section.settings.mobile_text_align }};
+    }
+
+    #handmade-ceramics-{{ section.id }} .products-slider {
+      order: 2;
+      height: {{ section.settings.mobile_slider_height }}px;
+    }
+
+    /* Mobile: Keep auto-scroll animation */
+    #handmade-ceramics-{{ section.id }} .slider-track {
+      /* Animation will be enabled by JavaScript for both desktop and mobile */
+    }
+
+    #handmade-ceramics-{{ section.id }} .slider-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    #handmade-ceramics-{{ section.id }} .product-card {
+      width: 240px;
+      min-height: 400px;
+    }
+
+    #handmade-ceramics-{{ section.id }} .product-image-wrapper {
+      width: 240px;
+      height: 325px;
+    }
+
+    #handmade-ceramics-{{ section.id }} .ceramics-heading {
+      font-size: {{ section.settings.mobile_heading_size }}px;
+      margin-bottom: {{ section.settings.mobile_heading_margin }}px;
+    }
+
+    #handmade-ceramics-{{ section.id }} .ceramics-description {
+      font-size: {{ section.settings.mobile_description_size }}px;
+      margin-bottom: {{ section.settings.mobile_description_margin }}px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #handmade-ceramics-{{ section.id }} .product-card {
+      width: {{ section.settings.small_mobile_card_width }}px;
+    }
+
+    #handmade-ceramics-{{ section.id }} .ceramics-heading {
+      font-size: {{ section.settings.small_mobile_heading_size }}px;
+    }
+  }
+</style>
+
+<section id="handmade-ceramics-{{ section.id }}">
+  <div class="ceramics-container">
+    <!-- Products Slider Section -->
+    <div class="products-slider">
+      <div class="slider-track" id="slider-track-{{ section.id }}">
+        {% comment %} First set of products {% endcomment %}
+        {% if section.settings.collection != blank %}
+          {% assign products = collections[section.settings.collection].products | limit: section.settings.products_limit %}
+          {% for product in products %}
+            <div class="product-card">
+              <div class="product-image-wrapper">
+                {% if product.featured_media %}
+                  <img
+                    src="{{ product.featured_media | img_url: '400x400' }}"
+                    alt="{{ product.featured_media.alt | escape }}"
+                    class="product-image"
+                    loading="lazy"
+                  >
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'product-image' }}
+                {% endif %}
+
+                {% if section.settings.show_badges %}
+                  {% assign badge_text = '' %}
+                  {% if product.tags contains 'new' %}
+                    {% assign badge_text = section.settings.new_badge_text %}
+                  {% elsif product.tags contains 'popular' %}
+                    {% assign badge_text = section.settings.popular_badge_text %}
+                  {% endif %}
+
+                  {% if badge_text != blank %}
+                    <div class="product-badge">{{ badge_text }}</div>
+                  {% endif %}
+                {% endif %}
+              </div>
+
+              <div class="product-info">
+                <h3 class="product-title">{{ product.title }}</h3>
+                <div class="product-price">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="sale-price">{{ product.price | money }}</span>
+                    <span class="original-price">{{ product.compare_at_price | money }}</span>
+                  {% else %}
+                    {{ product.price | money }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          {% comment %} Placeholder products when no collection is selected {% endcomment %}
+          {% for i in (1..6) %}
+            <div class="product-card">
+              <div class="product-image-wrapper">
+                {{ 'product-1' | placeholder_svg_tag: 'product-image' }}
+                {% if section.settings.show_badges and i <= 3 %}
+                  <div class="product-badge">
+                    {% if i == 1 or i == 2 %}
+                      {{ section.settings.new_badge_text }}
+                    {% else %}
+                      {{ section.settings.popular_badge_text }}
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">Sample Product {{ i }}</h3>
+                <div class="product-price">${{ 25 | plus: i }}.00</div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        {% comment %} Duplicate set for infinite scroll {% endcomment %}
+        {% if section.settings.collection != blank %}
+          {% for product in products %}
+            <div class="product-card">
+              <div class="product-image-wrapper">
+                {% if product.featured_media %}
+                  <img
+                    src="{{ product.featured_media | img_url: '400x400' }}"
+                    alt="{{ product.featured_media.alt | escape }}"
+                    class="product-image"
+                    loading="lazy"
+                  >
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'product-image' }}
+                {% endif %}
+
+                {% if section.settings.show_badges %}
+                  {% assign badge_text = '' %}
+                  {% if product.tags contains 'new' %}
+                    {% assign badge_text = section.settings.new_badge_text %}
+                  {% elsif product.tags contains 'popular' %}
+                    {% assign badge_text = section.settings.popular_badge_text %}
+                  {% endif %}
+
+                  {% if badge_text != blank %}
+                    <div class="product-badge">{{ badge_text }}</div>
+                  {% endif %}
+                {% endif %}
+              </div>
+
+              <div class="product-info">
+                <h3 class="product-title">{{ product.title }}</h3>
+                <div class="product-price">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="sale-price">{{ product.price | money }}</span>
+                    <span class="original-price">{{ product.compare_at_price | money }}</span>
+                  {% else %}
+                    {{ product.price | money }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for i in (1..6) %}
+            <div class="product-card">
+              <div class="product-image-wrapper">
+                {{ 'product-1' | placeholder_svg_tag: 'product-image' }}
+                {% if section.settings.show_badges and i <= 3 %}
+                  <div class="product-badge">
+                    {% if i == 1 or i == 2 %}
+                      {{ section.settings.new_badge_text }}
+                    {% else %}
+                      {{ section.settings.popular_badge_text }}
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">Sample Product {{ i }}</h3>
+                <div class="product-price">${{ 25 | plus: i }}.00</div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="content-section">
+      <h2 class="ceramics-heading">{{ section.settings.heading }}</h2>
+
+      {% if section.settings.description != blank %}
+        <div class="ceramics-description">
+          {{ section.settings.description }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.link_text != blank and section.settings.link_url != blank %}
+        <a href="{{ section.settings.link_url }}" class="see-more-link">
+          {{ section.settings.link_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sliderId = 'slider-track-{{ section.id }}';
+    const sliderTrack = document.getElementById(sliderId);
+
+    if (!sliderTrack) return;
+
+    // Auto-scroll functionality for both desktop and mobile
+    function enableAutoScroll() {
+      // Enable animation for both desktop and mobile
+      sliderTrack.style.animation = 'slide-right-to-left {{ section.settings.animation_speed }}s linear infinite';
+      sliderTrack.style.overflow = 'hidden';
+    }
+
+    // Initialize
+    enableAutoScroll();
+
+    // Handle window resize
+    window.addEventListener('resize', enableAutoScroll);
+
+    // Pause animation on hover/touch for both desktop and mobile
+    const slider = sliderTrack.closest('.products-slider');
+
+    // Mouse events (desktop)
+    slider.addEventListener('mouseenter', () => {
+      sliderTrack.style.animationPlayState = 'paused';
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      sliderTrack.style.animationPlayState = 'running';
+    });
+
+    // Touch events (mobile)
+    slider.addEventListener('touchstart', () => {
+      sliderTrack.style.animationPlayState = 'paused';
+    });
+
+    slider.addEventListener('touchend', () => {
+      sliderTrack.style.animationPlayState = 'running';
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Handmade Ceramics",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding bottom",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "horizontal_padding",
+      "min": 0,
+      "max": 60,
+      "step": 10,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "desktop_gap",
+      "min": 10,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop gap between slider and content",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "left_side_width",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "label": "Left side width (slider)",
+      "default": 50,
+      "info": "Percentage width of the slider section"
+    },
+    {
+      "type": "range",
+      "id": "right_side_width",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "label": "Right side width (content)",
+      "default": 50,
+      "info": "Percentage width of the content section"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Handmade Ceramics"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>A beautiful collection of handmade plates made from stoneware clay and hand painted in a range of neutral glazes, offering relaxed yet artful decor.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "See more"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Product Slider Settings"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "label": "Number of products to show",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "slider_height",
+      "min": 500,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "label": "Slider height",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "desktop_card_width",
+      "min": 200,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop card width",
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "product_gap",
+      "min": 16,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between products",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Animation speed",
+      "default": 30,
+      "info": "Higher number = slower speed"
+    },
+    {
+      "type": "header",
+      "content": "Product Card Styling"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "desktop_image_height",
+      "min": 200,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop image height",
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "desktop_image_width",
+      "min": 80,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Desktop image width",
+      "default": 100,
+      "info": "Width of image within card"
+    },
+    {
+      "type": "range",
+      "id": "hover_lift",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Hover lift effect",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "product_info_padding",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Product info padding",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Badge Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Show product badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "new_badge_text",
+      "label": "New badge text",
+      "default": "New"
+    },
+    {
+      "type": "text",
+      "id": "popular_badge_text",
+      "label": "Popular badge text",
+      "default": "Popular"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "badge_top",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Badge top position",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "badge_left",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Badge left position",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_x",
+      "min": 6,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "label": "Badge horizontal padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_y",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Badge vertical padding",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "badge_border_radius",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Badge border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size",
+      "min": 10,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "label": "Badge font size",
+      "default": 11
+    },
+    {
+      "type": "select",
+      "id": "badge_font_weight",
+      "label": "Badge font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height",
+      "min": 1.1,
+      "max": 1.5,
+      "step": 0.1,
+      "label": "Heading line height",
+      "default": 1.2
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "min": 16,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Space below heading",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "options": [
+        {
+          "value": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+          "label": "Helvetica"
+        },
+        {
+          "value": "'Georgia', serif",
+          "label": "Georgia"
+        },
+        {
+          "value": "'Times New Roman', serif",
+          "label": "Times"
+        },
+        {
+          "value": "'Arial', sans-serif",
+          "label": "Arial"
+        }
+      ],
+      "default": "'Helvetica Neue', Helvetica, Arial, sans-serif"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_line_height",
+      "min": 1.4,
+      "max": 1.8,
+      "step": 0.1,
+      "label": "Description line height",
+      "default": 1.6
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "description_margin_bottom",
+      "min": 16,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Space below description",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "product_title_size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Product title size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "product_title_weight",
+      "label": "Product title font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Product title color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom",
+      "min": 4,
+      "max": 12,
+      "step": 2,
+      "unit": "px",
+      "label": "Space below product title",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "product_price_size",
+      "min": 14,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Product price size",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "product_price_weight",
+      "label": "Product price font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "product_price_color",
+      "label": "Product price color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "min": 14,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Link font size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "link_weight",
+      "label": "Link font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover color",
+      "default": "#666666"
+    },
+    {
+      "type": "select",
+      "id": "link_decoration",
+      "label": "Link text decoration",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "underline",
+          "label": "Underline"
+        }
+      ],
+      "default": "underline"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_left",
+      "min": 0,
+      "max": 60,
+      "step": 10,
+      "unit": "px",
+      "label": "Content left padding",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile padding bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_horizontal_padding",
+      "min": 0,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile horizontal padding",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "min": 20,
+      "max": 60,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile gap between content and slider",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_align",
+      "label": "Mobile text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "mobile_slider_height",
+      "min": 350,
+      "max": 500,
+      "step": 25,
+      "unit": "px",
+      "label": "Mobile slider height",
+      "default": 425
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_width",
+      "min": 160,
+      "max": 220,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile card width",
+      "default": 180
+    },
+    {
+      "type": "range",
+      "id": "small_mobile_card_width",
+      "min": 140,
+      "max": 180,
+      "step": 10,
+      "unit": "px",
+      "label": "Small mobile card width",
+      "default": 160
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "min": 140,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile image height",
+      "default": 160
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_width",
+      "min": 80,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Mobile image width",
+      "default": 100,
+      "info": "Width of image within mobile card"
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "min": 24,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile heading size",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "small_mobile_heading_size",
+      "min": 20,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "label": "Small mobile heading size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_margin",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile heading margin bottom",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_description_size",
+      "min": 14,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile description size",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "mobile_description_margin",
+      "min": 16,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile description margin bottom",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Handmade Ceramics",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

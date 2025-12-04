@@ -1,0 +1,664 @@
+{% comment %}
+  Section: Product Comparison Table
+  Two-column layout with text content and product comparison chart
+{% endcomment %}
+
+<section class="comparison-section">
+  <div class="comparison-container">
+
+    <div class="comparison-content">
+      {%- if section.settings.label != blank -%}
+        <p class="comparison-content__label">{{ section.settings.label }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="comparison-content__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="comparison-content__text">
+          {{ section.settings.text }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_text != blank -%}
+        <a href="{{ section.settings.button_url }}" class="comparison-content__button">
+          {{ section.settings.button_text }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="comparison-table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr class="comparison-table__header-row">
+            <th class="comparison-table__feature-cell"></th>
+            <th class="comparison-table__brand-cell comparison-table__brand-cell--primary">
+              {%- if section.settings.product_1_image != blank -%}
+                <img
+                  src="{{ section.settings.product_1_image | image_url: width: 200 }}"
+                  alt="{{ section.settings.product_1_name | escape }}"
+                  class="comparison-table__product-image"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="comparison-table__placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
+              {%- endif -%}
+              <p class="comparison-table__product-name">{{ section.settings.product_1_name }}</p>
+              {%- if section.settings.product_1_button_text != blank -%}
+                <a href="{{ section.settings.product_1_button_url }}" class="comparison-table__add-button">
+                  {{ section.settings.product_1_button_text }}
+                </a>
+              {%- endif -%}
+            </th>
+            <th class="comparison-table__brand-cell comparison-table__brand-cell--secondary">
+              {%- if section.settings.product_2_image != blank -%}
+                <img
+                  src="{{ section.settings.product_2_image | image_url: width: 200 }}"
+                  alt="{{ section.settings.product_2_name | escape }}"
+                  class="comparison-table__product-image"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="comparison-table__placeholder">{{ 'product-2' | placeholder_svg_tag }}</div>
+              {%- endif -%}
+              <p class="comparison-table__product-name">{{ section.settings.product_2_name }}</p>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr class="comparison-table__row">
+              <td class="comparison-table__feature-label">{{ block.settings.feature_label }}</td>
+              <td class="comparison-table__value comparison-table__value--primary">
+                {%- if block.settings.product_1_value_type == 'check' -%}
+                  <svg class="comparison-table__icon comparison-table__icon--check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {%- elsif block.settings.product_1_value_type == 'cross' -%}
+                  <svg class="comparison-table__icon comparison-table__icon--cross" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {%- else -%}
+                  {{ block.settings.product_1_value_text }}
+                {%- endif -%}
+              </td>
+              <td class="comparison-table__value comparison-table__value--secondary">
+                {%- if block.settings.product_2_value_type == 'check' -%}
+                  <svg class="comparison-table__icon comparison-table__icon--check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {%- elsif block.settings.product_2_value_type == 'cross' -%}
+                  <svg class="comparison-table__icon comparison-table__icon--cross" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {%- else -%}
+                  {{ block.settings.product_2_value_text }}
+                {%- endif -%}
+              </td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .comparison-section {
+    background-color: #ffffff;
+    margin-bottom: 120px;
+  }
+
+  .comparison-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 30px;
+    align-items: stretch;
+  }
+
+  .comparison-content {
+    padding: 0 48px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .comparison-content__label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ section.settings.label_color }};
+    margin: 0 0 16px 0;
+  }
+
+  .comparison-content__heading {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 24px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .comparison-content__text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 32px;
+  }
+
+  .comparison-content__text p {
+    margin: 0 0 16px 0;
+  }
+
+  .comparison-content__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .comparison-content__button {
+    display: inline-block;
+    padding: 14px 40px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: {{ section.settings.button_text_color }};
+    background-color: {{ section.settings.button_background }};
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .comparison-content__button:hover {
+    background-color: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text }};
+  }
+
+  .comparison-table-wrapper {
+    background-color: {{ section.settings.background_color }};
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .comparison-table__header-row {
+    background-color: #f8f8f8;
+  }
+
+  .comparison-table__feature-cell {
+    width: 40%;
+    padding: 20px 16px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #666;
+    background-color: #f8f8f8;
+  }
+
+  .comparison-table__brand-cell {
+    width: 30%;
+    padding: 0;
+    text-align: center;
+    vertical-align: top;
+  }
+
+  .comparison-table__brand-cell--primary {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  .comparison-table__brand-cell--secondary {
+    background-color: #f8f8f8;
+    color: #000000;
+  }
+
+  .comparison-table__product-image {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+
+  .comparison-table__brand-cell--primary .comparison-table__product-image {
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .comparison-table__placeholder {
+    width: 100%;
+    height: 170px;
+    margin: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .comparison-table__product-name {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 8px 0;
+    padding: 0 8px;
+  }
+
+  .comparison-table__add-button {
+    display: inline-block;
+    padding: 10px 24px;
+    margin: 8px 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .comparison-table__add-button:hover {
+    background-color: #f5f5f5;
+  }
+
+  .comparison-table__row {
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .comparison-table__feature-label {
+    padding: 20px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #333;
+    text-align: left;
+    background-color: #f8f8f8;
+  }
+
+  .comparison-table__value {
+    padding: 20px 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .comparison-table__value--primary {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  .comparison-table__value--secondary {
+    background-color: #f8f8f8;
+    color: #000000;
+  }
+
+  .comparison-table__icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+  }
+
+  .comparison-table__icon--check {
+    color: #ffffff;
+  }
+
+  .comparison-table__value--secondary .comparison-table__icon--check {
+    color: #000000;
+  }
+
+  .comparison-table__icon--cross {
+    color: #ff0000;
+  }
+
+  @media screen and (max-width: 989px) {
+    .comparison-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .comparison-content {
+      padding: 0 40px;
+      text-align: center;
+      align-items: center;
+    }
+
+    .comparison-content__heading {
+      font-size: 28px;
+    }
+
+    .comparison-table-wrapper {
+      overflow-x: auto;
+      padding: 0;
+    }
+
+    .comparison-table {
+      min-width: 600px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .comparison-content {
+      padding: 0 20px;
+      align-items: center;
+    }
+
+    .comparison-table-wrapper {
+      padding: 0;
+    }
+
+    .comparison-content__heading {
+      font-size: 24px;
+    }
+
+    .comparison-content__text {
+      font-size: 13px;
+    }
+
+    .comparison-table__product-image {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      padding: 0;
+    }
+
+    .comparison-table__placeholder {
+      width: 100%;
+      height: 120px;
+    }
+
+    .comparison-table__product-name {
+      font-size: 10px;
+    }
+
+    .comparison-table__add-button {
+      font-size: 10px;
+      padding: 8px 16px;
+    }
+
+    .comparison-table__feature-label,
+    .comparison-table__feature-cell {
+      font-size: 9px;
+      padding: 12px 8px;
+    }
+
+    .comparison-table__value {
+      font-size: 12px;
+      padding: 12px 8px;
+    }
+
+    .comparison-table__icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Comparison Table",
+  "class": "section-product-comparison",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left Content"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Shop Smarter"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "WHY PAY MORE? COMPARE AND SAVE WITH DAGACCI"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et nulla sit at, auctor tempor id. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices sapien massa, in vestibulum vitae.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "BUY NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Product 1 (Primary)"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_1_image",
+      "label": "Product Image"
+    },
+    {
+      "type": "text",
+      "id": "product_1_name",
+      "label": "Product Name",
+      "default": "DAGACCI"
+    },
+    {
+      "type": "text",
+      "id": "product_1_button_text",
+      "label": "Button Text",
+      "default": "+ ADD"
+    },
+    {
+      "type": "url",
+      "id": "product_1_button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Product 2 (Competitor)"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_2_image",
+      "label": "Product Image"
+    },
+    {
+      "type": "text",
+      "id": "product_2_name",
+      "label": "Product Name",
+      "default": "FIGS"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button Hover Background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text",
+      "label": "Button Hover Text",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "comparison_row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_label",
+          "label": "Feature Label",
+          "default": "FEATURE NAME"
+        },
+        {
+          "type": "select",
+          "id": "product_1_value_type",
+          "label": "Product 1 Value Type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "check",
+              "label": "Checkmark"
+            },
+            {
+              "value": "cross",
+              "label": "Cross"
+            }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "product_1_value_text",
+          "label": "Product 1 Text Value",
+          "info": "Only used if 'Text' is selected above"
+        },
+        {
+          "type": "select",
+          "id": "product_2_value_type",
+          "label": "Product 2 Value Type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "check",
+              "label": "Checkmark"
+            },
+            {
+              "value": "cross",
+              "label": "Cross"
+            }
+          ],
+          "default": "cross"
+        },
+        {
+          "type": "text",
+          "id": "product_2_value_text",
+          "label": "Product 2 Text Value",
+          "info": "Only used if 'Text' is selected above"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Comparison Table",
+      "blocks": [
+        {
+          "type": "comparison_row",
+          "settings": {
+            "feature_label": "PRICING STARTS AT",
+            "product_1_value_type": "text",
+            "product_1_value_text": "$20",
+            "product_2_value_type": "text",
+            "product_2_value_text": "$86"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "feature_label": "INCLUSIVE SIZE",
+            "product_1_value_type": "check",
+            "product_2_value_type": "cross"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "feature_label": "STRETCHY JOGGERS",
+            "product_1_value_type": "check",
+            "product_2_value_type": "cross"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "feature_label": "FAST DELIVERY",
+            "product_1_value_type": "check",
+            "product_2_value_type": "cross"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "feature_label": "PRICING STARTS AT",
+            "product_1_value_type": "check",
+            "product_2_value_type": "cross"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

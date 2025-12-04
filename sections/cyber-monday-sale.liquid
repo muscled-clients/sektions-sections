@@ -1,0 +1,569 @@
+<style>
+  #cyber-monday-sale-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    min-height: {{ section.settings.section_height }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    {% if section.settings.background_image %}
+      background-image: url('{{ section.settings.background_image | img_url: "2000x" }}');
+    {% else %}
+      background-color: #cccccc;
+    {% endif %}
+  }
+
+  #cyber-monday-sale-{{ section.id }} .sale-overlay {
+    background: rgba({{ section.settings.overlay_bg_r }}, {{ section.settings.overlay_bg_g }}, {{ section.settings.overlay_bg_b }}, {{ section.settings.overlay_bg_opacity | divided_by: 100.0 }});
+    border-radius: 30px;
+    padding: 0;
+    max-width: {{ section.settings.overlay_max_width }}px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .sale-header {
+    padding: 40px 30px 25px;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .sale-footer {
+    padding: 25px 40px 40px;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .sale-title {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: {{ section.settings.title_font_size }}px;
+    color: {{ section.settings.title_color }};
+    margin: 0 0 8px 0;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .sale-subheading {
+    font-size: {{ section.settings.subheading_font_size }}px;
+    color: {{ section.settings.subheading_color }};
+    margin: 0 0 25px 0;
+    font-weight: 300;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .countdown-timer {
+    background: {{ section.settings.timer_background }};
+    padding: {{ section.settings.timer_padding_vertical }}px {{ section.settings.timer_padding_horizontal }}px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    position: relative;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .time-number {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: {{ section.settings.timer_number_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.timer_number_color }};
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .time-label {
+    font-size: {{ section.settings.timer_label_size }}px;
+    color: {{ section.settings.timer_label_color }};
+    text-transform: capitalize;
+    font-weight: 400;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .time-separator {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: {{ section.settings.timer_number_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.timer_number_color }};
+    line-height: 1;
+    margin-bottom: 28px;
+    letter-spacing: 2px;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .sale-description {
+    font-size: {{ section.settings.description_font_size }}px;
+    color: {{ section.settings.description_color }};
+    line-height: 1.6;
+    margin: 0 0 25px 0;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .shop-now-btn {
+    display: inline-block;
+    padding: 12px 40px;
+    background: transparent;
+    border: 2px solid {{ section.settings.button_border_color }};
+    color: {{ section.settings.button_text_color }};
+    font-size: {{ section.settings.button_font_size }}px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  #cyber-monday-sale-{{ section.id }} .shop-now-btn:hover {
+    background: {{ section.settings.button_hover_bg }};
+    border-color: {{ section.settings.button_hover_bg }};
+    color: {{ section.settings.button_hover_text }};
+  }
+
+  @media (max-width: 768px) {
+    #cyber-monday-sale-{{ section.id }} {
+      min-height: auto;
+      padding: 30px 15px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .sale-overlay {
+      border-radius: 20px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .sale-header {
+      padding: 30px 20px 20px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .sale-footer {
+      padding: 20px 25px 30px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .sale-title {
+      font-size: {{ section.settings.title_font_size | minus: 8 }}px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .sale-subheading {
+      font-size: {{ section.settings.subheading_font_size | minus: 2 }}px;
+      margin-bottom: 20px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .countdown-timer {
+      padding: {{ section.settings.timer_padding_vertical | minus: 10 }}px {{ section.settings.timer_padding_horizontal | minus: 10 }}px;
+      gap: 8px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .time-number {
+      font-size: {{ section.settings.timer_number_size | minus: 10 }}px;
+      margin-bottom: 5px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .time-label {
+      font-size: {{ section.settings.timer_label_size | minus: 2 }}px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .time-separator {
+      font-size: {{ section.settings.timer_number_size | minus: 10 }}px;
+      margin-bottom: 18px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .sale-description {
+      font-size: {{ section.settings.description_font_size | minus: 2 }}px;
+      margin-bottom: 20px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .shop-now-btn {
+      padding: 10px 30px;
+      font-size: {{ section.settings.button_font_size | minus: 2 }}px;
+    }
+  }
+</style>
+
+<section id="cyber-monday-sale-{{ section.id }}">
+  <div class="sale-overlay">
+    <div class="sale-header">
+      <h2 class="sale-title">{{ section.settings.sale_title }}</h2>
+      <p class="sale-subheading">{{ section.settings.sale_subheading }}</p>
+    </div>
+
+    <div class="countdown-timer" id="countdown-{{ section.id }}">
+      <div class="time-unit">
+        <div class="time-number" id="days-{{ section.id }}">00</div>
+        <div class="time-label">Days</div>
+      </div>
+      <div class="time-separator">:</div>
+      <div class="time-unit">
+        <div class="time-number" id="hours-{{ section.id }}">00</div>
+        <div class="time-label">Hours</div>
+      </div>
+      <div class="time-separator">:</div>
+      <div class="time-unit">
+        <div class="time-number" id="minutes-{{ section.id }}">00</div>
+        <div class="time-label">Minutes</div>
+      </div>
+      <div class="time-separator">:</div>
+      <div class="time-unit">
+        <div class="time-number" id="seconds-{{ section.id }}">00</div>
+        <div class="time-label">Seconds</div>
+      </div>
+    </div>
+
+    <div class="sale-footer">
+      <p class="sale-description">{{ section.settings.sale_description }}</p>
+      <a href="{{ section.settings.button_link }}" class="shop-now-btn">{{ section.settings.button_text }}</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const endDate = new Date('{{ section.settings.end_date }}').getTime();
+    const sectionId = '{{ section.id }}';
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = endDate - now;
+
+      if (distance < 0) {
+        document.getElementById('days-' + sectionId).textContent = '00';
+        document.getElementById('hours-' + sectionId).textContent = '00';
+        document.getElementById('minutes-' + sectionId).textContent = '00';
+        document.getElementById('seconds-' + sectionId).textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days-' + sectionId).textContent = String(days).padStart(2, '0');
+      document.getElementById('hours-' + sectionId).textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes-' + sectionId).textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds-' + sectionId).textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Cyber Monday Sale",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "label": "Section Height",
+      "min": 400,
+      "max": 800,
+      "step": 50,
+      "default": 600,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Overlay Box Settings"
+    },
+    {
+      "type": "range",
+      "id": "overlay_max_width",
+      "label": "Overlay Max Width",
+      "min": 600,
+      "max": 1200,
+      "step": 50,
+      "default": 900,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "overlay_bg_r",
+      "label": "Overlay Background Red (RGB)",
+      "min": 0,
+      "max": 255,
+      "step": 5,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "overlay_bg_g",
+      "label": "Overlay Background Green (RGB)",
+      "min": 0,
+      "max": 255,
+      "step": 5,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "overlay_bg_b",
+      "label": "Overlay Background Blue (RGB)",
+      "min": 0,
+      "max": 255,
+      "step": 5,
+      "default": 65
+    },
+    {
+      "type": "range",
+      "id": "overlay_bg_opacity",
+      "label": "Overlay Background Darkness (Opacity %)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 70,
+      "unit": "%",
+      "info": "Higher = Darker. Recommended: 70-80%"
+    },
+    {
+      "type": "header",
+      "content": "Title Settings"
+    },
+    {
+      "type": "text",
+      "id": "sale_title",
+      "label": "Sale Title",
+      "default": "Cyber Monday Sale"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title Font Size",
+      "min": 28,
+      "max": 52,
+      "step": 2,
+      "default": 42,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Subheading Settings"
+    },
+    {
+      "type": "text",
+      "id": "sale_subheading",
+      "label": "Subheading Text",
+      "default": "Get your offer before the sale ends in"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Subheading Font Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Countdown Timer Settings"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "End Date (Format: Dec 31, 2025 23:59:59)",
+      "default": "Dec 31, 2025 23:59:59",
+      "info": "Enter the date and time when the sale ends"
+    },
+    {
+      "type": "color",
+      "id": "timer_background",
+      "label": "Timer Background Color",
+      "default": "#F4D03F"
+    },
+    {
+      "type": "color",
+      "id": "timer_number_color",
+      "label": "Timer Number Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "timer_number_size",
+      "label": "Timer Number Size",
+      "min": 32,
+      "max": 64,
+      "step": 2,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "timer_label_color",
+      "label": "Timer Label Color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "timer_label_size",
+      "label": "Timer Label Size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 13,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "timer_padding_vertical",
+      "label": "Timer Vertical Padding",
+      "min": 15,
+      "max": 50,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "timer_padding_horizontal",
+      "label": "Timer Horizontal Padding",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "timer_inner_border_color",
+      "label": "Timer Inner Border Color",
+      "default": "#D4AF37"
+    },
+    {
+      "type": "range",
+      "id": "timer_inner_border_width",
+      "label": "Timer Inner Border Width",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "default": 3,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "timer_margin_horizontal",
+      "label": "Timer Horizontal Margin (Spacing from Edges)",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "default": 25,
+      "unit": "px",
+      "info": "Space between timer bar and overlay edges"
+    },
+    {
+      "type": "range",
+      "id": "timer_border_radius",
+      "label": "Timer Border Radius",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Description Settings"
+    },
+    {
+      "type": "textarea",
+      "id": "sale_description",
+      "label": "Description Text",
+      "default": "Grab premium quality at unbeatable prices. Don't miss out, offer ends when the timer hits zero! Sale will ends soon!"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#d0d0d0"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "label": "Description Font Size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button Border Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button Font Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Button Hover Background",
+      "default": "#D4AF37"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text",
+      "label": "Button Hover Text Color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cyber Monday Sale"
+    }
+  ]
+}
+{% endschema %}

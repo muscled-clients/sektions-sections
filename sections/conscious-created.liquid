@@ -1,0 +1,781 @@
+<!-- Consciously Created Section with Rotating Badge -->
+<style>
+  @keyframes spin-{{ section.id }} {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  #conscious-created-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    background-color: {{ section.settings.outer_background }};
+  }
+
+  #conscious-created-{{ section.id }} .section-container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 {{ section.settings.container_padding }}px;
+  }
+
+  #conscious-created-{{ section.id }} .content-wrapper {
+    position: relative;
+    display: flex;
+    gap: {{ section.settings.column_gap }}px;
+    align-items: stretch;
+  }
+
+  /* Left Column */
+  #conscious-created-{{ section.id }} .left-column {
+    flex: {{ section.settings.left_column_ratio }};
+    background-color: {{ section.settings.left_background_color }};
+    padding: {{ section.settings.content_padding }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    border-radius: {{ section.settings.border_radius }}px;
+    box-shadow: {{ section.settings.section_shadow }};
+  }
+
+  #conscious-created-{{ section.id }} .heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.heading_color }};
+    line-height: {{ section.settings.heading_line_height }};
+    margin-bottom: {{ section.settings.heading_margin_bottom }}px;
+  }
+
+  #conscious-created-{{ section.id }} .description {
+    font-size: {{ section.settings.description_size }}px;
+    color: {{ section.settings.description_color }};
+    line-height: {{ section.settings.description_line_height }};
+    margin-bottom: {{ section.settings.description_margin_bottom }}px;
+  }
+
+  #conscious-created-{{ section.id }} .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: {{ section.settings.button_padding_y }}px {{ section.settings.button_padding_x }}px;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    border: {{ section.settings.button_border_width }}px solid {{ section.settings.button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: {{ section.settings.button_font_size }}px;
+    font-weight: {{ section.settings.button_font_weight }};
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  #conscious-created-{{ section.id }} .cta-button:hover {
+    background-color: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text_color }};
+    transform: translateY(-2px);
+  }
+
+  #conscious-created-{{ section.id }} .button-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  #conscious-created-{{ section.id }} .cta-button:hover .button-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Right Column */
+  #conscious-created-{{ section.id }} .right-column {
+    flex: {{ section.settings.right_column_ratio }};
+    position: relative;
+    background-color: {{ section.settings.right_background_color }};
+    min-height: {{ section.settings.min_height }}px;
+    border-radius: {{ section.settings.border_radius }}px;
+    overflow: hidden;
+    box-shadow: {{ section.settings.section_shadow }};
+  }
+
+  #conscious-created-{{ section.id }} .right-column img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Rotating Badge */
+  #conscious-created-{{ section.id }} .rotating-badge {
+    position: absolute;
+    width: {{ section.settings.badge_size }}px;
+    height: {{ section.settings.badge_size }}px;
+    top: {{ section.settings.badge_top_position }}px;
+    left: calc({{ section.settings.left_column_ratio }}% + {{ section.settings.column_gap | divided_by: 2.0 }}px);
+    transform: translateX(-50%);
+    z-index: 10;
+    animation: spin-{{ section.id }} {{ section.settings.rotation_speed }}s linear infinite;
+  }
+
+  {% if section.settings.pause_on_hover %}
+  #conscious-created-{{ section.id }} .rotating-badge:hover {
+    animation-play-state: paused;
+  }
+  {% endif %}
+
+  #conscious-created-{{ section.id }} .rotating-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    #conscious-created-{{ section.id }} {
+      padding: 20px;
+    }
+
+    #conscious-created-{{ section.id }} .section-container {
+      padding: 0;
+    }
+
+    #conscious-created-{{ section.id }} .content-wrapper {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #conscious-created-{{ section.id }} .right-column {
+      min-height: auto;
+      max-height: 350px;
+      border-radius: {{ section.settings.border_radius }}px;
+      order: -1;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    #conscious-created-{{ section.id }} .right-column img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    #conscious-created-{{ section.id }} .left-column {
+      padding: 30px 25px 35px 25px;
+      text-align: left;
+      border-radius: {{ section.settings.border_radius }}px;
+      box-shadow: none;
+    }
+
+    #conscious-created-{{ section.id }} .heading {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 28px;
+      font-style: italic;
+      font-weight: 700;
+      margin-bottom: 18px;
+      line-height: 1.2;
+      color: #000000;
+    }
+
+    #conscious-created-{{ section.id }} .description {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      margin-bottom: 22px;
+      line-height: 1.55;
+      color: #333333;
+    }
+
+    #conscious-created-{{ section.id }} .cta-button {
+      margin: 0;
+      font-size: 15px;
+      padding: 12px 24px;
+    }
+
+    #conscious-created-{{ section.id }} .rotating-badge {
+      display: none;
+    }
+  }
+
+  /* Reverse Layout Option */
+  {% if section.settings.reverse_layout %}
+    #conscious-created-{{ section.id }} .content-wrapper {
+      direction: rtl;
+    }
+    #conscious-created-{{ section.id }} .left-column,
+    #conscious-created-{{ section.id }} .right-column {
+      direction: ltr;
+    }
+  {% endif %}
+</style>
+
+<section id="conscious-created-{{ section.id }}">
+  <div class="section-container">
+    <div class="content-wrapper">
+      <!-- Left Column -->
+      <div class="left-column">
+        {% if section.settings.heading != blank %}
+          <h2 class="heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <p class="description">{{ section.settings.description }}</p>
+        {% endif %}
+
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="cta-button">
+            {{ section.settings.button_text }}
+            {% if section.settings.show_button_arrow %}
+              <svg class="button-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10H13M13 10L10 7M13 10L10 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            {% endif %}
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- Right Column -->
+      <div class="right-column">
+        {% if section.settings.right_image %}
+          <img src="{{ section.settings.right_image | image_url: width: 1200 }}"
+               alt="{{ section.settings.right_image_alt | escape }}"
+               loading="lazy">
+        {% else %}
+          <!-- Placeholder if no image selected -->
+          <div style="width: 100%; height: 100%; background-color: #f0f0f0;"></div>
+        {% endif %}
+      </div>
+
+      <!-- Rotating Badge -->
+      {% if section.settings.badge_image %}
+        <div class="rotating-badge">
+          <img src="{{ section.settings.badge_image | image_url: width: 300 }}"
+               alt="{{ section.settings.badge_alt | escape }}">
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Conscious Created",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "default": 1400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "container_padding",
+      "label": "Container padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Gap between columns",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "default": 10,
+      "unit": "px",
+      "info": "Space between left and right columns where badge appears"
+    },
+    {
+      "type": "range",
+      "id": "left_column_ratio",
+      "label": "Left column width ratio",
+      "min": 30,
+      "max": 50,
+      "step": 1,
+      "default": 35,
+      "unit": "%",
+      "info": "Percentage of total width for left column"
+    },
+    {
+      "type": "range",
+      "id": "right_column_ratio",
+      "label": "Right column width ratio",
+      "min": 50,
+      "max": 70,
+      "step": 1,
+      "default": 65,
+      "unit": "%",
+      "info": "Percentage of total width for right column"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Section border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "section_shadow",
+      "label": "Section shadow",
+      "default": "0 10px 40px rgba(0,0,0,0.1)"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse_layout",
+      "label": "Reverse layout (Image on left)",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum height",
+      "min": 300,
+      "max": 700,
+      "step": 50,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "Minimum height (Mobile)",
+      "min": 200,
+      "max": 500,
+      "step": 50,
+      "default": 350,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Section padding top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Section padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Background Colors"
+    },
+    {
+      "type": "color",
+      "id": "outer_background",
+      "label": "Page background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "left_background_color",
+      "label": "Left column background",
+      "default": "#f6ec5a"
+    },
+    {
+      "type": "color",
+      "id": "right_background_color",
+      "label": "Right column background",
+      "default": "#e8ddd0"
+    },
+    {
+      "type": "header",
+      "content": "Left Column Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Consciously Created"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Most of our favorite ingredients come straight from Mother Nature. We love awakening antioxidants, nourishing oils and essential vitamins."
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Content padding",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "label": "Content padding (Mobile)",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 28,
+      "max": 64,
+      "step": 2,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (Mobile)",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra bold"}
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height",
+      "label": "Heading line height",
+      "min": 1,
+      "max": 1.5,
+      "step": 0.1,
+      "default": 1.1
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Heading margin bottom",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 17,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "label": "Description size (Mobile)",
+      "min": 14,
+      "max": 18,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "description_line_height",
+      "label": "Description line height",
+      "min": 1.2,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.6
+    },
+    {
+      "type": "range",
+      "id": "description_margin_bottom",
+      "label": "Description margin bottom",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 35,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_arrow",
+      "label": "Show button arrow",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "label": "Button horizontal padding",
+      "min": 15,
+      "max": 50,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "label": "Button vertical padding",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 17,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Button font weight",
+      "options": [
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Button border width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button border color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Right Column Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right column image"
+    },
+    {
+      "type": "text",
+      "id": "right_image_alt",
+      "label": "Image alt text",
+      "default": "Product image"
+    },
+    {
+      "type": "header",
+      "content": "Rotating Badge"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_image",
+      "label": "Badge image"
+    },
+    {
+      "type": "text",
+      "id": "badge_alt",
+      "label": "Badge alt text",
+      "default": "Free shipping worldwide"
+    },
+    {
+      "type": "range",
+      "id": "badge_size",
+      "label": "Badge size",
+      "min": 80,
+      "max": 180,
+      "step": 10,
+      "default": 120,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_size_mobile",
+      "label": "Badge size (Mobile)",
+      "min": 60,
+      "max": 120,
+      "step": 10,
+      "default": 90,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_top_position",
+      "label": "Badge top position",
+      "min": 20,
+      "max": 200,
+      "step": 10,
+      "default": 60,
+      "unit": "px",
+      "info": "Distance from top of section"
+    },
+    {
+      "type": "range",
+      "id": "badge_top_position_mobile",
+      "label": "Badge top position (Mobile)",
+      "min": 20,
+      "max": 150,
+      "step": 10,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "rotation_speed",
+      "label": "Rotation speed (seconds)",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "default": 10,
+      "unit": "s",
+      "info": "Time for one complete rotation"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause rotation on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_align",
+      "label": "Mobile text alignment",
+      "options": [
+        {"value": "left", "label": "Left"},
+        {"value": "center", "label": "Center"},
+        {"value": "right", "label": "Right"}
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "mobile_badge_position",
+      "label": "Mobile badge position",
+      "options": [
+        {"value": "center", "label": "Center (between sections)"},
+        {"value": "bottom", "label": "Bottom of first section"}
+      ],
+      "default": "bottom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Conscious Created",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}

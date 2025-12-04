@@ -1,0 +1,583 @@
+{% comment %}
+  Season of Brilliance Section
+  Hero-style section with heading, subheading, and call-to-action button
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    position: relative;
+    background-color: {{ section.settings.background_color }};
+    {% if section.settings.background_image != blank %}
+      background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    {% endif %}
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    overflow: hidden;
+  }
+
+  {% if section.settings.background_image != blank and section.settings.overlay_opacity > 0 %}
+    #shopify-section-{{ section.id }}::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: {{ section.settings.overlay_color }};
+      opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+      z-index: 1;
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .content-container {
+    position: relative;
+    z-index: 2;
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .pre-title {
+    font-size: {{ section.settings.pre_title_size }}px;
+    font-weight: {{ section.settings.pre_title_weight }};
+    color: {{ section.settings.pre_title_color }};
+    margin: 0 0 {{ section.settings.pre_title_margin }}px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-transform: {{ section.settings.pre_title_transform }};
+    letter-spacing: {{ section.settings.pre_title_spacing }}px;
+  }
+
+  #shopify-section-{{ section.id }} .main-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 {{ section.settings.heading_margin }}px 0;
+    line-height: 1.1;
+    font-family: {% case section.settings.heading_font %}
+      {% when 'arial-black' %}'Arial Black', Gadget, sans-serif
+      {% when 'impact' %}Impact, Charcoal, sans-serif
+      {% when 'helvetica' %}'Helvetica Neue', Helvetica, Arial, sans-serif
+      {% else %}-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
+    {% endcase %};
+    text-transform: {{ section.settings.heading_transform }};
+    letter-spacing: {{ section.settings.heading_spacing }}px;
+  }
+
+  #shopify-section-{{ section.id }} .subheading {
+    font-size: {{ section.settings.subheading_size }}px;
+    font-weight: {{ section.settings.subheading_weight }};
+    color: {{ section.settings.subheading_color }};
+    margin: 0 auto {{ section.settings.subheading_margin }}px;
+    max-width: 600px;
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .cta-button {
+    display: inline-block;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    padding: {{ section.settings.button_padding_y }}px {{ section.settings.button_padding_x }}px;
+    border-radius: {{ section.settings.button_radius }}px;
+    font-size: {{ section.settings.button_size }}px;
+    font-weight: {{ section.settings.button_weight }};
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: {{ section.settings.button_border_width }}px solid {{ section.settings.button_border_color }};
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-transform: {{ section.settings.button_transform }};
+    letter-spacing: {{ section.settings.button_spacing }}px;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .cta-button:hover {
+    background-color: {{ section.settings.button_hover_background }};
+    color: {{ section.settings.button_hover_text_color }};
+    border-color: {{ section.settings.button_hover_border_color }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .pre-title {
+      font-size: {{ section.settings.pre_title_size | times: 0.9 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .main-heading {
+      font-size: {{ section.settings.heading_size | times: 0.7 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .subheading {
+      font-size: {{ section.settings.subheading_size | times: 0.9 }}px;
+      max-width: 90%;
+    }
+
+    #shopify-section-{{ section.id }} .cta-button {
+      font-size: {{ section.settings.button_size | times: 0.9 }}px;
+      padding: {{ section.settings.button_padding_y | times: 0.9 }}px {{ section.settings.button_padding_x | times: 0.9 }}px;
+    }
+  }
+</style>
+
+<div class="content-container">
+  {% if section.settings.pre_title != blank %}
+    <p class="pre-title">{{ section.settings.pre_title }}</p>
+  {% endif %}
+
+  {% if section.settings.heading != blank %}
+    <h2 class="main-heading">{{ section.settings.heading }}</h2>
+  {% endif %}
+
+  {% if section.settings.subheading != blank %}
+    <p class="subheading">{{ section.settings.subheading }}</p>
+  {% endif %}
+
+  {% if section.settings.button_text != blank and section.settings.button_link != blank %}
+    <a href="{{ section.settings.button_link }}" class="cta-button">
+      {{ section.settings.button_text }}
+    </a>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Season of Brilliance",
+  "tag": "section",
+  "class": "season-brilliance-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "pre_title",
+      "label": "Pre-title (optional)",
+      "default": "Summer To Shine",
+      "info": "Small text above the main heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main heading",
+      "default": "YOUR SEASON OF BRILLIANCE"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Move together in festival and dance looks as individual as the sound."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image (optional)"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000",
+      "info": "Used with background image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Pre-title Typography"
+    },
+    {
+      "type": "range",
+      "id": "pre_title_size",
+      "label": "Pre-title size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "pre_title_weight",
+      "label": "Pre-title weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "pre_title_color",
+      "label": "Pre-title color",
+      "default": "#666666"
+    },
+    {
+      "type": "select",
+      "id": "pre_title_transform",
+      "label": "Pre-title text transform",
+      "options": [
+        {"value": "none", "label": "None"},
+        {"value": "uppercase", "label": "UPPERCASE"},
+        {"value": "lowercase", "label": "lowercase"},
+        {"value": "capitalize", "label": "Capitalize"}
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "pre_title_spacing",
+      "label": "Pre-title letter spacing",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "pre_title_margin",
+      "label": "Space below pre-title",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Heading Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 28,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra-bold"},
+        {"value": "900", "label": "Black"}
+      ],
+      "default": "900"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        {"value": "system", "label": "System font"},
+        {"value": "arial-black", "label": "Arial Black"},
+        {"value": "impact", "label": "Impact"},
+        {"value": "helvetica", "label": "Helvetica"}
+      ],
+      "default": "system"
+    },
+    {
+      "type": "select",
+      "id": "heading_transform",
+      "label": "Heading text transform",
+      "options": [
+        {"value": "none", "label": "None"},
+        {"value": "uppercase", "label": "UPPERCASE"},
+        {"value": "lowercase", "label": "lowercase"},
+        {"value": "capitalize", "label": "Capitalize"}
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Heading letter spacing",
+      "min": -2,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "heading_margin",
+      "label": "Space below heading",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Subheading Typography"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "subheading_weight",
+      "label": "Subheading weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"}
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "subheading_margin",
+      "label": "Space below subheading",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Button Style"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "label": "Button horizontal padding",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "label": "Button vertical padding",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "label": "Button text size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "button_weight",
+      "label": "Button text weight",
+      "options": [
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "500"
+    },
+    {
+      "type": "select",
+      "id": "button_transform",
+      "label": "Button text transform",
+      "options": [
+        {"value": "none", "label": "None"},
+        {"value": "uppercase", "label": "UPPERCASE"},
+        {"value": "lowercase", "label": "lowercase"},
+        {"value": "capitalize", "label": "Capitalize"}
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "button_spacing",
+      "label": "Button letter spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Button border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button border color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Button Hover"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Hover border color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum content width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "default": 1000
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Season of Brilliance",
+      "settings": {
+        "pre_title": "Summer To Shine",
+        "heading": "YOUR SEASON OF BRILLIANCE",
+        "subheading": "Move together in festival and dance looks as individual as the sound.",
+        "button_text": "Shop",
+        "button_link": "/collections/all"
+      }
+    }
+  ]
+}
+{% endschema %}

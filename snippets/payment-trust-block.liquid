@@ -1,0 +1,101 @@
+{% comment %}
+  Payment Trust Block Snippet
+  To be included in product information section as a block
+{% endcomment %}
+
+<style>
+  .payment-trust-block {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .payment-trust-block__text {
+    font-size: {{ block.settings.text_size | default: 14 }}px;
+    color: {{ block.settings.text_color | default: '#666666' }};
+    margin-bottom: 15px;
+    font-weight: 400;
+  }
+
+  .payment-trust-block__logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .payment-trust-block__logo {
+    width: {{ block.settings.logo_size | default: 50 }}px;
+    height: 32px;
+    object-fit: contain;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 4px 8px;
+    transition: transform 0.2s ease;
+  }
+
+  .payment-trust-block__logo:hover {
+    transform: scale(1.05);
+  }
+
+  @media screen and (max-width: 750px) {
+    .payment-trust-block__logos {
+      gap: 8px;
+    }
+
+    .payment-trust-block__logo {
+      width: {{ block.settings.logo_size | default: 50 | times: 0.8 }}px;
+      height: 28px;
+      padding: 3px 6px;
+    }
+  }
+</style>
+
+<div class="payment-trust-block">
+  {% if block.settings.trust_text != blank %}
+    <p class="payment-trust-block__text">{{ block.settings.trust_text }}</p>
+  {% endif %}
+
+  <div class="payment-trust-block__logos">
+    {% if block.settings.show_gpay %}
+      <img class="payment-trust-block__logo" src="https://cdn.shopify.com/s/files/1/0560/7466/6159/files/google-pay.svg" alt="Google Pay" loading="lazy">
+    {% endif %}
+    
+    {% if block.settings.show_apple_pay %}
+      <img class="payment-trust-block__logo" src="https://cdn.shopify.com/s/files/1/0560/7466/6159/files/apple-pay.svg" alt="Apple Pay" loading="lazy">
+    {% endif %}
+    
+    {% if block.settings.show_paypal %}
+      <img class="payment-trust-block__logo" src="https://cdn.shopify.com/s/files/1/0560/7466/6159/files/paypal.svg" alt="PayPal" loading="lazy">
+    {% endif %}
+    
+    {% if block.settings.show_mastercard %}
+      <img class="payment-trust-block__logo" src="https://cdn.shopify.com/s/files/1/0560/7466/6159/files/mastercard.svg" alt="Mastercard" loading="lazy">
+    {% endif %}
+    
+    {% if block.settings.show_visa %}
+      <img class="payment-trust-block__logo" src="https://cdn.shopify.com/s/files/1/0560/7466/6159/files/visa.svg" alt="Visa" loading="lazy">
+    {% endif %}
+    
+    {% if block.settings.show_amex %}
+      <img class="payment-trust-block__logo" src="https://cdn.shopify.com/s/files/1/0560/7466/6159/files/amex.svg" alt="American Express" loading="lazy">
+    {% endif %}
+    
+    {% if block.settings.show_klarna %}
+      <img class="payment-trust-block__logo" src="https://cdn.shopify.com/s/files/1/0560/7466/6159/files/klarna.svg" alt="Klarna" loading="lazy">
+    {% endif %}
+    
+    {% if block.settings.show_amazon_pay %}
+      <img class="payment-trust-block__logo" src="https://cdn.shopify.com/s/files/1/0560/7466/6159/files/amazon-pay.svg" alt="Amazon Pay" loading="lazy">
+    {% endif %}
+    
+    {% if block.settings.custom_logo_1 != blank %}
+      {{ block.settings.custom_logo_1 | image_url: width: 100 | image_tag: class: 'payment-trust-block__logo', alt: 'Payment method' }}
+    {% endif %}
+    
+    {% if block.settings.custom_logo_2 != blank %}
+      {{ block.settings.custom_logo_2 | image_url: width: 100 | image_tag: class: 'payment-trust-block__logo', alt: 'Payment method' }}
+    {% endif %}
+  </div>
+</div>

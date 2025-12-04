@@ -1,0 +1,1196 @@
+<style>
+  /* Container Styles */
+  #announcement-bar-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    font-family: {{ section.settings.font_family }};
+    z-index: {{ section.settings.z_index }};
+    min-height: 60px;
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* Slider Container */
+  #announcement-bar-{{ section.id }} .announcement-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    min-height: inherit;
+  }
+
+  /* Cards Wrapper */
+  #announcement-bar-{{ section.id }} .cards-wrapper {
+    display: flex;
+    width: 100%;
+    gap: 8px;
+    transition: transform {{ section.settings.slide_transition_speed }}ms ease-in-out;
+    padding: 0 8px;
+  }
+
+  /* Individual Announcement Card */
+  #announcement-bar-{{ section.id }} .announcement-card {
+    min-width: calc(50% - 4px);
+    width: calc(50% - 4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 20px;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    min-height: 50px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    margin: 0;
+    overflow: visible;
+    word-wrap: break-word;
+  }
+
+  /* Card Content */
+  #announcement-bar-{{ section.id }} .card-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0;
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Navigation Arrows */
+  #announcement-bar-{{ section.id }} .nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    padding: 0;
+    line-height: 1;
+    font-family: Arial, sans-serif;
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  #announcement-bar-{{ section.id }} .nav-arrow:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  #announcement-bar-{{ section.id }} .nav-arrow.prev {
+    left: 16px;
+    display: none;
+  }
+
+  #announcement-bar-{{ section.id }} .nav-arrow.next {
+    right: 16px;
+  }
+
+  /* Hide arrows when not needed */
+  #announcement-bar-{{ section.id }}.hide-arrows .nav-arrow {
+    display: none;
+  }
+
+
+  /* Text Content */
+  #announcement-bar-{{ section.id }} .announcement-text {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  /* Inline Icons/Emojis */
+  #announcement-bar-{{ section.id }} .inline-icon {
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  #announcement-bar-{{ section.id }} .announcement-text {
+    order: 1;
+  }
+
+  #announcement-bar-{{ section.id }} .inline-icon.icon-before {
+    order: 2;
+    margin: 0 4px;
+  }
+
+  #announcement-bar-{{ section.id }} .announcement-link {
+    order: 3;
+  }
+
+  #announcement-bar-{{ section.id }} .inline-icon.icon-after {
+    order: 4;
+    margin-left: 4px;
+  }
+
+  /* Links */
+  #announcement-bar-{{ section.id }} .announcement-link {
+    color: inherit;
+    text-decoration: underline;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+    margin-left: 4px;
+  }
+
+  #announcement-bar-{{ section.id }} .announcement-link:hover {
+    opacity: 0.8;
+  }
+
+  /* Info Icon and Tooltip */
+  #announcement-bar-{{ section.id }} .info-icon-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+
+  #announcement-bar-{{ section.id }} .info-icon {
+    width: {{ section.settings.info_icon_size }}px;
+    height: {{ section.settings.info_icon_size }}px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: {{ section.settings.info_icon_size | minus: 4 }}px;
+    opacity: {{ section.settings.info_icon_opacity }};
+    transition: opacity 0.3s ease;
+  }
+
+  #announcement-bar-{{ section.id }} .info-icon:hover {
+    opacity: 1;
+  }
+
+  /* Tooltip */
+  #announcement-bar-{{ section.id }} .tooltip {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: {{ section.settings.tooltip_background }};
+    color: {{ section.settings.tooltip_text_color }};
+    padding: {{ section.settings.tooltip_padding }}px;
+    border-radius: {{ section.settings.tooltip_border_radius }}px;
+    font-size: {{ section.settings.tooltip_font_size }}px;
+    line-height: 1.4;
+    white-space: normal;
+    width: {{ section.settings.tooltip_width }}px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+    pointer-events: none;
+  }
+
+  /* Tooltip Arrow */
+  #announcement-bar-{{ section.id }} .tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent {{ section.settings.tooltip_background }} transparent;
+  }
+
+  #announcement-bar-{{ section.id }} .info-icon-wrapper:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+  /* Mobile Responsive */
+  @media screen and (max-width: 768px) {
+    #announcement-bar-{{ section.id }} .cards-wrapper {
+      flex-direction: row;
+      gap: 0;
+      padding: 0;
+    }
+
+    #announcement-bar-{{ section.id }} .announcement-card {
+      min-width: 100%;
+      width: 100%;
+      min-height: 50px;
+      padding: 12px 40px;
+      height: auto;
+      border-radius: 0;
+    }
+
+    #announcement-bar-{{ section.id }} .card-content {
+      font-size: 13px;
+    }
+
+    #announcement-bar-{{ section.id }} .nav-arrow {
+      width: 28px;
+      height: 28px;
+      font-size: 14px;
+    }
+
+    #announcement-bar-{{ section.id }} .nav-arrow.prev {
+      left: 12px;
+      display: flex;
+    }
+
+    #announcement-bar-{{ section.id }} .nav-arrow.next {
+      right: 12px;
+    }
+
+    #announcement-bar-{{ section.id }} .tooltip {
+      width: {{ section.settings.mobile_tooltip_width }}px;
+      font-size: {{ section.settings.mobile_tooltip_font_size }}px;
+    }
+  }
+
+  /* Small Mobile */
+  @media screen and (max-width: 480px) {
+    #announcement-bar-{{ section.id }} .card-content {
+      font-size: 12px;
+      gap: 4px;
+    }
+
+    #announcement-bar-{{ section.id }} .inline-icon {
+      font-size: 14px;
+    }
+  }
+
+  /* Accessibility */
+  #announcement-bar-{{ section.id }} .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+</style>
+
+<section
+  id="announcement-bar-{{ section.id }}"
+  class="announcement-bar"
+  data-section-id="{{ section.id }}"
+  data-total-cards="{{ section.blocks.size }}"
+  aria-label="{{ section.settings.accessibility_label }}"
+>
+  <div class="announcement-slider">
+    <!-- Navigation Arrows -->
+    {% if section.blocks.size >= 2 %}
+      <button
+        class="nav-arrow prev"
+        aria-label="Previous announcements"
+        data-direction="prev"
+      >
+        {{ section.settings.arrow_prev_icon }}
+      </button>
+      <button
+        class="nav-arrow next"
+        aria-label="Next announcements"
+        data-direction="next"
+      >
+        {{ section.settings.arrow_next_icon }}
+      </button>
+    {% endif %}
+
+    <!-- Cards Wrapper -->
+    <div class="cards-wrapper" data-current-pair="0">
+      {% for block in section.blocks %}
+        <div
+          class="announcement-card"
+          data-card-index="{{ forloop.index0 }}"
+          style="background-color: {{ block.settings.background_color }}; color: {{ block.settings.text_color }};"
+          {{ block.shopify_attributes }}
+        >
+          <div class="card-content">
+            <!-- Main Text Content -->
+            <span class="announcement-text">{{ block.settings.text }}</span>
+
+            <!-- Icon Before Link -->
+            {% if block.settings.icon_before != blank %}
+              <span class="inline-icon icon-before">{{ block.settings.icon_before }}</span>
+            {% endif %}
+
+            <!-- Link -->
+            {% if block.settings.link_text != blank and block.settings.link_url != blank %}
+              <a
+                href="{{ block.settings.link_url }}"
+                class="announcement-link"
+                {% if block.settings.link_new_tab %}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                {% endif %}
+              >
+                {{ block.settings.link_text }}
+              </a>
+            {% endif %}
+
+            <!-- Icon After Text -->
+            {% if block.settings.icon_after != blank %}
+              <span class="inline-icon icon-after">{{ block.settings.icon_after }}</span>
+            {% endif %}
+
+            <!-- Info Icon with Tooltip -->
+            {% if block.settings.tooltip_text != blank %}
+              <div class="info-icon-wrapper">
+                <span class="info-icon" role="button" tabindex="0" aria-label="More information">
+                  {{ section.settings.info_icon_symbol }}
+                </span>
+                <div class="tooltip" role="tooltip">
+                  {{ block.settings.tooltip_text }}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.getElementById('announcement-bar-{{ section.id }}');
+    if (!section) return;
+
+    const cardsWrapper = section.querySelector('.cards-wrapper');
+    const cards = section.querySelectorAll('.announcement-card');
+    const prevButton = section.querySelector('.nav-arrow.prev');
+    const nextButton = section.querySelector('.nav-arrow.next');
+
+    const totalCards = cards.length;
+    console.log('Announcement bar: Found', totalCards, 'cards');
+
+    if (totalCards < 2) {
+      console.log('Not enough cards, hiding arrows');
+      if (prevButton) prevButton.style.display = 'none';
+      if (nextButton) nextButton.style.display = 'none';
+      return;
+    }
+
+    // Show arrows
+    if (prevButton) prevButton.style.display = 'flex';
+    if (nextButton) nextButton.style.display = 'flex';
+
+    if (totalCards <= 2) {
+      console.log('Only 2 cards, arrows will be disabled');
+      // Disable arrows for 2 cards since no sliding needed
+      if (prevButton) {
+        prevButton.style.opacity = '0.3';
+        prevButton.disabled = true;
+      }
+      if (nextButton) {
+        nextButton.style.opacity = '0.3';
+        nextButton.disabled = true;
+      }
+      return;
+    }
+
+    let currentPair = 0;
+    const totalPairs = Math.ceil(totalCards / 2);
+    let isTransitioning = false;
+    let isMobile = window.innerWidth <= 768;
+
+    // Function to update card position
+    function updateCardPosition() {
+      if (isTransitioning) return;
+
+      isTransitioning = true;
+
+      // Mobile view: show one card at a time (100% width)
+      // Desktop view: show two cards at a time (50% width)
+      const translateX = isMobile ? -currentPair * 100 : -currentPair * 50;
+      cardsWrapper.style.transform = `translateX(${translateX}%)`;
+
+      // Update button states
+      const maxIndex = isMobile ? totalCards - 1 : totalPairs - 1;
+
+      if (prevButton) {
+        if (currentPair === 0) {
+          prevButton.style.display = 'none';
+        } else {
+          prevButton.style.display = 'flex';
+          prevButton.style.opacity = '0.8';
+          prevButton.disabled = false;
+        }
+      }
+      if (nextButton) {
+        if (currentPair >= maxIndex) {
+          nextButton.style.display = 'none';
+        } else {
+          nextButton.style.display = 'flex';
+          nextButton.style.opacity = '0.8';
+          nextButton.disabled = false;
+        }
+      }
+
+      // Reset transition flag after animation completes
+      setTimeout(() => {
+        isTransitioning = false;
+      }, {{ section.settings.slide_transition_speed }});
+    }
+
+    // Function to go to next pair
+    function nextPair() {
+      const maxIndex = isMobile ? totalCards - 1 : totalPairs - 1;
+      if (isTransitioning || currentPair >= maxIndex) return;
+      currentPair++;
+      updateCardPosition();
+    }
+
+    // Function to go to previous pair
+    function prevPair() {
+      if (isTransitioning || currentPair <= 0) return;
+      currentPair--;
+      updateCardPosition();
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      const wasMobile = isMobile;
+      isMobile = window.innerWidth <= 768;
+
+      // Reset position when switching between mobile and desktop
+      if (wasMobile !== isMobile) {
+        currentPair = 0;
+        updateCardPosition();
+      }
+    });
+
+    // Event listeners for navigation arrows
+    if (nextButton) {
+      nextButton.addEventListener('click', nextPair);
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener('click', prevPair);
+    }
+
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isSwiping = false;
+
+    section.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      isSwiping = true;
+    }, { passive: true });
+
+    section.addEventListener('touchmove', (e) => {
+      if (!isSwiping) return;
+      touchEndX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    section.addEventListener('touchend', () => {
+      if (!isSwiping) return;
+
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextPair();
+        } else {
+          prevPair();
+        }
+      }
+
+      isSwiping = false;
+    });
+
+    // Keyboard navigation for accessibility
+    section.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        prevPair();
+      } else if (e.key === 'ArrowRight') {
+        nextPair();
+      }
+    });
+
+    // Info icon keyboard accessibility
+    const infoIcons = section.querySelectorAll('.info-icon');
+    infoIcons.forEach(icon => {
+      icon.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const tooltip = icon.nextElementSibling;
+          const isVisible = tooltip.style.visibility === 'visible';
+
+          // Toggle tooltip
+          tooltip.style.visibility = isVisible ? 'hidden' : 'visible';
+          tooltip.style.opacity = isVisible ? '0' : '1';
+
+          // Hide tooltip after 3 seconds
+          if (!isVisible) {
+            setTimeout(() => {
+              tooltip.style.visibility = 'hidden';
+              tooltip.style.opacity = '0';
+            }, 3000);
+          }
+        }
+      });
+    });
+
+    // Initialize button states
+    updateCardPosition();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Sliding Announcement Bar",
+  "tag": "section",
+  "class": "announcement-bar-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "range",
+      "id": "bar_height",
+      "min": 40,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bar height",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "mobile_bar_height",
+      "min": 40,
+      "max": 70,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile bar height",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "z_index",
+      "min": 10,
+      "max": 1000,
+      "step": 10,
+      "label": "Z-index",
+      "default": 100,
+      "info": "Stack order relative to other elements"
+    },
+    {
+      "type": "color",
+      "id": "default_background",
+      "label": "Default background",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Announcement bar with multiple messages"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font family",
+      "options": [
+        {
+          "value": "system-ui, sans-serif",
+          "label": "System"
+        },
+        {
+          "value": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+          "label": "Helvetica"
+        },
+        {
+          "value": "Georgia, 'Times New Roman', serif",
+          "label": "Georgia"
+        },
+        {
+          "value": "'Courier New', Courier, monospace",
+          "label": "Courier"
+        }
+      ],
+      "default": "system-ui, sans-serif"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile text size",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "small_mobile_text_size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Small mobile text size",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "text_weight",
+      "label": "Text weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "min": 1.2,
+      "max": 1.8,
+      "step": 0.1,
+      "label": "Line height",
+      "default": 1.4
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "min": 0,
+      "max": 2,
+      "step": 0.1,
+      "unit": "px",
+      "label": "Letter spacing",
+      "default": 0.2
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_vertical",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile vertical padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_horizontal",
+      "min": 15,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "min": 6,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap between content elements",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 14,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_icon_size",
+      "min": 12,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile icon size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Links"
+    },
+    {
+      "type": "select",
+      "id": "link_underline",
+      "label": "Link underline",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "underline",
+          "label": "Underline"
+        }
+      ],
+      "default": "underline"
+    },
+    {
+      "type": "select",
+      "id": "link_weight",
+      "label": "Link font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "link_hover_opacity",
+      "min": 0.5,
+      "max": 1,
+      "step": 0.1,
+      "label": "Link hover opacity",
+      "default": 0.8
+    },
+    {
+      "type": "header",
+      "content": "Info Icon & Tooltip"
+    },
+    {
+      "type": "text",
+      "id": "info_icon_symbol",
+      "label": "Info icon symbol",
+      "default": "ℹ"
+    },
+    {
+      "type": "range",
+      "id": "info_icon_size",
+      "min": 16,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Info icon size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "info_icon_opacity",
+      "min": 0.3,
+      "max": 1,
+      "step": 0.1,
+      "label": "Info icon opacity",
+      "default": 0.6
+    },
+    {
+      "type": "color",
+      "id": "tooltip_background",
+      "label": "Tooltip background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "tooltip_text_color",
+      "label": "Tooltip text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "tooltip_width",
+      "min": 200,
+      "max": 400,
+      "step": 20,
+      "unit": "px",
+      "label": "Tooltip width",
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "mobile_tooltip_width",
+      "min": 180,
+      "max": 300,
+      "step": 20,
+      "unit": "px",
+      "label": "Mobile tooltip width",
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "tooltip_padding",
+      "min": 10,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Tooltip padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "tooltip_border_radius",
+      "min": 4,
+      "max": 12,
+      "step": 2,
+      "unit": "px",
+      "label": "Tooltip border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "tooltip_font_size",
+      "min": 11,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "label": "Tooltip font size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "mobile_tooltip_font_size",
+      "min": 11,
+      "max": 13,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile tooltip font size",
+      "default": 11
+    },
+    {
+      "type": "header",
+      "content": "Navigation Arrows"
+    },
+    {
+      "type": "text",
+      "id": "arrow_prev_icon",
+      "label": "Previous arrow icon",
+      "default": "‹"
+    },
+    {
+      "type": "text",
+      "id": "arrow_next_icon",
+      "label": "Next arrow icon",
+      "default": "›"
+    },
+    {
+      "type": "color",
+      "id": "arrow_background",
+      "label": "Arrow background",
+      "default": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "min": 30,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Arrow size",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "mobile_arrow_size",
+      "min": 24,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile arrow size",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "arrow_icon_size",
+      "min": 16,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Arrow icon size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_arrow_icon_size",
+      "min": 14,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile arrow icon size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "arrow_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 10,
+      "unit": "%",
+      "label": "Arrow border radius",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "arrow_offset",
+      "min": 10,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Arrow offset from edge",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_arrow_offset",
+      "min": 5,
+      "max": 20,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile arrow offset",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "arrow_opacity",
+      "min": 0.3,
+      "max": 1,
+      "step": 0.1,
+      "label": "Arrow opacity",
+      "default": 0.7
+    },
+    {
+      "type": "range",
+      "id": "arrow_hover_opacity",
+      "min": 0.5,
+      "max": 1,
+      "step": 0.1,
+      "label": "Arrow hover opacity",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Animation Settings"
+    },
+    {
+      "type": "range",
+      "id": "slide_transition_speed",
+      "min": 300,
+      "max": 1000,
+      "step": 100,
+      "unit": "ms",
+      "label": "Slide transition speed",
+      "default": 500,
+      "info": "Card sliding animation duration"
+    },
+    {
+      "type": "header",
+      "content": "Animation Settings"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Announcement text",
+          "default": "Welcome to our store! Enjoy free shipping on orders over $50"
+        },
+        {
+          "type": "text",
+          "id": "icon_before",
+          "label": "Icon before text",
+          "placeholder": "🎉",
+          "info": "Add emoji or leave blank"
+        },
+        {
+          "type": "text",
+          "id": "icon_after",
+          "label": "Icon after text",
+          "placeholder": "🎉",
+          "info": "Add emoji or leave blank"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "placeholder": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_new_tab",
+          "label": "Open link in new tab",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "textarea",
+          "id": "tooltip_text",
+          "label": "Tooltip text",
+          "placeholder": "Additional information about this announcement",
+          "info": "Shows when hovering over info icon"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sliding Announcement Bar",
+      "blocks": [
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "Last chance: Save 20% on all* makeup",
+            "icon_before": "💄",
+            "link_text": "NYX, Clinique, MAC, Clarins and many more!",
+            "background_color": "#FFE4E8",
+            "text_color": "#333333",
+            "tooltip_text": "Certain items are excluded from all discounts. Discounts cannot be combined."
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "You can still get a tan even when the sun is hiding",
+            "icon_before": "😎",
+            "link_text": "Shop self-tanner here",
+            "background_color": "#FFF4D6",
+            "text_color": "#333333"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "Section Store from head to toe",
+            "icon_before": "💙",
+            "link_text": "Find your favorites here",
+            "background_color": "#E6F0FF",
+            "text_color": "#333333"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,612 @@
+<style>
+  .bundle-builder-section {
+    width: 100%;
+    padding: {{ section.settings.section_padding_top }}px 20px {{ section.settings.section_padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .bundle-builder-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .bundle-builder-header {
+    margin-bottom: 40px;
+  }
+
+  .bundle-builder-title {
+    font-size: 48px;
+    font-weight: 900;
+    margin: 0 0 16px 0;
+    color: #000000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .bundle-builder-subtitle {
+    font-size: 16px;
+    color: #666666;
+    margin: 0;
+  }
+
+  .bundle-builder-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .bundle-products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .bundle-product-card {
+    position: relative;
+    background-color: #f5f5f5;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+  }
+
+  .bundle-product-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .bundle-product-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+
+  .bundle-add-button {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 2px solid #000000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 24px;
+    font-weight: 300;
+    color: #000000;
+  }
+
+  .bundle-add-button:hover {
+    background-color: #000000;
+    color: white;
+  }
+
+  .bundle-product-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #000000;
+  }
+
+  .bundle-product-description {
+    font-size: 14px;
+    color: #666666;
+    margin: 0 0 8px 0;
+  }
+
+  .bundle-product-meta {
+    font-size: 14px;
+    color: #666666;
+    margin: 0 0 12px 0;
+  }
+
+  .bundle-product-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+  }
+
+.bundle-sidebar {
+    position: sticky;
+    top: 20px;
+    background-color: #e8e3f3;
+    border-radius: 24px;
+    padding: 32px;
+  }
+
+  .bundle-sidebar-title {
+    font-size: 36px;
+    font-weight: 900;
+    margin: 0 0 8px 0;
+    color: #000000;
+    text-align: center;
+  }
+
+  .bundle-savings {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 24px 0;
+    color: #000000;
+  }
+
+  .bundle-discount-label {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 12px 0;
+    color: #000000;
+  }
+
+  .bundle-discount-bar {
+    display: flex;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    border: 2px solid #000000;
+  }
+
+  .bundle-discount-tier {
+    flex: 1;
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    background-color: #ffffff;
+    color: #000000;
+    transition: all 0.3s ease;
+    border-right: 1px solid #e0e0e0;
+  }
+
+  .bundle-discount-tier:last-child {
+    border-right: none;
+  }
+
+  .bundle-discount-tier.active {
+    background-color: #d4ed3f;
+    color: #000000;
+  }
+
+  .bundle-selected-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+    min-height: 260px;
+  }
+
+  .bundle-selected-slot {
+    width: 100%;
+    min-height: 120px;
+    height: 120px;
+    border: 3px dashed #999999 !important;
+    border-radius: 12px;
+    position: relative;
+    background-color: #ffffff !important;
+    display: block !important;
+    box-sizing: border-box;
+  }
+
+  .bundle-selected-slot img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
+
+  .bundle-remove-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    background-color: #000000;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .bundle-totals {
+    margin-bottom: 20px;
+  }
+
+  .bundle-value {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .bundle-value-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .bundle-value-prices {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .bundle-original-price {
+    font-size: 16px;
+    color: #999999;
+    text-decoration: line-through;
+  }
+
+  .bundle-final-price {
+    font-size: 24px;
+    font-weight: 900;
+    color: #000000;
+  }
+
+  .bundle-add-to-cart {
+    width: 100%;
+    padding: 16px;
+    background-color: #d4ed3f;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+  }
+
+  .bundle-add-to-cart:hover {
+    background-color: #c5de30;
+  }
+
+  .bundle-add-to-cart:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .bundle-disclaimer {
+    font-size: 12px;
+    color: #666666;
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  @media (max-width: 1024px) {
+    .bundle-builder-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .bundle-products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bundle-sidebar {
+      position: relative;
+      top: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .bundle-builder-title {
+      font-size: 32px;
+    }
+
+    .bundle-products-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .bundle-sidebar-title {
+      font-size: 28px;
+    }
+
+    .bundle-discount-tier {
+      font-size: 12px;
+      padding: 6px 4px;
+    }
+  }
+</style>
+
+<div class="bundle-builder-section">
+  <div class="bundle-builder-container">
+    <div class="bundle-builder-header">
+      <h1 class="bundle-builder-title">{{ section.settings.title }}</h1>
+      <p class="bundle-builder-subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <div class="bundle-builder-layout">
+      <div class="bundle-products-grid" id="bundleProductsGrid">
+        {% if section.settings.collection != blank %}
+          {% for product in section.settings.collection.products limit: 12 %}
+            <div class="bundle-product-card">
+              <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" class="bundle-product-image">
+              <button class="bundle-add-button" data-product-id="{{ product.variants.first.id }}" data-product-title="{{ product.title }}" data-product-price="{{ product.price }}" data-product-image="{{ product.featured_image | img_url: 'small' }}">+</button>
+              <h3 class="bundle-product-title">{{ product.title }}</h3>
+              <p class="bundle-product-description">{{ product.vendor }}</p>
+              {% if product.variants.first.title != 'Default Title' %}
+                <p class="bundle-product-meta">{{ product.variants.first.title }}</p>
+              {% endif %}
+              <p class="bundle-product-price">{{ product.price | money }}</p>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>Please select a collection in the theme customizer.</p>
+        {% endif %}
+      </div>
+
+      <div class="bundle-sidebar">
+        <h2 class="bundle-sidebar-title">Your Bundle (<span id="bundleCount">0</span>)</h2>
+        <p class="bundle-savings">Total Savings: <span id="bundleSavings">$0.00</span></p>
+        <p class="bundle-discount-label">Your Discount</p>
+        <div class="bundle-discount-bar">
+          <div class="bundle-discount-tier active" data-tier="0">0%</div>
+          <div class="bundle-discount-tier" data-tier="1">5%</div>
+          <div class="bundle-discount-tier" data-tier="2">10%</div>
+          <div class="bundle-discount-tier" data-tier="3">15%</div>
+          <div class="bundle-discount-tier" data-tier="4">20%</div>
+          <div class="bundle-discount-tier" data-tier="5">25%</div>
+        </div>
+
+        <div class="bundle-selected-grid" id="bundleSelectedGrid">
+          <div class="bundle-selected-slot"></div>
+          <div class="bundle-selected-slot"></div>
+          <div class="bundle-selected-slot"></div>
+          <div class="bundle-selected-slot"></div>
+          <div class="bundle-selected-slot"></div>
+          <div class="bundle-selected-slot"></div>
+        </div>
+
+        <div class="bundle-totals">
+          <div class="bundle-value">
+            <span class="bundle-value-label">Bundle Value:</span>
+            <div class="bundle-value-prices">
+              <span class="bundle-original-price" id="bundleOriginalPrice">$0.00</span>
+              <span class="bundle-final-price" id="bundleFinalPrice">$0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="bundle-add-to-cart" id="addBundleToCart" disabled>ADD BUNDLE TO BAG</button>
+        <p class="bundle-disclaimer">Can't be stacked with other discounts.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const bundleState = {
+    products: [],
+    discountTiers: [
+      { items: 1, discount: 0 },
+      { items: 2, discount: 0.05 },
+      { items: 3, discount: 0.10 },
+      { items: 4, discount: 0.15 },
+      { items: 5, discount: 0.20 },
+      { items: 6, discount: 0.25 }
+    ]
+  };
+
+  function getActiveDiscount() {
+    const count = bundleState.products.length;
+    let discount = 0;
+
+    for (let i = bundleState.discountTiers.length - 1; i >= 0; i--) {
+      if (count >= bundleState.discountTiers[i].items) {
+        discount = bundleState.discountTiers[i].discount;
+        break;
+      }
+    }
+
+    return discount;
+  }
+
+  function updateDiscountBar() {
+    const count = bundleState.products.length;
+    const tiers = document.querySelectorAll('.bundle-discount-tier');
+
+    tiers.forEach((tier, index) => {
+      tier.classList.remove('active');
+      if (count >= bundleState.discountTiers[index].items) {
+        tier.classList.add('active');
+      }
+    });
+  }
+
+  function calculateTotals() {
+    const total = bundleState.products.reduce((sum, p) => sum + parseFloat(p.price), 0);
+    const discount = getActiveDiscount();
+    const savings = total * discount;
+    const finalPrice = total - savings;
+
+    return {
+      original: total / 100,
+      savings: savings / 100,
+      final: finalPrice / 100
+    };
+  }
+
+  function formatMoney(cents) {
+    return '$' + cents.toFixed(2);
+  }
+
+  function updateUI() {
+    const totals = calculateTotals();
+    const count = bundleState.products.length;
+
+    document.getElementById('bundleCount').textContent = count;
+    document.getElementById('bundleSavings').textContent = formatMoney(totals.savings);
+    document.getElementById('bundleOriginalPrice').textContent = formatMoney(totals.original);
+    document.getElementById('bundleFinalPrice').textContent = formatMoney(totals.final);
+
+    updateDiscountBar();
+    updateSelectedGrid();
+
+    const addButton = document.getElementById('addBundleToCart');
+    addButton.disabled = count === 0;
+  }
+
+function updateSelectedGrid() {
+    const grid = document.getElementById('bundleSelectedGrid');
+    const slots = grid.querySelectorAll('.bundle-selected-slot');
+
+    slots.forEach((slot, index) => {
+      slot.innerHTML = '';
+
+      if (bundleState.products[index]) {
+        const product = bundleState.products[index];
+
+        const wrapper = document.createElement('div');
+        wrapper.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;';
+
+        const img = document.createElement('img');
+        img.src = product.image;
+        img.alt = product.title;
+        img.style.cssText = 'width: 80%; height: 80%; object-fit: contain;';
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'bundle-remove-button';
+        removeBtn.innerHTML = '×';
+        removeBtn.onclick = () => removeProduct(index);
+
+        wrapper.appendChild(img);
+        wrapper.appendChild(removeBtn);
+        slot.appendChild(wrapper);
+      }
+    });
+  }
+
+  function addProduct(productData) {
+    if (bundleState.products.length >= 6) {
+      alert('Maximum 6 products allowed in bundle');
+      return;
+    }
+
+    bundleState.products.push(productData);
+    updateUI();
+  }
+
+  function removeProduct(index) {
+    bundleState.products.splice(index, 1);
+    updateUI();
+  }
+
+  function addBundleToCart() {
+    if (bundleState.products.length === 0) return;
+
+    const addButton = document.getElementById('addBundleToCart');
+    addButton.disabled = true;
+    addButton.textContent = 'Adding...';
+
+    const requests = bundleState.products.map(product => {
+      return fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: product.id,
+          quantity: 1
+        })
+      });
+    });
+
+    Promise.all(requests)
+      .then(() => {
+        window.location.href = '/cart';
+      })
+      .catch(error => {
+        console.error('Error adding to cart:', error);
+        addButton.disabled = false;
+        addButton.textContent = 'ADD BUNDLE TO BAG';
+        alert('Error adding bundle to cart. Please try again.');
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const addButtons = document.querySelectorAll('.bundle-add-button');
+    addButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const productData = {
+          id: this.dataset.productId,
+          title: this.dataset.productTitle,
+          price: parseFloat(this.dataset.productPrice),
+          image: this.dataset.productImage
+        };
+        addProduct(productData);
+      });
+    });
+
+    document.getElementById('addBundleToCart').addEventListener('click', addBundleToCart);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Build Your Own Bundle",
+  "tag": "section",
+  "class": "section-bundle-builder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Build Your Own Bundle"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Find your favorites, build your bundle and save up to 25%. The more you add, the more you save!"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Build Your Own Bundle"
+    }
+  ]
+}
+{% endschema %}

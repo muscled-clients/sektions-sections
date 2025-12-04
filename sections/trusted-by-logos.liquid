@@ -1,0 +1,403 @@
+{% comment %}
+  Trusted By Section
+  Displays brand logos with heading
+{% endcomment %}
+
+<section class="trusted-by-section section-{{ section.id }}-padding">
+  {% if section.settings.heading != blank %}
+    <h2 class="trusted-by-heading">{{ section.settings.heading }}</h2>
+  {% endif %}
+
+  <div class="trusted-by-logos">
+    {% for block in section.blocks %}
+      <div class="logo-item" {{ block.shopify_attributes }}>
+        {% if block.settings.logo != blank %}
+          <img
+            src="{{ block.settings.logo | image_url: width: 300 }}"
+            alt="{{ block.settings.logo.alt | default: block.settings.logo_alt }}"
+            loading="lazy"
+            width="{{ block.settings.logo.width }}"
+            height="{{ block.settings.logo.height }}"
+          >
+        {% else %}
+          <div class="logo-placeholder">
+            <p>{{ block.settings.logo_alt | default: "Logo" }}</p>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<style>
+  .trusted-by-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: {{ section.settings.background_color }};
+    border-bottom: 1px solid {{ section.settings.border_color }};
+    box-sizing: border-box;
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-left: {{ section.settings.padding_left }}px;
+    padding-right: {{ section.settings.padding_right }}px;
+  }
+
+  .trusted-by-heading {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    letter-spacing: {{ section.settings.letter_spacing }}px;
+    text-align: {{ section.settings.heading_alignment }};
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 {{ section.settings.heading_spacing }}px 0;
+    padding: 0;
+    text-transform: uppercase;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .trusted-by-logos {
+    display: flex;
+    align-items: center;
+    justify-content: {{ section.settings.logo_alignment }};
+    gap: {{ section.settings.logo_gap }}px;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .logo-item {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .logo-item img {
+    max-width: {{ section.settings.logo_max_width }}px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: grayscale({{ section.settings.grayscale_amount }}%);
+    opacity: {{ section.settings.logo_opacity }};
+    transition: all 0.3s ease;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .logo-item img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  .logo-placeholder {
+    width: 150px;
+    height: 60px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+  }
+
+  .logo-placeholder p {
+    margin: 0;
+    color: #999;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Responsive Design */
+  @media screen and (max-width: 989px) {
+    .trusted-by-heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.85);
+      margin-bottom: calc({{ section.settings.heading_spacing }}px * 0.8);
+    }
+
+    .trusted-by-logos {
+      gap: calc({{ section.settings.logo_gap }}px * 0.7);
+    }
+
+    .logo-item img {
+      max-width: calc({{ section.settings.logo_max_width }}px * 0.75);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+
+    .trusted-by-heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.75);
+      margin-bottom: calc({{ section.settings.heading_spacing }}px * 0.7);
+      text-align: center;
+    }
+
+    .trusted-by-logos {
+      justify-content: center;
+      gap: calc({{ section.settings.logo_gap }}px * 0.5);
+    }
+
+    .logo-item img {
+      max-width: calc({{ section.settings.logo_max_width }}px * 0.6);
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .trusted-by-logos {
+      flex-direction: {{ section.settings.mobile_layout }};
+      gap: 20px;
+    }
+
+    .logo-item {
+      flex: 0 1 auto;
+    }
+
+    .logo-item img {
+      max-width: 120px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Trusted By Logos",
+  "tag": "section",
+  "class": "section-trusted-by",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "TRUSTED BY"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading Weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Letter Spacing",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Spacing Below Heading",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "logo_alignment",
+      "label": "Logo Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "space-between", "label": "Space Between" },
+        { "value": "space-around", "label": "Space Around" },
+        { "value": "space-evenly", "label": "Space Evenly" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "logo_gap",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap Between Logos",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo Max Width",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "grayscale_amount",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Grayscale Amount",
+      "default": 100,
+      "info": "100% = full grayscale, 0% = full color"
+    },
+    {
+      "type": "range",
+      "id": "logo_opacity",
+      "min": 0.3,
+      "max": 1,
+      "step": 0.1,
+      "label": "Logo Opacity",
+      "default": 0.7
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FAFAFA"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#E5E5E5"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile Layout",
+      "options": [
+        { "value": "row", "label": "Horizontal (Wrap)" },
+        { "value": "column", "label": "Vertical (Stack)" }
+      ],
+      "default": "row"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo Image"
+        },
+        {
+          "type": "text",
+          "id": "logo_alt",
+          "label": "Logo Alt Text",
+          "info": "Describe the logo for accessibility"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trusted By Logos",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        },
+        {
+          "type": "logo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

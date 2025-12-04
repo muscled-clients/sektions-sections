@@ -1,0 +1,1302 @@
+{% comment %}
+  Bundle Builder Section
+  Collection-based product selector with cart functionality
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .bundle-container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+    align-items: start;
+  }
+
+  #shopify-section-{{ section.id }} .section-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 30px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .product-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
+    transition: all 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  #shopify-section-{{ section.id }} .product-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    position: relative;
+    background: #f8f8f8;
+  }
+
+  #shopify-section-{{ section.id }} .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .product-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+    margin: 0 0 8px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .product-reviews {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .star {
+    color: #ffc107;
+    font-size: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .review-count {
+    font-size: 11px;
+    color: #999999;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .product-nutrition {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #666666;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .nutrition-item {
+    color: #666666;
+  }
+
+  #shopify-section-{{ section.id }} .nutrition-divider {
+    color: #cccccc;
+  }
+
+  #shopify-section-{{ section.id }} .product-actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .add-button {
+    background-color: #ffc107;
+    color: #333333;
+    border: none;
+    padding: 10px 40px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    width: 100%;
+    max-width: 200px;
+  }
+
+  #shopify-section-{{ section.id }} .add-button:hover {
+    background-color: #ffb300;
+    transform: translateY(-1px);
+  }
+
+  #shopify-section-{{ section.id }} .quantity-selector {
+    display: flex;
+    align-items: center;
+    background-color: #ffc107;
+    border-radius: 20px;
+    padding: 6px 12px;
+    gap: 20px;
+    width: 100%;
+    max-width: 200px;
+    justify-content: space-between;
+  }
+
+  #shopify-section-{{ section.id }} .quantity-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .quantity-btn:hover {
+    background-color: rgba(0,0,0,0.1);
+  }
+
+  #shopify-section-{{ section.id }} .quantity-display {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+    min-width: 20px;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .sidebar {
+    position: sticky;
+    top: 20px;
+    background: {{ section.settings.sidebar_bg }};
+    border-radius: {{ section.settings.sidebar_radius }}px;
+    padding: 25px;
+    box-shadow: {{ section.settings.sidebar_shadow }};
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .selected-products {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 200px;
+  }
+
+  #shopify-section-{{ section.id }} .sidebar-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: {{ section.settings.sidebar_title_color }};
+    margin: 0 0 20px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .selected-products {
+    margin-bottom: 25px;
+  }
+
+  #shopify-section-{{ section.id }} .selected-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .selected-item:last-child {
+    border-bottom: none;
+  }
+
+  #shopify-section-{{ section.id }} .selected-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  #shopify-section-{{ section.id }} .selected-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .selected-details {
+    flex: 1;
+    padding-right: 100px;
+  }
+
+  #shopify-section-{{ section.id }} .selected-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+    margin: 0 0 4px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .sidebar-quantity {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    padding: 2px;
+    gap: 8px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #shopify-section-{{ section.id }} .sidebar-quantity .quantity-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #666;
+  }
+
+  #shopify-section-{{ section.id }} .sidebar-quantity .quantity-btn:hover {
+    background: #f0f0f0;
+  }
+
+  #shopify-section-{{ section.id }} .sidebar-quantity .quantity-display {
+    font-size: 14px;
+    min-width: 20px;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+  }
+
+  #shopify-section-{{ section.id }} .remove-link {
+    color: #666666;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .remove-link:hover {
+    color: #333333;
+  }
+
+  #shopify-section-{{ section.id }} .sidebar-progress-bar {
+    margin-bottom: 25px;
+    padding: 0 15px;
+  }
+
+  #shopify-section-{{ section.id }} .progress-container {
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .progress-track {
+    position: relative;
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: visible;
+  }
+
+  #shopify-section-{{ section.id }} .progress-filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 8px;
+    background-color: #495057 !important;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.3s ease;
+    z-index: 1;
+    display: block !important;
+  }
+
+  #shopify-section-{{ section.id }} .progress-current,
+  #shopify-section-{{ section.id }} .progress-milestone {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .progress-current {
+    background: #6c757d;
+    color: #ffffff;
+    z-index: 3;
+    transition: left 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .progress-milestone {
+    background: #ffffff;
+    border: 2px solid #e0e0e0;
+    color: #999999;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid {{ section.settings.divider_color }};
+  }
+
+  #shopify-section-{{ section.id }} .footer-message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #8693a6;
+    color: #ffffff;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  #shopify-section-{{ section.id }} .message-text {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .message-count {
+    width: 28px;
+    height: 28px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .cart-button {
+    width: 100%;
+    background-color: #ffc107;
+    color: #333333;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin-bottom: 15px;
+  }
+
+  #shopify-section-{{ section.id }} .cart-button:hover {
+    background-color: #ffb300;
+    transform: translateY(-1px);
+  }
+
+  #shopify-section-{{ section.id }} .incentive-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin-top: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    padding: 4px 8px;
+    border-radius: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .badge.yellow {
+    background: #fff3cd;
+    color: #856404;
+  }
+
+  #shopify-section-{{ section.id }} .badge.orange {
+    background: #ffeaa7;
+    color: #d63031;
+  }
+
+  #shopify-section-{{ section.id }} .progress-filled.milestone-reached {
+    background-color: #ffc107 !important;
+  }
+
+  #shopify-section-{{ section.id }} .progress-current.milestone-reached {
+    background: #ffc107;
+    color: #333333;
+  }
+
+  /* Mobile Layout */
+  @media screen and (max-width: 949px) {
+    #shopify-section-{{ section.id }} .bundle-container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    #shopify-section-{{ section.id }} .sidebar {
+      position: relative;
+      top: 0;
+      order: -1;
+    }
+
+    #shopify-section-{{ section.id }} .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="bundle-container">
+  <div class="products-section">
+    {% if section.settings.heading != blank %}
+      <h2 class="section-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="products-grid" id="products-grid-{{ section.id }}">
+      {% if section.settings.collection != blank %}
+        {% for product in section.settings.collection.products limit: section.settings.product_limit %}
+          <div class="product-card" data-product-id="{{ product.id }}" data-section-id="{{ section.id }}">
+            <div class="product-image">
+              {% if product.featured_image %}
+                {{ product.featured_image | image_url: width: 400 | image_tag: alt: product.title }}
+              {% else %}
+                <div style="width: 100%; height: 100%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999;">No Image</div>
+              {% endif %}
+            </div>
+
+            <h3 class="product-title">{{ product.title }}</h3>
+
+            <div class="product-reviews">
+              <div class="stars">
+                {% for i in (1..5) %}
+                  <span class="star">★</span>
+                {% endfor %}
+              </div>
+              <span class="review-count">{{ section.settings.review_placeholder }}</span>
+            </div>
+
+            <div class="product-nutrition">
+              <span class="nutrition-item">16g protein</span>
+              <span class="nutrition-divider">|</span>
+              <span class="nutrition-item">250 cal</span>
+            </div>
+
+            <div class="product-actions">
+              <button class="add-button" id="add-btn-{{ section.id }}-{{ product.id }}" onclick="addProduct_{{ section.id | replace: '-', '_' }}('{{ product.id }}', '{{ product.title }}', '{{ product.featured_image | image_url: width: 200 }}', '{{ product.variants.first.id }}')">
+                {{ section.settings.add_button_text }}
+              </button>
+              <div class="quantity-selector" id="qty-selector-{{ section.id }}-{{ product.id }}" style="display: none;">
+                <button class="quantity-btn minus" onclick="updateQuantity_{{ section.id | replace: '-', '_' }}('{{ product.id }}', -1)">−</button>
+                <span class="quantity-display" id="qty-display-{{ section.id }}-{{ product.id }}">1</span>
+                <button class="quantity-btn plus" onclick="updateQuantity_{{ section.id | replace: '-', '_' }}('{{ product.id }}', 1)">+</button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>Please select a collection in the section settings.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <h3 class="sidebar-title">{{ section.settings.sidebar_title }}</h3>
+
+    <div class="sidebar-progress-bar">
+      <div class="progress-container">
+        <div class="progress-track">
+          <div class="progress-filled" id="progress-filled-{{ section.id }}"></div>
+          <div class="progress-current" id="current-marker-{{ section.id }}" style="left: 0;">
+            <span>0</span>
+          </div>
+          <div class="progress-milestone" style="left: 55.55%;">
+            <span>5</span>
+          </div>
+          <div class="progress-milestone" style="left: 100%;">
+            <span>9</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="selected-products" id="selected-products-{{ section.id }}">
+      <div id="empty-state" style="text-align: center; color: {{ section.settings.text_color }}; font-size: 14px; padding: 40px 20px;">
+        No products selected yet
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="footer-message" id="footer-message-{{ section.id }}">
+        <span class="message-text" id="message-text-{{ section.id }}">Please Select atleast 5 Pouches</span>
+        <span class="message-count" id="message-count-{{ section.id }}">5</span>
+      </div>
+
+      <button class="cart-button" id="cart-button-{{ section.id }}" onclick="addToCart_{{ section.id | replace: '-', '_' }}()" style="display: none;">
+        Checkout
+      </button>
+
+      <div class="incentive-badges">
+        <span class="badge yellow">🤩 Build-a-Boxes Ship FREE</span>
+        <span class="badge orange">🤩 Save with 9 Pouches!</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const sectionId = '{{ section.id }}';
+  const sectionIdSafe = '{{ section.id | replace: '-', '_' }}';
+  let selectedProducts = {};
+  const minQuantity = {{ section.settings.min_quantity }};
+  const midQuantity = {{ section.settings.mid_quantity }};
+  const maxQuantity = {{ section.settings.max_quantity }};
+
+  function addProduct(productId, title, image, variantId) {
+    // Get the product card element for THIS section only
+    const card = document.querySelector(`[data-product-id="${productId}"][data-section-id="${sectionId}"]`);
+    if (!card) return;
+
+    if (!selectedProducts[productId]) {
+      selectedProducts[productId] = {
+        id: productId,
+        title: title,
+        image: image,
+        variantId: variantId,
+        quantity: 1
+      };
+    } else {
+      selectedProducts[productId].quantity += 1;
+    }
+
+    // Hide Add button and show quantity selector using unique IDs
+    const addButton = document.getElementById(`add-btn-${sectionId}-${productId}`);
+    const quantitySelector = document.getElementById(`qty-selector-${sectionId}-${productId}`);
+    const quantityDisplay = document.getElementById(`qty-display-${sectionId}-${productId}`);
+
+    if (addButton) addButton.style.display = 'none';
+    if (quantitySelector) quantitySelector.style.display = 'flex';
+    if (quantityDisplay) quantityDisplay.textContent = selectedProducts[productId].quantity;
+
+    updateSidebar();
+    updateProgress();
+  }
+
+  function updateQuantity(productId, change) {
+    // Get product card for THIS section only
+    const card = document.querySelector(`[data-product-id="${productId}"][data-section-id="${sectionId}"]`);
+    if (!card) return;
+
+    if (!selectedProducts[productId] && change > 0) {
+      // If product doesn't exist and we're trying to increase, get product details from DOM
+      const title = card.querySelector('.product-title').textContent;
+      const image = card.querySelector('.product-image img') ? card.querySelector('.product-image img').src : '';
+      const addBtn = document.getElementById(`add-btn-${sectionId}-${productId}`);
+      const variantId = addBtn ? addBtn.onclick.toString().match(/'([^']*)'[^']*$/)[1] : '';
+
+      selectedProducts[productId] = {
+        id: productId,
+        title: title,
+        image: image,
+        variantId: variantId,
+        quantity: 1
+      };
+    } else if (selectedProducts[productId]) {
+      selectedProducts[productId].quantity += change;
+
+      if (selectedProducts[productId].quantity <= 0) {
+        delete selectedProducts[productId];
+      }
+    }
+
+    updateProductCard(productId);
+    updateSidebar();
+    updateProgress();
+  }
+
+function updateSidebarQuantity(productId, change) {
+  if (selectedProducts[productId]) {
+    selectedProducts[productId].quantity += change;
+
+    if (selectedProducts[productId].quantity <= 0) {
+      delete selectedProducts[productId];
+    }
+  }
+
+  updateProductCard(productId);
+  updateSidebar();
+  updateProgress();
+}
+
+function removeProduct(productId) {
+  delete selectedProducts[productId];
+  updateProductCard(productId);
+  updateSidebar();
+  updateProgress();
+}
+
+  function updateProductCard(productId) {
+    const card = document.querySelector(`[data-product-id="${productId}"][data-section-id="${sectionId}"]`);
+    if (!card) return;
+
+    const addButton = document.getElementById(`add-btn-${sectionId}-${productId}`);
+    const quantitySelector = document.getElementById(`qty-selector-${sectionId}-${productId}`);
+    const quantityDisplay = document.getElementById(`qty-display-${sectionId}-${productId}`);
+
+    if (selectedProducts[productId]) {
+      if (addButton) addButton.style.display = 'none';
+      if (quantitySelector) quantitySelector.style.display = 'flex';
+      if (quantityDisplay) quantityDisplay.textContent = selectedProducts[productId].quantity;
+    } else {
+      if (addButton) addButton.style.display = 'block';
+      if (quantitySelector) quantitySelector.style.display = 'none';
+    }
+  }
+
+function updateSidebar() {
+  const container = document.getElementById(`selected-products-${sectionId}`);
+
+  if (!container) return;
+
+  if (Object.keys(selectedProducts).length === 0) {
+    container.innerHTML = '<div id="empty-state" style="text-align: center; color: {{ section.settings.text_color }}; font-size: 14px;">No products selected yet</div>';
+    return;
+  }
+
+  let html = '';
+  for (const [productId, product] of Object.entries(selectedProducts)) {
+    html += `
+      <div class="selected-item" data-sidebar-product="${productId}">
+        <div class="selected-image">
+          <img src="${product.image}" alt="${product.title}">
+        </div>
+        <div class="selected-details">
+          <div class="selected-title">${product.title}</div>
+          <div class="remove-link" onclick="removeProduct_${sectionIdSafe}('${productId}')">Remove Item</div>
+        </div>
+        <div class="sidebar-quantity">
+          <button class="quantity-btn minus" onclick="updateSidebarQuantity_${sectionIdSafe}('${productId}', -1)">−</button>
+          <span class="quantity-display">${product.quantity}</span>
+          <button class="quantity-btn plus" onclick="updateSidebarQuantity_${sectionIdSafe}('${productId}', 1)">+</button>
+        </div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
+}
+
+function updateProgress() {
+  const totalQuantity = Object.values(selectedProducts).reduce((sum, product) => sum + product.quantity, 0);
+  const progressFilled = document.getElementById(`progress-filled-${sectionId}`);
+  const currentMarker = document.getElementById(`current-marker-${sectionId}`);
+  const markerValue = currentMarker.querySelector('span');
+  const messageText = document.getElementById(`message-text-${sectionId}`);
+  const messageCount = document.getElementById(`message-count-${sectionId}`);
+  const cartButton = document.getElementById(`cart-button-${sectionId}`);
+
+  // Update current marker value
+  if (markerValue) {
+    markerValue.textContent = totalQuantity;
+  }
+
+  // Update count in message (shows required amount when below 5)
+  if (messageCount) {
+    if (totalQuantity < 5) {
+      messageCount.textContent = 5 - totalQuantity;
+    } else {
+      messageCount.textContent = totalQuantity;
+    }
+  }
+
+  // Calculate position percentage (0 to 9 scale)
+  let positionPercentage = 0;
+  if (totalQuantity === 0) {
+    positionPercentage = 0;
+  } else if (totalQuantity <= 9) {
+    positionPercentage = (totalQuantity / 9) * 100;
+  } else {
+    positionPercentage = 100;
+  }
+
+  // Update current marker position
+  if (currentMarker) {
+    currentMarker.style.left = `${positionPercentage}%`;
+  }
+
+  // IMPORTANT: Force update progress bar fill
+  if (progressFilled) {
+    // Set width directly using style attribute
+    progressFilled.setAttribute('style', `width: ${positionPercentage}% !important;`);
+
+    // Also try setting via style property as backup
+    progressFilled.style.width = `${positionPercentage}%`;
+    progressFilled.style.backgroundColor = '#495057';
+  }
+
+  // Update message and button state
+  const footerMessage = document.getElementById(`footer-message-${sectionId}`);
+
+  if (messageText && cartButton && footerMessage) {
+    // Show button at 5, 9, or more pouches
+    if (totalQuantity === 5 || totalQuantity >= 9) {
+      // Show button, hide message
+      cartButton.style.display = 'block';
+      footerMessage.style.display = 'none';
+
+      // Update progress bar color to yellow for milestones
+      progressFilled.classList.add('milestone-reached');
+      currentMarker.classList.add('milestone-reached');
+
+      // Update button text based on quantity
+      if (totalQuantity === 5) {
+        cartButton.textContent = 'Checkout - 5 Pouches';
+      } else if (totalQuantity === 9) {
+        cartButton.textContent = 'Checkout - 9 Pouches (Best Value!)';
+      } else {
+        cartButton.textContent = `Checkout - ${totalQuantity} Pouches`;
+      }
+    } else {
+      // Hide button, show message
+      cartButton.style.display = 'none';
+      footerMessage.style.display = 'flex';
+
+      // Reset progress bar color
+      progressFilled.classList.remove('milestone-reached');
+      currentMarker.classList.remove('milestone-reached');
+
+      if (totalQuantity < 5) {
+        const remaining = 5 - totalQuantity;
+        messageText.textContent = `Please Select atleast ${remaining} Pouch${remaining !== 1 ? 'es' : ''}`;
+        messageCount.textContent = remaining;
+      } else if (totalQuantity > 5 && totalQuantity < 9) {
+        const remaining = 9 - totalQuantity;
+        messageText.textContent = `Add ${remaining} more for maximum savings`;
+        messageCount.textContent = remaining;
+      }
+    }
+  }
+}
+
+async function addToCart() {
+  const cartButton = document.getElementById(`cart-button-${sectionId}`);
+
+  if (Object.keys(selectedProducts).length === 0) {
+    alert('Please select at least one product.');
+    return;
+  }
+
+  cartButton.textContent = 'Adding...';
+  cartButton.disabled = true;
+
+  try {
+    const items = Object.values(selectedProducts).map(product => ({
+      id: product.variantId,
+      quantity: product.quantity
+    }));
+
+    const response = await fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ items })
+    });
+
+    if (response.ok) {
+      // Reset the bundle builder
+      selectedProducts = {};
+      updateSidebar();
+      updateProgress();
+
+      // Reset all product cards
+      document.querySelectorAll('.add-button').forEach(btn => btn.style.display = 'block');
+      document.querySelectorAll('.quantity-selector').forEach(sel => sel.style.display = 'none');
+
+      cartButton.textContent = '{{ section.settings.cart_button_text }}';
+
+      // Trigger cart drawer or redirect
+      if (window.theme && window.theme.cart) {
+        window.theme.cart.refresh();
+      } else {
+        window.location.href = '/cart';
+      }
+    } else {
+      throw new Error('Failed to add to cart');
+    }
+  } catch (error) {
+    console.error('Error adding to cart:', error);
+    alert('Error adding products to cart. Please try again.');
+    cartButton.textContent = '{{ section.settings.cart_button_text }}';
+    cartButton.disabled = false;
+  }
+}
+
+  // Make functions globally available with unique names
+  window[`addProduct_${sectionIdSafe}`] = addProduct;
+  window[`updateQuantity_${sectionIdSafe}`] = updateQuantity;
+  window[`updateSidebarQuantity_${sectionIdSafe}`] = updateSidebarQuantity;
+  window[`removeProduct_${sectionIdSafe}`] = removeProduct;
+  window[`addToCart_${sectionIdSafe}`] = addToCart;
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', function() {
+    updateProgress();
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Bundle Builder",
+  "tag": "section",
+  "class": "bundle-builder-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Build Your Bundle"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Product collection"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Number of products to show",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "review_placeholder",
+      "label": "Review count placeholder",
+      "default": "24 Reviews"
+    },
+    {
+      "type": "header",
+      "content": "Sidebar"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_title",
+      "label": "Sidebar title",
+      "default": "Add More & Save!"
+    },
+    {
+      "type": "range",
+      "id": "min_quantity",
+      "label": "Minimum quantity required",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "mid_quantity",
+      "label": "Middle progress step",
+      "min": 6,
+      "max": 15,
+      "step": 1,
+      "default": 9
+    },
+    {
+      "type": "range",
+      "id": "max_quantity",
+      "label": "Maximum progress step",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "text",
+      "id": "progress_note",
+      "label": "Progress note",
+      "default": "Please select at least 5 pouches"
+    },
+    {
+      "type": "text",
+      "id": "incentive_text",
+      "label": "Incentive text",
+      "default": "Build a Box. Ship FREE 🤩 Save with 9 Pouches!"
+    },
+    {
+      "type": "header",
+      "content": "Button Text"
+    },
+    {
+      "type": "text",
+      "id": "add_button_text",
+      "label": "Add button text",
+      "default": "+ Add"
+    },
+    {
+      "type": "text",
+      "id": "cart_button_text",
+      "label": "Add to cart text",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "sidebar_radius",
+      "label": "Sidebar border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "card_shadow",
+      "label": "Card shadow",
+      "default": "0 4px 20px rgba(0,0,0,0.1)"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_shadow",
+      "label": "Sidebar shadow",
+      "default": "0 4px 20px rgba(0,0,0,0.15)"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_bg",
+      "label": "Sidebar background",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Product title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_title_color",
+      "label": "Sidebar title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_text_color",
+      "label": "Sidebar text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#ffc107"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#007bff"
+    },
+    {
+      "type": "color",
+      "id": "link_hover",
+      "label": "Link hover color",
+      "default": "#0056b3"
+    },
+    {
+      "type": "color",
+      "id": "add_button_bg",
+      "label": "Add button background",
+      "default": "#28a745"
+    },
+    {
+      "type": "color",
+      "id": "add_button_color",
+      "label": "Add button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "add_button_hover",
+      "label": "Add button hover",
+      "default": "#218838"
+    },
+    {
+      "type": "color",
+      "id": "quantity_bg",
+      "label": "Quantity selector background",
+      "default": "#fff3cd"
+    },
+    {
+      "type": "color",
+      "id": "quantity_color",
+      "label": "Quantity selector text",
+      "default": "#856404"
+    },
+    {
+      "type": "color",
+      "id": "cart_button_bg",
+      "label": "Cart button background",
+      "default": "#dc3545"
+    },
+    {
+      "type": "color",
+      "id": "cart_button_color",
+      "label": "Cart button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "cart_button_hover",
+      "label": "Cart button hover",
+      "default": "#c82333"
+    },
+    {
+      "type": "color",
+      "id": "button_disabled",
+      "label": "Disabled button background",
+      "default": "#e9ecef"
+    },
+    {
+      "type": "color",
+      "id": "remove_color",
+      "label": "Remove link color",
+      "default": "#dc3545"
+    },
+    {
+      "type": "color",
+      "id": "remove_hover",
+      "label": "Remove link hover",
+      "default": "#c82333"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#e9ecef"
+    },
+    {
+      "type": "color",
+      "id": "progress_filled",
+      "label": "Progress bar filled",
+      "default": "#ffc107"
+    },
+    {
+      "type": "color",
+      "id": "progress_empty",
+      "label": "Progress bar empty",
+      "default": "#e9ecef"
+    },
+    {
+      "type": "color",
+      "id": "progress_bg",
+      "label": "Progress section background",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "color",
+      "id": "progress_text_color",
+      "label": "Progress text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "count_bg",
+      "label": "Count circle background",
+      "default": "#6c757d"
+    },
+    {
+      "type": "color",
+      "id": "count_color",
+      "label": "Count circle text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "milestone_bg",
+      "label": "Milestone background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "milestone_color",
+      "label": "Milestone text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "incentive_color",
+      "label": "Incentive text color",
+      "default": "#856404"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Builder"
+    }
+  ]
+}
+{% endschema %}

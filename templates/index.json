@@ -1,0 +1,1459 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Browse our latest products",
+            "heading_size": "h0"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop all",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ],
+      "settings": {
+        "image_overlay_opacity": 40,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-3",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "featured_pairs_XMBXng": {
+      "type": "featured-pairs",
+      "blocks": {
+        "feature_card_bWFJbt": {
+          "type": "feature_card",
+          "settings": {
+            "image": "shopify://shop_images/Detox_fddc584f-b649-4eee-b6b7-4b32b3feb8f0.webp",
+            "image_alt": "",
+            "aspect_ratio": "natural",
+            "show_shadow": false,
+            "eyebrow": "Bright. Light. Fruity.",
+            "title": "Super Detox Smoothies",
+            "link_url": "#",
+            "link_aria_label": "",
+            "make_card_clickable": false,
+            "eyebrow_color": "",
+            "title_color": "",
+            "card_bg": "rgba(0,0,0,0)"
+          }
+        },
+        "feature_card_tmUdrY": {
+          "type": "feature_card",
+          "settings": {
+            "image": "shopify://shop_images/Energy_boosting.webp",
+            "image_alt": "",
+            "aspect_ratio": "natural",
+            "show_shadow": false,
+            "eyebrow": "Cleansing. Refreshing. Flavourful.",
+            "title": "Energy Boosting Smoothies",
+            "link_url": "#",
+            "link_aria_label": "",
+            "make_card_clickable": false,
+            "eyebrow_color": "",
+            "title_color": "",
+            "card_bg": "rgba(0,0,0,0)"
+          }
+        }
+      },
+      "block_order": [
+        "feature_card_bWFJbt",
+        "feature_card_tmUdrY"
+      ],
+      "name": "Featured Pairs",
+      "settings": {
+        "eyebrow_font_size": 15,
+        "heading_font_size": 34,
+        "text_align": "center",
+        "container_width": "1280",
+        "gap_desktop": 32,
+        "gap_mobile": 16,
+        "pad_top": 60,
+        "pad_bottom": 60,
+        "pad_side": 20,
+        "show_divider": false
+      }
+    },
+    "hero_background_split_jw9Pig": {
+      "type": "hero-background-split",
+      "name": "Hero Background Split",
+      "settings": {
+        "background_image": "shopify://shop_images/Image_with_text_overlay.webp",
+        "image_alt": "",
+        "tilt_angle": 0,
+        "heading": "7 days. 7 smoothies.",
+        "heading_font_size": 48,
+        "heading_font_weight": "700",
+        "body": "<p>Order a smoothie for every day of the week and we will give you the weekend smoothies for free!</p>",
+        "body_font_size": 16,
+        "button_label": "SHOP NOW",
+        "button_url": "/collections/all",
+        "button_new_tab": false,
+        "section_height": 600,
+        "container_width": 1300,
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "background_color": "#ffffff",
+        "heading_color": "#000000",
+        "text_color": "#333333",
+        "button_bg_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_hover_bg_color": "#333333",
+        "button_hover_text_color": "#ffffff"
+      }
+    },
+    "category_slider_4h7k3e": {
+      "type": "category-slider",
+      "blocks": {
+        "category_ctPhbi": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/MG20B1_Hero_800x800_1_2.avif",
+            "title": "Headphones",
+            "eyebrow": "",
+            "link": "",
+            "open_new_tab": false,
+            "aspect_ratio_override": "",
+            "show_arrow_overlay": false
+          }
+        },
+        "category_UicyTm": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/MW08SportGR_Angle_Right_800x800_8a72d3f1-7771-4cb1-8ceb-3106713e47d6_800x800_2.avif",
+            "title": "Earphones",
+            "eyebrow": "",
+            "link": "",
+            "open_new_tab": false,
+            "aspect_ratio_override": "",
+            "show_arrow_overlay": false
+          }
+        },
+        "category_c9Mxiq": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/MA770_Front_800x800_6fa371dc-5be6-4991-87b2-a70272cdea96_800x800_1.avif",
+            "title": "Speakers",
+            "eyebrow": "",
+            "link": "",
+            "open_new_tab": false,
+            "aspect_ratio_override": "",
+            "show_arrow_overlay": false
+          }
+        },
+        "category_8RPraN": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/1200x1200.avif",
+            "title": "Collaborations",
+            "eyebrow": "",
+            "link": "",
+            "open_new_tab": false,
+            "aspect_ratio_override": "",
+            "show_arrow_overlay": true
+          }
+        }
+      },
+      "block_order": [
+        "category_ctPhbi",
+        "category_UicyTm",
+        "category_c9Mxiq",
+        "category_8RPraN"
+      ],
+      "name": "Category Slider",
+      "settings": {
+        "heading": "Shop by Category",
+        "subheading": "",
+        "view_all_text": "View all",
+        "view_all_url": "#",
+        "container_width": "contained",
+        "items_desktop": 4,
+        "items_tablet": 2.5,
+        "items_mobile": 1.2,
+        "card_gap": 16,
+        "card_radius": 16,
+        "card_background": "#f5f5f5",
+        "text_color": "#000000",
+        "title_size": "medium",
+        "eyebrow_size": "12",
+        "title_weight": "500",
+        "aspect_ratio": "square",
+        "show_hover_chevron": true,
+        "show_arrow_overlay_default": false,
+        "show_dots_mobile": true,
+        "autoplay": false,
+        "autoplay_interval": 5000,
+        "animation_duration": 300,
+        "respect_reduced_motion": true,
+        "aria_label": "Category navigation",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "before_after_slider_QerQyQ": {
+      "type": "before-after-slider",
+      "name": "Before After Slider",
+      "settings": {
+        "before_image": "shopify://shop_images/Before_After_-_Desktop_-_Home_after.webp",
+        "before_alt": "Before",
+        "after_image": "shopify://shop_images/Before_After_-_Desktop_-_Home_before.webp",
+        "after_alt": "After",
+        "initial_position": 50,
+        "handle_theme": "light",
+        "show_labels": true,
+        "before_label": "Before",
+        "after_label": "After",
+        "label_theme": "dark",
+        "full_width": false,
+        "height_mode": "auto",
+        "border_radius": 8,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "bestsellers_grid_wcnVFP": {
+      "type": "bestsellers-grid",
+      "name": "Bestsellers Grid",
+      "settings": {
+        "heading": "Bestsellers",
+        "cta_label": "SHOP NEW ARRIVALS",
+        "cta_link": "",
+        "source": "products",
+        "collection": "",
+        "products": [
+          "cleansing-body-gel",
+          "renewal-face-cream",
+          "nourishing-hair-repair-mask",
+          "eye-treatment"
+        ],
+        "products_to_show": 4,
+        "show_vendor": false,
+        "show_price": true,
+        "show_quick_view": true,
+        "show_dots": true,
+        "title_font_size": 15,
+        "price_font_size": 14,
+        "quick_view_font_size": 11,
+        "quick_view_font_weight": 400,
+        "quick_view_letter_spacing": 10,
+        "quick_view_opacity": 70,
+        "quick_view_margin_top": 8
+      }
+    },
+    "category_circles_j8QpX3": {
+      "type": "category-circles",
+      "blocks": {
+        "category_QTxBiD": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Umbra_Oh_black_9f54789d-800f-4743-977d-c73413ad8810.webp",
+            "title": "Furniture",
+            "url": ""
+          }
+        },
+        "category_XR3nkc": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/UmbraTriggPlanterlarge_f9cbe994-9e3a-483a-9218-cf023e41446b.webp",
+            "title": "Planters",
+            "url": ""
+          }
+        },
+        "category_mxNaDf": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Eva_Solo_bird_feed_cage.webp",
+            "title": "Outdoor & Garden",
+            "url": ""
+          }
+        },
+        "category_UaebEP": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Suck_UK_laundry_monkey.webp",
+            "title": "Kids",
+            "url": ""
+          }
+        },
+        "category_U6fKYD": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/BlomusMacchiattosetcopy_5f559f23-d89f-466b-ba23-62c98d86e8fa.webp",
+            "title": "Coffee Accessories",
+            "url": ""
+          }
+        },
+        "category_qc3bcT": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/GJ_Barbry_paring_knife.webp",
+            "title": "Knives",
+            "url": ""
+          }
+        },
+        "category_ymFbKG": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Alessi_bookend_dog_ss.webp",
+            "title": "Bookends",
+            "url": ""
+          }
+        },
+        "category_7BkgyD": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Final_Touch_Caesar_0f93b0ff-6d64-4e55-863f-e5adff66e1fb.webp",
+            "title": "Canadiana",
+            "url": ""
+          }
+        },
+        "category_bAxfCj": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Iitala_tapio_red.webp",
+            "title": "Design icons",
+            "url": ""
+          }
+        },
+        "category_eiaRWg": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Alessi_you_tea_infuser_red.webp",
+            "title": "Limited Editions",
+            "url": ""
+          }
+        },
+        "category_PFF4x8": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Umbra_buddy_chess.webp",
+            "title": "Games & Puzzles",
+            "url": ""
+          }
+        },
+        "category_bi9d6G": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Selettihybrideufemia.webp",
+            "title": "Sale",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_QTxBiD",
+        "category_XR3nkc",
+        "category_mxNaDf",
+        "category_UaebEP",
+        "category_U6fKYD",
+        "category_qc3bcT",
+        "category_ymFbKG",
+        "category_7BkgyD",
+        "category_bAxfCj",
+        "category_eiaRWg",
+        "category_PFF4x8",
+        "category_bi9d6G"
+      ],
+      "name": "Category Circles",
+      "settings": {
+        "heading": "Shop by Category",
+        "columns": 6,
+        "heading_size": 36,
+        "heading_color": "#1a1a1a",
+        "circle_size": 160,
+        "text_size": 16,
+        "text_color": "#333333",
+        "background_color": "#ffffff",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "hotspot_hero_UrRMiz": {
+      "type": "hotspot-hero",
+      "blocks": {
+        "hotspot_cEarQQ": {
+          "type": "hotspot",
+          "settings": {
+            "label": "USB Hub",
+            "number": "1",
+            "x_percent": 30,
+            "y_percent": 45,
+            "link": "",
+            "always_show_label": false,
+            "aria_label": ""
+          }
+        },
+        "hotspot_YHVAGP": {
+          "type": "hotspot",
+          "settings": {
+            "label": "USB C to USB C Cable",
+            "number": "2",
+            "x_percent": 52,
+            "y_percent": 85,
+            "link": "",
+            "always_show_label": false,
+            "aria_label": ""
+          }
+        },
+        "hotspot_Mh8nXK": {
+          "type": "hotspot",
+          "settings": {
+            "label": "Power Cable",
+            "number": "3",
+            "x_percent": 75,
+            "y_percent": 30,
+            "link": "",
+            "always_show_label": false,
+            "aria_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_cEarQQ",
+        "hotspot_YHVAGP",
+        "hotspot_Mh8nXK"
+      ],
+      "name": "Hotspot Hero",
+      "settings": {
+        "eyebrow": "COMING SOON",
+        "heading": "Tech Accessories Everyone Wants",
+        "subtext": "<p>Grab the perfect charger and adapter set to keep you connected and charged up.</p>",
+        "image": "shopify://shop_images/Markers_Image_17032b36-3a78-4117-ba6f-d9307e15660a.webp",
+        "image_aspect": "auto",
+        "corner_radius": 12,
+        "container_width": "wide",
+        "bg_tint": "",
+        "primary_color": "#0066ff",
+        "text_color": "#000000",
+        "padding_top": 24,
+        "padding_bottom": 56
+      }
+    },
+    "collections_grid_nhBVmx": {
+      "type": "collections-grid",
+      "blocks": {
+        "collection_xBQjEQ": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/rings-collection-01.webp",
+            "title": "Rings"
+          }
+        },
+        "collection_3xX4A7": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/necklaces-collection-01.webp",
+            "title": "Necklaces"
+          }
+        },
+        "collection_qaQFhM": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/engagement-rings-collection-01.webp",
+            "title": "Engagement"
+          }
+        },
+        "collection_kJT7pT": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/earrings-collection.webp",
+            "title": "Earrings"
+          }
+        }
+      },
+      "block_order": [
+        "collection_xBQjEQ",
+        "collection_3xX4A7",
+        "collection_qaQFhM",
+        "collection_kJT7pT"
+      ],
+      "name": "Collections Grid",
+      "settings": {
+        "heading": "The Collections",
+        "heading_font": "serif",
+        "heading_size": 42,
+        "heading_color": "#000000",
+        "title_size": 16,
+        "title_color": "#000000",
+        "background_color": "#ffffff",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "testimonials_slider_NExgjY": {
+      "type": "testimonials-slider",
+      "blocks": {
+        "testimonial_3p6jgh": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "I started using Mediva's daily wellness supplements two months ago, and the difference in my energy levels is amazing.",
+            "name": "Robert Wattson",
+            "role": "Finance Manager"
+          }
+        },
+        "testimonial_mUHtCm": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "I appreciate that Mediva focuses on natural and trustworthy ingredients. I feel better and more confident in my routine now.",
+            "name": "David G.",
+            "role": "Director at Igloo"
+          }
+        },
+        "testimonial_37cqKA": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "The quality of Mediva products is outstanding. I've tried many supplements, but these are the ones that actually work.",
+            "name": "Sarah Johnson",
+            "role": "Marketing Director"
+          }
+        },
+        "testimonial_4HFWQt": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "Excellent customer service and fast delivery. The products have made a real difference to my daily wellness routine.",
+            "name": "Michael Chen",
+            "role": "Software Engineer"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_3p6jgh",
+        "testimonial_mUHtCm",
+        "testimonial_37cqKA",
+        "testimonial_4HFWQt"
+      ],
+      "name": "Testimonials Slider",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "heading_size": 38,
+        "heading_color": "#000000",
+        "slide_speed": 60,
+        "section_background": "#ffffff",
+        "card_background": "#e8f5f0",
+        "text_size": 20,
+        "text_color": "#072151",
+        "name_color": "#2d3748",
+        "role_color": "#718096",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "trustpilot_reviews_GCjcCL": {
+      "type": "trustpilot-reviews",
+      "blocks": {
+        "review_fxy3aT": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Great quality",
+            "text": "I love the unique designs on these t-shirts. They're a great conversation starter and I always get compliments. The quality is top-notch too.",
+            "author": "Sarah D.",
+            "date": "20 June"
+          }
+        },
+        "review_d9EetV": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Perfect!",
+            "text": "The sizing guide was spot-on. My tee fits perfectly and the fabric is super comfortable. I'll definitely be ordering more.",
+            "author": "Kathy R.",
+            "date": "20 June"
+          }
+        },
+        "review_bWJnGx": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Great fit",
+            "text": "The fit is great, not too tight and not too baggy. It's definitely become my go-to for casual wear.",
+            "author": "Madison A.",
+            "date": "21 June"
+          }
+        },
+        "review_YC3xBb": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Amazing service",
+            "text": "Fast shipping and excellent customer service. The product quality exceeded my expectations. Will definitely order again!",
+            "author": "James M.",
+            "date": "22 June"
+          }
+        },
+        "review_T4rBm9": {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "title": "Good value",
+            "text": "Really happy with my purchase. Good quality for the price point. Would recommend to friends.",
+            "author": "Emily S.",
+            "date": "23 June"
+          }
+        }
+      },
+      "block_order": [
+        "review_fxy3aT",
+        "review_d9EetV",
+        "review_bWJnGx",
+        "review_YC3xBb",
+        "review_T4rBm9"
+      ],
+      "name": "Trustpilot Reviews",
+      "settings": {
+        "heading": "Excellent",
+        "overall_rating": 4.5,
+        "total_reviews": "4,150",
+        "background_color": "#ffffff",
+        "card_background": "#ffffff",
+        "card_radius": 8,
+        "title_color": "#353131",
+        "subtitle_color": "#666666",
+        "review_title_color": "#1e1b1b",
+        "review_text_color": "#444444",
+        "author_color": "#6e6868",
+        "date_color": "#999999",
+        "title_size": 30,
+        "subtitle_size": 14,
+        "review_title_size": 16,
+        "review_text_size": 14,
+        "author_size": 13,
+        "star_size": 28,
+        "star_color": "#00b67a",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "scrolling_images_xjDw6k": {
+      "type": "scrolling-images",
+      "blocks": {
+        "image_dbPbaQ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/352866888_1234930060541550_8374548221298115641_n.jpg"
+          }
+        },
+        "image_CN8nm4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/355262913_273791138638760_2561072628436540503_n.webp"
+          }
+        },
+        "image_CWUKpd": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/353042517_1485476312205555_4606414770753393586_n.webp"
+          }
+        },
+        "image_e9iCmy": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/367007130_244835127927178_148393632398136921_n.webp"
+          }
+        },
+        "image_VyiYL7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/367377790_1720549985056522_5359668055811931852_n.webp"
+          }
+        },
+        "image_e7GL8y": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/330203863_638013718084947_1357077150597762301_n.webp"
+          }
+        }
+      },
+      "block_order": [
+        "image_dbPbaQ",
+        "image_CN8nm4",
+        "image_CWUKpd",
+        "image_e9iCmy",
+        "image_VyiYL7",
+        "image_e7GL8y"
+      ],
+      "name": "Scrolling Images",
+      "settings": {
+        "image_width": 290,
+        "image_height": 50,
+        "image_gap": 10,
+        "mobile_image_width": 250,
+        "mobile_image_height": 40,
+        "mobile_image_gap": 8,
+        "scroll_speed": 30,
+        "pause_on_hover": true,
+        "auto_adjust_speed": false,
+        "overlay_text": "+12,000 people loves our natural wine",
+        "text_size": 20,
+        "text_color": "#000000",
+        "font_family": "system",
+        "font_weight": "400",
+        "overlay_background": "#ffffff",
+        "overlay_padding": 38,
+        "border_width": 1,
+        "border_color": "#000000",
+        "background_color": "#ffffff"
+      }
+    },
+    "faq_accordion_VKYyzi": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_rjeJfM": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's the shipping time?",
+            "answer": "<p>Typically 3-5 business days depending on location.</p>"
+          }
+        },
+        "faq_GFJTVg": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's the shipping time in US?",
+            "answer": "<p>Typically 3-5 business days depending on location.</p>"
+          }
+        },
+        "faq_MRGUwF": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where are your products made?",
+            "answer": "<p>All our products are proudly made with quality materials.</p>"
+          }
+        },
+        "faq_7BFUT9": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is this faq section really free?",
+            "answer": "<p>Yes 100%! I have more sections you can check out.</p>"
+          }
+        },
+        "faq_e9NRtc": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Who made the FAQ?",
+            "answer": "<p>A developer who loves Shopify and clean design.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_rjeJfM",
+        "faq_GFJTVg",
+        "faq_MRGUwF",
+        "faq_7BFUT9",
+        "faq_e9NRtc"
+      ],
+      "name": "FAQ Accordion",
+      "settings": {
+        "heading": "Most asked questions",
+        "heading_font": "system-ui",
+        "heading_size": 28,
+        "heading_weight": 600,
+        "heading_margin": 40,
+        "question_background": "#d4cba6",
+        "question_hover_background": "#d4cba6",
+        "question_color": "#ffffff",
+        "arrow_color": "#ffffff",
+        "question_font": "system-ui",
+        "question_size": 14,
+        "question_weight": 500,
+        "question_padding_vertical": 18,
+        "question_padding_horizontal": 24,
+        "answer_background": "#ffffff",
+        "answer_color": "#121212",
+        "answer_font": "system-ui",
+        "answer_size": 14,
+        "answer_padding": 24,
+        "container_width": 800,
+        "item_gap": 8,
+        "item_border_radius": 8,
+        "section_background": "#ffffff",
+        "heading_color": "#333333",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "comfort_features_byGWX8": {
+      "type": "comfort-features",
+      "name": "Comfort Features",
+      "settings": {
+        "heading": "All-day comfort",
+        "reviews_text": "1000+ Reviews",
+        "feature_1_label": "Support",
+        "feature_1_level": 2,
+        "feature_1_text": "Medium",
+        "feature_2_label": "Compression",
+        "feature_2_level": 3,
+        "feature_2_text": "High",
+        "feature_3_label": "Seams",
+        "feature_3_level": 1,
+        "feature_3_text": "Flat",
+        "price_text": "Starting at $89.99",
+        "button_text": "SHOP THE COLLECTION",
+        "button_link": "",
+        "image": "shopify://shop_images/pexels-rethaferguson-3820296.webp",
+        "overlay_text": "For everyday comfort and style",
+        "background_color": "#ffffff",
+        "left_background": "#fdf4ec",
+        "heading_color": "#000000",
+        "text_color": "#333333",
+        "star_color": "#000000",
+        "icon_color": "#666666",
+        "progress_filled": "#a03c32",
+        "progress_empty": "#e5e5e5",
+        "button_background": "#a03c32",
+        "button_color": "#ffffff",
+        "overlay_color": "#ffffff",
+        "heading_size": 36,
+        "heading_weight": "400",
+        "overlay_size": 42,
+        "overlay_weight": "300",
+        "padding": 60,
+        "mobile_padding": 30
+      }
+    },
+    "bundle_builder_Dgd4UJ": {
+      "type": "bundle-builder",
+      "name": "Bundle Builder",
+      "settings": {
+        "heading": "Build Your Bundle",
+        "collection": "dummy-collection",
+        "product_limit": 12,
+        "review_placeholder": "24 Reviews",
+        "sidebar_title": "Add More & Save!",
+        "min_quantity": 5,
+        "mid_quantity": 9,
+        "max_quantity": 15,
+        "progress_note": "Please select at least 5 pouches",
+        "incentive_text": "Build a Box. Ship FREE 🤩 Save with 9 Pouches!",
+        "add_button_text": "+ Add",
+        "cart_button_text": "Add to Cart",
+        "max_width": 1200,
+        "card_radius": 12,
+        "sidebar_radius": 12,
+        "card_shadow": "0 4px 20px rgba(0,0,0,0.1)",
+        "sidebar_shadow": "0 4px 20px rgba(0,0,0,0.15)",
+        "background_color": "#ffffff",
+        "heading_color": "#000000",
+        "card_background": "#ffffff",
+        "sidebar_bg": "#ffffff",
+        "title_color": "#000000",
+        "text_color": "#666666",
+        "sidebar_title_color": "#000000",
+        "sidebar_text_color": "#333333",
+        "star_color": "#ffc107",
+        "link_color": "#007bff",
+        "link_hover": "#0056b3",
+        "add_button_bg": "#28a745",
+        "add_button_color": "#ffffff",
+        "add_button_hover": "#218838",
+        "quantity_bg": "#fff3cd",
+        "quantity_color": "#856404",
+        "cart_button_bg": "#dc3545",
+        "cart_button_color": "#ffffff",
+        "cart_button_hover": "#c82333",
+        "button_disabled": "#e9ecef",
+        "remove_color": "#dc3545",
+        "remove_hover": "#c82333",
+        "divider_color": "#e9ecef",
+        "progress_filled": "#ffc107",
+        "progress_empty": "#e9ecef",
+        "progress_bg": "#f0f0f0",
+        "progress_text_color": "#333333",
+        "count_bg": "#6c757d",
+        "count_color": "#ffffff",
+        "milestone_bg": "#ffffff",
+        "milestone_color": "#666666",
+        "incentive_color": "#856404",
+        "heading_size": 32,
+        "heading_weight": "700",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "bundle_products_HmUWWr": {
+      "type": "bundle-products",
+      "name": "Bundle Products",
+      "settings": {
+        "title": "Build Your Bundle",
+        "sidebar_title": "Your Bundle",
+        "collection": "dummy-collection",
+        "products_limit": 8,
+        "background_color": "#ffffff",
+        "heading_color": "#333333",
+        "accent_color": "#4caf50",
+        "title_font_size": 16,
+        "title_font_weight": "600",
+        "title_color": "#1a1a1a",
+        "description_font_size": 14,
+        "description_color": "#666666",
+        "price_font_size": 16,
+        "price_font_weight": "700",
+        "price_color": "#1a1a1a",
+        "section_padding": 40
+      }
+    },
+    "bundle_pack_builder_qiqiUE": {
+      "type": "bundle-pack-builder",
+      "name": "Bundle Pack Builder",
+      "settings": {
+        "title": "Build Your Pack",
+        "collection": "dummy-collection",
+        "products_limit": 12,
+        "free_gift_image": "shopify://shop_images/lunchbag.jpg",
+        "background_color": "#f8f8f8",
+        "section_padding": 40
+      }
+    },
+    "countdown_banner_bEjXDj": {
+      "type": "countdown-banner",
+      "name": "Countdown Banner",
+      "settings": {
+        "max_width": 1300,
+        "border_radius": 16,
+        "min_height_desktop": 550,
+        "min_height_mobile": 400,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "background_color": "#ffffff",
+        "background_image_desktop": "shopify://shop_images/high-fashion-model-in-red.webp",
+        "background_image_mobile": "shopify://shop_images/high-fashion-model-in-red.webp",
+        "enable_overlay": true,
+        "overlay_color": "#0000004d",
+        "overlay_opacity": 30,
+        "image_brightness": 70,
+        "heading": "50% off all suits and accessories",
+        "heading_size_desktop": 42,
+        "heading_size_mobile": 32,
+        "heading_weight": "700",
+        "heading_color": "#ffffff",
+        "heading_transform": "none",
+        "heading_margin": 20,
+        "subheading": "",
+        "subheading_size": 18,
+        "subheading_size_mobile": 16,
+        "subheading_color": "#ffffff",
+        "subheading_margin": 30,
+        "button_text": "View Discounted Items",
+        "button_link": "",
+        "button_bg_color": "#ffffff",
+        "button_text_color": "#000000",
+        "button_hover_bg_color": "#f0f0f0",
+        "button_hover_text_color": "#000000",
+        "button_padding_x": 30,
+        "button_padding_y": 12,
+        "button_border_radius": 50,
+        "button_font_size": 16,
+        "button_font_weight": "500",
+        "countdown_end_date": "2025-12-31 23:59:59",
+        "expired_text": "Offer Expired",
+        "countdown_number_size": 48,
+        "countdown_number_size_mobile": 36,
+        "countdown_number_color": "#ffffff",
+        "countdown_number_weight": 100,
+        "countdown_label_size": 12,
+        "countdown_label_size_mobile": 10,
+        "countdown_label_color": "#ffffff",
+        "days_label": "DAYS",
+        "hours_label": "HOURS",
+        "minutes_label": "MINUTES",
+        "seconds_label": "SECONDS",
+        "expired_text_color": "#ffffff",
+        "countdown_separator_color": "#ffffff",
+        "countdown_separator_opacity": 100,
+        "countdown_separator_thickness": 1,
+        "countdown_spacing": 15,
+        "countdown_spacing_mobile": 10,
+        "separator_margin": 10,
+        "separator_margin_mobile": 9
+      }
+    },
+    "conscious_created_z3AXLE": {
+      "type": "conscious-created",
+      "name": "Conscious Created",
+      "settings": {
+        "max_width": 1400,
+        "container_padding": 20,
+        "column_gap": 10,
+        "left_column_ratio": 32,
+        "right_column_ratio": 68,
+        "border_radius": 20,
+        "section_shadow": "0 10px 40px rgba(0,0,0,0.1)",
+        "reverse_layout": false,
+        "min_height": 500,
+        "min_height_mobile": 350,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "outer_background": "#ffffff",
+        "left_background_color": "#f2e853",
+        "right_background_color": "#e8ddd0",
+        "heading": "Consciously Created",
+        "description": "Most of our favorite ingredients come straight from Mother Nature. We love awakening antioxidants, nourishing oils and essential vitamins.",
+        "content_padding": 60,
+        "content_padding_mobile": 40,
+        "heading_size": 48,
+        "heading_size_mobile": 36,
+        "heading_weight": "700",
+        "heading_color": "#000000",
+        "heading_line_height": 1.1,
+        "heading_margin_bottom": 20,
+        "description_size": 17,
+        "description_size_mobile": 15,
+        "description_color": "#333333",
+        "description_line_height": 1.6,
+        "description_margin_bottom": 35,
+        "button_text": "Learn more",
+        "button_link": "",
+        "show_button_arrow": true,
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#333333",
+        "button_hover_text_color": "#ffffff",
+        "button_padding_x": 30,
+        "button_padding_y": 14,
+        "button_border_radius": 30,
+        "button_font_size": 17,
+        "button_font_weight": "600",
+        "button_border_width": 0,
+        "button_border_color": "#000000",
+        "right_image": "shopify://shop_images/kalos-skincare-kzjH8CCWAD0-unsplash_1500x1500_775c539e-e6cc-4d1c-b232-4c611b67b600.webp",
+        "right_image_alt": "Product image",
+        "badge_image": "shopify://shop_images/free-shipping-sticker_500x500_870d6efe-71eb-4f3d-a017-712e7da41a9a.svg",
+        "badge_alt": "Free shipping worldwide",
+        "badge_size": 120,
+        "badge_size_mobile": 90,
+        "badge_top_position": 60,
+        "badge_top_position_mobile": 50,
+        "rotation_speed": 10,
+        "pause_on_hover": true,
+        "mobile_text_align": "center",
+        "mobile_badge_position": "bottom"
+      }
+    },
+    "feature_blocks_icons_nUBGaj": {
+      "type": "feature-blocks-icons",
+      "blocks": {
+        "feature_block_NPpQYK": {
+          "type": "feature_block",
+          "settings": {
+            "icon_image": "shopify://shop_images/vegan.svg",
+            "icon_svg": "<svg viewbox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z\"></path></svg>",
+            "circle_color": "#a8e6a3",
+            "title": "Vegan",
+            "description": "Our entire Chella menu is completely vegan"
+          }
+        },
+        "feature_block_GKjw7m": {
+          "type": "feature_block",
+          "settings": {
+            "icon_image": "shopify://shop_images/natural.svg",
+            "icon_svg": "<svg viewbox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z\"></path></svg>",
+            "circle_color": "#b9dde8",
+            "title": "All-Natural",
+            "description": "All of our ingredients are 100% natural"
+          }
+        },
+        "feature_block_mXMp3K": {
+          "type": "feature_block",
+          "settings": {
+            "icon_image": "shopify://shop_images/canada.avif",
+            "icon_svg": "<svg viewbox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z\"></path></svg>",
+            "circle_color": "#e8b9c7",
+            "title": "Made in Canada",
+            "description": "All items on our Chella menu are made in Canada"
+          }
+        },
+        "feature_block_hPYTCL": {
+          "type": "feature_block",
+          "settings": {
+            "icon_image": "shopify://shop_images/hand.svg",
+            "icon_svg": "<svg viewbox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z\"></path></svg>",
+            "circle_color": "#f8c784",
+            "title": "Handcrafted",
+            "description": "Each product on the Chella menu is unique and handcrafted"
+          }
+        }
+      },
+      "block_order": [
+        "feature_block_NPpQYK",
+        "feature_block_GKjw7m",
+        "feature_block_mXMp3K",
+        "feature_block_hPYTCL"
+      ],
+      "name": "Feature Blocks Icons",
+      "settings": {
+        "max_width": 1200,
+        "container_padding": 20,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "background_color": "#ffffff",
+        "section_title": "",
+        "section_subtitle": "",
+        "header_margin_bottom": 50,
+        "title_size": 36,
+        "title_size_mobile": 28,
+        "title_weight": "700",
+        "title_color": "#000000",
+        "title_margin_bottom": 15,
+        "subtitle_size": 16,
+        "subtitle_color": "#666666",
+        "columns_desktop": 4,
+        "columns_tablet": 2,
+        "columns_mobile": "1",
+        "column_gap": 30,
+        "column_gap_tablet": 20,
+        "column_gap_mobile": 20,
+        "block_padding": 10,
+        "circle_size": 150,
+        "circle_size_mobile": 120,
+        "icon_size": 60,
+        "icon_size_mobile": 50,
+        "icon_color": "#000000",
+        "icon_stroke_width": 2,
+        "icon_margin_bottom": 20,
+        "enable_hover_effect": true,
+        "feature_title_size": 22,
+        "feature_title_size_mobile": 18,
+        "feature_title_weight": "700",
+        "feature_title_color": "#4a3f36",
+        "feature_title_margin": 10,
+        "feature_description_size": 15,
+        "feature_description_size_mobile": 14,
+        "feature_description_color": "#8b7f77",
+        "feature_description_line_height": 1.5,
+        "description_max_width": 300
+      }
+    },
+    "vertical_sliders_DByPhV": {
+      "type": "vertical-sliders",
+      "blocks": {
+        "left_slider_image_yJdkF8": {
+          "type": "left_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/8_56f66330-e700-4275-801a-e6881e49f591.webp",
+            "image_alt": ""
+          }
+        },
+        "left_slider_image_kKEUdD": {
+          "type": "left_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/7_aa8b97d6-b8fa-40e8-9209-ff54e1d5f432.webp",
+            "image_alt": ""
+          }
+        },
+        "left_slider_image_DwxagW": {
+          "type": "left_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/4_df1ee164-6d85-42b4-b51e-8d9268fb8150.webp",
+            "image_alt": ""
+          }
+        },
+        "left_slider_image_qcRxdk": {
+          "type": "left_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/6_576f0093-cc17-4d1b-a3a5-c31794ed76bc.webp",
+            "image_alt": ""
+          }
+        },
+        "left_slider_image_zDR6dA": {
+          "type": "left_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/4_43308cc7-8454-4a61-9f9a-bae9f33f5eaa.webp",
+            "image_alt": ""
+          }
+        },
+        "left_slider_image_8DwWYA": {
+          "type": "left_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/8_7e199b32-7d43-4bf1-b41c-ebb0e95328db.webp",
+            "image_alt": ""
+          }
+        },
+        "right_slider_image_4Mbqwp": {
+          "type": "right_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/3_5320173f-3d53-4a50-b8a4-52663baaa4b7.webp",
+            "image_alt": ""
+          }
+        },
+        "right_slider_image_wx833Y": {
+          "type": "right_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/5_6f55f3ed-2101-4419-999a-3a3cadbe5895.webp",
+            "image_alt": ""
+          }
+        },
+        "right_slider_image_H7XpTa": {
+          "type": "right_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/1_b84c421f-9bc0-4631-9c8a-286858f7e651.webp",
+            "image_alt": ""
+          }
+        },
+        "right_slider_image_c7zhed": {
+          "type": "right_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/9_fa14b1c9-f68d-4623-865c-ef6461e4d1e1.webp",
+            "image_alt": ""
+          }
+        },
+        "right_slider_image_4GziWA": {
+          "type": "right_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/4_87ce220e-8931-4a1a-91fa-5337c072430c.webp",
+            "image_alt": ""
+          }
+        },
+        "right_slider_image_A4rgjQ": {
+          "type": "right_slider_image",
+          "settings": {
+            "image": "shopify://shop_images/5_0fdfb5cf-7e76-42f1-815c-7a4a4ad9a2c2.webp",
+            "image_alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "left_slider_image_yJdkF8",
+        "left_slider_image_kKEUdD",
+        "left_slider_image_DwxagW",
+        "left_slider_image_qcRxdk",
+        "left_slider_image_zDR6dA",
+        "left_slider_image_8DwWYA",
+        "right_slider_image_4Mbqwp",
+        "right_slider_image_wx833Y",
+        "right_slider_image_H7XpTa",
+        "right_slider_image_c7zhed",
+        "right_slider_image_4GziWA",
+        "right_slider_image_A4rgjQ"
+      ],
+      "name": "Vertical Sliders",
+      "settings": {
+        "max_width": 1400,
+        "container_padding": 20,
+        "left_column_width": 45,
+        "column_gap": 60,
+        "content_padding_right": 40,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "background_color": "#fff7f7",
+        "heading": "Throw rugs you'll own for a lifetime",
+        "description": "NTL creates products that inspire conscious living. It rejects mindless consumerism, choosing not to participate in seasonal sales. NTL ships globally, delivering to more than 40 countries. Thanks for being here.",
+        "heading_size": 52,
+        "heading_size_mobile": 36,
+        "heading_weight": "700",
+        "heading_color": "#000000",
+        "heading_line_height": 1.1,
+        "heading_margin_bottom": 25,
+        "description_size": 17,
+        "description_size_mobile": 15,
+        "description_color": "#666666",
+        "description_line_height": 1.6,
+        "description_margin_bottom": 35,
+        "button_text": "Shop now",
+        "button_link": "",
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#333333",
+        "button_hover_text_color": "#ffffff",
+        "button_padding_x": 35,
+        "button_padding_y": 15,
+        "button_border_radius": 0,
+        "button_font_size": 16,
+        "button_font_weight": "600",
+        "button_border_width": 0,
+        "button_border_color": "#000000",
+        "slider_height": 600,
+        "slider_height_mobile": 450,
+        "slider_gap": 20,
+        "image_gap": 20,
+        "image_aspect_ratio": "4/5",
+        "image_border_radius": 12,
+        "animation_duration": 30,
+        "pause_on_hover": true,
+        "mobile_gap": 40,
+        "mobile_text_align": "center"
+      }
+    },
+    "countdown_sale_gy7XDQ": {
+      "type": "countdown-sale",
+      "name": "Countdown Sale",
+      "settings": {
+        "max_width": 1400,
+        "container_padding": 20,
+        "column_gap": 60,
+        "content_padding_right": 40,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#faf6f1",
+        "heading": "Sleep like a king with royal deals!",
+        "show_emoji": true,
+        "emoji": "👑",
+        "subheading": "Shop your favorite pillow products now with discounts up to 20%!",
+        "heading_size": 56,
+        "heading_size_mobile": 36,
+        "heading_weight": "800",
+        "heading_color": "#000000",
+        "heading_line_height": 1.2,
+        "heading_margin_bottom": 20,
+        "subheading_size": 20,
+        "subheading_size_mobile": 16,
+        "subheading_color": "#333333",
+        "subheading_line_height": 1.5,
+        "subheading_margin_bottom": 40,
+        "countdown_end_date": "2025-12-31 23:59:59",
+        "expired_text": "Sale has ended!",
+        "hide_timer_on_expire": false,
+        "timer_box_background": "#ffffff",
+        "timer_text_color": "#000000",
+        "timer_box_shadow": "0 2px 8px rgba(0,0,0,0.1)",
+        "timer_number_size": 48,
+        "timer_number_size_mobile": 32,
+        "timer_number_weight": "700",
+        "timer_box_padding": 20,
+        "timer_box_padding_mobile": 12,
+        "timer_box_width": 80,
+        "timer_box_width_mobile": 60,
+        "timer_box_radius": 8,
+        "timer_gap": 20,
+        "timer_margin_bottom": 40,
+        "days_label": "Days",
+        "hours_label": "Hours",
+        "minutes_label": "Minutes",
+        "seconds_label": "Seconds",
+        "timer_label_size": 14,
+        "timer_label_color": "#666666",
+        "timer_label_weight": "400",
+        "timer_label_transform": "capitalize",
+        "timer_label_margin_top": 7,
+        "expired_text_size": 20,
+        "expired_text_color": "#ff0000",
+        "expired_text_weight": "600",
+        "button_text": "Check out the sale!",
+        "button_link": "",
+        "button_background": "#ff6b35",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#e5602f",
+        "button_hover_text_color": "#ffffff",
+        "button_padding_x": 40,
+        "button_padding_y": 15,
+        "button_border_radius": 50,
+        "button_font_size": 18,
+        "button_font_weight": "600",
+        "button_border_width": 0,
+        "button_border_color": "#ff6b35",
+        "product_image": "shopify://shop_images/jude-infantini-gRZmKaFUpBM-unsplash.webp",
+        "product_image_alt": "Product image",
+        "image_background_color": "#f5a623",
+        "image_bg_radius": 46,
+        "image_bg_rotation": 0,
+        "image_max_width": 500,
+        "mobile_gap": 40,
+        "mobile_text_align": "center",
+        "mobile_image_height": 350
+      }
+    },
+    "build_a_box_WMegYe": {
+      "type": "build-a-box",
+      "name": "Build a Box",
+      "settings": {
+        "new_arrivals_collection": "dummy-collection",
+        "accessories_collection": "",
+        "products_limit": 12,
+        "background_color": "#fff5f5",
+        "max_width": 1400,
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "featured_collection",
+    "featured_pairs_XMBXng",
+    "hero_background_split_jw9Pig",
+    "category_slider_4h7k3e",
+    "before_after_slider_QerQyQ",
+    "bestsellers_grid_wcnVFP",
+    "category_circles_j8QpX3",
+    "hotspot_hero_UrRMiz",
+    "collections_grid_nhBVmx",
+    "testimonials_slider_NExgjY",
+    "trustpilot_reviews_GCjcCL",
+    "scrolling_images_xjDw6k",
+    "faq_accordion_VKYyzi",
+    "comfort_features_byGWX8",
+    "bundle_builder_Dgd4UJ",
+    "bundle_products_HmUWWr",
+    "bundle_pack_builder_qiqiUE",
+    "countdown_banner_bEjXDj",
+    "conscious_created_z3AXLE",
+    "feature_blocks_icons_nUBGaj",
+    "vertical_sliders_DByPhV",
+    "countdown_sale_gy7XDQ",
+    "build_a_box_WMegYe"
+  ]
+}

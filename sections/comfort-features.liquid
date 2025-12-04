@@ -1,0 +1,598 @@
+{% comment %}
+  Comfort Features Section
+  Two-column split with features and progress bars
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    width: 100%;
+    min-height: 500px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .comfort-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 500px;
+  }
+
+  #shopify-section-{{ section.id }} .left-content {
+    padding: {{ section.settings.padding }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: {{ section.settings.left_background }};
+  }
+
+  #shopify-section-{{ section.id }} .comfort-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 20px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  #shopify-section-{{ section.id }} .stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .star {
+    font-size: 16px;
+    color: {{ section.settings.star_color }};
+  }
+
+  #shopify-section-{{ section.id }} .reviews-text {
+    font-size: 14px;
+    color: {{ section.settings.text_color }};
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  #shopify-section-{{ section.id }} .feature-item {
+    display: grid;
+    grid-template-columns: 30px 100px 1fr;
+    align-items: center;
+    gap: 15px;
+  }
+
+  #shopify-section-{{ section.id }} .feature-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .feature-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: {{ section.settings.icon_color }};
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  #shopify-section-{{ section.id }} .feature-label {
+    font-size: 14px;
+    color: {{ section.settings.text_color }};
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .progress-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .progress-bar {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+    max-width: 150px;
+  }
+
+  #shopify-section-{{ section.id }} .progress-segment {
+    height: 8px;
+    flex: 1;
+    background-color: {{ section.settings.progress_empty }};
+    border-radius: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .progress-segment.filled {
+    background-color: {{ section.settings.progress_filled }};
+  }
+
+  #shopify-section-{{ section.id }} .progress-level {
+    font-size: 12px;
+    color: {{ section.settings.text_color }};
+    margin-left: 10px;
+    min-width: 50px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .price-text {
+    font-size: 16px;
+    color: {{ section.settings.text_color }};
+    margin-bottom: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_color }};
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: opacity 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .cta-button:hover {
+    opacity: 0.9;
+  }
+
+  #shopify-section-{{ section.id }} .right-content {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: {{ section.settings.overlay_color }};
+    font-size: {{ section.settings.overlay_size }}px;
+    font-weight: {{ section.settings.overlay_weight }};
+    line-height: 1.2;
+    max-width: 80%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Mobile Layout */
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .comfort-container {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .left-content {
+      padding: {{ section.settings.mobile_padding }}px;
+    }
+
+    #shopify-section-{{ section.id }} .right-content {
+      min-height: 400px;
+    }
+
+    #shopify-section-{{ section.id }} .comfort-heading {
+      font-size: {{ section.settings.heading_size | times: 0.85 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .overlay-text {
+      font-size: {{ section.settings.overlay_size | times: 0.85 }}px;
+    }
+  }
+</style>
+
+<div class="comfort-container">
+  <div class="left-content">
+    <h2 class="comfort-heading">{{ section.settings.heading }}</h2>
+
+    <div class="reviews-container">
+      <div class="stars">
+        {% for i in (1..5) %}
+          <span class="star">★</span>
+        {% endfor %}
+      </div>
+      <span class="reviews-text">{{ section.settings.reviews_text }}</span>
+    </div>
+
+    <div class="features-list">
+      <!-- Feature 1: Support -->
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+          </svg>
+        </div>
+        <span class="feature-label">{{ section.settings.feature_1_label }}</span>
+        <div class="progress-container">
+          <div class="progress-bar">
+            {% for i in (1..3) %}
+              <div class="progress-segment {% if i <= section.settings.feature_1_level %}filled{% endif %}"></div>
+            {% endfor %}
+          </div>
+          <span class="progress-level">{{ section.settings.feature_1_text }}</span>
+        </div>
+      </div>
+
+      <!-- Feature 2: Compression -->
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M6 6h12v2H6zm0 4h12v2H6zm0 4h8v2H6z"/>
+            <path d="M2 4v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2zm2 0h16v16H4V4z"/>
+          </svg>
+        </div>
+        <span class="feature-label">{{ section.settings.feature_2_label }}</span>
+        <div class="progress-container">
+          <div class="progress-bar">
+            {% for i in (1..3) %}
+              <div class="progress-segment {% if i <= section.settings.feature_2_level %}filled{% endif %}"></div>
+            {% endfor %}
+          </div>
+          <span class="progress-level">{{ section.settings.feature_2_text }}</span>
+        </div>
+      </div>
+
+      <!-- Feature 3: Seams -->
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 4h16v2H4zm0 6h16v2H4zm0 6h16v2H4z"/>
+          </svg>
+        </div>
+        <span class="feature-label">{{ section.settings.feature_3_label }}</span>
+        <div class="progress-container">
+          <div class="progress-bar">
+            {% for i in (1..3) %}
+              <div class="progress-segment {% if i <= section.settings.feature_3_level %}filled{% endif %}"></div>
+            {% endfor %}
+          </div>
+          <span class="progress-level">{{ section.settings.feature_3_text }}</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="price-text">{{ section.settings.price_text }}</p>
+
+    <a href="{{ section.settings.button_link }}" class="cta-button">
+      {{ section.settings.button_text }}
+    </a>
+  </div>
+
+  <div class="right-content">
+    <div class="image-container">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1200 | image_tag }}
+      {% else %}
+        <div style="width: 100%; height: 100%; background: linear-gradient(45deg, #ddd, #eee);"></div>
+      {% endif %}
+      <div class="overlay-text">{{ section.settings.overlay_text }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Comfort Features",
+  "tag": "section",
+  "class": "comfort-features-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "All-day comfort"
+    },
+    {
+      "type": "text",
+      "id": "reviews_text",
+      "label": "Reviews text",
+      "default": "1000+ Reviews"
+    },
+    {
+      "type": "header",
+      "content": "Feature 1"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_label",
+      "label": "Feature 1 Label",
+      "default": "Support"
+    },
+    {
+      "type": "range",
+      "id": "feature_1_level",
+      "label": "Feature 1 Level",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "text",
+      "id": "feature_1_text",
+      "label": "Feature 1 Text",
+      "default": "Medium"
+    },
+    {
+      "type": "header",
+      "content": "Feature 2"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_label",
+      "label": "Feature 2 Label",
+      "default": "Compression"
+    },
+    {
+      "type": "range",
+      "id": "feature_2_level",
+      "label": "Feature 2 Level",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "feature_2_text",
+      "label": "Feature 2 Text",
+      "default": "High"
+    },
+    {
+      "type": "header",
+      "content": "Feature 3"
+    },
+    {
+      "type": "text",
+      "id": "feature_3_label",
+      "label": "Feature 3 Label",
+      "default": "Seams"
+    },
+    {
+      "type": "range",
+      "id": "feature_3_level",
+      "label": "Feature 3 Level",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "text",
+      "id": "feature_3_text",
+      "label": "Feature 3 Text",
+      "default": "Flat"
+    },
+    {
+      "type": "text",
+      "id": "price_text",
+      "label": "Price text",
+      "default": "Starting at $89.99"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "SHOP THE COLLECTION"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Right Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "overlay_text",
+      "label": "Overlay text",
+      "default": "For everyday comfort and style"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "left_background",
+      "label": "Left side background",
+      "default": "#fdf4ec"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "progress_filled",
+      "label": "Progress bar filled",
+      "default": "#a03c32"
+    },
+    {
+      "type": "color",
+      "id": "progress_empty",
+      "label": "Progress bar empty",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#a03c32"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "overlay_size",
+      "label": "Overlay text size",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "select",
+      "id": "overlay_weight",
+      "label": "Overlay text weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        }
+      ],
+      "default": "300"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Desktop padding",
+      "min": 30,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding",
+      "label": "Mobile padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comfort Features"
+    }
+  ]
+}
+{% endschema %}

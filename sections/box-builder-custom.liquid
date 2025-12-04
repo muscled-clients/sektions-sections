@@ -1,0 +1,745 @@
+<style>
+  #box-builder-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  #box-builder-{{ section.id }} .container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #box-builder-{{ section.id }} .box-builder-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 30px;
+    align-items: start;
+  }
+
+  /* Product Grid Styles */
+  #box-builder-{{ section.id }} .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  #box-builder-{{ section.id }} .product-card {
+    background: #fde4e4;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  #box-builder-{{ section.id }} .product-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    margin-bottom: 15px;
+  }
+
+  #box-builder-{{ section.id }} .product-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #5968d1;
+    margin-bottom: 8px;
+    min-height: 48px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+  }
+
+  #box-builder-{{ section.id }} .product-description {
+    font-size: 14px;
+    color: #5968d1;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    opacity: 0.8;
+  }
+
+  #box-builder-{{ section.id }} .add-to-box-btn {
+    width: 100%;
+    padding: 12px 20px;
+    background: #5968d1;
+    color: white;
+    border: 2px solid #5968d1;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #box-builder-{{ section.id }} .add-to-box-btn:hover {
+    background: transparent;
+    color: #5968d1;
+  }
+
+  #box-builder-{{ section.id }} .quantity-selector {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+  }
+
+  #box-builder-{{ section.id }} .quantity-selector.active {
+    display: flex;
+  }
+
+  #box-builder-{{ section.id }} .quantity-btn {
+    width: 48px;
+    height: 48px;
+    background: #5968d1;
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+  }
+
+  #box-builder-{{ section.id }} .quantity-btn:first-child {
+    border-radius: 25px 0 0 25px;
+  }
+
+  #box-builder-{{ section.id }} .quantity-btn:last-child {
+    border-radius: 0 25px 25px 0;
+  }
+
+  #box-builder-{{ section.id }} .quantity-btn:hover {
+    background: #4958c1;
+  }
+
+  #box-builder-{{ section.id }} .quantity-input {
+    width: 60px;
+    height: 48px;
+    text-align: center;
+    border: none;
+    border-top: 2px solid #5968d1;
+    border-bottom: 2px solid #5968d1;
+    font-size: 18px;
+    font-weight: 600;
+    background: transparent;
+    color: #5968d1;
+  }
+
+  /* Sidebar Styles */
+  #box-builder-{{ section.id }} .box-sidebar {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 20px;
+    border: 1px solid #e0e0e0;
+  }
+
+  #box-builder-{{ section.id }} .sidebar-header {
+    background: #5968d1;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+
+  #box-builder-{{ section.id }} .sidebar-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  #box-builder-{{ section.id }} .sidebar-content {
+    padding: 25px;
+  }
+
+  #box-builder-{{ section.id }} .size-selection {
+    margin-bottom: 30px;
+  }
+
+  #box-builder-{{ section.id }} .size-selection h3 {
+    font-size: 16px;
+    color: #5968d1;
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  #box-builder-{{ section.id }} .size-options {
+    display: flex;
+    background: #f5f5f5;
+    border-radius: 30px;
+    padding: 4px;
+    gap: 0;
+  }
+
+  #box-builder-{{ section.id }} .size-option {
+    flex: 1;
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    border-radius: 26px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #5968d1;
+  }
+
+  #box-builder-{{ section.id }} .size-option.active {
+    background: #5968d1;
+    color: white;
+  }
+
+  #box-builder-{{ section.id }} .size-option .size-name {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  #box-builder-{{ section.id }} .size-option .size-price {
+    font-size: 18px;
+  }
+
+  #box-builder-{{ section.id }} .selected-products {
+    margin-bottom: 25px;
+  }
+
+  #box-builder-{{ section.id }} .selected-products h3 {
+    font-size: 16px;
+    color: #5968d1;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+
+  #box-builder-{{ section.id }} .selected-products-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  #box-builder-{{ section.id }} .selected-product-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  #box-builder-{{ section.id }} .selected-product-item:last-child {
+    border-bottom: none;
+  }
+
+  #box-builder-{{ section.id }} .selected-product-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  #box-builder-{{ section.id }} .selected-product-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #box-builder-{{ section.id }} .selected-product-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #5968d1;
+  }
+
+  #box-builder-{{ section.id }} .selected-product-quantity {
+    font-size: 14px;
+    color: #999;
+    margin-left: auto;
+    margin-right: 10px;
+  }
+
+  #box-builder-{{ section.id }} .remove-product-btn {
+    width: 32px;
+    height: 32px;
+    background: #5968d1;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  #box-builder-{{ section.id }} .remove-product-btn:hover {
+    background: #4050b1;
+  }
+
+  #box-builder-{{ section.id }} .empty-box-message {
+    text-align: center;
+    color: #999;
+    padding: 40px 20px;
+    font-style: italic;
+  }
+
+  #box-builder-{{ section.id }} .add-to-cart-btn {
+    width: 100%;
+    padding: 16px;
+    background: #8b95e6;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  #box-builder-{{ section.id }} .add-to-cart-btn:hover:not(:disabled) {
+    background: #7b85d6;
+  }
+
+  #box-builder-{{ section.id }} .add-to-cart-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+
+  #box-builder-{{ section.id }} .box-counter {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  #box-builder-{{ section.id }} .box-counter strong {
+    color: #4a5fc1;
+    font-size: 16px;
+  }
+
+  @media (max-width: 1024px) {
+    #box-builder-{{ section.id }} .box-builder-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    #box-builder-{{ section.id }} .box-sidebar {
+      position: relative;
+      top: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #box-builder-{{ section.id }} .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #box-builder-{{ section.id }} .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section id="box-builder-{{ section.id }}">
+  <div class="container">
+    <div class="box-builder-wrapper">
+      <!-- Product Grid -->
+      <div class="products-grid" id="products-grid-{{ section.id }}">
+        {% if section.settings.collection %}
+          {% assign collection = collections[section.settings.collection] %}
+          {% for product in collection.products limit: section.settings.products_limit %}
+            <div class="product-card" data-product-id="{{ product.id }}">
+              {% if product.featured_image %}
+                <img class="product-image"
+                     src="{{ product.featured_image | image_url: width: 300 }}"
+                     alt="{{ product.title }}"
+                     loading="lazy">
+              {% else %}
+                <img class="product-image"
+                     src="{{ 'placeholder-product.svg' | asset_url }}"
+                     alt="{{ product.title }}">
+              {% endif %}
+
+              <h3 class="product-title">{{ product.title }}</h3>
+
+              <p class="product-description">
+                {% if product.description != blank %}
+                  {{ product.description | strip_html | truncate: 80 }}
+                {% else %}
+                  This is a demonstration store. You can purchase...
+                {% endif %}
+              </p>
+
+              <button class="add-to-box-btn"
+                      data-product-id="{{ product.id }}"
+                      data-product-title="{{ product.title | escape }}"
+                      data-product-image="{% if product.featured_image %}{{ product.featured_image | image_url: width: 100 }}{% else %}{{ 'placeholder-product.svg' | asset_url }}{% endif %}"
+                      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                      data-variant-price="{{ product.selected_or_first_available_variant.price }}">
+                ADD TO BOX
+              </button>
+
+              <div class="quantity-selector" data-product-id="{{ product.id }}">
+                <button class="quantity-btn minus" data-product-id="{{ product.id }}">−</button>
+                <input type="number" class="quantity-input" value="1" min="1" readonly>
+                <button class="quantity-btn plus" data-product-id="{{ product.id }}">+</button>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <!-- Sidebar -->
+      <div class="box-sidebar">
+        <div class="sidebar-header">
+          <h2>Build your own box</h2>
+        </div>
+
+        <div class="sidebar-content">
+          <!-- Size Selection -->
+          <div class="size-selection">
+            <h3>Choose the size of your box</h3>
+            <div class="size-options">
+              <div class="size-option active" data-size="12" data-price="19999">
+                <div class="size-name">Box of 12</div>
+                <div class="size-price">$199.99</div>
+              </div>
+              <div class="size-option" data-size="6" data-price="9999">
+                <div class="size-name">Box of 6</div>
+                <div class="size-price">$99.99</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Box Counter (Hidden but functional) -->
+          <div class="box-counter" style="display: none;">
+            <span>Items in box: </span>
+            <strong id="items-count-{{ section.id }}">0</strong>
+            <span> / </span>
+            <strong id="max-items-{{ section.id }}">12</strong>
+          </div>
+
+          <!-- Selected Products -->
+          <div class="selected-products">
+            <h3>Products in the box</h3>
+            <div class="selected-products-list" id="selected-products-{{ section.id }}">
+              <div class="empty-box-message">Your box is empty. Add products to get started!</div>
+            </div>
+          </div>
+
+          <!-- Add to Cart Button -->
+          <button class="add-to-cart-btn" id="add-to-cart-{{ section.id }}" disabled>
+            ADD TO CART
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const sectionId = '{{ section.id }}';
+  const productsGrid = document.getElementById(`products-grid-${sectionId}`);
+  const selectedProductsList = document.getElementById(`selected-products-${sectionId}`);
+  const addToCartBtn = document.getElementById(`add-to-cart-${sectionId}`);
+  const itemsCountEl = document.getElementById(`items-count-${sectionId}`);
+  const maxItemsEl = document.getElementById(`max-items-${sectionId}`);
+
+  let selectedProducts = new Map();
+  let currentBoxSize = 12;
+  let totalItems = 0;
+
+  // Initialize size selection
+  document.querySelectorAll(`#box-builder-${sectionId} .size-option`).forEach(option => {
+    option.addEventListener('click', function() {
+      // Update active state
+      document.querySelectorAll(`#box-builder-${sectionId} .size-option`).forEach(opt => {
+        opt.classList.remove('active');
+      });
+      this.classList.add('active');
+
+      // Update box size
+      currentBoxSize = parseInt(this.dataset.size);
+      maxItemsEl.textContent = currentBoxSize;
+
+      // Check if current selection exceeds new limit
+      enforceBoxLimit();
+    });
+  });
+
+  // Add to box functionality
+  document.querySelectorAll(`#box-builder-${sectionId} .add-to-box-btn`).forEach(btn => {
+    btn.addEventListener('click', function() {
+      const productId = this.dataset.productId;
+      const productTitle = this.dataset.productTitle;
+      const productImage = this.dataset.productImage;
+      const variantId = this.dataset.variantId;
+      const variantPrice = this.dataset.variantPrice;
+
+      // Check if adding would exceed limit
+      if (totalItems >= currentBoxSize) {
+        alert(`Maximum ${currentBoxSize} items allowed in the box`);
+        return;
+      }
+
+      // Add product to selection
+      addProduct(productId, productTitle, productImage, variantId, variantPrice, 1);
+
+      // Hide add button, show quantity selector
+      this.style.display = 'none';
+      const quantitySelector = this.parentElement.querySelector('.quantity-selector');
+      quantitySelector.classList.add('active');
+    });
+  });
+
+  // Quantity controls
+  document.querySelectorAll(`#box-builder-${sectionId} .quantity-btn`).forEach(btn => {
+    btn.addEventListener('click', function() {
+      const productId = this.dataset.productId;
+      const quantityInput = this.parentElement.querySelector('.quantity-input');
+      const currentQty = parseInt(quantityInput.value);
+
+      if (this.classList.contains('minus')) {
+        if (currentQty > 1) {
+          updateQuantity(productId, currentQty - 1);
+          quantityInput.value = currentQty - 1;
+        } else {
+          removeProduct(productId);
+        }
+      } else if (this.classList.contains('plus')) {
+        if (totalItems < currentBoxSize) {
+          updateQuantity(productId, currentQty + 1);
+          quantityInput.value = currentQty + 1;
+        } else {
+          alert(`Maximum ${currentBoxSize} items allowed in the box`);
+        }
+      }
+    });
+  });
+
+  function addProduct(productId, title, image, variantId, price, quantity) {
+    if (selectedProducts.has(productId)) {
+      const product = selectedProducts.get(productId);
+      product.quantity = quantity;
+    } else {
+      selectedProducts.set(productId, {
+        id: productId,
+        title: title,
+        image: image,
+        variantId: variantId,
+        price: price,
+        quantity: quantity
+      });
+    }
+    updateSidebar();
+  }
+
+  function updateQuantity(productId, newQuantity) {
+    if (selectedProducts.has(productId)) {
+      const product = selectedProducts.get(productId);
+      const oldQuantity = product.quantity;
+      const difference = newQuantity - oldQuantity;
+
+      if (totalItems + difference <= currentBoxSize) {
+        product.quantity = newQuantity;
+        updateSidebar();
+      } else {
+        alert(`Maximum ${currentBoxSize} items allowed in the box`);
+        // Reset input value
+        const card = document.querySelector(`[data-product-id="${productId}"] .quantity-input`);
+        if (card) {
+          card.value = oldQuantity;
+        }
+      }
+    }
+  }
+
+  function removeProduct(productId) {
+    selectedProducts.delete(productId);
+
+    // Reset product card
+    const productCard = document.querySelector(`#box-builder-${sectionId} [data-product-id="${productId}"]`);
+    if (productCard) {
+      const addBtn = productCard.querySelector('.add-to-box-btn');
+      const quantitySelector = productCard.querySelector('.quantity-selector');
+      const quantityInput = productCard.querySelector('.quantity-input');
+
+      addBtn.style.display = 'block';
+      quantitySelector.classList.remove('active');
+      quantityInput.value = 1;
+    }
+
+    updateSidebar();
+  }
+
+  function updateSidebar() {
+    // Calculate total items
+    totalItems = 0;
+    selectedProducts.forEach(product => {
+      totalItems += product.quantity;
+    });
+
+    // Update counter
+    itemsCountEl.textContent = totalItems;
+
+    // Update products list
+    if (selectedProducts.size === 0) {
+      selectedProductsList.innerHTML = '<div class="empty-box-message">Your box is empty. Add products to get started!</div>';
+    } else {
+      selectedProductsList.innerHTML = '';
+      selectedProducts.forEach((product, productId) => {
+        const itemHtml = `
+          <div class="selected-product-item" data-product-id="${productId}">
+            <img src="${product.image}" alt="${product.title}" class="selected-product-image">
+            <div class="selected-product-info">
+              <span class="selected-product-title">${product.title}</span>
+              <span class="selected-product-quantity">x${product.quantity}</span>
+            </div>
+            <button class="remove-product-btn" onclick="boxBuilderRemoveProduct('${sectionId}', '${productId}')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        `;
+        selectedProductsList.insertAdjacentHTML('beforeend', itemHtml);
+      });
+    }
+
+    // Enable/disable add to cart button
+    addToCartBtn.disabled = totalItems === 0;
+  }
+
+  function enforceBoxLimit() {
+    if (totalItems > currentBoxSize) {
+      alert(`Current selection exceeds the new box limit. Please remove ${totalItems - currentBoxSize} items.`);
+      // You could also automatically trim items here if desired
+    }
+  }
+
+  // Global function for remove button
+  window[`boxBuilderRemoveProduct_${sectionId}`] = function(productId) {
+    removeProduct(productId);
+  };
+
+  // Expose remove function globally with dynamic name
+  window.boxBuilderRemoveProduct = function(sectionId, productId) {
+    window[`boxBuilderRemoveProduct_${sectionId}`](productId);
+  };
+
+  // Add to cart functionality
+  addToCartBtn.addEventListener('click', async function() {
+    if (selectedProducts.size === 0) return;
+
+    // Prepare items for cart
+    const items = [];
+    selectedProducts.forEach(product => {
+      items.push({
+        id: product.variantId,
+        quantity: product.quantity
+      });
+    });
+
+    // Add to Shopify cart
+    try {
+      const response = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items })
+      });
+
+      if (response.ok) {
+        // Redirect to cart or show success message
+        window.location.href = '/cart';
+      } else {
+        alert('Failed to add items to cart. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('An error occurred. Please try again.');
+    }
+  });
+
+  // Initialize
+  updateSidebar();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Box Builder Custom",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Product Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Number of Products to Show",
+      "min": 6,
+      "max": 50,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum Width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "default": 1400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 50,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Box Builder Custom"
+    }
+  ]
+}
+{% endschema %}

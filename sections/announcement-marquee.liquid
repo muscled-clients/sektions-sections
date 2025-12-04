@@ -1,0 +1,325 @@
+{% comment %}
+  Announcement Marquee Section
+  Scrolling announcement bar with customizable messages
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    overflow: hidden;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .marquee-container {
+    height: {{ section.settings.bar_height }}px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .marquee-track {
+    display: flex;
+    animation: scroll-{{ section.id }} {{ section.settings.scroll_speed }}s linear infinite;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+  #shopify-section-{{ section.id }} .marquee-content {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding-right: {{ section.settings.content_gap }}px;
+  }
+
+  #shopify-section-{{ section.id }} .marquee-item {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.text_size }}px;
+    font-weight: {{ section.settings.font_weight }};
+    text-transform: {{ section.settings.text_transform }};
+    letter-spacing: {{ section.settings.letter_spacing }}px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    white-space: nowrap;
+    margin: 0 {{ section.settings.item_spacing }}px;
+  }
+
+  #shopify-section-{{ section.id }} .marquee-separator {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.text_size }}px;
+    margin: 0 5px;
+  }
+
+
+  @keyframes scroll-{{ section.id }} {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .marquee-track:hover {
+    {% if section.settings.pause_on_hover %}
+      animation-play-state: paused;
+    {% endif %}
+  }
+
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .marquee-container {
+      height: {{ section.settings.mobile_bar_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .marquee-item {
+      font-size: {{ section.settings.mobile_text_size }}px;
+    }
+
+    #shopify-section-{{ section.id }} .marquee-separator {
+      font-size: {{ section.settings.mobile_text_size }}px;
+      margin: 0 {{ section.settings.mobile_item_spacing }}px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .marquee-track {
+      animation: none;
+      justify-content: center;
+    }
+
+    #shopify-section-{{ section.id }} .marquee-content:nth-child(2) {
+      display: none;
+    }
+  }
+</style>
+
+<div class="marquee-container">
+  <div class="marquee-track">
+    {% comment %} Repeat content 8 times to ensure no gaps {% endcomment %}
+    {% for i in (1..8) %}
+      <div class="marquee-content">
+        {% for block in section.blocks %}
+          {% if block.type == 'announcement' %}
+            <span class="marquee-item" {% if i == 1 %}{{ block.shopify_attributes }}{% endif %}>
+              {{ block.settings.text }}
+            </span>
+            {% unless forloop.last %}
+              <span class="marquee-separator">·</span>
+            {% endunless %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Marquee",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "bar_height",
+      "label": "Bar height (desktop)",
+      "min": 30,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_bar_height",
+      "label": "Bar height (mobile)",
+      "min": 30,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size (desktop)",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "label": "Text size (mobile)",
+      "min": 10,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "select",
+      "id": "text_transform",
+      "label": "Text transform",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize"
+        }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "label": "Letter spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "label": "Item spacing (desktop)",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "mobile_item_spacing",
+      "label": "Item spacing (mobile)",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Gap between content sets",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 100,
+      "info": "Space between each complete set of announcements"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll speed",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "s",
+      "default": 20,
+      "info": "Time in seconds for one complete scroll"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "ANNOUNCEMENT"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Marquee",
+      "blocks": [
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "EASY RETURNS"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "TRUSTED BY 1000+"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "FREE SHIPPING"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "EASY CHECKOUT"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

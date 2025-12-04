@@ -1,0 +1,611 @@
+{% style %}
+  #table-{{ section.id }} {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: {{ section.settings.top_margin }}px;
+    margin-bottom: {{ section.settings.bottom_margin }}px;
+    padding: 0 20px;
+    background-color: {{ section.settings.table_color }};
+    position: relative;
+    z-index: 1;
+    font-family: {{ section.settings.select_font }};
+  }
+
+  #table-{{ section.id }} .section-title {
+    text-align: center;
+    font-size: {{ section.settings.header_text_size }}px;
+    font-weight: 600;
+    {% if section.settings.header_text_style == 'cursive' %}
+    font-style: italic;
+    {% else %}
+    font-style: normal;
+    {% endif %}
+    color: {{ section.settings.benefits_text_color }};
+    margin: 0 0 40px 0;
+  }
+
+  #table-{{ section.id }} .table-wrapper {
+    width: 100%;
+  }
+
+  #table-{{ section.id }} .compare-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #table-{{ section.id }} .table-row {
+    display: flex;
+    width: 100%;
+  }
+
+  #table-{{ section.id }} .table-cell {
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 400;
+    border: {{ section.settings.border_thickness }}px solid {{ section.settings.border_color }};
+    border-radius: {{ section.settings.corner_radius }}px;
+    margin: -{{ section.settings.border_thickness | divided_by: 2 }}px;
+  }
+
+  #table-{{ section.id }} .table-cell.feature-name {
+    {% if section.settings.number_of_columns == '2' %}
+    width: 40%;
+    {% else %}
+    width: 30%;
+    {% endif %}
+    flex-shrink: 0;
+    justify-content: center;
+    text-align: center;
+    font-weight: 400;
+    color: {{ section.settings.benefits_text_color }};
+    background-color: {{ section.settings.table_color }};
+  }
+
+  #table-{{ section.id }} .table-cell.brand-cell {
+    flex: 1;
+    color: {{ section.settings.others_text_color }};
+    background-color: {{ section.settings.table_color }};
+  }
+
+  #table-{{ section.id }} .table-cell.brand-cell.active {
+    background-color: {{ section.settings.highlighted_color }};
+    color: {{ section.settings.highlighted_text_color }};
+    border-color: {{ section.settings.highlighted_color }};
+  }
+
+  /* Header row */
+  #table-{{ section.id }} .table-row.header-row .table-cell.feature-name {
+    background: transparent;
+    border: none;
+  }
+
+  #table-{{ section.id }} .table-row.header-row .table-cell.brand-cell {
+    padding: 25px 20px;
+    flex-direction: column;
+    gap: 8px;
+    border: none;
+    border-bottom: {{ section.settings.border_thickness }}px solid {{ section.settings.border_color }};
+  }
+
+  #table-{{ section.id }} .table-row.header-row .table-cell.brand-cell.active {
+    border: none;
+    border-top-left-radius: {{ section.settings.corner_radius }}px;
+    border-top-right-radius: {{ section.settings.corner_radius }}px;
+  }
+
+  #table-{{ section.id }} .header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #table-{{ section.id }} .header-logo {
+    max-width: 140px;
+    max-height: 60px;
+    object-fit: contain;
+  }
+
+  #table-{{ section.id }} .header-name {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  /* Last row - rounded bottom corners for active column */
+  #table-{{ section.id }} .table-row.feature-row:last-child .table-cell.brand-cell.active {
+    border-bottom-left-radius: {{ section.settings.corner_radius }}px;
+    border-bottom-right-radius: {{ section.settings.corner_radius }}px;
+  }
+
+  /* Icons */
+  #table-{{ section.id }} .check-icon,
+  #table-{{ section.id }} .x-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  #table-{{ section.id }} .check-icon svg,
+  #table-{{ section.id }} .x-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  #table-{{ section.id }} .brand-cell .check-icon svg {
+    fill: none;
+    stroke: {{ section.settings.others_icon_color }};
+    stroke-width: 2;
+  }
+
+  #table-{{ section.id }} .brand-cell.active .check-icon svg {
+    stroke: {{ section.settings.highlighted_icon_color }};
+  }
+
+  #table-{{ section.id }} .brand-cell .x-icon svg {
+    fill: {{ section.settings.others_icon_color }};
+  }
+
+  #table-{{ section.id }} .brand-cell.active .x-icon svg {
+    fill: {{ section.settings.highlighted_icon_color }};
+  }
+
+  /* Hide third column if 2 columns selected */
+  {% if section.settings.number_of_columns == '2' %}
+  #table-{{ section.id }} .table-cell.brand-cell:nth-child(4) {
+    display: none;
+  }
+  {% endif %}
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    #table-{{ section.id }} .section-title {
+      font-size: {{ section.settings.header_text_size | times: 0.7 | round }}px;
+    }
+
+    #table-{{ section.id }} .table-cell {
+      padding: 12px 8px;
+      font-size: 12px;
+    }
+
+    #table-{{ section.id }} .table-cell.feature-name {
+      width: 35%;
+    }
+
+    #table-{{ section.id }} .table-row.header-row .table-cell.brand-cell {
+      padding: 15px 8px;
+    }
+
+    #table-{{ section.id }} .header-name {
+      font-size: 12px;
+    }
+
+    #table-{{ section.id }} .header-logo {
+      max-width: 70px;
+      max-height: 35px;
+    }
+
+    #table-{{ section.id }} .check-icon,
+    #table-{{ section.id }} .x-icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #table-{{ section.id }} .table-cell {
+      padding: 10px 5px;
+      font-size: 10px;
+    }
+
+    #table-{{ section.id }} .table-cell.feature-name {
+      width: 30%;
+    }
+
+    #table-{{ section.id }} .header-logo {
+      max-width: 50px;
+    }
+  }
+{% endstyle %}
+
+<div id="table-{{ section.id }}">
+  {% if section.settings.header_text != blank %}
+    <h2 class="section-title">{{ section.settings.header_text }}</h2>
+  {% endif %}
+
+  <div class="table-wrapper">
+    <div class="compare-table">
+      {%- comment -%} Header Row {%- endcomment -%}
+      <div class="table-row header-row">
+        <div class="table-cell feature-name"></div>
+
+        {%- comment -%} Column 1 - Always highlighted {%- endcomment -%}
+        <div class="table-cell brand-cell active">
+          <div class="header-content">
+            {% if section.settings.column1_logo != blank %}
+              <img class="header-logo" src="{{ section.settings.column1_logo | image_url: width: 280 }}" alt="{{ section.settings.column1_text }}">
+            {% endif %}
+            {% if section.settings.column1_text != blank %}
+              <span class="header-name">{{ section.settings.column1_text }}</span>
+            {% endif %}
+          </div>
+        </div>
+
+        {%- comment -%} Column 2 {%- endcomment -%}
+        <div class="table-cell brand-cell">
+          <div class="header-content">
+            <span class="header-name">{{ section.settings.column2_text }}</span>
+          </div>
+        </div>
+
+        {%- comment -%} Column 3 {%- endcomment -%}
+        {% if section.settings.number_of_columns == '3' %}
+        <div class="table-cell brand-cell">
+          <div class="header-content">
+            <span class="header-name">{{ section.settings.column3_text }}</span>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+      {%- comment -%} Feature Rows {%- endcomment -%}
+      {% for block in section.blocks %}
+        {% if block.type == 'row' %}
+          <div class="table-row feature-row" {{ block.shopify_attributes }}>
+            <div class="table-cell feature-name">{{ block.settings.header }}</div>
+
+            {%- comment -%} Column 1 - Active {%- endcomment -%}
+            <div class="table-cell brand-cell active">
+              {% if block.settings.compare_1 == 'check' %}
+                <span class="check-icon">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  </svg>
+                </span>
+              {% else %}
+                <span class="x-icon">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+                  </svg>
+                </span>
+              {% endif %}
+            </div>
+
+            {%- comment -%} Column 2 {%- endcomment -%}
+            <div class="table-cell brand-cell">
+              {% if block.settings.compare_2 == 'check' %}
+                <span class="check-icon">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  </svg>
+                </span>
+              {% else %}
+                <span class="x-icon">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+                  </svg>
+                </span>
+              {% endif %}
+            </div>
+
+            {%- comment -%} Column 3 {%- endcomment -%}
+            {% if section.settings.number_of_columns == '3' %}
+            <div class="table-cell brand-cell">
+              {% if block.settings.compare_3 == 'check' %}
+                <span class="check-icon">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  </svg>
+                </span>
+              {% else %}
+                <span class="x-icon">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+                  </svg>
+                </span>
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Table",
+  "tag": "section",
+  "class": "section-table",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Number of Columns"
+    },
+    {
+      "type": "select",
+      "id": "number_of_columns",
+      "label": "Select number of columns",
+      "options": [
+        { "value": "2", "label": "2 Columns" },
+        { "value": "3", "label": "3 Columns" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "top_margin",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top Margin",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "bottom_margin",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom Margin",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "select",
+      "id": "select_font",
+      "label": "Select Font",
+      "options": [
+        { "value": "Poppins, sans-serif", "label": "Poppins" },
+        { "value": "Arial, sans-serif", "label": "Arial" },
+        { "value": "Helvetica, sans-serif", "label": "Helvetica" },
+        { "value": "Georgia, serif", "label": "Georgia" },
+        { "value": "Times New Roman, serif", "label": "Times New Roman" },
+        { "value": "inherit", "label": "Theme Default" }
+      ],
+      "default": "Poppins, sans-serif"
+    },
+    {
+      "type": "text",
+      "id": "header_text",
+      "label": "Header Text",
+      "default": "StyleUP vs. Standard"
+    },
+    {
+      "type": "range",
+      "id": "header_text_size",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Header Text Size",
+      "default": 52
+    },
+    {
+      "type": "select",
+      "id": "header_text_style",
+      "label": "Header Text Style",
+      "options": [
+        { "value": "cursive", "label": "Cursive" },
+        { "value": "normal", "label": "Normal" }
+      ],
+      "default": "cursive"
+    },
+    {
+      "type": "header",
+      "content": "Column Settings"
+    },
+    {
+      "type": "text",
+      "id": "column1_text",
+      "label": "Column 1 Text",
+      "default": "Sternify Hairstyler 2.0"
+    },
+    {
+      "type": "image_picker",
+      "id": "column1_logo",
+      "label": "Logo (Optional)",
+      "info": "We recommend using a transparent logo here."
+    },
+    {
+      "type": "text",
+      "id": "column2_text",
+      "label": "Column 2 Text",
+      "default": "Original Hairstyler"
+    },
+    {
+      "type": "text",
+      "id": "column3_text",
+      "label": "Column 3 Text",
+      "default": "Standard Hairstyler",
+      "info": "This setting is only available with 3 columns"
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "highlighted_color",
+      "label": "Highlighted Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "highlighted_text_color",
+      "label": "Highlighted Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "highlighted_icon_color",
+      "label": "Highlighted Icon Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "others_text_color",
+      "label": "Others Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "others_icon_color",
+      "label": "Others Icon Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "benefits_text_color",
+      "label": "Benefits Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "table_color",
+      "label": "Table Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#D7D8D5"
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border Thickness",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Corner Radius",
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "header",
+          "label": "Header",
+          "default": "Feature 1"
+        },
+        {
+          "type": "select",
+          "id": "compare_1",
+          "label": "Compare 1",
+          "options": [
+            { "value": "check", "label": "Checkmark" },
+            { "value": "x", "label": "Cross" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "select",
+          "id": "compare_2",
+          "label": "Compare 2",
+          "options": [
+            { "value": "check", "label": "Checkmark" },
+            { "value": "x", "label": "Cross" }
+          ],
+          "default": "x"
+        },
+        {
+          "type": "select",
+          "id": "compare_3",
+          "label": "Compare 3",
+          "info": "Note: This setting is only available with 3 columns",
+          "options": [
+            { "value": "check", "label": "Checkmark" },
+            { "value": "x", "label": "Cross" }
+          ],
+          "default": "x"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Table",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "header": "Kein Coding",
+            "compare_1": "check",
+            "compare_2": "x",
+            "compare_3": "x"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "header": "Für jedes Theme geeignet",
+            "compare_1": "check",
+            "compare_2": "x",
+            "compare_3": "x"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "header": "Getestet in hunderten Shops",
+            "compare_1": "check",
+            "compare_2": "x",
+            "compare_3": "x"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "header": "Für Shopify entwickelt",
+            "compare_1": "check",
+            "compare_2": "x",
+            "compare_3": "x"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "header": "Kinderleicht konfigurierbar",
+            "compare_1": "check",
+            "compare_2": "x",
+            "compare_3": "x"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

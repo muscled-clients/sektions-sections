@@ -1,0 +1,175 @@
+{% comment %}
+  Essentials Promo Banner
+  A centered promotional banner section with title, subtext, and button
+{% endcomment %}
+
+<div class="essentials-promo-banner" style="background-color: {{ section.settings.background_color }};">
+  <div class="essentials-promo-banner__container">
+    {% if section.settings.title != blank %}
+      <h2 class="essentials-promo-banner__title">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.settings.subtext != blank %}
+      <p class="essentials-promo-banner__subtext">{{ section.settings.subtext }}</p>
+    {% endif %}
+
+    {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_link }}" class="essentials-promo-banner__button">
+        {{ section.settings.button_text }}
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+.essentials-promo-banner {
+  width: 100%;
+  padding: 60px 20px;
+  background-color: #FFCECE;
+}
+
+.essentials-promo-banner__container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.essentials-promo-banner__title {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0 0 15px;
+  line-height: 1.3;
+}
+
+.essentials-promo-banner__subtext {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #000000;
+  margin: 0 0 30px;
+  line-height: 1.4;
+}
+
+.essentials-promo-banner__button {
+  display: inline-block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #FFFFFF;
+  background-color: #000000;
+  padding: 12px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.essentials-promo-banner__button:hover {
+  background-color: #333333;
+  transform: translateY(-1px);
+}
+
+.essentials-promo-banner__button:active {
+  transform: translateY(0);
+}
+
+/* Responsive - Tablet */
+@media screen and (max-width: 768px) {
+  .essentials-promo-banner {
+    padding: 50px 20px;
+  }
+
+  .essentials-promo-banner__title {
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+
+  .essentials-promo-banner__subtext {
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+
+  .essentials-promo-banner__button {
+    font-size: 15px;
+    padding: 11px 18px;
+  }
+}
+
+/* Responsive - Mobile */
+@media screen and (max-width: 480px) {
+  .essentials-promo-banner {
+    padding: 40px 20px;
+  }
+
+  .essentials-promo-banner__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .essentials-promo-banner__subtext {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  .essentials-promo-banner__button {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Essentials Promo Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Essentials for healthy living"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "20% OFF THIS WEEK"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "View Discounted Essentials"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFCECE"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Essentials Promo Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,237 @@
+.show-us-your-style-section {
+  padding-top: var(--section-padding-top, 60px);
+  padding-bottom: var(--section-padding-bottom, 60px);
+  background-color: var(--color-background);
+}
+
+.show-us-your-style-section .page-width {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+/* Section Heading */
+.show-us-your-style-section .section-heading {
+  text-align: center;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  color: var(--color-foreground, #000);
+}
+
+.show-us-your-style-section .section-description {
+  text-align: center;
+  margin: 0 auto 2.5rem;
+  max-width: 600px;
+  color: var(--color-foreground, #666);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Grid Layout */
+.style-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  margin-top: 2rem;
+}
+
+/* Grid Item */
+.style-grid-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  background-color: #f5f5f5;
+  aspect-ratio: var(--image-ratio, 1 / 1);
+}
+
+/* Image Wrapper */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.style-grid-item:hover .image-wrapper img {
+  transform: scale(1.08);
+}
+
+/* Placeholder SVG */
+.image-wrapper .placeholder-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Social Overlay */
+.social-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.35s ease-in-out;
+  z-index: 2;
+}
+
+.style-grid-item:hover .social-overlay {
+  opacity: 1;
+}
+
+/* Social Icon Link */
+.social-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  animation: fadeInScale 0.3s ease-out;
+  cursor: pointer;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.social-icon-link:hover {
+  transform: scale(1.15);
+}
+
+/* Non-clickable icon (no link) */
+div.social-icon-link {
+  cursor: default;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  stroke: #fff;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* For filled icons (Facebook, TikTok, etc.) */
+.social-icon[fill="currentColor"] {
+  fill: #fff;
+}
+
+/* For stroke icons (Instagram) keep fill as none */
+.social-icon[fill="none"] {
+  fill: none;
+}
+
+/* Keep icons white - remove brand color hover effects */
+
+/* Tablet Styles */
+@media screen and (max-width: 989px) {
+  .style-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .show-us-your-style-section .section-heading {
+    font-size: 2rem;
+  }
+
+  .social-icon-link {
+    width: 50px;
+    height: 50px;
+  }
+
+  .social-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 749px) {
+  .show-us-your-style-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .style-grid {
+    grid-template-columns: repeat(var(--grid-columns-mobile, 2), 1fr);
+    gap: 0;
+  }
+
+  .show-us-your-style-section .section-heading {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .show-us-your-style-section .section-description {
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .social-icon-link {
+    width: 45px;
+    height: 45px;
+  }
+
+  .social-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .style-grid-item {
+    border-radius: 0;
+  }
+}
+
+/* High-res displays */
+@media screen and (min-width: 1400px) {
+  .style-grid {
+    gap: 0;
+  }
+}
+
+/* Accessibility */
+.social-icon-link:focus {
+  outline: 2px solid var(--color-foreground, #000);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .image-wrapper img,
+  .social-overlay,
+  .social-icon-link {
+    transition: none;
+  }
+
+  .style-grid-item:hover .image-wrapper img {
+    transform: none;
+  }
+}

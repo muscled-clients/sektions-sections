@@ -1,0 +1,635 @@
+{% comment %}
+  FAQ Section with Tabs
+  Collapsible FAQ with tabbed navigation
+{% endcomment %}
+
+<div class="faq-tabs-section" data-section-id="{{ section.id }}">
+  <div class="faq-container">
+    <!-- Header -->
+    <div class="faq-header">
+      {% if section.settings.heading != blank %}
+        <h1 class="faq-title">{{ section.settings.heading }}</h1>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="faq-subtitle">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div class="faq-tabs">
+      <button class="faq-tab active" data-tab="general">
+        {{ section.settings.tab1_label | default: "General information" }}
+      </button>
+      <button class="faq-tab" data-tab="shipping">
+        {{ section.settings.tab2_label | default: "Shipping & Delivery" }}
+      </button>
+      <button class="faq-tab" data-tab="returns">
+        {{ section.settings.tab3_label | default: "Returns & Exchanges" }}
+      </button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="faq-content">
+      <!-- General Information Tab -->
+      <div class="tab-panel active" data-panel="general">
+        {% for block in section.blocks %}
+          {% if block.settings.tab_category == 'general' %}
+            <div class="faq-item" {{ block.shopify_attributes }}>
+              <button class="faq-question">
+                <span>{{ block.settings.question }}</span>
+                <span class="faq-icon">
+                  <svg class="icon-plus" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                  <svg class="icon-minus" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Shipping & Delivery Tab -->
+      <div class="tab-panel" data-panel="shipping">
+        {% for block in section.blocks %}
+          {% if block.settings.tab_category == 'shipping' %}
+            <div class="faq-item" {{ block.shopify_attributes }}>
+              <button class="faq-question">
+                <span>{{ block.settings.question }}</span>
+                <span class="faq-icon">
+                  <svg class="icon-plus" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                  <svg class="icon-minus" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Returns & Exchanges Tab -->
+      <div class="tab-panel" data-panel="returns">
+        {% for block in section.blocks %}
+          {% if block.settings.tab_category == 'returns' %}
+            <div class="faq-item" {{ block.shopify_attributes }}>
+              <button class="faq-question">
+                <span>{{ block.settings.question }}</span>
+                <span class="faq-icon">
+                  <svg class="icon-plus" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                  <svg class="icon-minus" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.faq-tabs-section {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: {{ section.settings.section_bg | default: '#ffffff' }};
+  padding: 60px 20px;
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Header */
+.faq-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.faq-title {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: {{ section.settings.heading_color | default: '#2D3250' }};
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.faq-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: {{ section.settings.subheading_color | default: '#6B6B6B' }};
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Tabs */
+.faq-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.faq-tab {
+  background-color: {{ section.settings.tab_inactive_bg | default: '#E8E8E8' }};
+  color: {{ section.settings.tab_inactive_text | default: '#6B6B6B' }};
+  border: none;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.faq-tab:hover {
+  background-color: {{ section.settings.tab_hover_bg | default: '#D0D0D0' }};
+}
+
+.faq-tab.active {
+  background-color: {{ section.settings.tab_active_bg | default: '#2D3250' }};
+  color: {{ section.settings.tab_active_text | default: '#ffffff' }};
+}
+
+/* Tab Content */
+.faq-content {
+  position: relative;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FAQ Items */
+.faq-item {
+  border-bottom: 1px solid {{ section.settings.border_color | default: '#E0E0E0' }};
+  margin-bottom: 0;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: {{ section.settings.question_color | default: '#2D3250' }};
+  transition: color 0.3s ease;
+}
+
+.faq-question:hover {
+  color: {{ section.settings.question_hover_color | default: '#6c63ff' }};
+}
+
+.faq-question span:first-child {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.faq-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  color: {{ section.settings.icon_color | default: '#2D3250' }};
+}
+
+.faq-icon svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.icon-minus {
+  opacity: 0;
+  transform: rotate(-90deg);
+}
+
+.faq-item.active .icon-plus {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+.faq-item.active .icon-minus {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+/* FAQ Answer */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 1000px;
+  padding-bottom: 20px;
+}
+
+.faq-answer-content {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: {{ section.settings.answer_color | default: '#6B6B6B' }};
+  line-height: 1.6;
+  padding-right: 40px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .faq-tabs-section {
+    padding: 40px 16px;
+  }
+
+  .faq-title {
+    font-size: 28px;
+  }
+
+  .faq-subtitle {
+    font-size: 14px;
+  }
+
+  .faq-tabs {
+    gap: 8px;
+  }
+
+  .faq-tab {
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+
+  .faq-question {
+    font-size: 15px;
+    padding: 16px 0;
+  }
+
+  .faq-answer-content {
+    font-size: 13px;
+    padding-right: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .faq-title {
+    font-size: 24px;
+  }
+
+  .faq-tab {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+
+  .faq-question {
+    font-size: 14px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sectionId = '{{ section.id }}';
+  const section = document.querySelector('[data-section-id="' + sectionId + '"]');
+
+  if (!section) return;
+
+  const tabs = section.querySelectorAll('.faq-tab');
+  const panels = section.querySelectorAll('.tab-panel');
+  const faqItems = section.querySelectorAll('.faq-item');
+
+  // Tab switching
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      const tabName = this.getAttribute('data-tab');
+
+      // Remove active class from all tabs and panels
+      tabs.forEach(function(t) {
+        t.classList.remove('active');
+      });
+      panels.forEach(function(p) {
+        p.classList.remove('active');
+      });
+
+      // Add active class to clicked tab and corresponding panel
+      this.classList.add('active');
+      const activePanel = section.querySelector('.tab-panel[data-panel="' + tabName + '"]');
+      if (activePanel) {
+        activePanel.classList.add('active');
+      }
+
+      // Close all FAQ items when switching tabs
+      faqItems.forEach(function(item) {
+        item.classList.remove('active');
+      });
+    });
+  });
+
+  // FAQ accordion
+  faqItems.forEach(function(item) {
+    const question = item.querySelector('.faq-question');
+
+    if (question) {
+      question.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Toggle active class
+        item.classList.toggle('active');
+      });
+    }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "FAQ with Tabs",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Please contact our Customer Support Team at support@ourstore.com for more information!"
+    },
+    {
+      "type": "header",
+      "content": "Tab Labels"
+    },
+    {
+      "type": "text",
+      "id": "tab1_label",
+      "label": "Tab 1 Label",
+      "default": "General information"
+    },
+    {
+      "type": "text",
+      "id": "tab2_label",
+      "label": "Tab 2 Label",
+      "default": "Shipping & Delivery"
+    },
+    {
+      "type": "text",
+      "id": "tab3_label",
+      "label": "Tab 3 Label",
+      "default": "Returns & Exchanges"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#2D3250"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#6B6B6B"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg",
+      "label": "Active Tab Background",
+      "default": "#2D3250"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text",
+      "label": "Active Tab Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tab_inactive_bg",
+      "label": "Inactive Tab Background",
+      "default": "#E8E8E8"
+    },
+    {
+      "type": "color",
+      "id": "tab_inactive_text",
+      "label": "Inactive Tab Text",
+      "default": "#6B6B6B"
+    },
+    {
+      "type": "color",
+      "id": "tab_hover_bg",
+      "label": "Tab Hover Background",
+      "default": "#D0D0D0"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Question Text Color",
+      "default": "#2D3250"
+    },
+    {
+      "type": "color",
+      "id": "question_hover_color",
+      "label": "Question Hover Color",
+      "default": "#6c63ff"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "Answer Text Color",
+      "default": "#6B6B6B"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Color",
+      "default": "#2D3250"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#E0E0E0"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "tab_category",
+          "label": "Tab Category",
+          "options": [
+            {
+              "value": "general",
+              "label": "General information"
+            },
+            {
+              "value": "shipping",
+              "label": "Shipping & Delivery"
+            },
+            {
+              "value": "returns",
+              "label": "Returns & Exchanges"
+            }
+          ],
+          "default": "general"
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Your question here?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Your answer here.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ with Tabs",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "tab_category": "general",
+            "question": "I placed an order where is it?",
+            "answer": "<p>All items are dispatched from our warehouse within 48 hours of placing your order, during business hours. If you place an order on a Friday afternoon or over the weekend, it will be sent out on the next business day. We are closed on public holidays, so please take this into account when placing an order.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "tab_category": "general",
+            "question": "Where can I find a store?",
+            "answer": "<p>Our stores are located in various cities across the country. You can find a list of our stores on our website under the 'Store Locator' section.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "tab_category": "general",
+            "question": "How can I sign in to my account?",
+            "answer": "<p>You can sign in to your account by clicking on the 'Sign In' button at the top right corner of our website. Enter your email address and password to access your account.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "tab_category": "shipping",
+            "question": "What is the shipping policy?",
+            "answer": "<p>We offer free shipping on orders over $50. Standard shipping takes 5-7 business days, while express shipping takes 2-3 business days.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "tab_category": "shipping",
+            "question": "Do you ship worldwide?",
+            "answer": "<p>Yes, we ship to most countries worldwide. Shipping costs and delivery times vary depending on the destination.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "tab_category": "returns",
+            "question": "How can I return my order?",
+            "answer": "<p>You can return your order within 30 days from the date of purchase. Please ensure the items are in their original condition with tags attached.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "tab_category": "returns",
+            "question": "How long do I have to return my order?",
+            "answer": "<p>You have 30 days from the date of delivery to return your order for a full refund or exchange.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "tab_category": "returns",
+            "question": "What is your returns policy?",
+            "answer": "<p>We accept returns within 30 days of purchase. Items must be unworn, unwashed, and in their original packaging with all tags attached.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

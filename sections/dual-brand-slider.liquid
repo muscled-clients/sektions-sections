@@ -1,0 +1,442 @@
+{% comment %}
+  Dual Brand Slider
+  Two infinite scrolling sliders - top moves left to right, bottom moves right to left
+{% endcomment %}
+
+<div class="dual-brand-slider" style="--slider-speed: {{ section.settings.slider_speed }}s; --card-gap: {{ section.settings.card_gap }}px; --slider-gap: {{ section.settings.slider_gap }}px; --card-width: {{ section.settings.card_width }}px; --card-height: {{ section.settings.card_height }}px; --bg-blur: {{ section.settings.background_blur }}px;">
+  {% if section.settings.heading != blank %}
+    <h2 class="dual-brand-slider__heading">{{ section.settings.heading }}</h2>
+  {% endif %}
+
+  <!-- Upper Slider - Left to Right -->
+  <div class="dual-brand-slider__track-wrapper">
+    <div class="dual-brand-slider__track dual-brand-slider__track--ltr">
+      {% for block in section.blocks %}
+        {% if block.type == 'brand_upper' %}
+          <div class="dual-brand-slider__item" {{ block.shopify_attributes }}>
+            {% if block.settings.background_image %}
+              <img class="dual-brand-slider__background" src="{{ block.settings.background_image | img_url: '400x' }}" alt="{{ block.settings.brand_name }}" loading="lazy">
+            {% else %}
+              <div class="dual-brand-slider__placeholder">{{ 'image' | placeholder_svg_tag }}</div>
+            {% endif %}
+            {% if block.settings.logo_image %}
+              <img class="dual-brand-slider__logo" src="{{ block.settings.logo_image | img_url: '200x' }}" alt="{{ block.settings.brand_name }} logo" loading="lazy">
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+      <!-- Duplicate 1 for seamless infinite loop -->
+      {% for block in section.blocks %}
+        {% if block.type == 'brand_upper' %}
+          <div class="dual-brand-slider__item" aria-hidden="true">
+            {% if block.settings.background_image %}
+              <img class="dual-brand-slider__background" src="{{ block.settings.background_image | img_url: '400x' }}" alt="{{ block.settings.brand_name }}" loading="lazy">
+            {% else %}
+              <div class="dual-brand-slider__placeholder">{{ 'image' | placeholder_svg_tag }}</div>
+            {% endif %}
+            {% if block.settings.logo_image %}
+              <img class="dual-brand-slider__logo" src="{{ block.settings.logo_image | img_url: '200x' }}" alt="{{ block.settings.brand_name }} logo" loading="lazy">
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+      <!-- Duplicate 2 for extra smoothness -->
+      {% for block in section.blocks %}
+        {% if block.type == 'brand_upper' %}
+          <div class="dual-brand-slider__item" aria-hidden="true">
+            {% if block.settings.background_image %}
+              <img class="dual-brand-slider__background" src="{{ block.settings.background_image | img_url: '400x' }}" alt="{{ block.settings.brand_name }}" loading="lazy">
+            {% else %}
+              <div class="dual-brand-slider__placeholder">{{ 'image' | placeholder_svg_tag }}</div>
+            {% endif %}
+            {% if block.settings.logo_image %}
+              <img class="dual-brand-slider__logo" src="{{ block.settings.logo_image | img_url: '200x' }}" alt="{{ block.settings.brand_name }} logo" loading="lazy">
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Lower Slider - Right to Left -->
+  <div class="dual-brand-slider__track-wrapper">
+    <div class="dual-brand-slider__track dual-brand-slider__track--rtl">
+      {% for block in section.blocks %}
+        {% if block.type == 'brand_lower' %}
+          <div class="dual-brand-slider__item" {{ block.shopify_attributes }}>
+            {% if block.settings.background_image %}
+              <img class="dual-brand-slider__background" src="{{ block.settings.background_image | img_url: '400x' }}" alt="{{ block.settings.brand_name }}" loading="lazy">
+            {% else %}
+              <div class="dual-brand-slider__placeholder">{{ 'image' | placeholder_svg_tag }}</div>
+            {% endif %}
+            {% if block.settings.logo_image %}
+              <img class="dual-brand-slider__logo" src="{{ block.settings.logo_image | img_url: '200x' }}" alt="{{ block.settings.brand_name }} logo" loading="lazy">
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+      <!-- Duplicate 1 for seamless infinite loop -->
+      {% for block in section.blocks %}
+        {% if block.type == 'brand_lower' %}
+          <div class="dual-brand-slider__item" aria-hidden="true">
+            {% if block.settings.background_image %}
+              <img class="dual-brand-slider__background" src="{{ block.settings.background_image | img_url: '400x' }}" alt="{{ block.settings.brand_name }}" loading="lazy">
+            {% else %}
+              <div class="dual-brand-slider__placeholder">{{ 'image' | placeholder_svg_tag }}</div>
+            {% endif %}
+            {% if block.settings.logo_image %}
+              <img class="dual-brand-slider__logo" src="{{ block.settings.logo_image | img_url: '200x' }}" alt="{{ block.settings.brand_name }} logo" loading="lazy">
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+      <!-- Duplicate 2 for extra smoothness -->
+      {% for block in section.blocks %}
+        {% if block.type == 'brand_lower' %}
+          <div class="dual-brand-slider__item" aria-hidden="true">
+            {% if block.settings.background_image %}
+              <img class="dual-brand-slider__background" src="{{ block.settings.background_image | img_url: '400x' }}" alt="{{ block.settings.brand_name }}" loading="lazy">
+            {% else %}
+              <div class="dual-brand-slider__placeholder">{{ 'image' | placeholder_svg_tag }}</div>
+            {% endif %}
+            {% if block.settings.logo_image %}
+              <img class="dual-brand-slider__logo" src="{{ block.settings.logo_image | img_url: '200x' }}" alt="{{ block.settings.brand_name }} logo" loading="lazy">
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+.dual-brand-slider {
+  width: 100%;
+  padding: 60px 0;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.dual-brand-slider__heading {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0 0 40px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.dual-brand-slider__track-wrapper {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: var(--slider-gap, 15px);
+}
+
+.dual-brand-slider__track {
+  display: flex;
+  gap: var(--card-gap, 15px);
+  width: fit-content;
+}
+
+.dual-brand-slider__track--ltr {
+  animation: scroll-left-to-right var(--slider-speed, 30s) linear infinite;
+}
+
+.dual-brand-slider__track--rtl {
+  animation: scroll-right-to-left var(--slider-speed, 30s) linear infinite;
+}
+
+.dual-brand-slider__item {
+  flex-shrink: 0;
+  width: var(--card-width, 280px);
+  height: var(--card-height, 180px);
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.dual-brand-slider__background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: blur(var(--bg-blur, 0px));
+}
+
+.dual-brand-slider__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 60%;
+  max-height: 50%;
+  object-fit: contain;
+  z-index: 2;
+  filter: brightness(0) invert(1);
+}
+
+.dual-brand-slider__placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dual-brand-slider__placeholder svg {
+  width: 60%;
+  height: 60%;
+  opacity: 0.3;
+}
+
+/* Animations */
+@keyframes scroll-left-to-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes scroll-right-to-left {
+  0% {
+    transform: translateX(-33.333%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Pause on hover (optional) */
+.dual-brand-slider__track:hover {
+  animation-play-state: paused;
+}
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+  .dual-brand-slider {
+    padding: 40px 0;
+  }
+
+  .dual-brand-slider__heading {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .dual-brand-slider__item {
+    width: var(--card-width, 220px);
+    height: var(--card-height, 140px);
+  }
+
+  .dual-brand-slider__track-wrapper {
+    margin-bottom: var(--slider-gap, 12px);
+  }
+
+  .dual-brand-slider__track {
+    gap: var(--card-gap, 12px);
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 480px) {
+  .dual-brand-slider {
+    padding: 30px 0;
+  }
+
+  .dual-brand-slider__heading {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  .dual-brand-slider__item {
+    width: var(--card-width, 180px);
+    height: var(--card-height, 120px);
+  }
+
+  .dual-brand-slider__track-wrapper {
+    margin-bottom: var(--slider-gap, 10px);
+  }
+
+  .dual-brand-slider__track {
+    gap: var(--card-gap, 10px);
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Dual Brand Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Shop by Brand"
+    },
+    {
+      "type": "range",
+      "id": "slider_speed",
+      "label": "Slider Speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 30,
+      "info": "Duration for one complete slide cycle. Lower = faster, Higher = slower"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Card Gap",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 15,
+      "info": "Spacing between cards in the slider"
+    },
+    {
+      "type": "range",
+      "id": "slider_gap",
+      "label": "Slider Gap",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 15,
+      "info": "Spacing between upper and lower sliders"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Card Width",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 280,
+      "info": "Width of each brand card"
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "label": "Card Height",
+      "min": 100,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 180,
+      "info": "Height of each brand card"
+    },
+    {
+      "type": "range",
+      "id": "background_blur",
+      "label": "Background Image Blur",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "info": "Apply blur effect to all background images (0 = no blur)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand_upper",
+      "name": "Upper Slider Brand",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "Background Image",
+          "info": "Lifestyle or product photo"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo Image",
+          "info": "Brand logo (will be displayed in white)"
+        },
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name",
+          "info": "Used for alt text"
+        }
+      ]
+    },
+    {
+      "type": "brand_lower",
+      "name": "Lower Slider Brand",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "Background Image",
+          "info": "Lifestyle or product photo"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo Image",
+          "info": "Brand logo (will be displayed in white)"
+        },
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name",
+          "info": "Used for alt text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dual Brand Slider",
+      "blocks": [
+        {
+          "type": "brand_upper",
+          "settings": {
+            "brand_name": "Nike"
+          }
+        },
+        {
+          "type": "brand_upper",
+          "settings": {
+            "brand_name": "Fila"
+          }
+        },
+        {
+          "type": "brand_upper",
+          "settings": {
+            "brand_name": "Bullpadel"
+          }
+        },
+        {
+          "type": "brand_lower",
+          "settings": {
+            "brand_name": "Converse"
+          }
+        },
+        {
+          "type": "brand_lower",
+          "settings": {
+            "brand_name": "Adidas"
+          }
+        },
+        {
+          "type": "brand_lower",
+          "settings": {
+            "brand_name": "New Balance"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

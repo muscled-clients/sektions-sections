@@ -1,0 +1,458 @@
+{% comment %}
+  Sensitive Skin Features Section
+  Expandable yellow cards with accordion functionality
+{% endcomment %}
+
+<div class="sensitive-skin-section" data-section-id="{{ section.id }}">
+  <div class="sensitive-skin__container">
+    <!-- Dots Illustration -->
+    <div class="sensitive-skin__icon">
+      {% if section.settings.icon_image != blank %}
+        <img src="{{ section.settings.icon_image | img_url: '80x' }}" alt="Icon" loading="lazy">
+      {% else %}
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+          <ellipse cx="20" cy="22" rx="6" ry="9" fill="#000000" transform="rotate(-25 20 22)"/>
+          <ellipse cx="40" cy="20" rx="6" ry="9" fill="#000000" transform="rotate(15 40 20)"/>
+          <ellipse cx="28" cy="38" rx="6" ry="9" fill="#000000" transform="rotate(-5 28 38)"/>
+          <ellipse cx="44" cy="42" rx="6" ry="9" fill="#000000" transform="rotate(20 44 42)"/>
+        </svg>
+      {% endif %}
+    </div>
+
+    <!-- Heading -->
+    {% if section.settings.heading != blank %}
+      <h2 class="sensitive-skin__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <!-- Subheading -->
+    {% if section.settings.subheading != blank %}
+      <p class="sensitive-skin__subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+
+    <!-- Feature Cards -->
+    <div class="sensitive-skin__cards">
+      {% for block in section.blocks %}
+        <div class="skin-feature-card" data-card-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="skin-feature-card__header">
+            <h3 class="skin-feature-card__title">{{ block.settings.title }}</h3>
+            <button class="skin-feature-card__toggle" aria-label="Toggle {{ block.settings.title }}">
+              <span class="toggle-plus">+</span>
+              <span class="toggle-close">×</span>
+            </button>
+          </div>
+          <div class="skin-feature-card__content">
+            <p class="skin-feature-card__description">{{ block.settings.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- CTA Button -->
+    {% if section.settings.button_text != blank %}
+      <div class="sensitive-skin__cta">
+        <a href="{{ section.settings.button_url }}" class="sensitive-skin__button">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+.sensitive-skin-section {
+  width: 100%;
+  background-color: {{ section.settings.section_bg | default: '#ffffff' }};
+  padding: 80px 20px;
+}
+
+.sensitive-skin__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.sensitive-skin__icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.sensitive-skin__icon img {
+  display: block;
+  max-width: 80px;
+  height: auto;
+}
+
+.sensitive-skin__heading {
+  font-family: 'Georgia', 'Merriweather', serif;
+  font-size: 52px;
+  font-weight: 400;
+  color: #333333;
+  text-align: center;
+  margin: 0 0 24px;
+  line-height: 1.2;
+}
+
+.sensitive-skin__subheading {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: #555555;
+  text-align: center;
+  margin: 0 auto 60px;
+  max-width: 900px;
+  line-height: 1.7;
+}
+
+.sensitive-skin__cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 50px;
+  align-items: start;
+}
+
+.skin-feature-card {
+  background-color: {{ section.settings.card_bg | default: '#F4E36B' }};
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  height: auto;
+}
+
+.skin-feature-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skin-feature-card__title {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.skin-feature-card__toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
+  color: #000000;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.skin-feature-card__toggle:hover {
+  transform: scale(1.1);
+}
+
+.toggle-close {
+  display: none;
+}
+
+.skin-feature-card.expanded .toggle-plus {
+  display: none;
+}
+
+.skin-feature-card.expanded .toggle-close {
+  display: block;
+}
+
+.skin-feature-card__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+  opacity: 0;
+}
+
+.skin-feature-card.expanded .skin-feature-card__content {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 16px;
+}
+
+.skin-feature-card__description {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.sensitive-skin__cta {
+  display: flex;
+  justify-content: center;
+}
+
+.sensitive-skin__button {
+  display: inline-block;
+  background-color: {{ section.settings.button_bg | default: '#4A4A4A' }};
+  color: {{ section.settings.button_text_color | default: '#FFFFFF' }};
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 16px 50px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.sensitive-skin__button:hover {
+  background-color: #333333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  .sensitive-skin__cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .sensitive-skin-section {
+    padding: 60px 20px;
+  }
+
+  .sensitive-skin__heading {
+    font-size: 42px;
+  }
+
+  .sensitive-skin__subheading {
+    font-size: 16px;
+    margin-bottom: 50px;
+  }
+
+  .sensitive-skin__cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .skin-feature-card {
+    padding: 18px;
+  }
+
+  .skin-feature-card__title {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sensitive-skin-section {
+    padding: 50px 16px;
+  }
+
+  .sensitive-skin__heading {
+    font-size: 34px;
+    margin-bottom: 20px;
+  }
+
+  .sensitive-skin__subheading {
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+
+  .sensitive-skin__cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .sensitive-skin__button {
+    padding: 14px 40px;
+    font-size: 13px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var sectionId = '{{ section.id }}';
+  var section = document.querySelector('[data-section-id="' + sectionId + '"]');
+
+  if (!section) return;
+
+  var cards = section.querySelectorAll('.skin-feature-card');
+
+  function closeAllCards() {
+    cards.forEach(function(card) {
+      card.classList.remove('expanded');
+    });
+  }
+
+  cards.forEach(function(card, index) {
+    var toggle = card.querySelector('.skin-feature-card__toggle');
+
+    if (toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var isCurrentlyExpanded = card.classList.contains('expanded');
+
+        closeAllCards();
+
+        if (!isCurrentlyExpanded) {
+          card.classList.add('expanded');
+        }
+      });
+    }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Sensitive Skin Features",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_image",
+      "label": "Top Icon Image",
+      "info": "Optional custom icon (recommended size: 80x80px)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Made for Sensitive Skin"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Clinically proven to transform even the most sensitive skin into skin that's healthier looking, more hydrated, and more resilient, with zero irritation."
+    },
+    {
+      "type": "header",
+      "content": "Card Settings"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background Color",
+      "default": "#F4E36B"
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button Background Color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Add your feature description here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sensitive Skin Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Microbiome-friendly",
+            "description": "Clinically proven to be friendly with your skin's natural microbiome, promoting a balanced and healthy complexion."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Similar pH",
+            "description": "Its pH balance is similar to that of your skin, ensuring gentle yet effective care."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Lactic acid",
+            "description": "Lactic acid provides hydration and boosts cell renewal."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "31 nutrients",
+            "description": "Formulated with 31 essential nutrients to nourish and support healthy skin."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Glycolic acid",
+            "description": "Glycolic acid helps to exfoliate and reveal smoother, brighter skin."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Vitamin C",
+            "description": "Packed with Vitamin C to brighten and firm the skin."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,665 @@
+{% comment %}
+  Hotspot Hero Section
+  Interactive hero image with numbered hotspots that reveal product details
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% if section.settings.bg_tint %}
+      background-color: {{ section.settings.bg_tint }};
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} * {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot-hero__container {
+    {% case section.settings.container_width %}
+      {% when 'full' %}
+        max-width: 100%;
+        padding: 0 20px;
+      {% when 'wide' %}
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 20px;
+      {% when 'content' %}
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    {% endcase %}
+  }
+
+  #shopify-section-{{ section.id }} .hotspot-hero__header {
+    text-align: left;
+    margin-bottom: 40px;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot-hero__eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: {{ section.settings.text_color | default: '#666' }};
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot-hero__heading {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: {{ section.settings.text_color | default: '#000' }};
+    margin: 0 0 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot-hero__subtext {
+    font-size: 18px;
+    line-height: 1.5;
+    color: {{ section.settings.text_color | default: '#333' }};
+    opacity: 0.8;
+    max-width: 600px;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot-hero__image-wrapper {
+    position: relative;
+    border-radius: {{ section.settings.corner_radius }}px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    background-color: #f5f5f5;
+    {% case section.settings.image_aspect %}
+      {% when '16:9' %}
+        aspect-ratio: 16/9;
+      {% when '4:3' %}
+        aspect-ratio: 4/3;
+      {% when '3:2' %}
+        aspect-ratio: 3/2;
+      {% when '21:9' %}
+        aspect-ratio: 21/9;
+      {% else %}
+        aspect-ratio: auto;
+    {% endcase %}
+  }
+
+  #shopify-section-{{ section.id }} .hotspot-hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot-hero__hotspots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot__pin {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: {{ section.settings.primary_color | default: '#0066FF' }};
+    color: white;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot__pin:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  #shopify-section-{{ section.id }} .hotspot__pin:focus-visible {
+    outline: 2px solid {{ section.settings.primary_color | default: '#0066FF' }};
+    outline-offset: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot__pin.hotspot__pin--hidden {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot__tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+    z-index: 3;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+  }
+
+  #shopify-section-{{ section.id }} .hotspot__tooltip.hotspot__tooltip--visible,
+  #shopify-section-{{ section.id }} .hotspot__tooltip.hotspot__tooltip--always-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot__tooltip.hotspot__tooltip--always-visible {
+    pointer-events: auto;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot__tooltip a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot__tooltip a:hover {
+    text-decoration: underline;
+  }
+
+  /* Position adjustments for edge cases */
+  #shopify-section-{{ section.id }} .hotspot--near-right .hotspot__tooltip {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  #shopify-section-{{ section.id }} .hotspot--near-bottom .hotspot__tooltip {
+    bottom: auto;
+    top: calc(100% + 8px);
+  }
+
+  /* Pulse animation */
+  @keyframes pulse-{{ section.id }} {
+    0% {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 8px rgba(0, 102, 255, 0.2);
+    }
+    100% {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .hotspot__pin {
+    animation: pulse-{{ section.id }} 2s infinite;
+  }
+
+  #shopify-section-{{ section.id }} .hotspot__pin:hover,
+  #shopify-section-{{ section.id }} .hotspot__pin:focus {
+    animation: none;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .hotspot__pin {
+      animation: none;
+    }
+    
+    #shopify-section-{{ section.id }} .hotspot__tooltip {
+      transition: none;
+    }
+  }
+
+  /* Mobile adjustments */
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .hotspot-hero__heading {
+      font-size: 28px;
+    }
+
+    #shopify-section-{{ section.id }} .hotspot-hero__subtext {
+      font-size: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .hotspot__tooltip {
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+  }
+</style>
+
+<div class="hotspot-hero__container">
+  {% if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subtext != blank %}
+    <div class="hotspot-hero__header">
+      {% if section.settings.eyebrow != blank %}
+        <div class="hotspot-hero__eyebrow">{{ section.settings.eyebrow }}</div>
+      {% endif %}
+      
+      {% if section.settings.heading != blank %}
+        <h2 class="hotspot-hero__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      
+      {% if section.settings.subtext != blank %}
+        <div class="hotspot-hero__subtext">{{ section.settings.subtext }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="hotspot-hero__image-wrapper">
+    {% if section.settings.image != blank %}
+      {% assign img_alt = section.settings.image.alt | default: section.settings.heading %}
+      <img
+        class="hotspot-hero__image"
+        srcset="
+          {{ section.settings.image | image_url: width: 800 }} 800w,
+          {{ section.settings.image | image_url: width: 1200 }} 1200w,
+          {{ section.settings.image | image_url: width: 1600 }} 1600w,
+          {{ section.settings.image | image_url: width: 2000 }} 2000w
+        "
+        sizes="(max-width: 750px) 100vw, (max-width: 1440px) 90vw, 1280px"
+        src="{{ section.settings.image | image_url: width: 1600 }}"
+        alt="{{ img_alt }}"
+        loading="lazy"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+      >
+    {% else %}
+      <div class="hotspot-hero__image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 500px;"></div>
+    {% endif %}
+
+    <div class="hotspot-hero__hotspots">
+      {% for block in section.blocks %}
+        {% if block.type == 'hotspot' %}
+          {% assign hotspot_number = block.settings.number | default: forloop.index %}
+          {% assign aria_label = block.settings.aria_label | default: block.settings.label %}
+          
+          <div 
+            class="hotspot{% if block.settings.always_show_label %} hotspot--always-visible{% endif %}"
+            style="left: {{ block.settings.x_percent }}%; top: {{ block.settings.y_percent }}%;"
+            data-hotspot-id="{{ block.id }}"
+            {{ block.shopify_attributes }}
+          >
+            <button
+              class="hotspot__pin{% if block.settings.always_show_label %} hotspot__pin--hidden{% endif %}"
+              aria-expanded="false"
+              aria-controls="tooltip-{{ block.id }}"
+              aria-label="{{ aria_label }}"
+              data-hotspot-trigger="{{ block.id }}"
+            >
+              {{ hotspot_number }}
+            </button>
+            
+            <div 
+              id="tooltip-{{ block.id }}"
+              class="hotspot__tooltip{% if block.settings.always_show_label %} hotspot__tooltip--always-visible{% endif %}"
+              role="tooltip"
+            >
+              {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}">{{ block.settings.label }}</a>
+              {% else %}
+                {{ block.settings.label }}
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.getElementById('shopify-section-' + sectionId);
+    if (!section) return;
+
+    const hotspots = section.querySelectorAll('.hotspot');
+    const imageWrapper = section.querySelector('.hotspot-hero__image-wrapper');
+    let currentOpenTooltip = null;
+
+    // Position tooltips to avoid edge clipping
+    function adjustTooltipPosition(hotspot) {
+      const tooltip = hotspot.querySelector('.hotspot__tooltip');
+      const rect = tooltip.getBoundingClientRect();
+      const wrapperRect = imageWrapper.getBoundingClientRect();
+      
+      // Check if near edges
+      if (rect.right > wrapperRect.right - 20) {
+        hotspot.classList.add('hotspot--near-right');
+      } else {
+        hotspot.classList.remove('hotspot--near-right');
+      }
+      
+      if (rect.top < wrapperRect.top + 20) {
+        hotspot.classList.add('hotspot--near-bottom');
+      } else {
+        hotspot.classList.remove('hotspot--near-bottom');
+      }
+    }
+
+    // Toggle tooltip visibility
+    function toggleTooltip(hotspot, show) {
+      const trigger = hotspot.querySelector('.hotspot__pin');
+      const tooltip = hotspot.querySelector('.hotspot__tooltip');
+      
+      if (!trigger || trigger.classList.contains('hotspot__pin--hidden')) return;
+      
+      if (show) {
+        // Close any other open tooltip
+        if (currentOpenTooltip && currentOpenTooltip !== hotspot) {
+          toggleTooltip(currentOpenTooltip, false);
+        }
+        
+        tooltip.classList.add('hotspot__tooltip--visible');
+        trigger.setAttribute('aria-expanded', 'true');
+        currentOpenTooltip = hotspot;
+        
+        // Adjust position after showing
+        setTimeout(() => adjustTooltipPosition(hotspot), 10);
+      } else {
+        tooltip.classList.remove('hotspot__tooltip--visible');
+        trigger.setAttribute('aria-expanded', 'false');
+        if (currentOpenTooltip === hotspot) {
+          currentOpenTooltip = null;
+        }
+      }
+    }
+
+    // Handle hotspot interactions
+    hotspots.forEach(hotspot => {
+      const trigger = hotspot.querySelector('.hotspot__pin');
+      if (!trigger || trigger.classList.contains('hotspot__pin--hidden')) return;
+
+      // Click/tap handler
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        toggleTooltip(hotspot, !isOpen);
+      });
+
+      // Hover handlers (desktop)
+      hotspot.addEventListener('mouseenter', () => {
+        if (window.matchMedia('(hover: hover)').matches) {
+          toggleTooltip(hotspot, true);
+        }
+      });
+
+      hotspot.addEventListener('mouseleave', () => {
+        if (window.matchMedia('(hover: hover)').matches) {
+          toggleTooltip(hotspot, false);
+        }
+      });
+
+      // Keyboard support
+      trigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+          toggleTooltip(hotspot, !isOpen);
+        } else if (e.key === 'Escape') {
+          toggleTooltip(hotspot, false);
+          trigger.focus();
+        }
+      });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.hotspot') && currentOpenTooltip) {
+        toggleTooltip(currentOpenTooltip, false);
+      }
+    });
+
+    // Close on Escape key (global)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && currentOpenTooltip) {
+        toggleTooltip(currentOpenTooltip, false);
+      }
+    });
+
+    // Adjust tooltip positions on resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        hotspots.forEach(hotspot => {
+          if (hotspot.querySelector('.hotspot__tooltip--visible')) {
+            adjustTooltipPosition(hotspot);
+          }
+        });
+      }, 100);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hotspot Hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "COMING SOON"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tech Accessories Everyone Wants"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "<p>Grab the perfect charger and adapter set to keep you connected and charged up.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto"
+        },
+        {
+          "value": "16:9",
+          "label": "16:9"
+        },
+        {
+          "value": "4:3",
+          "label": "4:3"
+        },
+        {
+          "value": "3:2",
+          "label": "3:2"
+        },
+        {
+          "value": "21:9",
+          "label": "21:9"
+        }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full width"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (1440px)"
+        },
+        {
+          "value": "content",
+          "label": "Content (1200px)"
+        }
+      ],
+      "default": "wide"
+    },
+    {
+      "type": "color",
+      "id": "bg_tint",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Hotspot color",
+      "default": "#0066FF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Hotspot",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Product name",
+          "info": "Shown in the tooltip"
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "info": "Leave blank to auto-number"
+        },
+        {
+          "type": "range",
+          "id": "x_percent",
+          "label": "Horizontal position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "y_percent",
+          "label": "Vertical position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "always_show_label",
+          "label": "Always show label",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "aria_label",
+          "label": "Accessibility label",
+          "info": "Defaults to label if not set"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hotspot Hero",
+      "blocks": [
+        {
+          "type": "hotspot",
+          "settings": {
+            "label": "USB Hub",
+            "number": "1",
+            "x_percent": 30,
+            "y_percent": 45
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "label": "USB C to USB C Cable",
+            "number": "2",
+            "x_percent": 52,
+            "y_percent": 85
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "label": "Power Cable",
+            "number": "3",
+            "x_percent": 75,
+            "y_percent": 30
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

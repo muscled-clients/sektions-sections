@@ -1,0 +1,810 @@
+{% comment %}
+  Bundle Products Section - Shopify Online Store 2.0
+  Displays products from a collection with bundle builder functionality
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    padding: {{ section.settings.section_padding }}px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .bundle-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #shopify-section-{{ section.id }} .bundle-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    color: {{ section.settings.heading_color }};
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .bundle-layout {
+    display: flex;
+    gap: 40px;
+  }
+
+  #shopify-section-{{ section.id }} .products-section {
+    flex: 1;
+  }
+
+  #shopify-section-{{ section.id }} .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .product-card {
+    background: white;
+    border: none;
+    border-radius: 0;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  #shopify-section-{{ section.id }} .product-checkbox {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 2px solid #d1d5db;
+    border-radius: 50%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .product-card.selected .product-checkbox {
+    background: #4ade80;
+    border-color: #4ade80;
+  }
+
+  #shopify-section-{{ section.id }} .product-checkbox::after {
+    content: '✓';
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .product-card.selected .product-checkbox::after {
+    opacity: 1;
+  }
+
+  #shopify-section-{{ section.id }} .product-image-wrapper {
+    position: relative;
+    transition: all 0.2s ease;
+    border-radius: 0;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .product-card.selected .product-image-wrapper {
+    border: 2px solid #4ade80;
+  }
+
+  #shopify-section-{{ section.id }} .product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background: #f9fafb;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .product-info {
+    padding: 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+  }
+
+  #shopify-section-{{ section.id }} .product-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #111827;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .product-description {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  #shopify-section-{{ section.id }} .product-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0;
+    margin-top: auto;
+  }
+
+  #shopify-section-{{ section.id }} .product-price .compare-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-left: 5px;
+  }
+
+
+  /* Sidebar Styles */
+  #shopify-section-{{ section.id }} .bundle-sidebar {
+    width: 400px;
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+  }
+
+  #shopify-section-{{ section.id }} .bundle-sidebar h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: {{ section.settings.heading_color }};
+  }
+
+  #shopify-section-{{ section.id }} .progress-container {
+    margin-bottom: 30px;
+  }
+
+  #shopify-section-{{ section.id }} .progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    position: relative;
+    overflow: visible;
+    display: flex;
+  }
+
+  #shopify-section-{{ section.id }} .progress-segment {
+    flex: 1;
+    background: transparent;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .progress-segment::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: white;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .progress-segment:last-child::after {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: {{ section.settings.accent_color }};
+    transition: width 0.3s ease;
+    z-index: 0;
+    border-radius: 10px;
+    display: block;
+    opacity: 1;
+  }
+
+  #shopify-section-{{ section.id }} .milestones {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 10px;
+    height: 50px;
+  }
+
+  #shopify-section-{{ section.id }} .milestone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+  }
+
+  #shopify-section-{{ section.id }} .milestone:nth-child(1) {
+    left: 42.86%;
+    transform: translateX(-50%);
+  }
+  #shopify-section-{{ section.id }} .milestone:nth-child(2) {
+    left: 71.43%;
+    transform: translateX(-50%);
+  }
+  #shopify-section-{{ section.id }} .milestone:nth-child(3) {
+    left: 100%;
+    transform: translateX(-100%);
+  }
+
+  #shopify-section-{{ section.id }} .milestone-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+  }
+
+  #shopify-section-{{ section.id }} .milestone-desc {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} .progress-message {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  #shopify-section-{{ section.id }} .bundle-total {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .total-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  #shopify-section-{{ section.id }} .total-pricing {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .original-price {
+    font-size: 16px;
+    color: #999;
+    text-decoration: line-through;
+  }
+
+  #shopify-section-{{ section.id }} .discounted-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #00b894;
+  }
+
+  #shopify-section-{{ section.id }} .delivery-message {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .add-bundle-button {
+    width: 100%;
+    background: #000;
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    margin-bottom: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .add-bundle-button:hover {
+    background: #333;
+  }
+
+  #shopify-section-{{ section.id }} .add-bundle-button:disabled {
+    background: #ccc;
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  #shopify-section-{{ section.id }} .guarantee-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .badge-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  #shopify-section-{{ section.id }} .badge-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    #shopify-section-{{ section.id }} .products-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .bundle-layout {
+      flex-direction: column;
+    }
+
+    #shopify-section-{{ section.id }} .bundle-sidebar {
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .product-info {
+      padding: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #shopify-section-{{ section.id }} .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="bundle-container">
+  {% if section.settings.title != blank %}
+    <h2 class="bundle-title">{{ section.settings.title }}</h2>
+  {% endif %}
+
+  <div class="bundle-layout">
+    <div class="products-section">
+      <div class="products-grid" id="products-grid-{{ section.id }}">
+        {% if section.settings.collection %}
+          {% for product in section.settings.collection.products limit: section.settings.products_limit %}
+            <div class="product-card" data-product-id="{{ product.id }}" data-section-id="{{ section.id }}" data-product-handle="{{ product.handle }}" onclick="toggleProduct_{{ section.id | replace: '-', '_' }}('{{ product.id }}', '{{ product.variants.first.id }}', '{{ product.title | escape }}', '{{ product.price | money_without_currency }}', '{{ product.featured_image | image_url: width: 200 }}')">
+              <div class="product-image-wrapper">
+                <div class="product-checkbox" onclick="toggleProduct_{{ section.id | replace: '-', '_' }}('{{ product.id }}', '{{ product.variants.first.id }}', '{{ product.title | escape }}', '{{ product.price | money_without_currency }}', '{{ product.featured_image | image_url: width: 200 }}', event)"></div>
+                {% if product.featured_image %}
+                  <img class="product-image"
+                       src="{{ product.featured_image | image_url: width: 400 }}"
+                       alt="{{ product.title | escape }}"
+                       loading="lazy">
+                {% else %}
+                  <div class="product-image" style="background: #f0f0f0;"></div>
+                {% endif %}
+              </div>
+
+              <div class="product-info">
+                <h3 class="product-title">{{ product.title }}</h3>
+                <p class="product-description">{{ product.description | strip_html | truncate: 60 }}</p>
+                <div class="product-price">
+                  {% if product.compare_at_price > product.price %}
+                    ${{ product.price | money_without_currency }}
+                    <span class="compare-price">${{ product.compare_at_price | money_without_currency }}</span>
+                  {% else %}
+                    ${{ product.price | money_without_currency }}
+                  {% endif %}
+                </div>
+
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>Please select a collection in the theme customizer.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="bundle-sidebar">
+      <h3>{{ section.settings.sidebar_title | default: 'Build Your Bundle' }}</h3>
+
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar-{{ section.id }}">
+          <div class="progress-fill" id="progress-fill-{{ section.id }}" style="width: 0%;"></div>
+          <div class="progress-segments">
+            <div class="progress-segment" data-threshold="3"></div>
+            <div class="progress-segment" data-threshold="5"></div>
+            <div class="progress-segment" data-threshold="7"></div>
+          </div>
+        </div>
+
+        <div class="milestones">
+          <div class="milestone">
+            <div class="milestone-text">10%</div>
+            <div class="milestone-desc">Save<br>3 items</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-text">15%</div>
+            <div class="milestone-desc">Save<br>5 items</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-text">20%</div>
+            <div class="milestone-desc">Save<br>7 items</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-message" id="progress-message-{{ section.id }}">
+        CHOOSE 2 MORE PRODUCTS FOR 10% DISCOUNT
+      </div>
+
+      <div class="bundle-total">
+        <div class="total-label">Total</div>
+        <div class="total-pricing">
+          <span class="original-price" id="original-price-{{ section.id }}">$0.00</span>
+          <span class="discounted-price" id="total-price-{{ section.id }}">$0.00</span>
+        </div>
+      </div>
+
+      <div class="delivery-message">
+        Order by 12PM for same-day delivery
+      </div>
+
+      <button class="add-bundle-button" id="add-bundle-{{ section.id }}" onclick="addBundleToCart_{{ section.id | replace: '-', '_' }}()" disabled>
+        Add bundle to cart
+      </button>
+
+      <div class="guarantee-badges">
+        <div class="badge-item">
+          <div class="badge-icon">⏱</div>
+          <span>30 day money back guarantee</span>
+        </div>
+        <div class="badge-item">
+          <div class="badge-icon">🌍</div>
+          <span>Climate neutral shipping</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const sectionId = '{{ section.id }}';
+  const sectionIdSafe = '{{ section.id | replace: '-', '_' }}';
+  let selectedProducts = new Map();
+  let totalPrice = 0;
+
+  function toggleProduct(productId, variantId, title, price, image, event) {
+    // Prevent event bubbling if called from a child element
+    if (event) {
+      event.stopPropagation();
+    }
+
+    const productCard = document.querySelector(`[data-product-id="${productId}"][data-section-id="${sectionId}"]`);
+    if (!productCard) return;
+
+    if (selectedProducts.has(productId)) {
+      // Remove product
+      selectedProducts.delete(productId);
+      productCard.classList.remove('selected');
+    } else {
+      // Add product
+      selectedProducts.set(productId, {
+        id: productId,
+        variantId: variantId,
+        title: title,
+        price: parseFloat(price),
+        image: image,
+        quantity: 1
+      });
+      productCard.classList.add('selected');
+    }
+
+    updateBundleState();
+  }
+
+
+  function updateBundleState() {
+    const totalProducts = getTotalProductCount();
+    updateProgressBar(totalProducts);
+    updateTotalPrice();
+    updateProgressMessage(totalProducts);
+    updateAddButton(totalProducts);
+  }
+
+  function getTotalProductCount() {
+    let total = 0;
+    selectedProducts.forEach(product => {
+      total += product.quantity;
+    });
+    return total;
+  }
+
+  function updateProgressBar(count) {
+    const progressFill = document.getElementById(`progress-fill-${sectionId}`);
+    const percentage = Math.min((count / 7) * 100, 100);
+    progressFill.style.width = percentage + '%';
+  }
+
+  function updateTotalPrice() {
+    const totalProducts = getTotalProductCount();
+    let originalTotal = 0;
+    let discountPercentage = 0;
+
+    selectedProducts.forEach(product => {
+      originalTotal += product.price * product.quantity;
+    });
+
+    // Calculate discount based on quantity
+    if (totalProducts >= 7) {
+      discountPercentage = 20;
+    } else if (totalProducts >= 5) {
+      discountPercentage = 15;
+    } else if (totalProducts >= 3) {
+      discountPercentage = 10;
+    }
+
+    const discountAmount = originalTotal * (discountPercentage / 100);
+    const discountedTotal = originalTotal - discountAmount;
+
+    const originalPriceElement = document.getElementById(`original-price-${sectionId}`);
+    const discountedPriceElement = document.getElementById(`total-price-${sectionId}`);
+
+    if (discountPercentage > 0) {
+      originalPriceElement.textContent = `$${originalTotal.toFixed(2)}`;
+      originalPriceElement.style.display = 'inline';
+      discountedPriceElement.textContent = `$${discountedTotal.toFixed(2)}`;
+    } else {
+      originalPriceElement.style.display = 'none';
+      discountedPriceElement.textContent = `$${originalTotal.toFixed(2)}`;
+    }
+
+    totalPrice = discountedTotal;
+  }
+
+  function updateProgressMessage(count) {
+    const messageElement = document.getElementById(`progress-message-${sectionId}`);
+    if (count < 3) {
+      const remaining = 3 - count;
+      messageElement.textContent = `CHOOSE ${remaining} MORE PRODUCT${remaining !== 1 ? 'S' : ''} FOR 10% DISCOUNT`;
+    } else if (count < 5) {
+      const remaining = 5 - count;
+      messageElement.textContent = `CHOOSE ${remaining} MORE PRODUCT${remaining !== 1 ? 'S' : ''} FOR 15% DISCOUNT`;
+    } else if (count < 7) {
+      const remaining = 7 - count;
+      messageElement.textContent = `CHOOSE ${remaining} MORE PRODUCT${remaining !== 1 ? 'S' : ''} FOR 20% DISCOUNT`;
+    } else {
+      messageElement.textContent = `MAXIMUM 20% DISCOUNT ACHIEVED!`;
+    }
+  }
+
+  function updateAddButton(count) {
+    const button = document.getElementById(`add-bundle-${sectionId}`);
+
+    if (count >= 2) {
+      button.disabled = false;
+      button.textContent = 'Add bundle to cart';
+    } else {
+      button.disabled = true;
+      button.textContent = 'Add bundle to cart';
+    }
+  }
+
+  function addBundleToCart() {
+    if (selectedProducts.size === 0) return;
+
+    const items = [];
+    selectedProducts.forEach(product => {
+      items.push({
+        id: parseInt(product.variantId),
+        quantity: product.quantity
+      });
+    });
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ items: items })
+    })
+    .then(response => response.json())
+    .then(data => {
+      window.location.href = '/cart';
+    })
+    .catch(error => {
+      console.error('Error adding to cart:', error);
+      alert('Error adding products to cart. Please try again.');
+    });
+  }
+
+
+  // Make functions global with unique names
+  window[`toggleProduct_${sectionIdSafe}`] = toggleProduct;
+  window[`addBundleToCart_${sectionIdSafe}`] = addBundleToCart;
+
+  // Initialize
+  updateBundleState();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Bundle Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Build Your Bundle"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_title",
+      "label": "Sidebar Title",
+      "default": "Your Bundle"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Product Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Number of products to show",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Progress & Highlights)",
+      "default": "#4CAF50"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Product Title Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "title_font_weight",
+      "label": "Product Title Font Weight",
+      "options": [
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi Bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Product Title Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "label": "Product Description Font Size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Product Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "price_font_size",
+      "label": "Product Price Font Size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "price_font_weight",
+      "label": "Product Price Font Weight",
+      "options": [
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi Bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Product Price Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section Padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Products",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

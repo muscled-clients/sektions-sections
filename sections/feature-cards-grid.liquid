@@ -1,0 +1,486 @@
+{% comment %}
+  Feature Cards Grid Section
+  4-column grid with icon, title, and description cards
+{% endcomment %}
+
+<div class="feature-cards-grid" style="
+  --section-bg: {{ section.settings.section_bg }};
+  --card-bg: {{ section.settings.card_bg }};
+  --icon-color: {{ section.settings.icon_color }};
+  --title-color: {{ section.settings.title_color }};
+  --description-color: {{ section.settings.description_color }};
+  --title-size: {{ section.settings.title_size }}px;
+  --description-size: {{ section.settings.description_size }}px;
+  --card-gap: {{ section.settings.card_gap }}px;
+  --section-padding-top: {{ section.settings.section_padding_top }}px;
+  --section-padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  --card-padding: {{ section.settings.card_padding }}px;
+  --icon-size: {{ section.settings.icon_size }}px;
+  --card-border-radius: {{ section.settings.card_border_radius }}px;
+  --icon-weight: {{ section.settings.icon_weight }};
+">
+  <div class="feature-cards-grid__container">
+    {% if section.settings.heading != blank %}
+      <h2 class="feature-cards-grid__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="feature-cards-grid__grid">
+      {% for block in section.blocks %}
+        <div class="feature-cards-grid__card" {{ block.shopify_attributes }}>
+          <div class="feature-cards-grid__icon">
+            {% case block.settings.icon_type %}
+              {% when 'truck' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13"></rect>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                  <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                  <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+              {% when 'plane' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path>
+                </svg>
+              {% when 'message' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                  <line x1="9" y1="10" x2="15" y2="10"></line>
+                  <line x1="12" y1="7" x2="12" y2="13"></line>
+                </svg>
+              {% when 'gift' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                  <rect x="2" y="7" width="20" height="5"></rect>
+                  <line x1="12" y1="22" x2="12" y2="7"></line>
+                  <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                </svg>
+              {% when 'shopping' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+              {% when 'heart' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              {% when 'star' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              {% when 'users' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              {% when 'clock' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              {% when 'target' %}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="6"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+            {% endcase %}
+          </div>
+
+          {% if block.settings.title != blank %}
+            <h3 class="feature-cards-grid__title">{{ block.settings.title }}</h3>
+          {% endif %}
+
+          {% if block.settings.description != blank %}
+            <p class="feature-cards-grid__description">{{ block.settings.description }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+.feature-cards-grid {
+  width: 100%;
+  background-color: var(--section-bg, #ffffff);
+  padding: var(--section-padding-top, 60px) 20px var(--section-padding-bottom, 60px);
+}
+
+.feature-cards-grid__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-cards-grid__heading {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #2E2E2E;
+  text-align: center;
+  margin: 0 0 60px;
+  line-height: 1.2;
+}
+
+.feature-cards-grid__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--card-gap, 24px);
+}
+
+.feature-cards-grid__card {
+  background-color: var(--card-bg, #ffffff);
+  padding: var(--card-padding, 40px);
+  border-radius: var(--card-border-radius, 16px);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-cards-grid__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.feature-cards-grid__icon {
+  width: var(--icon-size, 50px);
+  height: var(--icon-size, 50px);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.feature-cards-grid__icon svg {
+  width: 100%;
+  height: 100%;
+  color: var(--icon-color, #00B4B8);
+  stroke-width: var(--icon-weight, 2);
+}
+
+.feature-cards-grid__title {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: var(--title-size, 20px);
+  font-weight: 700;
+  color: var(--title-color, #2E2E2E);
+  margin: 0 0 16px;
+  line-height: 1.3;
+}
+
+.feature-cards-grid__description {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: var(--description-size, 15px);
+  font-weight: 400;
+  color: var(--description-color, #6B5B95);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Tablet Layout */
+@media screen and (max-width: 1024px) {
+  .feature-cards-grid__heading {
+    font-size: 40px;
+    margin-bottom: 50px;
+  }
+
+  .feature-cards-grid__grid {
+    gap: var(--card-gap, 20px);
+  }
+
+  .feature-cards-grid__card {
+    padding: var(--card-padding, 32px);
+  }
+
+  .feature-cards-grid__icon {
+    margin-bottom: 20px;
+  }
+
+  .feature-cards-grid__title {
+    font-size: calc(var(--title-size, 20px) * 0.9);
+  }
+
+  .feature-cards-grid__description {
+    font-size: calc(var(--description-size, 15px) * 0.95);
+  }
+}
+
+/* Mobile Layout */
+@media screen and (max-width: 480px) {
+  .feature-cards-grid {
+    padding: var(--section-padding-top, 40px) 16px var(--section-padding-bottom, 40px);
+  }
+
+  .feature-cards-grid__heading {
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+
+  .feature-cards-grid__grid {
+    grid-template-columns: 1fr;
+    gap: var(--card-gap, 16px);
+  }
+
+  .feature-cards-grid__card {
+    padding: var(--card-padding, 28px);
+  }
+
+  .feature-cards-grid__icon {
+    margin-bottom: 16px;
+  }
+
+  .feature-cards-grid__title {
+    font-size: calc(var(--title-size, 20px) * 0.85);
+  }
+
+  .feature-cards-grid__description {
+    font-size: calc(var(--description-size, 15px) * 0.9);
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Feature Cards Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Hey Readers, You Want ?"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Color",
+      "default": "#00B4B8"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#2E2E2E"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#6B5B95"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title Font Size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description Font Size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon Size",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "icon_weight",
+      "label": "Icon Weight (Thickness)",
+      "min": 1,
+      "max": 4,
+      "step": 0.5,
+      "default": 2,
+      "info": "Controls the thickness/weight of the icon lines"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap Between Cards",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card Padding",
+      "min": 20,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card Border Radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_card",
+      "name": "Feature Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "truck",
+              "label": "Delivery Truck"
+            },
+            {
+              "value": "plane",
+              "label": "Airplane"
+            },
+            {
+              "value": "message",
+              "label": "Message Bubble"
+            },
+            {
+              "value": "gift",
+              "label": "Gift Box"
+            },
+            {
+              "value": "shopping",
+              "label": "Shopping Cart"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "users",
+              "label": "Users"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "target",
+              "label": "Target"
+            }
+          ],
+          "default": "truck"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Card Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Build a thriving online presence with our expertly designed Shopify store templates."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Cards Grid",
+      "blocks": [
+        {
+          "type": "feature_card",
+          "settings": {
+            "icon_type": "truck",
+            "title": "Charge $10k+ per month",
+            "description": "Build a thriving online presence with our expertly designed Shopify store templates."
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "icon_type": "plane",
+            "title": "Influencer marketing basics",
+            "description": "Build a thriving online presence with our expertly designed Shopify store templates."
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "icon_type": "message",
+            "title": "How to find a perfect niche",
+            "description": "Build a thriving online presence with our expertly designed Shopify store templates."
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "icon_type": "gift",
+            "title": "Diversify your income streams",
+            "description": "Build a thriving online presence with our expertly designed Shopify store templates."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

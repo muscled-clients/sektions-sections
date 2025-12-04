@@ -1,0 +1,855 @@
+<!-- Countdown Banner Section -->
+<style>
+  #shopify-section-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  #countdown-banner-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    border-radius: {{ section.settings.border_radius }}px;
+    overflow: hidden;
+    min-height: {{ section.settings.min_height_desktop }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #countdown-banner-{{ section.id }} .banner-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  #countdown-banner-{{ section.id }} .banner-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness({{ section.settings.image_brightness | divided_by: 100.0 }});
+  }
+
+  #countdown-banner-{{ section.id }} .banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    z-index: 2;
+  }
+
+  #countdown-banner-{{ section.id }} .banner-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 40px 20px;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  #countdown-banner-{{ section.id }} .banner-heading {
+    font-size: {{ section.settings.heading_size_desktop }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.heading_color }};
+    margin-bottom: {{ section.settings.heading_margin }}px;
+    line-height: 1.2;
+    text-transform: {{ section.settings.heading_transform }};
+  }
+
+  #countdown-banner-{{ section.id }} .banner-subheading {
+    font-size: {{ section.settings.subheading_size }}px;
+    color: {{ section.settings.subheading_color }};
+    margin-bottom: {{ section.settings.subheading_margin }}px;
+    line-height: 1.4;
+  }
+
+  #countdown-banner-{{ section.id }} .banner-button {
+    display: inline-block;
+    padding: {{ section.settings.button_padding_y }}px {{ section.settings.button_padding_x }}px;
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    font-size: {{ section.settings.button_font_size }}px;
+    font-weight: {{ section.settings.button_font_weight }};
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+  }
+
+  #countdown-banner-{{ section.id }} .banner-button:hover {
+    background-color: {{ section.settings.button_hover_bg_color }};
+    color: {{ section.settings.button_hover_text_color }};
+    transform: translateY(-2px);
+  }
+
+  #countdown-banner-{{ section.id }} .countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: {{ section.settings.countdown_spacing | default: 30 }}px;
+    flex-wrap: wrap;
+  }
+
+  #countdown-banner-{{ section.id }} .countdown-item {
+    text-align: center;
+    min-width: 60px;
+  }
+
+  #countdown-banner-{{ section.id }} .countdown-number {
+    font-size: {{ section.settings.countdown_number_size }}px;
+    font-weight: {{ section.settings.countdown_number_weight }};
+    color: {{ section.settings.countdown_number_color }};
+    line-height: 1;
+    display: block;
+  }
+
+  #countdown-banner-{{ section.id }} .countdown-label {
+    font-size: {{ section.settings.countdown_label_size }}px;
+    color: {{ section.settings.countdown_label_color }};
+    text-transform: uppercase;
+    margin-top: 5px;
+    letter-spacing: 1px;
+  }
+
+  #countdown-banner-{{ section.id }} .countdown-separator {
+    display: inline-block;
+    width: 0;
+    height: 50px;
+    border-left: {{ section.settings.countdown_separator_thickness | default: 1 }}px solid {{ section.settings.countdown_separator_color | default: '#ffffff' }};
+    opacity: {{ section.settings.countdown_separator_opacity | default: 50 | divided_by: 100.0 }};
+    margin: 0 {{ section.settings.separator_margin | default: 20 }}px;
+    align-self: center;
+    flex-shrink: 0;
+  }
+
+  #countdown-banner-{{ section.id }} .expired-message {
+    font-size: 24px;
+    color: {{ section.settings.expired_text_color }};
+    font-weight: bold;
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    #countdown-banner-{{ section.id }} {
+      min-height: {{ section.settings.min_height_mobile }}px;
+    }
+
+    #countdown-banner-{{ section.id }} .banner-background.mobile-only {
+      display: block;
+    }
+
+    #countdown-banner-{{ section.id }} .banner-background.desktop-only {
+      display: none;
+    }
+
+    #countdown-banner-{{ section.id }} .banner-heading {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+    }
+
+    #countdown-banner-{{ section.id }} .banner-subheading {
+      font-size: {{ section.settings.subheading_size_mobile }}px;
+    }
+
+    #countdown-banner-{{ section.id }} .countdown-timer {
+      gap: {{ section.settings.countdown_spacing_mobile | default: 20 }}px;
+    }
+
+    #countdown-banner-{{ section.id }} .countdown-number {
+      font-size: {{ section.settings.countdown_number_size_mobile }}px;
+    }
+
+    #countdown-banner-{{ section.id }} .countdown-label {
+      font-size: {{ section.settings.countdown_label_size_mobile }}px;
+    }
+
+    #countdown-banner-{{ section.id }} .countdown-separator {
+      height: 35px;
+      margin: 0 {{ section.settings.separator_margin_mobile | default: 12 }}px;
+      border-left-width: {{ section.settings.countdown_separator_thickness | default: 1 }}px;
+    }
+
+    #countdown-banner-{{ section.id }} .banner-content {
+      padding: 30px 15px;
+    }
+  }
+
+  /* Desktop Styles */
+  @media (min-width: 769px) {
+    #countdown-banner-{{ section.id }} .banner-background.mobile-only {
+      display: none;
+    }
+
+    #countdown-banner-{{ section.id }} .banner-background.desktop-only {
+      display: block;
+    }
+  }
+</style>
+
+<div id="countdown-banner-{{ section.id }}">
+  <!-- Background Images -->
+  {% if section.settings.background_image_desktop %}
+    <div class="banner-background desktop-only">
+      <img src="{{ section.settings.background_image_desktop | image_url: width: 1920 }}"
+           alt="{{ section.settings.heading | escape }}"
+           loading="lazy">
+    </div>
+  {% endif %}
+
+  {% if section.settings.background_image_mobile %}
+    <div class="banner-background mobile-only">
+      <img src="{{ section.settings.background_image_mobile | image_url: width: 768 }}"
+           alt="{{ section.settings.heading | escape }}"
+           loading="lazy">
+    </div>
+  {% elsif section.settings.background_image_desktop %}
+    <div class="banner-background mobile-only">
+      <img src="{{ section.settings.background_image_desktop | image_url: width: 768 }}"
+           alt="{{ section.settings.heading | escape }}"
+           loading="lazy">
+    </div>
+  {% endif %}
+
+  <!-- Overlay -->
+  {% if section.settings.enable_overlay %}
+    <div class="banner-overlay"></div>
+  {% endif %}
+
+  <!-- Content -->
+  <div class="banner-content">
+    {% if section.settings.heading != blank %}
+      <h2 class="banner-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="banner-subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+
+    {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_link | default: '#' }}" class="banner-button">
+        {{ section.settings.button_text }}
+      </a>
+    {% endif %}
+
+    <!-- Countdown Timer -->
+    <div id="countdown-{{ section.id }}" class="countdown-timer">
+      <div class="countdown-item">
+        <span class="countdown-number" id="days-{{ section.id }}">00</span>
+        <span class="countdown-label">{{ section.settings.days_label }}</span>
+      </div>
+      <div class="countdown-separator"></div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="hours-{{ section.id }}">00</span>
+        <span class="countdown-label">{{ section.settings.hours_label }}</span>
+      </div>
+      <div class="countdown-separator"></div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="minutes-{{ section.id }}">00</span>
+        <span class="countdown-label">{{ section.settings.minutes_label }}</span>
+      </div>
+      <div class="countdown-separator"></div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="seconds-{{ section.id }}">00</span>
+        <span class="countdown-label">{{ section.settings.seconds_label }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const sectionId = '{{ section.id }}';
+  const countdownEndDate = '{{ section.settings.countdown_end_date }}';
+  const expiredText = '{{ section.settings.expired_text }}';
+
+  if (!countdownEndDate) {
+    console.error('Countdown end date not set for section: ' + sectionId);
+    return;
+  }
+
+  // Parse the end date
+  const endDate = new Date(countdownEndDate).getTime();
+
+  if (isNaN(endDate)) {
+    console.error('Invalid countdown end date format: ' + countdownEndDate);
+    return;
+  }
+
+  // Update countdown function
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = endDate - now;
+
+    // Get elements
+    const countdownContainer = document.getElementById('countdown-' + sectionId);
+    const daysElement = document.getElementById('days-' + sectionId);
+    const hoursElement = document.getElementById('hours-' + sectionId);
+    const minutesElement = document.getElementById('minutes-' + sectionId);
+    const secondsElement = document.getElementById('seconds-' + sectionId);
+
+    if (!countdownContainer) return;
+
+    if (distance < 0) {
+      // Timer has expired
+      if (expiredText) {
+        countdownContainer.innerHTML = '<div class="expired-message">' + expiredText + '</div>';
+      } else {
+        // Set all to 00
+        if (daysElement) daysElement.textContent = '00';
+        if (hoursElement) hoursElement.textContent = '00';
+        if (minutesElement) minutesElement.textContent = '00';
+        if (secondsElement) secondsElement.textContent = '00';
+      }
+      return;
+    }
+
+    // Calculate time units
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Update display
+    if (daysElement) daysElement.textContent = String(days).padStart(2, '0');
+    if (hoursElement) hoursElement.textContent = String(hours).padStart(2, '0');
+    if (minutesElement) minutesElement.textContent = String(minutes).padStart(2, '0');
+    if (secondsElement) secondsElement.textContent = String(seconds).padStart(2, '0');
+  }
+
+  // Initial update
+  updateCountdown();
+
+  // Update every second
+  setInterval(updateCountdown, 1000);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Countdown Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 800,
+      "max": 1920,
+      "step": 20,
+      "default": 1400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "min_height_desktop",
+      "label": "Minimum height (Desktop)",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "Minimum height (Mobile)",
+      "min": 200,
+      "max": 600,
+      "step": 10,
+      "default": 400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Background Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_desktop",
+      "label": "Background image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image (Mobile)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_overlay",
+      "label": "Enable overlay",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "rgba(0, 0, 0, 0.3)"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 30,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "image_brightness",
+      "label": "Image brightness",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "default": 100,
+      "unit": "%",
+      "info": "Adjust image brightness. 100% is normal, less than 100% darkens, more than 100% brightens."
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "50% off all suits and accessories"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (Desktop)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (Mobile)",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra bold"}
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "heading_transform",
+      "label": "Heading text transform",
+      "options": [
+        {"value": "none", "label": "None"},
+        {"value": "uppercase", "label": "UPPERCASE"},
+        {"value": "lowercase", "label": "lowercase"},
+        {"value": "capitalize", "label": "Capitalize"}
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin",
+      "label": "Heading bottom margin",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Subheading"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size (Desktop)",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "label": "Subheading size (Mobile)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "subheading_margin",
+      "label": "Subheading bottom margin",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View Discounted Items"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button hover background",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "label": "Button horizontal padding",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "label": "Button vertical padding",
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Button font weight",
+      "options": [
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "500"
+    },
+    {
+      "type": "header",
+      "content": "Countdown Timer"
+    },
+    {
+      "type": "text",
+      "id": "countdown_end_date",
+      "label": "Countdown end date",
+      "info": "Format: YYYY-MM-DD HH:MM:SS (24-hour format)",
+      "default": "2025-12-31 23:59:59"
+    },
+    {
+      "type": "text",
+      "id": "expired_text",
+      "label": "Expired message",
+      "default": "Offer Expired"
+    },
+    {
+      "type": "range",
+      "id": "countdown_number_size",
+      "label": "Number size (Desktop)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "countdown_number_size_mobile",
+      "label": "Number size (Mobile)",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "countdown_number_color",
+      "label": "Number color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "countdown_number_weight",
+      "label": "Number font weight",
+      "min": 100,
+      "max": 900,
+      "step": 10,
+      "default": 300,
+      "info": "100=Thin, 300=Light, 400=Regular, 500=Medium, 600=Semi-bold, 700=Bold, 900=Black"
+    },
+    {
+      "type": "range",
+      "id": "countdown_label_size",
+      "label": "Label size (Desktop)",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "countdown_label_size_mobile",
+      "label": "Label size (Mobile)",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "countdown_label_color",
+      "label": "Label color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "days_label",
+      "label": "Days label",
+      "default": "DAYS"
+    },
+    {
+      "type": "text",
+      "id": "hours_label",
+      "label": "Hours label",
+      "default": "HOURS"
+    },
+    {
+      "type": "text",
+      "id": "minutes_label",
+      "label": "Minutes label",
+      "default": "MINUTES"
+    },
+    {
+      "type": "text",
+      "id": "seconds_label",
+      "label": "Seconds label",
+      "default": "SECONDS"
+    },
+    {
+      "type": "color",
+      "id": "expired_text_color",
+      "label": "Expired text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Countdown Separator"
+    },
+    {
+      "type": "color",
+      "id": "countdown_separator_color",
+      "label": "Separator line color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "countdown_separator_opacity",
+      "label": "Separator line opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "countdown_separator_thickness",
+      "label": "Separator line thickness",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 1,
+      "unit": "px",
+      "info": "Thickness of the vertical separator lines"
+    },
+    {
+      "type": "header",
+      "content": "Countdown Spacing"
+    },
+    {
+      "type": "range",
+      "id": "countdown_spacing",
+      "label": "Gap between countdown items (Desktop)",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30,
+      "unit": "px",
+      "info": "Space between countdown number blocks"
+    },
+    {
+      "type": "range",
+      "id": "countdown_spacing_mobile",
+      "label": "Gap between countdown items (Mobile)",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "separator_margin",
+      "label": "Padding around separator (Desktop)",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "default": 20,
+      "unit": "px",
+      "info": "Horizontal spacing on each side of the vertical line"
+    },
+    {
+      "type": "range",
+      "id": "separator_margin_mobile",
+      "label": "Padding around separator (Mobile)",
+      "min": 3,
+      "max": 25,
+      "step": 2,
+      "default": 13,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown Banner",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

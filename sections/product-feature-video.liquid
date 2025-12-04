@@ -1,0 +1,639 @@
+<style>
+  .product-feature-video {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;
+  }
+
+  .product-feature-video__container {
+    display: grid;
+    grid-template-columns: 45fr 55fr;
+    gap: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: center;
+    min-height: 600px;
+  }
+
+  .product-feature-video__content {
+    padding: 60px 80px 60px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .product-feature-video__title {
+    font-family: {{ section.settings.title_font }}, serif;
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: {{ section.settings.title_weight }};
+    line-height: 1.2;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 {{ section.settings.title_margin_bottom }}px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .product-feature-video__description {
+    font-family: {{ section.settings.body_font }}, sans-serif;
+    font-size: {{ section.settings.description_size }}px;
+    line-height: 1.7;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 {{ section.settings.description_margin_bottom }}px 0;
+    max-width: 520px;
+  }
+
+  .product-feature-video__features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: {{ section.settings.features_margin_top }}px;
+  }
+
+  .product-feature-video__feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-feature-video__feature-icon {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    margin-bottom: 12px;
+    fill: {{ section.settings.icon_color }};
+  }
+
+  .product-feature-video__feature-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .product-feature-video__feature-text {
+    font-family: {{ section.settings.body_font }}, sans-serif;
+    font-size: {{ section.settings.feature_text_size }}px;
+    line-height: 1.4;
+    color: {{ section.settings.text_color }};
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .product-feature-video__media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    overflow: hidden;
+  }
+
+  .product-feature-video__video,
+  .product-feature-video__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: none;
+  }
+
+  .product-feature-video__media video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-feature-video__media iframe.product-feature-video__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .product-feature-video__container {
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      min-height: 500px;
+    }
+
+    .product-feature-video__content {
+      padding: 40px;
+    }
+
+    .product-feature-video__media {
+      min-height: 500px;
+    }
+
+    .product-feature-video__title {
+      font-size: {{ section.settings.title_size | minus: 8 }}px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-feature-video__container {
+      grid-template-columns: 1fr;
+      gap: 0;
+      min-height: auto;
+    }
+
+    .product-feature-video__content {
+      padding: 40px {{ section.settings.mobile_padding }}px;
+      order: 2;
+    }
+
+    .product-feature-video__media {
+      min-height: 400px;
+      order: 1;
+    }
+
+    .product-feature-video__title {
+      font-size: {{ section.settings.mobile_title_size }}px;
+      margin-bottom: 20px;
+    }
+
+    .product-feature-video__description {
+      font-size: {{ section.settings.description_size | minus: 2 }}px;
+      margin-bottom: 30px;
+      max-width: 100%;
+    }
+
+    .product-feature-video__features {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px 20px;
+      margin-top: 30px;
+    }
+
+    .product-feature-video__feature-icon {
+      width: {{ section.settings.icon_size | minus: 10 }}px;
+      height: {{ section.settings.icon_size | minus: 10 }}px;
+    }
+
+    .product-feature-video__feature-text {
+      font-size: {{ section.settings.feature_text_size | minus: 1 }}px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-feature-video__content {
+      padding: 30px {{ section.settings.mobile_padding | divided_by: 1.5 }}px;
+    }
+
+    .product-feature-video__title {
+      font-size: {{ section.settings.mobile_title_size | minus: 4 }}px;
+    }
+
+    .product-feature-video__media {
+      min-height: 350px;
+    }
+  }
+</style>
+
+<div class="product-feature-video">
+  <div class="product-feature-video__container">
+    <!-- Left Content -->
+    <div class="product-feature-video__content">
+      {% if section.settings.title != blank %}
+      <h2 class="product-feature-video__title">
+        {{ section.settings.title }}
+      </h2>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+      <p class="product-feature-video__description">
+        {{ section.settings.description }}
+      </p>
+      {% endif %}
+
+      <!-- Features -->
+      {% if section.blocks.size > 0 %}
+      <div class="product-feature-video__features">
+        {% for block in section.blocks %}
+          <div class="product-feature-video__feature" {{ block.shopify_attributes }}>
+            <div class="product-feature-video__feature-icon">
+              {% if block.settings.icon != blank %}
+                <img src="{{ block.settings.icon | image_url: width: 100 }}" alt="{{ block.settings.text }}" loading="lazy">
+              {% else %}
+                <!-- Default SVG icon based on block index -->
+                {% case forloop.index %}
+                  {% when 1 %}
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M32 8L36 20H48L38 28L42 40L32 32L22 40L26 28L16 20H28L32 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <rect x="12" y="40" width="40" height="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M20 40V36C20 33 22 30 26 28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M44 40V36C44 33 42 30 38 28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  {% when 2 %}
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="2"/>
+                      <path d="M32 12C32 12 22 22 22 32C22 42 32 52 32 52" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M42 32C42 22 32 12 32 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M20 26L44 26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M20 38L44 38" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  {% when 3 %}
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M32 10L38 22L52 24L42 34L44 48L32 42L20 48L22 34L12 24L26 22L32 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="32" cy="32" r="8" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  {% when 4 %}
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M32 10C32 10 22 18 22 28C22 34 26 38 32 38C38 38 42 34 42 28C42 18 32 10 32 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M32 38L32 54" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M24 46L32 38L40 46" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                {% endcase %}
+              {% endif %}
+            </div>
+            {% if block.settings.text != blank %}
+            <p class="product-feature-video__feature-text">{{ block.settings.text }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Right Media -->
+    <div class="product-feature-video__media">
+      {% if section.settings.video_cdn_url != blank %}
+        <video
+          class="product-feature-video__video"
+          {% if section.settings.autoplay %}autoplay{% endif %}
+          {% if section.settings.loop %}loop{% endif %}
+          {% if section.settings.muted %}muted{% endif %}
+          playsinline
+        >
+          <source src="{{ section.settings.video_cdn_url }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      {% elsif section.settings.shopify_video != blank %}
+        {{ section.settings.shopify_video | video_tag: autoplay: section.settings.autoplay, loop: section.settings.loop, muted: section.settings.muted, playsinline: true, class: 'product-feature-video__video' }}
+      {% elsif section.settings.video != blank %}
+        {% if section.settings.video.type == 'youtube' %}
+          <iframe
+            class="product-feature-video__video"
+            src="https://www.youtube.com/embed/{{ section.settings.video.id }}?autoplay={{ section.settings.autoplay | default: 0 }}&mute={{ section.settings.muted | default: 1 }}&loop={{ section.settings.loop | default: 1 }}&playlist={{ section.settings.video.id }}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+            frameborder="0"
+          ></iframe>
+        {% elsif section.settings.video.type == 'vimeo' %}
+          <iframe
+            class="product-feature-video__video"
+            src="https://player.vimeo.com/video/{{ section.settings.video.id }}?autoplay={{ section.settings.autoplay | default: 0 }}&muted={{ section.settings.muted | default: 1 }}&loop={{ section.settings.loop | default: 1 }}&background=1"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+            frameborder="0"
+          ></iframe>
+        {% endif %}
+      {% elsif section.settings.image != blank %}
+        <img
+          src="{{ section.settings.image | image_url: width: 1000 }}"
+          srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                  {{ section.settings.image | image_url: width: 900 }} 900w,
+                  {{ section.settings.image | image_url: width: 1200 }} 1200w"
+          sizes="(max-width: 768px) 100vw, 55vw"
+          alt="{{ section.settings.image.alt | default: section.settings.title }}"
+          class="product-feature-video__image"
+          loading="lazy"
+        />
+      {% else %}
+        <div style="width: 100%; height: 100%; background-color: #e5e3df; display: flex; align-items: center; justify-content: center; color: #999;">
+          <p>Add video or image</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Feature Video",
+  "class": "product-feature-video-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Sunflower blanket"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Our blankets offer comfort and warmth wherever it's needed - draped over your bed, tossed on the couch, wrapped around you, or taken along for outdoor adventures."
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "text",
+      "id": "video_cdn_url",
+      "label": "Video CDN URL",
+      "info": "Direct link to MP4 video file (e.g., from CDN, AWS S3, Cloudinary)"
+    },
+    {
+      "type": "video",
+      "id": "shopify_video",
+      "label": "Shopify-hosted Video",
+      "info": "Upload video in Settings > Files"
+    },
+    {
+      "type": "video_url",
+      "id": "video",
+      "label": "YouTube or Vimeo URL",
+      "accept": ["youtube", "vimeo"],
+      "info": "Used if no CDN or Shopify video is added"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Fallback Image",
+      "info": "Shown if no video is added"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay Video",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop Video",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "muted",
+      "label": "Mute Video",
+      "default": true,
+      "info": "Video must be muted for autoplay to work"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "title_font",
+      "label": "Title Font",
+      "options": [
+        {
+          "value": "Georgia",
+          "label": "Georgia"
+        },
+        {
+          "value": "Times New Roman",
+          "label": "Times New Roman"
+        },
+        {
+          "value": "Playfair Display",
+          "label": "Playfair Display"
+        },
+        {
+          "value": "Merriweather",
+          "label": "Merriweather"
+        },
+        {
+          "value": "system-ui",
+          "label": "System UI"
+        }
+      ],
+      "default": "Georgia"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 32,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Title Font Size (Desktop)",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "title_weight",
+      "min": 300,
+      "max": 700,
+      "step": 100,
+      "label": "Title Font Weight",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "mobile_title_size",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "label": "Title Font Size (Mobile)",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "body_font",
+      "label": "Body Font",
+      "options": [
+        {
+          "value": "system-ui",
+          "label": "System UI"
+        },
+        {
+          "value": "Arial",
+          "label": "Arial"
+        },
+        {
+          "value": "Helvetica",
+          "label": "Helvetica"
+        },
+        {
+          "value": "-apple-system",
+          "label": "San Francisco (Apple)"
+        }
+      ],
+      "default": "system-ui"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Feature Text Font Size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5C4D3C"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Color",
+      "default": "#5C4D3C"
+    },
+    {
+      "type": "header",
+      "content": "Feature Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 40,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Icon Size",
+      "default": 56
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Title Bottom Margin",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "description_margin_bottom",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Description Bottom Margin",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "features_margin_top",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Features Top Margin",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Horizontal Padding",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon Image",
+          "info": "Leave blank to use default SVG icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature Text",
+          "default": "Feature name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Feature Video",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Perfect for gifting"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Machine washable"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Reversible design"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Organic cotton"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

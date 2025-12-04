@@ -1,0 +1,623 @@
+<style>
+  .nutrition-hero-section {
+    width: 100%;
+    padding: {{ section.settings.section_padding_top }}px 20px {{ section.settings.section_padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .nutrition-hero-container {
+    max-width: {{ section.settings.container_max_width }}px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .nutrition-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: {{ section.settings.left_padding_top }}px {{ section.settings.left_padding_right }}px {{ section.settings.left_padding_bottom }}px {{ section.settings.left_padding_left }}px;
+    min-height: {{ section.settings.left_section_height }}px;
+    justify-content: center;
+  }
+
+  .nutrition-hero-heading {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 24px 0;
+  }
+
+  .nutrition-hero-subheading {
+    font-size: 20px;
+    line-height: 1.5;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 28px 0;
+    max-width: 500px;
+  }
+
+  .nutrition-hero-rating {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .nutrition-hero-stars {
+    display: flex;
+    gap: 4px;
+    font-size: 20px;
+    color: {{ section.settings.star_color }};
+  }
+
+  .nutrition-hero-rating-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: {{ section.settings.text_color }};
+  }
+
+  .nutrition-hero-features {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 36px;
+  }
+
+  .nutrition-hero-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .nutrition-hero-feature-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nutrition-hero-feature-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .nutrition-hero-feature-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: {{ section.settings.text_color }};
+    white-space: nowrap;
+  }
+
+  .nutrition-hero-button {
+    display: inline-block;
+    padding: {{ section.settings.button_padding_vertical }}px {{ section.settings.button_padding_horizontal }}px;
+    background-color: {{ section.settings.button_bg }};
+    color: {{ section.settings.button_text_color }};
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .nutrition-hero-button:hover {
+    opacity: 0.9;
+  }
+
+  .nutrition-hero-image-wrapper {
+    width: 100%;
+    position: relative;
+    padding: {{ section.settings.right_padding_top }}px {{ section.settings.right_padding_right }}px {{ section.settings.right_padding_bottom }}px {{ section.settings.right_padding_left }}px;
+    min-height: {{ section.settings.right_section_height }}px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nutrition-hero-image-wrapper img {
+    width: 100%;
+    height: auto;
+    {% if section.settings.image_max_height > 0 %}
+      max-height: {{ section.settings.image_max_height }}px;
+    {% endif %}
+    display: block;
+    object-fit: cover;
+    border-radius: {{ section.settings.image_border_radius }}px;
+  }
+
+  @media (max-width: 768px) {
+    .nutrition-hero-container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .nutrition-hero-content {
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      min-height: auto;
+    }
+
+    .nutrition-hero-image-wrapper {
+      padding: 0;
+      min-height: auto;
+    }
+
+    .nutrition-hero-image-wrapper img {
+      height: auto;
+      max-height: none;
+    }
+
+    .nutrition-hero-heading {
+      font-size: 42px;
+    }
+
+    .nutrition-hero-subheading {
+      font-size: 18px;
+      max-width: 100%;
+    }
+
+    .nutrition-hero-rating {
+      justify-content: center;
+    }
+
+    .nutrition-hero-features {
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .nutrition-hero-feature-text {
+      font-size: 13px;
+    }
+
+    .nutrition-hero-feature-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .nutrition-hero-button {
+      padding: 14px 42px;
+    }
+
+    .nutrition-hero-image-wrapper {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nutrition-hero-heading {
+      font-size: 36px;
+    }
+
+    .nutrition-hero-subheading {
+      font-size: 16px;
+    }
+
+    .nutrition-hero-features {
+      gap: 16px;
+    }
+
+    .nutrition-hero-feature-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .nutrition-hero-feature-text {
+      font-size: 12px;
+    }
+  }
+</style>
+
+<div class="nutrition-hero-section">
+  <div class="nutrition-hero-container">
+    <div class="nutrition-hero-content">
+      {% if section.settings.heading != blank %}
+        <h1 class="nutrition-hero-heading">{{ section.settings.heading }}</h1>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <p class="nutrition-hero-subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+
+      <div class="nutrition-hero-rating">
+        <div class="nutrition-hero-stars">
+          ★★★★<span style="opacity: 0.5;">★</span>
+        </div>
+        {% if section.settings.rating_text != blank %}
+          <span class="nutrition-hero-rating-text">{{ section.settings.rating_text }}</span>
+        {% endif %}
+      </div>
+
+      <div class="nutrition-hero-features">
+        {% if section.settings.feature_1_icon != blank %}
+          <div class="nutrition-hero-feature">
+            <div class="nutrition-hero-feature-icon">
+              <img src="{{ section.settings.feature_1_icon | img_url: 'master' }}" alt="{{ section.settings.feature_1_text }}">
+            </div>
+            {% if section.settings.feature_1_text != blank %}
+              <span class="nutrition-hero-feature-text">{{ section.settings.feature_1_text }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.feature_2_icon != blank %}
+          <div class="nutrition-hero-feature">
+            <div class="nutrition-hero-feature-icon">
+              <img src="{{ section.settings.feature_2_icon | img_url: 'master' }}" alt="{{ section.settings.feature_2_text }}">
+            </div>
+            {% if section.settings.feature_2_text != blank %}
+              <span class="nutrition-hero-feature-text">{{ section.settings.feature_2_text }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.feature_3_icon != blank %}
+          <div class="nutrition-hero-feature">
+            <div class="nutrition-hero-feature-icon">
+              <img src="{{ section.settings.feature_3_icon | img_url: 'master' }}" alt="{{ section.settings.feature_3_text }}">
+            </div>
+            {% if section.settings.feature_3_text != blank %}
+              <span class="nutrition-hero-feature-text">{{ section.settings.feature_3_text }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="nutrition-hero-button">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="nutrition-hero-image-wrapper">
+      {% if section.settings.hero_image != blank %}
+        <img src="{{ section.settings.hero_image | img_url: 'master' }}" alt="{{ section.settings.hero_image.alt | escape }}" loading="lazy">
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Nutrition Hero",
+  "tag": "section",
+  "class": "section-nutrition-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Image Border Radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section Heights"
+    },
+    {
+      "type": "range",
+      "id": "left_section_height",
+      "min": 0,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Left Section Min Height",
+      "default": 0,
+      "info": "Minimum height for left content section (0 = auto)"
+    },
+    {
+      "type": "range",
+      "id": "right_section_height",
+      "min": 0,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Right Section Min Height",
+      "default": 0,
+      "info": "Minimum height for right image section (0 = auto)"
+    },
+    {
+      "type": "range",
+      "id": "image_max_height",
+      "min": 0,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Image Max Height",
+      "default": 0,
+      "info": "Maximum height for the image (0 = no limit)"
+    },
+    {
+      "type": "header",
+      "content": "Left Content Padding"
+    },
+    {
+      "type": "range",
+      "id": "left_padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Left Content Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "left_padding_right",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Left Content Padding Right",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "left_padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Left Content Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "left_padding_left",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Left Content Padding Left",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Right Image Padding"
+    },
+    {
+      "type": "range",
+      "id": "right_padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Right Image Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "right_padding_right",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Right Image Padding Right",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "right_padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Right Image Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "right_padding_left",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Right Image Padding Left",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star Rating Color",
+      "default": "#F8E71C"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button Background",
+      "default": "#F8E71C"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Nutrition Simplified"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Transform your body and reclaim your energy with science-backed plant-based nutrition."
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating Text",
+      "default": "600+ Daily Users"
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_1_icon",
+      "label": "Feature 1 Icon"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_text",
+      "label": "Feature 1 Text",
+      "default": "Complete Nutrition"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_2_icon",
+      "label": "Feature 2 Icon"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_text",
+      "label": "Feature 2 Text",
+      "default": "Sustained Energy"
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_3_icon",
+      "label": "Feature 3 Icon"
+    },
+    {
+      "type": "text",
+      "id": "feature_3_text",
+      "label": "Feature 3 Text",
+      "default": "Higher Standards"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Get Started"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Padding Vertical",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Button Padding Horizontal",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Border Radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Hero Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nutrition Hero"
+    }
+  ]
+}
+{% endschema %}

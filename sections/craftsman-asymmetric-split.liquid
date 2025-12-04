@@ -1,0 +1,413 @@
+<style>
+  .craftsman-asymmetric-section {
+    width: 100%;
+    padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;
+  }
+
+  .craftsman-asymmetric-container {
+    max-width: {{ section.settings.container_max_width }}px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+  }
+
+  .craftsman-content-column {
+    flex: 0 0 {{ section.settings.left_column_width }}%;
+    background-color: {{ section.settings.background_color }};
+    padding: 100px 80px {{ section.settings.content_bottom_padding }}px 100px;
+    min-height: {{ section.settings.content_min_height }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 1;
+  }
+
+  .craftsman-image-column {
+    flex: 0 0 {{ section.settings.right_column_width }}%;
+    display: flex;
+    align-items: flex-start;
+    padding: {{ section.settings.right_padding_top }}px {{ section.settings.right_padding_right }}px {{ section.settings.right_padding_bottom }}px {{ section.settings.right_padding_left }}px;
+    margin-left: {{ section.settings.image_overlap }}px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .craftsman-title {
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 32px 0;
+    line-height: 1.2;
+  }
+
+  .craftsman-description {
+    font-size: 16px;
+    line-height: 1.75;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 45px 0;
+    max-width: 480px;
+  }
+
+  .craftsman-description p {
+    margin: 0;
+  }
+
+  .craftsman-btn {
+    display: inline-block;
+    padding: 15px 45px;
+    background-color: transparent !important;
+    color: {{ section.settings.text_color }};
+    border: 2px solid {{ section.settings.text_color }};
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+
+  .craftsman-btn:hover {
+    background-color: {{ section.settings.text_color }};
+    color: {{ section.settings.background_color }};
+  }
+
+  .craftsman-image-wrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  .craftsman-image-wrapper img {
+    width: 100%;
+    height: auto;
+    {% if section.settings.image_max_height > 0 %}
+      max-height: {{ section.settings.image_max_height }}px;
+    {% endif %}
+    display: block;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .craftsman-asymmetric-container {
+      flex-direction: column;
+    }
+
+    .craftsman-content-column {
+      flex: 1;
+      padding: 50px 30px 60px;
+      min-height: auto;
+    }
+
+    .craftsman-image-column {
+      flex: 1;
+      width: 100%;
+      order: -1;
+      padding: 0;
+      margin-left: 0;
+    }
+
+    .craftsman-title {
+      font-size: 24px;
+      margin-bottom: 26px;
+    }
+
+    .craftsman-description {
+      font-size: 15px;
+      line-height: 1.65;
+      margin-bottom: 35px;
+      max-width: 100%;
+    }
+
+    .craftsman-btn {
+      padding: 13px 40px;
+      font-size: 14px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .craftsman-image-wrapper img {
+      min-height: 380px;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .craftsman-content-column {
+      padding: 40px 25px 50px;
+    }
+
+    .craftsman-title {
+      font-size: 22px;
+      margin-bottom: 22px;
+    }
+
+    .craftsman-description {
+      font-size: 14px;
+    }
+
+    .craftsman-btn {
+      padding: 12px 35px;
+    }
+
+    .craftsman-image-wrapper img {
+      min-height: 320px;
+    }
+  }
+</style>
+
+<div class="craftsman-asymmetric-section">
+  <div class="craftsman-asymmetric-container">
+    <div class="craftsman-content-column">
+      {% if section.settings.title != blank %}
+        <h2 class="craftsman-title">{{ section.settings.title }}</h2>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <div class="craftsman-description">
+          {{ section.settings.description }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="craftsman-btn">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="craftsman-image-column">
+      <div class="craftsman-image-wrapper">
+        {% if section.settings.image != blank %}
+          <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.image.alt | escape }}" loading="lazy">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Craftsman Split",
+  "tag": "section",
+  "class": "section-craftsman-asymmetric",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "container_max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Column Width"
+    },
+    {
+      "type": "range",
+      "id": "left_column_width",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "label": "Left Content Width",
+      "default": 58,
+      "info": "Width of the beige content column"
+    },
+    {
+      "type": "range",
+      "id": "right_column_width",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "label": "Right Image Width",
+      "default": 42,
+      "info": "Width of the image column"
+    },
+    {
+      "type": "header",
+      "content": "Height Controls"
+    },
+    {
+      "type": "range",
+      "id": "content_min_height",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Left Content Min Height",
+      "default": 700,
+      "info": "Minimum height of the beige content block"
+    },
+    {
+      "type": "range",
+      "id": "content_bottom_padding",
+      "min": 50,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Left Content Bottom Padding",
+      "default": 200,
+      "info": "Controls extra beige space at bottom"
+    },
+    {
+      "type": "range",
+      "id": "image_max_height",
+      "min": 0,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Right Image Max Height",
+      "default": 0,
+      "info": "Set to 0 for auto height, or limit image height"
+    },
+    {
+      "type": "range",
+      "id": "image_overlap",
+      "min": -200,
+      "max": 0,
+      "step": 10,
+      "unit": "px",
+      "label": "Image Overlap Amount",
+      "default": -60,
+      "info": "Negative value makes image overlap the beige block"
+    },
+    {
+      "type": "header",
+      "content": "Right Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "right_padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Right Section Padding Top",
+      "default": 40,
+      "info": "Top padding for right image section"
+    },
+    {
+      "type": "range",
+      "id": "right_padding_right",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Right Section Padding Right",
+      "default": 0,
+      "info": "Right padding for right image section"
+    },
+    {
+      "type": "range",
+      "id": "right_padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Right Section Padding Bottom",
+      "default": 0,
+      "info": "Bottom padding for right image section"
+    },
+    {
+      "type": "range",
+      "id": "right_padding_left",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Right Section Padding Left",
+      "default": 0,
+      "info": "Left padding for right image section"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Content Background Color",
+      "default": "#f3e6df"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text & Border Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "HAND OF CRAFTSMAN"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>At the heart of the object, there is the breath andt he hand of the craftsman. The one who blows the glass and leaves in each piece a complement of soul, the one who delicately pours the wax layer by layer. At the heart of the object there are also the materials, which allow our collections to express all their nobility.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Read more"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Craftsman Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Craftsman Split"
+    }
+  ]
+}
+{% endschema %}

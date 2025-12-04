@@ -1,0 +1,700 @@
+{% comment %}
+  Video With Text 3 Section
+  A two-column layout with video on one side and text content on the other
+{% endcomment %}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .video-text-3-{{ section.id }} {
+    --button-bg: {{ section.settings.button_color }};
+    --button-bg-hover: {{ section.settings.button_color_hover }};
+    --button-text: {{ section.settings.button_text_color }};
+    --button-radius: {{ section.settings.button_radius }}px;
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign video_id = section.settings.video.id | default: section.settings.video_url.id
+  assign video_alt = section.settings.video.alt | default: section.settings.video_description
+  assign alt = 'sections.video.load_video' | t: description: video_alt | escape
+  assign poster = section.settings.video.preview_image | default: section.settings.cover_image
+-%}
+
+<div class="video-text-3 video-text-3-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="video-text-3__container">
+    <div class="video-text-3__grid video-text-3__grid--{{ section.settings.layout }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <!-- Video Column -->
+      <div class="video-text-3__media">
+        <div class="video-text-3__media-wrapper" style="{% if section.settings.media_radius > 0 %}border-radius: {{ section.settings.media_radius }}px; overflow: hidden;{% endif %}">
+          {%- if section.settings.video != blank or section.settings.video_url != blank -%}
+            {%- if section.settings.autoplay -%}
+              {%- if section.settings.video != blank -%}
+                <div class="video-text-3__video-autoplay">
+                  {{
+                    section.settings.video
+                    | video_tag:
+                      image_size: '1500x',
+                      autoplay: true,
+                      loop: section.settings.enable_video_looping,
+                      muted: true,
+                      playsinline: true,
+                      controls: false
+                  }}
+                </div>
+              {%- elsif section.settings.video_url != blank -%}
+                <div class="video-text-3__video-autoplay video-text-3__video-autoplay--external">
+                  {%- if section.settings.video_url.type == 'youtube' -%}
+                    <iframe
+                      src="https://www.youtube.com/embed/{{ video_id }}?autoplay=1&mute=1&loop=1&playlist={{ video_id }}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                      title="{{ section.settings.video_description | escape }}"
+                    ></iframe>
+                  {%- else -%}
+                    <iframe
+                      src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1&loop=1&muted=1&background=1"
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                      title="{{ section.settings.video_description | escape }}"
+                    ></iframe>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- else -%}
+              <deferred-media
+                class="video-text-3__deferred-media deferred-media"
+                data-media-id="{{ video_id }}"
+                {% if poster != null %}
+                  style="--ratio-percent: {{ 1 | divided_by: poster.aspect_ratio | times: 100 }}%;"
+                {% endif %}
+              >
+                <button
+                  id="Deferred-Poster-{{ section.id }}-{{ video_id }}"
+                  class="video-text-3__poster deferred-media__poster"
+                  type="button"
+                  aria-label="{{ alt }}"
+                >
+                  {%- if poster != null -%}
+                    {{
+                      poster
+                      | image_url: width: 1500
+                      | image_tag: sizes: '(min-width: 750px) 50vw, 100vw', widths: '375, 750, 1100, 1500'
+                    }}
+                  {%- else -%}
+                    {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                  {%- endif -%}
+                  <span class="video-text-3__play-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </span>
+                </button>
+                <template>
+                  {%- if section.settings.video == null and section.settings.video_url != null -%}
+                    {%- liquid
+                      assign loop = ''
+                      if section.settings.enable_video_looping
+                        assign loop = '&loop=1&playlist=' | append: video_id
+                      endif
+                    -%}
+                    {%- if section.settings.video_url.type == 'youtube' -%}
+                      <iframe
+                        src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
+                        class="js-youtube"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen
+                        title="{{ section.settings.video_description | escape }}"
+                      ></iframe>
+                    {%- else -%}
+                      <iframe
+                        src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
+                        class="js-vimeo"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen
+                        title="{{ section.settings.video_description | escape }}"
+                      ></iframe>
+                    {%- endif -%}
+                  {%- else -%}
+                    {{
+                      section.settings.video
+                      | video_tag:
+                        image_size: '1500x',
+                        autoplay: true,
+                        loop: section.settings.enable_video_looping,
+                        controls: true,
+                        muted: false
+                    }}
+                  {%- endif -%}
+                </template>
+              </deferred-media>
+            {%- endif -%}
+          {%- else -%}
+            <div class="video-text-3__placeholder">
+              {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Text Column -->
+      <div class="video-text-3__content video-text-3__content--{{ section.settings.content_alignment }}">
+        <div class="video-text-3__content-inner">
+          {%- if section.settings.subheading != blank -%}
+            <p class="video-text-3__subheading">{{ section.settings.subheading }}</p>
+          {%- endif -%}
+
+          {%- if section.settings.heading != blank -%}
+            <h2 class="video-text-3__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+
+          {%- if section.settings.text != blank -%}
+            <div class="video-text-3__text rte">{{ section.settings.text }}</div>
+          {%- endif -%}
+
+          {%- if section.settings.button_label != blank -%}
+            <a
+              {% if section.settings.button_link == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.button_link }}"
+              {% endif %}
+              class="video-text-3__button"
+            >
+              {{ section.settings.button_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .video-text-3 {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .video-text-3__container {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+
+  .video-text-3__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  @media screen and (min-width: 990px) {
+    .video-text-3__grid {
+      flex-direction: row;
+      align-items: stretch;
+      min-height: 500px;
+    }
+
+    .video-text-3__grid--video_right {
+      flex-direction: row-reverse;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .video-text-3__grid {
+      min-height: 600px;
+    }
+  }
+
+  .video-text-3__media {
+    width: 100%;
+    position: relative;
+  }
+
+  @media screen and (min-width: 990px) {
+    .video-text-3__media {
+      width: 55%;
+      flex: 0 0 55%;
+    }
+  }
+
+  .video-text-3__media-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  @media screen and (max-width: 989px) {
+    .video-text-3__media-wrapper {
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .video-text-3__media-wrapper {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: calc(100% + ((100vw - 100%) / 2));
+      min-height: 100%;
+    }
+
+    .video-text-3__grid--video_left .video-text-3__media-wrapper {
+      left: auto;
+      right: 0;
+    }
+
+    .video-text-3__grid--video_right .video-text-3__media-wrapper {
+      left: 0;
+      right: auto;
+    }
+  }
+
+  .video-text-3__video-autoplay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-text-3__video-autoplay video,
+  .video-text-3__video-autoplay iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+  }
+
+  .video-text-3__video-autoplay--external {
+    overflow: hidden;
+  }
+
+  .video-text-3__deferred-media {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .video-text-3__poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .video-text-3__poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-text-3__play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .video-text-3__play-button svg {
+    margin-left: 4px;
+    color: #000;
+  }
+
+  .video-text-3__poster:hover .video-text-3__play-button {
+    transform: translate(-50%, -50%) scale(1.1);
+    background-color: #fff;
+  }
+
+  .video-text-3__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .video-text-3__placeholder .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-text-3__deferred-media iframe,
+  .video-text-3__deferred-media video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+  }
+
+  .video-text-3__content {
+    width: 100%;
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .video-text-3__content {
+      width: 45%;
+      flex: 0 0 45%;
+      padding: 60px 50px;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .video-text-3__content {
+      padding: 60px 80px;
+    }
+  }
+
+  .video-text-3__content--left {
+    text-align: left;
+  }
+
+  .video-text-3__content--center {
+    text-align: center;
+  }
+
+  .video-text-3__content--center .video-text-3__content-inner {
+    margin: 0 auto;
+  }
+
+  .video-text-3__content--right {
+    text-align: right;
+  }
+
+  .video-text-3__content--right .video-text-3__content-inner {
+    margin-left: auto;
+  }
+
+  .video-text-3__content-inner {
+    max-width: 520px;
+    width: 100%;
+  }
+
+  .video-text-3__subheading {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0 0 12px;
+    opacity: 0.85;
+  }
+
+  @media screen and (min-width: 750px) {
+    .video-text-3__subheading {
+      font-size: 18px;
+    }
+  }
+
+  .video-text-3__heading {
+    margin: 0 0 24px;
+    line-height: 1.2;
+  }
+
+  .video-text-3__text {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 30px;
+    opacity: 0.85;
+  }
+
+  @media screen and (min-width: 750px) {
+    .video-text-3__text {
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 40px;
+    }
+  }
+
+  .video-text-3__button {
+    display: inline-block;
+    padding: 16px 40px;
+    background-color: var(--button-bg, #2f7d39);
+    color: var(--button-text, #fff);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: var(--button-radius, 32px);
+    transition: all 0.25s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: 750px) {
+    .video-text-3__button {
+      font-size: 18px;
+    }
+  }
+
+  .video-text-3__button:hover {
+    background-color: var(--button-bg-hover, #3e974a);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Video With Text 3",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Shopify-hosted video"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": ["youtube", "vimeo"],
+      "label": "YouTube or Vimeo URL",
+      "info": "Used if no Shopify-hosted video is selected"
+    },
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "Cover image",
+      "info": "Used as poster for external videos"
+    },
+    {
+      "type": "text",
+      "id": "video_description",
+      "label": "Video alt text",
+      "info": "Describe the video for accessibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay video",
+      "default": false,
+      "info": "Video will be muted when autoplaying"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "label": "Loop video",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "media_radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Video corner radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Free One Year Supply of Vitamin D3+K2, 5 Travel Packs"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "AG1: Your smart nutritional habit"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        },
+        {
+          "value": "hxl",
+          "label": "Extra large"
+        }
+      ],
+      "default": "h0",
+      "label": "Heading size"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>AG1 is a daily Foundational Nutrition supplement that supports physical and mental health. It's a science-driven formulation of vitamins, minerals, good bacteria, and whole food sourced nutrients that support cognition.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Unlock Offer"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button background",
+      "default": "#2f7d39"
+    },
+    {
+      "type": "color",
+      "id": "button_color_hover",
+      "label": "Button background (hover)",
+      "default": "#3e974a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Button corner radius",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "video_left",
+          "label": "Video left, text right"
+        },
+        {
+          "value": "video_right",
+          "label": "Video right, text left"
+        }
+      ],
+      "default": "video_left",
+      "label": "Desktop layout"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Content alignment"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video With Text 3"
+    }
+  ]
+}
+{% endschema %}

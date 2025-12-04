@@ -1,0 +1,793 @@
+<style>
+  .video-hero-modern {
+    position: relative;
+    width: 100%;
+    height: {{ section.settings.section_height }}vh;
+    min-height: {{ section.settings.min_height }}px;
+    overflow: hidden;
+    background-color: #000;
+  }
+
+  .video-hero-modern__video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .video-hero-modern__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-hero-modern__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent 0%, rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }}) 60%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .video-hero-modern__pause-btn {
+    position: absolute;
+    top: {{ section.settings.pause_btn_top }}px;
+    right: {{ section.settings.pause_btn_right }}px;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .video-hero-modern__pause-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .video-hero-modern__pause-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: #ffffff;
+  }
+
+  .video-hero-modern__pause-icon,
+  .video-hero-modern__play-icon {
+    display: none;
+  }
+
+  .video-hero-modern__pause-btn[data-playing="true"] .video-hero-modern__pause-icon {
+    display: block;
+  }
+
+  .video-hero-modern__pause-btn[data-playing="false"] .video-hero-modern__play-icon {
+    display: block;
+  }
+
+  .video-hero-modern__container {
+    position: relative;
+    z-index: 5;
+    max-width: {{ section.settings.container_width }}px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 {{ section.settings.container_padding }}px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .video-hero-modern__content {
+    text-align: right;
+    max-width: {{ section.settings.content_max_width }}px;
+    padding: 0 0 {{ section.settings.content_padding_bottom }}px;
+  }
+
+  .video-hero-modern__title {
+    font-family: {{ section.settings.title_font }}, sans-serif;
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: {{ section.settings.title_weight }};
+    line-height: 1.15;
+    color: {{ section.settings.title_color }};
+    margin: 0 0 {{ section.settings.title_margin_bottom }}px 0;
+    letter-spacing: -0.5px;
+  }
+
+  .video-hero-modern__subtitle {
+    font-family: {{ section.settings.body_font }}, sans-serif;
+    font-size: {{ section.settings.subtitle_size }}px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: {{ section.settings.subtitle_color }};
+    margin: 0 0 {{ section.settings.subtitle_margin_bottom }}px 0;
+    opacity: 0.9;
+  }
+
+  .video-hero-modern__buttons {
+    display: flex;
+    gap: {{ section.settings.buttons_gap }}px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .video-hero-modern__button {
+    display: inline-block;
+    padding: 12px 22px;
+    font-family: {{ section.settings.body_font }}, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: rgba(40, 40, 40, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .video-hero-modern__button:hover {
+    background-color: rgba(30, 30, 30, 0.8);
+    transform: scale(1.02);
+  }
+
+  .video-hero-modern__button--secondary {
+    background-color: rgba(40, 40, 40, 0.65);
+  }
+
+  .video-hero-modern__button--secondary:hover {
+    background-color: rgba(30, 30, 30, 0.8);
+  }
+
+  @media (max-width: 1024px) {
+    .video-hero-modern__title {
+      font-size: {{ section.settings.title_size | minus: 10 }}px;
+    }
+
+    .video-hero-modern__subtitle {
+      font-size: {{ section.settings.subtitle_size | minus: 2 }}px;
+    }
+
+    .video-hero-modern__button {
+      padding: {{ section.settings.button_padding_vertical | minus: 2 }}px {{ section.settings.button_padding_horizontal | minus: 6 }}px;
+      font-size: {{ section.settings.button_font_size | minus: 1 }}px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .video-hero-modern {
+      height: {{ section.settings.mobile_section_height }}vh;
+      min-height: {{ section.settings.mobile_min_height }}px;
+    }
+
+    .video-hero-modern__overlay {
+      background: rgba(0,0,0,0.15);
+    }
+
+    .video-hero-modern__container {
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .video-hero-modern__content {
+      text-align: center;
+      max-width: 100%;
+      padding: 0;
+    }
+
+    .video-hero-modern__title {
+      font-size: {{ section.settings.mobile_title_size }}px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .video-hero-modern__subtitle {
+      font-size: {{ section.settings.mobile_subtitle_size }}px;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    .video-hero-modern__buttons {
+      justify-content: center;
+      flex-direction: row;
+      gap: 12px;
+    }
+
+    .video-hero-modern__button {
+      width: auto;
+      text-align: center;
+      padding: 14px 28px;
+      font-size: 14px;
+    }
+
+    .video-hero-modern__pause-btn {
+      top: 15px;
+      right: 15px;
+      width: 32px;
+      height: 32px;
+    }
+
+    .video-hero-modern__pause-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+</style>
+
+<section class="video-hero-modern" data-section-id="{{ section.id }}">
+  <div class="video-hero-modern__video-wrapper">
+    {% if section.settings.video != blank %}
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'video-hero-modern__video' }}
+    {% elsif section.settings.video_url != blank %}
+      <video class="video-hero-modern__video" autoplay loop muted playsinline>
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+      </video>
+    {% elsif section.settings.fallback_image != blank %}
+      <img
+        src="{{ section.settings.fallback_image | image_url: width: 1920 }}"
+        alt="{{ section.settings.title }}"
+        class="video-hero-modern__video"
+        loading="eager"
+      />
+    {% else %}
+      <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);"></div>
+    {% endif %}
+  </div>
+
+  <div class="video-hero-modern__overlay"></div>
+
+  <button class="video-hero-modern__pause-btn" data-playing="true" aria-label="Pause video">
+    <svg class="video-hero-modern__pause-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="4" width="4" height="16" rx="1"/>
+      <rect x="14" y="4" width="4" height="16" rx="1"/>
+    </svg>
+    <svg class="video-hero-modern__play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+  </button>
+
+  <div class="video-hero-modern__container">
+    <div class="video-hero-modern__content">
+      {% if section.settings.title != blank %}
+        <h1 class="video-hero-modern__title">{{ section.settings.title }}</h1>
+      {% endif %}
+
+      {% if section.settings.subtitle != blank %}
+        <p class="video-hero-modern__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+
+      {% if section.settings.button_1_text != blank or section.settings.button_2_text != blank %}
+        <div class="video-hero-modern__buttons">
+          {% if section.settings.button_1_text != blank %}
+            <a href="{{ section.settings.button_1_link }}" class="video-hero-modern__button">
+              {{ section.settings.button_1_text }}
+            </a>
+          {% endif %}
+          {% if section.settings.button_2_text != blank %}
+            <a href="{{ section.settings.button_2_link }}" class="video-hero-modern__button video-hero-modern__button--secondary">
+              {{ section.settings.button_2_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    const pauseBtn = section.querySelector('.video-hero-modern__pause-btn');
+    const video = section.querySelector('.video-hero-modern__video');
+
+    if (pauseBtn && video && video.tagName === 'VIDEO') {
+      pauseBtn.addEventListener('click', function() {
+        if (video.paused) {
+          video.play();
+          pauseBtn.setAttribute('data-playing', 'true');
+          pauseBtn.setAttribute('aria-label', 'Pause video');
+        } else {
+          video.pause();
+          pauseBtn.setAttribute('data-playing', 'false');
+          pauseBtn.setAttribute('aria-label', 'Play video');
+        }
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Video Hero Modern",
+  "class": "video-hero-modern-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video Settings"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+      "info": "Upload video via Settings > Files, then select here"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL (Alternative)",
+      "info": "Paste Shopify CDN URL or external mp4 link"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback Image",
+      "info": "Shown if no video is provided"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Modern heritage"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "20% off 1000s of styles. Use your exclusive code: JUST4YOU20"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 Text",
+      "default": "Shop sale"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button 2 Text",
+      "default": "Shop all"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 Link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content Position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Section Height (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "min": 400,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Minimum Height (Desktop)",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "mobile_section_height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Section Height (Mobile)",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "mobile_min_height",
+      "min": 350,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "label": "Minimum Height (Mobile)",
+      "default": 450
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "container_padding",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Container Horizontal Padding",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 300,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "label": "Content Max Width",
+      "default": 450
+    },
+    {
+      "type": "range",
+      "id": "content_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Content Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "content_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Content Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "mobile_content_padding_bottom",
+      "min": 30,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile Content Bottom Padding",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Pause Button"
+    },
+    {
+      "type": "range",
+      "id": "pause_btn_top",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Pause Button Top Position",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "pause_btn_right",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Pause Button Right Position",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "title_font",
+      "label": "Title Font",
+      "options": [
+        { "value": "system-ui", "label": "System UI" },
+        { "value": "Arial", "label": "Arial" },
+        { "value": "Helvetica Neue", "label": "Helvetica Neue" },
+        { "value": "Georgia", "label": "Georgia" }
+      ],
+      "default": "system-ui"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 32,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Title Size (Desktop)",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "mobile_title_size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title Size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "title_weight",
+      "min": 400,
+      "max": 900,
+      "step": 100,
+      "label": "Title Weight",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "title_letter_spacing",
+      "min": -2,
+      "max": 4,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Title Letter Spacing",
+      "default": -0.5
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Title Bottom Margin",
+      "default": 10
+    },
+    {
+      "type": "select",
+      "id": "body_font",
+      "label": "Body Font",
+      "options": [
+        { "value": "system-ui", "label": "System UI" },
+        { "value": "Arial", "label": "Arial" },
+        { "value": "Helvetica Neue", "label": "Helvetica Neue" }
+      ],
+      "default": "system-ui"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle Size (Desktop)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "mobile_subtitle_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subtitle_weight",
+      "min": 300,
+      "max": 600,
+      "step": 100,
+      "label": "Subtitle Weight",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "subtitle_margin_bottom",
+      "min": 15,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Subtitle Bottom Margin",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Font Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_font_weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "label": "Button Font Weight",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Vertical Padding",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 16,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Button Horizontal Padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Border Radius",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Border Width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "buttons_gap",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap Between Buttons",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button 1 Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color_background",
+      "id": "button_bg_color",
+      "label": "Button 1 Background",
+      "default": "linear-gradient(rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7))"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button 1 Border Color",
+      "default": "rgba(255, 255, 255, 0.3)"
+    },
+    {
+      "type": "color_background",
+      "id": "button_hover_bg",
+      "label": "Button 1 Hover Background",
+      "default": "linear-gradient(rgba(30, 30, 30, 0.85), rgba(30, 30, 30, 0.85))"
+    },
+    {
+      "type": "color_background",
+      "id": "button_secondary_bg",
+      "label": "Button 2 Background",
+      "default": "linear-gradient(rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7))"
+    },
+    {
+      "type": "color",
+      "id": "button_secondary_border",
+      "label": "Button 2 Border Color",
+      "default": "rgba(255, 255, 255, 0.3)"
+    },
+    {
+      "type": "color_background",
+      "id": "button_secondary_hover_bg",
+      "label": "Button 2 Hover Background",
+      "default": "linear-gradient(rgba(30, 30, 30, 0.85), rgba(30, 30, 30, 0.85))"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Hero Modern"
+    }
+  ]
+}
+{% endschema %}

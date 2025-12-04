@@ -1,0 +1,892 @@
+{% comment %}
+  Bundle Pack Builder Section
+  Complete pack builder with size selection, product cards, and sidebar
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    padding: {{ section.settings.section_padding }}px 0;
+    background: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .pack-builder-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #shopify-section-{{ section.id }} .pack-builder-layout {
+    display: flex;
+    gap: 40px;
+  }
+
+  #shopify-section-{{ section.id }} .products-section {
+    flex: 1;
+  }
+
+  #shopify-section-{{ section.id }} .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .product-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .product-image-wrapper {
+    position: relative;
+    padding-top: 100%;
+    background: #f8f8f8;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .product-info {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  #shopify-section-{{ section.id }} .product-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #shopify-section-{{ section.id }} .product-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .add-button {
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  #shopify-section-{{ section.id }} .add-button:hover {
+    background: #000;
+  }
+
+  #shopify-section-{{ section.id }} .quantity-selector {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .quantity-selector.active {
+    display: flex;
+  }
+
+  #shopify-section-{{ section.id }} .quantity-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    background: white;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .quantity-display {
+    background: #5ce1e6;
+    color: #333;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .product-info-link {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /* Sidebar Styles */
+  #shopify-section-{{ section.id }} .pack-sidebar {
+    width: 400px;
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+  }
+
+  #shopify-section-{{ section.id }} .step-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .step-number {
+    background: #5ce1e6;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .step-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  #shopify-section-{{ section.id }} .pack-size-selector {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .pack-size-btn {
+    flex: 1;
+    padding: 8px 4px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+  }
+
+  #shopify-section-{{ section.id }} .pack-size-btn.active {
+    background: #5ce1e6;
+    border-color: #5ce1e6;
+    color: white;
+  }
+
+  #shopify-section-{{ section.id }} .pack-size-btn .pack-name {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} .pack-size-btn .pack-label {
+    font-size: 10px;
+    opacity: 0.8;
+    display: block;
+    margin-top: 2px;
+    line-height: 1.1;
+  }
+
+  /* Products and Gift Section */
+  #shopify-section-{{ section.id }} .products-gift-section {
+    margin-bottom: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .step-header-combined {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .products-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .gift-header {
+    display: flex;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .products-gift-content {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  #shopify-section-{{ section.id }} .selected-products {
+    flex: 1;
+    min-height: 80px;
+  }
+
+  #shopify-section-{{ section.id }} .selected-products-grid {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .selected-product-item {
+    width: 60px;
+    height: 60px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .selected-product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .add-product-slot {
+    width: 60px;
+    height: 60px;
+    border: 2px dashed #d0d0d0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .free-gift-section {
+    flex-shrink: 0;
+  }
+
+  #shopify-section-{{ section.id }} .free-gift-image {
+    width: 100px;
+    height: 100px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .free-gift-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .perks-list {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+  }
+
+  #shopify-section-{{ section.id }} .perk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: #333;
+    line-height: 1.3;
+  }
+
+  #shopify-section-{{ section.id }} .perk-check {
+    width: 16px;
+    height: 16px;
+    color: #333;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  #shopify-section-{{ section.id }} .pack-total {
+    border-top: 2px solid #e0e0e0;
+    padding-top: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .total-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  #shopify-section-{{ section.id }} .total-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+  }
+
+  #shopify-section-{{ section.id }} .add-to-cart-btn {
+    width: 100%;
+    padding: 16px;
+    background: #5ce1e6;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: not-allowed;
+    transition: all 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .add-to-cart-btn:hover:not(:disabled) {
+    background: #4dd0d5;
+  }
+
+  #shopify-section-{{ section.id }} .add-to-cart-btn:disabled {
+    background: #5ce1e6;
+    color: #fff;
+    cursor: not-allowed;
+    opacity: 0.9;
+  }
+
+  #shopify-section-{{ section.id }} .add-to-cart-btn.complete {
+    cursor: pointer;
+    background: #5ce1e6;
+  }
+
+  #shopify-section-{{ section.id }} .add-to-cart-btn.complete:hover {
+    background: #4dd0d5;
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    #shopify-section-{{ section.id }} .products-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .pack-builder-layout {
+      flex-direction: column;
+    }
+
+    #shopify-section-{{ section.id }} .pack-sidebar {
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #shopify-section-{{ section.id }} .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="pack-builder-container">
+  {% if section.settings.title != blank %}
+    <h2 style="text-align: center; margin-bottom: 40px;">{{ section.settings.title }}</h2>
+  {% endif %}
+
+  <div class="pack-builder-layout">
+    <!-- Products Section -->
+    <div class="products-section">
+      <div class="products-grid">
+        {% if section.settings.collection %}
+          {% for product in section.settings.collection.products limit: section.settings.products_limit %}
+            <div class="product-card" data-product-id="{{ product.id }}" data-section-id="{{ section.id }}">
+              <div class="product-image-wrapper">
+                {% if product.featured_image %}
+                  <img class="product-image"
+                       src="{{ product.featured_image | image_url: width: 400 }}"
+                       alt="{{ product.title | escape }}"
+                       loading="lazy">
+                {% else %}
+                  <div style="width: 100%; height: 100%; background: #f5f5f5;"></div>
+                {% endif %}
+              </div>
+
+              <div class="product-info">
+                <h3 class="product-title">{{ product.title }}</h3>
+                <div class="product-price">${{ product.price | money_without_currency }}</div>
+
+                <button class="add-button" id="add-btn-{{ section.id }}-{{ product.id }}"
+                        onclick="addProductToPack_{{ section.id | replace: '-', '_' }}('{{ product.id }}', '{{ product.variants.first.id }}', '{{ product.title | escape }}', '{{ product.price | money_without_currency }}', '{{ product.featured_image | image_url: width: 200 }}')">
+                  + Add
+                </button>
+
+                <div class="quantity-selector" id="qty-selector-{{ section.id }}-{{ product.id }}">
+                  <button class="quantity-btn" onclick="updatePackQuantity_{{ section.id | replace: '-', '_' }}('{{ product.id }}', -1)">−</button>
+                  <div class="quantity-display" id="qty-display-{{ section.id }}-{{ product.id }}">1</div>
+                  <button class="quantity-btn" onclick="updatePackQuantity_{{ section.id | replace: '-', '_' }}('{{ product.id }}', 1)">+</button>
+                </div>
+
+                <div class="product-info-link" onclick="window.open('/products/{{ product.handle }}', '_blank')">
+                  Product Info
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>Please select a collection in the theme customizer.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="pack-sidebar">
+      <!-- Step 1: Select Size -->
+      <div class="step-header">
+        <span class="step-number">1</span>
+        <span class="step-title">Select Size</span>
+      </div>
+
+      <div class="pack-size-selector">
+        <div class="pack-size-btn active" onclick="selectPackSize_{{ section.id | replace: '-', '_' }}(3)" id="pack-size-3-{{ section.id }}">
+          <div class="pack-name">3 Pack</div>
+        </div>
+        <div class="pack-size-btn" onclick="selectPackSize_{{ section.id | replace: '-', '_' }}(8)" id="pack-size-8-{{ section.id }}">
+          <div class="pack-name">8 Pack</div>
+          <span class="pack-label">Most popular</span>
+        </div>
+        <div class="pack-size-btn" onclick="selectPackSize_{{ section.id | replace: '-', '_' }}(12)" id="pack-size-12-{{ section.id }}">
+          <div class="pack-name">12 Pack</div>
+          <span class="pack-label">Best value</span>
+        </div>
+      </div>
+
+      <!-- Step 2: Choose Products and Free Gift -->
+      <div class="products-gift-section">
+        <div class="step-header-combined">
+          <div class="products-header">
+            <span class="step-number">2</span>
+            <span class="step-title">Choose Products - <span id="selected-count-{{ section.id }}">0</span>/<span id="pack-size-display-{{ section.id }}">3</span></span>
+          </div>
+          <div class="gift-header">
+            <span class="step-title">Free Gift</span>
+          </div>
+        </div>
+
+        <div class="products-gift-content">
+          <div class="selected-products">
+            <div class="selected-products-grid" id="selected-products-{{ section.id }}">
+              <!-- Selected products will appear here -->
+            </div>
+          </div>
+
+          <div class="free-gift-section">
+            <div class="free-gift-image">
+              {% if section.settings.free_gift_image %}
+                <img src="{{ section.settings.free_gift_image | image_url: width: 200 }}" alt="Free Gift">
+              {% else %}
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' fill='%23f5f5f5'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='14'%3EGift%3C/text%3E%3C/svg%3E" alt="Free Gift">
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Perks List -->
+      <div class="perks-list">
+        <div class="perk-item">
+          <svg class="perk-check" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          <span>Free shipping on orders $50+</span>
+        </div>
+        <div class="perk-item">
+          <svg class="perk-check" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          <span>30-day hassle-free returns</span>
+        </div>
+        <div class="perk-item">
+          <svg class="perk-check" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          <span>Free gift with every purchase</span>
+        </div>
+        <div class="perk-item">
+          <svg class="perk-check" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          <span>Pickup in-store</span>
+        </div>
+      </div>
+
+      <!-- Total -->
+      <div class="pack-total">
+        <span class="total-label">Total</span>
+        <span class="total-price" id="total-price-{{ section.id }}">$0.00</span>
+      </div>
+
+      <!-- Add to Cart Button -->
+      <button class="add-to-cart-btn" id="add-to-cart-{{ section.id }}" onclick="addPackToCart_{{ section.id | replace: '-', '_' }}()" disabled>
+        Add <span id="button-text-count-{{ section.id }}">3</span> products
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const sectionId = '{{ section.id }}';
+  const sectionIdSafe = '{{ section.id | replace: '-', '_' }}';
+  let selectedProducts = new Map();
+  let currentPackSize = 3;
+  let totalPrice = 0;
+
+  function selectPackSize(size) {
+    currentPackSize = size;
+
+    // Update active button
+    document.querySelectorAll(`#shopify-section-${sectionId} .pack-size-btn`).forEach(btn => {
+      btn.classList.remove('active');
+    });
+    document.getElementById(`pack-size-${size}-${sectionId}`).classList.add('active');
+
+    // Update display
+    document.getElementById(`pack-size-display-${sectionId}`).textContent = size;
+
+    // Check if we need to remove items if current selection exceeds new pack size
+    const totalSelected = getTotalQuantity();
+    if (totalSelected > currentPackSize) {
+      alert(`The current pack size only allows ${currentPackSize} items. Please adjust your selection.`);
+    }
+
+    // Update button immediately with new pack size
+    const button = document.getElementById(`add-to-cart-${sectionId}`);
+    const remainingCount = currentPackSize - totalSelected;
+
+    if (remainingCount === 0) {
+      button.disabled = false;
+      button.classList.add('complete');
+      button.innerHTML = `Add to Cart`;
+    } else {
+      button.disabled = true;
+      button.classList.remove('complete');
+      button.innerHTML = `Add ${remainingCount} product${remainingCount !== 1 ? 's' : ''}`;
+    }
+
+    // Update remaining count and all states
+    updatePackState();
+  }
+
+  function addProductToPack(productId, variantId, title, price, image) {
+    const totalSelected = getTotalQuantity();
+
+    if (totalSelected >= currentPackSize) {
+      alert(`You can only add ${currentPackSize} items to a ${currentPackSize} pack.`);
+      return;
+    }
+
+    if (!selectedProducts.has(productId)) {
+      selectedProducts.set(productId, {
+        id: productId,
+        variantId: variantId,
+        title: title,
+        price: parseFloat(price),
+        image: image,
+        quantity: 1
+      });
+    } else {
+      const product = selectedProducts.get(productId);
+      if (totalSelected + 1 <= currentPackSize) {
+        product.quantity += 1;
+      } else {
+        alert(`You can only add ${currentPackSize} items to a ${currentPackSize} pack.`);
+        return;
+      }
+    }
+
+    updateProductCard(productId);
+
+    // Force immediate button update before updatePackState
+    const newTotal = getTotalQuantity();
+    const button = document.getElementById(`add-to-cart-${sectionId}`);
+    const remaining = currentPackSize - newTotal;
+
+    button.disabled = remaining !== 0;
+    button.classList.toggle('complete', remaining === 0);
+    button.innerHTML = remaining === 0 ? `Add to Cart` : `Add ${remaining} product${remaining !== 1 ? 's' : ''}`;
+
+    updatePackState();
+  }
+
+  function updatePackQuantity(productId, change) {
+    if (!selectedProducts.has(productId)) return;
+
+    const product = selectedProducts.get(productId);
+    const totalSelected = getTotalQuantity();
+
+    if (change > 0 && totalSelected >= currentPackSize) {
+      alert(`You can only add ${currentPackSize} items to a ${currentPackSize} pack.`);
+      return;
+    }
+
+    product.quantity += change;
+
+    if (product.quantity <= 0) {
+      selectedProducts.delete(productId);
+      // Reset button display
+      const addBtn = document.getElementById(`add-btn-${sectionId}-${productId}`);
+      const qtySelector = document.getElementById(`qty-selector-${sectionId}-${productId}`);
+      if (addBtn) addBtn.style.display = 'flex';
+      if (qtySelector) qtySelector.style.display = 'none';
+    }
+
+    updateProductCard(productId);
+
+    // Force immediate button update before updatePackState
+    const newTotal = getTotalQuantity();
+    const button = document.getElementById(`add-to-cart-${sectionId}`);
+    const remaining = currentPackSize - newTotal;
+
+    button.disabled = remaining !== 0;
+    button.classList.toggle('complete', remaining === 0);
+    button.innerHTML = remaining === 0 ? `Add to Cart` : `Add ${remaining} product${remaining !== 1 ? 's' : ''}`;
+
+    updatePackState();
+  }
+
+  function updateProductCard(productId) {
+    const addBtn = document.getElementById(`add-btn-${sectionId}-${productId}`);
+    const qtySelector = document.getElementById(`qty-selector-${sectionId}-${productId}`);
+    const qtyDisplay = document.getElementById(`qty-display-${sectionId}-${productId}`);
+
+    if (selectedProducts.has(productId)) {
+      if (addBtn) addBtn.style.display = 'none';
+      if (qtySelector) qtySelector.style.display = 'flex';
+      if (qtyDisplay) qtyDisplay.textContent = selectedProducts.get(productId).quantity;
+    } else {
+      if (addBtn) addBtn.style.display = 'flex';
+      if (qtySelector) qtySelector.style.display = 'none';
+    }
+  }
+
+  function getTotalQuantity() {
+    let total = 0;
+    selectedProducts.forEach(product => {
+      total += product.quantity;
+    });
+    return total;
+  }
+
+  function updatePackState() {
+    const totalSelected = getTotalQuantity();
+
+    // Debug log
+    console.log(`Pack size: ${currentPackSize}, Selected: ${totalSelected}, Remaining: ${currentPackSize - totalSelected}`);
+
+    // Update selected count
+    document.getElementById(`selected-count-${sectionId}`).textContent = totalSelected;
+
+    // Update selected products display
+    updateSelectedProductsDisplay();
+
+    // Update total price
+    updateTotalPrice();
+
+    // Update button state
+    updateAddToCartButton(totalSelected);
+  }
+
+  function updateSelectedProductsDisplay() {
+    const container = document.getElementById(`selected-products-${sectionId}`);
+    let html = '';
+
+    selectedProducts.forEach(product => {
+      for (let i = 0; i < product.quantity; i++) {
+        html += `
+          <div class="selected-product-item">
+            <img class="selected-product-img" src="${product.image}" alt="${product.title}">
+          </div>
+        `;
+      }
+    });
+
+    // Add empty slots
+    const totalSelected = getTotalQuantity();
+    for (let i = totalSelected; i < currentPackSize; i++) {
+      html += '<div class="add-product-slot">+</div>';
+    }
+
+    container.innerHTML = html;
+  }
+
+  function updateTotalPrice() {
+    totalPrice = 0;
+    selectedProducts.forEach(product => {
+      totalPrice += product.price * product.quantity;
+    });
+    document.getElementById(`total-price-${sectionId}`).textContent = `$${totalPrice.toFixed(2)}`;
+  }
+
+  function updateAddToCartButton(totalSelected) {
+    const button = document.getElementById(`add-to-cart-${sectionId}`);
+    const remainingCount = currentPackSize - totalSelected;
+
+    console.log(`Updating button: remaining = ${remainingCount}, total selected = ${totalSelected}`);
+
+    if (remainingCount === 0) {
+      // Pack is complete - enable button
+      button.disabled = false;
+      button.classList.add('complete');
+      button.innerHTML = `Add to Cart`;
+    } else if (remainingCount > 0) {
+      // Pack incomplete - show remaining count
+      button.disabled = true;
+      button.classList.remove('complete');
+      button.innerHTML = `Add ${remainingCount} product${remainingCount !== 1 ? 's' : ''}`;
+    }
+
+    // Force button update
+    button.style.display = 'none';
+    button.offsetHeight; // Trigger reflow
+    button.style.display = 'block';
+  }
+
+  function addPackToCart() {
+    if (selectedProducts.size === 0) return;
+
+    const items = [];
+    selectedProducts.forEach(product => {
+      items.push({
+        id: parseInt(product.variantId),
+        quantity: product.quantity
+      });
+    });
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ items: items })
+    })
+    .then(response => response.json())
+    .then(data => {
+      window.location.href = '/cart';
+    })
+    .catch(error => {
+      console.error('Error adding to cart:', error);
+      alert('Error adding products to cart. Please try again.');
+    });
+  }
+
+  // Make functions globally available with unique names
+  window[`selectPackSize_${sectionIdSafe}`] = selectPackSize;
+  window[`addProductToPack_${sectionIdSafe}`] = addProductToPack;
+  window[`updatePackQuantity_${sectionIdSafe}`] = updatePackQuantity;
+  window[`addPackToCart_${sectionIdSafe}`] = addPackToCart;
+
+  // Initialize
+  updatePackState();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Bundle Pack Builder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Build Your Pack"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Product Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Number of products to show",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "image_picker",
+      "id": "free_gift_image",
+      "label": "Free Gift Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section Padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Pack Builder",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

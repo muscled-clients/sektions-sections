@@ -1,0 +1,598 @@
+{% style %}
+  #hero-slider-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 500px;
+    overflow: hidden;
+    display: block;
+  }
+
+  #hero-slider-{{ section.id }} .hero-slider-track {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  #hero-slider-{{ section.id }} .hero-slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  #hero-slider-{{ section.id }} .hero-slide {
+    width: 100%;
+    height: 100%;
+    flex: 0 0 100%;
+    position: relative;
+  }
+
+  #hero-slider-{{ section.id }} .hero-slide:not(:first-child) {
+    display: none;
+  }
+
+  #hero-slider-{{ section.id }} .hero-slide.active {
+    display: block;
+  }
+
+  #hero-slider-{{ section.id }} .hero-slide:first-child {
+    display: block;
+  }
+
+  #hero-slider-{{ section.id }} .slide-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #hero-slider-{{ section.id }} .slide-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #hero-slider-{{ section.id }} .slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+    pointer-events: none;
+  }
+
+  #hero-slider-{{ section.id }} .slide-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+  }
+
+  #hero-slider-{{ section.id }} .slide-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    width: 100%;
+  }
+
+  #hero-slider-{{ section.id }} .content-wrapper {
+    max-width: 700px;
+  }
+
+  #hero-slider-{{ section.id }} .slide-heading {
+    font-size: {{ section.settings.heading_font_size }}px;
+    font-weight: 300;
+    line-height: 1.15;
+    margin: 0 0 1rem 0;
+    font-family: {{ section.settings.heading_font_family }};
+    color: {{ section.settings.heading_color }};
+  }
+
+  #hero-slider-{{ section.id }} .slide-description {
+    font-size: {{ section.settings.description_font_size }}px;
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 0 0 2rem 0;
+    font-family: {{ section.settings.description_font_family }};
+    color: {{ section.settings.description_color }};
+  }
+
+  #hero-slider-{{ section.id }} .slide-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    text-decoration: none;
+    font-size: {{ section.settings.button_font_size }}px;
+    border: 2px solid {{ section.settings.button_border_color }};
+    border-radius: {{ section.settings.button_radius }}px;
+    transition: all 0.3s ease;
+  }
+
+  #hero-slider-{{ section.id }} .slide-button:hover {
+    background: {{ section.settings.button_hover_bg_color }};
+    color: {{ section.settings.button_hover_text_color }};
+    border-color: {{ section.settings.button_hover_border_color }};
+  }
+
+  #hero-slider-{{ section.id }} .slider-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+  }
+
+  #hero-slider-{{ section.id }} .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  #hero-slider-{{ section.id }} .dot.active {
+    background: white;
+  }
+
+  #hero-slider-{{ section.id }} .slider-arrows {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+  }
+
+  #hero-slider-{{ section.id }} .slider-nav {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  @media (max-width: 768px) {
+    #hero-slider-{{ section.id }} {
+      height: auto;
+      min-height: 500px;
+    }
+
+    #hero-slider-{{ section.id }} .hero-slide {
+      min-height: 500px;
+    }
+
+    #hero-slider-{{ section.id }} .slide-content {
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: 40px;
+    }
+
+    #hero-slider-{{ section.id }} .slide-container {
+      padding: 0 25px;
+    }
+
+    #hero-slider-{{ section.id }} .content-wrapper {
+      max-width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #hero-slider-{{ section.id }} .slide-heading {
+      font-size: 32px;
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    #hero-slider-{{ section.id }} .slide-description {
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    #hero-slider-{{ section.id }} .slide-button {
+      margin: 0 auto;
+      padding: 14px 50px;
+      background: transparent;
+      color: #ffffff;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 400;
+    }
+
+    #hero-slider-{{ section.id }} .slider-dots {
+      bottom: 20px;
+      left: 20px;
+      transform: none;
+    }
+
+    #hero-slider-{{ section.id }} .slider-arrows {
+      bottom: 20px;
+      right: 20px;
+      gap: 10px;
+    }
+
+    #hero-slider-{{ section.id }} .slider-nav {
+      width: 40px;
+      height: 40px;
+    }
+  }
+{% endstyle %}
+
+<div id="hero-slider-{{ section.id }}">
+  <div class="hero-slider-track">
+    <div class="hero-slider">
+      {% for block in section.blocks %}
+        <div class="hero-slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="slide-background">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url: width: 1920 }}" alt="{{ block.settings.heading | escape }}">
+            {% else %}
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);"></div>
+            {% endif %}
+          </div>
+
+          <div class="slide-overlay"></div>
+
+          <div class="slide-content">
+            <div class="slide-container">
+              <div class="content-wrapper">
+                {% if block.settings.heading != blank %}
+                  <h2 class="slide-heading">{{ block.settings.heading }}</h2>
+                {% endif %}
+                {% if block.settings.description != blank %}
+                  <p class="slide-description">{{ block.settings.description }}</p>
+                {% endif %}
+                {% if block.settings.button_text != blank %}
+                  <a href="{{ block.settings.button_url | default: '#' }}" class="slide-button">{{ block.settings.button_text }}</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if section.blocks.size > 1 %}
+    <div class="slider-dots">
+      {% for block in section.blocks %}
+        <button class="dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}"></button>
+      {% endfor %}
+    </div>
+
+    <div class="slider-arrows">
+      <button class="slider-nav prev-slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="slider-nav next-slide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  {% endif %}
+</div>
+
+<script>
+(function(){
+  var container = document.getElementById('hero-slider-{{ section.id }}');
+  if (!container) return;
+
+  var slides = container.querySelectorAll('.hero-slide');
+  var dots = container.querySelectorAll('.dot');
+  var prevBtn = container.querySelector('.prev-slide');
+  var nextBtn = container.querySelector('.next-slide');
+  var current = 0;
+  var timer = null;
+  var autoplay = {{ section.settings.autoplay | json }};
+  var speed = {{ section.settings.autoplay_speed }};
+
+  function show(index) {
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none';
+      slides[i].classList.remove('active');
+      if (dots[i]) dots[i].classList.remove('active');
+    }
+    slides[index].style.display = 'block';
+    slides[index].classList.add('active');
+    if (dots[index]) dots[index].classList.add('active');
+    current = index;
+  }
+
+  function next() {
+    show((current + 1) % slides.length);
+  }
+
+  function prev() {
+    show((current - 1 + slides.length) % slides.length);
+  }
+
+  function start() {
+    if (autoplay && slides.length > 1) {
+      timer = setInterval(next, speed);
+    }
+  }
+
+  function stop() {
+    if (timer) clearInterval(timer);
+  }
+
+  if (nextBtn) nextBtn.onclick = function() { stop(); next(); start(); };
+  if (prevBtn) prevBtn.onclick = function() { stop(); prev(); start(); };
+
+  for (var i = 0; i < dots.length; i++) {
+    (function(idx) {
+      dots[idx].onclick = function() { stop(); show(idx); start(); };
+    })(i);
+  }
+
+  container.onmouseenter = stop;
+  container.onmouseleave = start;
+
+  show(0);
+  start();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Hero Image Slider",
+  "tag": "section",
+  "class": "section-hero-slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-play slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 2000,
+      "max": 9000,
+      "step": 1000,
+      "unit": "ms",
+      "label": "Auto-play speed",
+      "default": 5000
+    },
+    {
+      "type": "header",
+      "content": "Background Overlay"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Darkness",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading Font",
+      "options": [
+        { "value": "Helvetica, Arial, sans-serif", "label": "Helvetica" },
+        { "value": "Georgia, serif", "label": "Georgia" },
+        { "value": "Times New Roman, serif", "label": "Times New Roman" }
+      ],
+      "default": "Helvetica, Arial, sans-serif"
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "description_font_family",
+      "label": "Description Font",
+      "options": [
+        { "value": "Helvetica, Arial, sans-serif", "label": "Helvetica" },
+        { "value": "Georgia, serif", "label": "Georgia" }
+      ],
+      "default": "Helvetica, Arial, sans-serif"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button Border",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Radius",
+      "default": 3
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Hover Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Hover Border",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_font_size",
+      "min": 18,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Heading",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "mobile_description_font_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Description",
+      "default": 14
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Lorem ipsum dolor sit amet"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Image Slider",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

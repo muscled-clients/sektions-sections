@@ -1,0 +1,582 @@
+{% comment %}
+  Hero 30 Section
+  Two-column hero with diagonal clip-path media and review badge
+{% endcomment %}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .hero-30-{{ section.id }} {
+    --hero-30-heading-color: {{ section.settings.heading_color }};
+    --hero-30-text-color: {{ section.settings.text_color }};
+    --hero-30-button-bg: {{ section.settings.button_color }};
+    --hero-30-button-text: {{ section.settings.button_text_color }};
+    --hero-30-badge-bg: {{ section.settings.badge_background }};
+    --hero-30-badge-text: {{ section.settings.badge_text_color }};
+    --hero-30-star-color: {{ section.settings.star_color }};
+    --hero-30-content-bg: {{ section.settings.content_background }};
+    --hero-30-accent-bg: {{ section.settings.accent_background }};
+  }
+{%- endstyle -%}
+
+<div class="hero-30 hero-30-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="hero-30__container">
+    <div class="hero-30__grid{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <!-- Media Column -->
+      <div class="hero-30__media">
+        <div class="hero-30__media-wrapper">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1500
+              | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 990px) 50vw, 100vw',
+                widths: '375, 750, 1100, 1500',
+                class: 'hero-30__image'
+            }}
+          {%- elsif section.settings.video != blank -%}
+            {{
+              section.settings.video
+              | video_tag:
+                image_size: '1500x',
+                autoplay: true,
+                loop: true,
+                muted: true,
+                playsinline: true,
+                controls: false,
+                class: 'hero-30__video'
+            }}
+          {%- else -%}
+            <div class="hero-30__placeholder">
+              {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Content Column -->
+      <div class="hero-30__content">
+        <div class="hero-30__content-inner">
+          {%- if section.settings.show_badge -%}
+            <div class="hero-30__badge">
+              <div class="hero-30__stars">
+                {%- for i in (1..5) -%}
+                  <span class="hero-30__star-box">
+                    <svg class="hero-30__star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  </span>
+                {%- endfor -%}
+              </div>
+              <span class="hero-30__badge-text">{{ section.settings.badge_text }}</span>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.heading != blank -%}
+            <h2 class="hero-30__heading {{ section.settings.heading_size }}">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
+
+          {%- if section.settings.text != blank -%}
+            <div class="hero-30__text rte">
+              {{ section.settings.text }}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.button_label != blank -%}
+            <div class="hero-30__button-wrapper">
+              <a
+                {% if section.settings.button_link == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.button_link }}"
+                {% endif %}
+                class="hero-30__button"
+              >
+                {{ section.settings.button_label | escape }}
+                {%- if section.settings.show_button_arrow -%}
+                  <svg class="hero-30__button-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                {%- endif -%}
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-30 {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .hero-30__container {
+    width: 100%;
+    max-width: none;
+  }
+
+  .hero-30__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "media"
+      "content";
+    gap: 0;
+    align-items: stretch;
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-30__grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "media content";
+      min-height: 550px;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .hero-30__grid {
+      min-height: 650px;
+    }
+  }
+
+  /* Media Column */
+  .hero-30__media {
+    grid-area: media;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-30__media-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    overflow: hidden;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hero-30__media-wrapper {
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-30__media {
+      z-index: 1;
+    }
+
+    .hero-30__media-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: -9%;
+      bottom: 0;
+      clip-path: polygon(0 0, 100% 0, 91% 100%, 0 100%);
+    }
+  }
+
+  .hero-30__image,
+  .hero-30__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-30__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f3f3;
+  }
+
+  .hero-30__placeholder .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Content Column */
+  .hero-30__content {
+    grid-area: content;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 16px;
+    text-align: center;
+    background: linear-gradient(to right, var(--hero-30-accent-bg, #f5e6a3) 0%, var(--hero-30-content-bg, #ffffff) 100%);
+    position: relative;
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-30__content {
+      padding: 60px 50px 60px 100px;
+      text-align: left;
+      justify-content: flex-start;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .hero-30__content {
+      padding: 60px 80px 60px 100px;
+    }
+  }
+
+  .hero-30__content-inner {
+    max-width: 550px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-30__content-inner {
+      margin: 0;
+    }
+  }
+
+  /* Badge / Review */
+  .hero-30__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    background-color: var(--hero-30-badge-bg, #d4d4aa);
+    border-radius: 6px;
+    margin-bottom: 24px;
+  }
+
+  .hero-30__stars {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .hero-30__star-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background-color: var(--hero-30-star-color, #00b67a);
+    border-radius: 2px;
+  }
+
+  .hero-30__star {
+    width: 14px;
+    height: 14px;
+    color: #ffffff;
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-30__star-box {
+      width: 24px;
+      height: 24px;
+    }
+
+    .hero-30__star {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  .hero-30__badge-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--hero-30-badge-text, #121212);
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-30__badge-text {
+      font-size: 15px;
+    }
+  }
+
+  /* Heading */
+  .hero-30__heading {
+    margin: 0 0 16px;
+    color: var(--hero-30-heading-color, #121212);
+    line-height: 1.1;
+    font-weight: 500;
+  }
+
+  /* Text */
+  .hero-30__text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--hero-30-text-color, #121212);
+    margin: 0 0 24px;
+    opacity: 0.85;
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-30__text {
+      font-size: 18px;
+      margin-bottom: 32px;
+    }
+  }
+
+  /* Button */
+  .hero-30__button-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-30__button-wrapper {
+      justify-content: flex-start;
+    }
+  }
+
+  .hero-30__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 32px;
+    background-color: var(--hero-30-button-bg, #121212);
+    color: var(--hero-30-button-text, #ffffff);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 100px;
+    border: 1px solid var(--hero-30-button-bg, #121212);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .hero-30__button:hover {
+    background-color: transparent;
+    color: var(--hero-30-button-bg, #121212);
+  }
+
+  .hero-30__button-arrow {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-30__button:hover .hero-30__button-arrow {
+    transform: translateX(4px);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero 30",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+      "info": "Used if no image is selected"
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show review badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Excellent 4.6 | 100,000+ Customers"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Stylish Bakeware"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        },
+        {
+          "value": "hxl",
+          "label": "Extra large"
+        }
+      ],
+      "default": "h0",
+      "label": "Heading size"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Discover bakeware and mixing bowls that look as good as the treats you make in them. Premium quality kitchen essentials designed for the modern home baker.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_arrow",
+      "label": "Show button arrow",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "accent_background",
+      "label": "Gradient start color (left)",
+      "default": "#f5e6a3"
+    },
+    {
+      "type": "color",
+      "id": "content_background",
+      "label": "Gradient end color (right)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Badge colors"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#d4d4aa"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star box color",
+      "default": "#00b67a"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero 30"
+    }
+  ]
+}
+{% endschema %}

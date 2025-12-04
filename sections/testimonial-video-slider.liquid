@@ -1,0 +1,851 @@
+{% comment %}
+  Testimonial Video Slider Section
+  Displays customer testimonial videos with product information
+{% endcomment %}
+
+<div class="testimonial-slider-section section-{{ section.id }}-padding">
+  {% if section.settings.title != blank %}
+    <h2 class="testimonial-slider-title">{{ section.settings.title }}</h2>
+  {% endif %}
+
+  <div class="testimonial-slider-wrapper">
+      <div class="testimonial-slider-container" id="slider-{{ section.id }}">
+        {% for block in section.blocks %}
+          <div class="testimonial-slide" data-slide-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            <div class="video-container">
+              {% if block.settings.video_url != blank %}
+                <video
+                  class="testimonial-video"
+                  playsinline
+                  {% if block.settings.muted %}muted{% endif %}
+                  {% if block.settings.loop %}loop{% endif %}
+                  {% if block.settings.autoplay %}autoplay{% endif %}
+                  {% if block.settings.controls %}controls{% endif %}
+                >
+                  <source src="{{ block.settings.video_url }}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+
+                {% unless block.settings.autoplay %}
+                  <div class="video-play-button">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="32" cy="32" r="32" fill="white" fill-opacity="0.9"/>
+                      <path d="M26 20L44 32L26 44V20Z" fill="black"/>
+                    </svg>
+                  </div>
+                {% endunless %}
+              {% else %}
+                <div class="video-placeholder">
+                  <p>Add video URL</p>
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="product-info-card">
+              {% if block.settings.product != blank %}
+                {% assign product = block.settings.product %}
+                <div class="product-icon">
+                  {% if product.featured_image %}
+                    <img src="{{ product.featured_image | image_url: width: 50 }}" alt="{{ product.title }}" width="30" height="30">
+                  {% else %}
+                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                      <rect width="30" height="30" fill="#000"/>
+                    </svg>
+                  {% endif %}
+                </div>
+                <h3 class="product-name">{{ product.title }}</h3>
+                <p class="product-price">{{ product.price | money }}</p>
+              {% else %}
+                <div class="product-icon">
+                  <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                    <rect width="30" height="30" fill="#000"/>
+                  </svg>
+                </div>
+                <h3 class="product-name">{{ block.settings.product_name | default: "Product Name" }}</h3>
+                <p class="product-price">{{ block.settings.product_price | default: "$24.99" }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if section.blocks.size > 1 %}
+        <div class="slider-navigation">
+          <button class="slider-nav-btn prev-btn" aria-label="Previous slide">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+
+          <div class="slider-progress">
+            <div class="slider-progress-bar"></div>
+          </div>
+
+          <button class="slider-nav-btn next-btn" aria-label="Next slide">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="slider-dots">
+          {% for block in section.blocks %}
+            <button class="slider-dot {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+</div>
+
+<style>
+  .testimonial-slider-section {
+    background-color: {{ section.settings.background_color }};
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .testimonial-slider-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ section.settings.text_color }};
+    height: 24px;
+    line-height: 24px;
+    margin: 0 0 24px 0;
+    padding: 0 20px;
+  }
+
+  .testimonial-slider-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .testimonial-slider-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: auto;
+    padding: 59px 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    align-items: center;
+  }
+
+  .testimonial-slider-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .testimonial-slide {
+    flex: 0 0 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: transform 0.3s ease;
+  }
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: height 0.3s ease;
+  }
+
+  /* Center slide gets larger height */
+  .testimonial-slide.center-slide .video-container {
+    height: 450px;
+  }
+
+  .testimonial-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 14px;
+  }
+
+  .video-play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 2;
+  }
+
+  .video-play-button:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .video-play-button.hidden {
+    display: none;
+  }
+
+  .product-info-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    height: 92px;
+    box-sizing: border-box;
+  }
+
+  .product-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .product-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .product-name {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    color: #000;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+  }
+
+  .product-price {
+    font-size: 13px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    line-height: 1;
+  }
+
+  /* Navigation Section - Total height: 160px */
+  .slider-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+    height: 50px;
+  }
+
+  .slider-nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: #000;
+    flex-shrink: 0;
+  }
+
+  .slider-nav-btn:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+  }
+
+  .slider-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .slider-nav-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .slider-progress {
+    flex: 1;
+    max-width: 450px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .slider-progress-bar {
+    height: 100%;
+    background: #fff;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  /* Dots */
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+    height: 20px;
+    align-items: center;
+  }
+
+  .slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .slider-dot.active {
+    background: #fff;
+    width: 28px;
+    border-radius: 5px;
+  }
+
+  /* Responsive */
+  @media screen and (max-width: 989px) {
+    .testimonial-slider-title {
+      font-size: 26px;
+      margin-bottom: 30px;
+      padding: 0 15px;
+    }
+
+    .testimonial-slide {
+      flex: 0 0 220px;
+    }
+
+    .video-container {
+      height: 360px;
+    }
+
+    .slider-navigation {
+      margin-top: 20px;
+    }
+
+    .slider-progress {
+      max-width: 250px;
+    }
+
+    .slider-dots {
+      margin-top: 15px;
+    }
+
+    .testimonial-slider-container {
+      padding: 10px 15px 20px 15px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .testimonial-slider-title {
+      font-size: 22px;
+      letter-spacing: 1.5px;
+      margin-bottom: 25px;
+      padding: 0 12px;
+    }
+
+    .testimonial-slider-container {
+      padding: 10px 12px 18px 12px;
+    }
+
+    .testimonial-slide {
+      flex: 0 0 200px;
+      gap: 12px;
+    }
+
+    .video-container {
+      height: 320px;
+      border-radius: 8px;
+    }
+
+    .product-info-card {
+      padding: 10px;
+      gap: 5px;
+    }
+
+    .product-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .product-name {
+      font-size: 10px;
+    }
+
+    .product-price {
+      font-size: 11px;
+    }
+
+    .slider-nav-btn {
+      width: 32px;
+      height: 32px;
+    }
+
+    .slider-navigation {
+      margin-top: 12px;
+    }
+
+    .slider-progress {
+      max-width: 120px;
+      height: 2px;
+    }
+
+    .slider-dots {
+      margin-top: 10px;
+    }
+
+    .slider-dot {
+      width: 6px;
+      height: 6px;
+    }
+
+    .slider-dot.active {
+      width: 18px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const slider = document.getElementById('slider-{{ section.id }}');
+    if (!slider) return;
+
+    const originalSlides = Array.from(slider.querySelectorAll('.testimonial-slide'));
+    const totalSlides = originalSlides.length;
+
+    // Create 3 sets of slides for seamless infinite loop
+    slider.innerHTML = '';
+
+    // Add slides 3 times
+    for (let set = 0; set < 3; set++) {
+      originalSlides.forEach((slide, index) => {
+        const clone = slide.cloneNode(true);
+        clone.setAttribute('data-slide-index', index);
+        slider.appendChild(clone);
+      });
+    }
+
+    const allSlides = slider.querySelectorAll('.testimonial-slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const dots = document.querySelectorAll('.slider-dot');
+    const progressBar = document.querySelector('.slider-progress-bar');
+
+    const autoplayEnabled = {{ section.settings.enable_autoplay }};
+    const scrollSpeed = 0.5; // Pixels per frame for smooth auto-scroll
+
+    let animationId = null;
+    let isAutoScrolling = false;
+    let isPaused = false;
+
+    // Get dimensions
+    function getSlideWidth() {
+      return (allSlides[0]?.offsetWidth || 260) + 20;
+    }
+
+    function getSetWidth() {
+      return getSlideWidth() * totalSlides;
+    }
+
+    // Update center slide
+    function updateCenterSlide() {
+      const sliderRect = slider.getBoundingClientRect();
+      const sliderCenter = sliderRect.left + sliderRect.width / 2;
+      let closestSlide = null;
+      let minDistance = Infinity;
+
+      allSlides.forEach(slide => {
+        const slideRect = slide.getBoundingClientRect();
+        const slideCenter = slideRect.left + slideRect.width / 2;
+        const distance = Math.abs(sliderCenter - slideCenter);
+
+        slide.classList.remove('center-slide');
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestSlide = slide;
+        }
+      });
+
+      if (closestSlide) {
+        closestSlide.classList.add('center-slide');
+        const slideIndex = parseInt(closestSlide.getAttribute('data-slide-index'));
+        updateDots(slideIndex);
+        updateProgress(slideIndex);
+      }
+    }
+
+    // Handle infinite loop seamlessly
+    function checkAndResetPosition() {
+      const setWidth = getSetWidth();
+      const scrollLeft = slider.scrollLeft;
+      const currentSet = scrollLeft / setWidth;
+
+      // If we're past the second set, reset to first set
+      if (currentSet >= 2) {
+        slider.scrollLeft = scrollLeft - setWidth;
+      }
+      // If we're before the first set, reset to second set
+      else if (currentSet < 1) {
+        slider.scrollLeft = scrollLeft + setWidth;
+      }
+    }
+
+    // Smooth auto-scroll animation
+    function autoScroll() {
+      if (!isAutoScrolling || isPaused) return;
+
+      slider.scrollLeft += scrollSpeed;
+      checkAndResetPosition();
+      updateCenterSlide();
+
+      animationId = requestAnimationFrame(autoScroll);
+    }
+
+    // Start auto-scrolling
+    function startAutoScroll() {
+      if (!autoplayEnabled || totalSlides <= 1) return;
+      if (isAutoScrolling) return;
+
+      isAutoScrolling = true;
+      isPaused = false;
+      autoScroll();
+    }
+
+    // Stop auto-scrolling
+    function stopAutoScroll() {
+      isAutoScrolling = false;
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+    }
+
+    // Pause auto-scrolling
+    function pauseAutoScroll() {
+      isPaused = true;
+    }
+
+    // Resume auto-scrolling
+    function resumeAutoScroll() {
+      if (isAutoScrolling) {
+        isPaused = false;
+        autoScroll();
+      }
+    }
+
+    // Update dots
+    function updateDots(slideIndex) {
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === slideIndex);
+      });
+    }
+
+    // Update progress
+    function updateProgress(slideIndex) {
+      const progress = ((slideIndex + 1) / totalSlides) * 100;
+      if (progressBar) {
+        progressBar.style.width = progress + '%';
+      }
+    }
+
+    // Manual navigation
+    function scrollToSlide(direction) {
+      pauseAutoScroll();
+
+      const slideWidth = getSlideWidth();
+      const currentScroll = slider.scrollLeft;
+      const targetScroll = currentScroll + (slideWidth * direction);
+
+      // Smooth scroll to target
+      slider.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+
+      setTimeout(() => {
+        checkAndResetPosition();
+        updateCenterSlide();
+        resumeAutoScroll();
+      }, 500);
+    }
+
+    // Button navigation
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => scrollToSlide(-1));
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => scrollToSlide(1));
+    }
+
+    // Dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        pauseAutoScroll();
+
+        const slideWidth = getSlideWidth();
+        const setWidth = getSetWidth();
+        const currentScroll = slider.scrollLeft;
+        const currentSet = Math.floor(currentScroll / setWidth);
+        const targetScroll = (currentSet * setWidth) + (index * slideWidth);
+
+        slider.scrollTo({
+          left: targetScroll,
+          behavior: 'smooth'
+        });
+
+        setTimeout(() => {
+          checkAndResetPosition();
+          updateCenterSlide();
+          resumeAutoScroll();
+        }, 500);
+      });
+    });
+
+    // Video play button functionality
+    allSlides.forEach(slide => {
+      const video = slide.querySelector('.testimonial-video');
+      const playButton = slide.querySelector('.video-play-button');
+
+      if (video && playButton) {
+        playButton.addEventListener('click', () => {
+          video.play();
+          playButton.classList.add('hidden');
+        });
+
+        video.addEventListener('pause', () => {
+          playButton.classList.remove('hidden');
+        });
+
+        video.addEventListener('play', () => {
+          playButton.classList.add('hidden');
+        });
+      }
+    });
+
+    // Pause on hover
+    slider.addEventListener('mouseenter', pauseAutoScroll);
+    slider.addEventListener('mouseleave', resumeAutoScroll);
+
+    // Handle manual scrolling
+    let scrollTimeout;
+    let isManualScrolling = false;
+
+    slider.addEventListener('scroll', () => {
+      if (!isAutoScrolling || isPaused) {
+        clearTimeout(scrollTimeout);
+        isManualScrolling = true;
+
+        scrollTimeout = setTimeout(() => {
+          checkAndResetPosition();
+          updateCenterSlide();
+          isManualScrolling = false;
+        }, 150);
+      }
+    });
+
+    // Initialize - start at middle set
+    setTimeout(() => {
+      const setWidth = getSetWidth();
+      slider.scrollLeft = setWidth; // Start at second set
+      updateCenterSlide();
+
+      // Start auto-scroll after initialization
+      if (autoplayEnabled) {
+        setTimeout(startAutoScroll, 500);
+      }
+    }, 100);
+
+    // Handle resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const wasScrolling = isAutoScrolling;
+        if (wasScrolling) stopAutoScroll();
+
+        const setWidth = getSetWidth();
+        slider.scrollLeft = setWidth;
+        updateCenterSlide();
+
+        if (wasScrolling) startAutoScroll();
+      }, 200);
+    });
+
+    // Cleanup
+    window.addEventListener('beforeunload', () => {
+      stopAutoScroll();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Testimonial Video Slider",
+  "tag": "section",
+  "class": "section-testimonial-slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "REAL COMFORT, REAL STORIES"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable Autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay",
+      "min": 2000,
+      "max": 9000,
+      "step": 1000,
+      "unit": "ms",
+      "label": "Autoplay Delay",
+      "default": 5000
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial Video",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL",
+          "info": "Upload video to Shopify Files and paste the URL here"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product Name (if no product selected)",
+          "default": "Unisex Medical Scrub Sets Cotton Blended"
+        },
+        {
+          "type": "text",
+          "id": "product_price",
+          "label": "Product Price (if no product selected)",
+          "default": "$24.99"
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Autoplay Video",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "muted",
+          "label": "Mute Video",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "loop",
+          "label": "Loop Video",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "controls",
+          "label": "Show Video Controls",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial Video Slider",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

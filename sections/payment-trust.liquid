@@ -1,0 +1,270 @@
+{% comment %}
+  Payment Trust Section
+  Shows a buy button, trust text, and payment method logos
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.section_background }};
+  }
+
+  #shopify-section-{{ section.id }} .payment-trust-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .trust-text {
+    margin: 0 0 20px;
+    font-size: {{ section.settings.trust_text_size }}px;
+    color: {{ section.settings.trust_text_color }};
+    font-weight: 400;
+  }
+
+  #shopify-section-{{ section.id }} .payment-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .payment-logo {
+    width: {{ section.settings.logo_size }}px;
+    height: auto;
+    max-height: 40px;
+    object-fit: contain;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .payment-logo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  #shopify-section-{{ section.id }} .payment-logo-placeholder {
+    width: {{ section.settings.logo_size }}px;
+    height: 40px;
+    background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #666;
+    padding: 8px;
+  }
+
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .payment-logos {
+      gap: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .payment-logo,
+    #shopify-section-{{ section.id }} .payment-logo-placeholder {
+      width: calc({{ section.settings.logo_size }}px * 0.9);
+      max-height: 35px;
+      padding: 6px;
+    }
+
+    #shopify-section-{{ section.id }} .trust-text {
+      font-size: calc({{ section.settings.trust_text_size }}px * 0.9);
+      margin: 16px 0 25px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #shopify-section-{{ section.id }} .payment-logos {
+      gap: 10px;
+    }
+
+    #shopify-section-{{ section.id }} .payment-logo,
+    #shopify-section-{{ section.id }} .payment-logo-placeholder {
+      width: calc({{ section.settings.logo_size }}px * 0.8);
+      max-height: 30px;
+      padding: 4px;
+    }
+  }
+</style>
+
+<div class="payment-trust-container">
+  {% if section.settings.trust_text != blank %}
+    <p class="trust-text">{{ section.settings.trust_text }}</p>
+  {% endif %}
+
+  <div class="payment-logos">
+    {% for block in section.blocks %}
+      {% if block.type == 'payment_logo' %}
+        <div {{ block.shopify_attributes }}>
+          {% if block.settings.logo != blank %}
+            {{ block.settings.logo | image_url: width: section.settings.logo_size | image_tag: 
+              class: 'payment-logo',
+              alt: block.settings.alt_text | default: 'Payment method',
+              loading: 'lazy'
+            }}
+          {% else %}
+            <div class="payment-logo-placeholder">
+              {{ block.settings.alt_text | default: 'Logo' }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Payment Trust",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Trust text",
+      "default": "Safe payment on our website"
+    },
+    {
+      "type": "range",
+      "id": "trust_text_size",
+      "label": "Trust text size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "trust_text_color",
+      "label": "Trust text color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "logo_size",
+      "label": "Payment logo size",
+      "min": 40,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "payment_logo",
+      "name": "Payment Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt text",
+          "default": "Payment method"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Payment Trust",
+      "blocks": [
+        {
+          "type": "payment_logo",
+          "settings": {
+            "alt_text": "Google Pay"
+          }
+        },
+        {
+          "type": "payment_logo",
+          "settings": {
+            "alt_text": "Apple Pay"
+          }
+        },
+        {
+          "type": "payment_logo",
+          "settings": {
+            "alt_text": "PayPal"
+          }
+        },
+        {
+          "type": "payment_logo",
+          "settings": {
+            "alt_text": "Mastercard"
+          }
+        },
+        {
+          "type": "payment_logo",
+          "settings": {
+            "alt_text": "Visa"
+          }
+        },
+        {
+          "type": "payment_logo",
+          "settings": {
+            "alt_text": "Klarna"
+          }
+        },
+        {
+          "type": "payment_logo",
+          "settings": {
+            "alt_text": "Diners Club"
+          }
+        },
+        {
+          "type": "payment_logo",
+          "settings": {
+            "alt_text": "Amazon Pay"
+          }
+        },
+        {
+          "type": "payment_logo",
+          "settings": {
+            "alt_text": "American Express"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

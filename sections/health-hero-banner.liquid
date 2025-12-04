@@ -1,0 +1,1323 @@
+<style>
+  #health-hero-{{ section.id }} {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: {{ section.settings.padding_top }}px {{ section.settings.padding_horizontal }}px {{ section.settings.padding_bottom }}px {{ section.settings.padding_horizontal }}px;
+    {% if section.settings.section_custom_gradient != blank %}
+      background: {{ section.settings.section_custom_gradient }};
+    {% elsif section.settings.section_bg_type == 'custom' %}
+      background-color: {{ section.settings.section_custom_bg_color }};
+    {% else %}
+      background: {{ section.settings.section_bg_type }};
+    {% endif %}
+  }
+
+  #health-hero-{{ section.id }} .hero-container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 60px; /* Space for cards overflow */
+  }
+
+  #health-hero-{{ section.id }} .hero-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: {{ section.settings.desktop_height }}px;
+    border-radius: {{ section.settings.border_radius }}px;
+    overflow: visible; /* Changed from hidden to visible */
+    background-color: #f5f5f5;
+  }
+
+  #health-hero-{{ section.id }} .hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: {{ section.settings.border_radius }}px;
+    overflow: hidden;
+    min-height: {{ section.settings.desktop_height }}px;
+  }
+
+  #health-hero-{{ section.id }} .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #health-hero-{{ section.id }} .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+    z-index: 1;
+  }
+
+  #health-hero-{{ section.id }} .hero-content {
+    position: absolute;
+    top: 50%;
+    left: {{ section.settings.content_padding_left }}px;
+    transform: translateY(-50%);
+    z-index: 2;
+    max-width: 500px;
+  }
+
+  #health-hero-{{ section.id }} .trustpilot-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+  }
+
+  #health-hero-{{ section.id }} .trustpilot-logo {
+    background: #00b67a;
+    padding: 6px 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  #health-hero-{{ section.id }} .trustpilot-logo svg {
+    width: 18px;
+    height: 18px;
+    fill: #ffffff;
+  }
+
+  #health-hero-{{ section.id }} .rating-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #333;
+  }
+
+  #health-hero-{{ section.id }} .rating-text {
+    color: #00b67a;
+    font-weight: 600;
+  }
+
+  #health-hero-{{ section.id }} .rating-score {
+    color: #333;
+  }
+
+  #health-hero-{{ section.id }} .divider {
+    color: #ccc;
+  }
+
+  #health-hero-{{ section.id }} .reviews-count {
+    color: #333;
+  }
+
+  #health-hero-{{ section.id }} .hero-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    line-height: 1.2;
+    color: {{ section.settings.heading_color }};
+    margin-bottom: 20px;
+  }
+
+  #health-hero-{{ section.id }} .hero-heading .highlight {
+    color: {{ section.settings.highlight_color }};
+  }
+
+  #health-hero-{{ section.id }} .hero-subtext {
+    font-size: {{ section.settings.subtext_size }}px;
+    line-height: 1.5;
+    color: {{ section.settings.subtext_color }};
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  #health-hero-{{ section.id }} .hero-button {
+    display: inline-block;
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    padding: 14px 32px;
+    border-radius: {{ section.settings.button_radius }}px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  #health-hero-{{ section.id }} .hero-button:hover {
+    background-color: {{ section.settings.button_hover_bg_color }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  #health-hero-{{ section.id }} .cards-container {
+    position: relative;
+    display: flex;
+    gap: 0;
+    z-index: 1;
+    width: calc(100% - {{ section.settings.cards_horizontal_margin }}px);
+    max-width: {{ section.settings.cards_max_width }}px;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: {{ section.settings.cards_overflow }}px;
+  }
+
+
+  #health-hero-{{ section.id }} .info-card {
+    background: {{ section.settings.card_bg_color }};
+    border-radius: {{ section.settings.card_border_radius }}px;
+    padding-top: {{ section.settings.card_padding_top }}px;
+    padding-bottom: {{ section.settings.card_padding_bottom }}px;
+    padding-left: {{ section.settings.card_padding_left }}px;
+    padding-right: {{ section.settings.card_padding_right }}px;
+    box-shadow: {{ section.settings.card_shadow }};
+    flex: 1;
+    min-width: {{ section.settings.card_min_width }}px;
+    transition: transform 0.3s ease;
+  }
+
+  #health-hero-{{ section.id }} .info-card:not(:last-child) {
+    margin-right: {{ section.settings.cards_gap }}px;
+  }
+
+  #health-hero-{{ section.id }} .info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: {{ section.settings.card_hover_shadow }};
+  }
+
+  #health-hero-{{ section.id }} .card-title {
+    font-size: {{ section.settings.card_title_size }}px;
+    font-weight: {{ section.settings.card_title_weight }};
+    color: {{ section.settings.card_title_color }};
+    margin-bottom: {{ section.settings.card_title_margin_bottom }}px;
+    text-align: {{ section.settings.card_text_align }};
+  }
+
+  #health-hero-{{ section.id }} .card-description {
+    font-size: {{ section.settings.card_description_size }}px;
+    color: {{ section.settings.card_description_color }};
+    line-height: {{ section.settings.card_description_line_height }};
+    text-align: {{ section.settings.card_text_align }};
+  }
+
+  /* Tablet responsive */
+  @media screen and (max-width: 1024px) {
+    #health-hero-{{ section.id }} .hero-wrapper {
+      min-height: {{ section.settings.tablet_height }}px;
+    }
+
+    #health-hero-{{ section.id }} .hero-content {
+      left: 40px;
+    }
+
+    #health-hero-{{ section.id }} .hero-heading {
+      font-size: {{ section.settings.heading_size | minus: 8 }}px;
+    }
+
+    #health-hero-{{ section.id }} .cards-container {
+      width: calc(100% - 40px);
+      gap: 16px;
+    }
+
+    #health-hero-{{ section.id }} .info-card {
+      min-width: {{ section.settings.tablet_card_min_width }}px;
+      padding: {{ section.settings.tablet_card_padding_top }}px {{ section.settings.tablet_card_padding_horizontal }}px {{ section.settings.tablet_card_padding_bottom }}px {{ section.settings.tablet_card_padding_horizontal }}px;
+    }
+
+    #health-hero-{{ section.id }} .info-card:not(:last-child) {
+      margin-right: {{ section.settings.tablet_cards_gap }}px;
+    }
+  }
+
+  /* Mobile responsive */
+  @media screen and (max-width: 768px) {
+    #health-hero-{{ section.id }} {
+      padding: {{ section.settings.mobile_padding_top }}px {{ section.settings.mobile_padding_horizontal }}px {{ section.settings.mobile_padding_bottom }}px {{ section.settings.mobile_padding_horizontal }}px;
+    }
+
+    #health-hero-{{ section.id }} .hero-container {
+      padding-bottom: 0;
+    }
+
+    #health-hero-{{ section.id }} .hero-wrapper {
+      min-height: {{ section.settings.mobile_height }}px;
+      border-radius: {{ section.settings.mobile_border_radius }}px;
+      position: relative;
+      overflow: visible;
+      margin-bottom: 20px;
+    }
+
+    #health-hero-{{ section.id }} .hero-overlay {
+      background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+    }
+
+    #health-hero-{{ section.id }} .hero-content {
+      left: 24px;
+      right: 24px;
+      max-width: none;
+      top: {{ section.settings.mobile_content_top_position }}px;
+      transform: none;
+      padding-bottom: 120px;
+    }
+
+    #health-hero-{{ section.id }} .hero-heading {
+      font-size: {{ section.settings.mobile_heading_size }}px;
+    }
+
+    #health-hero-{{ section.id }} .hero-subtext {
+      font-size: {{ section.settings.mobile_subtext_size }}px;
+      margin-bottom: 20px;
+      max-width: 85%;
+    }
+
+    #health-hero-{{ section.id }} .hero-button {
+      margin-bottom: 20px;
+    }
+
+    #health-hero-{{ section.id }} .cards-container {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      right: auto;
+      transform: none;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 10px;
+      align-items: stretch;
+      z-index: 1;
+      box-sizing: border-box;
+      padding: 0 15px;
+      margin-top: -70px;
+    }
+
+    #health-hero-{{ section.id }} .info-card {
+      min-width: auto;
+      padding: 0 8px;
+      margin: 0;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* First two cards side by side with equal height */
+    #health-hero-{{ section.id }} .info-card[data-card="1"],
+    #health-hero-{{ section.id }} .info-card[data-card="2"] {
+      grid-row: 1;
+      align-self: stretch;
+    }
+
+    #health-hero-{{ section.id }} .info-card[data-card="1"] {
+      grid-column: 1;
+    }
+
+    #health-hero-{{ section.id }} .info-card[data-card="2"] {
+      grid-column: 2;
+    }
+
+    /* Third card centered below */
+    #health-hero-{{ section.id }} .info-card[data-card="3"] {
+      grid-column: 1 / 3;
+      grid-row: 2;
+      justify-self: center;
+      width: 55%;
+      margin-top: 10px;
+    }
+
+    #health-hero-{{ section.id }} .card-title {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    #health-hero-{{ section.id }} .card-description {
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    #health-hero-{{ section.id }} .trustpilot-badge {
+      font-size: 12px;
+      margin-bottom: 16px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    #health-hero-{{ section.id }} .trustpilot-logo {
+      padding: 4px 8px;
+    }
+
+    #health-hero-{{ section.id }} .trustpilot-logo svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    #health-hero-{{ section.id }} .rating-info {
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #health-hero-{{ section.id }} .hero-heading {
+      font-size: {{ section.settings.mobile_heading_size | minus: 4 }}px;
+    }
+
+    #health-hero-{{ section.id }} .hero-button {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+
+    #health-hero-{{ section.id }} .cards-container {
+      padding: 0 10px;
+    }
+
+    #health-hero-{{ section.id }} .info-card[data-card="3"] {
+      width: 60%;
+    }
+  }
+</style>
+
+<section id="health-hero-{{ section.id }}">
+  <div class="hero-container">
+    <div class="hero-wrapper">
+      <div class="hero-image-wrapper">
+        {% if section.settings.background_image != blank %}
+          <img
+            src="{{ section.settings.background_image | img_url: '1920x' }}"
+            srcset="{{ section.settings.background_image | img_url: '768x' }} 768w,
+                    {{ section.settings.background_image | img_url: '1024x' }} 1024w,
+                    {{ section.settings.background_image | img_url: '1440x' }} 1440w,
+                    {{ section.settings.background_image | img_url: '1920x' }} 1920w"
+            sizes="100vw"
+            alt="{{ section.settings.image_alt }}"
+            class="hero-image"
+            loading="eager"
+          >
+        {% else %}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'hero-image' }}
+        {% endif %}
+
+        <div class="hero-overlay"></div>
+      </div>
+
+      <div class="hero-content">
+        {% if section.settings.show_trustpilot %}
+          <div class="trustpilot-badge">
+            <div class="trustpilot-logo">
+              {% for i in (1..section.settings.rating_stars) %}
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/>
+                </svg>
+              {% endfor %}
+            </div>
+            <div class="rating-info">
+              <span class="rating-text">{{ section.settings.rating_label }}</span>
+              <span class="rating-score">{{ section.settings.rating_score }}</span>
+              <span class="divider">|</span>
+              <span class="reviews-count">{{ section.settings.reviews_count }}</span>
+            </div>
+          </div>
+        {% endif %}
+
+        <h1 class="hero-heading">
+          {{ section.settings.heading_part1 }}
+          <span class="highlight">{{ section.settings.heading_highlight }}</span>
+        </h1>
+
+        <p class="hero-subtext">
+          {{ section.settings.subtext }}
+        </p>
+
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link }}" class="hero-button">
+            {{ section.settings.button_text }}
+          </a>
+        {% endif %}
+      </div>
+
+    </div>
+
+    <div class="cards-container">
+      {% for i in (1..3) %}
+        {% assign card_title = 'card_' | append: i | append: '_title' %}
+        {% assign card_desc = 'card_' | append: i | append: '_description' %}
+
+        {% if section.settings[card_title] != blank %}
+          <div class="info-card" data-card="{{ i }}">
+            <h3 class="card-title">{{ section.settings[card_title] }}</h3>
+            <p class="card-description">{{ section.settings[card_desc] }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Health Hero Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 0,
+      "max": 60,
+      "step": 10,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "section_bg_type",
+      "label": "Background type",
+      "options": [
+        {
+          "value": "#ffffff",
+          "label": "White"
+        },
+        {
+          "value": "#f8f8f8",
+          "label": "Light Gray"
+        },
+        {
+          "value": "#f0f0f0",
+          "label": "Gray"
+        },
+        {
+          "value": "linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%)",
+          "label": "White to Gray Gradient"
+        },
+        {
+          "value": "linear-gradient(180deg, #f8f8f8 0%, #ffffff 100%)",
+          "label": "Gray to White Gradient"
+        },
+        {
+          "value": "custom",
+          "label": "Custom Color"
+        }
+      ],
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "section_custom_bg_color",
+      "label": "Custom background color",
+      "default": "#ffffff",
+      "info": "Used when 'Custom Color' is selected above"
+    },
+    {
+      "type": "text",
+      "id": "section_custom_gradient",
+      "label": "Custom gradient CSS",
+      "placeholder": "linear-gradient(180deg, #fff 0%, #f0f0f0 100%)",
+      "info": "Optional: Enter a CSS gradient value for advanced backgrounds"
+    },
+    {
+      "type": "header",
+      "content": "Hero Banner Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt Text",
+      "default": "Health and wellness hero banner"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 400,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Desktop height",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "tablet_height",
+      "min": 350,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "label": "Tablet height",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 400,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "label": "Mobile height",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "mobile_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile border radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_padding_left",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Content left padding",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Trustpilot Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trustpilot",
+      "label": "Show Trustpilot badge",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "rating_stars",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Rating stars",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "rating_label",
+      "label": "Rating label",
+      "default": "Excellent"
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating score",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "reviews_count",
+      "label": "Reviews count",
+      "default": "2,000+ reviews"
+    },
+    {
+      "type": "header",
+      "content": "Heading Text"
+    },
+    {
+      "type": "text",
+      "id": "heading_part1",
+      "label": "Heading first part",
+      "default": "It's time you own"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading highlight part",
+      "default": "your health"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight color",
+      "default": "#FF6B35"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 36,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "mobile_heading_size",
+      "min": 28,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile heading size",
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading font weight",
+      "options": [
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "header",
+      "content": "Subtext"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Annually, beginning with over 100 lab tests and insights provided by leading doctors. Available for only $299."
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext color",
+      "default": "#555555"
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtext size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "mobile_subtext_size",
+      "min": 14,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile subtext size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background color",
+      "default": "#FF6B35"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button hover background",
+      "default": "#E55A2B"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 4,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Info Cards Layout"
+    },
+    {
+      "type": "range",
+      "id": "cards_overflow",
+      "min": -80,
+      "max": 20,
+      "step": 5,
+      "unit": "px",
+      "label": "Cards overflow position",
+      "default": -30,
+      "info": "Negative values make cards overlap the hero"
+    },
+    {
+      "type": "range",
+      "id": "cards_gap",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between cards",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "cards_horizontal_margin",
+      "min": 40,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "label": "Cards horizontal margin",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "cards_max_width",
+      "min": 600,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Cards container max width",
+      "default": 900
+    },
+    {
+      "type": "header",
+      "content": "Card Styling"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_padding_top",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Card top padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_padding_bottom",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Card bottom padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_padding_left",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Card left padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_padding_right",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Card right padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_min_width",
+      "min": 200,
+      "max": 350,
+      "step": 10,
+      "unit": "px",
+      "label": "Card minimum width",
+      "default": 250
+    },
+    {
+      "type": "text",
+      "id": "card_shadow",
+      "label": "Card shadow CSS",
+      "default": "0 4px 20px rgba(0,0,0,0.08)",
+      "info": "CSS box-shadow value"
+    },
+    {
+      "type": "text",
+      "id": "card_hover_shadow",
+      "label": "Card hover shadow CSS",
+      "default": "0 8px 30px rgba(0,0,0,0.12)",
+      "info": "CSS box-shadow value on hover"
+    },
+    {
+      "type": "header",
+      "content": "Card Text Styling"
+    },
+    {
+      "type": "select",
+      "id": "card_text_align",
+      "label": "Card text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Card title font size",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "card_title_weight",
+      "label": "Card title font weight",
+      "options": [
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card title color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "card_title_margin_bottom",
+      "min": 4,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "label": "Space below card title",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "card_description_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Card description font size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "card_description_color",
+      "label": "Card description color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "card_description_line_height",
+      "min": 1.2,
+      "max": 1.8,
+      "step": 0.1,
+      "label": "Card description line height",
+      "default": 1.4
+    },
+    {
+      "type": "header",
+      "content": "Tablet Card Settings"
+    },
+    {
+      "type": "range",
+      "id": "tablet_card_min_width",
+      "min": 150,
+      "max": 250,
+      "step": 10,
+      "unit": "px",
+      "label": "Tablet card min width",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "tablet_cards_gap",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Tablet gap between cards",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "tablet_card_padding_top",
+      "min": 12,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Tablet card top padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "tablet_card_padding_bottom",
+      "min": 12,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Tablet card bottom padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "tablet_card_padding_horizontal",
+      "min": 12,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Tablet card horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Mobile Card Settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_cards_gap",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile gap between cards",
+      "default": 16
+    },
+    {
+      "type": "text",
+      "id": "mobile_cards_overlap",
+      "label": "Mobile cards overlap value",
+      "default": "-40",
+      "placeholder": "-60",
+      "info": "Enter pixel value. Negative = into hero (e.g. -80), Positive = outside hero (e.g. 20), Zero = at edge"
+    },
+    {
+      "type": "range",
+      "id": "mobile_third_card_offset",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile third card offset",
+      "default": 20,
+      "info": "Distance of third card below hero section"
+    },
+    {
+      "type": "range",
+      "id": "mobile_cards_horizontal_margin",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile cards horizontal margin",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_padding_top",
+      "min": 12,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile card top padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_padding_bottom",
+      "min": 12,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile card bottom padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_padding_horizontal",
+      "min": 12,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile card horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_third_card_width",
+      "min": 60,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Mobile third card width",
+      "default": 80,
+      "info": "Width of the bottom centered card"
+    },
+    {
+      "type": "range",
+      "id": "mobile_third_card_margin_top",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile third card top margin",
+      "default": 30,
+      "info": "Extra spacing above the third card"
+    },
+    {
+      "type": "range",
+      "id": "mobile_first_two_cards_width",
+      "min": 40,
+      "max": 100,
+      "step": 2,
+      "unit": "%",
+      "label": "Mobile first two cards width",
+      "default": 48,
+      "info": "Width of the top two cards (each)"
+    },
+    {
+      "type": "range",
+      "id": "mobile_card_min_height",
+      "min": 80,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile card minimum height",
+      "default": 100,
+      "info": "Minimum height for all mobile cards"
+    },
+    {
+      "type": "range",
+      "id": "mobile_section_bottom_extension",
+      "min": 60,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile section bottom extension",
+      "default": 120,
+      "info": "Extra space at bottom to accommodate card overflow"
+    },
+    {
+      "type": "header",
+      "content": "Info Cards Content"
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Card 1 Title",
+      "default": "Vitamin D3"
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_description",
+      "label": "Card 1 Description",
+      "default": "Checks for deficiencies, which can impact the health"
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Card 2 Title",
+      "default": "Biological age"
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_description",
+      "label": "Card 2 Description",
+      "default": "5 years younger than your calendar age"
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Card 3 Title",
+      "default": "ApoB"
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_description",
+      "label": "Card 3 Description",
+      "default": "Risk marker for heart and autoimmune disease"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile padding top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile padding bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_horizontal",
+      "min": 0,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile horizontal padding",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "mobile_content_top_position",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile content top position",
+      "default": 60,
+      "info": "Distance from top of hero image to content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Health Hero Banner",
+      "category": "Hero"
+    }
+  ]
+}
+{% endschema %}

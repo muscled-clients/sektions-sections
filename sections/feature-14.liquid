@@ -1,0 +1,631 @@
+{% comment %}
+  Feature 14 Section
+  Card carousel with icons, titles and descriptions
+{% endcomment %}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .feature-14-{{ section.id }} {
+    --f14-bg: {{ section.settings.background_color }};
+    --f14-heading-color: {{ section.settings.heading_color }};
+    --f14-text-color: {{ section.settings.text_color }};
+    --f14-card-bg: {{ section.settings.card_background }};
+    --f14-card-border: {{ section.settings.card_border_color }};
+    --f14-icon-color: {{ section.settings.icon_color }};
+    --f14-button-bg: {{ section.settings.button_color }};
+    --f14-button-text: {{ section.settings.button_text_color }};
+  }
+{%- endstyle -%}
+
+<div class="feature-14 feature-14-{{ section.id }} section-{{ section.id }}-padding" style="background-color: var(--f14-bg);">
+  <div class="feature-14__container page-width">
+    <!-- Header -->
+    <div class="feature-14__header">
+      {%- if section.settings.subheading != blank -%}
+        <p class="feature-14__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="feature-14__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <p class="feature-14__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Slider Wrapper -->
+    <div class="feature-14__slider-wrapper">
+      <!-- Navigation Button - Prev -->
+      <button type="button" class="feature-14__nav-btn feature-14__nav-btn--prev" aria-label="Previous slide">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <!-- Swiper Slider -->
+      <div class="feature-14__slider swiper" data-section-id="{{ section.id }}">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="swiper-slide" {{ block.shopify_attributes }}>
+            <div class="feature-14__card">
+              {%- if block.settings.icon != blank -%}
+                <div class="feature-14__card-icon">
+                  <img src="{{ block.settings.icon | image_url: width: 120 }}" alt="{{ block.settings.title }}" loading="lazy">
+                </div>
+              {%- elsif block.settings.icon_svg != blank -%}
+                <div class="feature-14__card-icon feature-14__card-icon--svg">
+                  {{ block.settings.icon_svg }}
+                </div>
+              {%- else -%}
+                <div class="feature-14__card-icon feature-14__card-icon--svg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="32" cy="32" r="20"/>
+                    <path d="M32 22v20M22 32h20"/>
+                  </svg>
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.title != blank -%}
+                <h3 class="feature-14__card-title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.description != blank -%}
+                <p class="feature-14__card-text">{{ block.settings.description }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+    </div>
+
+      <!-- Navigation Button - Next -->
+      <button type="button" class="feature-14__nav-btn feature-14__nav-btn--next" aria-label="Next slide">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Pagination -->
+    <div class="feature-14__pagination swiper-pagination"></div>
+  </div>
+</div>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+  .feature-14 {
+    width: 100%;
+  }
+
+  .feature-14__container {
+    position: relative;
+    overflow: visible;
+  }
+
+  /* Header */
+  .feature-14__header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .feature-14__header {
+      margin-bottom: 50px;
+    }
+  }
+
+  .feature-14__subheading {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--f14-heading-color);
+    margin: 0 0 16px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .feature-14__subheading {
+      font-size: 16px;
+    }
+  }
+
+  .feature-14__heading {
+    margin: 0 0 20px;
+    color: var(--f14-heading-color);
+    line-height: 1.15;
+    font-weight: 700;
+  }
+
+  .feature-14__description {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--f14-text-color);
+    margin: 0;
+  }
+
+  @media screen and (min-width: 990px) {
+    .feature-14__description {
+      font-size: 18px;
+    }
+  }
+
+  /* Slider Wrapper */
+  .feature-14__slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Navigation */
+  .feature-14__nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--f14-button-bg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: var(--f14-button-text);
+    flex-shrink: 0;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-14__nav-btn--prev {
+    margin-right: -22px;
+  }
+
+  .feature-14__nav-btn--next {
+    margin-left: -22px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .feature-14__nav-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    .feature-14__nav-btn--prev {
+      margin-right: -20px;
+    }
+
+    .feature-14__nav-btn--next {
+      margin-left: -20px;
+    }
+  }
+
+  .feature-14__nav-btn:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+
+  .feature-14__nav-btn.swiper-button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Slider */
+  .feature-14__slider {
+    overflow: hidden;
+    flex: 1;
+    width: 100%;
+  }
+
+  .feature-14__slider .swiper-wrapper {
+    display: flex;
+  }
+
+  .feature-14__slider .swiper-slide {
+    height: auto;
+  }
+
+  /* Card */
+  .feature-14__card {
+    background: var(--f14-card-bg);
+    border: 1px solid var(--f14-card-border);
+    border-radius: 16px;
+    padding: 32px 24px 28px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .feature-14__card {
+      padding: 40px 28px 36px;
+      border-radius: 20px;
+    }
+  }
+
+  .feature-14__card-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .feature-14__card-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 28px;
+    }
+  }
+
+  .feature-14__card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .feature-14__card-icon--svg svg {
+    width: 100%;
+    height: 100%;
+    color: var(--f14-icon-color);
+  }
+
+  .feature-14__card-title {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--f14-heading-color);
+    margin: 0 0 14px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .feature-14__card-title {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+  }
+
+  .feature-14__card-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--f14-text-color);
+    margin: 0;
+  }
+
+  @media screen and (min-width: 990px) {
+    .feature-14__card-text {
+      font-size: 15px;
+    }
+  }
+
+  /* Pagination */
+  .feature-14__pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+    position: relative;
+    z-index: 5;
+  }
+
+  @media screen and (min-width: 990px) {
+    .feature-14__pagination {
+      margin-top: 48px;
+    }
+  }
+
+  .feature-14__pagination .swiper-pagination-bullet {
+    width: 14px;
+    height: 14px;
+    background: transparent;
+    border: 1.5px solid var(--f14-heading-color);
+    opacity: 0.5;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    margin: 0 !important;
+  }
+
+  .feature-14__pagination .swiper-pagination-bullet-active {
+    background: var(--f14-button-bg);
+    border-color: var(--f14-button-bg);
+    opacity: 1;
+  }
+</style>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    initFeature14('{{ section.id }}');
+  });
+
+  if (Shopify.designMode) {
+    document.addEventListener('shopify:section:load', function(event) {
+      if (event.detail.sectionId === '{{ section.id }}') {
+        initFeature14('{{ section.id }}');
+      }
+    });
+  }
+
+  function initFeature14(sectionId) {
+    const section = document.querySelector('.feature-14-' + sectionId);
+    if (!section) return;
+
+    const swiperEl = section.querySelector('.feature-14__slider');
+    const prevBtn = section.querySelector('.feature-14__nav-btn--prev');
+    const nextBtn = section.querySelector('.feature-14__nav-btn--next');
+    const pagination = section.querySelector('.feature-14__pagination');
+
+    if (!swiperEl) return;
+
+    const swiper = new Swiper(swiperEl, {
+      slidesPerView: 1.5,
+      spaceBetween: 16,
+      grabCursor: true,
+      centeredSlides: false,
+      pagination: {
+        el: pagination,
+        clickable: true,
+      },
+      navigation: {
+        prevEl: prevBtn,
+        nextEl: nextBtn,
+      },
+      breakpoints: {
+        480: {
+          slidesPerView: 2,
+          spaceBetween: 16,
+        },
+        750: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+        990: {
+          slidesPerView: 4,
+          spaceBetween: 24,
+        },
+      },
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Feature 14",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "What's in it?"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Allergen-Friendly Treats"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        },
+        {
+          "value": "hxl",
+          "label": "Extra large"
+        }
+      ],
+      "default": "h0",
+      "label": "Heading size"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "These allergy-friendly cookies won't compromise on taste or texture. Dive into chewy chocolate chip, crispy peanut butter, or discover unique flavor combinations."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#c8d5dc"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#232323"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#232323"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#f5f0d0"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border color",
+      "default": "#232323"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#232323"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button background",
+      "default": "#d4c478"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#232323"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image",
+          "info": "Recommended: 120x120px PNG or SVG"
+        },
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Custom SVG icon",
+          "info": "Paste SVG code here if not using image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "FEATURE TITLE"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Brief description of this feature or benefit."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature 14",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "GLUTEN-FREE",
+            "description": "Made without wheat, rye, barley, or any gluten-containing ingredients."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "DAIRY-FREE",
+            "description": "No milk, cheese, butter, or any dairy products used in our recipes."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "LOW SUGAR",
+            "description": "Naturally sweetened with minimal added sugars for guilt-free enjoyment."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "NUT-FREE",
+            "description": "Safe for those with tree nut and peanut allergies."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "SOY-FREE",
+            "description": "No soy lecithin or soy-based ingredients in our products."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "EGG-FREE",
+            "description": "Plant-based alternatives used instead of eggs."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "PALM-FREE",
+            "description": "Sustainably made without palm oil or palm derivatives."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

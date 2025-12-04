@@ -1,0 +1,329 @@
+{% comment %}
+  Announcement Bar Section
+  Horizontal scrolling announcement bar with customizable messages
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    height: {{ section.settings.bar_height }}px;
+    display: flex;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .announcement-wrapper {
+    display: flex;
+    animation: scroll-{{ section.id }} {{ section.settings.scroll_speed }}s linear infinite;
+  }
+
+  @keyframes scroll-{{ section.id }} {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .announcement-content {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-right: {{ section.settings.cycle_gap }}px;
+  }
+
+  #shopify-section-{{ section.id }} .announcement-text {
+    font-size: {{ section.settings.text_size }}px;
+    font-weight: {{ section.settings.text_weight }};
+    color: {{ section.settings.text_color }};
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-transform: {{ section.settings.text_transform }};
+    letter-spacing: {{ section.settings.letter_spacing }}px;
+    word-spacing: {{ section.settings.word_gap }}px;
+  }
+
+  #shopify-section-{{ section.id }} .separator {
+    margin: 0 {{ section.settings.separator_spacing }}px;
+    font-size: {{ section.settings.text_size }}px;
+    color: {{ section.settings.text_color }};
+    font-weight: {{ section.settings.text_weight }};
+  }
+
+  {% if section.settings.pause_on_hover %}
+    #shopify-section-{{ section.id }}:hover .announcement-marquee {
+      animation-play-state: paused;
+    }
+  {% endif %}
+
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} {
+      height: {{ section.settings.mobile_bar_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .announcement-text {
+      font-size: {{ section.settings.text_size | times: 0.9 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .separator {
+      font-size: {{ section.settings.text_size | times: 0.9 }}px;
+      margin: 0 {{ section.settings.separator_spacing | times: 0.8 }}px;
+    }
+  }
+</style>
+
+<div class="announcement-wrapper">
+  {% comment %} First copy of content {% endcomment %}
+  <div class="announcement-content">
+    {% for i in (1..5) %}
+      {% for block in section.blocks %}
+        {% if block.type == 'text' and block.settings.message != blank %}
+          <span class="announcement-text" {% if i == 1 %}{{ block.shopify_attributes }}{% endif %}>{{ block.settings.message }}</span>
+          <span class="separator">{{ section.settings.separator }}</span>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+
+  {% comment %} Second copy for seamless loop {% endcomment %}
+  <div class="announcement-content">
+    {% for i in (1..5) %}
+      {% for block in section.blocks %}
+        {% if block.type == 'text' and block.settings.message != blank %}
+          <span class="announcement-text">{{ block.settings.message }}</span>
+          <span class="separator">{{ section.settings.separator }}</span>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "tag": "section",
+  "class": "announcement-bar-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#c7da6d"
+    },
+    {
+      "type": "range",
+      "id": "bar_height",
+      "label": "Bar height (Desktop)",
+      "min": 30,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "mobile_bar_height",
+      "label": "Bar height (Mobile)",
+      "min": 30,
+      "max": 70,
+      "step": 2,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll speed (seconds)",
+      "min": 15,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 30,
+      "info": "Time to complete one full scroll"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "text_weight",
+      "label": "Text weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "select",
+      "id": "text_transform",
+      "label": "Text transform",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "lowercase"
+        },
+        {
+          "value": "capitalize",
+          "label": "Capitalize"
+        }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "label": "Letter spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "unit": "px",
+      "default": 0.5
+    },
+    {
+      "type": "header",
+      "content": "Separator"
+    },
+    {
+      "type": "text",
+      "id": "separator",
+      "label": "Separator symbol",
+      "default": "•",
+      "info": "Symbol between text items"
+    },
+    {
+      "type": "range",
+      "id": "separator_spacing",
+      "label": "Separator spacing",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "cycle_gap",
+      "label": "Gap between cycles",
+      "min": 15,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 80,
+      "info": "Space between each full set of messages"
+    },
+    {
+      "type": "range",
+      "id": "word_gap",
+      "label": "Gap between words",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 15,
+      "info": "Additional space between individual words"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Announcement Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "message",
+          "label": "Message",
+          "default": "FREE SHIPPING"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar",
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "message": "10% OFF TODAY"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "message": "FREE SHIPPING"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "message": "FREE RETURNS"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

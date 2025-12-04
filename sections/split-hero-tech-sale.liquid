@@ -1,0 +1,546 @@
+<style>
+  .split-hero-tech-sale {
+    width: 100%;
+    padding: {{ section.settings.section_padding_top }}px 20px {{ section.settings.section_padding_bottom }}px;
+    margin: 0 auto;
+    background-color: {{ section.settings.section_background }} !important;
+  }
+
+  .section-split-hero-tech-sale {
+    background-color: {{ section.settings.section_background }} !important;
+  }
+
+  .split-hero-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-radius: {{ section.settings.border_radius }}px;
+    overflow: hidden;
+    {% if section.settings.enable_shadow %}
+      box-shadow: 0 {{ section.settings.shadow_vertical }}px {{ section.settings.shadow_blur }}px rgba(0, 0, 0, {{ section.settings.shadow_opacity | divided_by: 100.0 }});
+    {% endif %}
+  }
+
+  .hero-column {
+    position: relative;
+    min-height: 600px;
+    padding: {{ section.settings.content_padding_top }}px {{ section.settings.content_padding_horizontal }}px {{ section.settings.content_padding_bottom }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: {{ section.settings.content_vertical_align }};
+    align-items: {{ section.settings.content_horizontal_align }};
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .hero-column-left {
+    background-image: url('{{ section.settings.left_background_image | img_url: 'master' }}');
+    background-color: {{ section.settings.left_fallback_color }};
+  }
+
+  .hero-column-right {
+    background-image: url('{{ section.settings.right_background_image | img_url: 'master' }}');
+    background-color: {{ section.settings.right_fallback_color }};
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    text-align: {{ section.settings.content_text_align }};
+  }
+
+  .hero-label {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ section.settings.label_color }};
+    margin: 0;
+    margin-bottom: {{ section.settings.label_heading_spacing }}px;
+    opacity: 0.9;
+  }
+
+  .hero-heading {
+    font-size: 62px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: {{ section.settings.heading_color }};
+    margin: 0;
+    margin-bottom: {{ section.settings.heading_subtext_spacing }}px;
+    letter-spacing: -1px;
+  }
+
+  .hero-subtext {
+    font-size: 18px;
+    color: {{ section.settings.subtext_color }};
+    margin: 0;
+    margin-bottom: {{ section.settings.subtext_button_spacing }}px;
+    opacity: 0.85;
+  }
+
+  .hero-button {
+    display: inline-block;
+    padding: 16px 36px;
+    background: {{ section.settings.button_bg }};
+    color: {{ section.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border: none;
+    cursor: pointer;
+  }
+
+  .hero-button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  @media (max-width: 768px) {
+    .split-hero-container {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .hero-column {
+      min-height: {{ section.settings.mobile_section_height }}px;
+      padding: 0;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      display: block;
+    }
+
+    .hero-column-left {
+      position: static;
+    }
+
+    .hero-column-right {
+      position: static;
+    }
+
+    .hero-column-left .hero-content {
+      position: absolute;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      max-width: calc(100% - 60px);
+      text-align: left;
+      padding: 0;
+    }
+
+    .hero-column-right .hero-content {
+      display: none;
+    }
+
+    .hero-heading {
+      font-size: 42px;
+    }
+
+    .hero-subtext {
+      font-size: 16px;
+    }
+
+    .hero-button {
+      padding: 14px 32px;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-column {
+      min-height: {{ section.settings.mobile_section_height }}px;
+    }
+
+    .hero-column-left .hero-content {
+      left: 25px;
+      max-width: calc(100% - 50px);
+    }
+
+    .hero-heading {
+      font-size: 36px;
+    }
+
+    .hero-subtext {
+      font-size: 15px;
+    }
+  }
+</style>
+
+<div class="split-hero-tech-sale">
+  <div class="split-hero-container">
+    <div class="hero-column hero-column-left">
+      <div class="hero-content">
+        {% if section.settings.label_text != blank %}
+          <div class="hero-label">{{ section.settings.label_text }}</div>
+        {% endif %}
+
+        {% if section.settings.heading_text != blank %}
+          <h2 class="hero-heading">{{ section.settings.heading_text }}</h2>
+        {% endif %}
+
+        {% if section.settings.subtext != blank %}
+          <p class="hero-subtext">{{ section.settings.subtext }}</p>
+        {% endif %}
+
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link }}" class="hero-button">
+            {{ section.settings.button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="hero-column hero-column-right">
+      <div class="hero-content"></div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Split Hero Tech Sale",
+  "tag": "section",
+  "class": "section-split-hero-tech-sale",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section Background Color",
+      "default": "#ffffff",
+      "info": "Background color for the section wrapper (visible around the hero container)"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Border Radius",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "Shadow Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shadow",
+      "label": "Enable Shadow",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow Vertical Offset",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Shadow Blur",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Shadow Opacity",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_section_height",
+      "min": 250,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile Section Height",
+      "default": 400,
+      "info": "Height of each stacked section on mobile"
+    },
+    {
+      "type": "header",
+      "content": "Content Padding"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Content Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "content_padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Content Padding Bottom",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "content_padding_horizontal",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Content Padding Left/Right",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Content Alignment"
+    },
+    {
+      "type": "select",
+      "id": "content_vertical_align",
+      "label": "Vertical Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "flex-end"
+    },
+    {
+      "type": "select",
+      "id": "content_horizontal_align",
+      "label": "Horizontal Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "select",
+      "id": "content_text_align",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Content Spacing"
+    },
+    {
+      "type": "range",
+      "id": "label_heading_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Label to Heading Spacing",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_subtext_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading to Subtext Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "subtext_button_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Subtext to Button Spacing",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Left Column Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_background_image",
+      "label": "Left Background Image (Smartwatch + Hand)"
+    },
+    {
+      "type": "color",
+      "id": "left_fallback_color",
+      "label": "Left Fallback Background Color",
+      "default": "#1a1f28"
+    },
+    {
+      "type": "header",
+      "content": "Right Column Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_background_image",
+      "label": "Right Background Image (Phone + Leaves)"
+    },
+    {
+      "type": "color",
+      "id": "right_fallback_color",
+      "label": "Right Fallback Background Color",
+      "default": "#6b5447"
+    },
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "label_text",
+      "label": "Label Text",
+      "default": "SALE"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "textarea",
+      "id": "heading_text",
+      "label": "Heading Text",
+      "default": "Smart tech at low prices!"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Find the best deals"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext Color",
+      "default": "#d0d0d0"
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop sale"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split Hero Tech Sale"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,457 @@
+{% comment %}
+  Scrolling Images Marquee Section
+  Displays images in a continuous horizontal scroll with text overlay
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    position: relative;
+    background-color: {{ section.settings.background_color }};
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .scrolling-container {
+    position: relative;
+    width: 100%;
+    height: {{ section.settings.image_height }}vh;
+    overflow: hidden;
+    min-height: 400px;
+  }
+
+  #shopify-section-{{ section.id }} .scrolling-track {
+    display: flex;
+    animation: scroll-{{ section.id }} {{ section.settings.scroll_speed }}s linear infinite;
+    height: 100%;
+  }
+
+  @keyframes scroll-{{ section.id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .image-group {
+    display: flex;
+    flex-shrink: 0;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .scrolling-image {
+    width: {{ section.settings.image_width }}px;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin-right: {{ section.settings.image_gap }}px;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .text-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: {{ section.settings.overlay_background }};
+    border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+    padding: {{ section.settings.overlay_padding }}px;
+    z-index: 10;
+    text-align: center;
+    min-width: 280px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  #shopify-section-{{ section.id }} .overlay-text {
+    font-size: {{ section.settings.text_size }}px;
+    color: {{ section.settings.text_color }};
+    margin: 0;
+    font-family: {% case section.settings.font_family %}
+      {% when 'georgia' %}'Georgia', serif
+      {% when 'helvetica' %}'Helvetica Neue', Arial, sans-serif
+      {% when 'times' %}'Times New Roman', serif
+      {% else %}-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
+    {% endcase %};
+    font-weight: {{ section.settings.font_weight }};
+    line-height: 1.4;
+  }
+
+  #shopify-section-{{ section.id }}:hover .scrolling-track {
+    {% if section.settings.pause_on_hover %}
+      animation-play-state: paused;
+    {% endif %}
+  }
+
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .scrolling-container {
+      height: {{ section.settings.mobile_image_height }}vh;
+    }
+
+    #shopify-section-{{ section.id }} .scrolling-image {
+      width: {{ section.settings.mobile_image_width }}px;
+      height: 100%;
+      margin-right: {{ section.settings.mobile_image_gap }}px;
+    }
+
+    #shopify-section-{{ section.id }} .text-overlay {
+      min-width: 240px;
+      padding: {{ section.settings.overlay_padding | times: 0.8 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .overlay-text {
+      font-size: {{ section.settings.text_size | times: 0.85 }}px;
+    }
+  }
+</style>
+
+<div class="scrolling-container">
+  <div class="scrolling-track" id="scrolling-track-{{ section.id }}">
+    {% comment %} First set of images {% endcomment %}
+    <div class="image-group">
+      {% for block in section.blocks %}
+        {% if block.type == 'image' %}
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 600 | image_tag:
+              class: 'scrolling-image',
+              loading: 'lazy',
+              alt: block.settings.image.alt | default: 'Scrolling image'
+            }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'scrolling-image' }}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% comment %} Duplicate set for seamless loop {% endcomment %}
+    <div class="image-group">
+      {% for block in section.blocks %}
+        {% if block.type == 'image' %}
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 600 | image_tag:
+              class: 'scrolling-image',
+              loading: 'lazy',
+              alt: block.settings.image.alt | default: 'Scrolling image'
+            }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'scrolling-image' }}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if section.settings.overlay_text != blank %}
+    <div class="text-overlay">
+      <p class="overlay-text">{{ section.settings.overlay_text }}</p>
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  (function() {
+    const track = document.getElementById('scrolling-track-{{ section.id }}');
+    const images = track.querySelectorAll('.scrolling-image');
+
+    // Ensure smooth infinite scroll by duplicating images if needed
+    function ensureSmoothScroll() {
+      const containerWidth = track.parentElement.offsetWidth;
+      const imageGroup = track.querySelector('.image-group');
+      const groupWidth = imageGroup.offsetWidth;
+
+      // If we need more copies for smooth scrolling
+      if (groupWidth < containerWidth * 2) {
+        const additionalCopies = Math.ceil((containerWidth * 2) / groupWidth);
+        for (let i = 0; i < additionalCopies; i++) {
+          const clone = imageGroup.cloneNode(true);
+          track.appendChild(clone);
+        }
+      }
+    }
+
+    // Run on load and resize
+    ensureSmoothScroll();
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(ensureSmoothScroll, 250);
+    });
+
+    // Optional: Adjust animation duration based on content width
+    {% if section.settings.auto_adjust_speed %}
+      const imageGroup = track.querySelector('.image-group');
+      const totalWidth = imageGroup.offsetWidth;
+      const baseSpeed = {{ section.settings.scroll_speed }};
+      const adjustedSpeed = (totalWidth / 300) * baseSpeed;
+      track.style.animationDuration = adjustedSpeed + 's';
+    {% endif %}
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Scrolling Images",
+  "tag": "section",
+  "class": "scrolling-images-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image width (Desktop)",
+      "min": 80,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Image height (Desktop)",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "image_gap",
+      "label": "Gap between images (Desktop)",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_width",
+      "label": "Image width (Mobile)",
+      "min": 60,
+      "max": 350,
+      "step": 5,
+      "unit": "px",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "label": "Image height (Mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 5,
+      "unit": "vh",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_gap",
+      "label": "Gap between images (Mobile)",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll speed (seconds)",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "s",
+      "default": 30,
+      "info": "Time to complete one full scroll"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_adjust_speed",
+      "label": "Auto-adjust speed based on content",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Text Overlay"
+    },
+    {
+      "type": "text",
+      "id": "overlay_text",
+      "label": "Overlay text",
+      "default": "+12,000 people loves our natural wine"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font family",
+      "options": [
+        {
+          "value": "system",
+          "label": "System font"
+        },
+        {
+          "value": "georgia",
+          "label": "Georgia"
+        },
+        {
+          "value": "helvetica",
+          "label": "Helvetica"
+        },
+        {
+          "value": "times",
+          "label": "Times New Roman"
+        }
+      ],
+      "default": "system"
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "overlay_background",
+      "label": "Overlay background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "overlay_padding",
+      "label": "Overlay padding",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "limit": 20,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Scrolling Images",
+      "settings": {
+        "image_width": 120,
+        "image_height": 90,
+        "image_gap": 10,
+        "mobile_image_width": 90,
+        "mobile_image_height": 70,
+        "mobile_image_gap": 8,
+        "scroll_speed": 30,
+        "overlay_text": "+12,000 people loves our natural wine"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,235 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement_marquee_HPFki8": {
+      "type": "announcement-marquee",
+      "blocks": {
+        "announcement_BhMA3L": {
+          "type": "announcement",
+          "settings": {
+            "text": "EASY RETURNS"
+          }
+        },
+        "announcement_jDydKX": {
+          "type": "announcement",
+          "settings": {
+            "text": "TRUSTED BY 1000+"
+          }
+        },
+        "announcement_HD3qKB": {
+          "type": "announcement",
+          "settings": {
+            "text": "FREE SHIPPING"
+          }
+        },
+        "announcement_cwMMEh": {
+          "type": "announcement",
+          "settings": {
+            "text": "EASY CHECKOUT"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_BhMA3L",
+        "announcement_jDydKX",
+        "announcement_HD3qKB",
+        "announcement_cwMMEh"
+      ],
+      "name": "Announcement Marquee",
+      "settings": {
+        "background_color": "#000000",
+        "text_color": "#ffffff",
+        "bar_height": 44,
+        "mobile_bar_height": 36,
+        "text_size": 13,
+        "mobile_text_size": 11,
+        "font_weight": "400",
+        "text_transform": "uppercase",
+        "letter_spacing": 1,
+        "item_spacing": 50,
+        "mobile_item_spacing": 16,
+        "content_gap": 50,
+        "scroll_speed": 26,
+        "pause_on_hover": false
+      }
+    },
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "Welcome to our store",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0"
+      ],
+      "settings": {
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-1",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "scrolling_announcement_bar_r4PTFf": {
+      "type": "scrolling-announcement-bar",
+      "blocks": {
+        "text_fNRGBM": {
+          "type": "text",
+          "settings": {
+            "message": "10% OFF TODAY"
+          }
+        },
+        "text_X7bHj4": {
+          "type": "text",
+          "settings": {
+            "message": "FREE SHIPPING"
+          }
+        },
+        "text_PgwaJz": {
+          "type": "text",
+          "settings": {
+            "message": "FREE RETURNS"
+          }
+        }
+      },
+      "block_order": [
+        "text_fNRGBM",
+        "text_X7bHj4",
+        "text_PgwaJz"
+      ],
+      "name": "Announcement Bar",
+      "settings": {
+        "background_color": "#c7da6d",
+        "bar_height": 50,
+        "mobile_bar_height": 44,
+        "scroll_speed": 25,
+        "pause_on_hover": false,
+        "text_size": 13,
+        "text_weight": "400",
+        "text_color": "#333333",
+        "text_transform": "uppercase",
+        "letter_spacing": 1,
+        "separator": "•",
+        "separator_spacing": 50,
+        "cycle_gap": 15,
+        "word_gap": 5
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-left",
+        "mobile_logo_position": "center",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": true,
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "rounded_navigation_header_zWhT7D": {
+      "type": "rounded-navigation-header",
+      "blocks": {
+        "left_link_g6wP9J": {
+          "type": "left_link",
+          "settings": {
+            "label": "SHOP",
+            "url": "/collections/all"
+          }
+        },
+        "left_link_Fm8MgM": {
+          "type": "left_link",
+          "settings": {
+            "label": "ABOUT",
+            "url": "/pages/about"
+          }
+        },
+        "right_link_gwQPXc": {
+          "type": "right_link",
+          "settings": {
+            "label": "ACCOUNT",
+            "url": "/account",
+            "is_cart": false
+          }
+        },
+        "right_link_mPchLF": {
+          "type": "right_link",
+          "settings": {
+            "label": "CART",
+            "url": "/cart",
+            "is_cart": true
+          }
+        }
+      },
+      "block_order": [
+        "left_link_g6wP9J",
+        "left_link_Fm8MgM",
+        "right_link_gwQPXc",
+        "right_link_mPchLF"
+      ],
+      "name": "Rounded Navigation Header",
+      "settings": {
+        "logo_text": "Section Saver",
+        "logo_height": 40,
+        "mobile_logo_height": 32,
+        "logo_text_size": 20,
+        "mobile_logo_text_size": 18,
+        "logo_font_weight": "600",
+        "logo_letter_spacing": 1,
+        "logo_uppercase": true,
+        "logo_color": "#000000",
+        "sticky_header": true,
+        "uppercase_links": true,
+        "font_size": 14,
+        "font_weight": "500",
+        "letter_spacing": 1,
+        "link_spacing": 20,
+        "outer_bg_color": "transparent",
+        "bg_color": "#f5f5f5",
+        "text_color": "#000000",
+        "hover_color": "#666666",
+        "cart_count_bg": "#ff0000",
+        "cart_count_color": "#ffffff",
+        "max_width": 1200,
+        "outer_padding": 20,
+        "padding_vertical": 16,
+        "padding_horizontal": 40,
+        "shadow": "0 2px 5px rgba(0,0,0,0.05)",
+        "mobile_breakpoint": 768,
+        "mobile_padding": 16,
+        "mobile_logo_position": "center"
+      }
+    }
+  },
+  "order": [
+    "announcement_marquee_HPFki8",
+    "announcement-bar",
+    "scrolling_announcement_bar_r4PTFf",
+    "header",
+    "rounded_navigation_header_zWhT7D"
+  ]
+}

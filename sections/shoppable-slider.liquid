@@ -1,0 +1,1050 @@
+{% style %}
+  #shoppable-slider-{{ section.id }} {
+    width: 100%;
+    margin-top: {{ section.settings.top_margin }}px;
+    margin-bottom: {{ section.settings.bottom_margin }}px;
+    padding: 50px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  }
+
+  #shoppable-slider-{{ section.id }} .section-header {
+    max-width: 1400px;
+    margin: 0 auto 30px;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  #shoppable-slider-{{ section.id }} .section-title {
+    font-size: {{ section.settings.title_font_size_desktop }}px;
+    font-weight: {{ section.settings.title_font.weight }};
+    font-style: {{ section.settings.title_font.style }};
+    font-family: {{ section.settings.title_font.family }}, {{ section.settings.title_font.fallback_families }};
+    color: {{ section.settings.title_color }};
+    margin: 0 0 10px 0;
+  }
+
+  #shoppable-slider-{{ section.id }} .section-subtitle {
+    font-size: {{ section.settings.subtitle_font_size_desktop }}px;
+    font-weight: {{ section.settings.subtitle_font.weight }};
+    font-style: {{ section.settings.subtitle_font.style }};
+    font-family: {{ section.settings.subtitle_font.family }}, {{ section.settings.subtitle_font.fallback_families }};
+    color: {{ section.settings.subtitle_color }};
+    margin: 0;
+  }
+
+  #shoppable-slider-{{ section.id }} .slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  #shoppable-slider-{{ section.id }} .slider-track {
+    position: relative;
+    height: 680px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide {
+    position: absolute;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    /* Smooth transitions */
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+                height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+                width 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+                opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+                left 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  /* Fixed card dimensions for desktop */
+  {% assign center_width = 360 %}
+  {% assign center_height = 620 %}
+  {% assign adjacent_width = 340 %}
+  {% assign adjacent_height = 560 %}
+  {% assign far_width = 300 %}
+  {% assign far_height = 500 %}
+  {% assign center_gap = 20 %}
+  {% assign card_overlap = 40 %}
+
+  {% assign center_half = center_width | divided_by: 2 %}
+  {% assign adjacent_half = adjacent_width | divided_by: 2 %}
+  {% assign far_half = far_width | divided_by: 2 %}
+
+  /* Adjacent position = center_half + center_gap + adjacent_half */
+  {% assign adjacent_pos = center_half | plus: center_gap | plus: adjacent_half %}
+
+  /* Far position - subtract overlap so far cards go behind adjacent cards */
+  {% assign far_pos = adjacent_pos | plus: adjacent_half | minus: card_overlap | plus: far_half %}
+
+  /* Hidden position = far_pos + far_half + far_half (for smooth exit) */
+  {% assign hidden_pos = far_pos | plus: far_half | plus: far_half %}
+
+  /* Position 0 - far left (smallest, close to adjacent) */
+  #shoppable-slider-{{ section.id }} .slide[data-position="0"] {
+    left: calc(50% - {{ far_half }}px - {{ far_pos }}px);
+    width: {{ far_width }}px;
+    height: {{ far_height }}px;
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  /* Position 1 - adjacent left (gap from center) */
+  #shoppable-slider-{{ section.id }} .slide[data-position="1"] {
+    left: calc(50% - {{ adjacent_half }}px - {{ adjacent_pos }}px);
+    width: {{ adjacent_width }}px;
+    height: {{ adjacent_height }}px;
+    opacity: 1;
+    z-index: 5;
+  }
+
+  /* Position 2 - center (active - largest) */
+  #shoppable-slider-{{ section.id }} .slide[data-position="2"] {
+    left: calc(50% - {{ center_half }}px);
+    width: {{ center_width }}px;
+    height: {{ center_height }}px;
+    opacity: 1;
+    z-index: 10;
+  }
+
+  /* Position 3 - adjacent right (gap from center) */
+  #shoppable-slider-{{ section.id }} .slide[data-position="3"] {
+    left: calc(50% - {{ adjacent_half }}px + {{ adjacent_pos }}px);
+    width: {{ adjacent_width }}px;
+    height: {{ adjacent_height }}px;
+    opacity: 1;
+    z-index: 5;
+  }
+
+  /* Position 4 - far right (smallest, close to adjacent) */
+  #shoppable-slider-{{ section.id }} .slide[data-position="4"] {
+    left: calc(50% - {{ far_half }}px + {{ far_pos }}px);
+    width: {{ far_width }}px;
+    height: {{ far_height }}px;
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  /* Hidden positions for enter/exit */
+  #shoppable-slider-{{ section.id }} .slide[data-position="-1"] {
+    left: calc(50% - {{ far_half }}px - {{ hidden_pos }}px);
+    width: {{ far_width | minus: 30 }}px;
+    height: {{ far_height | minus: 50 }}px;
+    opacity: 0;
+    z-index: 0;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide[data-position="5"] {
+    left: calc(50% - {{ far_half }}px + {{ hidden_pos }}px);
+    width: {{ far_width | minus: 30 }}px;
+    height: {{ far_height | minus: 50 }}px;
+    opacity: 0;
+    z-index: 0;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide-media {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide-media img,
+  #shoppable-slider-{{ section.id }} .slide-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+    pointer-events: none;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    padding-right: 70px;
+    color: #fff;
+    z-index: 2;
+  }
+
+  #shoppable-slider-{{ section.id }} .user-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  #shoppable-slider-{{ section.id }} .user-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: {{ section.settings.username_color }};
+  }
+
+  #shoppable-slider-{{ section.id }} .verified-icon {
+    width: 20px;
+    height: 20px;
+    display: none;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide.show-verified .verified-icon {
+    display: block;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide-subtitle {
+    font-size: {{ section.settings.description_font_size }}px;
+    font-weight: {{ section.settings.description_font.weight }};
+    font-style: {{ section.settings.description_font.style }};
+    font-family: {{ section.settings.description_font.family }}, {{ section.settings.description_font.fallback_families }};
+    color: {{ section.settings.description_color }};
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: {{ section.settings.verified_icon_color }};
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: gap 0.2s ease;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide-link:hover {
+    gap: 8px;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide-link svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  #shoppable-slider-{{ section.id }} .play-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    background: {{ section.settings.play_btn_bg_color }};
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    transition: all 0.2s ease;
+  }
+
+  #shoppable-slider-{{ section.id }} .play-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+
+  #shoppable-slider-{{ section.id }} .play-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: {{ section.settings.play_btn_icon_color }};
+    margin-left: 3px;
+  }
+
+  #shoppable-slider-{{ section.id }} .play-btn.playing svg.play-icon {
+    display: none;
+  }
+
+  #shoppable-slider-{{ section.id }} .play-btn svg.pause-icon {
+    display: none;
+    margin-left: 0;
+  }
+
+  #shoppable-slider-{{ section.id }} .play-btn.playing svg.pause-icon {
+    display: block;
+  }
+
+  /* Navigation Arrows */
+  #shoppable-slider-{{ section.id }} .nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: all 0.2s ease;
+  }
+
+  #shoppable-slider-{{ section.id }} .nav-arrow:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  #shoppable-slider-{{ section.id }} .nav-arrow svg {
+    width: 24px;
+    height: 24px;
+    fill: #000;
+  }
+
+  #shoppable-slider-{{ section.id }} .nav-arrow.prev {
+    left: 15px;
+  }
+
+  #shoppable-slider-{{ section.id }} .nav-arrow.next {
+    right: 15px;
+  }
+
+  /* Laptop L (1440px) */
+  @media (max-width: 1440px) {
+    #shoppable-slider-{{ section.id }} .slider-track {
+      height: 640px;
+    }
+  }
+
+  /* Laptop (1024px) */
+  @media (max-width: 1024px) {
+    #shoppable-slider-{{ section.id }} .slider-container {
+      padding: 0 60px;
+    }
+
+    #shoppable-slider-{{ section.id }} .slider-track {
+      height: 580px;
+    }
+
+    #shoppable-slider-{{ section.id }} .slide[data-position="0"] {
+      width: 260px;
+      height: 420px;
+      left: calc(50% - 130px - 580px);
+    }
+
+    #shoppable-slider-{{ section.id }} .slide[data-position="1"] {
+      width: 300px;
+      height: 480px;
+      left: calc(50% - 150px - 320px);
+    }
+
+    #shoppable-slider-{{ section.id }} .slide[data-position="2"] {
+      width: 320px;
+      height: 540px;
+      left: calc(50% - 160px);
+    }
+
+    #shoppable-slider-{{ section.id }} .slide[data-position="3"] {
+      width: 300px;
+      height: 480px;
+      left: calc(50% - 150px + 320px);
+    }
+
+    #shoppable-slider-{{ section.id }} .slide[data-position="4"] {
+      width: 260px;
+      height: 420px;
+      left: calc(50% - 130px + 580px);
+    }
+
+    #shoppable-slider-{{ section.id }} .nav-arrow {
+      width: 50px;
+      height: 50px;
+    }
+
+    #shoppable-slider-{{ section.id }} .nav-arrow svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  /* Tablet (768px) */
+  @media (max-width: 768px) {
+    #shoppable-slider-{{ section.id }} .section-title {
+      font-size: {{ section.settings.title_font_size_mobile }}px;
+    }
+
+    #shoppable-slider-{{ section.id }} .section-subtitle {
+      font-size: {{ section.settings.subtitle_font_size_mobile }}px;
+    }
+
+    #shoppable-slider-{{ section.id }} .slider-container {
+      padding: 0 20px;
+    }
+
+    #shoppable-slider-{{ section.id }} .slider-track {
+      height: 520px;
+    }
+
+    /* Hide far cards on tablet */
+    #shoppable-slider-{{ section.id }} .slide[data-position="0"],
+    #shoppable-slider-{{ section.id }} .slide[data-position="4"] {
+      opacity: 0;
+    }
+
+    #shoppable-slider-{{ section.id }} .slide[data-position="1"] {
+      width: 260px;
+      height: 420px;
+      left: -200px;
+      opacity: 0.7;
+    }
+
+    #shoppable-slider-{{ section.id }} .slide[data-position="2"] {
+      width: 300px;
+      height: 480px;
+      left: calc(50% - 150px);
+    }
+
+    #shoppable-slider-{{ section.id }} .slide[data-position="3"] {
+      width: 260px;
+      height: 420px;
+      left: calc(100% - 60px);
+      opacity: 0.7;
+    }
+
+    #shoppable-slider-{{ section.id }} .nav-arrow {
+      width: 45px;
+      height: 45px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    #shoppable-slider-{{ section.id }} .nav-arrow svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    #shoppable-slider-{{ section.id }} .nav-arrow.prev {
+      left: 10px;
+    }
+
+    #shoppable-slider-{{ section.id }} .nav-arrow.next {
+      right: 10px;
+    }
+
+    #shoppable-slider-{{ section.id }} .slide-content {
+      padding: 15px;
+      padding-right: 60px;
+    }
+
+    #shoppable-slider-{{ section.id }} .user-name {
+      font-size: 18px;
+    }
+
+    #shoppable-slider-{{ section.id }} .slide-subtitle {
+      font-size: 14px;
+    }
+
+    #shoppable-slider-{{ section.id }} .play-btn {
+      width: 45px;
+      height: 45px;
+      bottom: 15px;
+      right: 12px;
+    }
+  }
+
+  /* All Mobile (480px and below) - Fixed card dimensions and gap, edges adjust with screen */
+  @media (max-width: 480px) {
+    #shoppable-slider-{{ section.id }} .slider-track {
+      height: 440px;
+    }
+
+    /* Adjacent left - fixed position from center, edge shows based on screen width */
+    #shoppable-slider-{{ section.id }} .slide[data-position="1"] {
+      width: 220px;
+      height: 350px;
+      left: calc(50% - 120px - 12px - 220px); /* center half + gap + adjacent width */
+    }
+
+    /* Center card - always centered */
+    #shoppable-slider-{{ section.id }} .slide[data-position="2"] {
+      width: 240px;
+      height: 400px;
+      left: calc(50% - 120px);
+    }
+
+    /* Adjacent right - fixed position from center, edge shows based on screen width */
+    #shoppable-slider-{{ section.id }} .slide[data-position="3"] {
+      width: 220px;
+      height: 350px;
+      left: calc(50% + 120px + 12px); /* center half + gap */
+    }
+
+    #shoppable-slider-{{ section.id }} .nav-arrow {
+      width: 40px;
+      height: 40px;
+    }
+
+    #shoppable-slider-{{ section.id }} .nav-arrow svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    #shoppable-slider-{{ section.id }} .play-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    #shoppable-slider-{{ section.id }} .slide-content {
+      padding: 12px;
+      padding-right: 55px;
+    }
+
+    #shoppable-slider-{{ section.id }} .user-name {
+      font-size: 16px;
+    }
+
+    #shoppable-slider-{{ section.id }} .slide-subtitle {
+      font-size: 13px;
+    }
+  }
+
+  /* Mobile M (375px) - Smaller nav/buttons */
+  @media (max-width: 400px) {
+    #shoppable-slider-{{ section.id }} .nav-arrow {
+      width: 36px;
+      height: 36px;
+    }
+
+    #shoppable-slider-{{ section.id }} .nav-arrow svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    #shoppable-slider-{{ section.id }} .play-btn {
+      width: 38px;
+      height: 38px;
+    }
+  }
+
+  /* Mobile S (320px) - Smaller text and buttons */
+  @media (max-width: 350px) {
+    #shoppable-slider-{{ section.id }} .user-name {
+      font-size: 14px;
+    }
+
+    #shoppable-slider-{{ section.id }} .slide-subtitle {
+      font-size: 12px;
+    }
+
+    #shoppable-slider-{{ section.id }} .nav-arrow {
+      width: 32px;
+      height: 32px;
+    }
+
+    #shoppable-slider-{{ section.id }} .nav-arrow svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    #shoppable-slider-{{ section.id }} .play-btn {
+      width: 35px;
+      height: 35px;
+      bottom: 12px;
+      right: 10px;
+    }
+
+    #shoppable-slider-{{ section.id }} .play-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+{% endstyle %}
+
+<section id="shoppable-slider-{{ section.id }}">
+  {% if section.settings.title != blank or section.settings.subtitle != blank %}
+    <div class="section-header">
+      {% if section.settings.title != blank %}
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <p class="section-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="slider-container">
+    <div class="slider-track" id="slider-track-{{ section.id }}">
+      {% comment %} Slides will be cloned by JavaScript for infinite loop {% endcomment %}
+    </div>
+
+    <!-- Hidden slide templates rendered by Shopify -->
+    <div class="slide-templates" id="slide-templates-{{ section.id }}" style="display:none;">
+      {% for block in section.blocks %}
+        {% assign has_video = false %}
+        {% if block.settings.video_file != blank %}
+          {% assign has_video = true %}
+        {% endif %}
+        <div class="slide-template" data-slide-index="{{ forloop.index0 }}" data-verified="{{ block.settings.verified }}">
+          <div class="slide-media">
+            {% if block.settings.video_file != blank %}
+              {{ block.settings.video_file | video_tag: loop: true, muted: true, playsinline: true, preload: 'metadata', image_size: '800x' }}
+            {% else %}
+              <div class="slide-placeholder"></div>
+            {% endif %}
+          </div>
+          <div class="slide-overlay"></div>
+          <div class="slide-content">
+            <div class="user-info">
+              <span class="user-name">{{ block.settings.user_name }}</span>
+              <svg class="verified-icon" viewBox="0 0 24 24" fill="{{ section.settings.verified_icon_color }}">
+                <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"/>
+              </svg>
+            </div>
+            <p class="slide-subtitle">{{ block.settings.sub_text }}</p>
+            {% if block.settings.product != blank %}
+              <a href="{{ block.settings.product.url }}" class="slide-link">
+                {{ block.settings.product_text }}
+                <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+              </a>
+            {% endif %}
+          </div>
+          {% if has_video %}
+            <button class="play-btn" aria-label="Play video">
+              <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <button class="nav-arrow prev" id="prev-{{ section.id }}" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+    <button class="nav-arrow next" id="next-{{ section.id }}" aria-label="Next slide">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
+  </div>
+</section>
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const track = document.getElementById('slider-track-' + sectionId);
+    const templates = document.getElementById('slide-templates-' + sectionId);
+    const prevBtn = document.getElementById('prev-' + sectionId);
+    const nextBtn = document.getElementById('next-' + sectionId);
+
+    if (!track || !templates) return;
+
+    const slideTemplates = templates.querySelectorAll('.slide-template');
+    const totalSlides = slideTemplates.length;
+
+    if (totalSlides === 0) return;
+
+    let currentIndex = 0;
+    let isAnimating = false;
+    const animationDuration = 500; // ms - matches CSS transition
+
+    // Clone a slide template and return as a slide element
+    function cloneSlide(index) {
+      const template = slideTemplates[index];
+      const slide = template.cloneNode(true);
+      slide.className = 'slide';
+      slide.setAttribute('data-original-index', index);
+      // Add verified class if needed
+      if (template.getAttribute('data-verified') === 'true') {
+        slide.classList.add('show-verified');
+      }
+      return slide;
+    }
+
+    // Get the slide index for a given position relative to currentIndex
+    function getSlideIndex(offset) {
+      return ((currentIndex + offset) % totalSlides + totalSlides) % totalSlides;
+    }
+
+    // Initial render of 5 slides
+    function initialRender() {
+      track.innerHTML = '';
+
+      // Create 5 slides at positions 0-4
+      for (let pos = 0; pos <= 4; pos++) {
+        const offset = pos - 2; // -2, -1, 0, 1, 2
+        const idx = getSlideIndex(offset);
+        const slide = cloneSlide(idx);
+        slide.setAttribute('data-position', pos);
+        track.appendChild(slide);
+      }
+
+      setupPlayButtons();
+    }
+
+    // Navigate with smooth animation
+    function navigate(direction) {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      // Pause all videos
+      track.querySelectorAll('video').forEach(v => {
+        v.pause();
+        const btn = v.closest('.slide').querySelector('.play-btn');
+        if (btn) btn.classList.remove('playing');
+      });
+
+      const slides = Array.from(track.querySelectorAll('.slide'));
+
+      if (direction === 'next') {
+        // Update current index
+        currentIndex = (currentIndex + 1) % totalSlides;
+
+        // Move all slides one position to the left
+        slides.forEach(slide => {
+          const currentPos = parseInt(slide.getAttribute('data-position'));
+          const newPos = currentPos - 1;
+          slide.setAttribute('data-position', newPos);
+        });
+
+        // Add new slide on the right (position 5, will animate to 4)
+        const newIdx = getSlideIndex(2); // +2 from new currentIndex
+        const newSlide = cloneSlide(newIdx);
+        newSlide.setAttribute('data-position', 5);
+        track.appendChild(newSlide);
+
+        // Force reflow then move new slide into position 4
+        newSlide.offsetHeight;
+        newSlide.setAttribute('data-position', 4);
+
+        // Remove slide that moved to position -1 after animation
+        setTimeout(() => {
+          const exitedSlide = track.querySelector('.slide[data-position="-1"]');
+          if (exitedSlide) exitedSlide.remove();
+          setupPlayButtons();
+          isAnimating = false;
+        }, animationDuration);
+
+      } else {
+        // Update current index
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+
+        // Move all slides one position to the right
+        slides.forEach(slide => {
+          const currentPos = parseInt(slide.getAttribute('data-position'));
+          const newPos = currentPos + 1;
+          slide.setAttribute('data-position', newPos);
+        });
+
+        // Add new slide on the left (position -1, will animate to 0)
+        const newIdx = getSlideIndex(-2); // -2 from new currentIndex
+        const newSlide = cloneSlide(newIdx);
+        newSlide.setAttribute('data-position', -1);
+        track.insertBefore(newSlide, track.firstChild);
+
+        // Force reflow then move new slide into position 0
+        newSlide.offsetHeight;
+        newSlide.setAttribute('data-position', 0);
+
+        // Remove slide that moved to position 5 after animation
+        setTimeout(() => {
+          const exitedSlide = track.querySelector('.slide[data-position="5"]');
+          if (exitedSlide) exitedSlide.remove();
+          setupPlayButtons();
+          isAnimating = false;
+        }, animationDuration);
+      }
+    }
+
+    // Setup play button functionality
+    function setupPlayButtons() {
+      const playBtns = track.querySelectorAll('.play-btn');
+      playBtns.forEach(btn => {
+        // Remove existing listeners by cloning
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+
+        newBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const slide = this.closest('.slide');
+          const video = slide.querySelector('video');
+
+          if (video) {
+            // Pause all other videos
+            track.querySelectorAll('video').forEach(v => {
+              if (v !== video) {
+                v.pause();
+                const otherBtn = v.closest('.slide').querySelector('.play-btn');
+                if (otherBtn) otherBtn.classList.remove('playing');
+              }
+            });
+
+            if (video.paused) {
+              video.play();
+              this.classList.add('playing');
+            } else {
+              video.pause();
+              this.classList.remove('playing');
+            }
+          }
+        });
+      });
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', () => navigate('next'));
+    prevBtn.addEventListener('click', () => navigate('prev'));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') navigate('next');
+      if (e.key === 'ArrowLeft') navigate('prev');
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    track.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) navigate('next');
+        else navigate('prev');
+      }
+    }, { passive: true });
+
+    // Initial render
+    initialRender();
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Shoppable Slider",
+  "tag": "section",
+  "class": "shoppable-slider-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "top_margin",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top Margin",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "bottom_margin",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom Margin",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Title and Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Over 1000+ People Trust Us"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Check out our reviews and see for yourself!"
+    },
+    {
+      "type": "header",
+      "content": "Font Settings"
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Title Font",
+      "default": "poppins_n6"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_desktop",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Font Size (Desktop)",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Font Size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "font_picker",
+      "id": "subtitle_font",
+      "label": "Subtitle Font",
+      "default": "poppins_n3"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_font_size_desktop",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle Font Size (Desktop)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "subtitle_font_size_mobile",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle Font Size (Mobile)",
+      "default": 16
+    },
+    {
+      "type": "font_picker",
+      "id": "description_font",
+      "label": "Description Text Font",
+      "default": "poppins_n4"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Text Font Size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "username_color",
+      "label": "Username Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "play_btn_bg_color",
+      "label": "Play Button Background Color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "play_btn_icon_color",
+      "label": "Play Button Icon Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "verified_icon_color",
+      "label": "Verified Icon Color",
+      "default": "#42A5F5"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slider Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Slider Video"
+        },
+        {
+          "type": "text",
+          "id": "user_name",
+          "label": "User Name",
+          "default": "Sarah M."
+        },
+        {
+          "type": "text",
+          "id": "sub_text",
+          "label": "Sub Text",
+          "default": "Ordered the Sternify Mask 2.0"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product",
+          "info": "Optional: Choose a product to link in the slider."
+        },
+        {
+          "type": "text",
+          "id": "product_text",
+          "label": "Product Text",
+          "default": "Produkt ansehen",
+          "info": "The text that will be displayed in the product link."
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shoppable Slider",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

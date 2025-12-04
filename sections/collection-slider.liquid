@@ -1,0 +1,729 @@
+<style>
+  #collection-slider-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+    overflow: hidden;
+  }
+
+  #collection-slider-{{ section.id }} .container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  #collection-slider-{{ section.id }} .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 0 20px;
+  }
+
+  #collection-slider-{{ section.id }} .section-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 10px 0;
+    line-height: 1.2;
+  }
+
+  #collection-slider-{{ section.id }} .section-subheading {
+    font-size: {{ section.settings.subheading_size }}px;
+    font-weight: 400;
+    color: {{ section.settings.subheading_color }};
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  #collection-slider-{{ section.id }} .slider-wrapper {
+    position: relative;
+    margin: 0 auto;
+    max-width: calc(100% - 120px);
+  }
+
+  #collection-slider-{{ section.id }} .slider-container {
+    overflow: visible;
+    position: relative;
+    margin: 0 -60px;
+  }
+
+  #collection-slider-{{ section.id }} .slider-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 0;
+    padding: 0 60px;
+  }
+
+  #collection-slider-{{ section.id }} .slide-card {
+    flex: 0 0 calc(33.333% - 0.01px);
+    position: relative;
+    border-radius: 0;
+    overflow: hidden;
+    cursor: pointer;
+    height: 450px;
+  }
+
+  #collection-slider-{{ section.id }} .slide-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #collection-slider-{{ section.id }} .slide-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px 25px;
+  }
+
+  #collection-slider-{{ section.id }} .slide-card-top {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  #collection-slider-{{ section.id }} .slide-card-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+    opacity: 0.9;
+    margin: 0;
+    text-align: left;
+  }
+
+  #collection-slider-{{ section.id }} .slide-card-title {
+    line-height: 1.1;
+    margin: 0;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  #collection-slider-{{ section.id }} .slide-card-button {
+    display: inline-block;
+    padding: 14px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+
+  /* Navigation Arrows */
+  #collection-slider-{{ section.id }} .slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #000000;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  #collection-slider-{{ section.id }} .slider-arrow:hover {
+    background: #f5f5f5;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  #collection-slider-{{ section.id }} .slider-arrow.prev {
+    left: -20px;
+  }
+
+  #collection-slider-{{ section.id }} .slider-arrow.next {
+    right: -20px;
+  }
+
+  #collection-slider-{{ section.id }} .slider-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    #collection-slider-{{ section.id }} .slider-wrapper {
+      max-width: calc(100% - 100px);
+    }
+
+    #collection-slider-{{ section.id }} .slider-container {
+      margin: 0 -50px;
+    }
+
+    #collection-slider-{{ section.id }} .slider-track {
+      padding: 0 50px;
+    }
+
+    #collection-slider-{{ section.id }} .slide-card {
+      flex: 0 0 50%;
+      height: 420px;
+    }
+
+    #collection-slider-{{ section.id }} .slide-card-title {
+      font-size: 36px;
+    }
+
+    #collection-slider-{{ section.id }} .slider-arrow {
+      width: 45px;
+      height: 45px;
+    }
+
+    #collection-slider-{{ section.id }} .slider-arrow.prev {
+      left: -15px;
+    }
+
+    #collection-slider-{{ section.id }} .slider-arrow.next {
+      right: -15px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #collection-slider-{{ section.id }} .container {
+      display: flex;
+      flex-direction: column;
+      padding: 0 15px;
+    }
+
+    #collection-slider-{{ section.id }} .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+      word-break: break-word;
+      width: 100%;
+      order: 1;
+    }
+
+    #collection-slider-{{ section.id }} .section-heading {
+      font-size: {{ section.settings.heading_size | minus: 8 }}px;
+      word-break: break-word;
+    }
+
+    #collection-slider-{{ section.id }} .section-subheading {
+      font-size: {{ section.settings.subheading_size | minus: 2 }}px;
+    }
+
+    #collection-slider-{{ section.id }} .slider-wrapper {
+      max-width: 100%;
+      overflow: hidden;
+      width: 100%;
+      order: 2;
+    }
+
+    #collection-slider-{{ section.id }} .slider-container {
+      margin: 0 -15px;
+      overflow: visible;
+    }
+
+    #collection-slider-{{ section.id }} .slider-track {
+      padding: 0 15px;
+      gap: 0;
+    }
+
+    #collection-slider-{{ section.id }} .slide-card {
+      flex: 0 0 85%;
+      height: 500px;
+    }
+
+    #collection-slider-{{ section.id }} .slide-card-title {
+      font-size: 38px;
+    }
+
+    #collection-slider-{{ section.id }} .slider-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #collection-slider-{{ section.id }} .section-heading {
+      font-size: {{ section.settings.heading_size | minus: 14 }}px;
+    }
+
+    #collection-slider-{{ section.id }} .slide-card {
+      flex: 0 0 85%;
+      height: 450px;
+    }
+
+    #collection-slider-{{ section.id }} .slide-card-title {
+      font-size: 32px;
+    }
+  }
+</style>
+
+<section id="collection-slider-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.heading != blank or section.settings.subheading != blank %}
+      <div class="section-header">
+        {% if section.settings.heading != blank %}
+          <h2 class="section-heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <p class="section-subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="slider-wrapper">
+      <button class="slider-arrow prev" aria-label="Previous slide">
+        <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 1L1 6L5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="slider-container">
+        <div class="slider-track">
+          {% for block in section.blocks %}
+            <div class="slide-card" {{ block.shopify_attributes }}>
+              {% if block.settings.image %}
+                <img
+                  src="{{ block.settings.image | img_url: '800x' }}"
+                  alt="{{ block.settings.title }}"
+                  class="slide-card-image"
+                  loading="lazy"
+                >
+              {% else %}
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+              {% endif %}
+
+              <div class="slide-card-overlay">
+                <div class="slide-card-top">
+                  {% if block.settings.label != blank %}
+                    <p class="slide-card-label">{{ block.settings.label }}</p>
+                  {% endif %}
+                  {% if block.settings.title != blank %}
+                    <h3 class="slide-card-title" style="color: {{ block.settings.title_color }}; font-size: {{ block.settings.title_size }}px; font-weight: {{ block.settings.title_weight }};">{{ block.settings.title }}</h3>
+                  {% endif %}
+                </div>
+
+                {% if block.settings.button_text != blank %}
+                  <a
+                    href="{{ block.settings.button_link }}"
+                    class="slide-card-button"
+                    style="background-color: {{ block.settings.button_color }}; color: #ffffff;"
+                    data-title-color="{{ block.settings.title_color }}"
+                    data-button-color="{{ block.settings.button_color }}"
+                    onmouseover="this.style.backgroundColor=this.dataset.titleColor; this.style.color='#000000'; this.style.transform='translateY(-2px)';"
+                    onmouseout="this.style.backgroundColor=this.dataset.buttonColor; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
+                  >
+                    {{ block.settings.button_text }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <button class="slider-arrow next" aria-label="Next slide">
+        <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L5 6L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const sliderTrack = document.querySelector('#collection-slider-{{ section.id }} .slider-track');
+    const prevBtn = document.querySelector('#collection-slider-{{ section.id }} .slider-arrow.prev');
+    const nextBtn = document.querySelector('#collection-slider-{{ section.id }} .slider-arrow.next');
+    const originalSlides = Array.from(document.querySelectorAll('#collection-slider-{{ section.id }} .slide-card'));
+
+    if (originalSlides.length === 0) return;
+
+    let currentIndex = 0;
+    let slidesPerView = 3;
+    let isTransitioning = false;
+    let autoSlideInterval;
+
+    // Clone slides for infinite loop
+    function setupInfiniteLoop() {
+      // Clear existing slides
+      sliderTrack.innerHTML = '';
+
+      // Add clones at the beginning (last slides)
+      originalSlides.forEach(slide => {
+        const clone = slide.cloneNode(true);
+        sliderTrack.appendChild(clone);
+      });
+
+      // Add original slides
+      originalSlides.forEach(slide => {
+        sliderTrack.appendChild(slide.cloneNode(true));
+      });
+
+      // Add clones at the end (first slides)
+      originalSlides.forEach(slide => {
+        const clone = slide.cloneNode(true);
+        sliderTrack.appendChild(clone);
+      });
+
+      // Start at the first set of original slides
+      currentIndex = originalSlides.length;
+    }
+
+    function getSlidesPerView() {
+      const width = window.innerWidth;
+      if (width <= 768) return 1; // Mobile shows 1 card with peek
+      if (width <= 1024) return 2;
+      return 3;
+    }
+
+    function updateSlider(transition = true) {
+      slidesPerView = getSlidesPerView();
+      const slides = sliderTrack.querySelectorAll('.slide-card');
+      const slideWidth = slides[0].offsetWidth;
+      const offset = currentIndex * slideWidth;
+
+      if (transition) {
+        sliderTrack.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      } else {
+        sliderTrack.style.transition = 'none';
+      }
+
+      sliderTrack.style.transform = `translateX(-${offset}px)`;
+    }
+
+    function handleInfiniteLoop() {
+      const totalSlides = originalSlides.length;
+
+      // If we're at or past the last set of real slides, jump to the first set
+      if (currentIndex >= totalSlides * 2) {
+        setTimeout(() => {
+          currentIndex = totalSlides;
+          updateSlider(false);
+        }, 500);
+      }
+
+      // If we're before the first set of real slides, jump to the last set
+      if (currentIndex < totalSlides) {
+        setTimeout(() => {
+          currentIndex = totalSlides * 2 - 1;
+          updateSlider(false);
+        }, 500);
+      }
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      currentIndex--;
+      updateSlider(true);
+      handleInfiniteLoop();
+
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 500);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      currentIndex++;
+      updateSlider(true);
+      handleInfiniteLoop();
+
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 500);
+    });
+
+    window.addEventListener('resize', () => {
+      updateSlider(false);
+    });
+
+    // Auto slide functionality
+    const autoSlideEnabled = {{ section.settings.enable_autoplay | default: true }};
+    const autoSlideSpeed = {{ section.settings.autoplay_speed | default: 3000 }};
+
+    function startAutoSlide() {
+      if (!autoSlideEnabled) return;
+
+      autoSlideInterval = setInterval(() => {
+        if (!isTransitioning) {
+          isTransitioning = true;
+          currentIndex++;
+          updateSlider(true);
+          handleInfiniteLoop();
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 500);
+        }
+      }, autoSlideSpeed);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlideInterval);
+    }
+
+    setupInfiniteLoop();
+    updateSlider(false);
+    if (autoSlideEnabled) {
+      startAutoSlide();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Collection Slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop our collections"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "default": 42,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Elevate your workout"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading Size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Autoplay Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable Autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay Speed",
+      "min": 1000,
+      "max": 8000,
+      "step": 500,
+      "default": 3000,
+      "unit": "ms",
+      "info": "Time between slides in milliseconds"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Collection Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Top Label",
+          "default": "YOUR PERFECT FIT",
+          "info": "Small text that appears above the title"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Collection Title",
+          "default": "Best Sellers"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Title Size",
+          "min": 20,
+          "max": 80,
+          "step": 2,
+          "default": 42,
+          "unit": "px"
+        },
+        {
+          "type": "select",
+          "id": "title_weight",
+          "label": "Title Weight",
+          "options": [
+            {
+              "value": "400",
+              "label": "Normal"
+            },
+            {
+              "value": "500",
+              "label": "Medium"
+            },
+            {
+              "value": "600",
+              "label": "Semi Bold"
+            },
+            {
+              "value": "700",
+              "label": "Bold"
+            },
+            {
+              "value": "800",
+              "label": "Extra Bold"
+            }
+          ],
+          "default": "700"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Title Color",
+          "default": "#00FF00"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Button Background Color",
+          "default": "#9C27B0"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Slider",
+      "blocks": [
+        {
+          "type": "collection_card",
+          "settings": {
+            "label": "YOUR PERFECT FIT",
+            "title": "Best Sellers",
+            "title_color": "#00FF00",
+            "button_text": "Shop Now",
+            "button_color": "#9C27B0",
+            "button_text_color": "#ffffff"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "label": "JUST IN",
+            "title": "New Arrivals",
+            "title_color": "#00FF00",
+            "button_text": "Shop Now",
+            "button_color": "#00FF00",
+            "button_text_color": "#000000"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "label": "YOUR PERFECT FIT",
+            "title": "Bundles",
+            "title_color": "#00FF00",
+            "button_text": "Shop Now",
+            "button_color": "#9C27B0",
+            "button_text_color": "#ffffff"
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20
+}
+{% endschema %}

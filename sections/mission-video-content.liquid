@@ -1,0 +1,706 @@
+<style>
+  .mission-video-section {
+    background-color: #ffffff;
+    padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;
+  }
+
+  .mission-video__container {
+    max-width: {{ section.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 {{ section.settings.container_padding }}px;
+  }
+
+  .mission-video__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: stretch;
+    min-height: {{ section.settings.media_min_height }}px;
+  }
+
+  .mission-video__media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: {{ section.settings.media_min_height }}px;
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  .mission-video__video,
+  .mission-video__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .mission-video__content {
+    padding: {{ section.settings.content_padding_top }}px {{ section.settings.content_padding_horizontal }}px {{ section.settings.content_padding_bottom }}px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mission-video__title {
+    font-family: {{ section.settings.title_font }}, serif;
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: {{ section.settings.title_weight }};
+    font-style: italic;
+    line-height: {{ section.settings.title_line_height }};
+    color: {{ section.settings.title_color }};
+    letter-spacing: {{ section.settings.title_letter_spacing }}px;
+    margin: 0 0 {{ section.settings.title_margin_bottom }}px 0;
+  }
+
+  .mission-video__description {
+    font-family: {{ section.settings.body_font }}, sans-serif;
+    font-size: {{ section.settings.description_size }}px;
+    line-height: {{ section.settings.description_line_height }};
+    color: {{ section.settings.description_color }};
+    margin: 0 0 {{ section.settings.description_margin_bottom }}px 0;
+    max-width: {{ section.settings.description_max_width }}px;
+  }
+
+  .mission-video__button {
+    display: inline-block;
+    padding: {{ section.settings.button_padding_vertical }}px {{ section.settings.button_padding_horizontal }}px;
+    font-family: {{ section.settings.body_font }}, sans-serif;
+    font-size: {{ section.settings.button_font_size }}px;
+    font-weight: {{ section.settings.button_font_weight }};
+    letter-spacing: {{ section.settings.button_letter_spacing }}px;
+    text-transform: uppercase;
+    color: {{ section.settings.button_text_color }};
+    background-color: transparent;
+    border: {{ section.settings.button_border_width }}px solid {{ section.settings.button_border_color }};
+    border-radius: {{ section.settings.button_border_radius }}px;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+  }
+
+  .mission-video__button:hover {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 1024px) {
+    .mission-video__content {
+      padding: {{ section.settings.content_padding_top | minus: 10 }}px {{ section.settings.content_padding_horizontal | minus: 20 }}px {{ section.settings.content_padding_bottom | minus: 10 }}px;
+    }
+
+    .mission-video__title {
+      font-size: {{ section.settings.title_size | minus: 8 }}px;
+    }
+
+    .mission-video__description {
+      font-size: {{ section.settings.description_size | minus: 1 }}px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mission-video-section {
+      padding: 0;
+      background-color: #ffffff;
+    }
+
+    .mission-video__container {
+      padding: 0;
+    }
+
+    .mission-video__wrapper {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .mission-video__media {
+      min-height: {{ section.settings.mobile_media_height }}px;
+      border-radius: 0;
+      margin: 0 20px;
+    }
+
+    .mission-video__content {
+      padding: 50px 30px 60px 30px;
+      background-color: #ffffff;
+    }
+
+    .mission-video__title {
+      font-size: {{ section.settings.mobile_title_size }}px;
+      font-style: italic;
+      margin-bottom: 25px;
+      color: {{ section.settings.title_color }};
+    }
+
+    .mission-video__description {
+      font-size: {{ section.settings.mobile_description_size }}px;
+      margin-bottom: 30px;
+      max-width: 100%;
+      line-height: 1.6;
+      color: {{ section.settings.description_color }};
+    }
+
+    .mission-video__button {
+      padding: 14px 32px;
+      font-size: {{ section.settings.button_font_size | minus: 1 }}px;
+    }
+  }
+</style>
+
+<div class="mission-video-section">
+  <div class="mission-video__container">
+    <div class="mission-video__wrapper">
+      <!-- Left Media Column -->
+      <div class="mission-video__media">
+        {% if section.settings.video != blank %}
+          {{ section.settings.video | video_tag: autoplay: section.settings.autoplay, loop: section.settings.loop, muted: section.settings.muted, playsinline: true, class: 'mission-video__video' }}
+        {% elsif section.settings.video_url != blank %}
+          <video
+            class="mission-video__video"
+            {% if section.settings.autoplay %}autoplay{% endif %}
+            {% if section.settings.loop %}loop{% endif %}
+            {% if section.settings.muted %}muted{% endif %}
+            playsinline
+          >
+            <source src="{{ section.settings.video_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        {% elsif section.settings.image != blank %}
+          <img
+            src="{{ section.settings.image | image_url: width: 1000 }}"
+            srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                    {{ section.settings.image | image_url: width: 900 }} 900w,
+                    {{ section.settings.image | image_url: width: 1200 }} 1200w"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            alt="{{ section.settings.image.alt | default: section.settings.title }}"
+            class="mission-video__image"
+            loading="lazy"
+          />
+        {% else %}
+          <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+            Add Video or Image
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Right Content Column -->
+      <div class="mission-video__content">
+        {% if section.settings.title != blank %}
+          <h2 class="mission-video__title">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <p class="mission-video__description">{{ section.settings.description }}</p>
+        {% endif %}
+
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link }}" class="mission-video__button">
+            {{ section.settings.button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Mission Video Content",
+  "class": "mission-video-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "container_padding",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Container Horizontal Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "video_width",
+      "min": 40,
+      "max": 60,
+      "step": 5,
+      "label": "Video Column Width (%)",
+      "default": 45,
+      "info": "Percentage as fraction (45 = 45%)"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 40,
+      "max": 60,
+      "step": 5,
+      "label": "Content Column Width (%)",
+      "default": 55,
+      "info": "Percentage as fraction (55 = 55%)"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Gap Between Columns",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Media Settings"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+      "info": "Upload video via Settings > Files, then select here"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL (Alternative)",
+      "info": "Paste Shopify CDN URL or external mp4 link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Fallback Image",
+      "info": "Shown if no video"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay Video",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop Video",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "muted",
+      "label": "Mute Video",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "media_min_height",
+      "min": 350,
+      "max": 700,
+      "step": 50,
+      "unit": "px",
+      "label": "Media Min Height",
+      "default": 450
+    },
+    {
+      "type": "range",
+      "id": "media_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Media Border Radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "mobile_media_height",
+      "min": 300,
+      "max": 500,
+      "step": 50,
+      "unit": "px",
+      "label": "Mobile Media Height",
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Mission"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Our products are crafted with sustainability in mind, combining luxury with eco-friendly materials and practices."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "title_font",
+      "label": "Title Font",
+      "options": [
+        {
+          "value": "Georgia",
+          "label": "Georgia"
+        },
+        {
+          "value": "Playfair Display",
+          "label": "Playfair Display"
+        },
+        {
+          "value": "Times New Roman",
+          "label": "Times New Roman"
+        },
+        {
+          "value": "Merriweather",
+          "label": "Merriweather"
+        }
+      ],
+      "default": "Georgia"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 32,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Title Font Size (Desktop)",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "mobile_title_size",
+      "min": 28,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Title Font Size (Mobile)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "title_weight",
+      "min": 300,
+      "max": 700,
+      "step": 100,
+      "label": "Title Font Weight",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "title_line_height",
+      "min": 1.0,
+      "max": 1.6,
+      "step": 0.1,
+      "label": "Title Line Height",
+      "default": 1.2
+    },
+    {
+      "type": "range",
+      "id": "title_letter_spacing",
+      "min": -1,
+      "max": 3,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Title Letter Spacing",
+      "default": 0.5
+    },
+    {
+      "type": "select",
+      "id": "body_font",
+      "label": "Body Font",
+      "options": [
+        {
+          "value": "system-ui",
+          "label": "System UI"
+        },
+        {
+          "value": "Arial",
+          "label": "Arial"
+        },
+        {
+          "value": "Helvetica",
+          "label": "Helvetica"
+        }
+      ],
+      "default": "system-ui"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size (Desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_description_size",
+      "min": 14,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size (Mobile)",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "description_line_height",
+      "min": 1.4,
+      "max": 2.0,
+      "step": 0.1,
+      "label": "Description Line Height",
+      "default": 1.7
+    },
+    {
+      "type": "range",
+      "id": "description_max_width",
+      "min": 400,
+      "max": 700,
+      "step": 50,
+      "unit": "px",
+      "label": "Description Max Width",
+      "default": 500
+    },
+    {
+      "type": "header",
+      "content": "Button Styling"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Font Size",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "button_font_weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "label": "Button Font Weight",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "button_letter_spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Button Letter Spacing",
+      "default": 1.5
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 10,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Vertical Padding",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 24,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Button Horizontal Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Button Border Width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 20,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Button Border Radius",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FAFAFA"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#2B2B2B"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#2B2B2B"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button Border Color",
+      "default": "#2B2B2B"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "content_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Content Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "content_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Content Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "content_padding_horizontal",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Content Horizontal Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom",
+      "min": 15,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Title Bottom Margin",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "description_margin_bottom",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Description Bottom Margin",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Gap Between Elements",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_content_padding",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Content Padding",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mission Video Content"
+    }
+  ]
+}
+{% endschema %}

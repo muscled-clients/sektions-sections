@@ -1,0 +1,494 @@
+{% comment %}
+  Collections Hover Gallery Section
+  Displays collection names on left with hover-triggered images on right
+{% endcomment %}
+
+<style>
+  .collections-hover-gallery-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    min-height: {{ section.settings.section_height }}vh;
+    display: flex;
+    align-items: center;
+    padding: 60px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .gallery-container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 80px;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .gallery-left {
+    flex: 1;
+    max-width: 50%;
+    z-index: 2;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .gallery-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 50px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .collections-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .collection-item {
+    margin-bottom: 8px;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .collection-link {
+    display: inline-block;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: {{ section.settings.collection_name_size }}px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: {{ section.settings.collection_name_color }};
+    text-decoration: none;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    opacity: 1;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .collection-link:hover {
+    color: {{ section.settings.collection_name_color }};
+    opacity: 1;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .collection-link.inactive {
+    opacity: 0.4;
+    color: {{ section.settings.collection_name_hover_color }};
+  }
+
+  .collections-hover-gallery-{{ section.id }} .gallery-right {
+    flex: 1;
+    max-width: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .image-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 260px;
+    height: 350px;
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s 0.5s;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .image-container.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 10;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .collections-hover-gallery-{{ section.id }} .image-container.peek {
+    opacity: 0.6;
+    z-index: 5;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .collections-hover-gallery-{{ section.id }} .image-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 0;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .collections-hover-gallery-{{ section.id }} .image-wrapper {
+    transform: rotate(0deg) translate(0, 0);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .collections-hover-gallery-{{ section.id }} .image-container.active.rotate-right .image-wrapper {
+    transform: rotate(4deg) translate(20px, 0);
+  }
+
+  .collections-hover-gallery-{{ section.id }} .image-container.active.rotate-left .image-wrapper {
+    transform: rotate(-4deg) translate(-20px, 0);
+  }
+
+  .collections-hover-gallery-{{ section.id }} .image-container.peek .image-wrapper {
+    filter: brightness(0.95);
+    transform: rotate(0deg) translate(0, 0);
+  }
+
+  /* Tablet Responsive */
+  @media screen and (max-width: 1024px) {
+    .collections-hover-gallery-{{ section.id }} .gallery-container {
+      gap: 50px;
+      padding: 0 30px;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .collection-link {
+      font-size: {{ section.settings.collection_name_size | times: 0.75 }}px;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .image-container {
+      width: 230px;
+      height: 310px;
+    }
+  }
+
+  /* Mobile Responsive */
+  @media screen and (max-width: 768px) {
+    .collections-hover-gallery-{{ section.id }} {
+      min-height: auto;
+      padding: 50px 0;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .gallery-container {
+      flex-direction: column;
+      gap: 40px;
+      padding: 0 20px;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .gallery-left,
+    .collections-hover-gallery-{{ section.id }} .gallery-right {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .gallery-heading {
+      font-size: {{ section.settings.heading_size | times: 0.85 }}px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .collections-list {
+      text-align: center;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .collection-item {
+      margin-bottom: 12px;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .collection-link {
+      font-size: {{ section.settings.collection_name_size | times: 0.55 }}px;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .gallery-right {
+      min-height: 400px;
+      order: -1;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .image-container {
+      width: 90%;
+      max-width: 240px;
+      height: 320px;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .image-container.active {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .collections-hover-gallery-{{ section.id }} .collection-link {
+      font-size: {{ section.settings.collection_name_size | times: 0.5 }}px;
+    }
+
+    .collections-hover-gallery-{{ section.id }} .image-container {
+      width: 100%;
+      max-width: 220px;
+      height: 300px;
+    }
+  }
+</style>
+
+<section class="collections-hover-gallery-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="gallery-container">
+    <div class="gallery-left">
+      {% if section.settings.heading != blank %}
+        <h2 class="gallery-heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      <ul class="collections-list">
+        {% for block in section.blocks %}
+          <li class="collection-item" {{ block.shopify_attributes }}>
+            <a
+              href="{{ block.settings.collection_link | default: '#' }}"
+              class="collection-link{% if forloop.first %} active{% endif %}"
+              data-collection-index="{{ forloop.index0 }}"
+              data-block-id="{{ block.id }}"
+            >
+              {{ block.settings.collection_name }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="gallery-right">
+      {% for block in section.blocks %}
+        <div class="image-container{% if forloop.first %} active{% endif %}" data-image-index="{{ forloop.index0 }}">
+          <div class="image-wrapper">
+            {% if block.settings.collection_image != blank %}
+              {{ block.settings.collection_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.collection_name }}
+            {% else %}
+              <div style="width: 100%; height: 100%; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const collectionLinks = section.querySelectorAll('.collection-link');
+    const imageContainers = section.querySelectorAll('.image-container');
+    let currentIndex = 0;
+    let currentRotation = 'right'; // Start with right rotation
+
+    function showImage(index) {
+      // Calculate next image index (loop back to 0 if at end)
+      const nextIndex = (index + 1) % imageContainers.length;
+
+      // Toggle rotation direction on each hover
+      if (index !== currentIndex) {
+        currentRotation = currentRotation === 'right' ? 'left' : 'right';
+      }
+
+      // Hide all images and remove all classes
+      imageContainers.forEach((img, i) => {
+        img.classList.remove('active', 'peek', 'rotate-left', 'rotate-right');
+      });
+
+      // Show selected image with current rotation
+      if (imageContainers[index]) {
+        imageContainers[index].classList.add('active');
+        imageContainers[index].classList.add('rotate-' + currentRotation);
+      }
+
+      // Show peek of next image (straight/no rotation)
+      if (imageContainers[nextIndex]) {
+        imageContainers[nextIndex].classList.add('peek');
+      }
+
+      // Update link states - make only hovered one inactive
+      collectionLinks.forEach((link, i) => {
+        if (i === index) {
+          link.classList.add('inactive');
+        } else {
+          link.classList.remove('inactive');
+        }
+      });
+
+      currentIndex = index;
+    }
+
+    // Add hover event listeners
+    collectionLinks.forEach((link, index) => {
+      link.addEventListener('mouseenter', () => {
+        showImage(index);
+      });
+    });
+
+    // Reset all links when mouse leaves the list
+    const collectionsList = section.querySelector('.collections-list');
+    if (collectionsList) {
+      collectionsList.addEventListener('mouseleave', () => {
+        collectionLinks.forEach((link) => {
+          link.classList.remove('inactive');
+        });
+      });
+    }
+
+    // Initialize: show first image on load with right rotation
+    if (collectionLinks.length > 0) {
+      const nextIndex = 1 % imageContainers.length;
+      imageContainers[0].classList.add('active', 'rotate-right');
+      if (imageContainers[nextIndex]) {
+        imageContainers[nextIndex].classList.add('peek');
+      }
+      // Don't add any classes initially - all links visible
+    }
+
+    // For mobile: tap to show image
+    if (window.innerWidth <= 768) {
+      collectionLinks.forEach((link, index) => {
+        link.addEventListener('click', (e) => {
+          if (!link.classList.contains('active')) {
+            e.preventDefault();
+            showImage(index);
+          }
+        });
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Collections Hover Gallery",
+  "tag": "section",
+  "class": "section-collections-hover-gallery",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "min": 60,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Section Height (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "DISCOVER OUR COLLECTIONS"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#5c5c3a"
+    },
+    {
+      "type": "header",
+      "content": "Collection Names"
+    },
+    {
+      "type": "range",
+      "id": "collection_name_size",
+      "min": 30,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Collection Name Size (Desktop)",
+      "default": 56
+    },
+    {
+      "type": "color",
+      "id": "collection_name_color",
+      "label": "Collection Name Color",
+      "default": "#3d3600"
+    },
+    {
+      "type": "color",
+      "id": "collection_name_hover_color",
+      "label": "Collection Name Hover Color",
+      "default": "#2a2500"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "collection_name",
+          "label": "Collection Name",
+          "default": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "collection_image",
+          "label": "Collection Image"
+        },
+        {
+          "type": "url",
+          "id": "collection_link",
+          "label": "Collection Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections Hover Gallery",
+      "blocks": [
+        {
+          "type": "collection",
+          "settings": {
+            "collection_name": "Collection 1,"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "collection_name": "Collection 2,"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "collection_name": "Collection 3,"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "collection_name": "Collection 4."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

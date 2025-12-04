@@ -1,0 +1,259 @@
+{% comment %}
+  Yoga Hero Parallax Banner
+  Full-screen hero section with parallax background effect, centered content, and dual CTA buttons
+{% endcomment %}
+
+<div class="yoga-hero-parallax" {% if section.settings.background_image %}style="background-image: url('{{ section.settings.background_image | img_url: '2000x' }}');"{% endif %}>
+  <div class="yoga-hero-parallax__overlay"></div>
+  <div class="yoga-hero-parallax__content">
+    {% if section.settings.heading != blank %}
+      <h1 class="yoga-hero-parallax__heading">{{ section.settings.heading }}</h1>
+    {% endif %}
+
+    {% if section.settings.subtext != blank %}
+      <p class="yoga-hero-parallax__subtext">{{ section.settings.subtext }}</p>
+    {% endif %}
+
+    <div class="yoga-hero-parallax__buttons">
+      {% if section.settings.button_1_text != blank %}
+        <a href="{{ section.settings.button_1_link }}" class="yoga-hero-parallax__button yoga-hero-parallax__button--primary">
+          {{ section.settings.button_1_text }}
+        </a>
+      {% endif %}
+
+      {% if section.settings.button_2_text != blank %}
+        <a href="{{ section.settings.button_2_link }}" class="yoga-hero-parallax__button yoga-hero-parallax__button--secondary">
+          {{ section.settings.button_2_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+.yoga-hero-parallax {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  filter: grayscale(100%);
+}
+
+.yoga-hero-parallax__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.yoga-hero-parallax__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.yoga-hero-parallax__heading {
+  font-family: 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 20px;
+  line-height: 1.2;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.yoga-hero-parallax__subtext {
+  font-family: 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #FFFFFF;
+  margin: 0 0 35px;
+  line-height: 1.5;
+  opacity: 0.9;
+  max-width: 600px;
+}
+
+.yoga-hero-parallax__buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.yoga-hero-parallax__button {
+  display: inline-block;
+  font-family: 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.yoga-hero-parallax__button--primary {
+  background-color: #FFFFFF;
+  color: #000000;
+  border: none;
+}
+
+.yoga-hero-parallax__button--primary:hover {
+  opacity: 0.8;
+}
+
+.yoga-hero-parallax__button--secondary {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+}
+
+.yoga-hero-parallax__button--secondary:hover {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+  .yoga-hero-parallax {
+    height: 100vh;
+    min-height: 500px;
+    background-attachment: scroll;
+  }
+
+  .yoga-hero-parallax__heading {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+
+  .yoga-hero-parallax__subtext {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  .yoga-hero-parallax__button {
+    font-size: 13px;
+    padding: 12px 24px;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 480px) {
+  .yoga-hero-parallax {
+    min-height: 450px;
+  }
+
+  .yoga-hero-parallax__heading {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .yoga-hero-parallax__subtext {
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+
+  .yoga-hero-parallax__buttons {
+    gap: 12px;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .yoga-hero-parallax__button {
+    font-size: 12px;
+    padding: 11px 22px;
+    width: 100%;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Yoga Hero Parallax",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image",
+      "info": "Recommended: 1920x1080px. Image will be converted to grayscale automatically."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Better Equipped For Yoga"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Last brand you'll be looking for...."
+    },
+    {
+      "type": "header",
+      "content": "Button 1 (Primary)"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 Text",
+      "default": "SHOP MATS"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "header",
+      "content": "Button 2 (Secondary)"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button 2 Text",
+      "default": "SHOP CLOTHES"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Yoga Hero Parallax"
+    }
+  ]
+}
+{% endschema %}

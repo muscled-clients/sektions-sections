@@ -1,0 +1,1113 @@
+{{ 'section-category-slider.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #CategorySlider-{{ section.id }} {
+    --card-radius: {{ section.settings.card_radius }}px;
+    --card-gap: {{ section.settings.card_gap }}px;
+    --card-bg: {{ section.settings.card_background }};
+    --text-color: {{ section.settings.text_color }};
+    {%- assign title_size_value = section.settings.title_size -%}
+    {%- if title_size_value == 'small' -%}
+      {%- assign title_size_value = 14 -%}
+    {%- elsif title_size_value == 'medium' -%}
+      {%- assign title_size_value = 16 -%}
+    {%- elsif title_size_value == 'large' -%}
+      {%- assign title_size_value = 20 -%}
+    {%- elsif title_size_value == blank or title_size_value == nil -%}
+      {%- assign title_size_value = 16 -%}
+    {%- endif -%}
+    {%- assign eyebrow_size_value = section.settings.eyebrow_size | default: 12 -%}
+    --title-size: {{ title_size_value }}px;
+    --eyebrow-size: {{ eyebrow_size_value }}px;
+    --title-weight: {{ section.settings.title_weight }};
+    --items-desktop: {{ section.settings.items_desktop }};
+    --items-tablet: {{ section.settings.items_tablet }};
+    --items-mobile: {{ section.settings.items_mobile }};
+    --animation-duration: {{ section.settings.animation_duration }}ms;
+  }
+
+  .cat-slider {
+    position: relative;
+  }
+
+  .cat-slider__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .cat-slider__header-text h2 {
+    margin: 0 0 0.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .cat-slider__header-text p {
+    margin: 0;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  .cat-slider__view-all {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.2s ease;
+  }
+
+  .cat-slider__view-all:hover {
+    gap: 0.75rem;
+  }
+
+  .cat-slider__container {
+    position: relative;
+  }
+
+  .cat-slider__track-wrapper {
+    overflow: hidden;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+
+  .cat-slider__track {
+    display: flex;
+    gap: var(--card-gap);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+  }
+
+  .cat-slider__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cat-card {
+    flex: 0 0 calc((100% - var(--card-gap) * (var(--items-mobile) - 1)) / var(--items-mobile));
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .cat-card__link {
+    display: block;
+    text-decoration: none;
+    color: var(--text-color);
+    position: relative;
+    height: 100%;
+  }
+
+  .cat-card__inner {
+    background: var(--card-bg);
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .cat-card__link:hover .cat-card__inner {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .cat-card__image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--card-bg);
+  }
+
+  .cat-card__image-wrapper--square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .cat-card__image-wrapper--landscape {
+    aspect-ratio: 4 / 3;
+  }
+
+  .cat-card__image-wrapper--wide {
+    aspect-ratio: 3 / 2;
+  }
+
+  .cat-card__image-wrapper--cinematic {
+    aspect-ratio: 16 / 9;
+  }
+
+  .cat-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .cat-card__link:hover .cat-card__image {
+    transform: scale(1.08);
+  }
+
+  .cat-card__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cat-card__text-area {
+    flex: 1;
+  }
+
+  .cat-card__eyebrow {
+    font-size: var(--eyebrow-size);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+    opacity: 0.7;
+    color: #666666;
+  }
+
+  .cat-card__title {
+    font-size: var(--title-size);
+    font-weight: var(--title-weight);
+    margin: 0;
+    color: #000000;
+  }
+
+  .cat-card__arrow-overlay {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--animation-duration) ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+    margin-left: 1rem;
+    /* Default styling - black circle, white arrow */
+    background: #000000;
+    color: #ffffff;
+  }
+
+  /* Special styling for card 4 - white circle, black arrow */
+  .cat-card__arrow-overlay--card-4 {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .cat-card__link:hover .cat-card__arrow-overlay {
+    transform: scale(1.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .cat-card__link:hover .cat-card__arrow-overlay--card-4 {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .cat-card__hover-chevron {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: 2rem;
+    height: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity var(--animation-duration) ease, transform var(--animation-duration) ease;
+  }
+
+  .cat-card__link:hover .cat-card__hover-chevron {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .cat-slider__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 2;
+  }
+
+  .cat-slider__nav--prev {
+    left: -3rem;
+  }
+
+  .cat-slider__nav--next {
+    right: -3rem;
+  }
+
+  .cat-slider__nav-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--animation-duration) ease;
+    color: #333333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .cat-slider__nav-btn:hover:not(:disabled) {
+    background: #333333;
+    color: #ffffff;
+    transform: scale(1.05);
+  }
+
+  .cat-slider__nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .cat-slider__nav-btn:focus-visible {
+    outline: 2px solid var(--text-color);
+    outline-offset: 2px;
+  }
+
+  .cat-slider__dots {
+    display: none;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .cat-slider__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: all var(--animation-duration) ease;
+  }
+
+  .cat-slider__dot--active {
+    background: var(--text-color);
+    width: 1.5rem;
+    border-radius: 0.25rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cat-card {
+      flex: 0 0 calc((100% - var(--card-gap) * (var(--items-tablet) - 1)) / var(--items-tablet));
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .cat-card {
+      flex: 0 0 calc((100% - var(--card-gap) * (var(--items-desktop) - 1)) / var(--items-desktop));
+    }
+
+    .cat-slider__nav--prev {
+      left: -4rem;
+    }
+
+    .cat-slider__nav--next {
+      right: -4rem;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .cat-slider__dots {
+      display: flex;
+    }
+
+    .cat-slider__nav {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cat-slider__track {
+      scroll-behavior: auto;
+    }
+
+    .cat-card__inner,
+    .cat-card__image,
+    .cat-card__arrow-overlay,
+    .cat-card__hover-chevron {
+      transition: none;
+    }
+  }
+
+  .page-width--full .cat-slider__container {
+    padding: 0 1.5rem;
+  }
+{%- endstyle -%}
+
+<section id="CategorySlider-{{ section.id }}" 
+  class="cat-slider section-{{ section.id }}-padding{% if section.settings.container_width == 'contained' %} page-width{% else %} page-width--full{% endif %}"
+  role="region"
+  {% if section.settings.aria_label != blank %}aria-label="{{ section.settings.aria_label }}"{% endif %}>
+  
+  {%- if section.settings.heading != blank or section.settings.view_all_text != blank -%}
+    <div class="cat-slider__header{% if section.settings.container_width == 'full' %} page-width{% endif %}">
+      <div class="cat-slider__header-text">
+        {%- if section.settings.heading != blank -%}
+          <h2>{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p>{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.view_all_text != blank and section.settings.view_all_url != blank -%}
+        <a href="{{ section.settings.view_all_url }}" class="cat-slider__view-all">
+          {{ section.settings.view_all_text }}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="cat-slider__container">
+    <div class="cat-slider__nav cat-slider__nav--prev">
+      <button class="cat-slider__nav-btn cat-slider__prev" aria-label="{{ 'sections.slideshow.previous_slide' | t }}" aria-controls="Slider-{{ section.id }}">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cat-slider__track-wrapper">
+      <div id="Slider-{{ section.id }}" class="cat-slider__track" tabindex="0" aria-live="polite">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign aspect_ratio = block.settings.aspect_ratio_override | default: section.settings.aspect_ratio
+            assign show_arrow = block.settings.show_arrow_overlay
+            if show_arrow == nil
+              assign show_arrow = section.settings.show_arrow_overlay_default
+            endif
+          -%}
+          <article class="cat-card" {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.link | default: '#' }}" 
+              class="cat-card__link"
+              {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+              <div class="cat-card__inner">
+                <div class="cat-card__image-wrapper cat-card__image-wrapper--{{ aspect_ratio }}">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 800 | image_tag:
+                      loading: 'lazy',
+                      class: 'cat-card__image',
+                      widths: '200, 400, 600, 800',
+                      sizes: '(min-width: 1200px) 25vw, (min-width: 750px) 40vw, 80vw'
+                    }}
+                  {%- else -%}
+                    {{ 'collection-1' | placeholder_svg_tag: 'cat-card__image placeholder-svg' }}
+                  {%- endif -%}
+
+                  <div class="cat-card__content">
+                    <div class="cat-card__text-area">
+                      {%- if block.settings.eyebrow != blank -%}
+                        <div class="cat-card__eyebrow">{{ block.settings.eyebrow }}</div>
+                      {%- endif -%}
+                      <h3 class="cat-card__title">{{ block.settings.title | default: 'Category Title' }}</h3>
+                    </div>
+
+                    {%- if show_arrow -%}
+                      <div class="cat-card__arrow-overlay cat-card__arrow-overlay--card-{{ forloop.index }}">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
+                    {%- elsif section.settings.show_hover_chevron -%}
+                      <div class="cat-card__hover-chevron">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M4.5 9L7.5 6L4.5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="cat-slider__nav cat-slider__nav--next">
+      <button class="cat-slider__nav-btn cat-slider__next" aria-label="{{ 'sections.slideshow.next_slide' | t }}" aria-controls="Slider-{{ section.id }}">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    {%- if section.settings.show_dots_mobile -%}
+      <div class="cat-slider__dots" role="tablist">
+        {%- for block in section.blocks -%}
+          <button class="cat-slider__dot{% if forloop.first %} cat-slider__dot--active{% endif %}" 
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
+            data-index="{{ forloop.index0 }}">
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (() => {
+    const slider = document.querySelector('#CategorySlider-{{ section.id }}');
+    const track = slider.querySelector('.cat-slider__track');
+    const cards = track.querySelectorAll('.cat-card');
+    const prevBtn = slider.querySelector('.cat-slider__prev');
+    const nextBtn = slider.querySelector('.cat-slider__next');
+    const dots = slider.querySelectorAll('.cat-slider__dot');
+    
+    let isAutoplay = {{ section.settings.autoplay | json }};
+    const autoplayInterval = {{ section.settings.autoplay_interval }};
+    const respectReducedMotion = {{ section.settings.respect_reduced_motion | json }};
+    
+    let autoplayTimer = null;
+    let currentIndex = 0;
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    // Check for reduced motion preference
+    if (respectReducedMotion && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      isAutoplay = false;
+    }
+
+    function getCardWidth() {
+      if (cards.length === 0) return 0;
+      return cards[0].offsetWidth + parseInt(getComputedStyle(track).gap || 0);
+    }
+
+    function updateButtons() {
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      prevBtn.disabled = track.scrollLeft <= 0;
+      nextBtn.disabled = track.scrollLeft >= maxScroll - 1;
+      
+      // Update dots
+      if (dots.length > 0) {
+        const cardWidth = getCardWidth();
+        currentIndex = Math.round(track.scrollLeft / cardWidth);
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('cat-slider__dot--active', index === currentIndex);
+          dot.setAttribute('aria-selected', index === currentIndex);
+        });
+      }
+    }
+
+    function scrollToIndex(index) {
+      const cardWidth = getCardWidth();
+      track.scrollLeft = index * cardWidth;
+    }
+
+    function scrollByCards(direction) {
+      const cardWidth = getCardWidth();
+      const currentScroll = track.scrollLeft;
+      const targetScroll = direction === 'next' 
+        ? currentScroll + cardWidth
+        : currentScroll - cardWidth;
+      
+      track.scrollLeft = targetScroll;
+    }
+
+    function startAutoplay() {
+      if (!isAutoplay || autoplayTimer) return;
+      
+      autoplayTimer = setInterval(() => {
+        if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 1) {
+          track.scrollLeft = 0;
+        } else {
+          scrollByCards('next');
+        }
+      }, autoplayInterval);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    // Button controls
+    prevBtn.addEventListener('click', () => {
+      scrollByCards('prev');
+      stopAutoplay();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      scrollByCards('next');
+      stopAutoplay();
+    });
+
+    // Dot controls
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        scrollToIndex(index);
+        stopAutoplay();
+      });
+    });
+
+    // Keyboard navigation
+    track.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          scrollByCards('prev');
+          stopAutoplay();
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          scrollByCards('next');
+          stopAutoplay();
+          break;
+        case 'Home':
+          e.preventDefault();
+          track.scrollLeft = 0;
+          stopAutoplay();
+          break;
+        case 'End':
+          e.preventDefault();
+          track.scrollLeft = track.scrollWidth;
+          stopAutoplay();
+          break;
+      }
+    });
+
+    // Drag to scroll
+    const handleStart = (e) => {
+      isDragging = true;
+      track.style.cursor = 'grabbing';
+      startX = (e.pageX || e.touches[0].pageX) - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+      stopAutoplay();
+    };
+
+    const handleMove = (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = (e.pageX || e.touches[0].pageX) - track.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      track.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleEnd = () => {
+      isDragging = false;
+      track.style.cursor = 'grab';
+    };
+
+    // Mouse events
+    track.addEventListener('mousedown', handleStart);
+    track.addEventListener('mousemove', handleMove);
+    track.addEventListener('mouseup', handleEnd);
+    track.addEventListener('mouseleave', handleEnd);
+
+    // Touch events
+    track.addEventListener('touchstart', handleStart, { passive: true });
+    track.addEventListener('touchmove', handleMove, { passive: false });
+    track.addEventListener('touchend', handleEnd);
+
+    // Update buttons on scroll
+    track.addEventListener('scroll', () => {
+      updateButtons();
+    });
+
+    // Autoplay controls
+    if (isAutoplay) {
+      track.addEventListener('mouseenter', stopAutoplay);
+      track.addEventListener('mouseleave', startAutoplay);
+      track.addEventListener('focusin', stopAutoplay);
+      track.addEventListener('focusout', startAutoplay);
+      startAutoplay();
+    }
+
+    // Handle resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        updateButtons();
+      }, 250);
+    });
+
+    // Initial setup
+    track.style.cursor = 'grab';
+    updateButtons();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Category Slider",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View all text",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View all link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "options": [
+        {
+          "value": "contained",
+          "label": "Contained"
+        },
+        {
+          "value": "full",
+          "label": "Full width"
+        }
+      ],
+      "default": "contained"
+    },
+    {
+      "type": "range",
+      "id": "items_desktop",
+      "label": "Items per view (Desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 0.5,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "items_tablet",
+      "label": "Items per view (Tablet)",
+      "min": 1,
+      "max": 4,
+      "step": 0.5,
+      "default": 2.5
+    },
+    {
+      "type": "range",
+      "id": "items_mobile",
+      "label": "Items per view (Mobile)",
+      "min": 1,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.2
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Card gap",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Card styling"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "label": "Title size",
+      "options": [
+        {
+          "value": "12",
+          "label": "12px"
+        },
+        {
+          "value": "14",
+          "label": "14px"
+        },
+        {
+          "value": "16",
+          "label": "16px"
+        },
+        {
+          "value": "18",
+          "label": "18px"
+        },
+        {
+          "value": "20",
+          "label": "20px"
+        },
+        {
+          "value": "22",
+          "label": "22px"
+        },
+        {
+          "value": "24",
+          "label": "24px"
+        }
+      ],
+      "default": "16"
+    },
+    {
+      "type": "select",
+      "id": "eyebrow_size",
+      "label": "Eyebrow text size",
+      "options": [
+        {
+          "value": "10",
+          "label": "10px"
+        },
+        {
+          "value": "11",
+          "label": "11px"
+        },
+        {
+          "value": "12",
+          "label": "12px"
+        },
+        {
+          "value": "13",
+          "label": "13px"
+        },
+        {
+          "value": "14",
+          "label": "14px"
+        },
+        {
+          "value": "15",
+          "label": "15px"
+        },
+        {
+          "value": "16",
+          "label": "16px"
+        }
+      ],
+      "default": "12"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Title weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (3:2)"
+        },
+        {
+          "value": "cinematic",
+          "label": "Cinematic (16:9)"
+        },
+        {
+          "value": "natural",
+          "label": "Natural"
+        }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hover_chevron",
+      "label": "Show small chevron on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow_overlay_default",
+      "label": "Show arrow overlay by default",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots_mobile",
+      "label": "Show dots on mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_interval",
+      "label": "Autoplay interval",
+      "min": 2000,
+      "max": 8000,
+      "step": 1000,
+      "unit": "ms",
+      "default": 5000
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation duration",
+      "min": 200,
+      "max": 1000,
+      "step": 100,
+      "unit": "ms",
+      "default": 300
+    },
+    {
+      "type": "checkbox",
+      "id": "respect_reduced_motion",
+      "label": "Respect reduced motion preference",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Accessibility"
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "ARIA label",
+      "default": "Category navigation"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow text",
+          "info": "Optional text above title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Open in new tab",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "aspect_ratio_override",
+          "label": "Override aspect ratio",
+          "options": [
+            {
+              "value": "",
+              "label": "Use section default"
+            },
+            {
+              "value": "square",
+              "label": "Square (1:1)"
+            },
+            {
+              "value": "landscape",
+              "label": "Landscape (4:3)"
+            },
+            {
+              "value": "wide",
+              "label": "Wide (3:2)"
+            },
+            {
+              "value": "cinematic",
+              "label": "Cinematic (16:9)"
+            },
+            {
+              "value": "natural",
+              "label": "Natural"
+            }
+          ],
+          "default": ""
+        },
+        {
+          "type": "checkbox",
+          "id": "show_arrow_overlay",
+          "label": "Show arrow overlay",
+          "info": "Overrides section default"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Slider",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Headphones",
+            "show_arrow_overlay": true
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Earphones",
+            "show_arrow_overlay": true
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Speakers",
+            "show_arrow_overlay": true
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Collaborations",
+            "show_arrow_overlay": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
