@@ -239,7 +239,7 @@
         <div class="table-cell brand-cell active">
           <div class="header-content">
             {% if section.settings.column1_logo != blank %}
-              <img class="header-logo" src="{{ section.settings.column1_logo | image_url: width: 280 }}" alt="{{ section.settings.column1_text }}">
+              <img class="header-logo" src="{{ section.settings.column1_logo | image_url: width: 280 }}" alt="{{ section.settings.column1_text | default: 'Brand logo' }}" loading="lazy">
             {% endif %}
             {% if section.settings.column1_text != blank %}
               <span class="header-name">{{ section.settings.column1_text }}</span>
@@ -522,6 +522,7 @@
       "default": 10
     }
   ],
+  "max_blocks": 20,
   "blocks": [
     {
       "type": "row",
