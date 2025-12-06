@@ -213,33 +213,37 @@
 /* Mobile Layout - 2 Columns */
 @media screen and (max-width: 768px) {
   .feature-cards-grid {
-    padding: var(--section-padding-top, 40px) 16px var(--section-padding-bottom, 40px);
+    padding: 24px 12px 24px;
   }
 
   .feature-cards-grid__heading {
-    font-size: 32px;
-    margin-bottom: 40px;
+    font-size: 28px;
+    margin-bottom: 20px;
   }
 
   .feature-cards-grid__grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--card-gap, 16px);
+    gap: 10px;
   }
 
   .feature-cards-grid__card {
-    padding: var(--card-padding, 28px);
+    padding: 16px;
   }
 
   .feature-cards-grid__icon {
-    margin-bottom: 16px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
   }
 
   .feature-cards-grid__title {
-    font-size: calc(var(--title-size, 20px) * 0.85);
+    font-size: 16px;
+    margin-bottom: 8px;
   }
 
   .feature-cards-grid__description {
-    font-size: calc(var(--description-size, 15px) * 0.9);
+    font-size: 13px;
+    line-height: 1.4;
   }
 }
 </style>
