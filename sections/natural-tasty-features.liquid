@@ -304,6 +304,27 @@
   .natural-tasty__cards {
     grid-template-columns: repeat(var(--mobile-columns, 1), 1fr);
   }
+
+  .natural-tasty-section {
+    padding-block: 27px;
+  }
+
+  .natural-tasty__cookie {
+    max-width: 90px;
+    margin: auto;
+  }
+
+  .natural-tasty__cookie img {
+    max-width: 100%;
+  }
+
+  .natural-tasty__heading {
+    font-size: 32px;
+  }
+
+  .natural-tasty__subheading {
+    font-size: 16px;
+  }
 }
 
 </style>
@@ -724,45 +745,13 @@ document.addEventListener('DOMContentLoaded', function() {
   "presets": [
     {
       "name": "Natural & Tasty Features",
-      "settings": {
-        "section_bg": "#f4f0ea",
-        "heading": "All Natural & Unbelievably Tasty",
-        "subheading": "For those who prioritize their wellness, we handled the tough stuff so you can savor life!",
-        "button_text": "SHOP NOW",
-        "button_url": "",
-        "button_bg": "#f4e04d",
-        "button_text_color": "#000000",
-        "desktop_columns": 4,
-        "tablet_columns": 2,
-        "mobile_columns": "1",
-        "card_gap": 20,
-        "heading_size": 48,
-        "heading_weight": 700,
-        "subheading_size": 18,
-        "subheading_weight": 400,
-        "card_title_size": 18,
-        "card_title_weight": 700,
-        "card_description_size": 15,
-        "section_padding_top": 80,
-        "section_padding_bottom": 80,
-        "animation_speed": 0.4,
-        "max_content_height": 500,
-        "allow_multiple_open": false,
-        "default_expanded_card": -1,
-        "icon_hover_transparent": true,
-        "card_padding": 24,
-        "icon_border_weight": 2,
-        "plus_icon_size": 32,
-        "plus_icon_weight": 300,
-        "card_border_radius": 16
-      },
       "blocks": [
         {
           "type": "feature",
           "settings": {
             "title": "Gluten-free",
             "description": "Made with high-quality ingredients and are completely gluten-free. We've carefully crafted our recipe to ensure that everyone, including those with gluten sensitivities or celiac disease, can enjoy a tasty treat.",
-            "icon_bg": "#e0e0e0"
+            "icon_bg": "#E0E0E0"
           }
         },
         {
@@ -770,7 +759,7 @@ document.addEventListener('DOMContentLoaded', function() {
           "settings": {
             "title": "Milk-free",
             "description": "Our milk-free recipe ensures that even those with dietary restrictions can partake in the fun.",
-            "icon_bg": "#f4e04d"
+            "icon_bg": "#F4E04D"
           }
         },
         {
@@ -778,7 +767,7 @@ document.addEventListener('DOMContentLoaded', function() {
           "settings": {
             "title": "Nut-free",
             "description": "Our nut-free options are made in facilities free from cross-contamination so everyone can indulge safely.",
-            "icon_bg": "#f4c2c2"
+            "icon_bg": "#F4C2C2"
           }
         },
         {
@@ -786,7 +775,7 @@ document.addEventListener('DOMContentLoaded', function() {
           "settings": {
             "title": "Egg-free",
             "description": "We've perfected our egg-free recipes for the same great taste without compromise.",
-            "icon_bg": "#c8e6c9"
+            "icon_bg": "#C8E6C9"
           }
         }
       ]
