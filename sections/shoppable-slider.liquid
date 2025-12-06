@@ -775,37 +775,44 @@
       }
     }
 
-    // Setup play button functionality
-    function setupPlayButtons() {
-      const playBtns = track.querySelectorAll('.play-btn');
-      playBtns.forEach(btn => {
-        // Remove existing listeners by cloning
-        const newBtn = btn.cloneNode(true);
-        btn.parentNode.replaceChild(newBtn, btn);
+    // Toggle video play/pause
+    function toggleVideo(slide) {
+      const video = slide.querySelector('video');
+      const btn = slide.querySelector('.play-btn');
 
-        newBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const slide = this.closest('.slide');
-          const video = slide.querySelector('video');
-
-          if (video) {
-            // Pause all other videos
-            track.querySelectorAll('video').forEach(v => {
-              if (v !== video) {
-                v.pause();
-                const otherBtn = v.closest('.slide').querySelector('.play-btn');
-                if (otherBtn) otherBtn.classList.remove('playing');
-              }
-            });
-
-            if (video.paused) {
-              video.play();
-              this.classList.add('playing');
-            } else {
-              video.pause();
-              this.classList.remove('playing');
-            }
+      if (video) {
+        // Pause all other videos
+        track.querySelectorAll('video').forEach(v => {
+          if (v !== video) {
+            v.pause();
+            const otherBtn = v.closest('.slide').querySelector('.play-btn');
+            if (otherBtn) otherBtn.classList.remove('playing');
           }
+        });
+
+        if (video.paused) {
+          video.play();
+          if (btn) btn.classList.add('playing');
+        } else {
+          video.pause();
+          if (btn) btn.classList.remove('playing');
+        }
+      }
+    }
+
+    // Setup play button and slide click functionality
+    function setupPlayButtons() {
+      const slides = track.querySelectorAll('.slide');
+      slides.forEach(slide => {
+        // Remove existing listeners by cloning
+        const newSlide = slide.cloneNode(true);
+        slide.parentNode.replaceChild(newSlide, slide);
+
+        // Click anywhere on slide to play/pause
+        newSlide.addEventListener('click', function(e) {
+          // Don't trigger if clicking on a link
+          if (e.target.closest('a')) return;
+          toggleVideo(this);
         });
       });
     }
