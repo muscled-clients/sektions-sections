@@ -163,6 +163,24 @@
     object-fit: cover;
   }
 
+  #shoppable-slider-{{ section.id }} .slide-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shoppable-slider-{{ section.id }} .slide-placeholder::after {
+    content: '';
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+  }
+
   #shoppable-slider-{{ section.id }} .slide-overlay {
     position: absolute;
     bottom: 0;
@@ -595,6 +613,8 @@
           <div class="slide-media">
             {% if block.settings.video_file != blank %}
               {{ block.settings.video_file | video_tag: loop: true, muted: true, playsinline: true, preload: 'metadata', image_size: '800x' }}
+            {% elsif block.settings.fallback_image != blank %}
+              <img src="{{ block.settings.fallback_image | image_url: width: 800 }}" alt="{{ block.settings.user_name }}" loading="lazy">
             {% else %}
               <div class="slide-placeholder"></div>
             {% endif %}
@@ -1000,6 +1020,12 @@
           "type": "video",
           "id": "video_file",
           "label": "Slider Video"
+        },
+        {
+          "type": "image_picker",
+          "id": "fallback_image",
+          "label": "Fallback Image",
+          "info": "Displayed when no video is uploaded"
         },
         {
           "type": "text",
