@@ -1,0 +1,772 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .sek-vbp-{{ section.id }} {
+    --sek-vbp-height-mobile: {{ section.settings.height_mobile }}px;
+    --sek-vbp-height-desktop: {{ section.settings.height_desktop }}px;
+    --sek-vbp-overlay: {{ section.settings.overlay_color }};
+    --sek-vbp-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --sek-vbp-text: {{ section.settings.text_color }};
+    --sek-vbp-btn-bg: {{ section.settings.button_bg }};
+    --sek-vbp-btn-text: {{ section.settings.button_text }};
+    --sek-vbp-btn2-bg: {{ section.settings.button2_bg }};
+    --sek-vbp-btn2-text: {{ section.settings.button2_text }};
+
+    position: relative;
+    width: 100%;
+    height: var(--sek-vbp-height-mobile);
+    overflow: hidden;
+    background: #121212;
+  }
+
+  /* Slides */
+  .sek-vbp-{{ section.id }} .sek-vbp__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__slide--active {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  /* Video/Image Background */
+  .sek-vbp-{{ section.id }} .sek-vbp__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Overlay */
+  .sek-vbp-{{ section.id }} .sek-vbp__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--sek-vbp-overlay);
+    opacity: var(--sek-vbp-overlay-opacity);
+    z-index: 3;
+  }
+
+  /* Content */
+  .sek-vbp-{{ section.id }} .sek-vbp__content {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--sek-vbp-text);
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__content--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__content--right {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__inner {
+    max-width: 700px;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__subheading {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    opacity: 0.9;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__heading {
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 20px;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    max-width: 500px;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__content--center .sek-vbp__description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__content--center .sek-vbp__buttons {
+    justify-content: center;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    min-width: 140px;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__btn--primary {
+    background: var(--sek-vbp-btn-bg);
+    color: var(--sek-vbp-btn-text);
+    border: 2px solid var(--sek-vbp-btn-bg);
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__btn--primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__btn--secondary {
+    background: var(--sek-vbp-btn2-bg);
+    color: var(--sek-vbp-btn2-text);
+    border: 2px solid var(--sek-vbp-btn2-text);
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__btn--secondary:hover {
+    background: var(--sek-vbp-btn2-text);
+    color: var(--sek-vbp-btn2-bg);
+  }
+
+  /* Play Button */
+  .sek-vbp-{{ section.id }} .sek-vbp__play {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.4);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__play:hover {
+    background: rgba(0,0,0,0.6);
+    transform: scale(1.1);
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__play svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__play-icon--pause {
+    display: none;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__play.is-paused .sek-vbp__play-icon--play {
+    display: block;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__play.is-paused .sek-vbp__play-icon--pause {
+    display: none;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__play:not(.is-paused) .sek-vbp__play-icon--play {
+    display: none;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__play:not(.is-paused) .sek-vbp__play-icon--pause {
+    display: block;
+  }
+
+  /* Pagination */
+  .sek-vbp-{{ section.id }} .sek-vbp__pagination {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 12px;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__dot {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.3);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__dot:hover {
+    background: rgba(0,0,0,0.5);
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__dot-progress {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__dot-progress circle {
+    fill: none;
+    stroke: rgba(255,255,255,0.3);
+    stroke-width: 2;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__dot-progress .progress-ring {
+    stroke: #fff;
+    stroke-dasharray: 126;
+    stroke-dashoffset: 126;
+    transition: stroke-dashoffset 0.1s linear;
+  }
+
+  .sek-vbp-{{ section.id }} .sek-vbp__dot--active .progress-ring {
+    animation: sek-vbp-progress-{{ section.id }} {{ section.settings.autoplay_speed }}ms linear forwards;
+  }
+
+  @keyframes sek-vbp-progress-{{ section.id }} {
+    from {
+      stroke-dashoffset: 126;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    .sek-vbp-{{ section.id }} {
+      height: var(--sek-vbp-height-desktop);
+    }
+
+    .sek-vbp-{{ section.id }} .sek-vbp__play {
+      top: 30px;
+      left: 50px;
+      width: 56px;
+      height: 56px;
+    }
+
+    .sek-vbp-{{ section.id }} .sek-vbp__pagination {
+      bottom: auto;
+      top: 30px;
+      right: 50px;
+      left: auto;
+      transform: none;
+    }
+
+    .sek-vbp-{{ section.id }} .sek-vbp__content {
+      padding: 80px 60px;
+    }
+
+    .sek-vbp-{{ section.id }} .sek-vbp__description {
+      font-size: 18px;
+    }
+  }
+
+  /* Single slide - hide pagination */
+  {% if section.blocks.size <= 1 %}
+    .sek-vbp-{{ section.id }} .sek-vbp__pagination {
+      display: none;
+    }
+  {% endif %}
+{% endstyle %}
+
+<div class="sek-vbp-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="sek-video-banner-pro">
+  {% for block in section.blocks %}
+    <div class="sek-vbp__slide{% if forloop.first %} sek-vbp__slide--active{% endif %}" data-slide-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+      <!-- Media Background -->
+      <div class="sek-vbp__media">
+        {% if block.settings.video != blank %}
+          {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, class: 'sek-vbp__video', data-video: '' }}
+        {% elsif block.settings.video_url != blank %}
+          <video class="sek-vbp__video" autoplay loop muted playsinline data-video>
+            <source src="{{ block.settings.video_url }}" type="video/mp4">
+          </video>
+        {% elsif block.settings.image != blank %}
+          <img
+            src="{{ block.settings.image | image_url: width: 1920 }}"
+            srcset="{{ block.settings.image | image_url: width: 800 }} 800w,
+                    {{ block.settings.image | image_url: width: 1200 }} 1200w,
+                    {{ block.settings.image | image_url: width: 1600 }} 1600w,
+                    {{ block.settings.image | image_url: width: 1920 }} 1920w"
+            sizes="100vw"
+            alt="{{ block.settings.image.alt | default: block.settings.heading | escape }}"
+            class="sek-vbp__image"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+          >
+        {% else %}
+          {%- assign placeholder_num = forloop.index0 | modulo: 6 | plus: 1 -%}
+          {{ 'collection-' | append: placeholder_num | placeholder_svg_tag: 'sek-vbp__image' }}
+        {% endif %}
+      </div>
+
+      <!-- Overlay -->
+      <div class="sek-vbp__overlay"></div>
+
+      <!-- Content -->
+      <div class="sek-vbp__content sek-vbp__content--{{ block.settings.content_position }}">
+        <div class="sek-vbp__inner">
+          {% if block.settings.subheading != blank %}
+            <p class="sek-vbp__subheading">{{ block.settings.subheading }}</p>
+          {% endif %}
+
+          {% if block.settings.heading != blank %}
+            <h2 class="sek-vbp__heading">{{ block.settings.heading }}</h2>
+          {% endif %}
+
+          {% if block.settings.description != blank %}
+            <p class="sek-vbp__description">{{ block.settings.description }}</p>
+          {% endif %}
+
+          {% if block.settings.button_text != blank or block.settings.button2_text != blank %}
+            <div class="sek-vbp__buttons">
+              {% if block.settings.button_text != blank %}
+                <a href="{{ block.settings.button_link }}" class="sek-vbp__btn sek-vbp__btn--primary">
+                  {{ block.settings.button_text }}
+                </a>
+              {% endif %}
+              {% if block.settings.button2_text != blank %}
+                <a href="{{ block.settings.button2_link }}" class="sek-vbp__btn sek-vbp__btn--secondary">
+                  {{ block.settings.button2_text }}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+  <!-- Play/Pause Button -->
+  <button type="button" class="sek-vbp__play" aria-label="Play/Pause video" data-play-btn>
+    <svg class="sek-vbp__play-icon--play" viewBox="0 0 24 24" fill="currentColor">
+      <polygon points="5,3 19,12 5,21"></polygon>
+    </svg>
+    <svg class="sek-vbp__play-icon--pause" viewBox="0 0 24 24" fill="currentColor">
+      <rect x="6" y="4" width="4" height="16"></rect>
+      <rect x="14" y="4" width="4" height="16"></rect>
+    </svg>
+  </button>
+
+  <!-- Pagination -->
+  {% if section.blocks.size > 1 %}
+    <div class="sek-vbp__pagination">
+      {% for block in section.blocks %}
+        <button type="button" class="sek-vbp__dot{% if forloop.first %} sek-vbp__dot--active{% endif %}" data-dot-index="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}">
+          <svg class="sek-vbp__dot-progress" viewBox="0 0 44 44">
+            <circle cx="22" cy="22" r="20"></circle>
+            <circle class="progress-ring" cx="22" cy="22" r="20"></circle>
+          </svg>
+          <span>{{ forloop.index }}</span>
+        </button>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  (function() {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const slides = Array.from(section.querySelectorAll('.sek-vbp__slide'));
+    const dots = Array.from(section.querySelectorAll('.sek-vbp__dot'));
+    const playBtn = section.querySelector('[data-play-btn]');
+    const videos = Array.from(section.querySelectorAll('[data-video]'));
+
+    if (slides.length === 0) return;
+
+    let currentIndex = 0;
+    let autoplayInterval = null;
+    let isPaused = false;
+    const autoplaySpeed = {{ section.settings.autoplay_speed }};
+    const autoplayEnabled = {{ section.settings.autoplay }};
+
+    function goToSlide(index) {
+      // Remove active from all
+      slides.forEach(slide => slide.classList.remove('sek-vbp__slide--active'));
+      dots.forEach(dot => dot.classList.remove('sek-vbp__dot--active'));
+
+      // Pause all videos
+      videos.forEach(video => {
+        if (video.pause) video.pause();
+      });
+
+      // Set new active
+      currentIndex = index;
+      slides[currentIndex].classList.add('sek-vbp__slide--active');
+      if (dots[currentIndex]) {
+        dots[currentIndex].classList.add('sek-vbp__dot--active');
+      }
+
+      // Play video on current slide if not paused
+      const currentVideo = slides[currentIndex].querySelector('[data-video]');
+      if (currentVideo && currentVideo.play && !isPaused) {
+        currentVideo.play();
+      }
+
+      // Reset autoplay timer
+      if (autoplayEnabled && !isPaused) {
+        resetAutoplay();
+      }
+    }
+
+    function nextSlide() {
+      const next = (currentIndex + 1) % slides.length;
+      goToSlide(next);
+    }
+
+    function resetAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+      }
+      if (autoplayEnabled && !isPaused) {
+        autoplayInterval = setInterval(nextSlide, autoplaySpeed);
+      }
+    }
+
+    function togglePause() {
+      isPaused = !isPaused;
+      playBtn.classList.toggle('is-paused', isPaused);
+
+      const currentVideo = slides[currentIndex].querySelector('[data-video]');
+      if (currentVideo) {
+        if (isPaused) {
+          currentVideo.pause();
+        } else {
+          currentVideo.play();
+        }
+      }
+
+      if (isPaused) {
+        clearInterval(autoplayInterval);
+        // Remove active class to stop animation
+        dots.forEach(dot => {
+          dot.classList.remove('sek-vbp__dot--active');
+        });
+        dots[currentIndex].classList.add('sek-vbp__dot--active');
+      } else {
+        resetAutoplay();
+        // Re-trigger animation
+        dots[currentIndex].classList.remove('sek-vbp__dot--active');
+        void dots[currentIndex].offsetWidth; // Force reflow
+        dots[currentIndex].classList.add('sek-vbp__dot--active');
+      }
+    }
+
+    // Event listeners
+    if (playBtn) {
+      playBtn.addEventListener('click', togglePause);
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        if (i !== currentIndex) {
+          goToSlide(i);
+        }
+      });
+    });
+
+    // Start autoplay
+    if (autoplayEnabled && slides.length > 1) {
+      resetAutoplay();
+    }
+
+    // Handle visibility change
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        clearInterval(autoplayInterval);
+      } else if (autoplayEnabled && !isPaused) {
+        resetAutoplay();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SEK Video Banner Pro",
+  "class": "sek-video-banner-pro-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Height (mobile)",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "default": 550,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "label": "Height (desktop)",
+      "min": 400,
+      "max": 900,
+      "step": 50,
+      "default": 700,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed",
+      "min": 3000,
+      "max": 9500,
+      "step": 500,
+      "default": 7000,
+      "unit": "ms"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 20,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Primary button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Primary button text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button2_bg",
+      "label": "Secondary button background",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "button2_text",
+      "label": "Secondary button text",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Media"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Or video URL (mp4)",
+          "info": "Direct link to MP4 file"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Fallback image",
+          "info": "Shows if no video is set"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "label": "Content position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "New Arrival"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Modern Heritage"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "20% off 1000s of styles. Use your exclusive code: JUST4YOU20"
+        },
+        {
+          "type": "header",
+          "content": "Buttons"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Primary button text",
+          "default": "Shop Sale"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Primary button link"
+        },
+        {
+          "type": "text",
+          "id": "button2_text",
+          "label": "Secondary button text",
+          "default": "Shop All"
+        },
+        {
+          "type": "url",
+          "id": "button2_link",
+          "label": "Secondary button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Video Banner Pro",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "subheading": "New Arrival",
+            "heading": "Modern Heritage",
+            "description": "20% off 1000s of styles. Use your exclusive code: JUST4YOU20",
+            "button_text": "Shop Sale",
+            "button2_text": "Shop All"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "subheading": "Featured",
+            "heading": "Fabulous Sound",
+            "description": "Super Packable. Versatile. And All-Day (And Night) Adventure Ready.",
+            "button_text": "Shop This",
+            "button2_text": "Shop All"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "subheading": "Collection",
+            "heading": "New Collection",
+            "description": "Discover our latest arrivals and trending styles for the season.",
+            "button_text": "Shop Now",
+            "button2_text": "Learn More"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
