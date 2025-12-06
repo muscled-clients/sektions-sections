@@ -814,8 +814,14 @@
     nextBtn.addEventListener('click', () => navigate('next'));
     prevBtn.addEventListener('click', () => navigate('prev'));
 
-    // Keyboard navigation
+    // Keyboard navigation (only when slider is in viewport)
+    function isInViewport() {
+      const rect = track.getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
+    }
+
     document.addEventListener('keydown', function(e) {
+      if (!isInViewport()) return;
       if (e.key === 'ArrowRight') navigate('next');
       if (e.key === 'ArrowLeft') navigate('prev');
     });
@@ -1071,6 +1077,7 @@
       ]
     }
   ],
+  "max_blocks": 12,
   "presets": [
     {
       "name": "Shoppable Slider",
