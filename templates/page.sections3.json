@@ -255,48 +255,48 @@
         "padding_bottom": 52
       }
     },
-    "shoppable_slider_HKmDg3": {
+    "shoppable_slider_VEn6k4": {
       "type": "shoppable-slider",
       "blocks": {
-        "slide_4RKzh7": {
-          "type": "slide",
-          "settings": {
-            "video_file": "shopify://files/videos/464ca8e360e4412d815ad582d272e85e.mp4",
-            "user_name": "Sarah M.",
-            "sub_text": "Ordered the Sternify Mask 2.0",
-            "product": "",
-            "product_text": "Produkt ansehen",
-            "verified": false
-          }
-        },
-        "slide_gyc3Ax": {
+        "slide_DTe6aB": {
           "type": "slide",
           "settings": {
             "video_file": "shopify://files/videos/c39a9d2959c64d7097329463cbcf2472.mp4",
             "user_name": "Sarah M.",
-            "sub_text": "Ordered the Sternify Mask 2.0",
+            "sub_text": "Ordered the Glow Mask Pro",
             "product": "",
             "product_text": "Produkt ansehen",
             "verified": false
           }
         },
-        "slide_B3BtHk": {
+        "slide_BxrVQd": {
           "type": "slide",
           "settings": {
-            "video_file": "shopify://files/videos/73071a07ed004b6a8db75c5d4c5f5a4a.mp4",
+            "video_file": "shopify://files/videos/464ca8e360e4412d815ad582d272e85e.mp4",
             "user_name": "Sarah M.",
-            "sub_text": "Ordered the Sternify Mask 2.0",
+            "sub_text": "Ordered the Glow Mask Pro",
             "product": "",
             "product_text": "Produkt ansehen",
             "verified": false
           }
         },
-        "slide_kNEdfj": {
+        "slide_UERte3": {
           "type": "slide",
           "settings": {
             "video_file": "shopify://files/videos/d6b9189c3bf64d6a926ea5a5a2e81628.mp4",
             "user_name": "Sarah M.",
-            "sub_text": "Ordered the Sternify Mask 2.0",
+            "sub_text": "Ordered the Glow Mask Pro",
+            "product": "",
+            "product_text": "Produkt ansehen",
+            "verified": false
+          }
+        },
+        "slide_e7RG4g": {
+          "type": "slide",
+          "settings": {
+            "video_file": "shopify://files/videos/73071a07ed004b6a8db75c5d4c5f5a4a.mp4",
+            "user_name": "Sarah M.",
+            "sub_text": "Ordered the Glow Mask Pro",
             "product": "",
             "product_text": "Produkt ansehen",
             "verified": false
@@ -304,10 +304,10 @@
         }
       },
       "block_order": [
-        "slide_4RKzh7",
-        "slide_gyc3Ax",
-        "slide_B3BtHk",
-        "slide_kNEdfj"
+        "slide_DTe6aB",
+        "slide_BxrVQd",
+        "slide_UERte3",
+        "slide_e7RG4g"
       ],
       "name": "Shoppable Slider",
       "settings": {
@@ -331,166 +331,6 @@
         "play_btn_icon_color": "#FFFFFF",
         "verified_icon_color": "#42A5F5"
       }
-    },
-    "table_6dRcBJ": {
-      "type": "table",
-      "blocks": {
-        "row_UtTeCE": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "check",
-            "compare_3": "x"
-          }
-        },
-        "row_eCzBiL": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "x",
-            "compare_3": "x"
-          }
-        },
-        "row_PPnifx": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "x",
-            "compare_3": "x"
-          }
-        },
-        "row_DNrHGL": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "x",
-            "compare_3": "x"
-          }
-        },
-        "row_zpNqgT": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "x",
-            "compare_3": "x"
-          }
-        },
-        "row_BXjKCH": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "x",
-            "compare_3": "x"
-          }
-        }
-      },
-      "block_order": [
-        "row_UtTeCE",
-        "row_eCzBiL",
-        "row_PPnifx",
-        "row_DNrHGL",
-        "row_zpNqgT",
-        "row_BXjKCH"
-      ],
-      "name": "Table",
-      "settings": {
-        "number_of_columns": "2",
-        "top_margin": 0,
-        "bottom_margin": 0,
-        "select_font": "Poppins, sans-serif",
-        "header_text": "StyleUP vs. Standard",
-        "header_text_size": 52,
-        "header_text_style": "cursive",
-        "column1_text": "",
-        "column1_logo": "shopify://shop_images/Frame_117.webp",
-        "column2_text": "Original Hairstyler",
-        "column3_text": "Standard Hairstyler",
-        "highlighted_color": "#000000",
-        "highlighted_text_color": "#ffffff",
-        "highlighted_icon_color": "#ffffff",
-        "others_text_color": "#000000",
-        "others_icon_color": "#000000",
-        "benefits_text_color": "#000000",
-        "table_color": "#ffffff",
-        "border_color": "#d7d8d5",
-        "border_thickness": 2,
-        "corner_radius": 7
-      }
-    },
-    "testimonials_slider2_CTtQNU": {
-      "type": "testimonials-slider2",
-      "blocks": {
-        "testimonial_DEM7tM": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "2 days ago",
-            "stars": 5
-          }
-        },
-        "testimonial_kTChVw": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "3 days ago",
-            "stars": 5
-          }
-        },
-        "testimonial_NBMBCf": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "5 days ago",
-            "stars": 5
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_DEM7tM",
-        "testimonial_kTChVw",
-        "testimonial_NBMBCf"
-      ],
-      "name": "Testimonials Slider 2",
-      "settings": {
-        "style": "standard",
-        "background_color": "#ffffff",
-        "gradient_start_color": "#efefef",
-        "slider_autoplay": true,
-        "autoplay_speed": 2,
-        "top_margin": 0,
-        "bottom_margin": 0,
-        "inside_section_spacing": 60,
-        "title_color": "#000000",
-        "subtitle_color": "#000000",
-        "box_background": "#ffffff",
-        "box_text": "#000000",
-        "stars_header": "#ffd663",
-        "stars_box": "#ffd663",
-        "review_text_color": "#000000",
-        "header": "Your Satisfaction. Our Mission.",
-        "sub_header": "See what other customers say",
-        "rating_text": "Very Good 4.7/5",
-        "number_of_ratings": 5,
-        "show_button": true,
-        "button_text": "based on 778 ratings",
-        "button_link": "",
-        "button_background": "#000000",
-        "button_text_color": "#ffffff",
-        "verified_text": "Verified Rating",
-        "header_font": "'Poppins', sans-serif; font-weight: 700",
-        "subtitle_font": "Poppins, sans-serif",
-        "rating_font": "Poppins, sans-serif",
-        "show_avatar": true
-      }
     }
   },
   "order": [
@@ -498,8 +338,6 @@
     "hero_38_1_XCC6VW",
     "hero_38_2_gfjWNP",
     "hero_38_3_zxy9kq",
-    "shoppable_slider_HKmDg3",
-    "table_6dRcBJ",
-    "testimonials_slider2_CTtQNU"
+    "shoppable_slider_VEn6k4"
   ]
 }
