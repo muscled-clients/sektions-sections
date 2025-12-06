@@ -19,7 +19,6 @@
     {% endif %}
     position: relative;
     z-index: 1;
-    font-family: {{ section.settings.subtitle_font }};
   }
 
   #testimonials-slider2-{{ section.id }} .container {
@@ -207,7 +206,7 @@
   #testimonials-slider2-{{ section.id }} .verified-text {
     font-size: 14px;
     color: #999999;
-    font-family: 'Poppins', sans-serif;
+    font-family: {{ section.settings.subtitle_font }};
     font-weight: 400;
   }
 
@@ -255,13 +254,13 @@
     font-size: 14px;
     font-weight: 600;
     color: {{ section.settings.box_text }};
-    font-family: 'Poppins', sans-serif;
+    font-family: {{ section.settings.subtitle_font }};
   }
 
   #testimonials-slider2-{{ section.id }} .reviewer-date {
     font-size: 12px;
     color: #888888;
-    font-family: 'Poppins', sans-serif;
+    font-family: {{ section.settings.subtitle_font }};
   }
 
   #testimonials-slider2-{{ section.id }} .card-stars {
@@ -1177,40 +1176,42 @@
       "id": "header_font",
       "label": "Header Font",
       "options": [
-        { "value": "Poppins, sans-serif", "label": "Poppins" },
-        { "value": "'Poppins', sans-serif; font-weight: 700", "label": "Poppins Bold" },
         { "value": "Arial, sans-serif", "label": "Arial" },
         { "value": "Helvetica, sans-serif", "label": "Helvetica" },
         { "value": "Georgia, serif", "label": "Georgia" },
+        { "value": "Times New Roman, serif", "label": "Times New Roman" },
+        { "value": "Verdana, sans-serif", "label": "Verdana" },
         { "value": "inherit", "label": "Theme Default" }
       ],
-      "default": "'Poppins', sans-serif; font-weight: 700"
+      "default": "inherit"
     },
     {
       "type": "select",
       "id": "subtitle_font",
       "label": "Subtitle Font",
       "options": [
-        { "value": "Poppins, sans-serif", "label": "Poppins" },
         { "value": "Arial, sans-serif", "label": "Arial" },
         { "value": "Helvetica, sans-serif", "label": "Helvetica" },
         { "value": "Georgia, serif", "label": "Georgia" },
+        { "value": "Times New Roman, serif", "label": "Times New Roman" },
+        { "value": "Verdana, sans-serif", "label": "Verdana" },
         { "value": "inherit", "label": "Theme Default" }
       ],
-      "default": "Poppins, sans-serif"
+      "default": "inherit"
     },
     {
       "type": "select",
       "id": "rating_font",
       "label": "Rating Font",
       "options": [
-        { "value": "Poppins, sans-serif", "label": "Poppins" },
         { "value": "Arial, sans-serif", "label": "Arial" },
         { "value": "Helvetica, sans-serif", "label": "Helvetica" },
         { "value": "Georgia, serif", "label": "Georgia" },
+        { "value": "Times New Roman, serif", "label": "Times New Roman" },
+        { "value": "Verdana, sans-serif", "label": "Verdana" },
         { "value": "inherit", "label": "Theme Default" }
       ],
-      "default": "Poppins, sans-serif"
+      "default": "inherit"
     },
     {
       "type": "header",
