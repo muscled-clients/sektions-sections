@@ -656,14 +656,19 @@
 
 <script>
 (function() {
-  document.addEventListener('DOMContentLoaded', function() {
-    const sectionId = '{{ section.id }}';
+  const sectionId = '{{ section.id }}';
+
+  function initShoppableSlider() {
     const track = document.getElementById('slider-track-' + sectionId);
     const templates = document.getElementById('slide-templates-' + sectionId);
     const prevBtn = document.getElementById('prev-' + sectionId);
     const nextBtn = document.getElementById('next-' + sectionId);
 
     if (!track || !templates) return;
+
+    // Prevent double initialization
+    if (track.dataset.initialized === 'true') return;
+    track.dataset.initialized = 'true';
 
     const slideTemplates = templates.querySelectorAll('.slide-template');
     const totalSlides = slideTemplates.length;
@@ -846,6 +851,23 @@
 
     // Initial render
     initialRender();
+  }
+
+  // Initialize on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initShoppableSlider);
+  } else {
+    // DOM already loaded, run immediately
+    initShoppableSlider();
+  }
+
+  // Re-initialize when section is loaded in Shopify theme editor
+  document.addEventListener('shopify:section:load', function(event) {
+    if (event.detail.sectionId === sectionId) {
+      const track = document.getElementById('slider-track-' + sectionId);
+      if (track) track.dataset.initialized = 'false';
+      initShoppableSlider();
+    }
   });
 })();
 </script>
