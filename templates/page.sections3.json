@@ -493,6 +493,56 @@
         "rating_font": "Poppins, sans-serif",
         "show_avatar": true
       }
+    },
+    "hero_banner_wwEpth": {
+      "type": "hero-banner",
+      "blocks": {
+        "slide_zMT4XY": {
+          "type": "slide",
+          "settings": {
+            "image_desktop": "shopify://shop_images/Sek-hero-banner.webp",
+            "subheading": "New Collection",
+            "heading": "Meet The Perfect Travel Shoes",
+            "description": "Super Packable. Versatile. And All-Day (And Night) Adventure Ready.",
+            "button_1_text": "Shop Men",
+            "button_1_link": "shopify://products/unisex-scrub-cap",
+            "button_2_text": "Shop Women",
+            "button_2_link": "shopify://products/unisex-scrub-cap"
+          }
+        }
+      },
+      "block_order": [
+        "slide_zMT4XY"
+      ],
+      "name": "SEK Hero Banner",
+      "settings": {
+        "height_desktop": 95,
+        "height_mobile": 95,
+        "content_vertical_align": "flex-end",
+        "content_horizontal_align": "flex-start",
+        "text_align": "left",
+        "content_max_width": 700,
+        "image_position": "center",
+        "heading_size_desktop": 72,
+        "heading_size_mobile": 36,
+        "heading_weight": "700",
+        "heading_style": "normal",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "heading_color": "#ffffff",
+        "text_color": "#ffffff",
+        "button_primary_bg": "#ffffff",
+        "button_primary_text": "#000000",
+        "button_secondary_bg": "#ffffff",
+        "button_secondary_text": "#000000",
+        "button_secondary_border": "#ffffff",
+        "button_border_radius": 2,
+        "autoplay": true,
+        "autoplay_speed": 5000,
+        "transition_duration": 500,
+        "show_arrows": false,
+        "show_dots": false
+      }
     }
   },
   "order": [
@@ -502,6 +552,7 @@
     "hero_38_3_zxy9kq",
     "shoppable_slider_AiED8T",
     "table_6dRcBJ",
-    "testimonials_slider2_CTtQNU"
+    "testimonials_slider2_CTtQNU",
+    "hero_banner_wwEpth"
   ]
 }
