@@ -695,6 +695,39 @@
         "button2_bg": "transparent",
         "button2_text": "#ffffff"
       }
+    },
+    "before_after_MmycjH": {
+      "type": "before-after",
+      "name": "SEK Before/After Image",
+      "settings": {
+        "heading": "Before and after",
+        "subheading": "This product will change everything, forever.",
+        "before_image": "shopify://shop_images/senior-biker-crying_1400x_3efa3bbd-7525-4aec-89b6-0762b9a27146.webp",
+        "after_image": "shopify://shop_images/senior-man-in-pain_1400x_b94ea5f1-43fb-4de6-a8ab-1076d967abc8.webp",
+        "aspect_ratio": "16/9",
+        "image_max_width": 800,
+        "image_border_radius": 8,
+        "show_labels": true,
+        "before_label": "Before",
+        "after_label": "After",
+        "button_text": "Buy now",
+        "button_link": "",
+        "button_border_radius": 0,
+        "container_width": 900,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "heading_font_size": 28,
+        "subheading_font_size": 16,
+        "background_color": "#ffffff",
+        "heading_color": "#000000",
+        "text_color": "#666666",
+        "slider_color": "#ffffff",
+        "slider_icon_color": "#000000",
+        "label_background": "rgba(0,0,0,0.5)",
+        "label_text_color": "#ffffff",
+        "button_background": "#000000",
+        "button_text_color": "#ffffff"
+      }
     }
   },
   "order": [
@@ -708,6 +741,7 @@
     "hero_banner_wwEpth",
     "video_banner3_mG3bGf",
     "split_screen_QYzCPm",
-    "video_banner_pro_gd3Fbh"
+    "video_banner_pro_gd3Fbh",
+    "before_after_MmycjH"
   ]
 }
