@@ -626,6 +626,75 @@
         "button_text_color": "#ffffff",
         "autoplay_speed": 6000
       }
+    },
+    "video_banner_pro_gd3Fbh": {
+      "type": "video-banner-pro",
+      "blocks": {
+        "slide_6cbnyy": {
+          "type": "slide",
+          "settings": {
+            "video": "shopify://files/videos/d6b9189c3bf64d6a926ea5a5a2e81628.mp4",
+            "video_url": "",
+            "content_position": "center",
+            "subheading": "New Arrival",
+            "heading": "Modern Heritage",
+            "description": "20% off 1000s of styles. Use your exclusive code: JUST4YOU20",
+            "button_text": "Shop Sale",
+            "button_link": "",
+            "button2_text": "Shop All",
+            "button2_link": ""
+          }
+        },
+        "slide_VrzhNW": {
+          "type": "slide",
+          "settings": {
+            "video": "shopify://files/videos/73071a07ed004b6a8db75c5d4c5f5a4a.mp4",
+            "video_url": "",
+            "content_position": "center",
+            "subheading": "Featured",
+            "heading": "Fabulous Sound",
+            "description": "Super Packable. Versatile. And All-Day (And Night) Adventure Ready.",
+            "button_text": "Shop This",
+            "button_link": "",
+            "button2_text": "Shop All",
+            "button2_link": ""
+          }
+        },
+        "slide_RxwMgT": {
+          "type": "slide",
+          "settings": {
+            "video": "shopify://files/videos/464ca8e360e4412d815ad582d272e85e.mp4",
+            "video_url": "",
+            "content_position": "center",
+            "subheading": "Collection",
+            "heading": "New Collection",
+            "description": "Discover our latest arrivals and trending styles for the season.",
+            "button_text": "Shop Now",
+            "button_link": "",
+            "button2_text": "Learn More",
+            "button2_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_6cbnyy",
+        "slide_VrzhNW",
+        "slide_RxwMgT"
+      ],
+      "name": "SEK Video Banner Pro",
+      "settings": {
+        "height_mobile": 550,
+        "height_desktop": 700,
+        "autoplay": true,
+        "autoplay_speed": 7000,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "text_color": "#ffffff",
+        "button_bg": "#ffffff",
+        "button_text": "#000000",
+        "button2_bg": "transparent",
+        "button2_text": "#ffffff"
+      }
     }
   },
   "order": [
@@ -638,6 +707,7 @@
     "testimonials_slider2_CTtQNU",
     "hero_banner_wwEpth",
     "video_banner3_mG3bGf",
-    "split_screen_QYzCPm"
+    "split_screen_QYzCPm",
+    "video_banner_pro_gd3Fbh"
   ]
 }
