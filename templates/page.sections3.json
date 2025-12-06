@@ -565,6 +565,67 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "split_screen_QYzCPm": {
+      "type": "split-screen",
+      "blocks": {
+        "slide_FCVKRJ": {
+          "type": "slide",
+          "settings": {
+            "layout": "three_col",
+            "heading": "Women sale",
+            "subheading": "30% off summer items",
+            "text": "Text",
+            "button_text": "Shop now",
+            "button_link": "shopify://products/unisex-scrub-cap",
+            "video_url": "",
+            "image_left": "shopify://shop_images/fashion-model-in-pink.webp",
+            "image_right": "shopify://shop_images/model-with-leather-jacket-over-shoulders.webp"
+          }
+        },
+        "slide_VT3wTN": {
+          "type": "slide",
+          "settings": {
+            "layout": "media_left",
+            "heading": "Heading",
+            "subheading": "",
+            "text": "Shop Now",
+            "button_text": "Shop Now",
+            "button_link": "shopify://products/unisex-scrub-cap",
+            "video": "shopify://files/videos/551a4e5012a84ed4966d1b75e4b87758.HD-720p-3.0Mbps-11016697.mp4",
+            "video_url": ""
+          }
+        },
+        "slide_fqX38D": {
+          "type": "slide",
+          "settings": {
+            "layout": "content_left",
+            "heading": "Heading",
+            "subheading": "Sub-Heading",
+            "text": "Text",
+            "button_text": "Link",
+            "button_link": "",
+            "video_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_FCVKRJ",
+        "slide_VT3wTN",
+        "slide_fqX38D"
+      ],
+      "name": "SEK Split Screen Video",
+      "settings": {
+        "section_title": "Split screen video",
+        "title_color": "#000000",
+        "content_bg": "#dcdcdc",
+        "border_color": "#000000",
+        "heading_color": "#000000",
+        "text_color": "#000000",
+        "button_bg": "#000000",
+        "button_text_color": "#ffffff",
+        "autoplay_speed": 6000
+      }
     }
   },
   "order": [
@@ -576,6 +637,7 @@
     "table_6dRcBJ",
     "testimonials_slider2_CTtQNU",
     "hero_banner_wwEpth",
-    "video_banner3_mG3bGf"
+    "video_banner3_mG3bGf",
+    "split_screen_QYzCPm"
   ]
 }
