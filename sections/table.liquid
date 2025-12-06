@@ -138,20 +138,32 @@
 
   #table-{{ section.id }} .brand-cell .check-icon svg {
     fill: none;
-    stroke: {{ section.settings.others_icon_color }};
+    stroke: {{ section.settings.others_icon_color }} !important;
     stroke-width: 2;
   }
 
-  #table-{{ section.id }} .brand-cell.active .check-icon svg {
-    stroke: {{ section.settings.highlighted_icon_color }};
+  #table-{{ section.id }} .brand-cell .check-icon svg circle,
+  #table-{{ section.id }} .brand-cell .check-icon svg path {
+    stroke: {{ section.settings.others_icon_color }} !important;
+  }
+
+  #table-{{ section.id }} .brand-cell.active .check-icon svg,
+  #table-{{ section.id }} .brand-cell.active .check-icon svg circle,
+  #table-{{ section.id }} .brand-cell.active .check-icon svg path {
+    stroke: {{ section.settings.highlighted_icon_color }} !important;
   }
 
   #table-{{ section.id }} .brand-cell .x-icon svg {
-    fill: {{ section.settings.others_icon_color }};
+    fill: {{ section.settings.others_icon_color }} !important;
   }
 
-  #table-{{ section.id }} .brand-cell.active .x-icon svg {
-    fill: {{ section.settings.highlighted_icon_color }};
+  #table-{{ section.id }} .brand-cell .x-icon svg path {
+    fill: {{ section.settings.others_icon_color }} !important;
+  }
+
+  #table-{{ section.id }} .brand-cell.active .x-icon svg,
+  #table-{{ section.id }} .brand-cell.active .x-icon svg path {
+    fill: {{ section.settings.highlighted_icon_color }} !important;
   }
 
   /* Hide third column if 2 columns selected */
