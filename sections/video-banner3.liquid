@@ -1,0 +1,708 @@
+{% comment %}
+  SEK Video Banner 3 - Full-width video banner with play button modal
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+
+{% style %}
+  #sek-vb3-{{ section_id }} {
+    position: relative;
+    width: 100%;
+    height: {{ section.settings.height_mobile }}px;
+    overflow: hidden;
+    margin-top: {{ section.settings.padding_top }}px;
+    margin-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  /* Responsive heights */
+  @media (min-width: 480px) {
+    #sek-vb3-{{ section_id }} {
+      height: {{ section.settings.height_mobile | plus: 50 }}px;
+    }
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} {
+      height: {{ section.settings.height_tablet }}px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #sek-vb3-{{ section_id }} {
+      height: {{ section.settings.height_desktop }}px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    #sek-vb3-{{ section_id }} {
+      height: {{ section.settings.height_large }}px;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__image--mobile {
+    display: block;
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__image--desktop {
+    display: none;
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__image--mobile {
+      display: none;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__image--desktop {
+      display: block;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: {{ section.settings.overlay_color }};
+    z-index: 2;
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 24px 16px;
+    max-width: 100%;
+  }
+
+  @media (min-width: 480px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__content {
+      padding: 32px 24px;
+    }
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__content {
+      padding: 40px 40px;
+      max-width: 70%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__content {
+      padding: 48px 60px;
+      max-width: 60%;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__content {
+      padding: 60px 80px;
+      max-width: 50%;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__heading {
+    font-family: {{ section.settings.heading_font }}, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 130%;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 12px 0;
+  }
+
+  @media (min-width: 480px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__heading {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__heading {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__heading {
+      font-size: 40px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__heading {
+      font-size: 48px;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__description {
+    font-size: 14px;
+    line-height: 150%;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 20px 0;
+    opacity: 0.9;
+  }
+
+  @media (min-width: 480px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__description {
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__description {
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__description {
+      font-size: 18px;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__play-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__play-btn {
+      gap: 12px;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__play-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: {{ section.settings.play_btn_bg }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__play-btn:hover .sek-vb3__play-icon {
+    animation: sek-vb3-pulse-{{ section_id }} 1s ease infinite;
+  }
+
+  @keyframes sek-vb3-pulse-{{ section_id }} {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__play-icon svg {
+    width: 14px;
+    height: 14px;
+    fill: {{ section.settings.play_icon_color }};
+    margin-left: 2px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon svg {
+      width: 16px;
+      height: 16px;
+      margin-left: 3px;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__play-text {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: {{ section.settings.text_color }};
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__play-text {
+      font-size: 14px;
+    }
+  }
+
+  /* Modal Styles - Backdrop Blur */
+  #sek-vb3-{{ section_id }} .sek-vb3__modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(245, 245, 245, 0.9);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 300ms ease;
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__modal {
+      padding: 24px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__modal {
+      padding: 32px;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__modal.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__modal-close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-close {
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-close {
+      top: 24px;
+      right: 24px;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__modal-close:hover {
+    transform: scale(1.1);
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__modal-close svg {
+    width: 28px;
+    height: 28px;
+    stroke: #000000;
+    stroke-width: 2;
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-close svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__modal-video {
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (min-width: 750px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-video {
+      width: 85%;
+      max-width: 1100px;
+      border-radius: 12px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-video {
+      width: 80%;
+      max-width: 1200px;
+      border-radius: 16px;
+    }
+  }
+
+  #sek-vb3-{{ section_id }} .sek-vb3__modal-video iframe,
+  #sek-vb3-{{ section_id }} .sek-vb3__modal-video video {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+{% endstyle %}
+
+<div id="sek-vb3-{{ section_id }}" class="sek-vb3">
+  <!-- Background Image -->
+  <div class="sek-vb3__background">
+    {%- if section.settings.image_mobile != blank -%}
+      <img
+        src="{{ section.settings.image_mobile | image_url: width: 800 }}"
+        srcset="{{ section.settings.image_mobile | image_url: width: 400 }} 400w,
+                {{ section.settings.image_mobile | image_url: width: 600 }} 600w,
+                {{ section.settings.image_mobile | image_url: width: 800 }} 800w"
+        sizes="100vw"
+        alt="{{ section.settings.image_mobile.alt | default: section.settings.heading }}"
+        class="sek-vb3__image sek-vb3__image--mobile"
+        loading="lazy"
+      >
+    {%- else -%}
+      {{ 'collection-1' | placeholder_svg_tag: 'sek-vb3__image sek-vb3__image--mobile' }}
+    {%- endif -%}
+
+    {%- if section.settings.image_desktop != blank -%}
+      <img
+        src="{{ section.settings.image_desktop | image_url: width: 1920 }}"
+        srcset="{{ section.settings.image_desktop | image_url: width: 1200 }} 1200w,
+                {{ section.settings.image_desktop | image_url: width: 1600 }} 1600w,
+                {{ section.settings.image_desktop | image_url: width: 1920 }} 1920w"
+        sizes="100vw"
+        alt="{{ section.settings.image_desktop.alt | default: section.settings.heading }}"
+        class="sek-vb3__image sek-vb3__image--desktop"
+        loading="lazy"
+      >
+    {%- elsif section.settings.image_mobile != blank -%}
+      <img
+        src="{{ section.settings.image_mobile | image_url: width: 1920 }}"
+        srcset="{{ section.settings.image_mobile | image_url: width: 1200 }} 1200w,
+                {{ section.settings.image_mobile | image_url: width: 1600 }} 1600w,
+                {{ section.settings.image_mobile | image_url: width: 1920 }} 1920w"
+        sizes="100vw"
+        alt="{{ section.settings.image_mobile.alt | default: section.settings.heading }}"
+        class="sek-vb3__image sek-vb3__image--desktop"
+        loading="lazy"
+      >
+    {%- else -%}
+      {{ 'collection-1' | placeholder_svg_tag: 'sek-vb3__image sek-vb3__image--desktop' }}
+    {%- endif -%}
+  </div>
+
+  <!-- Overlay -->
+  <div class="sek-vb3__overlay"></div>
+
+  <!-- Content -->
+  <div class="sek-vb3__content">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="sek-vb3__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.description != blank -%}
+      <p class="sek-vb3__description">{{ section.settings.description }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.video_url != blank -%}
+      <button type="button" class="sek-vb3__play-btn" data-video-open>
+        <span class="sek-vb3__play-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </span>
+        {%- if section.settings.play_text != blank -%}
+          <span class="sek-vb3__play-text">{{ section.settings.play_text }}</span>
+        {%- endif -%}
+      </button>
+    {%- endif -%}
+  </div>
+
+  <!-- Video Modal -->
+  {%- if section.settings.video_url != blank -%}
+    <div class="sek-vb3__modal" data-video-modal>
+      <button type="button" class="sek-vb3__modal-close" data-video-close aria-label="Close video">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="sek-vb3__modal-video" data-video-container>
+        <!-- Video will be inserted here -->
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+  (function() {
+    const section = document.getElementById('sek-vb3-{{ section_id }}');
+    if (!section) return;
+
+    const openBtn = section.querySelector('[data-video-open]');
+    const modal = section.querySelector('[data-video-modal]');
+    const closeBtn = section.querySelector('[data-video-close]');
+    const videoContainer = section.querySelector('[data-video-container]');
+    const videoUrl = {{ section.settings.video_url | json }};
+
+    if (!openBtn || !modal || !videoContainer || !videoUrl) return;
+
+    function getVideoEmbed(url) {
+      // YouTube
+      let match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+      if (match) {
+        return `<iframe src="https://www.youtube.com/embed/${match[1]}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      }
+
+      // Vimeo
+      match = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+      if (match) {
+        return `<iframe src="https://player.vimeo.com/video/${match[1]}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+      }
+
+      // Direct video file
+      if (url.match(/\.(mp4|webm|ogg)(\?|$)/i)) {
+        return `<video src="${url}" autoplay controls playsinline></video>`;
+      }
+
+      // Fallback - try as iframe
+      return `<iframe src="${url}" allowfullscreen></iframe>`;
+    }
+
+    function openModal() {
+      videoContainer.innerHTML = getVideoEmbed(videoUrl);
+      modal.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-active');
+      document.body.style.overflow = '';
+      // Stop video
+      setTimeout(function() {
+        videoContainer.innerHTML = '';
+      }, 300);
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    // Close on overlay click
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+        closeModal();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SEK Video Banner 3",
+  "tag": "section",
+  "class": "sek-video-banner-3",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Watch Our Story"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        { "value": "Josefin Sans", "label": "Josefin Sans" },
+        { "value": "Playfair Display", "label": "Playfair Display" },
+        { "value": "Cormorant Garamond", "label": "Cormorant Garamond" },
+        { "value": "inherit", "label": "Theme default" }
+      ],
+      "default": "Josefin Sans"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover the passion and craftsmanship behind every piece we create."
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL",
+      "info": "YouTube, Vimeo, or direct video file URL"
+    },
+    {
+      "type": "text",
+      "id": "play_text",
+      "label": "Play button text",
+      "default": "Watch Film"
+    },
+    {
+      "type": "header",
+      "content": "Height - Responsive"
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Mobile (< 480px)",
+      "min": 250,
+      "max": 600,
+      "step": 10,
+      "default": 400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "height_tablet",
+      "label": "Tablet (750px+)",
+      "min": 350,
+      "max": 700,
+      "step": 10,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "label": "Laptop (1024px+)",
+      "min": 400,
+      "max": 800,
+      "step": 10,
+      "default": 600,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "height_large",
+      "label": "Large screens (1440px+)",
+      "min": 450,
+      "max": 900,
+      "step": 10,
+      "default": 700,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color_background",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "rgba(0, 0, 0, 0.3)"
+    },
+    {
+      "type": "color",
+      "id": "play_btn_bg",
+      "label": "Play button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "play_icon_color",
+      "label": "Play icon color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Video Banner 3"
+    }
+  ]
+}
+{% endschema %}
