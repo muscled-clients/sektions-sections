@@ -210,7 +210,7 @@
   }
 }
 
-/* Mobile Layout - Single Column */
+/* Mobile Layout - 2 Columns */
 @media screen and (max-width: 768px) {
   .feature-cards-grid {
     padding: var(--section-padding-top, 40px) 16px var(--section-padding-bottom, 40px);
@@ -222,7 +222,7 @@
   }
 
   .feature-cards-grid__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--card-gap, 16px);
   }
 
