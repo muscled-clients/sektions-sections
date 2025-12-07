@@ -447,6 +447,7 @@
 
     let currentIndex = 0;
     let cardsPerView = 3;
+    const totalCards = cards.length;
 
     function updateCardsPerView() {
       const width = window.innerWidth;
@@ -459,39 +460,46 @@
       }
     }
 
+    function getGap() {
+      const width = window.innerWidth;
+      return width <= 750 ? 12 : 20;
+    }
+
     function updateSlider() {
       const cardWidth = cards[0].offsetWidth;
-      const gap = 20;
+      const gap = getGap();
       const translateX = -currentIndex * (cardWidth + gap);
       slider.style.transform = `translateX(${translateX}px)`;
 
-      prevBtn.disabled = currentIndex === 0;
-      nextBtn.disabled = currentIndex >= cards.length - cardsPerView;
+      // No disabled state for infinite scroll
+      if (prevBtn) prevBtn.disabled = false;
+      if (nextBtn) nextBtn.disabled = false;
     }
 
     function slideNext() {
-      if (currentIndex < cards.length - cardsPerView) {
-        currentIndex++;
-        updateSlider();
+      currentIndex++;
+      if (currentIndex >= totalCards) {
+        currentIndex = 0;
       }
+      updateSlider();
     }
 
     function slidePrev() {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateSlider();
+      currentIndex--;
+      if (currentIndex < 0) {
+        currentIndex = totalCards - 1;
       }
+      updateSlider();
     }
 
-    nextBtn.addEventListener('click', slideNext);
-    prevBtn.addEventListener('click', slidePrev);
+    if (nextBtn) nextBtn.addEventListener('click', slideNext);
+    if (prevBtn) prevBtn.addEventListener('click', slidePrev);
 
     let resizeTimer;
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function() {
         updateCardsPerView();
-        currentIndex = Math.min(currentIndex, Math.max(0, cards.length - cardsPerView));
         updateSlider();
       }, 250);
     });
@@ -502,6 +510,7 @@
 
     slider.addEventListener('touchstart', function(e) {
       startX = e.touches[0].clientX;
+      currentX = startX;
       isDragging = true;
     }, { passive: true });
 
