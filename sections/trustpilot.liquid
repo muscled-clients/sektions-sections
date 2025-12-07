@@ -248,6 +248,7 @@
     }
   }
 
+  /* Tablet - show 2.5 cards */
   @media screen and (max-width: 750px) {
     #shopify-section-{{ section.id }} .reviews-container {
       padding: 0 15px;
@@ -275,8 +276,9 @@
     }
 
     #shopify-section-{{ section.id }} .review-card {
-      flex: 0 0 calc(100% - 50px);
-      min-width: calc(100% - 50px);
+      flex: 0 0 280px;
+      min-width: 280px;
+      max-width: 280px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
@@ -286,6 +288,24 @@
 
     #shopify-section-{{ section.id }} .excellent-title {
       font-size: calc({{ section.settings.title_size }}px * 0.85);
+    }
+  }
+
+  /* Mobile M and L - show 1.5 cards */
+  @media screen and (max-width: 500px) {
+    #shopify-section-{{ section.id }} .review-card {
+      flex: 0 0 260px;
+      min-width: 260px;
+      max-width: 260px;
+    }
+  }
+
+  /* Mobile S - show 1 card with edge of next */
+  @media screen and (max-width: 375px) {
+    #shopify-section-{{ section.id }} .review-card {
+      flex: 0 0 calc(100% - 40px);
+      min-width: calc(100% - 40px);
+      max-width: 280px;
     }
   }
 {% endstyle %}
