@@ -574,6 +574,14 @@
         updateSlider(false);
       }
     });
+
+    document.addEventListener('shopify:section:unload', function(event) {
+      if (event.detail.sectionId === '{{ section.id }}') {
+        slider.removeEventListener('transitionend', handleTransitionEnd);
+        if (nextBtn) nextBtn.removeEventListener('click', slideNext);
+        if (prevBtn) prevBtn.removeEventListener('click', slidePrev);
+      }
+    });
   })();
 </script>
 
@@ -837,7 +845,7 @@
           "type": "text",
           "id": "author",
           "label": "Author name",
-          "default": "Bob de Bouwer"
+          "default": "John D."
         },
         {
           "type": "text",
@@ -862,10 +870,10 @@
           "type": "review",
           "settings": {
             "rating": 5,
-            "title": "Easy to use",
-            "text": "Issues addressed very efficiently and in a timely manner. We were looked after very well;",
-            "author": "Bob de Bouwer",
-            "date": "1 day ago",
+            "title": "Great experience",
+            "text": "Excellent service and fast delivery. The product quality exceeded my expectations. Highly recommend!",
+            "author": "Sarah M.",
+            "date": "2 days ago",
             "show_verified": true
           }
         },
@@ -873,10 +881,21 @@
           "type": "review",
           "settings": {
             "rating": 5,
-            "title": "Easy to use",
-            "text": "Issues addressed very efficiently and in a timely manner. We were looked after very well;",
-            "author": "Bob de Bouwer",
-            "date": "1 day ago",
+            "title": "Outstanding support",
+            "text": "Customer service was incredibly helpful and responsive. They resolved my issue within hours.",
+            "author": "James K.",
+            "date": "3 days ago",
+            "show_verified": true
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 4.5,
+            "title": "Very satisfied",
+            "text": "Quality products and reliable shipping. Will definitely be ordering again in the future.",
+            "author": "Emily R.",
+            "date": "1 week ago",
             "show_verified": true
           }
         },
@@ -884,10 +903,10 @@
           "type": "review",
           "settings": {
             "rating": 5,
-            "title": "Easy to use",
-            "text": "Issues addressed very efficiently and in a timely manner. We were looked after very well;",
-            "author": "Bob de Bouwer",
-            "date": "1 day ago",
+            "title": "Highly recommended",
+            "text": "From ordering to delivery, everything was smooth and professional. Great company to deal with!",
+            "author": "Michael T.",
+            "date": "1 week ago",
             "show_verified": true
           }
         },
@@ -895,21 +914,10 @@
           "type": "review",
           "settings": {
             "rating": 5,
-            "title": "Easy to use",
-            "text": "Issues addressed very efficiently and in a timely manner. We were looked after very well;",
-            "author": "Bob de Bouwer",
-            "date": "1 day ago",
-            "show_verified": true
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Easy to use",
-            "text": "Issues addressed very efficiently and in a timely manner. We were looked after very well;",
-            "author": "Bob de Bouwer",
-            "date": "1 day ago",
+            "title": "Best purchase ever",
+            "text": "Amazing quality and value for money. The team went above and beyond to ensure satisfaction.",
+            "author": "Lisa W.",
+            "date": "2 weeks ago",
             "show_verified": true
           }
         }
