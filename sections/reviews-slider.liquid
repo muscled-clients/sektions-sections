@@ -526,13 +526,10 @@
 <script>
   (function() {
     function initReviewsSlider() {
-      console.log('initReviewsSlider called');
       const sectionContainer = document.getElementById('reviews-slider-section-{{ section.id }}');
-      console.log('sectionContainer:', sectionContainer);
       if (!sectionContainer) return;
 
       const slider = sectionContainer.querySelector('.reviews-slider');
-      console.log('slider:', slider);
       if (!slider) return;
 
       const wrapper = sectionContainer.querySelector('.reviews-wrapper');
@@ -541,7 +538,6 @@
       const prevBtn = sectionContainer.querySelector('.slider-nav.prev');
       const nextBtn = sectionContainer.querySelector('.slider-nav.next');
       const progressBar = sectionContainer.querySelector('.slider-progress-bar');
-      console.log('progressBar element:', progressBar);
       const originalCards = Array.from(slider.querySelectorAll('.review-card:not(.clone)'));
 
       if (originalCards.length === 0) return;
@@ -576,17 +572,10 @@
       }
 
       function updateProgressBar() {
-        console.log('updateProgressBar called, progressBar:', progressBar);
-        if (!progressBar) {
-          console.log('progressBar not found!');
-          return;
-        }
-        // Calculate which original card we're viewing (0 to totalOriginal-1)
+        if (!progressBar) return;
         let realIndex = (currentIndex - totalOriginal) % totalOriginal;
         if (realIndex < 0) realIndex += totalOriginal;
-        // Progress shows position from 1 to totalOriginal
         const progress = ((realIndex + 1) / totalOriginal) * 100;
-        console.log('Setting progress width to:', progress + '%');
         progressBar.style.width = progress + '%';
       }
 
