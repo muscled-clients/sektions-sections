@@ -104,23 +104,24 @@
   #shopify-section-{{ section.id }} .reviews-content {
     position: relative;
     overflow: hidden;
+    margin-left: -30px;
+    margin-right: -30px;
   }
 
   #shopify-section-{{ section.id }} .reviews-slider-wrapper {
     position: relative;
     overflow: visible;
+    padding-left: 30px;
   }
 
   #shopify-section-{{ section.id }} .reviews-slider {
     display: flex;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    gap: 20px;
+    gap: 24px;
   }
 
   #shopify-section-{{ section.id }} .review-card {
-    flex: 0 0 340px;
-    min-width: 340px;
-    max-width: 340px;
+    flex: 0 0 calc((100% - 48px) / 3);
     background: {{ section.settings.card_background }};
     border-radius: {{ section.settings.card_radius }}px;
     border: 1px solid #e5e5e5;
@@ -554,7 +555,7 @@
 
     function getGap() {
       const width = window.innerWidth;
-      return width <= 750 ? 12 : 20;
+      return width <= 750 ? 12 : 24;
     }
 
     function updateProgressBar() {
@@ -570,8 +571,8 @@
 
       const cardWidth = cards[0].offsetWidth;
       const gap = getGap();
-      const edgeOffset = cardWidth - 20;
-      const translateX = -currentIndex * (cardWidth + gap) + edgeOffset;
+      const edgeVisible = 30;
+      const translateX = -currentIndex * (cardWidth + gap) + (cardWidth - edgeVisible);
 
       if (animate) {
         slider.style.transition = 'transform 0.4s ease';
