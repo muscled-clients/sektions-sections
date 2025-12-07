@@ -104,13 +104,11 @@
   #shopify-section-{{ section.id }} .reviews-content {
     position: relative;
     overflow: hidden;
-    margin: 0 -50px;
   }
 
   #shopify-section-{{ section.id }} .reviews-slider-wrapper {
     position: relative;
     overflow: visible;
-    padding: 0 50px;
   }
 
   #shopify-section-{{ section.id }} .reviews-slider {
@@ -120,9 +118,9 @@
   }
 
   #shopify-section-{{ section.id }} .review-card {
-    flex: 0 0 320px;
-    min-width: 320px;
-    max-width: 320px;
+    flex: 0 0 340px;
+    min-width: 340px;
+    max-width: 340px;
     background: {{ section.settings.card_background }};
     border-radius: {{ section.settings.card_radius }}px;
     border: 1px solid #e5e5e5;
@@ -572,7 +570,7 @@
 
       const cardWidth = cards[0].offsetWidth;
       const gap = getGap();
-      const edgeOffset = cardWidth * 0.95;
+      const edgeOffset = cardWidth - 50;
       const translateX = -currentIndex * (cardWidth + gap) + edgeOffset;
 
       if (animate) {
