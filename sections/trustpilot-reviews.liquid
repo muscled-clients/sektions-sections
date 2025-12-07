@@ -1,9 +1,4 @@
-{% comment %}
-  Trustpilot-style Reviews Slider Section
-  Displays customer reviews in a sliding carousel
-{% endcomment %}
-
-<style>
+{% style %}
   #shopify-section-{{ section.id }} {
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
     background-color: {{ section.settings.background_color }};
@@ -39,7 +34,7 @@
     display: inline-flex;
     gap: 0;
     align-items: center;
-    background: #00B67A;
+    background: {{ section.settings.star_color }};
     padding: 4px 8px;
   }
 
@@ -126,9 +121,14 @@
   #shopify-section-{{ section.id }} .review-stars-small {
     display: flex;
     gap: 1px;
-    background: #00B67A;
+    background: {{ section.settings.star_color }};
     padding: 3px 6px;
     border-radius: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .review-stars-small .star-empty {
+    fill: #ffffff;
+    opacity: 0.5;
   }
 
   #shopify-section-{{ section.id }} .review-stars-small .star {
@@ -255,7 +255,7 @@
       font-size: calc({{ section.settings.title_size }}px * 0.85);
     }
   }
-</style>
+{% endstyle %}
 
 <div class="reviews-container">
   <div class="reviews-header">
@@ -317,8 +317,14 @@
           <div class="review-card" {{ block.shopify_attributes }}>
             <div class="review-header-row">
               <div class="review-stars-small">
-                {% for i in (1..5) %}
+                {% for i in (1..block.settings.rating) %}
                   <svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                {% endfor %}
+                {% assign empty_stars = 5 | minus: block.settings.rating %}
+                {% for i in (1..empty_stars) %}
+                  <svg class="star star-empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                   </svg>
                 {% endfor %}
@@ -444,6 +450,15 @@
     // Initialize
     updateCardsPerView();
     updateSlider();
+
+    // Shopify theme editor support
+    document.addEventListener('shopify:section:load', function(event) {
+      if (event.detail.sectionId === '{{ section.id }}') {
+        updateCardsPerView();
+        currentIndex = 0;
+        updateSlider();
+      }
+    });
   })();
 </script>
 
@@ -638,6 +653,7 @@
       "default": 50
     }
   ],
+  "max_blocks": 15,
   "blocks": [
     {
       "type": "review",
