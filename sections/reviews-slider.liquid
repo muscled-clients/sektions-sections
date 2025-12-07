@@ -572,8 +572,8 @@
 
       const cardWidth = cards[0].offsetWidth;
       const gap = getGap();
-      const edgeVisible = 40;
-      const translateX = -currentIndex * (cardWidth + gap) + (cardWidth - edgeVisible) - gap;
+      const edgeVisible = 50;
+      const translateX = -currentIndex * (cardWidth + gap) - edgeVisible;
 
       if (animate) {
         slider.style.transition = 'transform 0.4s ease';
