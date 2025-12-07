@@ -560,7 +560,10 @@
 
     function updateProgressBar() {
       if (!progressBar) return;
-      const realIndex = ((currentIndex - totalOriginal) % totalOriginal + totalOriginal) % totalOriginal;
+      // Calculate which original card we're viewing (0 to totalOriginal-1)
+      let realIndex = (currentIndex - totalOriginal) % totalOriginal;
+      if (realIndex < 0) realIndex += totalOriginal;
+      // Progress shows position from 1 to totalOriginal
       const progress = ((realIndex + 1) / totalOriginal) * 100;
       progressBar.style.width = progress + '%';
     }
@@ -661,6 +664,8 @@
 
     // Initial position (start at the first real card, after prepended clones)
     updateSlider(false);
+    // Ensure progress bar is set on initial load
+    updateProgressBar();
 
     document.addEventListener('shopify:section:load', function(event) {
       if (event.detail.sectionId === '{{ section.id }}') {
