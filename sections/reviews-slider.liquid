@@ -120,13 +120,14 @@
   }
 
   #shopify-section-{{ section.id }} .review-card {
-    flex: 0 0 calc((100% - 40px) / 3);
-    min-width: 320px;
+    flex: 0 0 280px;
+    min-width: 280px;
+    max-width: 280px;
     background: {{ section.settings.card_background }};
     border-radius: {{ section.settings.card_radius }}px;
     border: 1px solid #e5e5e5;
-    padding: 24px;
-    min-height: 200px;
+    padding: 20px;
+    min-height: 180px;
     display: flex;
     flex-direction: column;
   }
