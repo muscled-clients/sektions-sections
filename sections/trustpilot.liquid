@@ -1,0 +1,756 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .reviews-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-header {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    min-width: 200px;
+  }
+
+  #shopify-section-{{ section.id }} .excellent-title {
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.title_color }};
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .rating-stars {
+    display: inline-flex;
+    gap: 0;
+    align-items: center;
+    background: {{ section.settings.star_color }};
+    padding: 4px 8px;
+  }
+
+  #shopify-section-{{ section.id }} .star {
+    width: {{ section.settings.star_size }}px;
+    height: {{ section.settings.star_size }}px;
+    fill: #ffffff;
+  }
+
+  #shopify-section-{{ section.id }} .star-empty {
+    fill: #ffffff;
+    opacity: 0.5;
+  }
+
+  #shopify-section-{{ section.id }} .star-half {
+    position: relative;
+    width: {{ section.settings.star_size }}px;
+    height: {{ section.settings.star_size }}px;
+    display: inline-block;
+  }
+
+  #shopify-section-{{ section.id }} .star-half svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: {{ section.settings.star_size }}px;
+    height: {{ section.settings.star_size }}px;
+  }
+
+  #shopify-section-{{ section.id }} .star-half .star-bg {
+    fill: #ffffff;
+    opacity: 0.5;
+  }
+
+  #shopify-section-{{ section.id }} .star-half .star-fg {
+    fill: #ffffff;
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  }
+
+  #shopify-section-{{ section.id }} .review-count {
+    font-size: {{ section.settings.subtitle_size }}px;
+    color: {{ section.settings.subtitle_color }};
+    margin: 0;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-content {
+    flex: 1;
+    position: relative;
+    overflow: visible;
+    padding: 0 50px;
+    margin: 0 -50px;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-slider-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-slider {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .review-card {
+    flex: 0 0 calc(33.333% - 14px);
+    background: {{ section.settings.card_background }};
+    border-radius: {{ section.settings.card_radius }}px;
+    padding: 20px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .review-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .review-stars-small {
+    display: flex;
+    gap: 1px;
+    background: {{ section.settings.star_color }};
+    padding: 3px 6px;
+    border-radius: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .review-stars-small .star-empty {
+    fill: #ffffff;
+    opacity: 0.5;
+  }
+
+  #shopify-section-{{ section.id }} .review-stars-small .star {
+    width: 16px;
+    height: 16px;
+    fill: #ffffff;
+  }
+
+  #shopify-section-{{ section.id }} .review-title {
+    font-size: {{ section.settings.review_title_size }}px;
+    font-weight: 600;
+    color: {{ section.settings.review_title_color }};
+    margin: 0;
+    flex: 1;
+  }
+
+  #shopify-section-{{ section.id }} .review-text {
+    font-size: {{ section.settings.review_text_size }}px;
+    line-height: 1.5;
+    color: {{ section.settings.review_text_color }};
+    margin: 0 0 16px 0;
+  }
+
+  #shopify-section-{{ section.id }} .review-footer {
+    margin-top: auto;
+    padding-top: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .author-name {
+    font-size: {{ section.settings.author_size }}px;
+    font-weight: 600;
+    color: {{ section.settings.author_color }};
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .review-date {
+    font-size: 13px;
+    color: {{ section.settings.date_color }};
+    margin: 4px 0 0 0;
+  }
+
+  #shopify-section-{{ section.id }} .slider-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .slider-controls.prev-control {
+    left: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .slider-controls.next-control {
+    right: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .slider-nav {
+    background: #000;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  #shopify-section-{{ section.id }} .slider-nav:hover {
+    background: #333;
+  }
+
+  #shopify-section-{{ section.id }} .slider-nav svg {
+    width: 16px;
+    height: 16px;
+    stroke: #fff;
+    stroke-width: 2;
+  }
+
+  #shopify-section-{{ section.id }} .slider-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  @media screen and (max-width: 990px) {
+    #shopify-section-{{ section.id }} .review-card {
+      flex: 0 0 calc(50% - 10px);
+    }
+
+    #shopify-section-{{ section.id }} .reviews-header {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .header-left {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .review-card {
+      flex: 0 0 100%;
+    }
+
+    #shopify-section-{{ section.id }} .slider-nav {
+      width: 36px;
+      height: 36px;
+    }
+
+    #shopify-section-{{ section.id }} .slider-nav.prev {
+      left: 10px;
+    }
+
+    #shopify-section-{{ section.id }} .slider-nav.next {
+      right: 10px;
+    }
+
+    #shopify-section-{{ section.id }} .excellent-title {
+      font-size: calc({{ section.settings.title_size }}px * 0.85);
+    }
+  }
+{% endstyle %}
+
+<div class="reviews-container">
+  <div class="reviews-header">
+    <h2 class="excellent-title">{{ section.settings.heading }}</h2>
+    <div class="rating-stars">
+      {% assign rating_floor = section.settings.overall_rating | floor %}
+      {% assign rating_decimal = section.settings.overall_rating | minus: rating_floor %}
+
+      {% for i in (1..rating_floor) %}
+        <svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      {% endfor %}
+
+      {% if rating_decimal > 0 %}
+        <div class="star-half">
+          <svg class="star star-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <svg class="star star-fg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        {% assign remaining_stars = 4 | minus: rating_floor %}
+      {% else %}
+        {% assign remaining_stars = 5 | minus: rating_floor %}
+      {% endif %}
+
+      {% for i in (1..remaining_stars) %}
+        <svg class="star star-empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      {% endfor %}
+    </div>
+    <p class="review-count">Based on {{ section.settings.total_reviews }} reviews</p>
+  </div>
+
+  <div class="reviews-content">
+    <div class="slider-controls prev-control">
+      <button class="slider-nav prev" aria-label="Previous reviews">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="slider-controls next-control">
+      <button class="slider-nav next" aria-label="Next reviews">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="reviews-slider-wrapper">
+      <div class="reviews-slider" id="reviews-slider-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% if block.type == 'review' %}
+          <div class="review-card" {{ block.shopify_attributes }}>
+            <div class="review-header-row">
+              <div class="review-stars-small">
+                {% for i in (1..block.settings.rating) %}
+                  <svg class="star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                {% endfor %}
+                {% assign empty_stars = 5 | minus: block.settings.rating %}
+                {% for i in (1..empty_stars) %}
+                  <svg class="star star-empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                {% endfor %}
+              </div>
+            </div>
+
+            {% if block.settings.title != blank %}
+              <h3 class="review-title">{{ block.settings.title }}</h3>
+            {% endif %}
+
+            <p class="review-text">{{ block.settings.text }}</p>
+
+            <div class="review-footer">
+              <div>
+                <p class="author-name">{{ block.settings.author }}</p>
+              </div>
+              <div>
+                <p class="review-date">{{ block.settings.date }}</p>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const sliderId = 'reviews-slider-{{ section.id }}';
+    const slider = document.getElementById(sliderId);
+    const container = slider.closest('.reviews-container');
+    const prevBtn = container.querySelector('.slider-nav.prev');
+    const nextBtn = container.querySelector('.slider-nav.next');
+    const cards = slider.querySelectorAll('.review-card');
+
+    if (!slider || cards.length === 0) return;
+
+    let currentIndex = 0;
+    let cardsPerView = 3;
+
+    function updateCardsPerView() {
+      const width = window.innerWidth;
+      if (width <= 750) {
+        cardsPerView = 1;
+      } else if (width <= 990) {
+        cardsPerView = 2;
+      } else {
+        cardsPerView = 3;
+      }
+    }
+
+    function updateSlider() {
+      const cardWidth = cards[0].offsetWidth;
+      const gap = 20;
+      const translateX = -currentIndex * (cardWidth + gap);
+      slider.style.transform = `translateX(${translateX}px)`;
+
+      // Update button states
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex >= cards.length - cardsPerView;
+    }
+
+    function slideNext() {
+      if (currentIndex < cards.length - cardsPerView) {
+        currentIndex++;
+        updateSlider();
+      }
+    }
+
+    function slidePrev() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', slideNext);
+    prevBtn.addEventListener('click', slidePrev);
+
+    // Handle resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        updateCardsPerView();
+        currentIndex = Math.min(currentIndex, Math.max(0, cards.length - cardsPerView));
+        updateSlider();
+      }, 250);
+    });
+
+    // Touch support for mobile
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+
+    slider.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    });
+
+    slider.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener('touchend', function() {
+      if (!isDragging) return;
+      isDragging = false;
+      const diff = startX - currentX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          slideNext();
+        } else {
+          slidePrev();
+        }
+      }
+    });
+
+    // Initialize
+    updateCardsPerView();
+    updateSlider();
+
+    // Shopify theme editor support
+    document.addEventListener('shopify:section:load', function(event) {
+      if (event.detail.sectionId === '{{ section.id }}') {
+        updateCardsPerView();
+        currentIndex = 0;
+        updateSlider();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Trustpilot",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Excellent"
+    },
+    {
+      "type": "range",
+      "id": "overall_rating",
+      "label": "Overall rating",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 4.5
+    },
+    {
+      "type": "text",
+      "id": "total_reviews",
+      "label": "Total reviews count",
+      "default": "4,150"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#f7f7f7"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Colors - Outside Cards"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Main title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Review count color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Inside Cards"
+    },
+    {
+      "type": "color",
+      "id": "review_title_color",
+      "label": "Review title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "review_text_color",
+      "label": "Review text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "Author name color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "date_color",
+      "label": "Date color",
+      "default": "#999999"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "review_title_size",
+      "label": "Review title size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "review_text_size",
+      "label": "Review text size",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "author_size",
+      "label": "Author text size",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Stars"
+    },
+    {
+      "type": "range",
+      "id": "star_size",
+      "label": "Star size",
+      "min": 16,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#00B67A"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    }
+  ],
+  "max_blocks": 15,
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review title",
+          "default": "Great quality"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review text",
+          "default": "I love the unique designs on these t-shirts. They're a great conversation starter and I always get compliments. The quality is top-notch too."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Sarah D."
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "default": "20 June"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trustpilot",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Great quality",
+            "text": "I love the unique designs on these t-shirts. They're a great conversation starter and I always get compliments. The quality is top-notch too.",
+            "author": "Sarah D.",
+            "date": "20 June"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Perfect!",
+            "text": "The sizing guide was spot-on. My tee fits perfectly and the fabric is super comfortable. I'll definitely be ordering more.",
+            "author": "Kathy R.",
+            "date": "20 June"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Great fit",
+            "text": "The fit is great, not too tight and not too baggy. It's definitely become my go-to for casual wear.",
+            "author": "Madison A.",
+            "date": "21 June"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Amazing service",
+            "text": "Fast shipping and excellent customer service. The product quality exceeded my expectations. Will definitely order again!",
+            "author": "James M.",
+            "date": "22 June"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "title": "Good value",
+            "text": "Really happy with my purchase. Good quality for the price point. Would recommend to friends.",
+            "author": "Emily S.",
+            "date": "23 June"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
