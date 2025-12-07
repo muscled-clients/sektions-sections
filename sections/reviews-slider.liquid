@@ -104,25 +104,24 @@
   #shopify-section-{{ section.id }} .reviews-content {
     position: relative;
     overflow: hidden;
-    margin-left: -40px;
-    margin-right: -40px;
   }
 
   #shopify-section-{{ section.id }} .reviews-slider-wrapper {
     position: relative;
     overflow: visible;
-    padding-left: 40px;
-    padding-right: 40px;
   }
 
   #shopify-section-{{ section.id }} .reviews-slider {
     display: flex;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     gap: 24px;
+    padding-left: 50px;
   }
 
   #shopify-section-{{ section.id }} .review-card {
-    flex: 0 0 calc((100% - 48px) / 3);
+    flex: 0 0 384px;
+    min-width: 384px;
+    max-width: 384px;
     background: {{ section.settings.card_background }};
     border-radius: {{ section.settings.card_radius }}px;
     border: 1px solid #e5e5e5;
@@ -572,8 +571,7 @@
 
       const cardWidth = cards[0].offsetWidth;
       const gap = getGap();
-      const edgeVisible = 50;
-      const translateX = -currentIndex * (cardWidth + gap) - edgeVisible;
+      const translateX = -currentIndex * (cardWidth + gap);
 
       if (animate) {
         slider.style.transition = 'transform 0.4s ease';
