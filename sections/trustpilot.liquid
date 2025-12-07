@@ -48,7 +48,7 @@
   #shopify-section-{{ section.id }} .header-star-box svg {
     width: calc({{ section.settings.star_size }}px - 6px);
     height: calc({{ section.settings.star_size }}px - 6px);
-    fill: #ffffff;
+    fill: {{ section.settings.star_icon_color }};
   }
 
   #shopify-section-{{ section.id }} .header-star-box.empty {
@@ -125,7 +125,7 @@
   #shopify-section-{{ section.id }} .star-box svg {
     width: 14px;
     height: 14px;
-    fill: #ffffff;
+    fill: {{ section.settings.star_icon_color }};
   }
 
   #shopify-section-{{ section.id }} .star-box.empty {
@@ -640,8 +640,14 @@
     {
       "type": "color",
       "id": "star_color",
-      "label": "Star color",
+      "label": "Star background color",
       "default": "#00B67A"
+    },
+    {
+      "type": "color",
+      "id": "star_icon_color",
+      "label": "Star icon color",
+      "default": "#ffffff"
     },
     {
       "type": "header",
