@@ -441,22 +441,28 @@
 
     const prevBtn = container.querySelector('.slider-nav.prev');
     const nextBtn = container.querySelector('.slider-nav.next');
-    const cards = slider.querySelectorAll('.review-card');
+    const originalCards = Array.from(slider.querySelectorAll('.review-card'));
 
-    if (cards.length === 0) return;
+    if (originalCards.length === 0) return;
 
-    let currentIndex = 0;
-    let cardsPerView = 3;
-    const totalCards = cards.length;
+    const totalOriginal = originalCards.length;
+    let currentIndex = totalOriginal;
+    let isTransitioning = false;
 
-    function updateCardsPerView() {
-      const width = window.innerWidth;
-      if (width <= 750) {
-        cardsPerView = 1;
-      } else if (width <= 990) {
-        cardsPerView = 2;
-      } else {
-        cardsPerView = 3;
+    // Clone cards for infinite effect - add clones before and after
+    function setupInfiniteSlider() {
+      // Clone all cards and append to end
+      originalCards.forEach(card => {
+        const clone = card.cloneNode(true);
+        clone.classList.add('clone');
+        slider.appendChild(clone);
+      });
+
+      // Clone all cards and prepend to start
+      for (let i = totalOriginal - 1; i >= 0; i--) {
+        const clone = originalCards[i].cloneNode(true);
+        clone.classList.add('clone');
+        slider.insertBefore(clone, slider.firstChild);
       }
     }
 
@@ -465,32 +471,59 @@
       return width <= 750 ? 12 : 20;
     }
 
-    function updateSlider() {
+    function updateSlider(animate = true) {
+      const cards = slider.querySelectorAll('.review-card');
+      if (cards.length === 0) return;
+
       const cardWidth = cards[0].offsetWidth;
       const gap = getGap();
       const translateX = -currentIndex * (cardWidth + gap);
-      slider.style.transform = `translateX(${translateX}px)`;
 
-      // No disabled state for infinite scroll
-      if (prevBtn) prevBtn.disabled = false;
-      if (nextBtn) nextBtn.disabled = false;
+      if (animate) {
+        slider.style.transition = 'transform 0.4s ease';
+      } else {
+        slider.style.transition = 'none';
+      }
+
+      slider.style.transform = `translateX(${translateX}px)`;
+    }
+
+    function handleTransitionEnd() {
+      isTransitioning = false;
+      const cards = slider.querySelectorAll('.review-card');
+
+      // If we scrolled to the cloned section at the end, jump to real cards
+      if (currentIndex >= totalOriginal * 2) {
+        currentIndex = totalOriginal;
+        updateSlider(false);
+      }
+
+      // If we scrolled to the cloned section at the start, jump to real cards
+      if (currentIndex < totalOriginal) {
+        currentIndex = totalOriginal + (currentIndex % totalOriginal);
+        if (currentIndex < totalOriginal) currentIndex = totalOriginal * 2 - 1;
+        updateSlider(false);
+      }
     }
 
     function slideNext() {
+      if (isTransitioning) return;
+      isTransitioning = true;
       currentIndex++;
-      if (currentIndex >= totalCards) {
-        currentIndex = 0;
-      }
-      updateSlider();
+      updateSlider(true);
     }
 
     function slidePrev() {
+      if (isTransitioning) return;
+      isTransitioning = true;
       currentIndex--;
-      if (currentIndex < 0) {
-        currentIndex = totalCards - 1;
-      }
-      updateSlider();
+      updateSlider(true);
     }
+
+    // Setup infinite slider
+    setupInfiniteSlider();
+
+    slider.addEventListener('transitionend', handleTransitionEnd);
 
     if (nextBtn) nextBtn.addEventListener('click', slideNext);
     if (prevBtn) prevBtn.addEventListener('click', slidePrev);
@@ -499,8 +532,7 @@
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function() {
-        updateCardsPerView();
-        updateSlider();
+        updateSlider(false);
       }, 250);
     });
 
@@ -533,14 +565,13 @@
       }
     });
 
-    updateCardsPerView();
-    updateSlider();
+    // Initial position (start at the first real card, after prepended clones)
+    updateSlider(false);
 
     document.addEventListener('shopify:section:load', function(event) {
       if (event.detail.sectionId === '{{ section.id }}') {
-        updateCardsPerView();
-        currentIndex = 0;
-        updateSlider();
+        currentIndex = totalOriginal;
+        updateSlider(false);
       }
     });
   })();
