@@ -141,14 +141,14 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    color: {{ section.settings.subtitle_color }};
+    color: {{ section.settings.verified_text_color }};
     font-size: 13px;
   }
 
   #shopify-section-{{ section.id }} .verified-badge svg {
     width: 16px;
     height: 16px;
-    fill: {{ section.settings.card_star_bg_color }};
+    fill: {{ section.settings.verified_icon_color }};
   }
 
   #shopify-section-{{ section.id }} .review-title {
@@ -360,12 +360,14 @@
                   </div>
                 {% endfor %}
               </div>
-              <div class="verified-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-                <span>Verified</span>
-              </div>
+              {% if block.settings.show_verified %}
+                <div class="verified-badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                  <span>Verified</span>
+                </div>
+              {% endif %}
             </div>
 
             {% if block.settings.title != blank %}
@@ -686,6 +688,22 @@
     },
     {
       "type": "header",
+      "content": "Verified Badge"
+    },
+    {
+      "type": "color",
+      "id": "verified_icon_color",
+      "label": "Verified icon color",
+      "default": "#00B67A"
+    },
+    {
+      "type": "color",
+      "id": "verified_text_color",
+      "label": "Verified text color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
       "content": "Spacing"
     },
     {
@@ -747,6 +765,12 @@
           "id": "date",
           "label": "Date",
           "default": "1 day ago"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_verified",
+          "label": "Show Verified Badge",
+          "default": true
         }
       ]
     }
@@ -762,7 +786,8 @@
             "title": "Easy to use",
             "text": "Issues addressed very efficiently and in a timely manner. We were looked after very well;",
             "author": "Bob de Bouwer",
-            "date": "1 day ago"
+            "date": "1 day ago",
+            "show_verified": true
           }
         },
         {
@@ -772,7 +797,8 @@
             "title": "Easy to use",
             "text": "Issues addressed very efficiently and in a timely manner. We were looked after very well;",
             "author": "Bob de Bouwer",
-            "date": "1 day ago"
+            "date": "1 day ago",
+            "show_verified": true
           }
         },
         {
@@ -782,7 +808,8 @@
             "title": "Easy to use",
             "text": "Issues addressed very efficiently and in a timely manner. We were looked after very well;",
             "author": "Bob de Bouwer",
-            "date": "1 day ago"
+            "date": "1 day ago",
+            "show_verified": true
           }
         },
         {
@@ -792,7 +819,8 @@
             "title": "Easy to use",
             "text": "Issues addressed very efficiently and in a timely manner. We were looked after very well;",
             "author": "Bob de Bouwer",
-            "date": "1 day ago"
+            "date": "1 day ago",
+            "show_verified": true
           }
         },
         {
@@ -802,7 +830,8 @@
             "title": "Easy to use",
             "text": "Issues addressed very efficiently and in a timely manner. We were looked after very well;",
             "author": "Bob de Bouwer",
-            "date": "1 day ago"
+            "date": "1 day ago",
+            "show_verified": true
           }
         }
       ]
