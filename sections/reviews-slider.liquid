@@ -519,167 +519,172 @@
 
 <script>
   (function() {
-    const sliderId = 'reviews-slider-{{ section.id }}';
-    const slider = document.getElementById(sliderId);
-    if (!slider) return;
+    function initReviewsSlider() {
+      const sectionContainer = document.getElementById('reviews-slider-section-{{ section.id }}');
+      if (!sectionContainer) return;
 
-    const wrapper = slider.closest('.reviews-wrapper');
-    if (!wrapper) return;
+      const slider = sectionContainer.querySelector('.reviews-slider');
+      if (!slider) return;
 
-    const prevBtn = wrapper.querySelector('.slider-nav.prev');
-    const nextBtn = wrapper.querySelector('.slider-nav.next');
-    const progressBar = document.getElementById('progress-bar-{{ section.id }}');
-    const originalCards = Array.from(slider.querySelectorAll('.review-card'));
+      const wrapper = sectionContainer.querySelector('.reviews-wrapper');
+      if (!wrapper) return;
 
-    if (originalCards.length === 0) return;
+      const prevBtn = sectionContainer.querySelector('.slider-nav.prev');
+      const nextBtn = sectionContainer.querySelector('.slider-nav.next');
+      const progressBar = sectionContainer.querySelector('.slider-progress-bar');
+      const originalCards = Array.from(slider.querySelectorAll('.review-card:not(.clone)'));
 
-    const totalOriginal = originalCards.length;
-    let currentIndex = totalOriginal;
-    let isTransitioning = false;
+      if (originalCards.length === 0) return;
 
-    // Clone cards for infinite effect - add clones before and after
-    function setupInfiniteSlider() {
-      // Clone all cards and append to end
-      originalCards.forEach(card => {
-        const clone = card.cloneNode(true);
-        clone.classList.add('clone');
-        slider.appendChild(clone);
+      const totalOriginal = originalCards.length;
+      let currentIndex = totalOriginal;
+      let isTransitioning = false;
+
+      // Clone cards for infinite effect - add clones before and after
+      function setupInfiniteSlider() {
+        // Remove any existing clones first
+        slider.querySelectorAll('.review-card.clone').forEach(clone => clone.remove());
+
+        // Clone all cards and append to end
+        originalCards.forEach(card => {
+          const clone = card.cloneNode(true);
+          clone.classList.add('clone');
+          slider.appendChild(clone);
+        });
+
+        // Clone all cards and prepend to start
+        for (let i = totalOriginal - 1; i >= 0; i--) {
+          const clone = originalCards[i].cloneNode(true);
+          clone.classList.add('clone');
+          slider.insertBefore(clone, slider.firstChild);
+        }
+      }
+
+      function getGap() {
+        const width = window.innerWidth;
+        return width <= 750 ? 12 : 24;
+      }
+
+      function updateProgressBar() {
+        if (!progressBar) return;
+        // Calculate which original card we're viewing (0 to totalOriginal-1)
+        let realIndex = (currentIndex - totalOriginal) % totalOriginal;
+        if (realIndex < 0) realIndex += totalOriginal;
+        // Progress shows position from 1 to totalOriginal
+        const progress = ((realIndex + 1) / totalOriginal) * 100;
+        progressBar.style.width = progress + '%';
+      }
+
+      function updateSlider(animate = true) {
+        const cards = slider.querySelectorAll('.review-card');
+        if (cards.length === 0) return;
+
+        const cardWidth = cards[0].offsetWidth;
+        const gap = getGap();
+        const translateX = -currentIndex * (cardWidth + gap);
+
+        if (animate) {
+          slider.style.transition = 'transform 0.4s ease';
+        } else {
+          slider.style.transition = 'none';
+        }
+
+        slider.style.transform = `translateX(${translateX}px)`;
+        updateProgressBar();
+      }
+
+      function handleTransitionEnd() {
+        isTransitioning = false;
+
+        // If we scrolled to the cloned section at the end, jump to real cards
+        if (currentIndex >= totalOriginal * 2) {
+          currentIndex = totalOriginal;
+          updateSlider(false);
+        }
+
+        // If we scrolled to the cloned section at the start, jump to real cards
+        if (currentIndex < totalOriginal) {
+          currentIndex = totalOriginal + (currentIndex % totalOriginal);
+          if (currentIndex < totalOriginal) currentIndex = totalOriginal * 2 - 1;
+          updateSlider(false);
+        }
+      }
+
+      function slideNext() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex++;
+        updateSlider(true);
+      }
+
+      function slidePrev() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex--;
+        updateSlider(true);
+      }
+
+      // Setup infinite slider
+      setupInfiniteSlider();
+
+      slider.addEventListener('transitionend', handleTransitionEnd);
+
+      if (nextBtn) nextBtn.addEventListener('click', slideNext);
+      if (prevBtn) prevBtn.addEventListener('click', slidePrev);
+
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          updateSlider(false);
+        }, 250);
       });
 
-      // Clone all cards and prepend to start
-      for (let i = totalOriginal - 1; i >= 0; i--) {
-        const clone = originalCards[i].cloneNode(true);
-        clone.classList.add('clone');
-        slider.insertBefore(clone, slider.firstChild);
-      }
-    }
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
 
-    function getGap() {
-      const width = window.innerWidth;
-      return width <= 750 ? 12 : 24;
-    }
+      slider.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        currentX = startX;
+        isDragging = true;
+      }, { passive: true });
 
-    function updateProgressBar() {
-      if (!progressBar) return;
-      // Calculate which original card we're viewing (0 to totalOriginal-1)
-      let realIndex = (currentIndex - totalOriginal) % totalOriginal;
-      if (realIndex < 0) realIndex += totalOriginal;
-      // Progress shows position from 1 to totalOriginal
-      const progress = ((realIndex + 1) / totalOriginal) * 100;
-      progressBar.style.width = progress + '%';
-    }
+      slider.addEventListener('touchmove', function(e) {
+        if (!isDragging) return;
+        currentX = e.touches[0].clientX;
+      }, { passive: true });
 
-    function updateSlider(animate = true) {
-      const cards = slider.querySelectorAll('.review-card');
-      if (cards.length === 0) return;
+      slider.addEventListener('touchend', function() {
+        if (!isDragging) return;
+        isDragging = false;
+        const diff = startX - currentX;
 
-      const cardWidth = cards[0].offsetWidth;
-      const gap = getGap();
-      const translateX = -currentIndex * (cardWidth + gap);
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            slideNext();
+          } else {
+            slidePrev();
+          }
+        }
+      });
 
-      if (animate) {
-        slider.style.transition = 'transform 0.4s ease';
-      } else {
-        slider.style.transition = 'none';
-      }
-
-      slider.style.transform = `translateX(${translateX}px)`;
+      // Initial position (start at the first real card, after prepended clones)
+      updateSlider(false);
       updateProgressBar();
     }
 
-    function handleTransitionEnd() {
-      isTransitioning = false;
-
-      // If we scrolled to the cloned section at the end, jump to real cards
-      if (currentIndex >= totalOriginal * 2) {
-        currentIndex = totalOriginal;
-        updateSlider(false);
-      }
-
-      // If we scrolled to the cloned section at the start, jump to real cards
-      if (currentIndex < totalOriginal) {
-        currentIndex = totalOriginal + (currentIndex % totalOriginal);
-        if (currentIndex < totalOriginal) currentIndex = totalOriginal * 2 - 1;
-        updateSlider(false);
-      }
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initReviewsSlider);
+    } else {
+      initReviewsSlider();
     }
 
-    function slideNext() {
-      if (isTransitioning) return;
-      isTransitioning = true;
-      currentIndex++;
-      updateSlider(true);
-    }
-
-    function slidePrev() {
-      if (isTransitioning) return;
-      isTransitioning = true;
-      currentIndex--;
-      updateSlider(true);
-    }
-
-    // Setup infinite slider
-    setupInfiniteSlider();
-
-    slider.addEventListener('transitionend', handleTransitionEnd);
-
-    if (nextBtn) nextBtn.addEventListener('click', slideNext);
-    if (prevBtn) prevBtn.addEventListener('click', slidePrev);
-
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function() {
-        updateSlider(false);
-      }, 250);
-    });
-
-    let startX = 0;
-    let currentX = 0;
-    let isDragging = false;
-
-    slider.addEventListener('touchstart', function(e) {
-      startX = e.touches[0].clientX;
-      currentX = startX;
-      isDragging = true;
-    }, { passive: true });
-
-    slider.addEventListener('touchmove', function(e) {
-      if (!isDragging) return;
-      currentX = e.touches[0].clientX;
-    }, { passive: true });
-
-    slider.addEventListener('touchend', function() {
-      if (!isDragging) return;
-      isDragging = false;
-      const diff = startX - currentX;
-
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          slideNext();
-        } else {
-          slidePrev();
-        }
-      }
-    });
-
-    // Initial position (start at the first real card, after prepended clones)
-    updateSlider(false);
-    // Ensure progress bar is set on initial load
-    updateProgressBar();
-
+    // Reinitialize on Shopify section events
     document.addEventListener('shopify:section:load', function(event) {
       if (event.detail.sectionId === '{{ section.id }}') {
-        currentIndex = totalOriginal;
-        updateSlider(false);
-      }
-    });
-
-    document.addEventListener('shopify:section:unload', function(event) {
-      if (event.detail.sectionId === '{{ section.id }}') {
-        slider.removeEventListener('transitionend', handleTransitionEnd);
-        if (nextBtn) nextBtn.removeEventListener('click', slideNext);
-        if (prevBtn) prevBtn.removeEventListener('click', slidePrev);
+        initReviewsSlider();
       }
     });
   })();
