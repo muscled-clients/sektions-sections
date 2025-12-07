@@ -250,16 +250,38 @@
 
   @media screen and (max-width: 750px) {
     #shopify-section-{{ section.id }} .reviews-container {
-      padding: 0 20px;
+      padding: 0 15px;
+      gap: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-header {
+      align-items: center;
+      text-align: center;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-content {
+      padding: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-slider-wrapper {
+      overflow: visible;
+      margin-right: -15px;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-slider {
+      gap: 12px;
     }
 
     #shopify-section-{{ section.id }} .review-card {
-      flex: 0 0 100%;
+      flex: 0 0 calc(100% - 50px);
+      min-width: calc(100% - 50px);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
-    #shopify-section-{{ section.id }} .slider-nav {
-      width: 32px;
-      height: 32px;
+    #shopify-section-{{ section.id }} .slider-controls {
+      display: none;
     }
 
     #shopify-section-{{ section.id }} .excellent-title {
