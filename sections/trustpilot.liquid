@@ -39,7 +39,7 @@
   #shopify-section-{{ section.id }} .header-star-box {
     width: {{ section.settings.star_size }}px;
     height: {{ section.settings.star_size }}px;
-    background: {{ section.settings.star_color }};
+    background: {{ section.settings.header_star_bg_color }};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +48,7 @@
   #shopify-section-{{ section.id }} .header-star-box svg {
     width: calc({{ section.settings.star_size }}px - 6px);
     height: calc({{ section.settings.star_size }}px - 6px);
-    fill: {{ section.settings.star_icon_color }};
+    fill: {{ section.settings.header_star_icon_color }};
   }
 
   #shopify-section-{{ section.id }} .header-star-box.empty {
@@ -57,7 +57,7 @@
 
   #shopify-section-{{ section.id }} .header-star-box.half {
     position: relative;
-    background: linear-gradient(to right, {{ section.settings.star_color }} 50%, #dcdce6 50%);
+    background: linear-gradient(to right, {{ section.settings.header_star_bg_color }} 50%, #dcdce6 50%);
   }
 
   #shopify-section-{{ section.id }} .review-count {
@@ -116,7 +116,7 @@
   #shopify-section-{{ section.id }} .star-box {
     width: 20px;
     height: 20px;
-    background: {{ section.settings.star_color }};
+    background: {{ section.settings.card_star_bg_color }};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -125,7 +125,7 @@
   #shopify-section-{{ section.id }} .star-box svg {
     width: 14px;
     height: 14px;
-    fill: {{ section.settings.star_icon_color }};
+    fill: {{ section.settings.card_star_icon_color }};
   }
 
   #shopify-section-{{ section.id }} .star-box.empty {
@@ -143,7 +143,7 @@
   #shopify-section-{{ section.id }} .verified-badge svg {
     width: 16px;
     height: 16px;
-    fill: {{ section.settings.star_color }};
+    fill: {{ section.settings.card_star_bg_color }};
   }
 
   #shopify-section-{{ section.id }} .review-title {
@@ -625,7 +625,7 @@
     },
     {
       "type": "header",
-      "content": "Stars"
+      "content": "Header Stars"
     },
     {
       "type": "range",
@@ -639,14 +639,30 @@
     },
     {
       "type": "color",
-      "id": "star_color",
-      "label": "Star background color",
+      "id": "header_star_bg_color",
+      "label": "Header star background",
       "default": "#00B67A"
     },
     {
       "type": "color",
-      "id": "star_icon_color",
-      "label": "Star icon color",
+      "id": "header_star_icon_color",
+      "label": "Header star icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Card Stars"
+    },
+    {
+      "type": "color",
+      "id": "card_star_bg_color",
+      "label": "Card star background",
+      "default": "#00B67A"
+    },
+    {
+      "type": "color",
+      "id": "card_star_icon_color",
+      "label": "Card star icon color",
       "default": "#ffffff"
     },
     {
