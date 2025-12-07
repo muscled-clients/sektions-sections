@@ -1,0 +1,928 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+    overflow-x: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-header {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 200px;
+  }
+
+  #shopify-section-{{ section.id }} .excellent-title {
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: 600;
+    color: {{ section.settings.title_color }};
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .header-stars {
+    display: flex;
+    gap: 3px;
+  }
+
+  #shopify-section-{{ section.id }} .header-star-box {
+    width: {{ section.settings.star_size }}px;
+    height: {{ section.settings.star_size }}px;
+    background: {{ section.settings.header_star_bg_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .header-star-box svg {
+    width: calc({{ section.settings.star_size }}px - 6px);
+    height: calc({{ section.settings.star_size }}px - 6px);
+    fill: {{ section.settings.header_star_icon_color }};
+  }
+
+  #shopify-section-{{ section.id }} .header-star-box.empty {
+    background: #dcdce6;
+  }
+
+  #shopify-section-{{ section.id }} .header-star-box.half {
+    position: relative;
+    background: linear-gradient(to right, {{ section.settings.header_star_bg_color }} 50%, #dcdce6 50%);
+  }
+
+  #shopify-section-{{ section.id }} .review-count {
+    font-size: {{ section.settings.subtitle_size }}px;
+    color: {{ section.settings.subtitle_color }};
+    margin: 0;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .review-count strong {
+    font-weight: 600;
+    color: {{ section.settings.title_color }};
+  }
+
+  #shopify-section-{{ section.id }} .reviews-content {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    padding: 0 50px;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-slider-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-slider {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .review-card {
+    flex: 0 0 calc(33.333% - 14px);
+    background: {{ section.settings.card_background }};
+    border-radius: {{ section.settings.card_radius }}px;
+    padding: 20px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .review-header-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .review-stars-row {
+    display: flex;
+    gap: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .star-box {
+    width: 20px;
+    height: 20px;
+    background: {{ section.settings.card_star_bg_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .star-box svg {
+    width: 14px;
+    height: 14px;
+    fill: {{ section.settings.card_star_icon_color }};
+  }
+
+  #shopify-section-{{ section.id }} .star-box.empty {
+    background: #dcdce6;
+  }
+
+  #shopify-section-{{ section.id }} .star-box.half {
+    position: relative;
+    background: linear-gradient(to right, {{ section.settings.card_star_bg_color }} 50%, #dcdce6 50%);
+  }
+
+  #shopify-section-{{ section.id }} .verified-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: {{ section.settings.verified_text_color }};
+    font-size: 13px;
+  }
+
+  #shopify-section-{{ section.id }} .verified-badge svg {
+    width: 16px;
+    height: 16px;
+    fill: {{ section.settings.verified_icon_color }};
+  }
+
+  #shopify-section-{{ section.id }} .review-title {
+    font-size: {{ section.settings.review_title_size }}px;
+    font-weight: 600;
+    color: {{ section.settings.review_title_color }};
+    margin: 0 0 8px 0;
+  }
+
+  #shopify-section-{{ section.id }} .review-text {
+    font-size: {{ section.settings.review_text_size }}px;
+    line-height: 1.5;
+    color: {{ section.settings.review_text_color }};
+    margin: 0 0 auto 0;
+  }
+
+  #shopify-section-{{ section.id }} .review-footer {
+    margin-top: 16px;
+    padding-top: 0;
+  }
+
+  #shopify-section-{{ section.id }} .author-line {
+    font-size: {{ section.settings.author_size }}px;
+    color: {{ section.settings.author_color }};
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .author-line .author-name {
+    font-weight: 600;
+  }
+
+  #shopify-section-{{ section.id }} .author-line .review-date {
+    font-weight: 400;
+    color: {{ section.settings.date_color }};
+  }
+
+  #shopify-section-{{ section.id }} .slider-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .slider-controls.prev-control {
+    left: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .slider-controls.next-control {
+    right: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .slider-nav {
+    background: transparent;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #ddd;
+  }
+
+  #shopify-section-{{ section.id }} .slider-nav:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+  }
+
+  #shopify-section-{{ section.id }} .slider-nav svg {
+    width: 16px;
+    height: 16px;
+    stroke: #333;
+    stroke-width: 2;
+  }
+
+  #shopify-section-{{ section.id }} .slider-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  /* Tablet - show 2-3 cards */
+  @media screen and (max-width: 990px) {
+    #shopify-section-{{ section.id }} .reviews-container {
+      flex-direction: column;
+      padding: 0 20px;
+      gap: 25px;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-header {
+      align-items: center;
+      text-align: center;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-content {
+      padding: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-slider-wrapper {
+      overflow: visible;
+      margin-right: -20px;
+    }
+
+    #shopify-section-{{ section.id }} .review-card {
+      flex: 0 0 280px;
+      min-width: 280px;
+      max-width: 280px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    #shopify-section-{{ section.id }} .slider-controls {
+      display: none;
+    }
+  }
+
+  /* Mobile L - show ~2 cards */
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .reviews-container {
+      padding: 0 15px;
+      gap: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-slider-wrapper {
+      margin-right: -15px;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-slider {
+      gap: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .excellent-title {
+      font-size: calc({{ section.settings.title_size }}px * 0.85);
+    }
+  }
+
+  /* Mobile M - show ~1.5 cards */
+  @media screen and (max-width: 500px) {
+    #shopify-section-{{ section.id }} .review-card {
+      flex: 0 0 260px;
+      min-width: 260px;
+      max-width: 260px;
+    }
+  }
+
+  /* Mobile S - show 1 card with edge of next */
+  @media screen and (max-width: 375px) {
+    #shopify-section-{{ section.id }} .review-card {
+      flex: 0 0 calc(100% - 40px);
+      min-width: calc(100% - 40px);
+      max-width: 280px;
+    }
+  }
+{% endstyle %}
+
+<div id="reviews-slider-section-{{ section.id }}" class="reviews-slider-section">
+<div class="reviews-container">
+  <div class="reviews-header">
+    <h2 class="excellent-title">{{ section.settings.heading }}</h2>
+    <div class="header-stars">
+      {% assign rating_floor = section.settings.overall_rating | floor %}
+      {% assign rating_decimal = section.settings.overall_rating | minus: rating_floor %}
+
+      {% for i in (1..rating_floor) %}
+        <div class="header-star-box">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+      {% endfor %}
+
+      {% if rating_decimal > 0 %}
+        <div class="header-star-box half">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        {% assign remaining_stars = 4 | minus: rating_floor %}
+      {% else %}
+        {% assign remaining_stars = 5 | minus: rating_floor %}
+      {% endif %}
+
+      {% for i in (1..remaining_stars) %}
+        <div class="header-star-box empty">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+      {% endfor %}
+    </div>
+    <p class="review-count">Based on <strong>{{ section.settings.total_reviews }}</strong> reviews</p>
+  </div>
+
+  <div class="reviews-content">
+    <div class="slider-controls prev-control">
+      <button class="slider-nav prev" aria-label="Previous reviews">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="slider-controls next-control">
+      <button class="slider-nav next" aria-label="Next reviews">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="reviews-slider-wrapper">
+      <div class="reviews-slider" id="reviews-slider-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% if block.type == 'review' %}
+          <div class="review-card" {{ block.shopify_attributes }}>
+            <div class="review-header-row">
+              <div class="review-stars-row">
+                {% assign card_rating_floor = block.settings.rating | floor %}
+                {% assign card_rating_decimal = block.settings.rating | minus: card_rating_floor %}
+
+                {% for i in (1..card_rating_floor) %}
+                  <div class="star-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  </div>
+                {% endfor %}
+
+                {% if card_rating_decimal > 0 %}
+                  <div class="star-box half">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  </div>
+                  {% assign card_remaining_stars = 4 | minus: card_rating_floor %}
+                {% else %}
+                  {% assign card_remaining_stars = 5 | minus: card_rating_floor %}
+                {% endif %}
+
+                {% for i in (1..card_remaining_stars) %}
+                  <div class="star-box empty">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  </div>
+                {% endfor %}
+              </div>
+              {% if block.settings.show_verified %}
+                <div class="verified-badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                  <span>Verified</span>
+                </div>
+              {% endif %}
+            </div>
+
+            {% if block.settings.title != blank %}
+              <h3 class="review-title">{{ block.settings.title }}</h3>
+            {% endif %}
+
+            <p class="review-text">{{ block.settings.text }}</p>
+
+            <div class="review-footer">
+              <p class="author-line">
+                <span class="author-name">{{ block.settings.author }},</span>
+                <span class="review-date">{{ block.settings.date }}</span>
+              </p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+
+<script>
+  (function() {
+    const sliderId = 'reviews-slider-{{ section.id }}';
+    const slider = document.getElementById(sliderId);
+    if (!slider) return;
+
+    const container = slider.closest('.reviews-container');
+    if (!container) return;
+
+    const prevBtn = container.querySelector('.slider-nav.prev');
+    const nextBtn = container.querySelector('.slider-nav.next');
+    const originalCards = Array.from(slider.querySelectorAll('.review-card'));
+
+    if (originalCards.length === 0) return;
+
+    const totalOriginal = originalCards.length;
+    let currentIndex = totalOriginal;
+    let isTransitioning = false;
+
+    // Clone cards for infinite effect - add clones before and after
+    function setupInfiniteSlider() {
+      // Clone all cards and append to end
+      originalCards.forEach(card => {
+        const clone = card.cloneNode(true);
+        clone.classList.add('clone');
+        slider.appendChild(clone);
+      });
+
+      // Clone all cards and prepend to start
+      for (let i = totalOriginal - 1; i >= 0; i--) {
+        const clone = originalCards[i].cloneNode(true);
+        clone.classList.add('clone');
+        slider.insertBefore(clone, slider.firstChild);
+      }
+    }
+
+    function getGap() {
+      const width = window.innerWidth;
+      return width <= 750 ? 12 : 20;
+    }
+
+    function updateSlider(animate = true) {
+      const cards = slider.querySelectorAll('.review-card');
+      if (cards.length === 0) return;
+
+      const cardWidth = cards[0].offsetWidth;
+      const gap = getGap();
+      const translateX = -currentIndex * (cardWidth + gap);
+
+      if (animate) {
+        slider.style.transition = 'transform 0.4s ease';
+      } else {
+        slider.style.transition = 'none';
+      }
+
+      slider.style.transform = `translateX(${translateX}px)`;
+    }
+
+    function handleTransitionEnd() {
+      isTransitioning = false;
+      const cards = slider.querySelectorAll('.review-card');
+
+      // If we scrolled to the cloned section at the end, jump to real cards
+      if (currentIndex >= totalOriginal * 2) {
+        currentIndex = totalOriginal;
+        updateSlider(false);
+      }
+
+      // If we scrolled to the cloned section at the start, jump to real cards
+      if (currentIndex < totalOriginal) {
+        currentIndex = totalOriginal + (currentIndex % totalOriginal);
+        if (currentIndex < totalOriginal) currentIndex = totalOriginal * 2 - 1;
+        updateSlider(false);
+      }
+    }
+
+    function slideNext() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      currentIndex++;
+      updateSlider(true);
+    }
+
+    function slidePrev() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      currentIndex--;
+      updateSlider(true);
+    }
+
+    // Setup infinite slider
+    setupInfiniteSlider();
+
+    slider.addEventListener('transitionend', handleTransitionEnd);
+
+    if (nextBtn) nextBtn.addEventListener('click', slideNext);
+    if (prevBtn) prevBtn.addEventListener('click', slidePrev);
+
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        updateSlider(false);
+      }, 250);
+    });
+
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+
+    slider.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      currentX = startX;
+      isDragging = true;
+    }, { passive: true });
+
+    slider.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX;
+    }, { passive: true });
+
+    slider.addEventListener('touchend', function() {
+      if (!isDragging) return;
+      isDragging = false;
+      const diff = startX - currentX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          slideNext();
+        } else {
+          slidePrev();
+        }
+      }
+    });
+
+    // Initial position (start at the first real card, after prepended clones)
+    updateSlider(false);
+
+    document.addEventListener('shopify:section:load', function(event) {
+      if (event.detail.sectionId === '{{ section.id }}') {
+        currentIndex = totalOriginal;
+        updateSlider(false);
+      }
+    });
+
+    document.addEventListener('shopify:section:unload', function(event) {
+      if (event.detail.sectionId === '{{ section.id }}') {
+        slider.removeEventListener('transitionend', handleTransitionEnd);
+        if (nextBtn) nextBtn.removeEventListener('click', slideNext);
+        if (prevBtn) prevBtn.removeEventListener('click', slidePrev);
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Reviews Slider",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Excellent"
+    },
+    {
+      "type": "range",
+      "id": "overall_rating",
+      "label": "Overall rating",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "total_reviews",
+      "label": "Total reviews count",
+      "default": "1501"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors - Outside Cards"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Main title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Review count color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Inside Cards"
+    },
+    {
+      "type": "color",
+      "id": "review_title_color",
+      "label": "Review title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "review_text_color",
+      "label": "Review text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "Author name color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "date_color",
+      "label": "Date color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "review_title_size",
+      "label": "Review title size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "review_text_size",
+      "label": "Review text size",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "author_size",
+      "label": "Author text size",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Header Stars"
+    },
+    {
+      "type": "range",
+      "id": "star_size",
+      "label": "Header star size",
+      "min": 20,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "color",
+      "id": "header_star_bg_color",
+      "label": "Header star background",
+      "default": "#049B22"
+    },
+    {
+      "type": "color",
+      "id": "header_star_icon_color",
+      "label": "Header star icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Card Stars"
+    },
+    {
+      "type": "color",
+      "id": "card_star_bg_color",
+      "label": "Card star background",
+      "default": "#049B22"
+    },
+    {
+      "type": "color",
+      "id": "card_star_icon_color",
+      "label": "Card star icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Verified Badge"
+    },
+    {
+      "type": "color",
+      "id": "verified_icon_color",
+      "label": "Verified icon color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "verified_text_color",
+      "label": "Verified text color",
+      "default": "#999999"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    }
+  ],
+  "max_blocks": 15,
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 0.5,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review title",
+          "default": "Easy to use"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review text",
+          "default": "Issues addressed very efficiently and in a timely manner. We were looked after very well;"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "John D."
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "default": "1 day ago"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_verified",
+          "label": "Show Verified Badge",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Slider",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Great experience",
+            "text": "Excellent service and fast delivery. The product quality exceeded my expectations. Highly recommend!",
+            "author": "Sarah M.",
+            "date": "2 days ago",
+            "show_verified": true
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Outstanding support",
+            "text": "Customer service was incredibly helpful and responsive. They resolved my issue within hours.",
+            "author": "James K.",
+            "date": "3 days ago",
+            "show_verified": true
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 4.5,
+            "title": "Very satisfied",
+            "text": "Quality products and reliable shipping. Will definitely be ordering again in the future.",
+            "author": "Emily R.",
+            "date": "1 week ago",
+            "show_verified": true
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Highly recommended",
+            "text": "From ordering to delivery, everything was smooth and professional. Great company to deal with!",
+            "author": "Michael T.",
+            "date": "1 week ago",
+            "show_verified": true
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Best purchase ever",
+            "text": "Amazing quality and value for money. The team went above and beyond to ensure satisfaction.",
+            "author": "Lisa W.",
+            "date": "2 weeks ago",
+            "show_verified": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
