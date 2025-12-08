@@ -25,7 +25,7 @@
   #shopify-section-{{ section.id }} .diagonal-strip-top {
     top: 50%;
     background-color: {{ section.settings.top_strip_color }};
-    transform: translateY(-50%) rotate({{ section.settings.rotation_angle }}deg);
+    transform: translateY(-50%) rotate({% if section.settings.top_strip_direction == 'left_to_right' %}{{ section.settings.rotation_angle }}{% else %}-{{ section.settings.rotation_angle }}{% endif %}deg);
     transform-origin: center center;
     z-index: 2;
   }
@@ -33,7 +33,7 @@
   #shopify-section-{{ section.id }} .diagonal-strip-bottom {
     top: 50%;
     background-color: {{ section.settings.bottom_strip_color }};
-    transform: translateY(-50%) rotate(-{{ section.settings.rotation_angle }}deg);
+    transform: translateY(-50%) rotate({% if section.settings.bottom_strip_direction == 'left_to_right' %}{{ section.settings.rotation_angle }}{% else %}-{{ section.settings.rotation_angle }}{% endif %}deg);
     transform-origin: center center;
     z-index: 1;
   }
@@ -86,6 +86,14 @@
 
     #shopify-section-{{ section.id }} .diagonal-strip {
       height: calc({{ section.settings.strip_height }}px * 0.6);
+    }
+
+    #shopify-section-{{ section.id }} .diagonal-strip-top {
+      transform: translateY(-50%) rotate({% if section.settings.top_strip_direction == 'left_to_right' %}{{ section.settings.mobile_rotation_angle }}{% else %}-{{ section.settings.mobile_rotation_angle }}{% endif %}deg);
+    }
+
+    #shopify-section-{{ section.id }} .diagonal-strip-bottom {
+      transform: translateY(-50%) rotate({% if section.settings.bottom_strip_direction == 'left_to_right' %}{{ section.settings.mobile_rotation_angle }}{% else %}-{{ section.settings.mobile_rotation_angle }}{% endif %}deg);
     }
 
     #shopify-section-{{ section.id }} .diagonal-strip-text {
@@ -191,12 +199,58 @@
     {
       "type": "range",
       "id": "rotation_angle",
-      "label": "Rotation angle",
+      "label": "Rotation angle (desktop)",
       "min": 1,
-      "max": 10,
+      "max": 15,
       "step": 0.5,
       "unit": "deg",
-      "default": 3
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "mobile_rotation_angle",
+      "label": "Rotation angle (mobile)",
+      "min": 1,
+      "max": 20,
+      "step": 0.5,
+      "unit": "deg",
+      "default": 7
+    },
+    {
+      "type": "header",
+      "content": "Strip Direction"
+    },
+    {
+      "type": "select",
+      "id": "top_strip_direction",
+      "label": "Top strip direction",
+      "options": [
+        {
+          "value": "left_to_right",
+          "label": "Top-left to bottom-right"
+        },
+        {
+          "value": "right_to_left",
+          "label": "Top-right to bottom-left"
+        }
+      ],
+      "default": "left_to_right"
+    },
+    {
+      "type": "select",
+      "id": "bottom_strip_direction",
+      "label": "Bottom strip direction",
+      "options": [
+        {
+          "value": "left_to_right",
+          "label": "Top-left to bottom-right"
+        },
+        {
+          "value": "right_to_left",
+          "label": "Top-right to bottom-left"
+        }
+      ],
+      "default": "right_to_left"
     },
     {
       "type": "header",
