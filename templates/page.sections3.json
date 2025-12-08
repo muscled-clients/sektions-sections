@@ -723,12 +723,108 @@
         "tab_3_title": "Our guarantee to you",
         "tab_3_content": "<p>We stand behind the quality of our products. If you're not completely satisfied with your purchase, we'll make it right. Our commitment to excellence means you can shop with confidence knowing that your satisfaction is our top priority.</p>",
         "background_color": "#ffffff",
-        "text_color": "#164A2D",
+        "text_color": "#164a2d",
         "content_color": "#3d6b4f",
         "tab_font_size": 16,
         "content_font_size": 16,
         "padding_top": 40,
         "padding_bottom": 40
+      }
+    },
+    "expert_faq_mnTcgd": {
+      "type": "expert-faq",
+      "blocks": {
+        "faq_item_QDUc6F": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes your neural network architecture unique?",
+            "answer": "<p>Our neural network architecture is built on cutting-edge research and optimized for real-world applications. It delivers superior performance while maintaining efficiency and scalability.</p>"
+          }
+        },
+        "faq_item_jCFaFi": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        "faq_item_8iChj9": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        "faq_item_wXiUW4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        "faq_item_3dyTiJ": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        "faq_item_JrgVhN": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        "faq_item_Na8EgK": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do you ensure data privacy in cloud processing?",
+            "answer": "<p>We implement multiple layers of security including end-to-end encryption, zero-knowledge protocols, and regular security audits to ensure your data privacy is never compromised.</p>"
+          }
+        },
+        "faq_item_UwwKUy": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can the system scale to handle petabyte datasets?",
+            "answer": "<p>Yes, our infrastructure is designed to scale horizontally and can efficiently process petabyte-scale datasets while maintaining optimal performance and cost-effectiveness.</p>"
+          }
+        },
+        "faq_item_YPQBdc": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What programming languages are supported?",
+            "answer": "<p>We support all major programming languages including Python, JavaScript, Go, Rust, and many more. Our SDK provides native integrations for seamless development experience.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_QDUc6F",
+        "faq_item_jCFaFi",
+        "faq_item_8iChj9",
+        "faq_item_wXiUW4",
+        "faq_item_3dyTiJ",
+        "faq_item_JrgVhN",
+        "faq_item_Na8EgK",
+        "faq_item_UwwKUy",
+        "faq_item_YPQBdc"
+      ],
+      "name": "Expert FAQ",
+      "settings": {
+        "left_heading": "Unlock the Power of Innovation with Our Expert Team",
+        "caption": "Crafted by our world-class engineering and design specialists",
+        "faq_heading": "Everything You Need to Know",
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "caption_color": "#666666",
+        "question_color": "#1a1a1a",
+        "answer_color": "#666666",
+        "left_heading_size": 42,
+        "faq_heading_size": 24,
+        "question_size": 16,
+        "answer_size": 15,
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     }
   },
@@ -743,6 +839,7 @@
     "trustpilot_B6EzFw",
     "reviews_slider_7hYaNA",
     "style_in_motion_LbMKGR",
-    "product_tabs_XNkGtt"
+    "product_tabs_XNkGtt",
+    "expert_faq_mnTcgd"
   ]
 }
