@@ -25,7 +25,7 @@
   #shopify-section-{{ section.id }} .diagonal-strip-top {
     top: 50%;
     background-color: {{ section.settings.top_strip_color }};
-    transform: translateY(-100%) rotate(-{{ section.settings.rotation_angle }}deg);
+    transform: translateY(-50%) rotate({{ section.settings.rotation_angle }}deg);
     transform-origin: center center;
     z-index: 1;
   }
@@ -33,7 +33,7 @@
   #shopify-section-{{ section.id }} .diagonal-strip-bottom {
     top: 50%;
     background-color: {{ section.settings.bottom_strip_color }};
-    transform: translateY(0%) rotate({{ section.settings.rotation_angle }}deg);
+    transform: translateY(-50%) rotate(-{{ section.settings.rotation_angle }}deg);
     transform-origin: center center;
     z-index: 2;
   }
