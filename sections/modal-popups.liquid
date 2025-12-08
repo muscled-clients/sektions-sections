@@ -1,0 +1,914 @@
+{% comment %}
+  SEK Modal Popup - Newsletter subscription popup with trigger button
+  Features: Multiple trigger positions, image layouts, customizable colors
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+
+{% style %}
+  /* Trigger Button - Fixed Position */
+  #sek-modal-trigger-{{ section_id }} {
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    background: {{ section.settings.trigger_background }};
+    color: {{ section.settings.trigger_text_color }};
+    border: none;
+    border-radius: {{ section.settings.trigger_border_radius }}px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 750px) {
+    #sek-modal-trigger-{{ section_id }} {
+      padding: 16px 26px;
+      font-size: 15px;
+    }
+  }
+
+  /* Trigger Positions - Corners */
+  #sek-modal-trigger-{{ section_id }}[data-position="top-left"] {
+    top: 20px;
+    left: 20px;
+  }
+
+  #sek-modal-trigger-{{ section_id }}[data-position="top-right"] {
+    top: 20px;
+    right: 20px;
+  }
+
+  #sek-modal-trigger-{{ section_id }}[data-position="bottom-left"] {
+    bottom: 20px;
+    left: 20px;
+  }
+
+  #sek-modal-trigger-{{ section_id }}[data-position="bottom-right"] {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  /* Trigger Positions - Center edges */
+  #sek-modal-trigger-{{ section_id }}[data-position="top-center"] {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #sek-modal-trigger-{{ section_id }}[data-position="bottom-center"] {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #sek-modal-trigger-{{ section_id }}[data-position="middle-left"] {
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+  }
+
+  #sek-modal-trigger-{{ section_id }}[data-position="middle-right"] {
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+  }
+
+  /* Trigger Positions - Offset corners (for multiple buttons) */
+  #sek-modal-trigger-{{ section_id }}[data-position="top-left-offset"] {
+    top: 80px;
+    left: 20px;
+  }
+
+  #sek-modal-trigger-{{ section_id }}[data-position="top-right-offset"] {
+    top: 80px;
+    right: 20px;
+  }
+
+  #sek-modal-trigger-{{ section_id }}[data-position="bottom-left-offset"] {
+    bottom: 80px;
+    left: 20px;
+  }
+
+  #sek-modal-trigger-{{ section_id }}[data-position="bottom-right-offset"] {
+    bottom: 80px;
+    right: 20px;
+  }
+
+  #sek-modal-trigger-{{ section_id }}:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+
+  #sek-modal-trigger-{{ section_id }} .sek-trigger-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+  }
+
+  #sek-modal-trigger-{{ section_id }} .sek-trigger-close svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    stroke-width: 2;
+  }
+
+  #sek-modal-trigger-{{ section_id }}.is-hidden {
+    display: none;
+  }
+
+  /* Modal Overlay */
+  #sek-modal-overlay-{{ section_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  #sek-modal-overlay-{{ section_id }}.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Modal Container */
+  #sek-modal-{{ section_id }} {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    background: {{ section.settings.modal_background }};
+    border-radius: {{ section.settings.modal_border_radius }}px;
+    overflow: hidden;
+    transform: scale(0.9) translateY(20px);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 750px) {
+    #sek-modal-{{ section_id }} {
+      flex-direction: {% if section.settings.image_position == 'right' %}row-reverse{% else %}row{% endif %};
+    }
+  }
+
+  #sek-modal-overlay-{{ section_id }}.is-open #sek-modal-{{ section_id }} {
+    transform: scale(1) translateY(0);
+  }
+
+  /* Close Button */
+  #sek-modal-{{ section_id }} .sek-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-close:hover {
+    opacity: 0.7;
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-close svg {
+    width: 24px;
+    height: 24px;
+    stroke: {{ section.settings.close_icon_color }};
+    stroke-width: 2;
+  }
+
+  /* Image Section */
+  #sek-modal-{{ section_id }} .sek-modal-image {
+    width: 100%;
+    height: 200px;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-modal-{{ section_id }} .sek-modal-image {
+      width: 45%;
+      height: auto;
+      min-height: 450px;
+    }
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-image--placeholder {
+    width: 100%;
+    height: 100%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-image--placeholder svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.3;
+  }
+
+  /* Content Section */
+  #sek-modal-{{ section_id }} .sek-modal-content {
+    flex: 1;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media (min-width: 750px) {
+    #sek-modal-{{ section_id }} .sek-modal-content {
+      padding: 50px 40px;
+    }
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-subheading {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: {{ section.settings.subheading_color }};
+    margin: 0 0 12px 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-modal-{{ section_id }} .sek-modal-subheading {
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-heading {
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 16px 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-modal-{{ section_id }} .sek-modal-heading {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-description {
+    font-size: 15px;
+    line-height: 1.6;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 24px 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-modal-{{ section_id }} .sek-modal-description {
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+  }
+
+  /* Form */
+  #sek-modal-{{ section_id }} .sek-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-input {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 15px;
+    background: {{ section.settings.input_background }};
+    color: {{ section.settings.input_text_color }};
+    border: 1px solid {{ section.settings.input_border_color }};
+    border-radius: {{ section.settings.input_border_radius }}px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-input::placeholder {
+    color: {{ section.settings.input_placeholder_color }};
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-input:focus {
+    border-color: {{ section.settings.button_background }};
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-submit {
+    width: fit-content;
+    padding: 16px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    border: none;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-submit:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-disclaimer {
+    font-size: 13px;
+    line-height: 1.5;
+    color: {{ section.settings.disclaimer_color }};
+    margin-top: 8px;
+  }
+
+  /* Success Message */
+  #sek-modal-{{ section_id }} .sek-modal-success {
+    display: none;
+    text-align: center;
+    padding: 20px;
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-success.is-visible {
+    display: block;
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-success-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 16px;
+    background: {{ section.settings.button_background }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-success-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke: {{ section.settings.button_text_color }};
+    stroke-width: 2;
+  }
+
+  #sek-modal-{{ section_id }} .sek-modal-success-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: {{ section.settings.heading_color }};
+  }
+{% endstyle %}
+
+<!-- Trigger Button -->
+<button
+  id="sek-modal-trigger-{{ section_id }}"
+  class="sek-modal-trigger"
+  data-position="{{ section.settings.trigger_position }}"
+  aria-label="Open popup"
+>
+  <span class="sek-trigger-text">{{ section.settings.trigger_text }}</span>
+  <span class="sek-trigger-close" data-hide-trigger>
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+</button>
+
+<!-- Modal Overlay -->
+<div id="sek-modal-overlay-{{ section_id }}" class="sek-modal-overlay" data-modal-overlay>
+  <div id="sek-modal-{{ section_id }}" class="sek-modal" role="dialog" aria-modal="true">
+    <!-- Close Button -->
+    <button class="sek-modal-close" data-modal-close aria-label="Close popup">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Image -->
+    <div class="sek-modal-image">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 800 }}"
+          alt="{{ section.settings.image.alt | default: section.settings.heading }}"
+          loading="lazy"
+        >
+      {%- else -%}
+        <div class="sek-modal-image--placeholder">
+          {{ 'lifestyle-1' | placeholder_svg_tag }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Content -->
+    <div class="sek-modal-content">
+      <div class="sek-modal-form-wrapper" data-form-wrapper>
+        {%- if section.settings.subheading != blank -%}
+          <p class="sek-modal-subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="sek-modal-heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <p class="sek-modal-description">{{ section.settings.description }}</p>
+        {%- endif -%}
+
+        <form class="sek-modal-form" data-modal-form>
+          <input
+            type="email"
+            class="sek-modal-input"
+            placeholder="{{ section.settings.input_placeholder }}"
+            required
+            autocomplete="email"
+          >
+          <button type="submit" class="sek-modal-submit">
+            {{ section.settings.button_text }}
+          </button>
+        </form>
+
+        {%- if section.settings.disclaimer != blank -%}
+          <p class="sek-modal-disclaimer">{{ section.settings.disclaimer }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="sek-modal-success" data-success-message>
+        <div class="sek-modal-success-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="sek-modal-success-text">{{ section.settings.success_message }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    function initModalPopup() {
+      const sectionId = '{{ section_id }}';
+      const trigger = document.getElementById('sek-modal-trigger-' + sectionId);
+      const overlay = document.getElementById('sek-modal-overlay-' + sectionId);
+      const modal = document.getElementById('sek-modal-' + sectionId);
+
+      if (!trigger || !overlay || !modal) return;
+
+      const closeBtn = modal.querySelector('[data-modal-close]');
+      const hideTriggerBtn = trigger.querySelector('[data-hide-trigger]');
+      const form = modal.querySelector('[data-modal-form]');
+      const formWrapper = modal.querySelector('[data-form-wrapper]');
+      const successMessage = modal.querySelector('[data-success-message]');
+
+      // Check if trigger was previously hidden
+      const storageKey = 'sek-modal-trigger-hidden-' + sectionId;
+      if (localStorage.getItem(storageKey) === 'true') {
+        trigger.classList.add('is-hidden');
+      }
+
+      // Check if modal should auto-open
+      const autoOpen = {{ section.settings.auto_open | json }};
+      const autoOpenDelay = {{ section.settings.auto_open_delay }} * 1000;
+      const autoOpenOnce = {{ section.settings.auto_open_once | json }};
+      const autoOpenKey = 'sek-modal-opened-' + sectionId;
+
+      if (autoOpen) {
+        const hasOpened = localStorage.getItem(autoOpenKey);
+        if (!autoOpenOnce || !hasOpened) {
+          setTimeout(() => {
+            openModal();
+            if (autoOpenOnce) {
+              localStorage.setItem(autoOpenKey, 'true');
+            }
+          }, autoOpenDelay);
+        }
+      }
+
+      // Open modal
+      function openModal() {
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      // Close modal
+      function closeModal() {
+        overlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      // Click on trigger text opens modal
+      trigger.addEventListener('click', function(e) {
+        if (!e.target.closest('[data-hide-trigger]')) {
+          openModal();
+        }
+      });
+
+      // Hide trigger button
+      if (hideTriggerBtn) {
+        hideTriggerBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          trigger.classList.add('is-hidden');
+          localStorage.setItem(storageKey, 'true');
+        });
+      }
+
+      // Close button
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+      }
+
+      // Click on overlay closes modal
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+          closeModal();
+        }
+      });
+
+      // Escape key closes modal
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+          closeModal();
+        }
+      });
+
+      // Form submission
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          const email = form.querySelector('input[type="email"]').value;
+
+          // Here you would typically send to your newsletter service
+          // For now, just show success message
+          if (formWrapper && successMessage) {
+            formWrapper.style.display = 'none';
+            successMessage.classList.add('is-visible');
+          }
+
+          // Close modal after delay
+          setTimeout(() => {
+            closeModal();
+            // Reset form after modal closes
+            setTimeout(() => {
+              form.reset();
+              if (formWrapper && successMessage) {
+                formWrapper.style.display = '';
+                successMessage.classList.remove('is-visible');
+              }
+            }, 300);
+          }, 2000);
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initModalPopup);
+    } else {
+      initModalPopup();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SEK Modal Popup",
+  "tag": "section",
+  "class": "sek-modal-popup-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Trigger Button"
+    },
+    {
+      "type": "text",
+      "id": "trigger_text",
+      "label": "Trigger text",
+      "default": "Get a 15% Discount"
+    },
+    {
+      "type": "select",
+      "id": "trigger_position",
+      "label": "Trigger position",
+      "options": [
+        { "value": "top-left", "label": "Top Left" },
+        { "value": "top-center", "label": "Top Center" },
+        { "value": "top-right", "label": "Top Right" },
+        { "value": "middle-left", "label": "Middle Left" },
+        { "value": "middle-right", "label": "Middle Right" },
+        { "value": "bottom-left", "label": "Bottom Left" },
+        { "value": "bottom-center", "label": "Bottom Center" },
+        { "value": "bottom-right", "label": "Bottom Right" },
+        { "value": "top-left-offset", "label": "Top Left (Offset)" },
+        { "value": "top-right-offset", "label": "Top Right (Offset)" },
+        { "value": "bottom-left-offset", "label": "Bottom Left (Offset)" },
+        { "value": "bottom-right-offset", "label": "Bottom Right (Offset)" }
+      ],
+      "default": "bottom-right"
+    },
+    {
+      "type": "range",
+      "id": "trigger_border_radius",
+      "label": "Trigger border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Auto Open"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_open",
+      "label": "Auto open popup",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "auto_open_delay",
+      "label": "Delay (seconds)",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_open_once",
+      "label": "Only show once per visitor",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Modal Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "JOIN THE CLUB"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get a 15% Discount"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Subscribe to our newsletter and get 15% off your next purchase, exclusive promotions and more!"
+    },
+    {
+      "type": "text",
+      "id": "input_placeholder",
+      "label": "Email placeholder",
+      "default": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer text",
+      "default": "By registering, you agree to receive marketing emails."
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you for subscribing!"
+    },
+    {
+      "type": "header",
+      "content": "Modal Style"
+    },
+    {
+      "type": "range",
+      "id": "modal_border_radius",
+      "label": "Modal border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Input border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "default": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 4,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Trigger Colors"
+    },
+    {
+      "type": "color",
+      "id": "trigger_background",
+      "label": "Trigger background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "trigger_text_color",
+      "label": "Trigger text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Modal Colors"
+    },
+    {
+      "type": "color",
+      "id": "modal_background",
+      "label": "Modal background",
+      "default": "#f5f0e8"
+    },
+    {
+      "type": "color",
+      "id": "close_icon_color",
+      "label": "Close icon color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "disclaimer_color",
+      "label": "Disclaimer color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Form Colors"
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Input text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "input_placeholder_color",
+      "label": "Input placeholder color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Modal Popup - Dark",
+      "settings": {
+        "trigger_text": "Get a 15% Discount",
+        "trigger_position": "top-right",
+        "trigger_border_radius": 10,
+        "trigger_background": "#1a1a1a",
+        "trigger_text_color": "#ffffff",
+        "modal_background": "#f5f0e8",
+        "subheading": "JOIN THE CLUB",
+        "heading": "Get a 15% Discount",
+        "description": "Subscribe to our newsletter and get 15% off your next purchase, exclusive promotions and more!"
+      }
+    },
+    {
+      "name": "SEK Modal Popup - Green",
+      "settings": {
+        "trigger_text": "Sign Up for Updates",
+        "trigger_position": "bottom-left",
+        "trigger_border_radius": 10,
+        "trigger_background": "#3d7c47",
+        "trigger_text_color": "#ffffff",
+        "modal_background": "#3d7c47",
+        "close_icon_color": "#ffffff",
+        "subheading_color": "#c8e6c8",
+        "heading_color": "#ffffff",
+        "text_color": "#ffffff",
+        "disclaimer_color": "#c8e6c8",
+        "input_background": "#f5f5dc",
+        "button_background": "#c8e6c8",
+        "button_text_color": "#1a1a1a",
+        "subheading": "",
+        "heading": "Sign Up for Updates",
+        "description": "Sign up for exclusive access to new products, discounts, events, and more!"
+      }
+    },
+    {
+      "name": "SEK Modal Popup - Red",
+      "settings": {
+        "trigger_text": "Sign Up for Updates",
+        "trigger_position": "bottom-right",
+        "trigger_border_radius": 10,
+        "trigger_background": "#8b2635",
+        "trigger_text_color": "#ffffff",
+        "modal_background": "#f5f0e8",
+        "subheading": "JOIN THE CLUB",
+        "heading": "Sign Up for Updates",
+        "description": "Sign up for exclusive access to new products, discounts, events, and more!"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,546 @@
+{% comment %}
+  SEK About Us 2 - Team showcase with infinite scroll marquee (2 rows)
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+{%- assign total_blocks = section.blocks.size -%}
+{%- assign half_blocks = total_blocks | divided_by: 2 -%}
+
+{% style %}
+  #sek-about-{{ section_id }} {
+    padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
+    background: {{ section.settings.background_color }};
+    overflow: hidden;
+  }
+
+  @media (min-width: 750px) {
+    #sek-about-{{ section_id }} {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Header */
+  #sek-about-{{ section_id }} .sek-about__header {
+    text-align: {{ section.settings.header_alignment }};
+    padding: 0 16px;
+    margin-bottom: 32px;
+    max-width: 800px;
+    {% if section.settings.header_alignment == 'center' %}
+    margin-left: auto;
+    margin-right: auto;
+    {% else %}
+    margin-left: 0;
+    margin-right: auto;
+    {% endif %}
+  }
+
+  @media (min-width: 750px) {
+    #sek-about-{{ section_id }} .sek-about__header {
+      padding: 0 40px;
+      margin-bottom: 48px;
+    }
+  }
+
+  #sek-about-{{ section_id }} .sek-about__subheading {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: {{ section.settings.accent_color }};
+    margin: 0 0 16px 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-about-{{ section_id }} .sek-about__subheading {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+  }
+
+  #sek-about-{{ section_id }} .sek-about__heading {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: {{ section.settings.heading_color }};
+    margin: 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-about-{{ section_id }} .sek-about__heading {
+      font-size: 36px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #sek-about-{{ section_id }} .sek-about__heading {
+      font-size: 42px;
+    }
+  }
+
+  #sek-about-{{ section_id }} .sek-about__description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: {{ section.settings.text_color }};
+    margin: 16px 0 0 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-about-{{ section_id }} .sek-about__description {
+      font-size: 16px;
+    }
+  }
+
+  /* Marquee Rows Container */
+  #sek-about-{{ section_id }} .sek-about__rows {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.row_gap }}px;
+  }
+
+  /* Marquee Container */
+  #sek-about-{{ section_id }} .sek-about__marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  #sek-about-{{ section_id }} .sek-about__track {
+    display: flex;
+    gap: {{ section.settings.card_gap }}px;
+    width: max-content;
+    animation: sek-marquee-left-{{ section_id }} {{ section.settings.animation_speed }}s linear infinite;
+  }
+
+  #sek-about-{{ section_id }} .sek-about__track--reverse {
+    animation: sek-marquee-right-{{ section_id }} {{ section.settings.animation_speed }}s linear infinite;
+  }
+
+  #sek-about-{{ section_id }} .sek-about__marquee:hover .sek-about__track {
+    animation-play-state: paused;
+  }
+
+  @keyframes sek-marquee-left-{{ section_id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes sek-marquee-right-{{ section_id }} {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Cards */
+  #sek-about-{{ section_id }} .sek-about__card {
+    position: relative;
+    width: 140px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (min-width: 750px) {
+    #sek-about-{{ section_id }} .sek-about__card {
+      width: 160px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #sek-about-{{ section_id }} .sek-about__card {
+      width: 180px;
+    }
+  }
+
+  /* Card Image Wrapper */
+  #sek-about-{{ section_id }} .sek-about__card-image-wrapper {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: {{ section.settings.card_border_radius }}px;
+    position: relative;
+  }
+
+  /* Card Image */
+  #sek-about-{{ section_id }} .sek-about__card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.4s ease;
+  }
+
+  #sek-about-{{ section_id }} .sek-about__card:hover .sek-about__card-image {
+    transform: scale(1.05);
+  }
+
+  /* Card Content - Below image */
+  #sek-about-{{ section_id }} .sek-about__card-content {
+    padding: 12px 4px 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  #sek-about-{{ section_id }} .sek-about__card-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 2px 0;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 750px) {
+    #sek-about-{{ section_id }} .sek-about__card-name {
+      font-size: 14px;
+    }
+  }
+
+  #sek-about-{{ section_id }} .sek-about__card-title {
+    font-size: 11px;
+    font-weight: 400;
+    color: {{ section.settings.text_color }};
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  @media (min-width: 750px) {
+    #sek-about-{{ section_id }} .sek-about__card-title {
+      font-size: 12px;
+    }
+  }
+
+{% endstyle %}
+
+<section id="sek-about-{{ section_id }}" class="sek-about">
+  {%- if section.settings.subheading != blank or section.settings.heading != blank or section.settings.description != blank -%}
+    <div class="sek-about__header">
+      {%- if section.settings.subheading != blank -%}
+        <p class="sek-about__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="sek-about__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="sek-about__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="sek-about__rows">
+    {%- comment -%} Row 1 - Scrolls Left {%- endcomment -%}
+    <div class="sek-about__marquee">
+      <div class="sek-about__track">
+        {%- for i in (1..2) -%}
+          {%- for block in section.blocks -%}
+            {%- assign block_index = forloop.index0 -%}
+            {%- if block_index < half_blocks -%}
+              <div class="sek-about__card" {{ block.shopify_attributes }}>
+                <div class="sek-about__card-image-wrapper">
+                  {%- if block.settings.image != blank -%}
+                    <img
+                      class="sek-about__card-image"
+                      src="{{ block.settings.image | image_url: width: 640 }}"
+                      alt="{{ block.settings.name | escape }}"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <div class="sek-about__card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                  {%- endif -%}
+                </div>
+
+                <div class="sek-about__card-content">
+                  {%- if block.settings.name != blank -%}
+                    <h3 class="sek-about__card-name">{{ block.settings.name }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.job_title != blank -%}
+                    <p class="sek-about__card-title">{{ block.settings.job_title }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} Row 2 - Scrolls Right {%- endcomment -%}
+    <div class="sek-about__marquee">
+      <div class="sek-about__track sek-about__track--reverse">
+        {%- for i in (1..2) -%}
+          {%- for block in section.blocks -%}
+            {%- assign block_index = forloop.index0 -%}
+            {%- if block_index >= half_blocks -%}
+              <div class="sek-about__card" {{ block.shopify_attributes }}>
+                <div class="sek-about__card-image-wrapper">
+                  {%- if block.settings.image != blank -%}
+                    <img
+                      class="sek-about__card-image"
+                      src="{{ block.settings.image | image_url: width: 640 }}"
+                      alt="{{ block.settings.name | escape }}"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <div class="sek-about__card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                  {%- endif -%}
+                </div>
+
+                <div class="sek-about__card-content">
+                  {%- if block.settings.name != blank -%}
+                    <h3 class="sek-about__card-name">{{ block.settings.name }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.job_title != blank -%}
+                    <p class="sek-about__card-title">{{ block.settings.job_title }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK About Us Team",
+  "tag": "section",
+  "class": "sek-about-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "OUR TEAM"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Meet your growth-focused specialists"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Marquee Settings"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "label": "Animation speed",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "default": 40,
+      "unit": "s",
+      "info": "Lower = faster"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap between cards",
+      "min": 0,
+      "max": 32,
+      "step": 4,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "row_gap",
+      "label": "Gap between rows",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Card Settings"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1a3a3a"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#7ae5c8"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "team_member",
+      "name": "Team Member",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "John Doe"
+        },
+        {
+          "type": "text",
+          "id": "job_title",
+          "label": "Job title",
+          "default": "CEO & Founder"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK About Us Team",
+      "blocks": [
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Sarah Johnson",
+            "job_title": "CEO & Founder"
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Michael Chen",
+            "job_title": "CTO"
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Emily Davis",
+            "job_title": "Head of Design"
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "James Wilson",
+            "job_title": "Lead Developer"
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Lisa Anderson",
+            "job_title": "Marketing Director"
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "David Brown",
+            "job_title": "Product Manager"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
