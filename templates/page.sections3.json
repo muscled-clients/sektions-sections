@@ -825,75 +825,6 @@
         "button_text_color": "#ffffff"
       }
     },
-    "testimonials_slider2_CTtQNU": {
-      "type": "testimonials-slider2",
-      "blocks": {
-        "testimonial_DEM7tM": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "2 days ago",
-            "stars": 5
-          }
-        },
-        "testimonial_kTChVw": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "3 days ago",
-            "stars": 5
-          }
-        },
-        "testimonial_NBMBCf": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "5 days ago",
-            "stars": 5
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_DEM7tM",
-        "testimonial_kTChVw",
-        "testimonial_NBMBCf"
-      ],
-      "name": "Testimonials Slider 2",
-      "settings": {
-        "style": "standard",
-        "background_color": "#ffffff",
-        "gradient_start_color": "#efefef",
-        "slider_autoplay": true,
-        "autoplay_speed": 2,
-        "top_margin": 0,
-        "bottom_margin": 0,
-        "inside_section_spacing": 60,
-        "title_color": "#000000",
-        "subtitle_color": "#000000",
-        "box_background": "#ffffff",
-        "box_text": "#000000",
-        "stars_header": "#ffd663",
-        "stars_box": "#ffd663",
-        "review_text_color": "#000000",
-        "header": "Your Satisfaction. Our Mission.",
-        "sub_header": "See what other customers say",
-        "rating_text": "Very Good 4.7/5",
-        "number_of_ratings": 5,
-        "show_button": true,
-        "button_text": "based on 778 ratings",
-        "button_link": "",
-        "button_background": "#000000",
-        "button_text_color": "#ffffff",
-        "verified_text": "Verified Rating",
-        "header_font": "'Poppins', sans-serif; font-weight: 700",
-        "subtitle_font": "Poppins, sans-serif",
-        "rating_font": "Poppins, sans-serif",
-        "show_avatar": true
-      }
-    },
     "shopthelook_QfWUAN": {
       "type": "shopthelook",
       "blocks": {
@@ -971,6 +902,205 @@
         "button_text_color": "#ffffff",
         "sale_color": "#f83a3a"
       }
+    },
+    "testimonials_slider2_CTtQNU": {
+      "type": "testimonials-slider2",
+      "blocks": {
+        "testimonial_DEM7tM": {
+          "type": "testimonial",
+          "settings": {
+            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
+            "name": "Max M.",
+            "date": "2 days ago",
+            "stars": 5
+          }
+        },
+        "testimonial_kTChVw": {
+          "type": "testimonial",
+          "settings": {
+            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
+            "name": "Max M.",
+            "date": "3 days ago",
+            "stars": 5
+          }
+        },
+        "testimonial_NBMBCf": {
+          "type": "testimonial",
+          "settings": {
+            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
+            "name": "Max M.",
+            "date": "5 days ago",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_DEM7tM",
+        "testimonial_kTChVw",
+        "testimonial_NBMBCf"
+      ],
+      "name": "Testimonials Slider 2",
+      "settings": {
+        "style": "standard",
+        "background_color": "#ffffff",
+        "gradient_start_color": "#efefef",
+        "slider_autoplay": true,
+        "autoplay_speed": 2,
+        "top_margin": 0,
+        "bottom_margin": 0,
+        "inside_section_spacing": 60,
+        "title_color": "#000000",
+        "subtitle_color": "#000000",
+        "box_background": "#ffffff",
+        "box_text": "#000000",
+        "stars_header": "#ffd663",
+        "stars_box": "#ffd663",
+        "review_text_color": "#000000",
+        "header": "Your Satisfaction. Our Mission.",
+        "sub_header": "See what other customers say",
+        "rating_text": "Very Good 4.7/5",
+        "number_of_ratings": 5,
+        "show_button": true,
+        "button_text": "based on 778 ratings",
+        "button_link": "",
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "verified_text": "Verified Rating",
+        "header_font": "'Poppins', sans-serif; font-weight: 700",
+        "subtitle_font": "Poppins, sans-serif",
+        "rating_font": "Poppins, sans-serif",
+        "show_avatar": true
+      }
+    },
+    "insta_feed_6ib6dG": {
+      "type": "insta-feed",
+      "blocks": {
+        "media_gm8t7h": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/unda_448236099_838777561443809_3713718446769214087_n.jpg",
+            "link": ""
+          }
+        },
+        "media_qetFWD": {
+          "type": "media",
+          "settings": {
+            "video": "shopify://files/videos/47436566e9a9418b80133ed76475f593.HD-720p-1.6Mbps-60686880.mp4",
+            "link": ""
+          }
+        },
+        "media_7HWW4f": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/unda_464302755_1754916091936228_5517207201143028391_n.jpg",
+            "link": ""
+          }
+        },
+        "media_xCdnci": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/unda_459891120_8708132899218500_1946484958475937582_n.jpg",
+            "link": ""
+          }
+        },
+        "media_qWrNNM": {
+          "type": "media",
+          "settings": {
+            "video": "shopify://files/videos/9eaff3fb745e4decb39b2cb20e6bb139.HD-1080p-2.5Mbps-60775971.mp4",
+            "link": ""
+          }
+        },
+        "media_3p43we": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/unda_458378430_1034589768393165_1013962926036898925_n.jpg",
+            "link": ""
+          }
+        },
+        "media_MxiJ8L": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/unda_459152613_826975476264322_6568941910895706371_n_1.webp",
+            "link": ""
+          }
+        },
+        "media_xaJb9b": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/unda_447035199_416028934583687_173914304468018162_n.jpg",
+            "link": ""
+          }
+        },
+        "media_9knbbd": {
+          "type": "media",
+          "settings": {
+            "video": "shopify://files/videos/ec8d26f808414efdab5752ca1c4603e8.HD-720p-1.6Mbps-60776647.mp4",
+            "link": ""
+          }
+        },
+        "media_TR8pmY": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/unda_470919874_1136501454506009_1840491884835010330_n.jpg",
+            "link": ""
+          }
+        },
+        "media_qMchkA": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/unda_476301549_17891382612185014_8151200738433074328_n_1.jpg",
+            "link": ""
+          }
+        },
+        "media_D4jHDj": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/unda_457521119_2182357158802045_5105460120622651851_n.webp",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "media_gm8t7h",
+        "media_qetFWD",
+        "media_7HWW4f",
+        "media_xCdnci",
+        "media_qWrNNM",
+        "media_3p43we",
+        "media_MxiJ8L",
+        "media_xaJb9b",
+        "media_9knbbd",
+        "media_TR8pmY",
+        "media_qMchkA",
+        "media_D4jHDj"
+      ],
+      "name": "SEK Instafeed Grid",
+      "settings": {
+        "full_width": true,
+        "show_header": false,
+        "label": "FOLLOW US ON SOCIALS",
+        "heading": "Tune in, for good stuff.",
+        "description": "Sales, music, events and more...",
+        "button_text": "@undabrand",
+        "button_link": "",
+        "columns_mobile": 2,
+        "columns_tablet": 4,
+        "columns_desktop": 6,
+        "gap": 0,
+        "border_radius": 0,
+        "max_width": 1400,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "background_color": "#ffffff",
+        "label_color": "#666666",
+        "heading_color": "#000000",
+        "text_color": "#333333",
+        "button_bg": "#181414",
+        "button_text_color": "#ffffff",
+        "button_hover_bg": "#953033"
+      }
     }
   },
   "order": [
@@ -988,7 +1118,8 @@
     "countdown_timer_p9p7Xq",
     "collection_ticker_WKnjcT",
     "hostspot_PLw84w",
+    "shopthelook_QfWUAN",
     "testimonials_slider2_CTtQNU",
-    "shopthelook_QfWUAN"
+    "insta_feed_6ib6dG"
   ]
 }
