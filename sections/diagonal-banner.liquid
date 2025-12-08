@@ -1,0 +1,259 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding: 0;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  #shopify-section-{{ section.id }} .diagonal-banner-wrapper {
+    position: relative;
+    height: {{ section.settings.section_height }}px;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .diagonal-strip {
+    position: absolute;
+    left: -10%;
+    width: 120%;
+    height: {{ section.settings.strip_height }}px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .diagonal-strip-top {
+    top: 0;
+    background-color: {{ section.settings.top_strip_color }};
+    transform: rotate({{ section.settings.rotation_angle }}deg);
+    transform-origin: center center;
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .diagonal-strip-bottom {
+    bottom: 0;
+    background-color: {{ section.settings.bottom_strip_color }};
+    transform: rotate(-{{ section.settings.rotation_angle }}deg);
+    transform-origin: center center;
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .diagonal-strip-content {
+    display: flex;
+    align-items: center;
+    animation: scrollLeft{{ section.id | replace: '-', '' }} {{ section.settings.animation_speed }}s linear infinite;
+  }
+
+  #shopify-section-{{ section.id }} .diagonal-strip-bottom .diagonal-strip-content {
+    animation: scrollRight{{ section.id | replace: '-', '' }} {{ section.settings.animation_speed }}s linear infinite;
+  }
+
+  #shopify-section-{{ section.id }} .diagonal-strip-text {
+    font-size: {{ section.settings.font_size }}px;
+    font-weight: 800;
+    font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+    color: {{ section.settings.text_color }};
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0 {{ section.settings.text_spacing }}px;
+    flex-shrink: 0;
+  }
+
+  @keyframes scrollLeft{{ section.id | replace: '-', '' }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes scrollRight{{ section.id | replace: '-', '' }} {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @media screen and (max-width: 990px) {
+    #shopify-section-{{ section.id }} .diagonal-banner-wrapper {
+      height: calc({{ section.settings.section_height }}px * 0.8);
+    }
+
+    #shopify-section-{{ section.id }} .diagonal-strip {
+      height: calc({{ section.settings.strip_height }}px * 0.8);
+    }
+
+    #shopify-section-{{ section.id }} .diagonal-strip-text {
+      font-size: calc({{ section.settings.font_size }}px * 0.8);
+      padding: 0 calc({{ section.settings.text_spacing }}px * 0.8);
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .diagonal-banner-wrapper {
+      height: calc({{ section.settings.section_height }}px * 0.6);
+    }
+
+    #shopify-section-{{ section.id }} .diagonal-strip {
+      height: calc({{ section.settings.strip_height }}px * 0.6);
+    }
+
+    #shopify-section-{{ section.id }} .diagonal-strip-text {
+      font-size: calc({{ section.settings.font_size }}px * 0.6);
+      padding: 0 calc({{ section.settings.text_spacing }}px * 0.6);
+    }
+  }
+{% endstyle %}
+
+<div class="diagonal-banner-section">
+  <div class="diagonal-banner-wrapper">
+    <div class="diagonal-strip diagonal-strip-top">
+      <div class="diagonal-strip-content">
+        {% for i in (1..20) %}
+          <span class="diagonal-strip-text">{{ section.settings.top_text }}</span>
+        {% endfor %}
+        {% for i in (1..20) %}
+          <span class="diagonal-strip-text">{{ section.settings.top_text }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="diagonal-strip diagonal-strip-bottom">
+      <div class="diagonal-strip-content">
+        {% for i in (1..20) %}
+          <span class="diagonal-strip-text">{{ section.settings.bottom_text }}</span>
+        {% endfor %}
+        {% for i in (1..20) %}
+          <span class="diagonal-strip-text">{{ section.settings.bottom_text }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Diagonal Banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "top_text",
+      "label": "Top strip text",
+      "default": "SALE"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom strip text",
+      "default": "-80%"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "top_strip_color",
+      "label": "Top strip background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "bottom_strip_color",
+      "label": "Bottom strip background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFD700"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "label": "Section height",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "strip_height",
+      "label": "Strip height",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "rotation_angle",
+      "label": "Rotation angle",
+      "min": 1,
+      "max": 10,
+      "step": 0.5,
+      "unit": "deg",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "text_spacing",
+      "label": "Text spacing",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "label": "Animation speed",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Diagonal Banner"
+    }
+  ]
+}
+{% endschema %}
