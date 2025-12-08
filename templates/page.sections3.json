@@ -425,75 +425,6 @@
         "corner_radius": 7
       }
     },
-    "testimonials_slider2_CTtQNU": {
-      "type": "testimonials-slider2",
-      "blocks": {
-        "testimonial_DEM7tM": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "2 days ago",
-            "stars": 5
-          }
-        },
-        "testimonial_kTChVw": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "3 days ago",
-            "stars": 5
-          }
-        },
-        "testimonial_NBMBCf": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "5 days ago",
-            "stars": 5
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_DEM7tM",
-        "testimonial_kTChVw",
-        "testimonial_NBMBCf"
-      ],
-      "name": "Testimonials Slider 2",
-      "settings": {
-        "style": "standard",
-        "background_color": "#ffffff",
-        "gradient_start_color": "#efefef",
-        "slider_autoplay": true,
-        "autoplay_speed": 2,
-        "top_margin": 0,
-        "bottom_margin": 0,
-        "inside_section_spacing": 60,
-        "title_color": "#000000",
-        "subtitle_color": "#000000",
-        "box_background": "#ffffff",
-        "box_text": "#000000",
-        "stars_header": "#ffd663",
-        "stars_box": "#ffd663",
-        "review_text_color": "#000000",
-        "header": "Your Satisfaction. Our Mission.",
-        "sub_header": "See what other customers say",
-        "rating_text": "Very Good 4.7/5",
-        "number_of_ratings": 5,
-        "show_button": true,
-        "button_text": "based on 778 ratings",
-        "button_link": "",
-        "button_background": "#000000",
-        "button_text_color": "#ffffff",
-        "verified_text": "Verified Rating",
-        "header_font": "'Poppins', sans-serif; font-weight: 700",
-        "subtitle_font": "Poppins, sans-serif",
-        "rating_font": "Poppins, sans-serif",
-        "show_avatar": true
-      }
-    },
     "hero_banner_wwEpth": {
       "type": "hero-banner",
       "blocks": {
@@ -728,6 +659,75 @@
         "button_background": "#000000",
         "button_text_color": "#ffffff"
       }
+    },
+    "testimonials_slider2_CTtQNU": {
+      "type": "testimonials-slider2",
+      "blocks": {
+        "testimonial_DEM7tM": {
+          "type": "testimonial",
+          "settings": {
+            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
+            "name": "Max M.",
+            "date": "2 days ago",
+            "stars": 5
+          }
+        },
+        "testimonial_kTChVw": {
+          "type": "testimonial",
+          "settings": {
+            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
+            "name": "Max M.",
+            "date": "3 days ago",
+            "stars": 5
+          }
+        },
+        "testimonial_NBMBCf": {
+          "type": "testimonial",
+          "settings": {
+            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
+            "name": "Max M.",
+            "date": "5 days ago",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_DEM7tM",
+        "testimonial_kTChVw",
+        "testimonial_NBMBCf"
+      ],
+      "name": "Testimonials Slider 2",
+      "settings": {
+        "style": "standard",
+        "background_color": "#ffffff",
+        "gradient_start_color": "#efefef",
+        "slider_autoplay": true,
+        "autoplay_speed": 2,
+        "top_margin": 0,
+        "bottom_margin": 0,
+        "inside_section_spacing": 60,
+        "title_color": "#000000",
+        "subtitle_color": "#000000",
+        "box_background": "#ffffff",
+        "box_text": "#000000",
+        "stars_header": "#ffd663",
+        "stars_box": "#ffd663",
+        "review_text_color": "#000000",
+        "header": "Your Satisfaction. Our Mission.",
+        "sub_header": "See what other customers say",
+        "rating_text": "Very Good 4.7/5",
+        "number_of_ratings": 5,
+        "show_button": true,
+        "button_text": "based on 778 ratings",
+        "button_link": "",
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "verified_text": "Verified Rating",
+        "header_font": "'Poppins', sans-serif; font-weight: 700",
+        "subtitle_font": "Poppins, sans-serif",
+        "rating_font": "Poppins, sans-serif",
+        "show_avatar": true
+      }
     }
   },
   "order": [
@@ -737,11 +737,11 @@
     "hero_38_3_zxy9kq",
     "shoppable_slider_AiED8T",
     "table_6dRcBJ",
-    "testimonials_slider2_CTtQNU",
     "hero_banner_wwEpth",
     "video_banner3_mG3bGf",
     "split_screen_QYzCPm",
     "video_banner_pro_gd3Fbh",
-    "before_after_MmycjH"
+    "before_after_MmycjH",
+    "testimonials_slider2_CTtQNU"
   ]
 }
