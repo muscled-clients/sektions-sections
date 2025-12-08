@@ -623,7 +623,7 @@
         "text_color": "#ffffff",
         "button_bg": "#ffffff",
         "button_text": "#000000",
-        "button2_bg": "transparent",
+        "button2_bg": "rgba(0,0,0,0)",
         "button2_text": "#ffffff"
       }
     },
@@ -654,7 +654,7 @@
         "text_color": "#666666",
         "slider_color": "#ffffff",
         "slider_icon_color": "#000000",
-        "label_background": "rgba(0,0,0,0.5)",
+        "label_background": "#00000080",
         "label_text_color": "#ffffff",
         "button_background": "#000000",
         "button_text_color": "#ffffff"
@@ -728,6 +728,49 @@
         "rating_font": "Poppins, sans-serif",
         "show_avatar": true
       }
+    },
+    "countdown_timer_p9p7Xq": {
+      "type": "countdown-timer",
+      "name": "SEK Countdown Timer",
+      "settings": {
+        "end_date": "2025-12-31 23:59:59",
+        "completed_text": "Sale Ended!",
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Minutes",
+        "label_seconds": "Seconds",
+        "badge_text": "HALF OF THE STOCK IS ALREADY SOLD!",
+        "show_badge_dot": true,
+        "heading": "Hurry! Save 60% On All Items",
+        "heading_size": 56,
+        "description": "Limited time offer. Shop now and save big on your favorite items!",
+        "button_text": "SHOP NOW",
+        "button_link": "",
+        "button_radius": 100,
+        "timer_size": 84,
+        "separator_width": 2,
+        "text_align": "center",
+        "container_width": 1200,
+        "enable_content_bg": true,
+        "content_bg": "rgba(0,0,0,0.4)",
+        "content_radius": 24,
+        "background_image": "shopify://shop_images/leire-cavia-9HCZIiXTAyg-unsplash.webp",
+        "overlay_color": "#121212",
+        "overlay_opacity": 50,
+        "background_color": "#1a1a1a",
+        "text_color": "#ffffff",
+        "timer_color": "#ffffff",
+        "separator_color": "#afafaf",
+        "badge_bg": "#333333",
+        "badge_text_color": "#ffffff",
+        "badge_dot_color": "#ff9500",
+        "button_bg": "#f5e55b",
+        "button_text_color": "#121212",
+        "button_hover_bg": "#ffffff",
+        "button_hover_text_color": "#121212",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
@@ -742,6 +785,7 @@
     "split_screen_QYzCPm",
     "video_banner_pro_gd3Fbh",
     "before_after_MmycjH",
-    "testimonials_slider2_CTtQNU"
+    "testimonials_slider2_CTtQNU",
+    "countdown_timer_p9p7Xq"
   ]
 }
