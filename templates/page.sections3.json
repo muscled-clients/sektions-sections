@@ -683,7 +683,7 @@
         "text_align": "center",
         "container_width": 1200,
         "enable_content_bg": true,
-        "content_bg": "rgba(0,0,0,0.4)",
+        "content_bg": "#00000066",
         "content_radius": 24,
         "background_image": "shopify://shop_images/leire-cavia-9HCZIiXTAyg-unsplash.webp",
         "overlay_color": "#121212",
@@ -1101,6 +1101,94 @@
         "rating_font": "Poppins, sans-serif",
         "show_avatar": true
       }
+    },
+    "video_testinomials_yPw64L": {
+      "type": "video-testinomials",
+      "blocks": {
+        "video_testimonial_YaPxaC": {
+          "type": "video_testimonial",
+          "settings": {
+            "poster": "shopify://shop_images/Screenshot_2025-12-09_022119.png",
+            "video": "shopify://files/videos/82ecba7ee95f410d85561611592245fa.HD-1080p-4.8Mbps-61911904.mp4",
+            "video_url": "",
+            "name": "Sofia A.",
+            "product_name": "Organic Cotton Pants",
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_testimonial_erW67X": {
+          "type": "video_testimonial",
+          "settings": {
+            "poster": "shopify://shop_images/Screenshot_2025-12-09_022132.png",
+            "video": "shopify://files/videos/31a37bb3d88a45a29d8d1b7455dbee47.HD-1080p-3.3Mbps-61907127.mp4",
+            "video_url": "",
+            "name": "Gabriela M.",
+            "product_name": "V-neck Floral Dress",
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_testimonial_pjygf4": {
+          "type": "video_testimonial",
+          "settings": {
+            "poster": "shopify://shop_images/Screenshot_2025-12-09_022145.png",
+            "video": "shopify://files/videos/27190e9de0614b69ab7aa7c731f3ff3d.HD-1080p-3.3Mbps-61912866.mp4",
+            "video_url": "",
+            "name": "Maya F.",
+            "product_name": "Blue Velvet Blazer",
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_testimonial_9DKHer": {
+          "type": "video_testimonial",
+          "settings": {
+            "video_url": "",
+            "name": "Laura S.",
+            "product_name": "Turquoise Set",
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_testimonial_PfJTbh": {
+          "type": "video_testimonial",
+          "settings": {
+            "poster": "shopify://shop_images/Screenshot_2025-12-09_022106.png",
+            "video": "shopify://files/videos/b4d43d7f127e4feca83a3eb8bf3bf2f1.HD-1080p-3.3Mbps-61910811.mp4",
+            "video_url": "",
+            "name": "Eleanor B.",
+            "product_name": "Linen Shirt & Skirt",
+            "show_stars": true,
+            "star_rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "video_testimonial_YaPxaC",
+        "video_testimonial_erW67X",
+        "video_testimonial_pjygf4",
+        "video_testimonial_9DKHer",
+        "video_testimonial_PfJTbh"
+      ],
+      "name": "SEK Video Testimonials",
+      "settings": {
+        "subheading": "OUR TESTIMONIALS",
+        "heading": "Why people love our brand",
+        "description": "Don't just take our word for it, see what our customers are saying",
+        "card_border_radius": 16,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50,
+        "background_color": "#ffffff",
+        "subheading_color": "#666666",
+        "heading_color": "#121212",
+        "text_color": "#666666",
+        "star_color": "#FFD700",
+        "nav_background": "#ffffff",
+        "nav_icon_color": "#121212"
+      }
     }
   },
   "order": [
@@ -1120,6 +1208,7 @@
     "hostspot_PLw84w",
     "insta_feed_6ib6dG",
     "shopthelook_QfWUAN",
-    "testimonials_slider2_CTtQNU"
+    "testimonials_slider2_CTtQNU",
+    "video_testinomials_yPw64L"
   ]
 }
