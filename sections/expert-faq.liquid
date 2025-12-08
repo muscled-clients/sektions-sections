@@ -1,0 +1,586 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .expert-faq-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 50px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  #shopify-section-{{ section.id }} .expert-faq-left {
+    padding-top: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .expert-faq-heading {
+    font-size: {{ section.settings.left_heading_size }}px;
+    font-weight: 500;
+    color: {{ section.settings.heading_color }};
+    line-height: 1.2;
+    margin: 0 0 40px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    letter-spacing: -0.5px;
+    max-width: 420px;
+  }
+
+  #shopify-section-{{ section.id }} .expert-avatars {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .expert-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid {{ section.settings.background_color }};
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    margin-right: -14px;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .expert-avatar:nth-child(1) {
+    z-index: 3;
+  }
+
+  #shopify-section-{{ section.id }} .expert-avatar:nth-child(2) {
+    z-index: 2;
+  }
+
+  #shopify-section-{{ section.id }} .expert-avatar:nth-child(3) {
+    z-index: 1;
+    margin-right: 0;
+  }
+
+  #shopify-section-{{ section.id }} .expert-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .expert-caption {
+    font-size: 14px;
+    color: {{ section.settings.caption_color }};
+    line-height: 1.5;
+    margin: 0;
+    max-width: 340px;
+  }
+
+  #shopify-section-{{ section.id }} .expert-faq-right {
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .faq-title {
+    font-size: {{ section.settings.faq_heading_size }}px;
+    font-weight: 500;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 30px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    letter-spacing: -0.3px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #shopify-section-{{ section.id }} .faq-item {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  #shopify-section-{{ section.id }} .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: {{ section.settings.question_size }}px;
+    font-weight: 400;
+    color: {{ section.settings.question_color }};
+    font-family: inherit;
+    gap: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-question:hover {
+    opacity: 0.7;
+  }
+
+  #shopify-section-{{ section.id }} .faq-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .faq-icon::before,
+  #shopify-section-{{ section.id }} .faq-icon::after {
+    content: '';
+    position: absolute;
+    background-color: {{ section.settings.question_color }};
+    transition: transform 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .faq-icon::before {
+    width: 14px;
+    height: 1.5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #shopify-section-{{ section.id }} .faq-icon::after {
+    width: 1.5px;
+    height: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #shopify-section-{{ section.id }} .faq-item.active .faq-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 0;
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer-inner {
+    padding: 0 0 20px 0;
+    font-size: {{ section.settings.answer_size }}px;
+    line-height: 1.7;
+    color: {{ section.settings.answer_color }};
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer-inner p {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .faq-answer-inner p + p {
+    margin-top: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-item.active .faq-answer {
+    max-height: 500px;
+  }
+
+  @media screen and (max-width: 990px) {
+    #shopify-section-{{ section.id }} .expert-faq-wrapper {
+      grid-template-columns: 1fr;
+      gap: 50px;
+      padding: 0 30px;
+    }
+
+    #shopify-section-{{ section.id }} .expert-faq-left {
+      padding-top: 0;
+    }
+
+    #shopify-section-{{ section.id }} .expert-faq-heading {
+      font-size: calc({{ section.settings.left_heading_size }}px * 0.8);
+      max-width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .expert-faq-wrapper {
+      padding: 0 20px;
+      gap: 40px;
+    }
+
+    #shopify-section-{{ section.id }} .expert-faq-heading {
+      font-size: calc({{ section.settings.left_heading_size }}px * 0.65);
+      margin-bottom: 30px;
+    }
+
+    #shopify-section-{{ section.id }} .expert-avatar {
+      width: 48px;
+      height: 48px;
+      margin-right: -12px;
+    }
+
+    #shopify-section-{{ section.id }} .faq-title {
+      font-size: calc({{ section.settings.faq_heading_size }}px * 0.85);
+    }
+
+    #shopify-section-{{ section.id }} .faq-question {
+      font-size: calc({{ section.settings.question_size }}px * 0.95);
+      padding: 16px 0;
+    }
+  }
+{% endstyle %}
+
+<div class="expert-faq-section" id="expert-faq-{{ section.id }}">
+  <div class="expert-faq-wrapper">
+    <div class="expert-faq-left">
+      {% if section.settings.left_heading != blank %}
+        <h2 class="expert-faq-heading">{{ section.settings.left_heading }}</h2>
+      {% endif %}
+
+      <div class="expert-avatars">
+        {% if section.settings.expert_1 != blank %}
+          <div class="expert-avatar">
+            <img src="{{ section.settings.expert_1 | image_url: width: 120 }}" alt="{{ section.settings.expert_1.alt | default: 'Expert' }}">
+          </div>
+        {% else %}
+          <div class="expert-avatar">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.expert_2 != blank %}
+          <div class="expert-avatar">
+            <img src="{{ section.settings.expert_2 | image_url: width: 120 }}" alt="{{ section.settings.expert_2.alt | default: 'Expert' }}">
+          </div>
+        {% else %}
+          <div class="expert-avatar">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.expert_3 != blank %}
+          <div class="expert-avatar">
+            <img src="{{ section.settings.expert_3 | image_url: width: 120 }}" alt="{{ section.settings.expert_3.alt | default: 'Expert' }}">
+          </div>
+        {% else %}
+          <div class="expert-avatar">
+            {{ 'image' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if section.settings.caption != blank %}
+        <p class="expert-caption">{{ section.settings.caption }}</p>
+      {% endif %}
+    </div>
+
+    <div class="expert-faq-right">
+      {% if section.settings.faq_heading != blank %}
+        <h3 class="faq-title">{{ section.settings.faq_heading }}</h3>
+      {% endif %}
+
+      <ul class="faq-list">
+        {% for block in section.blocks %}
+          {% if block.type == 'faq_item' %}
+            <li class="faq-item" {{ block.shopify_attributes }}>
+              <button class="faq-question" aria-expanded="false">
+                <span>{{ block.settings.question }}</span>
+                <span class="faq-icon"></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    function initExpertFaq() {
+      const container = document.getElementById('expert-faq-{{ section.id }}');
+      if (!container) return;
+
+      const faqItems = container.querySelectorAll('.faq-item');
+
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+
+        question.addEventListener('click', function() {
+          const isActive = item.classList.contains('active');
+          const answer = item.querySelector('.faq-answer');
+          const answerInner = item.querySelector('.faq-answer-inner');
+
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
+              otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          if (isActive) {
+            item.classList.remove('active');
+            question.setAttribute('aria-expanded', 'false');
+          } else {
+            item.classList.add('active');
+            question.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initExpertFaq);
+    } else {
+      initExpertFaq();
+    }
+
+    document.addEventListener('shopify:section:load', function(event) {
+      if (event.detail.sectionId === '{{ section.id }}') {
+        initExpertFaq();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Expert FAQ",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left Column"
+    },
+    {
+      "type": "text",
+      "id": "left_heading",
+      "label": "Heading",
+      "default": "Unlock the Power of Innovation with Our Expert Team"
+    },
+    {
+      "type": "image_picker",
+      "id": "expert_1",
+      "label": "Expert photo 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "expert_2",
+      "label": "Expert photo 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "expert_3",
+      "label": "Expert photo 3"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "Crafted by our world-class engineering and design specialists"
+    },
+    {
+      "type": "header",
+      "content": "Right Column"
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "FAQ heading",
+      "default": "Everything You Need to Know"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Question color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "Answer color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "left_heading_size",
+      "label": "Left heading size",
+      "min": 28,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "faq_heading_size",
+      "label": "FAQ heading size",
+      "min": 18,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "question_size",
+      "label": "Question size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "answer_size",
+      "label": "Answer size",
+      "min": 14,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How does the quantum encryption work?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance across all your devices.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Expert FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes your neural network architecture unique?",
+            "answer": "<p>Our neural network architecture is built on cutting-edge research and optimized for real-world applications. It delivers superior performance while maintaining efficiency and scalability.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do you ensure data privacy in cloud processing?",
+            "answer": "<p>We implement multiple layers of security including end-to-end encryption, zero-knowledge protocols, and regular security audits to ensure your data privacy is never compromised.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can the system scale to handle petabyte datasets?",
+            "answer": "<p>Yes, our infrastructure is designed to scale horizontally and can efficiently process petabyte-scale datasets while maintaining optimal performance and cost-effectiveness.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What programming languages are supported?",
+            "answer": "<p>We support all major programming languages including Python, JavaScript, Go, Rust, and many more. Our SDK provides native integrations for seamless development experience.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
