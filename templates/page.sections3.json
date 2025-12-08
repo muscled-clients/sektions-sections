@@ -742,75 +742,6 @@
         "sale_color": "#f15757"
       }
     },
-    "testimonials_slider2_CTtQNU": {
-      "type": "testimonials-slider2",
-      "blocks": {
-        "testimonial_DEM7tM": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "2 days ago",
-            "stars": 5
-          }
-        },
-        "testimonial_kTChVw": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "3 days ago",
-            "stars": 5
-          }
-        },
-        "testimonial_NBMBCf": {
-          "type": "testimonial",
-          "settings": {
-            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
-            "name": "Max M.",
-            "date": "5 days ago",
-            "stars": 5
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_DEM7tM",
-        "testimonial_kTChVw",
-        "testimonial_NBMBCf"
-      ],
-      "name": "Testimonials Slider 2",
-      "settings": {
-        "style": "standard",
-        "background_color": "#ffffff",
-        "gradient_start_color": "#efefef",
-        "slider_autoplay": true,
-        "autoplay_speed": 2,
-        "top_margin": 0,
-        "bottom_margin": 0,
-        "inside_section_spacing": 60,
-        "title_color": "#000000",
-        "subtitle_color": "#000000",
-        "box_background": "#ffffff",
-        "box_text": "#000000",
-        "stars_header": "#ffd663",
-        "stars_box": "#ffd663",
-        "review_text_color": "#000000",
-        "header": "Your Satisfaction. Our Mission.",
-        "sub_header": "See what other customers say",
-        "rating_text": "Very Good 4.7/5",
-        "number_of_ratings": 5,
-        "show_button": true,
-        "button_text": "based on 778 ratings",
-        "button_link": "",
-        "button_background": "#000000",
-        "button_text_color": "#ffffff",
-        "verified_text": "Verified Rating",
-        "header_font": "'Poppins', sans-serif; font-weight: 700",
-        "subtitle_font": "Poppins, sans-serif",
-        "rating_font": "Poppins, sans-serif",
-        "show_avatar": true
-      }
-    },
     "hostspot_PLw84w": {
       "type": "hostspot",
       "blocks": {
@@ -893,6 +824,153 @@
         "button_background": "#121212",
         "button_text_color": "#ffffff"
       }
+    },
+    "testimonials_slider2_CTtQNU": {
+      "type": "testimonials-slider2",
+      "blocks": {
+        "testimonial_DEM7tM": {
+          "type": "testimonial",
+          "settings": {
+            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
+            "name": "Max M.",
+            "date": "2 days ago",
+            "stars": 5
+          }
+        },
+        "testimonial_kTChVw": {
+          "type": "testimonial",
+          "settings": {
+            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
+            "name": "Max M.",
+            "date": "3 days ago",
+            "stars": 5
+          }
+        },
+        "testimonial_NBMBCf": {
+          "type": "testimonial",
+          "settings": {
+            "review_text": "Sternify is fantastic. It has extremely improved my conversion rate and brought my product page to a level with industry experts, all without developers! Everything in the Shopify Theme Builder.",
+            "name": "Max M.",
+            "date": "5 days ago",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_DEM7tM",
+        "testimonial_kTChVw",
+        "testimonial_NBMBCf"
+      ],
+      "name": "Testimonials Slider 2",
+      "settings": {
+        "style": "standard",
+        "background_color": "#ffffff",
+        "gradient_start_color": "#efefef",
+        "slider_autoplay": true,
+        "autoplay_speed": 2,
+        "top_margin": 0,
+        "bottom_margin": 0,
+        "inside_section_spacing": 60,
+        "title_color": "#000000",
+        "subtitle_color": "#000000",
+        "box_background": "#ffffff",
+        "box_text": "#000000",
+        "stars_header": "#ffd663",
+        "stars_box": "#ffd663",
+        "review_text_color": "#000000",
+        "header": "Your Satisfaction. Our Mission.",
+        "sub_header": "See what other customers say",
+        "rating_text": "Very Good 4.7/5",
+        "number_of_ratings": 5,
+        "show_button": true,
+        "button_text": "based on 778 ratings",
+        "button_link": "",
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "verified_text": "Verified Rating",
+        "header_font": "'Poppins', sans-serif; font-weight: 700",
+        "subtitle_font": "Poppins, sans-serif",
+        "rating_font": "Poppins, sans-serif",
+        "show_avatar": true
+      }
+    },
+    "shopthelook_QfWUAN": {
+      "type": "shopthelook",
+      "blocks": {
+        "product_8nn4FX": {
+          "type": "product",
+          "settings": {
+            "product": "the-multi-location-snowboard",
+            "hotspot_x": 50,
+            "hotspot_y": 50
+          }
+        },
+        "product_fbh3JF": {
+          "type": "product",
+          "settings": {
+            "product": "cleansing-body-gel",
+            "hotspot_x": 50,
+            "hotspot_y": 50
+          }
+        },
+        "product_Ngw6UV": {
+          "type": "product",
+          "settings": {
+            "product": "renewal-face-cream",
+            "hotspot_x": 30,
+            "hotspot_y": 35
+          }
+        },
+        "product_q8EUh8": {
+          "type": "product",
+          "settings": {
+            "product": "nourishing-hair-repair-mask",
+            "hotspot_x": 55,
+            "hotspot_y": 60
+          }
+        },
+        "product_WHAHbF": {
+          "type": "product",
+          "settings": {
+            "product": "the-inventory-not-tracked-snowboard",
+            "hotspot_x": 70,
+            "hotspot_y": 25
+          }
+        }
+      },
+      "block_order": [
+        "product_8nn4FX",
+        "product_fbh3JF",
+        "product_Ngw6UV",
+        "product_q8EUh8",
+        "product_WHAHbF"
+      ],
+      "name": "SEK Shop the Look",
+      "settings": {
+        "main_image": "shopify://shop_images/Screenshot_2023-07-14_at_11.18.51_1.webp",
+        "heading": "Shop the Look",
+        "heading_alignment": "left",
+        "container_width": 1200,
+        "grid_gap": 40,
+        "card_width": 350,
+        "image_border_radius": 8,
+        "card_border_radius": 8,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "hotspot_size": 16,
+        "heading_size_desktop": 28,
+        "heading_size_mobile": 22,
+        "background_color": "#ffffff",
+        "text_color": "#666666",
+        "heading_color": "#000000",
+        "card_background": "#ffffff",
+        "card_border_color": "#e5e5e5",
+        "dot_background": "#ffffff",
+        "dot_active_color": "#000000",
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "sale_color": "#f83a3a"
+      }
     }
   },
   "order": [
@@ -909,7 +987,8 @@
     "before_after_MmycjH",
     "countdown_timer_p9p7Xq",
     "collection_ticker_WKnjcT",
+    "hostspot_PLw84w",
     "testimonials_slider2_CTtQNU",
-    "hostspot_PLw84w"
+    "shopthelook_QfWUAN"
   ]
 }
