@@ -703,6 +703,45 @@
         "padding_bottom": 80
       }
     },
+    "collection_ticker_WKnjcT": {
+      "type": "collection-ticker",
+      "name": "SEK Collection Ticker",
+      "settings": {
+        "collection": "automated-collection",
+        "products_to_show": 8,
+        "heading": "<p><em>Black Friday Event</em> Up to 30% Off</p>",
+        "description": "",
+        "button_text": "SHOP NOW",
+        "button_link": "",
+        "show_timer": true,
+        "timer_end_date": "2025-12-31 23:59",
+        "expired_message": "This offer has ended",
+        "section_height_desktop": 95,
+        "section_height_mobile": 95,
+        "section_margin": 10,
+        "border_radius_desktop": 36,
+        "border_radius_mobile": 22,
+        "animation_speed": 45,
+        "card_width_mobile": 160,
+        "card_width_desktop": 220,
+        "card_border_radius": 16,
+        "heading_size_desktop": 52,
+        "heading_size_mobile": 34,
+        "background_color": "#2f0606",
+        "text_color": "#ffffff",
+        "heading_color": "#ffffff",
+        "timer_background": "#d2ff01",
+        "timer_text_color": "#121212",
+        "timer_border_radius": 6,
+        "button_background": "#ffffff",
+        "button_text_color": "#121212",
+        "button_hover_background": "#d2ff01",
+        "button_border_radius": 100,
+        "card_background": "#ffffff",
+        "card_border_color": "#e5e5e5",
+        "sale_color": "#f15757"
+      }
+    },
     "testimonials_slider2_CTtQNU": {
       "type": "testimonials-slider2",
       "blocks": {
@@ -772,43 +811,87 @@
         "show_avatar": true
       }
     },
-    "collection_ticker_WKnjcT": {
-      "type": "collection-ticker",
-      "name": "SEK Collection Ticker",
+    "hostspot_PLw84w": {
+      "type": "hostspot",
+      "blocks": {
+        "hotspot_wtM6dw": {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 25,
+            "position_y": 40,
+            "card_position": "right",
+            "product": "nourishing-hair-repair-mask",
+            "show_description": true,
+            "button_text": "",
+            "custom_title": "",
+            "custom_price": "",
+            "custom_description": "",
+            "custom_link": ""
+          }
+        },
+        "hotspot_mrBdB9": {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 65,
+            "position_y": 30,
+            "card_position": "left",
+            "product": "eye-treatment",
+            "show_description": true,
+            "button_text": "",
+            "custom_title": "",
+            "custom_price": "",
+            "custom_description": "",
+            "custom_link": ""
+          }
+        },
+        "hotspot_NFcFMm": {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 50,
+            "position_y": 70,
+            "card_position": "top",
+            "product": "renewal-face-cream",
+            "show_description": true,
+            "button_text": "",
+            "custom_title": "",
+            "custom_price": "",
+            "custom_description": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_wtM6dw",
+        "hotspot_mrBdB9",
+        "hotspot_NFcFMm"
+      ],
+      "name": "SEK Hotspots",
       "settings": {
-        "collection": "automated-collection",
-        "products_to_show": 8,
-        "heading": "<p><em>Black Friday Event</em> Up to 30% Off</p>",
-        "description": "",
-        "button_text": "SHOP NOW",
-        "button_link": "",
-        "show_timer": true,
-        "timer_end_date": "2025-12-31 23:59",
-        "expired_message": "This offer has ended",
-        "section_height_desktop": 95,
-        "section_height_mobile": 95,
-        "section_margin": 10,
-        "border_radius_desktop": 36,
-        "border_radius_mobile": 22,
-        "animation_speed": 45,
-        "card_width_mobile": 160,
-        "card_width_desktop": 220,
-        "card_border_radius": 16,
-        "heading_size_desktop": 52,
-        "heading_size_mobile": 34,
-        "background_color": "#2f0606",
-        "text_color": "#ffffff",
-        "heading_color": "#ffffff",
-        "timer_background": "#d2ff01",
-        "timer_text_color": "#121212",
-        "timer_border_radius": 6,
-        "button_background": "#ffffff",
-        "button_text_color": "#121212",
-        "button_hover_background": "#d2ff01",
-        "button_border_radius": 100,
+        "image": "shopify://shop_images/Naming_This_Later_Hero.webp",
+        "subheading": "Shop The Look",
+        "heading": "Explore Our Collection",
+        "description": "Click on the hotspots to discover featured products.",
+        "header_alignment": "center",
+        "trigger_type": "click",
+        "dot_size": 36,
+        "default_button_text": "View Product",
+        "container_width": 1200,
+        "image_max_width": 1000,
+        "image_border_radius": 12,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "heading_size_desktop": 36,
+        "heading_size_mobile": 28,
+        "background_color": "#ffffff",
+        "text_color": "#666666",
+        "heading_color": "#121212",
+        "dot_background": "#ffffff",
+        "dot_border_color": "#121212",
+        "dot_pulse_color": "#ffffff",
         "card_background": "#ffffff",
-        "card_border_color": "#e5e5e5",
-        "sale_color": "#f15757"
+        "card_text_color": "#666666",
+        "button_background": "#121212",
+        "button_text_color": "#ffffff"
       }
     }
   },
@@ -825,7 +908,8 @@
     "video_banner_pro_gd3Fbh",
     "before_after_MmycjH",
     "countdown_timer_p9p7Xq",
+    "collection_ticker_WKnjcT",
     "testimonials_slider2_CTtQNU",
-    "collection_ticker_WKnjcT"
+    "hostspot_PLw84w"
   ]
 }
