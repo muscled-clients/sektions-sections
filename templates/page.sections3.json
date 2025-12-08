@@ -1189,6 +1189,104 @@
         "nav_background": "#ffffff",
         "nav_icon_color": "#121212"
       }
+    },
+    "about_us2_PrDfRD": {
+      "type": "about-us2",
+      "blocks": {
+        "team_member_Ec9YnL": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2025-12-09_022132.png",
+            "name": "John Doe",
+            "job_title": "CEO & Founder"
+          }
+        },
+        "team_member_VCiqRr": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/our-team-png-2.webp",
+            "name": "Sarah Johnson",
+            "job_title": "CEO & Founder"
+          }
+        },
+        "team_member_34PxQr": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/our-team-png-1.webp",
+            "name": "Michael Chen",
+            "job_title": "CTO"
+          }
+        },
+        "team_member_xTFC8V": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/our-team-png-6.webp",
+            "name": "Emily Davis",
+            "job_title": "Head of Design"
+          }
+        },
+        "team_member_YQxHny": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/our-team-png-4.webp",
+            "name": "James Wilson",
+            "job_title": "Lead Developer"
+          }
+        },
+        "team_member_qbtUMk": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/our-team-png-6.webp",
+            "name": "Lisa Anderson",
+            "job_title": "Marketing Director"
+          }
+        },
+        "team_member_NzmWTk": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/our-team-png-2.webp",
+            "name": "David Brown",
+            "job_title": "Product Manager"
+          }
+        },
+        "team_member_NhtUNR": {
+          "type": "team_member",
+          "settings": {
+            "image": "shopify://shop_images/our-team-png-1.webp",
+            "name": "John Doe",
+            "job_title": "CEO & Founder"
+          }
+        }
+      },
+      "block_order": [
+        "team_member_Ec9YnL",
+        "team_member_VCiqRr",
+        "team_member_34PxQr",
+        "team_member_xTFC8V",
+        "team_member_YQxHny",
+        "team_member_qbtUMk",
+        "team_member_NzmWTk",
+        "team_member_NhtUNR"
+      ],
+      "name": "SEK About Us Team",
+      "settings": {
+        "subheading": "OUR TEAM",
+        "heading": "Meet your growth-focused specialists",
+        "description": "",
+        "header_alignment": "center",
+        "animation_speed": 40,
+        "card_gap": 16,
+        "row_gap": 20,
+        "card_border_radius": 12,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50,
+        "background_color": "#1a3a3a",
+        "heading_color": "#ffffff",
+        "text_color": "#cccccc",
+        "accent_color": "#7ae5c8"
+      }
     }
   },
   "order": [
@@ -1209,6 +1307,7 @@
     "insta_feed_6ib6dG",
     "shopthelook_QfWUAN",
     "testimonials_slider2_CTtQNU",
-    "video_testinomials_yPw64L"
+    "video_testinomials_yPw64L",
+    "about_us2_PrDfRD"
   ]
 }
