@@ -41,7 +41,14 @@
   #shopify-section-{{ section.id }} .diagonal-strip-content {
     display: flex;
     align-items: center;
-    animation: scrollLeft{{ section.id | replace: '-', '' }} {{ section.settings.animation_speed }}s linear infinite;
+  }
+
+  #shopify-section-{{ section.id }} .diagonal-strip-top .diagonal-strip-content {
+    animation: scroll{{ section.settings.top_scroll_direction | capitalize }}{{ section.id | replace: '-', '' }} {{ section.settings.animation_speed }}s linear infinite;
+  }
+
+  #shopify-section-{{ section.id }} .diagonal-strip-bottom .diagonal-strip-content {
+    animation: scroll{{ section.settings.bottom_scroll_direction | capitalize }}{{ section.id | replace: '-', '' }} {{ section.settings.animation_speed }}s linear infinite;
   }
 
   #shopify-section-{{ section.id }} .diagonal-strip-text {
@@ -61,6 +68,15 @@
     }
     100% {
       transform: translateX(-50%);
+    }
+  }
+
+  @keyframes scrollRight{{ section.id | replace: '-', '' }} {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
     }
   }
 
@@ -251,6 +267,42 @@
         }
       ],
       "default": "right_to_left"
+    },
+    {
+      "type": "header",
+      "content": "Scroll Direction"
+    },
+    {
+      "type": "select",
+      "id": "top_scroll_direction",
+      "label": "Top strip scroll direction",
+      "options": [
+        {
+          "value": "left",
+          "label": "Scroll left"
+        },
+        {
+          "value": "right",
+          "label": "Scroll right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "bottom_scroll_direction",
+      "label": "Bottom strip scroll direction",
+      "options": [
+        {
+          "value": "left",
+          "label": "Scroll left"
+        },
+        {
+          "value": "right",
+          "label": "Scroll right"
+        }
+      ],
+      "default": "left"
     },
     {
       "type": "header",
