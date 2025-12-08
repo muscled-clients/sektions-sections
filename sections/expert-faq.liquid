@@ -42,12 +42,13 @@
     border: 3px solid {{ section.settings.background_color }};
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-    margin-right: -14px;
+    margin-left: -14px;
     position: relative;
   }
 
   #shopify-section-{{ section.id }} .expert-avatar:nth-child(1) {
-    z-index: 3;
+    z-index: 1;
+    margin-left: 0;
   }
 
   #shopify-section-{{ section.id }} .expert-avatar:nth-child(2) {
@@ -55,8 +56,7 @@
   }
 
   #shopify-section-{{ section.id }} .expert-avatar:nth-child(3) {
-    z-index: 1;
-    margin-right: 0;
+    z-index: 3;
   }
 
   #shopify-section-{{ section.id }} .expert-avatar img {
@@ -211,7 +211,11 @@
     #shopify-section-{{ section.id }} .expert-avatar {
       width: 48px;
       height: 48px;
-      margin-right: -12px;
+      margin-left: -12px;
+    }
+
+    #shopify-section-{{ section.id }} .expert-avatar:nth-child(1) {
+      margin-left: 0;
     }
 
     #shopify-section-{{ section.id }} .faq-title {
