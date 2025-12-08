@@ -1,0 +1,875 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hotspots-section-{{ section.id }} {
+    --hs-bg: {{ section.settings.background_color }};
+    --hs-text: {{ section.settings.text_color }};
+    --hs-heading: {{ section.settings.heading_color }};
+    --hs-dot-bg: {{ section.settings.dot_background }};
+    --hs-dot-border: {{ section.settings.dot_border_color }};
+    --hs-dot-pulse: {{ section.settings.dot_pulse_color }};
+    --hs-card-bg: {{ section.settings.card_background }};
+    --hs-card-text: {{ section.settings.card_text_color }};
+    --hs-btn-bg: {{ section.settings.button_background }};
+    --hs-btn-text: {{ section.settings.button_text_color }};
+    background-color: var(--hs-bg);
+    color: var(--hs-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .hotspots-section-{{ section.id }} * {
+    box-sizing: border-box;
+  }
+
+  .hs-container-{{ section.id }} {
+    max-width: {{ section.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Header */
+  .hs-header-{{ section.id }} {
+    text-align: {{ section.settings.header_alignment }};
+    margin-bottom: 40px;
+    max-width: 700px;
+    {%- if section.settings.header_alignment == 'center' -%}
+    margin-left: auto;
+    margin-right: auto;
+    {%- endif -%}
+  }
+
+  .hs-subheading-{{ section.id }} {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--hs-btn-bg);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 10px 0;
+  }
+
+  .hs-heading-{{ section.id }} {
+    font-size: {{ section.settings.heading_size_mobile }}px;
+    font-weight: 700;
+    color: var(--hs-heading);
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+  }
+
+  .hs-description-{{ section.id }} {
+    font-size: 16px;
+    color: var(--hs-text);
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+
+  /* Image Container */
+  .hs-image-wrapper-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    max-width: {{ section.settings.image_max_width }}px;
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  .hs-image-{{ section.id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: {{ section.settings.image_border_radius }}px;
+  }
+
+  /* Hotspot Dot */
+  .hs-dot-{{ section.id }} {
+    position: absolute;
+    width: {{ section.settings.dot_size }}px;
+    height: {{ section.settings.dot_size }}px;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .hs-dot-inner-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--hs-dot-bg);
+    border: 3px solid var(--hs-dot-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .hs-dot-{{ section.id }}:hover .hs-dot-inner-{{ section.id }} {
+    transform: scale(1.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .hs-dot-inner-{{ section.id }} svg {
+    width: 50%;
+    height: 50%;
+    stroke: var(--hs-dot-border);
+    stroke-width: 2.5;
+  }
+
+  /* Pulse Animation */
+  .hs-dot-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: var(--hs-dot-pulse);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: hs-pulse-{{ section.id }} 2s ease-out infinite;
+    z-index: -1;
+  }
+
+  @keyframes hs-pulse-{{ section.id }} {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.6;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2);
+      opacity: 0;
+    }
+  }
+
+  /* Product Card - Small tooltip style */
+  .hs-card-{{ section.id }} {
+    position: absolute;
+    width: 220px;
+    background: var(--hs-card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s ease;
+    z-index: 100;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .hs-card-{{ section.id }}.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Card Positions */
+  .hs-card-{{ section.id }}.position-top {
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+  }
+
+  .hs-card-{{ section.id }}.position-top.active {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .hs-card-{{ section.id }}.position-bottom {
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+  }
+
+  .hs-card-{{ section.id }}.position-bottom.active {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .hs-card-{{ section.id }}.position-left {
+    right: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+  }
+
+  .hs-card-{{ section.id }}.position-left.active {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .hs-card-{{ section.id }}.position-right {
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%) translateX(-10px);
+  }
+
+  .hs-card-{{ section.id }}.position-right.active {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  /* Card Arrow */
+  .hs-card-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--hs-card-bg);
+    transform: rotate(45deg);
+    z-index: 1;
+  }
+
+  .hs-card-{{ section.id }}.position-top::before {
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+  }
+
+  .hs-card-{{ section.id }}.position-bottom::before {
+    top: -5px;
+    left: 50%;
+    margin-left: -5px;
+  }
+
+  .hs-card-{{ section.id }}.position-left::before {
+    right: -5px;
+    top: 50%;
+    margin-top: -5px;
+  }
+
+  .hs-card-{{ section.id }}.position-right::before {
+    left: -5px;
+    top: 50%;
+    margin-top: -5px;
+  }
+
+  /* Card Content - Horizontal layout */
+  .hs-card-image-{{ section.id }} {
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .hs-card-content-{{ section.id }} {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hs-card-title-{{ section.id }} {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--hs-heading);
+    margin: 0 0 4px 0;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .hs-card-price-{{ section.id }} {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--hs-card-text);
+    margin: 0;
+  }
+
+  .hs-card-price-{{ section.id }} .compare {
+    text-decoration: line-through;
+    color: #999;
+    font-weight: 400;
+    margin-left: 6px;
+    font-size: 11px;
+  }
+
+  .hs-card-desc-{{ section.id }} {
+    display: none;
+  }
+
+  .hs-card-btn-{{ section.id }} {
+    display: none;
+  }
+
+  /* Close Button - Hidden for tooltip style */
+  .hs-card-close-{{ section.id }} {
+    display: none;
+  }
+
+  /* Make entire card clickable */
+  .hs-card-{{ section.id }} {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .hs-card-{{ section.id }}:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Mobile Adjustments */
+  @media (max-width: 768px) {
+    .hs-heading-{{ section.id }} {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+    }
+
+    .hs-card-{{ section.id }} {
+      width: 200px;
+    }
+
+    .hs-card-image-{{ section.id }} {
+      width: 70px;
+      min-width: 70px;
+      height: 70px;
+    }
+
+    .hs-card-{{ section.id }}.position-left,
+    .hs-card-{{ section.id }}.position-right {
+      left: 50%;
+      right: auto;
+      top: calc(100% + 10px);
+      transform: translateX(-50%) translateY(-10px);
+    }
+
+    .hs-card-{{ section.id }}.position-left.active,
+    .hs-card-{{ section.id }}.position-right.active {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .hs-card-{{ section.id }}.position-left::before,
+    .hs-card-{{ section.id }}.position-right::before {
+      top: -5px;
+      left: 50%;
+      right: auto;
+      margin-left: -5px;
+      margin-top: 0;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .hs-heading-{{ section.id }} {
+      font-size: {{ section.settings.heading_size_desktop }}px;
+    }
+
+    .hs-container-{{ section.id }} {
+      padding: 0 40px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hs-container-{{ section.id }} {
+      padding: 0 60px;
+    }
+  }
+{% endstyle %}
+
+<section class="hotspots-section-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="hs-container-{{ section.id }}">
+    {%- if section.settings.subheading != blank or section.settings.heading != blank or section.settings.description != blank -%}
+      <div class="hs-header-{{ section.id }}">
+        {%- if section.settings.subheading != blank -%}
+          <p class="hs-subheading-{{ section.id }}">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="hs-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="hs-description-{{ section.id }}">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="hs-image-wrapper-{{ section.id }}">
+      {%- if section.settings.image != blank -%}
+        <img
+          class="hs-image-{{ section.id }}"
+          src="{{ section.settings.image | image_url: width: 1600 }}"
+          alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+          loading="lazy"
+        >
+      {%- else -%}
+        {{ 'collection-2' | placeholder_svg_tag: 'hs-image-' | append: section.id }}
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'hotspot' -%}
+          <div
+            class="hs-dot-{{ section.id }}"
+            style="left: {{ block.settings.position_x }}%; top: {{ block.settings.position_y }}%;"
+            data-hotspot="{{ forloop.index0 }}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="hs-dot-inner-{{ section.id }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </div>
+
+            <!-- Product Card - Small tooltip -->
+            {%- assign product = block.settings.product -%}
+            {%- assign card_link = product.url | default: block.settings.custom_link | default: '#' -%}
+            <a href="{{ card_link }}" class="hs-card-{{ section.id }} position-{{ block.settings.card_position }}" data-card="{{ forloop.index0 }}">
+              {%- if product != blank -%}
+                <img
+                  class="hs-card-image-{{ section.id }}"
+                  src="{{ product.featured_image | image_url: width: 200 }}"
+                  alt="{{ product.title | escape }}"
+                  loading="lazy"
+                >
+                <div class="hs-card-content-{{ section.id }}">
+                  <h4 class="hs-card-title-{{ section.id }}">{{ product.title }}</h4>
+                  <p class="hs-card-price-{{ section.id }}">
+                    {{ product.price | money }}
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="compare">{{ product.compare_at_price | money }}</span>
+                    {%- endif -%}
+                  </p>
+                </div>
+              {%- else -%}
+                {%- if block.settings.custom_image != blank -%}
+                  <img
+                    class="hs-card-image-{{ section.id }}"
+                    src="{{ block.settings.custom_image | image_url: width: 200 }}"
+                    alt="{{ block.settings.custom_title | escape }}"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+                <div class="hs-card-content-{{ section.id }}">
+                  <h4 class="hs-card-title-{{ section.id }}">{{ block.settings.custom_title | default: 'Product Title' }}</h4>
+                  {%- if block.settings.custom_price != blank -%}
+                    <p class="hs-card-price-{{ section.id }}">{{ block.settings.custom_price }}</p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const hotspots = section.querySelectorAll('[data-hotspot]');
+    const cards = section.querySelectorAll('[data-card]');
+    const triggerType = '{{ section.settings.trigger_type }}';
+
+    function closeAllCards() {
+      cards.forEach(card => card.classList.remove('active'));
+    }
+
+    function toggleCard(index) {
+      const card = section.querySelector(`[data-card="${index}"]`);
+      const isActive = card.classList.contains('active');
+      closeAllCards();
+      if (!isActive) {
+        card.classList.add('active');
+      }
+    }
+
+    hotspots.forEach((hotspot, index) => {
+      const dotInner = hotspot.querySelector('[class*="hs-dot-inner"]');
+
+      if (triggerType === 'click') {
+        // Only toggle on dot click, not card click
+        if (dotInner) {
+          dotInner.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleCard(index);
+          });
+        }
+      } else {
+        hotspot.addEventListener('mouseenter', function() {
+          closeAllCards();
+          const card = section.querySelector(`[data-card="${index}"]`);
+          card.classList.add('active');
+        });
+
+        hotspot.addEventListener('mouseleave', function(e) {
+          const card = section.querySelector(`[data-card="${index}"]`);
+          const relatedTarget = e.relatedTarget;
+          if (!card.contains(relatedTarget)) {
+            card.classList.remove('active');
+          }
+        });
+
+        const card = section.querySelector(`[data-card="${index}"]`);
+        card.addEventListener('mouseleave', function(e) {
+          const relatedTarget = e.relatedTarget;
+          if (!hotspot.contains(relatedTarget)) {
+            card.classList.remove('active');
+          }
+        });
+      }
+    });
+
+    // Close on outside click (only for click mode)
+    if (triggerType === 'click') {
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('[data-hotspot]')) {
+          closeAllCards();
+        }
+      });
+
+      // Close on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeAllCards();
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Hotspots",
+  "class": "hotspots-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Shop The Look"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Explore Our Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Click on the hotspots to discover featured products."
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Hotspot Settings"
+    },
+    {
+      "type": "select",
+      "id": "trigger_type",
+      "label": "Open card on",
+      "options": [
+        { "value": "click", "label": "Click" },
+        { "value": "hover", "label": "Hover" }
+      ],
+      "default": "click"
+    },
+    {
+      "type": "range",
+      "id": "dot_size",
+      "label": "Dot size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "default_button_text",
+      "label": "Default button text",
+      "default": "View Product"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 800,
+      "max": 1600,
+      "step": 20,
+      "default": 1200,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "label": "Image max width",
+      "min": 600,
+      "max": 1400,
+      "step": 20,
+      "default": 1000,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (mobile)",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "dot_background",
+      "label": "Dot background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "dot_border_color",
+      "label": "Dot border/icon color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "dot_pulse_color",
+      "label": "Dot pulse color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Hotspot",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Position"
+        },
+        {
+          "type": "range",
+          "id": "position_x",
+          "label": "Horizontal position (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "position_y",
+          "label": "Vertical position (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "type": "select",
+          "id": "card_position",
+          "label": "Card position",
+          "options": [
+            { "value": "top", "label": "Top" },
+            { "value": "bottom", "label": "Bottom" },
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "top"
+        },
+        {
+          "type": "header",
+          "content": "Product"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_description",
+          "label": "Show product description",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "info": "Leave blank to use default"
+        },
+        {
+          "type": "header",
+          "content": "Custom Content (if no product)"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom image"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom title"
+        },
+        {
+          "type": "text",
+          "id": "custom_price",
+          "label": "Custom price"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_description",
+          "label": "Custom description"
+        },
+        {
+          "type": "url",
+          "id": "custom_link",
+          "label": "Custom link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Hotspots",
+      "blocks": [
+        {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 25,
+            "position_y": 40,
+            "card_position": "right"
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 65,
+            "position_y": 30,
+            "card_position": "left"
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 50,
+            "position_y": 70,
+            "card_position": "top"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
