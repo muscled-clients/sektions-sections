@@ -27,7 +27,7 @@
     background-color: {{ section.settings.top_strip_color }};
     transform: translateY(-50%) rotate({{ section.settings.rotation_angle }}deg);
     transform-origin: center center;
-    z-index: 1;
+    z-index: 2;
   }
 
   #shopify-section-{{ section.id }} .diagonal-strip-bottom {
@@ -35,7 +35,7 @@
     background-color: {{ section.settings.bottom_strip_color }};
     transform: translateY(-50%) rotate(-{{ section.settings.rotation_angle }}deg);
     transform-origin: center center;
-    z-index: 2;
+    z-index: 1;
   }
 
   #shopify-section-{{ section.id }} .diagonal-strip-content {
@@ -186,7 +186,7 @@
       "max": 150,
       "step": 5,
       "unit": "px",
-      "default": 80
+      "default": 100
     },
     {
       "type": "range",
