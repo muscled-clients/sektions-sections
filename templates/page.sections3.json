@@ -597,6 +597,28 @@
         "padding_bottom": 50
       }
     },
+    "diagonal_banner_8zkEaj": {
+      "type": "diagonal-banner",
+      "name": "Diagonal Banner",
+      "settings": {
+        "top_text": "SALE",
+        "bottom_text": "-80%",
+        "top_strip_color": "#333333",
+        "bottom_strip_color": "#1a1a1a",
+        "text_color": "#ffd700",
+        "section_height": 280,
+        "strip_height": 80,
+        "rotation_angle": 4,
+        "mobile_rotation_angle": 7,
+        "top_strip_direction": "left_to_right",
+        "bottom_strip_direction": "right_to_left",
+        "top_scroll_direction": "left",
+        "bottom_scroll_direction": "left",
+        "font_size": 48,
+        "text_spacing": 50,
+        "animation_speed": 20
+      }
+    },
     "reviews_slider_7hYaNA": {
       "type": "reviews-slider",
       "blocks": {
@@ -830,28 +852,6 @@
         "padding_top": 60,
         "padding_bottom": 60
       }
-    },
-    "diagonal_banner_8zkEaj": {
-      "type": "diagonal-banner",
-      "name": "Diagonal Banner",
-      "settings": {
-        "top_text": "SALE",
-        "bottom_text": "-80%",
-        "top_strip_color": "#333333",
-        "bottom_strip_color": "#1a1a1a",
-        "text_color": "#ffd700",
-        "section_height": 280,
-        "strip_height": 80,
-        "rotation_angle": 4,
-        "mobile_rotation_angle": 7,
-        "top_strip_direction": "left_to_right",
-        "bottom_strip_direction": "right_to_left",
-        "top_scroll_direction": "left",
-        "bottom_scroll_direction": "left",
-        "font_size": 48,
-        "text_spacing": 50,
-        "animation_speed": 20
-      }
     }
   },
   "order": [
@@ -863,10 +863,10 @@
     "table_rBKTda",
     "testimonials_slider2_MRPQUU",
     "trustpilot_B6EzFw",
-    "reviews_slider_7hYaNA",
+    "diagonal_banner_8zkEaj",
     "style_in_motion_LbMKGR",
-    "product_tabs_XNkGtt",
+    "reviews_slider_7hYaNA",
     "expert_faq_mnTcgd",
-    "diagonal_banner_8zkEaj"
+    "product_tabs_XNkGtt"
   ]
 }
