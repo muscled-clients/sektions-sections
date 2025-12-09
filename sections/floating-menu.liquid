@@ -1,0 +1,977 @@
+{% comment %}
+  SEK Floating Menu - Sticky floating navigation with smooth scrolling
+  Features: Sliding background effect, glass blur, horizontal tabs, mobile hamburger menu
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+
+{% style %}
+  /* Reset and Base Styles */
+  #sek-floating-menu-{{ section_id }},
+  #sek-floating-menu-{{ section_id }} * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Floating Menu Container */
+  #sek-floating-menu-{{ section_id }} {
+    position: fixed !important;
+    z-index: 999 !important;
+    {%- if section.settings.position == 'bottom' -%}
+    bottom: {{ section.settings.offset_bottom }}px;
+    left: 50%;
+    transform: translateX(-50%);
+    {%- elsif section.settings.position == 'top' -%}
+    top: {{ section.settings.offset_top }}px;
+    left: 50%;
+    transform: translateX(-50%);
+    {%- endif -%}
+  }
+
+  #sek-floating-menu-{{ section_id }} .sek-fm__wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: {{ section.settings.gap_mobile }}px;
+    padding: {{ section.settings.padding_vertical }}px {{ section.settings.padding_horizontal }}px;
+    border-radius: {{ section.settings.border_radius }}px;
+    {%- if section.settings.enable_glass_effect -%}
+    background: {{ section.settings.glass_background }} !important;
+    backdrop-filter: blur({{ section.settings.glass_blur }}px);
+    -webkit-backdrop-filter: blur({{ section.settings.glass_blur }}px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    {%- else -%}
+      {%- if section.settings.background_style == 'gradient' -%}
+      background: linear-gradient({{ section.settings.gradient_angle }}deg, {{ section.settings.gradient_start }}, {{ section.settings.gradient_end }}) !important;
+      {%- else -%}
+      background: {{ section.settings.background_color }} !important;
+      {%- endif -%}
+    border: {{ section.settings.section_border_thickness }}px solid {{ section.settings.section_border_color }};
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    {%- endif -%}
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  {%- if section.settings.enable_glass_effect and section.settings.enable_scale_hover -%}
+  #sek-floating-menu-{{ section_id }} .sek-fm__wrapper:hover {
+    transform: scale(1.02);
+  }
+  {%- endif -%}
+
+  @media (min-width: 1024px) {
+    #sek-floating-menu-{{ section_id }} .sek-fm__wrapper {
+      gap: {{ section.settings.gap_desktop }}px;
+    }
+  }
+
+  /* Navigation Links Container */
+  #sek-floating-menu-{{ section_id }} .sek-fm__nav {
+    display: none !important;
+    align-items: center !important;
+    gap: {{ section.settings.gap_desktop }}px !important;
+    position: relative !important;
+    padding: 4px !important;
+  }
+
+  @media (min-width: 1024px) {
+    #sek-floating-menu-{{ section_id }} .sek-fm__nav {
+      display: flex !important;
+    }
+  }
+
+  /* Link Styles - with maximum specificity */
+  #sek-floating-menu-{{ section_id }} .sek-fm__nav .sek-fm__link,
+  #sek-floating-menu-{{ section_id }} .sek-fm__link,
+  #sek-floating-menu-{{ section_id }} a.sek-fm__link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: {{ section.settings.link_padding_vertical }}px {{ section.settings.link_padding_horizontal }}px !important;
+    font-size: {{ section.settings.font_size_desktop }}px !important;
+    {%- if section.settings.line_height != blank -%}
+    line-height: {{ section.settings.line_height }} !important;
+    {%- else -%}
+    line-height: 1.2 !important;
+    {%- endif -%}
+    {%- if section.settings.use_custom_font and section.settings.font_family != blank -%}
+    font-family: {{ section.settings.font_family }} !important;
+    {%- else -%}
+    font-family: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    {%- endif -%}
+    font-weight: 400 !important;
+    text-decoration: none !important;
+    color: {{ section.settings.link_color }} !important;
+    border-radius: {{ section.settings.link_border_radius }}px !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+    cursor: pointer;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  #sek-floating-menu-{{ section_id }} .sek-fm__link:visited,
+  #sek-floating-menu-{{ section_id }} .sek-fm__link:link,
+  #sek-floating-menu-{{ section_id }} .sek-fm__link:focus,
+  #sek-floating-menu-{{ section_id }} a.sek-fm__link:visited,
+  #sek-floating-menu-{{ section_id }} a.sek-fm__link:link,
+  #sek-floating-menu-{{ section_id }} a.sek-fm__link:focus {
+    color: {{ section.settings.link_color }} !important;
+    text-decoration: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Hover and Active States */
+  #sek-floating-menu-{{ section_id }} .sek-fm__nav .sek-fm__link:hover,
+  #sek-floating-menu-{{ section_id }} .sek-fm__nav .sek-fm__link.is-active,
+  #sek-floating-menu-{{ section_id }} .sek-fm__link:hover,
+  #sek-floating-menu-{{ section_id }} .sek-fm__link.is-active {
+    color: {{ section.settings.link_active_color }} !important;
+    text-decoration: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  /* Sliding Background Indicator */
+  #sek-floating-menu-{{ section_id }} .sek-fm__nav .sek-fm__slider,
+  #sek-floating-menu-{{ section_id }} .sek-fm__slider {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    height: calc(100% - 8px) !important;
+    min-height: 36px !important;
+    background-color: {{ section.settings.slider_background }} !important;
+    background: {{ section.settings.slider_background }} !important;
+    border-radius: {{ section.settings.link_border_radius }}px !important;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    left: 4px !important;
+    width: 120px !important;
+  }
+
+  /* Mobile Toggle Button */
+  #sek-floating-menu-{{ section_id }} .sek-fm__toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    background: {{ section.settings.toggle_background }} !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    transition: all 0.3s ease !important;
+  }
+
+  @media (min-width: 1024px) {
+    #sek-floating-menu-{{ section_id }} .sek-fm__toggle {
+      display: none !important;
+    }
+  }
+
+  #sek-floating-menu-{{ section_id }} .sek-fm__toggle:hover {
+    transform: scale(1.05);
+  }
+
+  #sek-floating-menu-{{ section_id }} .sek-fm__toggle-icon {
+    width: 20px;
+    height: 14px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  #sek-floating-menu-{{ section_id }} .sek-fm__toggle-line {
+    width: 100%;
+    height: 2px;
+    background: {{ section.settings.toggle_icon_color }};
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  #sek-floating-menu-{{ section_id }} .sek-fm__toggle.is-open .sek-fm__toggle-line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  #sek-floating-menu-{{ section_id }} .sek-fm__toggle.is-open .sek-fm__toggle-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  #sek-floating-menu-{{ section_id }} .sek-fm__toggle.is-open .sek-fm__toggle-line:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* Mobile Menu Overlay */
+  #sek-floating-menu-mobile-{{ section_id }}.sek-fm__mobile-menu {
+    display: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: {{ section.settings.mobile_menu_background }} !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    z-index: 998 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.3s ease !important;
+  }
+
+  @media (max-width: 1023px) {
+    #sek-floating-menu-mobile-{{ section_id }}.sek-fm__mobile-menu {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 16px !important;
+    }
+  }
+
+  #sek-floating-menu-mobile-{{ section_id }}.sek-fm__mobile-menu.is-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  #sek-floating-menu-mobile-{{ section_id }} .sek-fm__link {
+    font-size: {{ section.settings.font_size_mobile | plus: 8 }}px !important;
+    padding: 16px 32px !important;
+    background: transparent !important;
+    border: none !important;
+  }
+
+  #sek-floating-menu-mobile-{{ section_id }} .sek-fm__link:hover,
+  #sek-floating-menu-mobile-{{ section_id }} .sek-fm__link.is-active {
+    background: {{ section.settings.link_active_background }} !important;
+    color: {{ section.settings.link_active_color }} !important;
+    border-radius: {{ section.settings.link_border_radius }}px !important;
+  }
+
+  /* Hide body scroll when mobile menu open */
+  body.sek-fm-menu-open-{{ section_id }} {
+    overflow: hidden;
+  }
+{% endstyle %}
+
+<!-- Mobile Menu Overlay -->
+<div id="sek-floating-menu-mobile-{{ section_id }}" class="sek-fm__mobile-menu">
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'tab' -%}
+      <a
+        href="#{{ block.settings.target_section_id }}"
+        class="sek-fm__link"
+        data-target="{{ block.settings.target_section_id }}"
+        {{ block.shopify_attributes }}
+      >
+        {{ block.settings.tab_name }}
+      </a>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+<!-- Floating Menu -->
+<nav id="sek-floating-menu-{{ section_id }}" class="sek-floating-menu" aria-label="Section navigation">
+  <div class="sek-fm__wrapper">
+    <!-- Mobile Toggle -->
+    <button class="sek-fm__toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+      <span class="sek-fm__toggle-icon">
+        <span class="sek-fm__toggle-line"></span>
+        <span class="sek-fm__toggle-line"></span>
+        <span class="sek-fm__toggle-line"></span>
+      </span>
+    </button>
+
+    <!-- Desktop Navigation -->
+    <div class="sek-fm__nav">
+      <div class="sek-fm__slider"></div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'tab' -%}
+          <a
+            href="#{{ block.settings.target_section_id }}"
+            class="sek-fm__link{% if forloop.first %} is-active{% endif %}"
+            data-target="{{ block.settings.target_section_id }}"
+            {{ block.shopify_attributes }}
+          >
+            {{ block.settings.tab_name }}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if section.blocks.size == 0 -%}
+        <a href="#image-banner" class="sek-fm__link is-active" data-target="image-banner">Image banner</a>
+        <a href="#multicolumn" class="sek-fm__link" data-target="multicolumn">Multicolumn</a>
+        <a href="#about-us" class="sek-fm__link" data-target="about-us">About us</a>
+      {%- endif -%}
+    </div>
+  </div>
+</nav>
+
+<script>
+  (function() {
+    function initFloatingMenu() {
+      const sectionId = '{{ section_id }}';
+      const menu = document.getElementById('sek-floating-menu-' + sectionId);
+      const mobileMenu = document.getElementById('sek-floating-menu-mobile-' + sectionId);
+      if (!menu) return;
+
+      const toggle = menu.querySelector('.sek-fm__toggle');
+      const nav = menu.querySelector('.sek-fm__nav');
+      const links = menu.querySelectorAll('.sek-fm__link');
+      const mobileLinks = mobileMenu ? mobileMenu.querySelectorAll('.sek-fm__link') : [];
+      const slider = menu.querySelector('.sek-fm__slider');
+      const enableSliding = {{ section.settings.enable_sliding_effect | json }};
+      const scrollOffset = {{ section.settings.scroll_offset }};
+
+      // Update slider position
+      function updateSlider(link) {
+        if (!slider || !enableSliding) return;
+
+        const rect = link.getBoundingClientRect();
+        const navRect = nav.getBoundingClientRect();
+
+        slider.style.setProperty('width', rect.width + 'px', 'important');
+        slider.style.setProperty('left', (rect.left - navRect.left) + 'px', 'important');
+      }
+
+      // Set active link
+      function setActiveLink(targetId) {
+        links.forEach(l => l.classList.remove('is-active'));
+        mobileLinks.forEach(l => l.classList.remove('is-active'));
+
+        const activeLink = Array.from(links).find(l => l.dataset.target === targetId);
+        const activeMobileLink = Array.from(mobileLinks).find(l => l.dataset.target === targetId);
+
+        if (activeLink) {
+          activeLink.classList.add('is-active');
+          updateSlider(activeLink);
+        }
+        if (activeMobileLink) {
+          activeMobileLink.classList.add('is-active');
+        }
+      }
+
+      // Smooth scroll to section
+      function scrollToSection(targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (!targetElement) return;
+
+        const offsetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - scrollOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+
+      // Handle link clicks
+      function handleLinkClick(e) {
+        e.preventDefault();
+        const targetId = this.dataset.target;
+
+        setActiveLink(targetId);
+        scrollToSection(targetId);
+
+        // Close mobile menu if open
+        if (mobileMenu && mobileMenu.classList.contains('is-open')) {
+          closeMobileMenu();
+        }
+      }
+
+      // Toggle mobile menu
+      function toggleMobileMenu() {
+        const isOpen = mobileMenu.classList.contains('is-open');
+        if (isOpen) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
+      }
+
+      function openMobileMenu() {
+        mobileMenu.classList.add('is-open');
+        toggle.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('sek-fm-menu-open-' + sectionId);
+      }
+
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('is-open');
+        toggle.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('sek-fm-menu-open-' + sectionId);
+      }
+
+      // Scroll spy - detect which section is in view
+      function handleScroll() {
+        const sections = [];
+        links.forEach(link => {
+          const targetId = link.dataset.target;
+          const section = document.getElementById(targetId);
+          if (section) {
+            sections.push({ id: targetId, top: section.getBoundingClientRect().top });
+          }
+        });
+
+        // Find the section closest to the top
+        let activeSection = null;
+        sections.forEach(section => {
+          if (section.top <= scrollOffset + 100) {
+            activeSection = section.id;
+          }
+        });
+
+        if (activeSection) {
+          setActiveLink(activeSection);
+        }
+      }
+
+      // Initialize slider position
+      if (slider && enableSliding) {
+        const activeLink = nav.querySelector('.sek-fm__link.is-active');
+        if (activeLink) {
+          // Run immediately
+          updateSlider(activeLink);
+          // Run again after fonts load
+          setTimeout(() => updateSlider(activeLink), 100);
+          setTimeout(() => updateSlider(activeLink), 500);
+          // Also run when fonts are loaded
+          if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(() => updateSlider(activeLink));
+          }
+        }
+      }
+
+      // Hover effect for slider
+      if (enableSliding) {
+        links.forEach(link => {
+          link.addEventListener('mouseenter', function() {
+            updateSlider(this);
+          });
+
+          link.addEventListener('mouseleave', function() {
+            const activeLink = nav.querySelector('.sek-fm__link.is-active');
+            if (activeLink) {
+              updateSlider(activeLink);
+            }
+          });
+        });
+      }
+
+      // Event listeners
+      links.forEach(link => {
+        link.addEventListener('click', handleLinkClick);
+      });
+
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', handleLinkClick);
+      });
+
+      if (toggle && mobileMenu) {
+        toggle.addEventListener('click', toggleMobileMenu);
+      }
+
+      // Close mobile menu on escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('is-open')) {
+          closeMobileMenu();
+        }
+      });
+
+      // Scroll spy
+      let scrollTimeout;
+      window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(handleScroll, 50);
+      }, { passive: true });
+
+      // Handle resize
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+          if (slider && enableSliding) {
+            const activeLink = nav.querySelector('.sek-fm__link.is-active');
+            if (activeLink) {
+              updateSlider(activeLink);
+            }
+          }
+          // Close mobile menu on resize to desktop
+          if (window.innerWidth >= 1024 && mobileMenu && mobileMenu.classList.contains('is-open')) {
+            closeMobileMenu();
+          }
+        }, 100);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFloatingMenu);
+    } else {
+      initFloatingMenu();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SEK Floating Menu",
+  "tag": "div",
+  "class": "sek-floating-menu-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Position"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "options": [
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "top", "label": "Top" }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "range",
+      "id": "offset_bottom",
+      "label": "Bottom offset",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "offset_top",
+      "label": "Top offset",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "scroll_offset",
+      "label": "Scroll offset",
+      "info": "Offset when scrolling to sections",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 100,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Tabs Layout"
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "label": "Gap (desktop)",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Gap (mobile)",
+      "min": 0,
+      "max": 16,
+      "step": 2,
+      "default": 4,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Sliding Effect"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sliding_effect",
+      "label": "Enable sliding background effect",
+      "info": "Moving highlight follows hover/active state",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "slider_background",
+      "label": "Slider background",
+      "default": "#00a86e"
+    },
+    {
+      "type": "header",
+      "content": "Link Typography"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_custom_font",
+      "label": "Use custom font",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "font_family",
+      "label": "Font family",
+      "info": "e.g., 'Bebas Neue', sans-serif"
+    },
+    {
+      "type": "range",
+      "id": "font_size_desktop",
+      "label": "Font size (desktop)",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "font_size_mobile",
+      "label": "Font size (mobile)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "line_height",
+      "label": "Line height",
+      "info": "e.g., 1.2 or 1.5"
+    },
+    {
+      "type": "header",
+      "content": "Link Spacing & Style"
+    },
+    {
+      "type": "range",
+      "id": "link_padding_horizontal",
+      "label": "Padding horizontal",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "link_padding_vertical",
+      "label": "Padding vertical",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "link_border_radius",
+      "label": "Link roundness",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 6,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "link_border_thickness",
+      "label": "Link border thickness",
+      "info": "Only when slide effect is off",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Link Colors - Default"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Text color",
+      "default": "#202020"
+    },
+    {
+      "type": "color",
+      "id": "link_background",
+      "label": "Background color",
+      "info": "Only when slide effect is off",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "link_border_color",
+      "label": "Border color",
+      "info": "Only when slide effect is off",
+      "default": "transparent"
+    },
+    {
+      "type": "header",
+      "content": "Link Colors - Hover"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_background",
+      "label": "Hover background",
+      "info": "Only when slide effect is off",
+      "default": "#297373"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_border_color",
+      "label": "Hover border color",
+      "info": "Only when slide effect is off",
+      "default": "#297373"
+    },
+    {
+      "type": "header",
+      "content": "Link Colors - Active"
+    },
+    {
+      "type": "color",
+      "id": "link_active_color",
+      "label": "Active text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_active_background",
+      "label": "Active background",
+      "info": "Only when slide effect is off",
+      "default": "#00a86e"
+    },
+    {
+      "type": "color",
+      "id": "link_active_border_color",
+      "label": "Active border color",
+      "info": "Only when slide effect is off",
+      "default": "#00a86e"
+    },
+    {
+      "type": "header",
+      "content": "Section Background"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_glass_effect",
+      "label": "Enable glass effect",
+      "info": "Frosted glass blur background",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "glass_background",
+      "label": "Glass background",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "range",
+      "id": "glass_blur",
+      "label": "Glass blur amount",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scale_hover",
+      "label": "Enable scale hover effect",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "background_style",
+      "label": "Background style",
+      "info": "When glass effect is off",
+      "options": [
+        { "value": "solid", "label": "Solid color" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "gradient_start",
+      "label": "Gradient start",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "gradient_end",
+      "label": "Gradient end",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "range",
+      "id": "gradient_angle",
+      "label": "Gradient angle",
+      "min": 0,
+      "max": 360,
+      "step": 15,
+      "default": 135,
+      "unit": "deg"
+    },
+    {
+      "type": "header",
+      "content": "Section Style"
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Section padding horizontal",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Section padding vertical",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Section roundness",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_border_thickness",
+      "label": "Section border thickness",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "section_border_color",
+      "label": "Section border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Menu"
+    },
+    {
+      "type": "color",
+      "id": "toggle_background",
+      "label": "Toggle button background",
+      "default": "#00a86e"
+    },
+    {
+      "type": "color",
+      "id": "toggle_icon_color",
+      "label": "Toggle icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "mobile_menu_background",
+      "label": "Mobile menu background",
+      "default": "rgba(255, 255, 255, 0.95)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_name",
+          "label": "Tab name",
+          "default": "Section"
+        },
+        {
+          "type": "text",
+          "id": "target_section_id",
+          "label": "Target section ID",
+          "info": "The ID of the section to scroll to (without #)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Floating Menu",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Image banner",
+            "target_section_id": "image-banner"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Multicolumn",
+            "target_section_id": "multicolumn"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_name": "About us",
+            "target_section_id": "about-us"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

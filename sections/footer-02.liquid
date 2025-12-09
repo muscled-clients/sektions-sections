@@ -1,0 +1,990 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .footer-section-{{ section.id }} {
+    --footer-bg: {{ section.settings.background_color }};
+    --footer-text: {{ section.settings.text_color }};
+    --footer-heading: {{ section.settings.heading_color }};
+    --footer-link: {{ section.settings.link_color }};
+    --footer-link-hover: {{ section.settings.link_hover_color }};
+    --footer-accent: {{ section.settings.accent_color }};
+    --footer-border: {{ section.settings.border_color }};
+    --footer-input-bg: {{ section.settings.input_background }};
+    --footer-input-text: {{ section.settings.input_text_color }};
+    --footer-btn-bg: {{ section.settings.button_background }};
+    --footer-btn-text: {{ section.settings.button_text_color }};
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .footer-section-{{ section.id }} * {
+    box-sizing: border-box;
+  }
+
+  .footer-container-{{ section.id }} {
+    max-width: {{ section.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Features Row */
+  .footer-features-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--footer-border);
+  }
+
+  .footer-feature-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    border: 1px solid var(--footer-border);
+    border-radius: {{ section.settings.border_radius }}px;
+    transition: all 0.3s ease;
+  }
+
+  .footer-feature-{{ section.id }}:hover .footer-feature-icon-{{ section.id }} {
+    transform: scale(1.1);
+  }
+
+  .footer-feature-icon-{{ section.id }} {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--footer-accent);
+    border-radius: 50%;
+    transition: transform 0.4s ease;
+  }
+
+  .footer-feature-icon-{{ section.id }} svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--footer-btn-text);
+  }
+
+  .footer-feature-content-{{ section.id }} {
+    flex: 1;
+  }
+
+  .footer-feature-title-{{ section.id }} {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--footer-heading);
+    margin: 0 0 4px 0;
+  }
+
+  .footer-feature-desc-{{ section.id }} {
+    font-size: 12px;
+    color: var(--footer-text);
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  /* Main Content Grid */
+  .footer-main-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  /* Brand Column */
+  .footer-brand-{{ section.id }} {
+    max-width: 350px;
+  }
+
+  .footer-logo-{{ section.id }} {
+    max-height: {{ section.settings.logo_height }}px;
+    width: auto;
+    margin-bottom: 20px;
+  }
+
+  .footer-brand-text-{{ section.id }} {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--footer-text);
+    margin: 0 0 25px 0;
+    opacity: 0.9;
+  }
+
+  /* Newsletter */
+  .footer-newsletter-{{ section.id }} {
+    margin-bottom: 25px;
+  }
+
+  .footer-newsletter-title-{{ section.id }} {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--footer-heading);
+    margin: 0 0 10px 0;
+  }
+
+  .footer-newsletter-form-{{ section.id }} {
+    display: flex;
+    gap: 10px;
+  }
+
+  .footer-newsletter-input-{{ section.id }} {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 14px;
+    background: var(--footer-input-bg);
+    color: var(--footer-input-text);
+    border: 1px solid var(--footer-border);
+    border-radius: {{ section.settings.border_radius }}px;
+    outline: none;
+  }
+
+  .footer-newsletter-input-{{ section.id }}::placeholder {
+    color: var(--footer-input-text);
+    opacity: 0.6;
+  }
+
+  .footer-newsletter-btn-{{ section.id }} {
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--footer-btn-bg);
+    color: var(--footer-btn-text);
+    border: none;
+    border-radius: {{ section.settings.border_radius }}px;
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+  }
+
+  .footer-newsletter-btn-{{ section.id }}:hover {
+    opacity: 0.85;
+  }
+
+  .footer-newsletter-success-{{ section.id }} {
+    display: none;
+    font-size: 14px;
+    color: var(--footer-accent);
+    margin-top: 10px;
+  }
+
+  .footer-newsletter-{{ section.id }}.success .footer-newsletter-form-{{ section.id }} {
+    display: none;
+  }
+
+  .footer-newsletter-{{ section.id }}.success .footer-newsletter-success-{{ section.id }} {
+    display: block;
+  }
+
+  /* Social Links */
+  .footer-social-{{ section.id }} {
+    display: flex;
+    gap: 10px;
+  }
+
+  .footer-social-link-{{ section.id }} {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--footer-border);
+    border-radius: 50%;
+    transition: all 0.25s ease;
+  }
+
+  .footer-social-link-{{ section.id }}:hover {
+    background: var(--footer-accent);
+  }
+
+  .footer-social-link-{{ section.id }} svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--footer-text);
+    transition: fill 0.25s ease;
+  }
+
+  .footer-social-link-{{ section.id }}:hover svg {
+    fill: var(--footer-btn-text);
+  }
+
+  /* Menu Columns */
+  .footer-menus-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .footer-menu-{{ section.id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-menu-title-{{ section.id }} {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--footer-heading);
+    margin: 0 0 15px 0;
+  }
+
+  .footer-menu-item-{{ section.id }} {
+    margin-bottom: 10px;
+  }
+
+  .footer-menu-link-{{ section.id }} {
+    font-size: 14px;
+    color: var(--footer-link);
+    text-decoration: none;
+    transition: color 0.25s ease;
+    line-height: 1.3;
+  }
+
+  .footer-menu-link-{{ section.id }}:hover {
+    color: var(--footer-link-hover);
+  }
+
+  /* Bottom Bar */
+  .footer-bottom-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 30px;
+    border-top: 1px solid var(--footer-border);
+    text-align: center;
+  }
+
+  .footer-copyright-{{ section.id }} {
+    font-size: 13px;
+    color: var(--footer-text);
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .footer-copyright-{{ section.id }} a {
+    color: var(--footer-link);
+    text-decoration: none;
+  }
+
+  /* Payment Icons */
+  .footer-payments-{{ section.id }} {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .footer-payment-{{ section.id }} {
+    height: 32px;
+    width: auto;
+    opacity: 0.8;
+  }
+
+  .footer-payment-{{ section.id }} svg {
+    height: 100%;
+    width: auto;
+  }
+
+  /* Responsive - Tablet */
+  @media (min-width: 768px) {
+    .footer-features-{{ section.id }} {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .footer-menus-{{ section.id }} {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .footer-bottom-{{ section.id }} {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+  }
+
+  /* Responsive - Desktop */
+  @media (min-width: 1024px) {
+    .footer-container-{{ section.id }} {
+      padding: 0 80px;
+    }
+
+    .footer-main-{{ section.id }} {
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
+    }
+
+    .footer-feature-{{ section.id }} {
+      padding: 20px;
+    }
+
+    .footer-feature-icon-{{ section.id }} {
+      width: 48px;
+      height: 48px;
+    }
+
+    .footer-feature-icon-{{ section.id }} svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .footer-feature-title-{{ section.id }} {
+      font-size: 15px;
+    }
+
+    .footer-feature-desc-{{ section.id }} {
+      font-size: 13px;
+    }
+
+    .footer-menu-title-{{ section.id }} {
+      font-size: 18px;
+    }
+
+    .footer-payment-{{ section.id }} {
+      height: 36px;
+    }
+  }
+{% endstyle %}
+
+<footer class="footer-section-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="footer-container-{{ section.id }}">
+    {%- if section.settings.show_features -%}
+      <!-- Features Row -->
+      <div class="footer-features-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'feature' -%}
+            <div class="footer-feature-{{ section.id }}" {{ block.shopify_attributes }}>
+              <div class="footer-feature-icon-{{ section.id }}">
+                {%- case block.settings.icon -%}
+                  {%- when 'shipping' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="1" y="3" width="15" height="13"></rect>
+                      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                      <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                      <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                  {%- when 'returns' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="1 4 1 10 7 10"></polyline>
+                      <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                    </svg>
+                  {%- when 'warranty' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      <polyline points="9 12 11 14 15 10"></polyline>
+                    </svg>
+                  {%- when 'support' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                    </svg>
+                  {%- when 'secure' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  {%- when 'quality' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="8" r="7"></circle>
+                      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                    </svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                {%- endcase -%}
+              </div>
+              <div class="footer-feature-content-{{ section.id }}">
+                <h4 class="footer-feature-title-{{ section.id }}">{{ block.settings.title }}</h4>
+                {%- if block.settings.description != blank -%}
+                  <p class="footer-feature-desc-{{ section.id }}">{{ block.settings.description }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Main Content -->
+    <div class="footer-main-{{ section.id }}">
+      <!-- Brand Column -->
+      <div class="footer-brand-{{ section.id }}">
+        {%- if section.settings.logo != blank -%}
+          <img
+            class="footer-logo-{{ section.id }}"
+            src="{{ section.settings.logo | image_url: height: 100 }}"
+            alt="{{ shop.name }}"
+            loading="lazy"
+          >
+        {%- else -%}
+          <h3 style="font-size: 24px; font-weight: 700; color: var(--footer-heading); margin: 0 0 20px 0;">{{ shop.name }}</h3>
+        {%- endif -%}
+
+        {%- if section.settings.brand_text != blank -%}
+          <p class="footer-brand-text-{{ section.id }}">{{ section.settings.brand_text }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.show_newsletter -%}
+          <!-- Newsletter -->
+          <div class="footer-newsletter-{{ section.id }}" data-newsletter>
+            <h4 class="footer-newsletter-title-{{ section.id }}">{{ section.settings.newsletter_title }}</h4>
+            <form class="footer-newsletter-form-{{ section.id }}" data-newsletter-form>
+              <input
+                type="email"
+                class="footer-newsletter-input-{{ section.id }}"
+                placeholder="{{ section.settings.newsletter_placeholder }}"
+                required
+              >
+              <button type="submit" class="footer-newsletter-btn-{{ section.id }}">
+                {{ section.settings.newsletter_button }}
+              </button>
+            </form>
+            <p class="footer-newsletter-success-{{ section.id }}">{{ section.settings.newsletter_success }}</p>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_social -%}
+          <!-- Social Links -->
+          <div class="footer-social-{{ section.id }}">
+            {%- if section.settings.social_facebook != blank -%}
+              <a href="{{ section.settings.social_facebook }}" class="footer-social-link-{{ section.id }}" aria-label="Facebook" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.social_instagram != blank -%}
+              <a href="{{ section.settings.social_instagram }}" class="footer-social-link-{{ section.id }}" aria-label="Instagram" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.social_twitter != blank -%}
+              <a href="{{ section.settings.social_twitter }}" class="footer-social-link-{{ section.id }}" aria-label="Twitter" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.social_youtube != blank -%}
+              <a href="{{ section.settings.social_youtube }}" class="footer-social-link-{{ section.id }}" aria-label="YouTube" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="var(--footer-btn-text)"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.social_tiktok != blank -%}
+              <a href="{{ section.settings.social_tiktok }}" class="footer-social-link-{{ section.id }}" aria-label="TikTok" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.social_pinterest != blank -%}
+              <a href="{{ section.settings.social_pinterest }}" class="footer-social-link-{{ section.id }}" aria-label="Pinterest" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Menu Columns -->
+      <div class="footer-menus-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'menu' -%}
+            <div {{ block.shopify_attributes }}>
+              <h4 class="footer-menu-title-{{ section.id }}">{{ block.settings.title }}</h4>
+              {%- if block.settings.menu != blank -%}
+                <ul class="footer-menu-{{ section.id }}">
+                  {%- for link in linklists[block.settings.menu].links -%}
+                    <li class="footer-menu-item-{{ section.id }}">
+                      <a href="{{ link.url }}" class="footer-menu-link-{{ section.id }}">{{ link.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom-{{ section.id }}">
+      <p class="footer-copyright-{{ section.id }}">
+        &copy; {{ 'now' | date: '%Y' }} <a href="/">{{ shop.name }}</a>. {{ section.settings.copyright_text }}
+      </p>
+
+      {%- if section.settings.show_payments -%}
+        <div class="footer-payments-{{ section.id }}">
+          {%- if section.settings.payment_visa -%}
+            <span class="footer-payment-{{ section.id }}">
+              <svg viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="38" height="24" rx="3" fill="#fff"/><path d="M15.84 16.23h-2.34l1.46-9.05h2.34l-1.46 9.05z" fill="#00579F"/><path d="M24.4 7.41a5.73 5.73 0 0 0-2.08-.38c-2.29 0-3.9 1.22-3.91 2.97-.02 1.29 1.15 2.01 2.03 2.44.9.44 1.2.72 1.2 1.11-.01.6-.72.87-1.39.87-.93 0-1.42-.14-2.18-.47l-.3-.14-.33 2.02c.54.25 1.55.47 2.59.48 2.44 0 4.02-1.2 4.04-3.07.01-1.02-.61-1.8-1.96-2.44-.82-.42-1.32-.69-1.32-1.11 0-.37.43-.77 1.35-.77a4.1 4.1 0 0 1 1.76.35l.21.1.32-1.96z" fill="#00579F"/><path d="M28.18 7.18h-1.79c-.55 0-.97.16-1.21.75l-3.44 8.23h2.43s.4-1.11.49-1.35h2.97c.07.31.28 1.35.28 1.35h2.15l-1.88-9.02zm-2.86 5.82c.19-.52.93-2.51.93-2.51s.19-.53.31-.87l.16.78.54 2.6h-1.94z" fill="#00579F"/><path d="m11.4 7.18-2.27 6.17-.24-1.24a6.86 6.86 0 0 0-3.21-3.75l2.08 7.87h2.45l3.64-9.05H11.4z" fill="#00579F"/><path d="M7.04 7.18H3.24l-.04.21c2.9.74 4.82 2.53 5.61 4.68l-.81-4.1c-.14-.57-.55-.75-1.04-.79z" fill="#FAA61A"/></svg>
+            </span>
+          {%- endif -%}
+          {%- if section.settings.payment_mastercard -%}
+            <span class="footer-payment-{{ section.id }}">
+              <svg viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="38" height="24" rx="3" fill="#fff"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/><path d="M19 6.8a7 7 0 0 0 0 10.4 7 7 0 0 0 0-10.4z" fill="#FF5F00"/></svg>
+            </span>
+          {%- endif -%}
+          {%- if section.settings.payment_amex -%}
+            <span class="footer-payment-{{ section.id }}">
+              <svg viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="38" height="24" rx="3" fill="#006FCF"/><path d="M7 13.5h2l.5-1.5h.5l.5 1.5h5v-1l.5 1h2.5l.5-1v1h10v-3.5l-.5-.5.5-.5V7H19l-.5 1-.5-1H7v6.5z" fill="#006FCF"/><path d="m10.5 8.5-2 5h1.5l.3-1h2l.3 1h1.5l-2-5h-1.6zm.2 3 .6-1.5.6 1.5h-1.2zM15 8.5v5h1.2v-3l1.3 3h1l1.3-3v3h1.2v-5h-1.7l-1.3 3-1.3-3H15zM22 8.5v5h3.5v-1h-2.3v-1h2.2v-1h-2.2v-1h2.3v-1H22zM26 8.5l1.5 2-1.5 2v1l2-2.5 2 2.5v-1l-1.5-2 1.5-2v-1l-2 2.5-2-2.5v1z" fill="#fff"/></svg>
+            </span>
+          {%- endif -%}
+          {%- if section.settings.payment_paypal -%}
+            <span class="footer-payment-{{ section.id }}">
+              <svg viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="38" height="24" rx="3" fill="#fff"/><path d="M25.5 7.2c.5.6.7 1.4.5 2.4-.5 2.6-2.3 4-5 4h-.6l-.5 3.2h-2.3l-.1.6h-2l1.4-9h4.4c1.6 0 2.8.3 3.4 1l.8-.2z" fill="#009CDE"/><path d="M13.2 6.6h4.4c1.2 0 2.2.2 2.8.7.7.6.9 1.5.7 2.7-.5 2.6-2.2 4-4.8 4h-1l-.6 3.4h-2.1l1.6-10.8z" fill="#003087"/><path d="M17 9.1h-1.5l-.6 3.7h1c1.4 0 2.4-.7 2.6-2 .2-1.2-.4-1.7-1.5-1.7z" fill="#fff"/></svg>
+            </span>
+          {%- endif -%}
+          {%- if section.settings.payment_applepay -%}
+            <span class="footer-payment-{{ section.id }}">
+              <svg viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="38" height="24" rx="3" fill="#000"/><path d="M14.5 8.8c-.3.4-.8.7-1.3.6-.1-.5.2-1 .4-1.3.3-.4.8-.6 1.2-.6.1.5-.1 1-.3 1.3zm.3.7c-.7 0-1.3.4-1.6.4-.4 0-.9-.4-1.5-.4-.8 0-1.5.5-1.9 1.2-.8 1.4-.2 3.4.6 4.5.4.6.8 1.2 1.4 1.1.6 0 .8-.4 1.4-.4.7 0 .8.4 1.5.4.6 0 1-.5 1.4-1.1.4-.6.6-1.3.6-1.3-.6-.3-1.1-1-1.1-1.9 0-.8.4-1.4 1-1.8-.4-.6-1-.9-1.7-.9l-.1.2z" fill="#fff"/><path d="M20 9h1.2l2.3 5.5h.1L25.8 9h1.2l-2.8 7h-1.4L20 9zM18.2 16h-1.1v-5.5h1.1v.8h.1c.2-.5.7-.9 1.4-.9.2 0 .4 0 .6.1v1c-.2 0-.4-.1-.7-.1-.8 0-1.3.5-1.3 1.2V16zM27.8 16h-1.1v-7h1.1v7z" fill="#fff"/></svg>
+            </span>
+          {%- endif -%}
+          {%- if section.settings.payment_googlepay -%}
+            <span class="footer-payment-{{ section.id }}">
+              <svg viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="38" height="24" rx="3" fill="#fff" stroke="#D9D9D9"/><path d="M19.1 12.2v2.3h-.7V9h2a1.8 1.8 0 0 1 1.9 1.8c0 1-.8 1.8-1.9 1.8l-1.3-.4zm0-2.6v2h1.3c.6 0 1.1-.5 1.1-1s-.5-1-1.1-1h-1.3z" fill="#5F6368"/><path d="M24.6 10.8c.9 0 1.5.6 1.5 1.5v2.2h-.7v-.5c-.2.4-.7.6-1.2.6-.6 0-1.2-.4-1.2-1s.5-1 1.3-1h1.1v-.2c0-.5-.3-.8-.9-.8-.4 0-.8.2-.9.5l-.6-.3c.3-.6.9-1 1.6-1zm-1 2.8c0 .3.3.6.7.6.5 0 1-.4 1-.9v-.2h-1c-.5 0-.7.2-.7.5z" fill="#5F6368"/><path d="M28.7 16c-.6 0-1-.3-1.3-.7l.6-.2c.1.3.4.4.7.4.5 0 .8-.3.8-.8v-.4c-.2.3-.5.5-1 .5-.9 0-1.6-.8-1.6-1.7 0-1 .7-1.7 1.6-1.7.5 0 .8.2 1 .5v-.4h.7v3.1c0 1-.7 1.4-1.5 1.4zm0-4.3c-.5 0-1 .4-1 1.1 0 .6.5 1 1 1 .6 0 1-.4 1-1 0-.7-.4-1.1-1-1.1z" fill="#5F6368"/><path d="M15.8 12a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" fill="#4285F4"/><path d="M13.3 14.5a2.5 2.5 0 0 1-2.5-2.2h5a2.5 2.5 0 0 1-2.5 2.2z" fill="#34A853"/><path d="M10.8 12c0-.3 0-.5.1-.8l2.4 2.4a2.5 2.5 0 0 1-2.5-1.6z" fill="#FABB05"/><path d="M13.3 9.5a2.5 2.5 0 0 0-2.4 1.7L13.3 9l.1.5z" fill="#E94235"/></svg>
+            </span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const newsletterForm = section.querySelector('[data-newsletter-form]');
+    const newsletterContainer = section.querySelector('[data-newsletter]');
+
+    if (newsletterForm && newsletterContainer) {
+      newsletterForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const emailInput = newsletterForm.querySelector('input[type="email"]');
+        const email = emailInput.value;
+
+        if (!email) return;
+
+        try {
+          const formData = new FormData();
+          formData.append('contact[email]', email);
+          formData.append('form_type', 'customer');
+
+          await fetch('/contact', {
+            method: 'POST',
+            body: formData
+          });
+
+          newsletterContainer.classList.add('success');
+        } catch (error) {
+          console.error('Newsletter signup error:', error);
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Footer",
+  "class": "footer-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_text",
+      "label": "Brand description",
+      "default": "We create products that bring joy to everyday life. Quality craftsmanship meets modern design."
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features",
+      "label": "Show features row",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter title",
+      "default": "Subscribe to our newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Placeholder text",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button",
+      "label": "Button text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_success",
+      "label": "Success message",
+      "default": "Thanks for subscribing!"
+    },
+    {
+      "type": "header",
+      "content": "Social Links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social links",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "social_twitter",
+      "label": "Twitter/X URL"
+    },
+    {
+      "type": "url",
+      "id": "social_youtube",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "url",
+      "id": "social_tiktok",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "social_pinterest",
+      "label": "Pinterest URL"
+    },
+    {
+      "type": "header",
+      "content": "Copyright"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "All rights reserved."
+    },
+    {
+      "type": "header",
+      "content": "Payment Icons"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payments",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_visa",
+      "label": "Visa",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_mastercard",
+      "label": "Mastercard",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_amex",
+      "label": "American Express",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_paypal",
+      "label": "PayPal",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_applepay",
+      "label": "Apple Pay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_googlepay",
+      "label": "Google Pay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 1000,
+      "max": 1600,
+      "step": 20,
+      "default": 1400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#99c924"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Input background",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Input text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "warranty", "label": "Warranty" },
+            { "value": "support", "label": "Support" },
+            { "value": "secure", "label": "Secure" },
+            { "value": "quality", "label": "Quality" }
+          ],
+          "default": "shipping"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "On orders over $50"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Quick Links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Footer",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free Shipping",
+            "description": "On orders over $50"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "returns",
+            "title": "Easy Returns",
+            "description": "30-day return policy"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "warranty",
+            "title": "Warranty",
+            "description": "Lifetime guarantee"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "support",
+            "title": "24/7 Support",
+            "description": "We're here to help"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "title": "Shop"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "title": "Company"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "title": "Support"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "title": "Legal"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
