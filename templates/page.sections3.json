@@ -255,176 +255,6 @@
         "padding_bottom": 52
       }
     },
-    "shoppable_slider_AiED8T": {
-      "type": "shoppable-slider",
-      "blocks": {
-        "slide_iaNkFW": {
-          "type": "slide",
-          "settings": {
-            "video_file": "shopify://files/videos/464ca8e360e4412d815ad582d272e85e.mp4",
-            "user_name": "Sarah M.",
-            "sub_text": "Ordered the Sternify Mask 2.0",
-            "product": "",
-            "product_text": "Produkt ansehen",
-            "verified": false
-          }
-        },
-        "slide_EE76Ge": {
-          "type": "slide",
-          "settings": {
-            "video_file": "shopify://files/videos/c39a9d2959c64d7097329463cbcf2472.mp4",
-            "user_name": "Sarah M.",
-            "sub_text": "Ordered the Sternify Mask 2.0",
-            "product": "",
-            "product_text": "Produkt ansehen",
-            "verified": false
-          }
-        },
-        "slide_nDQzkU": {
-          "type": "slide",
-          "settings": {
-            "video_file": "shopify://files/videos/d6b9189c3bf64d6a926ea5a5a2e81628.mp4",
-            "user_name": "Sarah M.",
-            "sub_text": "Ordered the Sternify Mask 2.0",
-            "product": "",
-            "product_text": "Produkt ansehen",
-            "verified": false
-          }
-        },
-        "slide_HPGcyc": {
-          "type": "slide",
-          "settings": {
-            "video_file": "shopify://files/videos/73071a07ed004b6a8db75c5d4c5f5a4a.mp4",
-            "user_name": "Sarah M.",
-            "sub_text": "Ordered the Sternify Mask 2.0",
-            "product": "",
-            "product_text": "Produkt ansehen",
-            "verified": false
-          }
-        }
-      },
-      "block_order": [
-        "slide_iaNkFW",
-        "slide_EE76Ge",
-        "slide_nDQzkU",
-        "slide_HPGcyc"
-      ],
-      "disabled": true,
-      "name": "Shoppable Slider",
-      "settings": {
-        "top_margin": 50,
-        "bottom_margin": 50,
-        "title": "Shop the Look",
-        "subtitle": "Discover trending products from our community",
-        "title_font": "poppins_n6",
-        "title_font_size_desktop": 45,
-        "title_font_size_mobile": 32,
-        "subtitle_font": "poppins_n3",
-        "subtitle_font_size_desktop": 20,
-        "subtitle_font_size_mobile": 16,
-        "description_font": "poppins_n4",
-        "description_font_size": 16,
-        "title_color": "#000000",
-        "subtitle_color": "#666666",
-        "username_color": "#ffffff",
-        "description_color": "#ffffff",
-        "play_btn_bg_color": "#4a4a4a",
-        "play_btn_icon_color": "#ffffff",
-        "verified_icon_color": "#42a5f5"
-      }
-    },
-    "table_6dRcBJ": {
-      "type": "table",
-      "blocks": {
-        "row_UtTeCE": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "check",
-            "compare_3": "x"
-          }
-        },
-        "row_eCzBiL": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "x",
-            "compare_3": "x"
-          }
-        },
-        "row_PPnifx": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "x",
-            "compare_3": "x"
-          }
-        },
-        "row_DNrHGL": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "x",
-            "compare_3": "x"
-          }
-        },
-        "row_zpNqgT": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "x",
-            "compare_3": "x"
-          }
-        },
-        "row_BXjKCH": {
-          "type": "row",
-          "settings": {
-            "header": "Feature 1",
-            "compare_1": "check",
-            "compare_2": "x",
-            "compare_3": "x"
-          }
-        }
-      },
-      "block_order": [
-        "row_UtTeCE",
-        "row_eCzBiL",
-        "row_PPnifx",
-        "row_DNrHGL",
-        "row_zpNqgT",
-        "row_BXjKCH"
-      ],
-      "disabled": true,
-      "name": "Table",
-      "settings": {
-        "number_of_columns": "2",
-        "top_margin": 0,
-        "bottom_margin": 0,
-        "select_font": "Poppins, sans-serif",
-        "header_text": "StyleUP vs. Standard",
-        "header_text_size": 52,
-        "header_text_style": "cursive",
-        "column1_text": "",
-        "column1_logo": "shopify://shop_images/Frame_117.webp",
-        "column2_text": "Original Hairstyler",
-        "column3_text": "Standard Hairstyler",
-        "highlighted_color": "#000000",
-        "highlighted_text_color": "#ffffff",
-        "highlighted_icon_color": "#ffffff",
-        "others_text_color": "#000000",
-        "others_icon_color": "#000000",
-        "benefits_text_color": "#000000",
-        "table_color": "#ffffff",
-        "border_color": "#d7d8d5",
-        "border_thickness": 2,
-        "corner_radius": 7
-      }
-    },
     "hero_banner_wwEpth": {
       "type": "hero-banner",
       "blocks": {
@@ -1185,7 +1015,7 @@
         "subheading_color": "#666666",
         "heading_color": "#121212",
         "text_color": "#666666",
-        "star_color": "#FFD700",
+        "star_color": "#ffd700",
         "nav_background": "#ffffff",
         "nav_icon_color": "#121212"
       }
@@ -1401,6 +1231,381 @@
         "button_background": "#1a1a1a",
         "button_text_color": "#ffffff"
       }
+    },
+    "glow_testiomnials_Ei8WgE": {
+      "type": "glow-testiomnials",
+      "blocks": {
+        "testimonial_ftWHUd": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/jimmy-fermin-bqe0J0b26RQ-unsplash.jpg",
+            "author": "Customer",
+            "rating": "5",
+            "testimonial": "My skin has never felt so soft and hydrated!"
+          }
+        },
+        "testimonial_8RLzUy": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/pexels-zahra-talebizadeh-423932604-20820147.webp",
+            "author": "Customer",
+            "rating": "5",
+            "testimonial": "This serum is a hydration game-changer!"
+          }
+        },
+        "testimonial_JKjzT8": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/pexels-billy-van-tran-246994057-12790546.webp",
+            "author": "Customer",
+            "rating": "5",
+            "testimonial": "I'm absolutely in love with the results!"
+          }
+        },
+        "testimonial_p6Dbbg": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/pexels-shazardr-12698379_1.jpg",
+            "author": "Customer",
+            "rating": "5",
+            "testimonial": "My skin has never looked better!"
+          }
+        },
+        "testimonial_fYEMdT": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/our-team-png-5.webp",
+            "author": "Customer",
+            "rating": "5",
+            "testimonial": "It leaves my skin feeling soft and supple all day long."
+          }
+        },
+        "testimonial_jUQMKx": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/our-team-png-1.webp",
+            "author": "Customer",
+            "rating": "5",
+            "testimonial": "My skin looks brighter and more even-toned."
+          }
+        },
+        "testimonial_4WNjhg": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/our-team-png-4.webp",
+            "author": "Customer",
+            "rating": "5",
+            "testimonial": "My skin feels plump and dewy after just one use."
+          }
+        },
+        "testimonial_U9qNFy": {
+          "type": "testimonial",
+          "settings": {
+            "avatar": "shopify://shop_images/Screenshot_2025-12-09_022132.png",
+            "author": "Customer",
+            "rating": "5",
+            "testimonial": "Best skincare purchase I've ever made!"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_ftWHUd",
+        "testimonial_8RLzUy",
+        "testimonial_JKjzT8",
+        "testimonial_p6Dbbg",
+        "testimonial_fYEMdT",
+        "testimonial_jUQMKx",
+        "testimonial_4WNjhg",
+        "testimonial_U9qNFy"
+      ],
+      "name": "SEK Glow Testimonial",
+      "settings": {
+        "heading": "Our customers [love] the product",
+        "row1_speed": 40,
+        "row2_speed": 46,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "background_color": "#fef7f4",
+        "heading_color": "#1a1a1a",
+        "text_color": "#1a1a1a",
+        "card_background": "#ffffff",
+        "highlight_color_1": "#f5a673",
+        "highlight_color_2": "#f8c9a0",
+        "badge_color_1": "#f97068",
+        "badge_color_2": "#ff8a80"
+      }
+    },
+    "shopabale_video_jYzVUx": {
+      "type": "shopabale-video",
+      "blocks": {
+        "video_Tz4XhG": {
+          "type": "video",
+          "settings": {
+            "username": "@GABBYFENING",
+            "video": "shopify://files/videos/715828a8f6944bc9a768b45d07f6cc93.HD-1080p-2.5Mbps-60772246.mp4",
+            "video_url": "",
+            "product": "eye-treatment",
+            "product_url": ""
+          }
+        },
+        "video_4Yfdgf": {
+          "type": "video",
+          "settings": {
+            "username": "@JAMESAUSTIN",
+            "video": "shopify://files/videos/b70caed7a9e84f8f9c88f16c1b02b477.HD-1080p-2.5Mbps-61218151.mp4",
+            "video_url": "",
+            "product": "renewal-face-cream",
+            "product_url": ""
+          }
+        },
+        "video_fN38p6": {
+          "type": "video",
+          "settings": {
+            "username": "@LAURAGREEN",
+            "video": "shopify://files/videos/66acbd4a16004251930a8505cb34d3b5.HD-1080p-2.5Mbps-60772760.mp4",
+            "video_url": "",
+            "product": "the-collection-snowboard-hydrogen",
+            "product_url": ""
+          }
+        },
+        "video_GfxyrU": {
+          "type": "video",
+          "settings": {
+            "username": "@SARAHMILL",
+            "video": "shopify://files/videos/715828a8f6944bc9a768b45d07f6cc93.HD-1080p-2.5Mbps-60772246.mp4",
+            "video_url": "",
+            "product": "unisex-scrub-cap",
+            "product_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_Tz4XhG",
+        "video_4Yfdgf",
+        "video_fN38p6",
+        "video_GfxyrU"
+      ],
+      "name": "SEK Shoppable Video",
+      "settings": {
+        "subheading": "NTL + YOU",
+        "heading": "The Community",
+        "description": "We make blankets to elevate everyday life. Crafted for longevity. Designed for timeless appeal. Inspired by the world.",
+        "video_border_radius": 12,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "background_color": "#fbf9f4",
+        "subheading_color": "#5c6b4a",
+        "heading_color": "#5c6b4a",
+        "text_color": "#1a1a1a",
+        "nav_border_color": "#cccccc",
+        "nav_icon_color": "#1a1a1a",
+        "nav_hover_background": "#1a1a1a",
+        "nav_hover_icon_color": "#ffffff"
+      }
+    },
+    "hotspot2_qWG6Qg": {
+      "type": "hotspot2",
+      "blocks": {
+        "hotspot_XkqE6P": {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 12,
+            "position_y": 65,
+            "tooltip_position": "bottom",
+            "title": "Pillow Case",
+            "description": "Premium cotton pillow case with soft, breathable fabric for ultimate comfort."
+          }
+        },
+        "hotspot_8JLK6Y": {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 52,
+            "position_y": 32,
+            "tooltip_position": "bottom",
+            "title": "Bed Frame",
+            "description": "Sturdy, modern wood bedframe with natural finish and sleek design."
+          }
+        },
+        "hotspot_LUATk3": {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 36,
+            "position_y": 58,
+            "tooltip_position": "bottom",
+            "title": "Duvet Case",
+            "description": "Luxurious, hypoallergenic duvet case with button closure, patterned design."
+          }
+        },
+        "hotspot_m7Pqhy": {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 78,
+            "position_y": 55,
+            "tooltip_position": "left",
+            "title": "Side Table",
+            "description": "Modern metal side table with minimalist design and dual-tier storage."
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_XkqE6P",
+        "hotspot_8JLK6Y",
+        "hotspot_LUATk3",
+        "hotspot_m7Pqhy"
+      ],
+      "name": "SEK Hotspots Simple",
+      "settings": {
+        "heading": "Hotspots",
+        "image": "shopify://shop_images/PRODUCT_WHITE_1_3024x_d9a11701-52c0-4f86-8c20-1087051519a5.webp",
+        "max_width": 1600,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "marker_background": "#000000",
+        "marker_icon_color": "#ffffff",
+        "tooltip_background": "#ffffff",
+        "tooltip_title_color": "#1a1a1a",
+        "tooltip_text_color": "#1a1a1a"
+      }
+    },
+    "easy_setup_pnDHVP": {
+      "type": "easy-setup",
+      "blocks": {
+        "step_6az6gg": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/image_6.webp",
+            "step_text": "Rip open the package"
+          }
+        },
+        "step_AtxPDV": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/image_6_2.webp",
+            "step_text": "Put in a cup with tea & stir"
+          }
+        },
+        "step_4GdT74": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/image_6.webp",
+            "step_text": "Enjoy the funky stuff"
+          }
+        }
+      },
+      "block_order": [
+        "step_6az6gg",
+        "step_AtxPDV",
+        "step_4GdT74"
+      ],
+      "name": "SEK Easy Setup Steps",
+      "settings": {
+        "heading": "Easy Set Up in 3 Steps",
+        "button_text": "Shop Now",
+        "button_url": "",
+        "card_border_radius": 28,
+        "image_border_radius": 20,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "background_color": "#c9a9d4",
+        "heading_color": "#3d2a47",
+        "text_color": "#3d2a47",
+        "card_background": "#fef9f3",
+        "step_number_background": "#ffffff",
+        "step_number_color": "#3d2a47",
+        "step_number_border_color": "#3d2a47",
+        "button_background": "#ffffff",
+        "button_text_color": "#3d2a47",
+        "button_border_color": "#3d2a47",
+        "button_hover_background": "#3d2a47",
+        "button_hover_text_color": "#ffffff"
+      }
+    },
+    "floating_menu_rAmcUX": {
+      "type": "floating-menu",
+      "blocks": {
+        "tab_tMrTLK": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Image banner",
+            "target_section_id": "image-banner"
+          }
+        },
+        "tab_Ue3CpC": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Multicolumn",
+            "target_section_id": "SEK Glow Testimonial"
+          }
+        },
+        "tab_483CAQ": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "About us",
+            "target_section_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_tMrTLK",
+        "tab_Ue3CpC",
+        "tab_483CAQ"
+      ],
+      "name": "SEK Floating Menu",
+      "settings": {
+        "position": "bottom",
+        "offset_bottom": 30,
+        "offset_top": 30,
+        "scroll_offset": 100,
+        "gap_desktop": 8,
+        "gap_mobile": 4,
+        "enable_sliding_effect": true,
+        "slider_background": "#00a86e",
+        "use_custom_font": false,
+        "font_family": "",
+        "font_size_desktop": 16,
+        "font_size_mobile": 14,
+        "line_height": "",
+        "link_padding_horizontal": 16,
+        "link_padding_vertical": 10,
+        "link_border_radius": 6,
+        "link_border_thickness": 0,
+        "link_color": "#202020",
+        "link_background": "transparent",
+        "link_border_color": "transparent",
+        "link_hover_color": "#ffffff",
+        "link_hover_background": "#297373",
+        "link_hover_border_color": "#297373",
+        "link_active_color": "#ffffff",
+        "link_active_background": "#00a86e",
+        "link_active_border_color": "#00a86e",
+        "enable_glass_effect": true,
+        "glass_background": "#b9b9b9",
+        "glass_blur": 8,
+        "enable_scale_hover": false,
+        "background_style": "solid",
+        "background_color": "#f7f7f7",
+        "gradient_start": "#ffffff",
+        "gradient_end": "#f0f0f0",
+        "gradient_angle": 135,
+        "padding_horizontal": 12,
+        "padding_vertical": 8,
+        "border_radius": 26,
+        "section_border_thickness": 0,
+        "section_border_color": "#e0e0e0",
+        "toggle_background": "#00a86e",
+        "toggle_icon_color": "#ffffff",
+        "mobile_menu_background": "rgba(255, 255, 255, 0.95)"
+      }
     }
   },
   "order": [
@@ -1408,8 +1613,6 @@
     "hero_38_1_XCC6VW",
     "hero_38_2_gfjWNP",
     "hero_38_3_zxy9kq",
-    "shoppable_slider_AiED8T",
-    "table_6dRcBJ",
     "hero_banner_wwEpth",
     "video_banner3_mG3bGf",
     "split_screen_QYzCPm",
@@ -1425,6 +1628,11 @@
     "about_us2_PrDfRD",
     "modal_popups_yVNd8d",
     "modal_popups_hcxXpq",
-    "modal_popups_zzprX7"
+    "modal_popups_zzprX7",
+    "glow_testiomnials_Ei8WgE",
+    "shopabale_video_jYzVUx",
+    "hotspot2_qWG6Qg",
+    "easy_setup_pnDHVP",
+    "floating_menu_rAmcUX"
   ]
 }

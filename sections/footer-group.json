@@ -11,6 +11,122 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "footer_02_XXmT6f": {
+      "type": "footer-02",
+      "blocks": {
+        "feature_Wephic": {
+          "type": "feature",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free Shipping",
+            "description": "On orders over $50"
+          }
+        },
+        "feature_XUXy6F": {
+          "type": "feature",
+          "settings": {
+            "icon": "returns",
+            "title": "Easy Returns",
+            "description": "30-day return policy"
+          }
+        },
+        "feature_AbyXE3": {
+          "type": "feature",
+          "settings": {
+            "icon": "warranty",
+            "title": "Warranty",
+            "description": "Lifetime guarantee"
+          }
+        },
+        "feature_xEwLFQ": {
+          "type": "feature",
+          "settings": {
+            "icon": "support",
+            "title": "24/7 Support",
+            "description": "We're here to help"
+          }
+        },
+        "menu_fxp9Jh": {
+          "type": "menu",
+          "settings": {
+            "title": "Shop",
+            "menu": ""
+          }
+        },
+        "menu_Ghmdmt": {
+          "type": "menu",
+          "settings": {
+            "title": "Company",
+            "menu": ""
+          }
+        },
+        "menu_J64Nnb": {
+          "type": "menu",
+          "settings": {
+            "title": "Support",
+            "menu": ""
+          }
+        },
+        "menu_wiLFUQ": {
+          "type": "menu",
+          "settings": {
+            "title": "Legal",
+            "menu": ""
+          }
+        }
+      },
+      "block_order": [
+        "feature_Wephic",
+        "feature_XUXy6F",
+        "feature_AbyXE3",
+        "feature_xEwLFQ",
+        "menu_fxp9Jh",
+        "menu_Ghmdmt",
+        "menu_J64Nnb",
+        "menu_wiLFUQ"
+      ],
+      "name": "SEK Footer",
+      "settings": {
+        "logo_height": 40,
+        "brand_text": "We create products that bring joy to everyday life. Quality craftsmanship meets modern design.",
+        "show_features": true,
+        "show_newsletter": true,
+        "newsletter_title": "Subscribe to our newsletter",
+        "newsletter_placeholder": "Enter your email",
+        "newsletter_button": "Subscribe",
+        "newsletter_success": "Thanks for subscribing!",
+        "show_social": true,
+        "social_facebook": "",
+        "social_instagram": "",
+        "social_twitter": "",
+        "social_youtube": "",
+        "social_tiktok": "",
+        "social_pinterest": "",
+        "copyright_text": "All rights reserved.",
+        "show_payments": true,
+        "payment_visa": true,
+        "payment_mastercard": true,
+        "payment_amex": true,
+        "payment_paypal": true,
+        "payment_applepay": true,
+        "payment_googlepay": true,
+        "container_width": 1400,
+        "padding_top": 50,
+        "padding_bottom": 40,
+        "border_radius": 8,
+        "background_color": "#ffffff",
+        "text_color": "#666666",
+        "heading_color": "#121212",
+        "link_color": "#666666",
+        "link_hover_color": "#121212",
+        "accent_color": "#99c924",
+        "border_color": "#e5e5e5",
+        "input_background": "#f3f3f3",
+        "input_text_color": "#121212",
+        "button_background": "#121212",
+        "button_text_color": "#ffffff"
+      }
+    },
     "footer": {
       "type": "footer",
       "settings": {
@@ -30,6 +146,7 @@
     }
   },
   "order": [
+    "footer_02_XXmT6f",
     "footer"
   ]
 }
