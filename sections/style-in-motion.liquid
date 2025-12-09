@@ -65,19 +65,35 @@
 
   @media screen and (max-width: 750px) {
     #shopify-section-{{ section.id }} .style-motion-wrapper {
-      padding: 0 20px;
+      padding: 0 0 0 20px;
     }
 
     #shopify-section-{{ section.id }} .style-motion-heading {
       font-size: calc({{ section.settings.heading_size }}px * 0.75);
       margin-bottom: 24px;
+      padding-right: 20px;
     }
 
     #shopify-section-{{ section.id }} .style-motion-grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-      max-width: 320px;
-      margin: 0 auto;
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 12px;
+      padding-right: 20px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    #shopify-section-{{ section.id }} .style-motion-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .style-motion-video-container {
+      flex: 0 0 70vw;
+      min-width: 70vw;
+      max-width: 70vw;
+      scroll-snap-align: start;
     }
   }
 {% endstyle %}
