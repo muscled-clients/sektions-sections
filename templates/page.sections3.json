@@ -504,6 +504,17 @@
     "trustpilot_imRarL": {
       "type": "trustpilot",
       "blocks": {
+        "review_8hQzEK": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Easy to use",
+            "text": "Issues addressed very efficiently and in a timely manner. We were looked after very well;",
+            "author": "John D.",
+            "date": "1 day ago",
+            "show_verified": true
+          }
+        },
         "review_fpGgBw": {
           "type": "review",
           "settings": {
@@ -561,6 +572,7 @@
         }
       },
       "block_order": [
+        "review_8hQzEK",
         "review_fpGgBw",
         "review_D9eBQX",
         "review_qjc9Xn",
