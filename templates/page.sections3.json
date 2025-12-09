@@ -500,6 +500,394 @@
         "rating_font": "inherit",
         "show_avatar": true
       }
+    },
+    "trustpilot_RmVBdY": {
+      "type": "trustpilot",
+      "blocks": {
+        "review_qnhMBH": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Great experience",
+            "text": "Excellent service and fast delivery. The product quality exceeded my expectations. Highly recommend!",
+            "author": "Sarah M.",
+            "date": "2 days ago",
+            "show_verified": true
+          }
+        },
+        "review_wQMQJy": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Outstanding support",
+            "text": "Customer service was incredibly helpful and responsive. They resolved my issue within hours.",
+            "author": "James K.",
+            "date": "3 days ago",
+            "show_verified": true
+          }
+        },
+        "review_nwQihP": {
+          "type": "review",
+          "settings": {
+            "rating": 4.5,
+            "title": "Very satisfied",
+            "text": "Quality products and reliable shipping. Will definitely be ordering again in the future.",
+            "author": "Emily R.",
+            "date": "1 week ago",
+            "show_verified": true
+          }
+        },
+        "review_mFTyPw": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Highly recommended",
+            "text": "From ordering to delivery, everything was smooth and professional. Great company to deal with!",
+            "author": "Michael T.",
+            "date": "1 week ago",
+            "show_verified": true
+          }
+        },
+        "review_Yfa6qE": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Best purchase ever",
+            "text": "Amazing quality and value for money. The team went above and beyond to ensure satisfaction.",
+            "author": "Lisa W.",
+            "date": "2 weeks ago",
+            "show_verified": true
+          }
+        }
+      },
+      "block_order": [
+        "review_qnhMBH",
+        "review_wQMQJy",
+        "review_nwQihP",
+        "review_mFTyPw",
+        "review_Yfa6qE"
+      ],
+      "name": "Trustpilot",
+      "settings": {
+        "heading": "Excellent",
+        "overall_rating": 5,
+        "total_reviews": "1501",
+        "background_color": "#ffffff",
+        "card_background": "#ffffff",
+        "card_radius": 0,
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "review_title_color": "#000000",
+        "review_text_color": "#333333",
+        "author_color": "#000000",
+        "date_color": "#666666",
+        "title_size": 28,
+        "title_font": "system-ui, sans-serif",
+        "title_weight": "700",
+        "subtitle_size": 14,
+        "subtitle_font": "inherit",
+        "subtitle_weight": "400",
+        "review_title_size": 15,
+        "review_title_font": "inherit",
+        "review_title_weight": "700",
+        "review_text_size": 14,
+        "review_text_font": "inherit",
+        "review_text_weight": "700",
+        "author_size": 14,
+        "author_font": "inherit",
+        "author_weight": "700",
+        "star_size": 28,
+        "header_star_bg_color": "#049B22",
+        "header_star_icon_color": "#ffffff",
+        "card_star_bg_color": "#049B22",
+        "card_star_icon_color": "#ffffff",
+        "verified_icon_color": "#999999",
+        "verified_text_color": "#999999",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "reviews_slider_fBcEFc": {
+      "type": "reviews-slider",
+      "blocks": {
+        "review_WPRjrj": {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "title": "Great product",
+            "text": "The real gem is the integrated smartphone app with guided classes and body tracking. I really like it.",
+            "author": "Bo C.",
+            "date": "1 day ago",
+            "show_verified": true
+          }
+        },
+        "review_yGxr8r": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Great product",
+            "text": "The real gem is the integrated smartphone app with guided classes and body tracking. I really like it.",
+            "author": "Sammi B.",
+            "date": "1 day ago",
+            "show_verified": true
+          }
+        },
+        "review_iQDRHw": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Great product",
+            "text": "The real gem is the integrated smartphone app with guided classes and body tracking. I really like it.",
+            "author": "Lara S.",
+            "date": "1 day ago",
+            "show_verified": true
+          }
+        },
+        "review_cCpdE8": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Amazing experience",
+            "text": "The real gem is the integrated smartphone app with guided classes and body tracking. I really like it.",
+            "author": "Mike T.",
+            "date": "2 days ago",
+            "show_verified": true
+          }
+        },
+        "review_AgcG3h": {
+          "type": "review",
+          "settings": {
+            "rating": 4.5,
+            "title": "Highly recommend",
+            "text": "The real gem is the integrated smartphone app with guided classes and body tracking. I really like it.",
+            "author": "Sarah K.",
+            "date": "3 days ago",
+            "show_verified": true
+          }
+        }
+      },
+      "block_order": [
+        "review_WPRjrj",
+        "review_yGxr8r",
+        "review_iQDRHw",
+        "review_cCpdE8",
+        "review_AgcG3h"
+      ],
+      "name": "Reviews Slider",
+      "settings": {
+        "heading": "Customer Reviews",
+        "overall_rating": 4.8,
+        "total_reviews": "250",
+        "show_read_more": true,
+        "read_more_url": "",
+        "logo_text": "Trustpilot",
+        "background_color": "#ffffff",
+        "card_background": "#ffffff",
+        "card_radius": 8,
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "review_title_color": "#000000",
+        "review_text_color": "#333333",
+        "author_color": "#000000",
+        "date_color": "#666666",
+        "title_size": 32,
+        "title_font": "inherit",
+        "title_weight": "700",
+        "subtitle_size": 15,
+        "subtitle_font": "inherit",
+        "subtitle_weight": "400",
+        "review_title_size": 15,
+        "review_title_font": "inherit",
+        "review_title_weight": "700",
+        "review_text_size": 14,
+        "review_text_font": "inherit",
+        "review_text_weight": "700",
+        "author_size": 14,
+        "author_font": "inherit",
+        "author_weight": "700",
+        "star_size": 24,
+        "header_star_bg_color": "#00B67A",
+        "header_star_icon_color": "#ffffff",
+        "card_star_bg_color": "#00B67A",
+        "card_star_icon_color": "#ffffff",
+        "verified_icon_color": "#999999",
+        "verified_text_color": "#999999",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "style_in_motion_rqtET8": {
+      "type": "style-in-motion",
+      "name": "Style in Motion",
+      "settings": {
+        "heading": "Style in Motion",
+        "video_1_url": "",
+        "video_2_url": "",
+        "video_3_url": "",
+        "background_color": "#ffffff",
+        "heading_color": "#000000",
+        "heading_size": 34,
+        "heading_font": "inherit",
+        "heading_weight": "700",
+        "border_radius": 30,
+        "gap": 25,
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "expert_faq_EdYBU3": {
+      "type": "expert-faq",
+      "blocks": {
+        "faq_item_gajrBg": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes your neural network architecture unique?",
+            "answer": "<p>Our neural network architecture is built on cutting-edge research and optimized for real-world applications. It delivers superior performance while maintaining efficiency and scalability.</p>"
+          }
+        },
+        "faq_item_hTVKkK": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        "faq_item_TJWi7L": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        "faq_item_eBzyNY": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        "faq_item_pAg7Dp": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        "faq_item_LFXX7C": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the quantum encryption work?",
+            "answer": "<p>Our quantum encryption uses advanced algorithms to ensure your data remains secure. The system automatically adapts to new threats while maintaining seamless performance.</p>"
+          }
+        },
+        "faq_item_QJGrzH": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do you ensure data privacy in cloud processing?",
+            "answer": "<p>We implement multiple layers of security including end-to-end encryption, zero-knowledge protocols, and regular security audits to ensure your data privacy is never compromised.</p>"
+          }
+        },
+        "faq_item_EPjdbX": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can the system scale to handle petabyte datasets?",
+            "answer": "<p>Yes, our infrastructure is designed to scale horizontally and can efficiently process petabyte-scale datasets while maintaining optimal performance and cost-effectiveness.</p>"
+          }
+        },
+        "faq_item_ewt34U": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What programming languages are supported?",
+            "answer": "<p>We support all major programming languages including Python, JavaScript, Go, Rust, and many more. Our SDK provides native integrations for seamless development experience.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_gajrBg",
+        "faq_item_hTVKkK",
+        "faq_item_TJWi7L",
+        "faq_item_eBzyNY",
+        "faq_item_pAg7Dp",
+        "faq_item_LFXX7C",
+        "faq_item_QJGrzH",
+        "faq_item_EPjdbX",
+        "faq_item_ewt34U"
+      ],
+      "name": "Expert FAQ",
+      "settings": {
+        "left_heading": "Unlock the Power of Innovation with Our Expert Team",
+        "caption": "Crafted by our world-class engineering and design specialists",
+        "faq_heading": "Everything You Need to Know",
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "caption_color": "#666666",
+        "question_color": "#1a1a1a",
+        "answer_color": "#666666",
+        "left_heading_size": 42,
+        "left_heading_font": "inherit",
+        "left_heading_weight": "700",
+        "caption_size": 14,
+        "caption_font": "inherit",
+        "caption_weight": "400",
+        "faq_heading_size": 24,
+        "faq_heading_font": "inherit",
+        "faq_heading_weight": "400",
+        "question_size": 16,
+        "question_font": "inherit",
+        "question_weight": "700",
+        "answer_size": 15,
+        "answer_font": "inherit",
+        "answer_weight": "700",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "diagonal_banner_LT9ik7": {
+      "type": "diagonal-banner",
+      "name": "Diagonal Banner",
+      "settings": {
+        "top_text": "SALE",
+        "bottom_text": "-80%",
+        "top_strip_color": "#333333",
+        "bottom_strip_color": "#1a1a1a",
+        "text_color": "#FFD700",
+        "section_height": 280,
+        "strip_height": 80,
+        "rotation_angle": 4,
+        "mobile_rotation_angle": 7,
+        "top_strip_direction": "left_to_right",
+        "bottom_strip_direction": "right_to_left",
+        "top_scroll_direction": "left",
+        "bottom_scroll_direction": "left",
+        "font_size": 48,
+        "font_family": "inherit",
+        "font_weight": "700",
+        "text_spacing": 50,
+        "animation_speed": 20
+      }
+    },
+    "product_tabs_CN3phE": {
+      "type": "product-tabs",
+      "name": "Product Tabs",
+      "settings": {
+        "tab_1_title": "Description",
+        "tab_1_content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>",
+        "tab_2_title": "Shipping and returns",
+        "tab_2_content": "<p>We offer free standard shipping on all orders over $50. Orders are processed within 1-2 business days and typically arrive within 5-7 business days. Express shipping options are available at checkout for faster delivery.</p><p>Returns are accepted within 30 days of purchase. Items must be unworn, unwashed, and in original packaging. Contact our support team to initiate a return.</p>",
+        "tab_3_title": "Our guarantee to you",
+        "tab_3_content": "<p>We stand behind the quality of our products. If you're not completely satisfied with your purchase, we'll make it right. Our commitment to excellence means you can shop with confidence knowing that your satisfaction is our top priority.</p>",
+        "background_color": "#ffffff",
+        "text_color": "#164A2D",
+        "content_color": "#3d6b4f",
+        "tab_font_size": 16,
+        "tab_font": "inherit",
+        "tab_weight": "400",
+        "content_font_size": 16,
+        "content_font": "inherit",
+        "content_weight": "400",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
@@ -509,6 +897,12 @@
     "hero_38_3_zxy9kq",
     "shoppable_slider_4a9tNi",
     "table_rBKTda",
-    "testimonials_slider2_MRPQUU"
+    "testimonials_slider2_MRPQUU",
+    "trustpilot_RmVBdY",
+    "reviews_slider_fBcEFc",
+    "style_in_motion_rqtET8",
+    "expert_faq_EdYBU3",
+    "diagonal_banner_LT9ik7",
+    "product_tabs_CN3phE"
   ]
 }
