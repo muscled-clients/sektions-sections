@@ -500,6 +500,102 @@
         "rating_font": "inherit",
         "show_avatar": true
       }
+    },
+    "trustpilot_imRarL": {
+      "type": "trustpilot",
+      "blocks": {
+        "review_fpGgBw": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Great experience",
+            "text": "Excellent service and fast delivery. The product quality exceeded my expectations. Highly recommend!",
+            "author": "Sarah M.",
+            "date": "2 days ago",
+            "show_verified": true
+          }
+        },
+        "review_D9eBQX": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Outstanding support",
+            "text": "Customer service was incredibly helpful and responsive. They resolved my issue within hours.",
+            "author": "James K.",
+            "date": "3 days ago",
+            "show_verified": true
+          }
+        },
+        "review_qjc9Xn": {
+          "type": "review",
+          "settings": {
+            "rating": 4.5,
+            "title": "Very satisfied",
+            "text": "Quality products and reliable shipping. Will definitely be ordering again in the future.",
+            "author": "Emily R.",
+            "date": "1 week ago",
+            "show_verified": true
+          }
+        },
+        "review_3LRdkf": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Highly recommended",
+            "text": "From ordering to delivery, everything was smooth and professional. Great company to deal with!",
+            "author": "Michael T.",
+            "date": "1 week ago",
+            "show_verified": true
+          }
+        },
+        "review_9QdU3m": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Best purchase ever",
+            "text": "Amazing quality and value for money. The team went above and beyond to ensure satisfaction.",
+            "author": "Lisa W.",
+            "date": "2 weeks ago",
+            "show_verified": true
+          }
+        }
+      },
+      "block_order": [
+        "review_fpGgBw",
+        "review_D9eBQX",
+        "review_qjc9Xn",
+        "review_3LRdkf",
+        "review_9QdU3m"
+      ],
+      "name": "Trustpilot",
+      "settings": {
+        "heading": "Excellent",
+        "overall_rating": 5,
+        "total_reviews": "1501",
+        "background_color": "#ffffff",
+        "card_background": "#ffffff",
+        "card_radius": 0,
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "review_title_color": "#000000",
+        "review_text_color": "#333333",
+        "author_color": "#000000",
+        "date_color": "#666666",
+        "title_size": 28,
+        "subtitle_size": 14,
+        "review_title_size": 15,
+        "review_text_size": 14,
+        "author_size": 14,
+        "star_size": 28,
+        "header_star_bg_color": "#049B22",
+        "header_star_icon_color": "#ffffff",
+        "card_star_bg_color": "#049B22",
+        "card_star_icon_color": "#ffffff",
+        "verified_icon_color": "#999999",
+        "verified_text_color": "#999999",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
     }
   },
   "order": [
@@ -509,6 +605,7 @@
     "hero_38_3_zxy9kq",
     "shoppable_slider_4a9tNi",
     "table_rBKTda",
-    "testimonials_slider2_MRPQUU"
+    "testimonials_slider2_MRPQUU",
+    "trustpilot_imRarL"
   ]
 }
