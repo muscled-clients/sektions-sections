@@ -3,7 +3,6 @@
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
     background-color: {{ section.settings.background_color }};
   }
-
   #shopify-section-{{ section.id }} .expert-faq-wrapper {
     max-width: 1280px;
     margin: 0 auto;
@@ -13,11 +12,9 @@
     gap: 80px;
     align-items: start;
   }
-
   #shopify-section-{{ section.id }} .expert-faq-left {
     padding-top: 20px;
   }
-
   #shopify-section-{{ section.id }} .expert-faq-heading {
     font-size: {{ section.settings.left_heading_size }}px;
     font-weight: {{ section.settings.left_heading_weight }};
@@ -28,13 +25,11 @@
     letter-spacing: -0.5px;
     max-width: 420px;
   }
-
   #shopify-section-{{ section.id }} .expert-avatars {
     display: flex;
     align-items: center;
     margin-bottom: 16px;
   }
-
   #shopify-section-{{ section.id }} .expert-avatar {
     width: 56px;
     height: 56px;
@@ -45,27 +40,22 @@
     margin-left: -14px;
     position: relative;
   }
-
   #shopify-section-{{ section.id }} .expert-avatar:nth-child(1) {
     z-index: 1;
     margin-left: 0;
   }
-
   #shopify-section-{{ section.id }} .expert-avatar:nth-child(2) {
     z-index: 2;
   }
-
   #shopify-section-{{ section.id }} .expert-avatar:nth-child(3) {
     z-index: 3;
   }
-
   #shopify-section-{{ section.id }} .expert-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
-
   #shopify-section-{{ section.id }} .expert-caption {
     font-size: {{ section.settings.caption_size }}px;
     color: {{ section.settings.caption_color }};
@@ -75,11 +65,9 @@
     margin: 0;
     max-width: 340px;
   }
-
   #shopify-section-{{ section.id }} .expert-faq-right {
     width: 100%;
   }
-
   #shopify-section-{{ section.id }} .faq-title {
     font-size: {{ section.settings.faq_heading_size }}px;
     font-weight: {{ section.settings.faq_heading_weight }};
@@ -88,17 +76,14 @@
     font-family: {{ section.settings.faq_heading_font }};
     letter-spacing: -0.3px;
   }
-
   #shopify-section-{{ section.id }} .faq-list {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-
   #shopify-section-{{ section.id }} .faq-item {
     border-bottom: 1px solid #e5e5e5;
   }
-
   #shopify-section-{{ section.id }} .faq-question {
     display: flex;
     align-items: center;
@@ -115,11 +100,9 @@
     font-family: {{ section.settings.question_font }};
     gap: 20px;
   }
-
   #shopify-section-{{ section.id }} .faq-question:hover {
     opacity: 0.7;
   }
-
   #shopify-section-{{ section.id }} .faq-icon {
     flex-shrink: 0;
     width: 20px;
@@ -127,7 +110,6 @@
     position: relative;
     transition: transform 0.3s ease;
   }
-
   #shopify-section-{{ section.id }} .faq-icon::before,
   #shopify-section-{{ section.id }} .faq-icon::after {
     content: '';
@@ -135,7 +117,6 @@
     background-color: {{ section.settings.question_color }};
     transition: transform 0.3s ease;
   }
-
   #shopify-section-{{ section.id }} .faq-icon::before {
     width: 14px;
     height: 1.5px;
@@ -143,7 +124,6 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-
   #shopify-section-{{ section.id }} .faq-icon::after {
     width: 1.5px;
     height: 14px;
@@ -151,18 +131,15 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-
   #shopify-section-{{ section.id }} .faq-item.active .faq-icon::after {
     transform: translate(-50%, -50%) rotate(90deg);
     opacity: 0;
   }
-
   #shopify-section-{{ section.id }} .faq-answer {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease, padding 0.3s ease;
   }
-
   #shopify-section-{{ section.id }} .faq-answer-inner {
     padding: 0 0 20px 0;
     font-size: {{ section.settings.answer_size }}px;
@@ -171,75 +148,61 @@
     font-family: {{ section.settings.answer_font }};
     font-weight: {{ section.settings.answer_weight }};
   }
-
   #shopify-section-{{ section.id }} .faq-answer-inner p {
     margin: 0;
   }
-
   #shopify-section-{{ section.id }} .faq-answer-inner p + p {
     margin-top: 12px;
   }
-
   #shopify-section-{{ section.id }} .faq-item.active .faq-answer {
     max-height: 500px;
   }
-
   @media screen and (max-width: 990px) {
     #shopify-section-{{ section.id }} .expert-faq-wrapper {
       grid-template-columns: 1fr;
       gap: 50px;
       padding: 0 30px;
     }
-
     #shopify-section-{{ section.id }} .expert-faq-left {
       padding-top: 0;
     }
-
     #shopify-section-{{ section.id }} .expert-faq-heading {
       font-size: calc({{ section.settings.left_heading_size }}px * 0.8);
       max-width: 100%;
     }
   }
-
   @media screen and (max-width: 750px) {
     #shopify-section-{{ section.id }} .expert-faq-wrapper {
       padding: 0 20px;
       gap: 40px;
     }
-
     #shopify-section-{{ section.id }} .expert-faq-heading {
       font-size: calc({{ section.settings.left_heading_size }}px * 0.65);
       margin-bottom: 30px;
     }
-
     #shopify-section-{{ section.id }} .expert-avatar {
       width: 48px;
       height: 48px;
       margin-left: -12px;
     }
-
     #shopify-section-{{ section.id }} .expert-avatar:nth-child(1) {
       margin-left: 0;
     }
-
     #shopify-section-{{ section.id }} .faq-title {
       font-size: calc({{ section.settings.faq_heading_size }}px * 0.85);
     }
-
     #shopify-section-{{ section.id }} .faq-question {
       font-size: calc({{ section.settings.question_size }}px * 0.95);
       padding: 16px 0;
     }
   }
 {% endstyle %}
-
 <div class="expert-faq-section" id="expert-faq-{{ section.id }}">
   <div class="expert-faq-wrapper">
     <div class="expert-faq-left">
       {% if section.settings.left_heading != blank %}
         <h2 class="expert-faq-heading">{{ section.settings.left_heading }}</h2>
       {% endif %}
-
       <div class="expert-avatars">
         {% if section.settings.expert_1 != blank %}
           <div class="expert-avatar">
@@ -250,7 +213,6 @@
             {{ 'image' | placeholder_svg_tag }}
           </div>
         {% endif %}
-
         {% if section.settings.expert_2 != blank %}
           <div class="expert-avatar">
             <img src="{{ section.settings.expert_2 | image_url: width: 120 }}" alt="{{ section.settings.expert_2.alt | default: 'Expert' }}">
@@ -260,7 +222,6 @@
             {{ 'image' | placeholder_svg_tag }}
           </div>
         {% endif %}
-
         {% if section.settings.expert_3 != blank %}
           <div class="expert-avatar">
             <img src="{{ section.settings.expert_3 | image_url: width: 120 }}" alt="{{ section.settings.expert_3.alt | default: 'Expert' }}">
@@ -271,17 +232,14 @@
           </div>
         {% endif %}
       </div>
-
       {% if section.settings.caption != blank %}
         <p class="expert-caption">{{ section.settings.caption }}</p>
       {% endif %}
     </div>
-
     <div class="expert-faq-right">
       {% if section.settings.faq_heading != blank %}
         <h3 class="faq-title">{{ section.settings.faq_heading }}</h3>
       {% endif %}
-
       <ul class="faq-list">
         {% for block in section.blocks %}
           {% if block.type == 'faq_item' %}
@@ -302,30 +260,24 @@
     </div>
   </div>
 </div>
-
 <script>
   (function() {
     function initExpertFaq() {
       const container = document.getElementById('expert-faq-{{ section.id }}');
       if (!container) return;
-
       const faqItems = container.querySelectorAll('.faq-item');
-
       faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-
         question.addEventListener('click', function() {
           const isActive = item.classList.contains('active');
           const answer = item.querySelector('.faq-answer');
           const answerInner = item.querySelector('.faq-answer-inner');
-
           faqItems.forEach(otherItem => {
             if (otherItem !== item) {
               otherItem.classList.remove('active');
               otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
             }
           });
-
           if (isActive) {
             item.classList.remove('active');
             question.setAttribute('aria-expanded', 'false');
@@ -336,13 +288,11 @@
         });
       });
     }
-
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initExpertFaq);
     } else {
       initExpertFaq();
     }
-
     document.addEventListener('shopify:section:load', function(event) {
       if (event.detail.sectionId === '{{ section.id }}') {
         initExpertFaq();
@@ -350,7 +300,6 @@
     });
   })();
 </script>
-
 {% schema %}
 {
   "name": "Expert FAQ",
@@ -469,12 +418,9 @@
       "id": "left_heading_weight",
       "label": "Left heading font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
       "default": "700"
     },
@@ -516,12 +462,9 @@
       "id": "caption_weight",
       "label": "Caption font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
       "default": "400"
     },
@@ -563,12 +506,9 @@
       "id": "faq_heading_weight",
       "label": "FAQ heading font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
       "default": "600"
     },
@@ -610,14 +550,11 @@
       "id": "question_weight",
       "label": "Question font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
-      "default": "500"
+      "default": "400"
     },
     {
       "type": "header",
@@ -657,12 +594,9 @@
       "id": "answer_weight",
       "label": "Answer font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
       "default": "400"
     },

@@ -4,13 +4,11 @@
     background-color: {{ section.settings.background_color }};
     overflow-x: hidden;
   }
-
   #shopify-section-{{ section.id }} .reviews-wrapper {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px;
   }
-
   #shopify-section-{{ section.id }} .reviews-header {
     display: flex;
     flex-direction: column;
@@ -19,7 +17,6 @@
     gap: 12px;
     margin-bottom: 40px;
   }
-
   #shopify-section-{{ section.id }} .main-title {
     font-size: {{ section.settings.title_size }}px;
     font-weight: {{ section.settings.title_weight }};
@@ -27,7 +24,6 @@
     margin: 0;
     font-family: {{ section.settings.title_font }};
   }
-
   #shopify-section-{{ section.id }} .subtitle-row {
     display: flex;
     align-items: center;
@@ -39,46 +35,38 @@
     font-weight: {{ section.settings.subtitle_weight }};
     flex-wrap: wrap;
   }
-
   #shopify-section-{{ section.id }} .subtitle-row strong {
     font-weight: 700;
     color: {{ section.settings.title_color }};
   }
-
   #shopify-section-{{ section.id }} .trustpilot-logo {
     display: inline-flex;
     align-items: center;
     gap: 4px;
   }
-
   #shopify-section-{{ section.id }} .trustpilot-logo svg {
     height: 20px;
     width: auto;
   }
-
   #shopify-section-{{ section.id }} .rating-row {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
   }
-
   #shopify-section-{{ section.id }} .rating-number {
     font-size: 18px;
     font-weight: 600;
     color: {{ section.settings.title_color }};
   }
-
   #shopify-section-{{ section.id }} .rating-number span {
     font-weight: 400;
     color: {{ section.settings.subtitle_color }};
   }
-
   #shopify-section-{{ section.id }} .header-stars {
     display: flex;
     gap: 2px;
   }
-
   #shopify-section-{{ section.id }} .header-star-box {
     width: {{ section.settings.star_size }}px;
     height: {{ section.settings.star_size }}px;
@@ -87,39 +75,32 @@
     align-items: center;
     justify-content: center;
   }
-
   #shopify-section-{{ section.id }} .header-star-box svg {
     width: calc({{ section.settings.star_size }}px - 6px);
     height: calc({{ section.settings.star_size }}px - 6px);
     fill: {{ section.settings.header_star_icon_color }};
   }
-
   #shopify-section-{{ section.id }} .header-star-box.empty {
     background: #dcdce6;
   }
-
   #shopify-section-{{ section.id }} .header-star-box.half {
     position: relative;
     background: linear-gradient(to right, {{ section.settings.header_star_bg_color }} 50%, #dcdce6 50%);
   }
-
   #shopify-section-{{ section.id }} .reviews-content {
     position: relative;
     overflow: hidden;
   }
-
   #shopify-section-{{ section.id }} .reviews-slider-wrapper {
     position: relative;
     overflow: visible;
   }
-
   #shopify-section-{{ section.id }} .reviews-slider {
     display: flex;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     gap: 24px;
     padding: 20px 50px;
   }
-
   #shopify-section-{{ section.id }} .review-card {
     flex: 0 0 325px;
     min-width: 325px;
@@ -132,19 +113,16 @@
     display: flex;
     flex-direction: column;
   }
-
   #shopify-section-{{ section.id }} .review-header-row {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 12px;
   }
-
   #shopify-section-{{ section.id }} .review-stars-row {
     display: flex;
     gap: 2px;
   }
-
   #shopify-section-{{ section.id }} .star-box {
     width: 20px;
     height: 20px;
@@ -153,22 +131,18 @@
     align-items: center;
     justify-content: center;
   }
-
   #shopify-section-{{ section.id }} .star-box svg {
     width: 14px;
     height: 14px;
     fill: {{ section.settings.card_star_icon_color }};
   }
-
   #shopify-section-{{ section.id }} .star-box.empty {
     background: #dcdce6;
   }
-
   #shopify-section-{{ section.id }} .star-box.half {
     position: relative;
     background: linear-gradient(to right, {{ section.settings.card_star_bg_color }} 50%, #dcdce6 50%);
   }
-
   #shopify-section-{{ section.id }} .verified-badge {
     display: flex;
     align-items: center;
@@ -176,13 +150,11 @@
     color: {{ section.settings.verified_text_color }};
     font-size: 13px;
   }
-
   #shopify-section-{{ section.id }} .verified-badge svg {
     width: 16px;
     height: 16px;
     fill: {{ section.settings.verified_icon_color }};
   }
-
   #shopify-section-{{ section.id }} .review-title {
     font-size: {{ section.settings.review_title_size }}px;
     font-weight: {{ section.settings.review_title_weight }};
@@ -190,7 +162,6 @@
     color: {{ section.settings.review_title_color }};
     margin: 0 0 8px 0;
   }
-
   #shopify-section-{{ section.id }} .review-text {
     font-size: {{ section.settings.review_text_size }}px;
     line-height: 1.5;
@@ -199,12 +170,10 @@
     font-weight: {{ section.settings.review_text_weight }};
     margin: 0 0 auto 0;
   }
-
   #shopify-section-{{ section.id }} .review-footer {
     margin-top: 16px;
     padding-top: 0;
   }
-
   #shopify-section-{{ section.id }} .author-line {
     font-size: {{ section.settings.author_size }}px;
     color: {{ section.settings.author_color }};
@@ -212,16 +181,13 @@
     font-weight: {{ section.settings.author_weight }};
     margin: 0;
   }
-
   #shopify-section-{{ section.id }} .author-line .author-name {
     font-weight: {{ section.settings.author_weight }};
   }
-
   #shopify-section-{{ section.id }} .author-line .review-date {
     font-weight: 400;
     color: {{ section.settings.date_color }};
   }
-
   #shopify-section-{{ section.id }} .slider-footer {
     display: flex;
     flex-direction: column;
@@ -229,13 +195,11 @@
     gap: 12px;
     margin-top: 40px;
   }
-
   #shopify-section-{{ section.id }} .slider-nav-container {
     display: flex;
     align-items: center;
     gap: 12px;
   }
-
   #shopify-section-{{ section.id }} .slider-nav {
     background: transparent;
     border-radius: 50%;
@@ -248,19 +212,16 @@
     transition: all 0.3s ease;
     border: 1px solid #ddd;
   }
-
   #shopify-section-{{ section.id }} .slider-nav:hover {
     background: #f5f5f5;
     border-color: #ccc;
   }
-
   #shopify-section-{{ section.id }} .slider-nav svg {
     width: 16px;
     height: 16px;
     stroke: #333;
     stroke-width: 2;
   }
-
   #shopify-section-{{ section.id }} .slider-progress {
     width: 80px;
     height: 4px;
@@ -270,7 +231,6 @@
     position: relative;
     display: block;
   }
-
   #shopify-section-{{ section.id }} .slider-progress .slider-progress-bar {
     position: absolute;
     top: 0;
@@ -282,7 +242,6 @@
     transition: width 0.3s ease;
     display: block;
   }
-
   #shopify-section-{{ section.id }} .read-more-link {
     display: flex;
     align-items: center;
@@ -292,67 +251,54 @@
     color: {{ section.settings.subtitle_color }};
     text-decoration: none;
   }
-
   #shopify-section-{{ section.id }} .read-more-link:hover {
     text-decoration: underline;
   }
-
   #shopify-section-{{ section.id }} .read-more-link svg {
     height: 18px;
     width: auto;
   }
-
   /* Tablet - show 2-3 cards */
   @media screen and (max-width: 990px) {
     #shopify-section-{{ section.id }} .reviews-wrapper {
       padding: 0 20px;
     }
-
     #shopify-section-{{ section.id }} .reviews-slider {
       padding: 20px 20px;
     }
-
     #shopify-section-{{ section.id }} .review-card {
       flex: 0 0 280px;
       min-width: 280px;
       max-width: 280px;
     }
   }
-
   /* Mobile L - show 1 full card with edge of next */
   @media screen and (max-width: 750px) {
     #shopify-section-{{ section.id }} .reviews-wrapper {
       padding: 0 15px;
     }
-
     #shopify-section-{{ section.id }} .reviews-slider {
       gap: 12px;
       padding: 15px 15px;
     }
-
     #shopify-section-{{ section.id }} .review-card {
       flex: 0 0 calc(100vw - 80px);
       min-width: calc(100vw - 80px);
       max-width: calc(100vw - 80px);
     }
-
     #shopify-section-{{ section.id }} .main-title {
       font-size: calc({{ section.settings.title_size }}px * 0.85);
     }
-
     #shopify-section-{{ section.id }} .reviews-header {
       margin-bottom: 30px;
     }
-
     #shopify-section-{{ section.id }} .slider-footer {
       margin-top: 30px;
     }
-
     #shopify-section-{{ section.id }} .subtitle-row {
       font-size: 13px;
     }
   }
-
   /* Mobile S - smaller card */
   @media screen and (max-width: 375px) {
     #shopify-section-{{ section.id }} .review-card {
@@ -363,7 +309,6 @@
     }
   }
 {% endstyle %}
-
 <div id="reviews-slider-section-{{ section.id }}" class="reviews-slider-section">
 <div class="reviews-wrapper">
   <div class="reviews-header">
@@ -389,7 +334,6 @@
       <div class="header-stars">
         {% assign rating_floor = section.settings.overall_rating | floor %}
         {% assign rating_decimal = section.settings.overall_rating | minus: rating_floor %}
-
         {% for i in (1..rating_floor) %}
           <div class="header-star-box">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -397,7 +341,6 @@
             </svg>
           </div>
         {% endfor %}
-
         {% if rating_decimal > 0 %}
           <div class="header-star-box half">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -408,7 +351,6 @@
         {% else %}
           {% assign remaining_stars = 5 | minus: rating_floor %}
         {% endif %}
-
         {% for i in (1..remaining_stars) %}
           <div class="header-star-box empty">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -419,7 +361,6 @@
       </div>
     </div>
   </div>
-
   <div class="reviews-content">
     <div class="reviews-slider-wrapper">
       <div class="reviews-slider" id="reviews-slider-{{ section.id }}">
@@ -430,7 +371,6 @@
               <div class="review-stars-row">
                 {% assign card_rating_floor = block.settings.rating | floor %}
                 {% assign card_rating_decimal = block.settings.rating | minus: card_rating_floor %}
-
                 {% for i in (1..card_rating_floor) %}
                   <div class="star-box">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -438,7 +378,6 @@
                     </svg>
                   </div>
                 {% endfor %}
-
                 {% if card_rating_decimal > 0 %}
                   <div class="star-box half">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -449,7 +388,6 @@
                 {% else %}
                   {% assign card_remaining_stars = 5 | minus: card_rating_floor %}
                 {% endif %}
-
                 {% for i in (1..card_remaining_stars) %}
                   <div class="star-box empty">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -467,13 +405,10 @@
                 </div>
               {% endif %}
             </div>
-
             {% if block.settings.title != blank %}
               <h3 class="review-title">{{ block.settings.title }}</h3>
             {% endif %}
-
             <p class="review-text">{{ block.settings.text }}</p>
-
             <div class="review-footer">
               <p class="author-line">
                 <span class="author-name">{{ block.settings.author }},</span>
@@ -486,7 +421,6 @@
     </div>
   </div>
   </div>
-
   <div class="slider-footer">
     <div class="slider-nav-container">
       <button class="slider-nav prev" aria-label="Previous reviews">
@@ -519,42 +453,33 @@
   </div>
 </div>
 </div>
-
 <script>
   (function() {
     function initReviewsSlider() {
       const sectionContainer = document.getElementById('reviews-slider-section-{{ section.id }}');
       if (!sectionContainer) return;
-
       const slider = sectionContainer.querySelector('.reviews-slider');
       if (!slider) return;
-
       const wrapper = sectionContainer.querySelector('.reviews-wrapper');
       if (!wrapper) return;
-
       const prevBtn = sectionContainer.querySelector('.slider-nav.prev');
       const nextBtn = sectionContainer.querySelector('.slider-nav.next');
       const progressBar = sectionContainer.querySelector('.slider-progress-bar');
       const originalCards = Array.from(slider.querySelectorAll('.review-card:not(.clone)'));
-
       if (originalCards.length === 0) return;
-
       const totalOriginal = originalCards.length;
       let currentIndex = totalOriginal;
       let isTransitioning = false;
-
       // Clone cards for infinite effect - add clones before and after
       function setupInfiniteSlider() {
         // Remove any existing clones first
         slider.querySelectorAll('.review-card.clone').forEach(clone => clone.remove());
-
         // Clone all cards and append to end
         originalCards.forEach(card => {
           const clone = card.cloneNode(true);
           clone.classList.add('clone');
           slider.appendChild(clone);
         });
-
         // Clone all cards and prepend to start
         for (let i = totalOriginal - 1; i >= 0; i--) {
           const clone = originalCards[i].cloneNode(true);
@@ -562,12 +487,10 @@
           slider.insertBefore(clone, slider.firstChild);
         }
       }
-
       function getGap() {
         const width = window.innerWidth;
         return width <= 750 ? 12 : 24;
       }
-
       function updateProgressBar() {
         if (!progressBar) return;
         let realIndex = (currentIndex - totalOriginal) % totalOriginal;
@@ -575,34 +498,27 @@
         const progress = ((realIndex + 1) / totalOriginal) * 100;
         progressBar.style.width = progress + '%';
       }
-
       function updateSlider(animate = true) {
         const cards = slider.querySelectorAll('.review-card');
         if (cards.length === 0) return;
-
         const cardWidth = cards[0].offsetWidth;
         const gap = getGap();
         const translateX = -currentIndex * (cardWidth + gap);
-
         if (animate) {
           slider.style.transition = 'transform 0.4s ease';
         } else {
           slider.style.transition = 'none';
         }
-
         slider.style.transform = `translateX(${translateX}px)`;
         updateProgressBar();
       }
-
       function handleTransitionEnd() {
         isTransitioning = false;
-
         // If we scrolled to the cloned section at the end, jump to real cards
         if (currentIndex >= totalOriginal * 2) {
           currentIndex = totalOriginal;
           updateSlider(false);
         }
-
         // If we scrolled to the cloned section at the start, jump to real cards
         if (currentIndex < totalOriginal) {
           currentIndex = totalOriginal + (currentIndex % totalOriginal);
@@ -610,29 +526,23 @@
           updateSlider(false);
         }
       }
-
       function slideNext() {
         if (isTransitioning) return;
         isTransitioning = true;
         currentIndex++;
         updateSlider(true);
       }
-
       function slidePrev() {
         if (isTransitioning) return;
         isTransitioning = true;
         currentIndex--;
         updateSlider(true);
       }
-
       // Setup infinite slider
       setupInfiniteSlider();
-
       slider.addEventListener('transitionend', handleTransitionEnd);
-
       if (nextBtn) nextBtn.addEventListener('click', slideNext);
       if (prevBtn) prevBtn.addEventListener('click', slidePrev);
-
       let resizeTimer;
       window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
@@ -640,27 +550,22 @@
           updateSlider(false);
         }, 250);
       });
-
       let startX = 0;
       let currentX = 0;
       let isDragging = false;
-
       slider.addEventListener('touchstart', function(e) {
         startX = e.touches[0].clientX;
         currentX = startX;
         isDragging = true;
       }, { passive: true });
-
       slider.addEventListener('touchmove', function(e) {
         if (!isDragging) return;
         currentX = e.touches[0].clientX;
       }, { passive: true });
-
       slider.addEventListener('touchend', function() {
         if (!isDragging) return;
         isDragging = false;
         const diff = startX - currentX;
-
         if (Math.abs(diff) > 50) {
           if (diff > 0) {
             slideNext();
@@ -669,19 +574,16 @@
           }
         }
       });
-
       // Initial position (start at the first real card, after prepended clones)
       updateSlider(false);
       updateProgressBar();
     }
-
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initReviewsSlider);
     } else {
       initReviewsSlider();
     }
-
     // Reinitialize on Shopify section events
     document.addEventListener('shopify:section:load', function(event) {
       if (event.detail.sectionId === '{{ section.id }}') {
@@ -690,7 +592,6 @@
     });
   })();
 </script>
-
 {% schema %}
 {
   "name": "Reviews Slider",
@@ -847,12 +748,9 @@
       "id": "title_weight",
       "label": "Title font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
       "default": "600"
     },
@@ -894,12 +792,9 @@
       "id": "subtitle_weight",
       "label": "Subtitle font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
       "default": "400"
     },
@@ -941,12 +836,9 @@
       "id": "review_title_weight",
       "label": "Review title font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
       "default": "600"
     },
@@ -988,12 +880,9 @@
       "id": "review_text_weight",
       "label": "Review text font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
       "default": "400"
     },
@@ -1035,12 +924,9 @@
       "id": "author_weight",
       "label": "Author font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
       "default": "600"
     },

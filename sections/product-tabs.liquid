@@ -3,13 +3,11 @@
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
     background-color: {{ section.settings.background_color }};
   }
-
   #shopify-section-{{ section.id }} .product-tabs-wrapper {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 40px;
   }
-
   #shopify-section-{{ section.id }} .product-tabs-nav {
     display: flex;
     align-items: center;
@@ -18,7 +16,6 @@
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 0;
   }
-
   #shopify-section-{{ section.id }} .product-tab-btn {
     display: flex;
     align-items: center;
@@ -35,7 +32,6 @@
     transition: color 0.2s ease;
     white-space: nowrap;
   }
-
   #shopify-section-{{ section.id }} .product-tab-btn::after {
     content: '';
     position: absolute;
@@ -47,47 +43,38 @@
     transform: scaleX(0);
     transition: transform 0.2s ease;
   }
-
   #shopify-section-{{ section.id }} .product-tab-btn.active {
     font-weight: 600;
   }
-
   #shopify-section-{{ section.id }} .product-tab-btn.active::after {
     transform: scaleX(1);
   }
-
   #shopify-section-{{ section.id }} .product-tab-btn:hover {
     opacity: 0.8;
   }
-
   #shopify-section-{{ section.id }} .product-tab-btn svg {
     width: 18px;
     height: 18px;
     flex-shrink: 0;
   }
-
   #shopify-section-{{ section.id }} .product-tab-btn img {
     width: 18px;
     height: 18px;
     flex-shrink: 0;
     object-fit: contain;
   }
-
   #shopify-section-{{ section.id }} .product-tabs-content {
     padding-top: 24px;
   }
-
   #shopify-section-{{ section.id }} .product-tab-panel {
     display: none;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-
   #shopify-section-{{ section.id }} .product-tab-panel.active {
     display: block;
     opacity: 1;
   }
-
   #shopify-section-{{ section.id }} .product-tab-panel p,
   #shopify-section-{{ section.id }} .product-tab-panel {
     font-size: {{ section.settings.content_font_size }}px;
@@ -97,46 +84,38 @@
     font-weight: {{ section.settings.content_weight }};
     margin: 0;
   }
-
   #shopify-section-{{ section.id }} .product-tab-panel p + p {
     margin-top: 16px;
   }
-
   @media screen and (max-width: 750px) {
     #shopify-section-{{ section.id }} .product-tabs-wrapper {
       padding: 0 20px;
     }
-
     #shopify-section-{{ section.id }} .product-tabs-nav {
       flex-direction: column;
       align-items: flex-start;
       gap: 0;
       border-bottom: none;
     }
-
     #shopify-section-{{ section.id }} .product-tab-btn {
       width: 100%;
       padding: 12px 0;
       border-bottom: 1px solid #e0e0e0;
       font-size: calc({{ section.settings.tab_font_size }}px * 0.9);
     }
-
     #shopify-section-{{ section.id }} .product-tab-btn::after {
       bottom: -1px;
       height: 2px;
     }
-
     #shopify-section-{{ section.id }} .product-tabs-content {
       padding-top: 20px;
     }
-
     #shopify-section-{{ section.id }} .product-tab-panel p,
     #shopify-section-{{ section.id }} .product-tab-panel {
       font-size: calc({{ section.settings.content_font_size }}px * 0.95);
     }
   }
 {% endstyle %}
-
 <div class="product-tabs-section" id="product-tabs-{{ section.id }}">
   <div class="product-tabs-wrapper">
     <div class="product-tabs-nav" role="tablist">
@@ -175,7 +154,6 @@
         <span>{{ section.settings.tab_3_title }}</span>
       </button>
     </div>
-
     <div class="product-tabs-content">
       <div class="product-tab-panel active" role="tabpanel" data-panel="1">
         {{ section.settings.tab_1_content }}
@@ -189,32 +167,25 @@
     </div>
   </div>
 </div>
-
 <script>
   (function() {
     function initProductTabs() {
       const container = document.getElementById('product-tabs-{{ section.id }}');
       if (!container) return;
-
       const tabs = container.querySelectorAll('.product-tab-btn');
       const panels = container.querySelectorAll('.product-tab-panel');
-
       tabs.forEach(tab => {
         tab.addEventListener('click', function() {
           const tabId = this.getAttribute('data-tab');
-
           tabs.forEach(t => {
             t.classList.remove('active');
             t.setAttribute('aria-selected', 'false');
           });
-
           panels.forEach(p => {
             p.classList.remove('active');
           });
-
           this.classList.add('active');
           this.setAttribute('aria-selected', 'true');
-
           const activePanel = container.querySelector('[data-panel="' + tabId + '"]');
           if (activePanel) {
             activePanel.classList.add('active');
@@ -222,13 +193,11 @@
         });
       });
     }
-
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initProductTabs);
     } else {
       initProductTabs();
     }
-
     document.addEventListener('shopify:section:load', function(event) {
       if (event.detail.sectionId === '{{ section.id }}') {
         initProductTabs();
@@ -236,7 +205,6 @@
     });
   })();
 </script>
-
 {% schema %}
 {
   "name": "Product Tabs",
@@ -365,12 +333,9 @@
       "id": "tab_weight",
       "label": "Tab font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
       "default": "400"
     },
@@ -412,12 +377,9 @@
       "id": "content_weight",
       "label": "Content font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
-        
       ],
       "default": "400"
     },

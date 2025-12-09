@@ -4,13 +4,11 @@
     overflow: hidden;
     background: transparent;
   }
-
   #shopify-section-{{ section.id }} .diagonal-banner-wrapper {
     position: relative;
     height: {{ section.settings.section_height }}px;
     overflow: hidden;
   }
-
   #shopify-section-{{ section.id }} .diagonal-strip {
     position: absolute;
     left: -50%;
@@ -21,7 +19,6 @@
     overflow: hidden;
     white-space: nowrap;
   }
-
   #shopify-section-{{ section.id }} .diagonal-strip-top {
     top: 50%;
     background-color: {{ section.settings.top_strip_color }};
@@ -29,7 +26,6 @@
     transform-origin: center center;
     z-index: 2;
   }
-
   #shopify-section-{{ section.id }} .diagonal-strip-bottom {
     top: 50%;
     background-color: {{ section.settings.bottom_strip_color }};
@@ -37,20 +33,16 @@
     transform-origin: center center;
     z-index: 1;
   }
-
   #shopify-section-{{ section.id }} .diagonal-strip-content {
     display: flex;
     align-items: center;
   }
-
   #shopify-section-{{ section.id }} .diagonal-strip-top .diagonal-strip-content {
     animation: scroll{{ section.settings.top_scroll_direction | capitalize }}{{ section.id | replace: '-', '' }} {{ section.settings.animation_speed }}s linear infinite;
   }
-
   #shopify-section-{{ section.id }} .diagonal-strip-bottom .diagonal-strip-content {
     animation: scroll{{ section.settings.bottom_scroll_direction | capitalize }}{{ section.id | replace: '-', '' }} {{ section.settings.animation_speed }}s linear infinite;
   }
-
   #shopify-section-{{ section.id }} .diagonal-strip-text {
     font-size: {{ section.settings.font_size }}px;
     font-weight: {{ section.settings.font_weight }};
@@ -61,7 +53,6 @@
     padding: 0 {{ section.settings.text_spacing }}px;
     flex-shrink: 0;
   }
-
   @keyframes scrollLeft{{ section.id | replace: '-', '' }} {
     0% {
       transform: translateX(0);
@@ -70,7 +61,6 @@
       transform: translateX(-50%);
     }
   }
-
   @keyframes scrollRight{{ section.id | replace: '-', '' }} {
     0% {
       transform: translateX(-50%);
@@ -79,46 +69,37 @@
       transform: translateX(0);
     }
   }
-
   @media screen and (max-width: 990px) {
     #shopify-section-{{ section.id }} .diagonal-banner-wrapper {
       height: calc({{ section.settings.section_height }}px * 0.8);
     }
-
     #shopify-section-{{ section.id }} .diagonal-strip {
       height: calc({{ section.settings.strip_height }}px * 0.8);
     }
-
     #shopify-section-{{ section.id }} .diagonal-strip-text {
       font-size: calc({{ section.settings.font_size }}px * 0.8);
       padding: 0 calc({{ section.settings.text_spacing }}px * 0.8);
     }
   }
-
   @media screen and (max-width: 750px) {
     #shopify-section-{{ section.id }} .diagonal-banner-wrapper {
       height: calc({{ section.settings.section_height }}px * 0.6);
     }
-
     #shopify-section-{{ section.id }} .diagonal-strip {
       height: calc({{ section.settings.strip_height }}px * 0.6);
     }
-
     #shopify-section-{{ section.id }} .diagonal-strip-top {
       transform: translateY(-50%) rotate({% if section.settings.top_strip_direction == 'left_to_right' %}{{ section.settings.mobile_rotation_angle }}{% else %}-{{ section.settings.mobile_rotation_angle }}{% endif %}deg);
     }
-
     #shopify-section-{{ section.id }} .diagonal-strip-bottom {
       transform: translateY(-50%) rotate({% if section.settings.bottom_strip_direction == 'left_to_right' %}{{ section.settings.mobile_rotation_angle }}{% else %}-{{ section.settings.mobile_rotation_angle }}{% endif %}deg);
     }
-
     #shopify-section-{{ section.id }} .diagonal-strip-text {
       font-size: calc({{ section.settings.font_size }}px * 0.6);
       padding: 0 calc({{ section.settings.text_spacing }}px * 0.6);
     }
   }
 {% endstyle %}
-
 <div class="diagonal-banner-section">
   <div class="diagonal-banner-wrapper">
     <div class="diagonal-strip diagonal-strip-top">
@@ -131,7 +112,6 @@
         {% endfor %}
       </div>
     </div>
-
     <div class="diagonal-strip diagonal-strip-bottom">
       <div class="diagonal-strip-content">
         {% for i in (1..20) %}
@@ -144,7 +124,6 @@
     </div>
   </div>
 </div>
-
 {% schema %}
 {
   "name": "Diagonal Banner",
@@ -343,9 +322,7 @@
       "id": "font_weight",
       "label": "Font weight",
       "options": [
-        {"value": "300", "label": "Light"},
         {"value": "400", "label": "Normal"},
-        {"value": "500", "label": "Medium"},
         {"value": "600", "label": "Semi-bold"},
         {"value": "700", "label": "Bold"}
       ],
