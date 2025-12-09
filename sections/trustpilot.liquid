@@ -25,10 +25,10 @@
 
   #shopify-section-{{ section.id }} .excellent-title {
     font-size: {{ section.settings.title_size }}px;
-    font-weight: 600;
+    font-weight: {{ section.settings.title_weight }};
     color: {{ section.settings.title_color }};
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: {{ section.settings.title_font }};
   }
 
   #shopify-section-{{ section.id }} .header-stars {
@@ -64,7 +64,8 @@
     font-size: {{ section.settings.subtitle_size }}px;
     color: {{ section.settings.subtitle_color }};
     margin: 0;
-    font-weight: 400;
+    font-weight: {{ section.settings.subtitle_weight }};
+    font-family: {{ section.settings.subtitle_font }};
     white-space: nowrap;
   }
 
@@ -153,9 +154,10 @@
 
   #shopify-section-{{ section.id }} .review-title {
     font-size: {{ section.settings.review_title_size }}px;
-    font-weight: 600;
+    font-weight: {{ section.settings.review_title_weight }};
     color: {{ section.settings.review_title_color }};
     margin: 0 0 8px 0;
+    font-family: {{ section.settings.review_title_font }};
   }
 
   #shopify-section-{{ section.id }} .review-text {
@@ -163,6 +165,8 @@
     line-height: 1.5;
     color: {{ section.settings.review_text_color }};
     margin: 0 0 auto 0;
+    font-family: {{ section.settings.review_text_font }};
+    font-weight: {{ section.settings.review_text_weight }};
   }
 
   #shopify-section-{{ section.id }} .review-footer {
@@ -174,6 +178,8 @@
     font-size: {{ section.settings.author_size }}px;
     color: {{ section.settings.author_color }};
     margin: 0;
+    font-family: {{ section.settings.author_font }};
+    font-weight: {{ section.settings.author_weight }};
   }
 
   #shopify-section-{{ section.id }} .author-line .author-name {
@@ -679,7 +685,7 @@
     },
     {
       "type": "header",
-      "content": "Typography"
+      "content": "Title Typography"
     },
     {
       "type": "range",
@@ -692,6 +698,44 @@
       "default": 28
     },
     {
+      "type": "select",
+      "id": "title_font",
+      "label": "Title font family",
+      "options": [
+        {"value": "inherit", "label": "Default"},
+        {"value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", "label": "System UI"},
+        {"value": "'Arial', sans-serif", "label": "Arial"},
+        {"value": "'Helvetica Neue', Helvetica, sans-serif", "label": "Helvetica"},
+        {"value": "'Georgia', serif", "label": "Georgia"},
+        {"value": "'Times New Roman', serif", "label": "Times New Roman"},
+        {"value": "'Courier New', monospace", "label": "Courier New"},
+        {"value": "'Verdana', sans-serif", "label": "Verdana"},
+        {"value": "'Trebuchet MS', sans-serif", "label": "Trebuchet MS"},
+        {"value": "'Palatino Linotype', serif", "label": "Palatino"},
+        {"value": "'Lucida Sans', sans-serif", "label": "Lucida Sans"},
+        {"value": "'Impact', sans-serif", "label": "Impact"}
+      ],
+      "default": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Title font weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra-bold"}
+      ],
+      "default": "600"
+    },
+    {
+      "type": "header",
+      "content": "Subtitle Typography"
+    },
+    {
       "type": "range",
       "id": "subtitle_size",
       "label": "Subtitle size",
@@ -700,6 +744,44 @@
       "step": 1,
       "unit": "px",
       "default": 14
+    },
+    {
+      "type": "select",
+      "id": "subtitle_font",
+      "label": "Subtitle font family",
+      "options": [
+        {"value": "inherit", "label": "Default"},
+        {"value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", "label": "System UI"},
+        {"value": "'Arial', sans-serif", "label": "Arial"},
+        {"value": "'Helvetica Neue', Helvetica, sans-serif", "label": "Helvetica"},
+        {"value": "'Georgia', serif", "label": "Georgia"},
+        {"value": "'Times New Roman', serif", "label": "Times New Roman"},
+        {"value": "'Courier New', monospace", "label": "Courier New"},
+        {"value": "'Verdana', sans-serif", "label": "Verdana"},
+        {"value": "'Trebuchet MS', sans-serif", "label": "Trebuchet MS"},
+        {"value": "'Palatino Linotype', serif", "label": "Palatino"},
+        {"value": "'Lucida Sans', sans-serif", "label": "Lucida Sans"},
+        {"value": "'Impact', sans-serif", "label": "Impact"}
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "select",
+      "id": "subtitle_weight",
+      "label": "Subtitle font weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra-bold"}
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Review Title Typography"
     },
     {
       "type": "range",
@@ -712,6 +794,44 @@
       "default": 15
     },
     {
+      "type": "select",
+      "id": "review_title_font",
+      "label": "Review title font family",
+      "options": [
+        {"value": "inherit", "label": "Default"},
+        {"value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", "label": "System UI"},
+        {"value": "'Arial', sans-serif", "label": "Arial"},
+        {"value": "'Helvetica Neue', Helvetica, sans-serif", "label": "Helvetica"},
+        {"value": "'Georgia', serif", "label": "Georgia"},
+        {"value": "'Times New Roman', serif", "label": "Times New Roman"},
+        {"value": "'Courier New', monospace", "label": "Courier New"},
+        {"value": "'Verdana', sans-serif", "label": "Verdana"},
+        {"value": "'Trebuchet MS', sans-serif", "label": "Trebuchet MS"},
+        {"value": "'Palatino Linotype', serif", "label": "Palatino"},
+        {"value": "'Lucida Sans', sans-serif", "label": "Lucida Sans"},
+        {"value": "'Impact', sans-serif", "label": "Impact"}
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "select",
+      "id": "review_title_weight",
+      "label": "Review title font weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra-bold"}
+      ],
+      "default": "600"
+    },
+    {
+      "type": "header",
+      "content": "Review Text Typography"
+    },
+    {
       "type": "range",
       "id": "review_text_size",
       "label": "Review text size",
@@ -722,6 +842,44 @@
       "default": 14
     },
     {
+      "type": "select",
+      "id": "review_text_font",
+      "label": "Review text font family",
+      "options": [
+        {"value": "inherit", "label": "Default"},
+        {"value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", "label": "System UI"},
+        {"value": "'Arial', sans-serif", "label": "Arial"},
+        {"value": "'Helvetica Neue', Helvetica, sans-serif", "label": "Helvetica"},
+        {"value": "'Georgia', serif", "label": "Georgia"},
+        {"value": "'Times New Roman', serif", "label": "Times New Roman"},
+        {"value": "'Courier New', monospace", "label": "Courier New"},
+        {"value": "'Verdana', sans-serif", "label": "Verdana"},
+        {"value": "'Trebuchet MS', sans-serif", "label": "Trebuchet MS"},
+        {"value": "'Palatino Linotype', serif", "label": "Palatino"},
+        {"value": "'Lucida Sans', sans-serif", "label": "Lucida Sans"},
+        {"value": "'Impact', sans-serif", "label": "Impact"}
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "select",
+      "id": "review_text_weight",
+      "label": "Review text font weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra-bold"}
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Author Typography"
+    },
+    {
       "type": "range",
       "id": "author_size",
       "label": "Author text size",
@@ -730,6 +888,40 @@
       "step": 1,
       "unit": "px",
       "default": 14
+    },
+    {
+      "type": "select",
+      "id": "author_font",
+      "label": "Author font family",
+      "options": [
+        {"value": "inherit", "label": "Default"},
+        {"value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", "label": "System UI"},
+        {"value": "'Arial', sans-serif", "label": "Arial"},
+        {"value": "'Helvetica Neue', Helvetica, sans-serif", "label": "Helvetica"},
+        {"value": "'Georgia', serif", "label": "Georgia"},
+        {"value": "'Times New Roman', serif", "label": "Times New Roman"},
+        {"value": "'Courier New', monospace", "label": "Courier New"},
+        {"value": "'Verdana', sans-serif", "label": "Verdana"},
+        {"value": "'Trebuchet MS', sans-serif", "label": "Trebuchet MS"},
+        {"value": "'Palatino Linotype', serif", "label": "Palatino"},
+        {"value": "'Lucida Sans', sans-serif", "label": "Lucida Sans"},
+        {"value": "'Impact', sans-serif", "label": "Impact"}
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "select",
+      "id": "author_weight",
+      "label": "Author font weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra-bold"}
+      ],
+      "default": "400"
     },
     {
       "type": "header",

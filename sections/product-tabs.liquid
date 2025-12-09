@@ -28,9 +28,9 @@
     padding: 0 0 12px 0;
     cursor: pointer;
     font-size: {{ section.settings.tab_font_size }}px;
-    font-family: inherit;
+    font-family: {{ section.settings.tab_font }};
     color: {{ section.settings.text_color }};
-    font-weight: 400;
+    font-weight: {{ section.settings.tab_weight }};
     position: relative;
     transition: color 0.2s ease;
     white-space: nowrap;
@@ -93,6 +93,8 @@
     font-size: {{ section.settings.content_font_size }}px;
     line-height: 1.7;
     color: {{ section.settings.content_color }};
+    font-family: {{ section.settings.content_font }};
+    font-weight: {{ section.settings.content_weight }};
     margin: 0;
   }
 
@@ -327,7 +329,7 @@
     },
     {
       "type": "header",
-      "content": "Typography"
+      "content": "Tab Typography"
     },
     {
       "type": "range",
@@ -340,6 +342,43 @@
       "default": 16
     },
     {
+      "type": "select",
+      "id": "tab_font",
+      "label": "Tab font family",
+      "options": [
+        {"value": "inherit", "label": "Default"},
+        {"value": "'Arial', sans-serif", "label": "Arial"},
+        {"value": "'Helvetica Neue', Helvetica, sans-serif", "label": "Helvetica"},
+        {"value": "'Georgia', serif", "label": "Georgia"},
+        {"value": "'Times New Roman', serif", "label": "Times New Roman"},
+        {"value": "'Courier New', monospace", "label": "Courier New"},
+        {"value": "'Verdana', sans-serif", "label": "Verdana"},
+        {"value": "'Trebuchet MS', sans-serif", "label": "Trebuchet MS"},
+        {"value": "'Palatino Linotype', serif", "label": "Palatino"},
+        {"value": "'Lucida Sans', sans-serif", "label": "Lucida Sans"},
+        {"value": "'Impact', sans-serif", "label": "Impact"}
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "select",
+      "id": "tab_weight",
+      "label": "Tab font weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra-bold"}
+      ],
+      "default": "400"
+    },
+    {
+      "type": "header",
+      "content": "Content Typography"
+    },
+    {
       "type": "range",
       "id": "content_font_size",
       "label": "Content font size",
@@ -348,6 +387,39 @@
       "step": 1,
       "unit": "px",
       "default": 16
+    },
+    {
+      "type": "select",
+      "id": "content_font",
+      "label": "Content font family",
+      "options": [
+        {"value": "inherit", "label": "Default"},
+        {"value": "'Arial', sans-serif", "label": "Arial"},
+        {"value": "'Helvetica Neue', Helvetica, sans-serif", "label": "Helvetica"},
+        {"value": "'Georgia', serif", "label": "Georgia"},
+        {"value": "'Times New Roman', serif", "label": "Times New Roman"},
+        {"value": "'Courier New', monospace", "label": "Courier New"},
+        {"value": "'Verdana', sans-serif", "label": "Verdana"},
+        {"value": "'Trebuchet MS', sans-serif", "label": "Trebuchet MS"},
+        {"value": "'Palatino Linotype', serif", "label": "Palatino"},
+        {"value": "'Lucida Sans', sans-serif", "label": "Lucida Sans"},
+        {"value": "'Impact', sans-serif", "label": "Impact"}
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "select",
+      "id": "content_weight",
+      "label": "Content font weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra-bold"}
+      ],
+      "default": "400"
     },
     {
       "type": "header",

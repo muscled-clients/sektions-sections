@@ -12,11 +12,11 @@
 
   #shopify-section-{{ section.id }} .style-motion-heading {
     font-size: {{ section.settings.heading_size }}px;
-    font-weight: 700;
+    font-weight: {{ section.settings.heading_weight }};
     color: {{ section.settings.heading_color }};
     text-align: center;
     margin: 0 0 40px 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: {{ section.settings.heading_font }};
   }
 
   #shopify-section-{{ section.id }} .style-motion-grid {
@@ -261,6 +261,39 @@
       "step": 2,
       "unit": "px",
       "default": 34
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font family",
+      "options": [
+        {"value": "inherit", "label": "Default"},
+        {"value": "'Arial', sans-serif", "label": "Arial"},
+        {"value": "'Helvetica Neue', Helvetica, sans-serif", "label": "Helvetica"},
+        {"value": "'Georgia', serif", "label": "Georgia"},
+        {"value": "'Times New Roman', serif", "label": "Times New Roman"},
+        {"value": "'Courier New', monospace", "label": "Courier New"},
+        {"value": "'Verdana', sans-serif", "label": "Verdana"},
+        {"value": "'Trebuchet MS', sans-serif", "label": "Trebuchet MS"},
+        {"value": "'Palatino Linotype', serif", "label": "Palatino"},
+        {"value": "'Lucida Sans', sans-serif", "label": "Lucida Sans"},
+        {"value": "'Impact', sans-serif", "label": "Impact"}
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading font weight",
+      "options": [
+        {"value": "300", "label": "Light"},
+        {"value": "400", "label": "Normal"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"},
+        {"value": "800", "label": "Extra-bold"}
+      ],
+      "default": "700"
     },
     {
       "type": "range",
