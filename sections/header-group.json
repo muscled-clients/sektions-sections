@@ -150,86 +150,12 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
-    },
-    "rounded_navigation_header_zWhT7D": {
-      "type": "rounded-navigation-header",
-      "blocks": {
-        "left_link_g6wP9J": {
-          "type": "left_link",
-          "settings": {
-            "label": "SHOP",
-            "url": "/collections/all"
-          }
-        },
-        "left_link_Fm8MgM": {
-          "type": "left_link",
-          "settings": {
-            "label": "ABOUT",
-            "url": "/pages/about"
-          }
-        },
-        "right_link_gwQPXc": {
-          "type": "right_link",
-          "settings": {
-            "label": "ACCOUNT",
-            "url": "/account",
-            "is_cart": false
-          }
-        },
-        "right_link_mPchLF": {
-          "type": "right_link",
-          "settings": {
-            "label": "CART",
-            "url": "/cart",
-            "is_cart": true
-          }
-        }
-      },
-      "block_order": [
-        "left_link_g6wP9J",
-        "left_link_Fm8MgM",
-        "right_link_gwQPXc",
-        "right_link_mPchLF"
-      ],
-      "name": "Rounded Navigation Header",
-      "settings": {
-        "logo_text": "Section Saver",
-        "logo_height": 40,
-        "mobile_logo_height": 32,
-        "logo_text_size": 20,
-        "mobile_logo_text_size": 18,
-        "logo_font_weight": "600",
-        "logo_letter_spacing": 1,
-        "logo_uppercase": true,
-        "logo_color": "#000000",
-        "sticky_header": true,
-        "uppercase_links": true,
-        "font_size": 14,
-        "font_weight": "500",
-        "letter_spacing": 1,
-        "link_spacing": 20,
-        "outer_bg_color": "transparent",
-        "bg_color": "#f5f5f5",
-        "text_color": "#000000",
-        "hover_color": "#666666",
-        "cart_count_bg": "#ff0000",
-        "cart_count_color": "#ffffff",
-        "max_width": 1200,
-        "outer_padding": 20,
-        "padding_vertical": 16,
-        "padding_horizontal": 40,
-        "shadow": "0 2px 5px rgba(0,0,0,0.05)",
-        "mobile_breakpoint": 768,
-        "mobile_padding": 16,
-        "mobile_logo_position": "center"
-      }
     }
   },
   "order": [
     "announcement_marquee_HPFki8",
     "announcement-bar",
     "scrolling_announcement_bar_r4PTFf",
-    "header",
-    "rounded_navigation_header_zWhT7D"
+    "header"
   ]
 }

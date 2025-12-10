@@ -15,9 +15,690 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "scrolling_logo_cloud_9EpeHQ": {
+      "type": "scrolling-logo-cloud",
+      "blocks": {
+        "logo_rjzHmF": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Screenshot_2023-04-07_at_21.21.59_cd74307b-a841-4882-bfac-056e5c985e0f.avif",
+            "alt_text": "Company 1",
+            "link": ""
+          }
+        },
+        "logo_MKxiiw": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Screenshot_2023-04-05_at_10.29.21.avif",
+            "alt_text": "Company 2",
+            "link": ""
+          }
+        },
+        "logo_TpMNT6": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Screenshot_2023-04-07_at_21.22.15.avif",
+            "alt_text": "Company 3",
+            "link": ""
+          }
+        },
+        "logo_VGf7CW": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Screenshot_2023-04-07_at_21.22.05.avif",
+            "alt_text": "Company 4",
+            "link": ""
+          }
+        },
+        "logo_By4Pii": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Screenshot_2023-04-07_at_21.22.45.avif",
+            "alt_text": "Company 5",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_rjzHmF",
+        "logo_MKxiiw",
+        "logo_TpMNT6",
+        "logo_VGf7CW",
+        "logo_By4Pii"
+      ],
+      "name": "SEK Logo Cloud",
+      "settings": {
+        "title": "Trusted by",
+        "title_size": 40,
+        "title_size_mobile": 30,
+        "title_weight": "600",
+        "title_color": "#3b3a3a",
+        "title_margin": 40,
+        "title_margin_mobile": 30,
+        "logo_width": 200,
+        "logo_width_mobile": 170,
+        "logo_height": 80,
+        "logo_height_mobile": 60,
+        "logo_gap": 30,
+        "logo_gap_mobile": 30,
+        "scroll_speed": 15,
+        "scroll_direction": "left",
+        "pause_on_hover": true,
+        "background_color": "#ffffff",
+        "logo_filter": "none",
+        "hover_effect": true,
+        "fade_edges": false,
+        "fade_width": 80,
+        "placeholder_bg": "#e5e5e5",
+        "placeholder_text": "#999999",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30
+      }
+    },
+    "header14_ddGan6": {
+      "type": "header14",
+      "blocks": {
+        "menu_item_Mrzyyj": {
+          "type": "menu_item",
+          "settings": {
+            "label": "For Her",
+            "link": "",
+            "dropdown_menu": "customer-account-main-menu",
+            "has_mega_menu": true,
+            "mega_title_1": "Shop by Product",
+            "mega_menu_1": "footer",
+            "mega_title_2": "New & Featured",
+            "mega_menu_2": "",
+            "mega_promo_image": "shopify://shop_images/boxed-water-is-better-S9E4j7RoQDk-unsplash_70d0b1e5-4bf9-425b-8ecf-b3d74150ae3f.webp",
+            "mega_promo_title": "",
+            "mega_promo_link": ""
+          }
+        },
+        "menu_item_XHdyib": {
+          "type": "menu_item",
+          "settings": {
+            "label": "For Him",
+            "link": "",
+            "dropdown_menu": "",
+            "has_mega_menu": true,
+            "mega_title_1": "Shop by Product",
+            "mega_menu_1": "",
+            "mega_title_2": "New & Featured",
+            "mega_menu_2": "",
+            "mega_promo_title": "",
+            "mega_promo_link": ""
+          }
+        },
+        "menu_item_3KEByD": {
+          "type": "menu_item",
+          "settings": {
+            "label": "Sale",
+            "link": "",
+            "dropdown_menu": "",
+            "has_mega_menu": false,
+            "mega_title_1": "Shop by Product",
+            "mega_menu_1": "",
+            "mega_title_2": "New & Featured",
+            "mega_menu_2": "",
+            "mega_promo_title": "",
+            "mega_promo_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "menu_item_Mrzyyj",
+        "menu_item_XHdyib",
+        "menu_item_3KEByD"
+      ],
+      "name": "SEK Header 14",
+      "settings": {
+        "scroll_behavior": "always",
+        "enable_transparent": false,
+        "transparent_scope": "homepage",
+        "logo": "shopify://shop_images/Screenshot_2023-04-07_at_21.22.45.avif",
+        "logo_width_desktop": 180,
+        "logo_width_mobile": 150,
+        "logo_height_desktop": 50,
+        "logo_height_mobile": 35,
+        "shop_name_size_desktop": 24,
+        "shop_name_size_mobile": 18,
+        "shop_name_spacing": 1,
+        "menu_spacing": 30,
+        "menu_font_size": 14,
+        "menu_font_weight": "500",
+        "menu_uppercase": false,
+        "show_search": true,
+        "show_account": true,
+        "show_cart": true,
+        "show_icon_labels": false,
+        "icon_size": 22,
+        "icon_gap": 10,
+        "search_text": "Search",
+        "account_text": "Account",
+        "cart_text": "Cart",
+        "search_placeholder": "Search our store...",
+        "menu_button_text": "Menu",
+        "close_button_text": "Close",
+        "promo_section_title": "Featured",
+        "promo_title_1": "",
+        "promo_link_1": "",
+        "promo_title_2": "",
+        "promo_link_2": "",
+        "promo_title_3": "",
+        "promo_link_3": "",
+        "promo_title_4": "",
+        "promo_link_4": "",
+        "container_width": 1400,
+        "side_padding": 50,
+        "header_padding_desktop": 16,
+        "header_padding_mobile": 12,
+        "header_height_desktop": 80,
+        "header_height_mobile": 70,
+        "background_color": "#ffffff",
+        "text_color": "#142b6f",
+        "accent_color": "#f1c469",
+        "transparent_text_color": "#ffffff",
+        "mega_menu_background": "#ffffff",
+        "mega_menu_text_color": "#142b6f",
+        "mobile_menu_background": "#ffffff"
+      }
+    },
+    "hero21_AN97HA": {
+      "type": "hero21",
+      "blocks": {
+        "ticker_row_1_yXkxD9": {
+          "type": "ticker_row_1",
+          "settings": {
+            "text": "Coffee beans"
+          }
+        },
+        "ticker_row_1_j7jFKr": {
+          "type": "ticker_row_1",
+          "settings": {
+            "text": "Espresso coffee"
+          }
+        },
+        "ticker_row_1_QbrQ7G": {
+          "type": "ticker_row_1",
+          "settings": {
+            "text": "Ground coffee"
+          }
+        },
+        "ticker_row_2_RMxiyB": {
+          "type": "ticker_row_2",
+          "settings": {
+            "text": "Decaffeinated"
+          }
+        },
+        "ticker_row_2_f8B9wB": {
+          "type": "ticker_row_2",
+          "settings": {
+            "text": "Instant coffee"
+          }
+        },
+        "ticker_row_2_R8UG6M": {
+          "type": "ticker_row_2",
+          "settings": {
+            "text": "Coffee capsules"
+          }
+        },
+        "ticker_row_3_qdX3TA": {
+          "type": "ticker_row_3",
+          "settings": {
+            "text": "ESE coffee tablets"
+          }
+        },
+        "ticker_row_3_T9Lyth": {
+          "type": "ticker_row_3",
+          "settings": {
+            "text": "Advent calendars"
+          }
+        },
+        "ticker_row_3_bVkTpL": {
+          "type": "ticker_row_3",
+          "settings": {
+            "text": "Coffee sets"
+          }
+        }
+      },
+      "block_order": [
+        "ticker_row_1_yXkxD9",
+        "ticker_row_1_j7jFKr",
+        "ticker_row_1_QbrQ7G",
+        "ticker_row_2_RMxiyB",
+        "ticker_row_2_f8B9wB",
+        "ticker_row_2_R8UG6M",
+        "ticker_row_3_qdX3TA",
+        "ticker_row_3_T9Lyth",
+        "ticker_row_3_bVkTpL"
+      ],
+      "name": "SEK Hero 21",
+      "settings": {
+        "background_video": "shopify://files/videos/ff1c3429deca4952bb22d569f1fd46d9.HD-720p-4.5Mbps-32261904.mp4",
+        "video_url": "",
+        "overlay_color": "#000000",
+        "overlay_opacity": 60,
+        "min_height_mobile": 550,
+        "min_height_desktop": 700,
+        "heading": "Discover our premium coffee selection",
+        "heading_font": "serif",
+        "heading_size_mobile": 28,
+        "heading_size_desktop": 56,
+        "heading_weight": "500",
+        "heading_color": "#eeebdd",
+        "text": "From single-origin beans to expertly crafted blends, find your perfect cup.",
+        "text_size_mobile": 14,
+        "text_size_desktop": 18,
+        "text_color": "#eeebdd",
+        "text_alignment": "center",
+        "content_max_width": 700,
+        "button_text": "Read More",
+        "button_link": "",
+        "show_button_arrow": true,
+        "button_bg": "#e9ce39",
+        "button_hover_bg": "#e1cb53",
+        "button_text_color": "#010101",
+        "card_bg": "rgba(238, 235, 221, 0.3)",
+        "card_hover_bg": "rgba(238, 235, 221, 0.5)",
+        "card_border": "#ffffff",
+        "card_text": "#ffffff",
+        "card_font_size_mobile": 14,
+        "card_font_size_desktop": 15,
+        "card_radius": 8,
+        "show_arrows": true,
+        "ticker_speed_mobile": 60,
+        "ticker_speed_desktop": 50,
+        "pause_on_hover": true,
+        "ticker_gap_mobile": 12,
+        "ticker_gap_desktop": 16,
+        "item_gap_mobile": 12,
+        "item_gap_desktop": 16,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80
+      }
+    },
+    "hero_3_kyiVEp": {
+      "type": "hero-3",
+      "name": "SEK Hero 3",
+      "settings": {
+        "background_video": "shopify://files/videos/496a4629d6c745e59b8a827771ebdc66.HD-1080p-2.5Mbps-20133411.mp4",
+        "video_url": "",
+        "overlay_color": "#000000",
+        "overlay_opacity": 10,
+        "left_image": "shopify://shop_images/boxed-water-is-better-S9E4j7RoQDk-unsplash_70d0b1e5-4bf9-425b-8ecf-b3d74150ae3f.webp",
+        "middle_image": "shopify://shop_images/boxed-water-is-better-0ktbjolsuEk-unsplash_a74b310f-5412-4af6-9bc7-df73c2c116a7.webp",
+        "min_height_mobile": 600,
+        "min_height_desktop": 700,
+        "card_height": 450,
+        "heading": "Boxed water is even better",
+        "heading_size_mobile": 24,
+        "heading_size_desktop": 32,
+        "heading_weight": "700",
+        "heading_color": "#000000",
+        "text": "We're a sustainable alternative to plastic water bottles",
+        "text_size_mobile": 15,
+        "text_size_desktop": 16,
+        "text_color": "#000000",
+        "button_text": "SHOP NOW",
+        "button_link": "",
+        "button_bg": "#000000",
+        "button_hover_bg": "#333333",
+        "button_text_color": "#ffffff",
+        "show_rating": true,
+        "rating_text": "4.9/5",
+        "star_color": "#000000",
+        "card_bg": "#ffffff",
+        "border_color": "#e5e5e5",
+        "border_width": 1,
+        "section_padding_top_mobile": 20,
+        "section_padding_bottom_mobile": 20,
+        "section_padding_top_desktop": 40,
+        "section_padding_bottom_desktop": 40
+      }
+    },
+    "scrolling_images_pro_fXzCMU": {
+      "type": "scrolling-images-pro",
+      "blocks": {
+        "row_jHqrhp": {
+          "type": "row",
+          "settings": {
+            "scroll_direction": "horizontal_left",
+            "scroll_speed": 30,
+            "pause_on_hover": true,
+            "image_1": "shopify://shop_images/beni_566260392_17997124976834598_6163701167523839399_n_1.webp",
+            "image_2": "shopify://shop_images/beni_561599139_17996518613834598_8454380951105921196_n.webp",
+            "image_3": "shopify://shop_images/beni_565610849_17997125060834598_5348253066878101290_n.webp",
+            "image_4": "shopify://shop_images/beni_566239893_17997125081834598_5886782520912929594_n.webp",
+            "image_5": "shopify://shop_images/beni_520167458_17986267859834598_738031015883068528_n.webp",
+            "image_6": "shopify://shop_images/beni_518305450_17986267850834598_6197347120424067250_n.webp"
+          }
+        },
+        "row_UkEijW": {
+          "type": "row",
+          "settings": {
+            "scroll_direction": "horizontal_right",
+            "scroll_speed": 35,
+            "pause_on_hover": true,
+            "image_1": "shopify://shop_images/beni_518305450_17986267850834598_6197347120424067250_n.webp",
+            "image_2": "shopify://shop_images/beni_561638829_17996518604834598_2419741128912522392_n.webp",
+            "image_3": "shopify://shop_images/beni_520167458_17986267859834598_738031015883068528_n.webp",
+            "image_4": "shopify://shop_images/beni_566239893_17997125081834598_5886782520912929594_n.webp",
+            "image_5": "shopify://shop_images/beni_564999618_17997125072834598_1895550871037856692_n.webp",
+            "image_6": "shopify://shop_images/beni_566260392_17997124976834598_6163701167523839399_n.webp"
+          }
+        }
+      },
+      "block_order": [
+        "row_jHqrhp",
+        "row_UkEijW"
+      ],
+      "name": "SEK Scrolling Images Pro",
+      "settings": {
+        "heading": "Our Gallery",
+        "subheading": "",
+        "heading_size_mobile": 24,
+        "heading_size_desktop": 36,
+        "heading_weight": "600",
+        "heading_color": "#000000",
+        "subheading_size_mobile": 16,
+        "subheading_size_desktop": 18,
+        "subheading_color": "#666666",
+        "header_alignment": "center",
+        "header_spacing_mobile": 30,
+        "header_spacing_desktop": 40,
+        "image_width_mobile": 200,
+        "image_width_desktop": 300,
+        "image_height_mobile": 250,
+        "image_height_desktop": 360,
+        "image_gap_mobile": 16,
+        "image_gap_desktop": 24,
+        "border_radius": 0,
+        "border_width": 0,
+        "border_color": "#e5e5e5",
+        "hover_zoom": false,
+        "vertical_height_mobile": 400,
+        "vertical_height_desktop": 500,
+        "row_gap_mobile": 20,
+        "row_gap_desktop": 30,
+        "bg_color": "#ffffff",
+        "section_padding_top_mobile": 40,
+        "section_padding_bottom_mobile": 40,
+        "section_padding_top_desktop": 60,
+        "section_padding_bottom_desktop": 60
+      }
+    },
+    "testionomial46_AAqRRY": {
+      "type": "testionomial46",
+      "blocks": {
+        "testimonial_row_1_BqegAd": {
+          "type": "testimonial_row_1",
+          "settings": {
+            "avatar": "shopify://shop_images/profile-image-christian-buehner-DItYlc26zVI-unsplash.webp",
+            "name": "Sarah Johnson",
+            "location": "Portland, OR",
+            "quote": "This product exceeded all my expectations. The quality is outstanding and the customer service team was incredibly helpful."
+          }
+        },
+        "testimonial_row_1_6wTFtn": {
+          "type": "testimonial_row_1",
+          "settings": {
+            "avatar": "shopify://shop_images/profile-image-fellipe-ditadi-T8ECKwjWwl4-unsplash.webp",
+            "name": "Emily Davis",
+            "location": "Austin, TX",
+            "quote": "Best purchase I've made this year! Fast shipping, beautiful packaging, and the product itself is top-notch quality."
+          }
+        },
+        "testimonial_row_1_xDKLNY": {
+          "type": "testimonial_row_1",
+          "settings": {
+            "avatar": "shopify://shop_images/pexels-billy-van-tran-246994057-12790546.webp",
+            "name": "Jessica Martinez",
+            "location": "Denver, CO",
+            "quote": "I was skeptical at first, but this has completely changed my routine. Highly recommend to anyone looking for quality."
+          }
+        },
+        "testimonial_row_2_mbNxeb": {
+          "type": "testimonial_row_2",
+          "settings": {
+            "avatar": "shopify://shop_images/profile-image-jsb-co-doNk_zErFds-unsplash.webp",
+            "name": "Michael Chen",
+            "location": "Seattle, WA",
+            "quote": "I've been a loyal customer for years and they never disappoint. The attention to detail is unmatched."
+          }
+        },
+        "testimonial_row_2_RfNKwh": {
+          "type": "testimonial_row_2",
+          "settings": {
+            "avatar": "shopify://shop_images/profile-image-meg-aghamyan-JXDFfSHarvY-unsplash.webp",
+            "name": "David Wilson",
+            "location": "Chicago, IL",
+            "quote": "Outstanding quality and fast shipping. This is exactly what I was looking for. Will definitely order again!"
+          }
+        },
+        "testimonial_row_2_b6Eadm": {
+          "type": "testimonial_row_2",
+          "settings": {
+            "avatar": "shopify://shop_images/profile-image-pexels-dziana-hasanbekava-7275385.webp",
+            "name": "Amanda Thompson",
+            "location": "Miami, FL",
+            "quote": "The best customer experience I've ever had. From browsing to delivery, everything was seamless and professional."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_row_1_BqegAd",
+        "testimonial_row_1_6wTFtn",
+        "testimonial_row_1_xDKLNY",
+        "testimonial_row_2_mbNxeb",
+        "testimonial_row_2_RfNKwh",
+        "testimonial_row_2_b6Eadm"
+      ],
+      "name": "SEK Testimonials 46",
+      "settings": {
+        "heading": "Why people love our brand",
+        "subheading": "See what our customers are saying",
+        "heading_size_mobile": 32,
+        "heading_size_desktop": 48,
+        "heading_color": "#1a1a1a",
+        "accent_color": "#e07c4e",
+        "subheading_size_mobile": 16,
+        "subheading_size_desktop": 18,
+        "subheading_color": "#666666",
+        "header_spacing_mobile": 30,
+        "header_spacing_desktop": 50,
+        "scroll_speed_mobile": 40,
+        "scroll_speed_desktop": 60,
+        "pause_on_hover": true,
+        "card_width_mobile": 300,
+        "card_width_desktop": 460,
+        "card_gap_mobile": 16,
+        "card_gap_desktop": 24,
+        "card_radius": 16,
+        "card_bg": "#ffffff",
+        "card_border_width": 0,
+        "card_border_color": "#e5e5e5",
+        "card_shadow": "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+        "quote_size_mobile": 16,
+        "quote_size_desktop": 18,
+        "quote_color": "#333333",
+        "name_color": "#1a1a1a",
+        "location_color": "#888888",
+        "show_stars": true,
+        "star_color": "#f5a623",
+        "avatar_size_mobile": 52,
+        "avatar_size_desktop": 72,
+        "avatar_bg": "#e07c4e",
+        "row_gap_mobile": 16,
+        "row_gap_desktop": 24,
+        "bg_gradient": "linear-gradient(180deg, rgba(251, 239, 228, 1), rgba(246, 206, 173, 1) 100%)",
+        "section_padding_top_mobile": 50,
+        "section_padding_bottom_mobile": 50,
+        "section_padding_top_desktop": 80,
+        "section_padding_bottom_desktop": 80
+      }
+    },
+    "feature25_6AnaMU": {
+      "type": "feature25",
+      "blocks": {
+        "gallery_video_GBaheJ": {
+          "type": "gallery_video",
+          "settings": {
+            "video": "shopify://files/videos/b38f6cf6d34f451889977da065e3fb74.HD-1080p-2.5Mbps-34537279.mp4",
+            "video_url": ""
+          }
+        },
+        "gallery_image_PfaKet": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/pexels-ron-lach-8142188.webp"
+          }
+        }
+      },
+      "block_order": [
+        "gallery_video_GBaheJ",
+        "gallery_image_PfaKet"
+      ],
+      "name": "SEK Feature 25",
+      "settings": {
+        "image_position": "1",
+        "max_width": 1400,
+        "gap_mobile": 24,
+        "gap_desktop": 40,
+        "image": "shopify://shop_images/pexels-ron-lach-8154672.webp",
+        "image_aspect_ratio": "1 / 1",
+        "image_radius": 16,
+        "show_image_overlay": true,
+        "overlay_opacity": 20,
+        "image_label": "Lip Balms",
+        "image_title": "Nourish Your Lips, Naturally",
+        "image_text_color": "#ffffff",
+        "subheading": "",
+        "heading": "How to Use",
+        "text": "<p>Gently glide the balm over your lips. Massage your lips gently to promote blood circulation. Reapply throughout the day as needed, especially in harsh weather conditions.</p>",
+        "heading_size_mobile": 22,
+        "heading_size_desktop": 28,
+        "text_size_mobile": 14,
+        "text_size_desktop": 16,
+        "subheading_color": "#c20119",
+        "heading_color": "#000000",
+        "text_color": "#444444",
+        "button_text": "",
+        "button_link": "",
+        "show_button_arrow": true,
+        "button_radius": 0,
+        "button_bg": "transparent",
+        "button_text_color": "#000000",
+        "button_border_color": "#000000",
+        "button_hover_bg": "#000000",
+        "button_hover_text": "#ffffff",
+        "content_bg": "#f8f5f1",
+        "content_radius": 16,
+        "content_padding_mobile": 24,
+        "content_padding_desktop": 40,
+        "gallery_columns_mobile": 2,
+        "gallery_columns_desktop": 2,
+        "gallery_aspect_ratio": "3 / 4",
+        "gallery_radius": 16,
+        "section_bg": "#f8f5f1",
+        "section_padding_top_mobile": 40,
+        "section_padding_bottom_mobile": 40,
+        "section_padding_top_desktop": 80,
+        "section_padding_bottom_desktop": 80
+      }
+    },
+    "how_it_works_cFrtnh": {
+      "type": "how-it-works",
+      "blocks": {
+        "step_JtAzqc": {
+          "type": "step",
+          "settings": {
+            "title": "Unbox your order",
+            "text": "Carefully open your package and remove all items. Check that everything is included according to your order confirmation."
+          }
+        },
+        "step_khCxp3": {
+          "type": "step",
+          "settings": {
+            "title": "Follow the setup guide",
+            "text": "Read through the included setup guide and follow each step carefully. The process takes only a few minutes."
+          }
+        },
+        "step_zLYNN6": {
+          "type": "step",
+          "settings": {
+            "title": "Allow time to settle",
+            "text": "Some products may need 24-48 hours to fully expand or settle. This is completely normal and ensures optimal performance."
+          }
+        },
+        "step_NphLPw": {
+          "type": "step",
+          "settings": {
+            "title": "Enjoy your product",
+            "text": "Once setup is complete, you're ready to enjoy your new product. Contact our support team if you have any questions."
+          }
+        }
+      },
+      "block_order": [
+        "step_JtAzqc",
+        "step_khCxp3",
+        "step_zLYNN6",
+        "step_NphLPw"
+      ],
+      "name": "SEK How It Works",
+      "settings": {
+        "subtitle": "Simple Setup",
+        "title": "How It Works",
+        "description": "What to expect when you unbox your order",
+        "header_alignment": "center",
+        "title_size_mobile": 32,
+        "title_size_desktop": 48,
+        "subtitle_color": "#e51b94",
+        "title_color": "#262425",
+        "description_color": "#5c5c5c",
+        "header_spacing_mobile": 30,
+        "header_spacing_desktop": 50,
+        "image_position": "left",
+        "max_width": 1400,
+        "gap_mobile": 30,
+        "gap_desktop": 50,
+        "video": "shopify://files/videos/2b4ec986939a4c0d9708a3e0c7e08e80.HD-1080p-4.8Mbps-59780475.mp4",
+        "video_url": "",
+        "image_aspect_ratio": "1 / 1",
+        "image_radius": 16,
+        "item_bg": "#f5f0e8",
+        "item_active_bg": "#f5f0e8",
+        "item_radius": 14,
+        "number_bg": "#f0f0f0",
+        "number_color": "#262425",
+        "number_active_bg": "#e51b94",
+        "number_active_color": "#ffffff",
+        "step_title_color": "#262425",
+        "step_text_color": "#5c5c5c",
+        "chevron_color": "#262425",
+        "section_bg": "#f9f7ef",
+        "section_margin_top": 40,
+        "section_margin_bottom": 40,
+        "section_padding_top_mobile": 50,
+        "section_padding_bottom_mobile": 50,
+        "section_padding_top_desktop": 80,
+        "section_padding_bottom_desktop": 80
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "scrolling_logo_cloud_9EpeHQ",
+    "header14_ddGan6",
+    "hero21_AN97HA",
+    "hero_3_kyiVEp",
+    "scrolling_images_pro_fXzCMU",
+    "testionomial46_AAqRRY",
+    "feature25_6AnaMU",
+    "how_it_works_cFrtnh"
   ]
 }
