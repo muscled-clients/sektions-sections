@@ -1,0 +1,697 @@
+{% comment %}
+  SEK Scrolling Images Pro - Advanced scrolling image gallery
+  Features: Horizontal/vertical scroll, multiple rows, pause on hover, seamless loop
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+
+{% style %}
+  /* Section Container */
+  #sek-sip-{{ section_id }} {
+    padding-top: {{ section.settings.section_padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom_mobile }}px;
+    background-color: {{ section.settings.bg_color }};
+    overflow: hidden;
+  }
+
+  @media (min-width: 750px) {
+    #sek-sip-{{ section_id }} {
+      padding-top: {{ section.settings.section_padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_desktop }}px;
+    }
+  }
+
+  /* Section Header */
+  #sek-sip-{{ section_id }} .sek-sip__header {
+    text-align: {{ section.settings.header_alignment }};
+    padding: 0 20px;
+    margin-bottom: {{ section.settings.header_spacing_mobile }}px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-sip-{{ section_id }} .sek-sip__header {
+      margin-bottom: {{ section.settings.header_spacing_desktop }}px;
+    }
+  }
+
+  #sek-sip-{{ section_id }} .sek-sip__heading {
+    font-size: {{ section.settings.heading_size_mobile }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 10px;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 750px) {
+    #sek-sip-{{ section_id }} .sek-sip__heading {
+      font-size: {{ section.settings.heading_size_desktop }}px;
+    }
+  }
+
+  #sek-sip-{{ section_id }} .sek-sip__subheading {
+    font-size: {{ section.settings.subheading_size_mobile }}px;
+    color: {{ section.settings.subheading_color }};
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 750px) {
+    #sek-sip-{{ section_id }} .sek-sip__subheading {
+      font-size: {{ section.settings.subheading_size_desktop }}px;
+    }
+  }
+
+  /* Scrolling Rows Container */
+  #sek-sip-{{ section_id }} .sek-sip__rows {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.row_gap_mobile }}px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-sip-{{ section_id }} .sek-sip__rows {
+      gap: {{ section.settings.row_gap_desktop }}px;
+    }
+  }
+
+  /* Single Row */
+  #sek-sip-{{ section_id }} .sek-sip__row {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Horizontal Scroll Track */
+  #sek-sip-{{ section_id }} .sek-sip__track {
+    display: flex;
+    gap: {{ section.settings.image_gap_mobile }}px;
+    width: fit-content;
+  }
+
+  @media (min-width: 750px) {
+    #sek-sip-{{ section_id }} .sek-sip__track {
+      gap: {{ section.settings.image_gap_desktop }}px;
+    }
+  }
+
+  /* Horizontal Animation - Left */
+  #sek-sip-{{ section_id }} .sek-sip__track--horizontal-left {
+    animation: sek-sip-scroll-left-{{ section_id }} var(--sip-speed, 30s) linear infinite;
+  }
+
+  /* Horizontal Animation - Right */
+  #sek-sip-{{ section_id }} .sek-sip__track--horizontal-right {
+    animation: sek-sip-scroll-right-{{ section_id }} var(--sip-speed, 30s) linear infinite;
+  }
+
+  /* Vertical Scroll Container */
+  #sek-sip-{{ section_id }} .sek-sip__row--vertical {
+    height: {{ section.settings.vertical_height_mobile }}px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-sip-{{ section_id }} .sek-sip__row--vertical {
+      height: {{ section.settings.vertical_height_desktop }}px;
+    }
+  }
+
+  #sek-sip-{{ section_id }} .sek-sip__track--vertical {
+    flex-direction: column;
+    height: fit-content;
+  }
+
+  /* Vertical Animation - Up */
+  #sek-sip-{{ section_id }} .sek-sip__track--vertical-up {
+    animation: sek-sip-scroll-up-{{ section_id }} var(--sip-speed, 30s) linear infinite;
+  }
+
+  /* Vertical Animation - Down */
+  #sek-sip-{{ section_id }} .sek-sip__track--vertical-down {
+    animation: sek-sip-scroll-down-{{ section_id }} var(--sip-speed, 30s) linear infinite;
+  }
+
+  /* Pause on Hover */
+  #sek-sip-{{ section_id }} .sek-sip__row--pause-hover:hover .sek-sip__track {
+    animation-play-state: paused;
+  }
+
+  /* Keyframes */
+  @keyframes sek-sip-scroll-left-{{ section_id }} {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes sek-sip-scroll-right-{{ section_id }} {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
+  @keyframes sek-sip-scroll-up-{{ section_id }} {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+
+  @keyframes sek-sip-scroll-down-{{ section_id }} {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
+  }
+
+  /* Image Item */
+  #sek-sip-{{ section_id }} .sek-sip__item {
+    flex-shrink: 0;
+    width: {{ section.settings.image_width_mobile }}px;
+    height: {{ section.settings.image_height_mobile }}px;
+    overflow: hidden;
+    border-radius: {{ section.settings.border_radius }}px;
+    border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+  }
+
+  @media (min-width: 750px) {
+    #sek-sip-{{ section_id }} .sek-sip__item {
+      width: {{ section.settings.image_width_desktop }}px;
+      height: {{ section.settings.image_height_desktop }}px;
+    }
+  }
+
+  #sek-sip-{{ section_id }} .sek-sip__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  /* Hover Zoom */
+  {%- if section.settings.hover_zoom -%}
+  #sek-sip-{{ section_id }} .sek-sip__item:hover img {
+    transform: scale(1.05);
+  }
+  {%- endif -%}
+{% endstyle %}
+
+<section id="sek-sip-{{ section_id }}" class="sek-sip">
+  <!-- Header -->
+  {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+    <div class="sek-sip__header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="sek-sip__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="sek-sip__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <!-- Scrolling Rows -->
+  <div class="sek-sip__rows">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'row' -%}
+        {%- assign row_direction = block.settings.scroll_direction -%}
+        {%- assign is_vertical = false -%}
+        {%- if row_direction == 'vertical_up' or row_direction == 'vertical_down' -%}
+          {%- assign is_vertical = true -%}
+        {%- endif -%}
+
+        {%- assign track_class = 'sek-sip__track' -%}
+        {%- case row_direction -%}
+          {%- when 'horizontal_left' -%}
+            {%- assign track_class = track_class | append: ' sek-sip__track--horizontal-left' -%}
+          {%- when 'horizontal_right' -%}
+            {%- assign track_class = track_class | append: ' sek-sip__track--horizontal-right' -%}
+          {%- when 'vertical_up' -%}
+            {%- assign track_class = track_class | append: ' sek-sip__track--vertical sek-sip__track--vertical-up' -%}
+          {%- when 'vertical_down' -%}
+            {%- assign track_class = track_class | append: ' sek-sip__track--vertical sek-sip__track--vertical-down' -%}
+        {%- endcase -%}
+
+        <div
+          class="sek-sip__row{% if is_vertical %} sek-sip__row--vertical{% endif %}{% if block.settings.pause_on_hover %} sek-sip__row--pause-hover{% endif %}"
+          style="--sip-speed: {{ block.settings.scroll_speed }}s;"
+          {{ block.shopify_attributes }}
+        >
+          <div class="{{ track_class }}">
+            {%- for i in (1..2) -%}
+              {%- if block.settings.image_1 != blank -%}
+                <div class="sek-sip__item">
+                  {{ block.settings.image_1 | image_url: width: 800 | image_tag: loading: 'lazy' }}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.image_2 != blank -%}
+                <div class="sek-sip__item">
+                  {{ block.settings.image_2 | image_url: width: 800 | image_tag: loading: 'lazy' }}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.image_3 != blank -%}
+                <div class="sek-sip__item">
+                  {{ block.settings.image_3 | image_url: width: 800 | image_tag: loading: 'lazy' }}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.image_4 != blank -%}
+                <div class="sek-sip__item">
+                  {{ block.settings.image_4 | image_url: width: 800 | image_tag: loading: 'lazy' }}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.image_5 != blank -%}
+                <div class="sek-sip__item">
+                  {{ block.settings.image_5 | image_url: width: 800 | image_tag: loading: 'lazy' }}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.image_6 != blank -%}
+                <div class="sek-sip__item">
+                  {{ block.settings.image_6 | image_url: width: 800 | image_tag: loading: 'lazy' }}
+                </div>
+              {%- endif -%}
+
+              {%- comment -%} Placeholder images if no images set {%- endcomment -%}
+              {%- if block.settings.image_1 == blank and block.settings.image_2 == blank -%}
+                {%- for j in (1..4) -%}
+                  <div class="sek-sip__item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                {%- endfor -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- comment -%} Default row if no blocks {%- endcomment -%}
+    {%- if section.blocks.size == 0 -%}
+      <div class="sek-sip__row sek-sip__row--pause-hover" style="--sip-speed: 30s;">
+        <div class="sek-sip__track sek-sip__track--horizontal-left">
+          {%- for i in (1..2) -%}
+            {%- for j in (1..4) -%}
+              <div class="sek-sip__item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Scrolling Images Pro",
+  "tag": "div",
+  "class": "sek-sip-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Gallery"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (mobile)",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "label": "Subheading size (mobile)",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_desktop",
+      "label": "Subheading size (desktop)",
+      "min": 16,
+      "max": 24,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#666666"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_mobile",
+      "label": "Header bottom spacing (mobile)",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_desktop",
+      "label": "Header bottom spacing (desktop)",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "range",
+      "id": "image_width_mobile",
+      "label": "Image width (mobile)",
+      "min": 150,
+      "max": 350,
+      "step": 10,
+      "default": 200,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_width_desktop",
+      "label": "Image width (desktop)",
+      "min": 200,
+      "max": 500,
+      "step": 20,
+      "default": 300,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_height_mobile",
+      "label": "Image height (mobile)",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "default": 250,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_height_desktop",
+      "label": "Image height (desktop)",
+      "min": 200,
+      "max": 500,
+      "step": 20,
+      "default": 360,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_gap_mobile",
+      "label": "Gap between images (mobile)",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_gap_desktop",
+      "label": "Gap between images (desktop)",
+      "min": 12,
+      "max": 60,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Image border width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Image border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "checkbox",
+      "id": "hover_zoom",
+      "label": "Zoom image on hover",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Vertical Scroll Settings"
+    },
+    {
+      "type": "range",
+      "id": "vertical_height_mobile",
+      "label": "Vertical row height (mobile)",
+      "min": 300,
+      "max": 600,
+      "step": 50,
+      "default": 400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "vertical_height_desktop",
+      "label": "Vertical row height (desktop)",
+      "min": 400,
+      "max": 800,
+      "step": 50,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Row Spacing"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "label": "Gap between rows (mobile)",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_desktop",
+      "label": "Gap between rows (desktop)",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Section Style"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_desktop",
+      "label": "Top padding (desktop)",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_desktop",
+      "label": "Bottom padding (desktop)",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Scrolling Row",
+      "settings": [
+        {
+          "type": "select",
+          "id": "scroll_direction",
+          "label": "Scroll direction",
+          "options": [
+            { "value": "horizontal_left", "label": "Horizontal - Left" },
+            { "value": "horizontal_right", "label": "Horizontal - Right" },
+            { "value": "vertical_up", "label": "Vertical - Up" },
+            { "value": "vertical_down", "label": "Vertical - Down" }
+          ],
+          "default": "horizontal_left"
+        },
+        {
+          "type": "range",
+          "id": "scroll_speed",
+          "label": "Scroll speed (seconds)",
+          "info": "Higher = slower",
+          "min": 10,
+          "max": 120,
+          "step": 5,
+          "default": 30,
+          "unit": "s"
+        },
+        {
+          "type": "checkbox",
+          "id": "pause_on_hover",
+          "label": "Pause on hover",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Images"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Image 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Image 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_6",
+          "label": "Image 6"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Scrolling Images Pro",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "scroll_direction": "horizontal_left",
+            "scroll_speed": 30,
+            "pause_on_hover": true
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "scroll_direction": "horizontal_right",
+            "scroll_speed": 35,
+            "pause_on_hover": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

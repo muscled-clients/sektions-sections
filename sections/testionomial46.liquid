@@ -1,0 +1,939 @@
+{% comment %}
+  SEK Testimonials 46 - Horizontal scrolling testimonial marquee
+  Features: Two rows, opposite scroll directions, avatar cards, star ratings, gradient backgrounds
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+
+  /* Section Container */
+  #sek-t46-{{ section_id }} {
+    padding: {{ section.settings.section_padding_top_mobile }}px 0 {{ section.settings.section_padding_bottom_mobile }}px;
+    background: {{ section.settings.bg_gradient }};
+    overflow: hidden;
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} {
+      padding: {{ section.settings.section_padding_top_desktop }}px 0 {{ section.settings.section_padding_bottom_desktop }}px;
+    }
+  }
+
+  /* Section Header */
+  #sek-t46-{{ section_id }} .sek-t46__header {
+    text-align: center;
+    padding: 0 20px;
+    margin-bottom: {{ section.settings.header_spacing_mobile }}px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__header {
+      margin-bottom: {{ section.settings.header_spacing_desktop }}px;
+    }
+  }
+
+  #sek-t46-{{ section_id }} .sek-t46__heading {
+    font-family: 'Inter', sans-serif;
+    font-size: {{ section.settings.heading_size_mobile }}px;
+    font-weight: 700;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__heading {
+      font-size: {{ section.settings.heading_size_desktop }}px;
+    }
+  }
+
+  #sek-t46-{{ section_id }} .sek-t46__heading em {
+    font-style: normal;
+    color: {{ section.settings.accent_color }};
+  }
+
+  #sek-t46-{{ section_id }} .sek-t46__subheading {
+    font-family: 'Inter', sans-serif;
+    font-size: {{ section.settings.subheading_size_mobile }}px;
+    font-weight: 400;
+    color: {{ section.settings.subheading_color }};
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__subheading {
+      font-size: {{ section.settings.subheading_size_desktop }}px;
+    }
+  }
+
+  /* Marquee Rows Container */
+  #sek-t46-{{ section_id }} .sek-t46__rows {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.row_gap_mobile }}px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__rows {
+      gap: {{ section.settings.row_gap_desktop }}px;
+    }
+  }
+
+  /* Single Row */
+  #sek-t46-{{ section_id }} .sek-t46__row {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Track */
+  #sek-t46-{{ section_id }} .sek-t46__track {
+    display: flex;
+    gap: {{ section.settings.card_gap_mobile }}px;
+    width: fit-content;
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__track {
+      gap: {{ section.settings.card_gap_desktop }}px;
+    }
+  }
+
+  /* Animation - Left */
+  #sek-t46-{{ section_id }} .sek-t46__track--left {
+    animation: sek-t46-scroll-left-{{ section_id }} {{ section.settings.scroll_speed_mobile }}s linear infinite;
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__track--left {
+      animation-duration: {{ section.settings.scroll_speed_desktop }}s;
+    }
+  }
+
+  /* Animation - Right */
+  #sek-t46-{{ section_id }} .sek-t46__track--right {
+    animation: sek-t46-scroll-right-{{ section_id }} {{ section.settings.scroll_speed_mobile }}s linear infinite;
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__track--right {
+      animation-duration: {{ section.settings.scroll_speed_desktop }}s;
+    }
+  }
+
+  /* Pause on Hover */
+  {%- if section.settings.pause_on_hover -%}
+  #sek-t46-{{ section_id }} .sek-t46__row:hover .sek-t46__track {
+    animation-play-state: paused;
+  }
+  {%- endif -%}
+
+  @keyframes sek-t46-scroll-left-{{ section_id }} {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes sek-t46-scroll-right-{{ section_id }} {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
+  /* Testimonial Card */
+  #sek-t46-{{ section_id }} .sek-t46__card {
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    width: {{ section.settings.card_width_mobile }}px;
+    padding: 20px;
+    background: {{ section.settings.card_bg }};
+    border: {{ section.settings.card_border_width }}px solid {{ section.settings.card_border_color }};
+    border-radius: {{ section.settings.card_radius }}px;
+    box-shadow: {{ section.settings.card_shadow }};
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__card {
+      width: {{ section.settings.card_width_desktop }}px;
+      padding: 28px;
+      gap: 20px;
+    }
+  }
+
+  /* Card Content */
+  #sek-t46-{{ section_id }} .sek-t46__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Quote */
+  #sek-t46-{{ section_id }} .sek-t46__quote {
+    font-family: 'Baskervville', serif;
+    font-size: {{ section.settings.quote_size_mobile }}px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.6;
+    color: {{ section.settings.quote_color }};
+    margin: 0 0 16px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__quote {
+      font-size: {{ section.settings.quote_size_desktop }}px;
+      margin-bottom: 20px;
+    }
+  }
+
+  /* Author Info */
+  #sek-t46-{{ section_id }} .sek-t46__author {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  #sek-t46-{{ section_id }} .sek-t46__name {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ section.settings.name_color }};
+    margin: 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__name {
+      font-size: 16px;
+    }
+  }
+
+  #sek-t46-{{ section_id }} .sek-t46__location {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: {{ section.settings.location_color }};
+    margin: 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__location {
+      font-size: 14px;
+    }
+  }
+
+  /* Stars */
+  #sek-t46-{{ section_id }} .sek-t46__stars {
+    display: flex;
+    gap: 3px;
+    margin-top: 8px;
+  }
+
+  #sek-t46-{{ section_id }} .sek-t46__star {
+    width: 14px;
+    height: 14px;
+    fill: {{ section.settings.star_color }};
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__star {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  /* Avatar */
+  #sek-t46-{{ section_id }} .sek-t46__avatar {
+    flex-shrink: 0;
+    width: {{ section.settings.avatar_size_mobile }}px;
+    height: {{ section.settings.avatar_size_mobile }}px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: {{ section.settings.avatar_bg }};
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__avatar {
+      width: {{ section.settings.avatar_size_desktop }}px;
+      height: {{ section.settings.avatar_size_desktop }}px;
+    }
+  }
+
+  #sek-t46-{{ section_id }} .sek-t46__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Avatar Placeholder */
+  #sek-t46-{{ section_id }} .sek-t46__avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    background: {{ section.settings.avatar_bg }};
+  }
+
+  @media (min-width: 750px) {
+    #sek-t46-{{ section_id }} .sek-t46__avatar-placeholder {
+      font-size: 24px;
+    }
+  }
+{% endstyle %}
+
+<section id="sek-t46-{{ section_id }}" class="sek-t46">
+  <!-- Header -->
+  {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+    <div class="sek-t46__header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="sek-t46__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="sek-t46__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <!-- Marquee Rows -->
+  <div class="sek-t46__rows">
+    {%- comment -%} Row 1 - Scrolls Left {%- endcomment -%}
+    <div class="sek-t46__row">
+      <div class="sek-t46__track sek-t46__track--left">
+        {%- for i in (1..2) -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial_row_1' -%}
+              <div class="sek-t46__card" {{ block.shopify_attributes }}>
+                <div class="sek-t46__content">
+                  <p class="sek-t46__quote">"{{ block.settings.quote }}"</p>
+                  <div class="sek-t46__author">
+                    <p class="sek-t46__name">{{ block.settings.name }}</p>
+                    {%- if block.settings.location != blank -%}
+                      <p class="sek-t46__location">{{ block.settings.location }}</p>
+                    {%- endif -%}
+                    {%- if section.settings.show_stars -%}
+                      <div class="sek-t46__stars">
+                        {%- for star in (1..5) -%}
+                          <svg class="sek-t46__star" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                          </svg>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+                <div class="sek-t46__avatar">
+                  {%- if block.settings.avatar != blank -%}
+                    {{ block.settings.avatar | image_url: width: 200 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    <div class="sek-t46__avatar-placeholder">{{ block.settings.name | slice: 0 }}</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- comment -%} Placeholder cards if no blocks {%- endcomment -%}
+          {%- assign row1_count = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial_row_1' -%}
+              {%- assign row1_count = row1_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if row1_count == 0 -%}
+            {%- for j in (1..3) -%}
+              <div class="sek-t46__card">
+                <div class="sek-t46__content">
+                  <p class="sek-t46__quote">"This product exceeded all my expectations. The quality is outstanding and customer service was incredibly helpful."</p>
+                  <div class="sek-t46__author">
+                    <p class="sek-t46__name">Happy Customer</p>
+                    <p class="sek-t46__location">New York, NY</p>
+                    <div class="sek-t46__stars">
+                      {%- for star in (1..5) -%}
+                        <svg class="sek-t46__star" viewBox="0 0 24 24">
+                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                      {%- endfor -%}
+                    </div>
+                  </div>
+                </div>
+                <div class="sek-t46__avatar">
+                  <div class="sek-t46__avatar-placeholder">H</div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} Row 2 - Scrolls Right {%- endcomment -%}
+    <div class="sek-t46__row">
+      <div class="sek-t46__track sek-t46__track--right">
+        {%- for i in (1..2) -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial_row_2' -%}
+              <div class="sek-t46__card" {{ block.shopify_attributes }}>
+                <div class="sek-t46__content">
+                  <p class="sek-t46__quote">"{{ block.settings.quote }}"</p>
+                  <div class="sek-t46__author">
+                    <p class="sek-t46__name">{{ block.settings.name }}</p>
+                    {%- if block.settings.location != blank -%}
+                      <p class="sek-t46__location">{{ block.settings.location }}</p>
+                    {%- endif -%}
+                    {%- if section.settings.show_stars -%}
+                      <div class="sek-t46__stars">
+                        {%- for star in (1..5) -%}
+                          <svg class="sek-t46__star" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                          </svg>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+                <div class="sek-t46__avatar">
+                  {%- if block.settings.avatar != blank -%}
+                    {{ block.settings.avatar | image_url: width: 200 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    <div class="sek-t46__avatar-placeholder">{{ block.settings.name | slice: 0 }}</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- comment -%} Placeholder cards if no blocks {%- endcomment -%}
+          {%- assign row2_count = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial_row_2' -%}
+              {%- assign row2_count = row2_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if row2_count == 0 -%}
+            {%- for j in (1..3) -%}
+              <div class="sek-t46__card">
+                <div class="sek-t46__content">
+                  <p class="sek-t46__quote">"Amazing experience from start to finish. Will definitely be ordering again and recommending to friends!"</p>
+                  <div class="sek-t46__author">
+                    <p class="sek-t46__name">Satisfied Buyer</p>
+                    <p class="sek-t46__location">Los Angeles, CA</p>
+                    <div class="sek-t46__stars">
+                      {%- for star in (1..5) -%}
+                        <svg class="sek-t46__star" viewBox="0 0 24 24">
+                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                      {%- endfor -%}
+                    </div>
+                  </div>
+                </div>
+                <div class="sek-t46__avatar">
+                  <div class="sek-t46__avatar-placeholder">S</div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Testimonials 46",
+  "tag": "div",
+  "class": "sek-t46-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why people <em>love</em> our brand"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "See what our customers are saying"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (mobile)",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 32,
+      "max": 72,
+      "step": 4,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (emphasized text)",
+      "default": "#e07c4e"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "label": "Subheading size (mobile)",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_desktop",
+      "label": "Subheading size (desktop)",
+      "min": 16,
+      "max": 24,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_mobile",
+      "label": "Header bottom spacing (mobile)",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_desktop",
+      "label": "Header bottom spacing (desktop)",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed_mobile",
+      "label": "Scroll speed mobile (seconds)",
+      "info": "Higher = slower",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "default": 40,
+      "unit": "s"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed_desktop",
+      "label": "Scroll speed desktop (seconds)",
+      "min": 30,
+      "max": 180,
+      "step": 10,
+      "default": 60,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Card Settings"
+    },
+    {
+      "type": "range",
+      "id": "card_width_mobile",
+      "label": "Card width (mobile)",
+      "min": 260,
+      "max": 360,
+      "step": 20,
+      "default": 300,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_width_desktop",
+      "label": "Card width (desktop)",
+      "min": 380,
+      "max": 580,
+      "step": 20,
+      "default": 460,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_gap_mobile",
+      "label": "Gap between cards (mobile)",
+      "min": 12,
+      "max": 32,
+      "step": 4,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_gap_desktop",
+      "label": "Gap between cards (desktop)",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Card border width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "card_shadow",
+      "label": "Card shadow",
+      "default": "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "quote_size_mobile",
+      "label": "Quote size (mobile)",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "quote_size_desktop",
+      "label": "Quote size (desktop)",
+      "min": 16,
+      "max": 24,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "quote_color",
+      "label": "Quote color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Name color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "location_color",
+      "label": "Location color",
+      "default": "#888888"
+    },
+    {
+      "type": "header",
+      "content": "Star Rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stars",
+      "label": "Show star rating",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#f5a623"
+    },
+    {
+      "type": "header",
+      "content": "Avatar"
+    },
+    {
+      "type": "range",
+      "id": "avatar_size_mobile",
+      "label": "Avatar size (mobile)",
+      "min": 40,
+      "max": 80,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "avatar_size_desktop",
+      "label": "Avatar size (desktop)",
+      "min": 60,
+      "max": 100,
+      "step": 4,
+      "default": 72,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "avatar_bg",
+      "label": "Avatar placeholder background",
+      "default": "#e07c4e"
+    },
+    {
+      "type": "header",
+      "content": "Row Spacing"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "label": "Gap between rows (mobile)",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_desktop",
+      "label": "Gap between rows (desktop)",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Section Style"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background",
+      "default": "linear-gradient(180deg, #fbefe4 0%, #f6cead 100%)"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_desktop",
+      "label": "Top padding (desktop)",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_desktop",
+      "label": "Bottom padding (desktop)",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial_row_1",
+      "name": "Row 1 Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer name",
+          "default": "Sarah Johnson"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Portland, OR"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Testimonial quote",
+          "default": "This product exceeded all my expectations. The quality is outstanding and the customer service team was incredibly helpful throughout my purchase."
+        }
+      ]
+    },
+    {
+      "type": "testimonial_row_2",
+      "name": "Row 2 Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer name",
+          "default": "Michael Chen"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Seattle, WA"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Testimonial quote",
+          "default": "I've been a loyal customer for years and they never disappoint. The attention to detail and quality of their products is unmatched in the industry."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Testimonials 46",
+      "blocks": [
+        {
+          "type": "testimonial_row_1",
+          "settings": {
+            "name": "Sarah Johnson",
+            "location": "Portland, OR",
+            "quote": "This product exceeded all my expectations. The quality is outstanding and the customer service team was incredibly helpful."
+          }
+        },
+        {
+          "type": "testimonial_row_1",
+          "settings": {
+            "name": "Emily Davis",
+            "location": "Austin, TX",
+            "quote": "Best purchase I've made this year! Fast shipping, beautiful packaging, and the product itself is top-notch quality."
+          }
+        },
+        {
+          "type": "testimonial_row_1",
+          "settings": {
+            "name": "Jessica Martinez",
+            "location": "Denver, CO",
+            "quote": "I was skeptical at first, but this has completely changed my routine. Highly recommend to anyone looking for quality."
+          }
+        },
+        {
+          "type": "testimonial_row_2",
+          "settings": {
+            "name": "Michael Chen",
+            "location": "Seattle, WA",
+            "quote": "I've been a loyal customer for years and they never disappoint. The attention to detail is unmatched."
+          }
+        },
+        {
+          "type": "testimonial_row_2",
+          "settings": {
+            "name": "David Wilson",
+            "location": "Chicago, IL",
+            "quote": "Outstanding quality and fast shipping. This is exactly what I was looking for. Will definitely order again!"
+          }
+        },
+        {
+          "type": "testimonial_row_2",
+          "settings": {
+            "name": "Amanda Thompson",
+            "location": "Miami, FL",
+            "quote": "The best customer experience I've ever had. From browsing to delivery, everything was seamless and professional."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

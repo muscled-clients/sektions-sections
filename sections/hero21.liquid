@@ -1,0 +1,841 @@
+{% comment %}
+  SEK Hero 21 - Full-width hero with scrolling ticker rows
+  Features: Background video/image, dark overlay, 3 marquee rows, alternating directions, pill cards
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+
+{% style %}
+  /* Hero Container */
+  #sek-hero21-{{ section_id }} {
+    position: relative;
+    width: 100%;
+    min-height: {{ section.settings.min_height_mobile }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hero21-{{ section_id }} {
+      min-height: {{ section.settings.min_height_desktop }}px;
+    }
+  }
+
+  /* Background Video/Image */
+  #sek-hero21-{{ section_id }} .sek-h21__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  #sek-hero21-{{ section_id }} .sek-h21__bg img,
+  #sek-hero21-{{ section_id }} .sek-h21__bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Overlay */
+  #sek-hero21-{{ section_id }} .sek-h21__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    z-index: 2;
+  }
+
+  /* Content */
+  #sek-hero21-{{ section_id }} .sek-h21__content {
+    position: relative;
+    z-index: 3;
+    padding: {{ section.settings.padding_top_mobile }}px 20px {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hero21-{{ section_id }} .sek-h21__content {
+      padding: {{ section.settings.padding_top_desktop }}px 5rem {{ section.settings.padding_bottom_desktop }}px;
+    }
+  }
+
+  /* Header Section */
+  #sek-hero21-{{ section_id }} .sek-h21__header {
+    text-align: {{ section.settings.text_alignment }};
+    max-width: {{ section.settings.content_max_width }}px;
+    margin: 0 auto 40px;
+    padding: 0 15px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hero21-{{ section_id }} .sek-h21__header {
+      margin-bottom: 60px;
+    }
+  }
+
+  #sek-hero21-{{ section_id }} .sek-h21__heading {
+    font-size: {{ section.settings.heading_size_mobile }}px;
+    line-height: 1.3;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 20px;
+    {%- if section.settings.heading_font == 'serif' -%}
+    font-family: 'Petrona', 'Georgia', 'Times New Roman', serif;
+    {%- else -%}
+    font-family: inherit;
+    {%- endif -%}
+  }
+
+  @media (min-width: 750px) {
+    #sek-hero21-{{ section_id }} .sek-h21__heading {
+      font-size: {{ section.settings.heading_size_desktop }}px;
+      margin-bottom: 25px;
+    }
+  }
+
+  #sek-hero21-{{ section_id }} .sek-h21__text {
+    font-size: {{ section.settings.text_size_mobile }}px;
+    line-height: 1.8;
+    color: {{ section.settings.text_color }};
+    margin: 0 0 30px;
+    opacity: 0.9;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hero21-{{ section_id }} .sek-h21__text {
+      font-size: {{ section.settings.text_size_desktop }}px;
+    }
+  }
+
+  /* CTA Button */
+  #sek-hero21-{{ section_id }} .sek-h21__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 100px;
+    background-color: {{ section.settings.button_bg }};
+    color: {{ section.settings.button_text_color }};
+    transition: all 0.25s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  #sek-hero21-{{ section_id }} .sek-h21__btn:hover {
+    background-color: {{ section.settings.button_hover_bg }};
+    transform: translateY(-2px);
+  }
+
+  #sek-hero21-{{ section_id }} .sek-h21__btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  /* Button Wrapper (Below Tickers) */
+  #sek-hero21-{{ section_id }} .sek-h21__btn-wrapper {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hero21-{{ section_id }} .sek-h21__btn-wrapper {
+      margin-top: 50px;
+    }
+  }
+
+  /* Ticker/Marquee Rows */
+  #sek-hero21-{{ section_id }} .sek-h21__tickers {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.ticker_gap_mobile }}px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hero21-{{ section_id }} .sek-h21__tickers {
+      gap: {{ section.settings.ticker_gap_desktop }}px;
+    }
+  }
+
+  #sek-hero21-{{ section_id }} .sek-h21__ticker {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  #sek-hero21-{{ section_id }} .sek-h21__ticker-track {
+    display: flex;
+    gap: {{ section.settings.item_gap_mobile }}px;
+    width: fit-content;
+    animation: sek-h21-scroll-{{ section_id }} {{ section.settings.ticker_speed_mobile }}s linear infinite;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hero21-{{ section_id }} .sek-h21__ticker-track {
+      gap: {{ section.settings.item_gap_desktop }}px;
+      animation-duration: {{ section.settings.ticker_speed_desktop }}s;
+    }
+  }
+
+  /* Reverse direction for middle row */
+  #sek-hero21-{{ section_id }} .sek-h21__ticker--reverse .sek-h21__ticker-track {
+    animation-name: sek-h21-scroll-reverse-{{ section_id }};
+  }
+
+  /* Pause on hover */
+  {%- if section.settings.pause_on_hover -%}
+  #sek-hero21-{{ section_id }} .sek-h21__ticker:hover .sek-h21__ticker-track {
+    animation-play-state: paused;
+  }
+  {%- endif -%}
+
+  @keyframes sek-h21-scroll-{{ section_id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes sek-h21-scroll-reverse-{{ section_id }} {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Ticker Items */
+  #sek-hero21-{{ section_id }} .sek-h21__ticker-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    background: {{ section.settings.card_bg }};
+    border: 1px solid {{ section.settings.card_border }};
+    border-radius: {{ section.settings.card_radius }}px;
+    color: {{ section.settings.card_text }};
+    font-size: {{ section.settings.card_font_size_mobile }}px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hero21-{{ section_id }} .sek-h21__ticker-item {
+      padding: 14px 24px;
+      font-size: {{ section.settings.card_font_size_desktop }}px;
+    }
+  }
+
+  #sek-hero21-{{ section_id }} .sek-h21__ticker-item:hover {
+    background: {{ section.settings.card_hover_bg }};
+  }
+
+  #sek-hero21-{{ section_id }} .sek-h21__ticker-icon {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    flex-shrink: 0;
+  }
+
+  /* Import Petrona font if needed */
+  {%- if section.settings.heading_font == 'serif' -%}
+  @import url('https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&display=swap');
+  {%- endif -%}
+{% endstyle %}
+
+<section id="sek-hero21-{{ section_id }}" class="sek-hero21">
+  <!-- Background Video/Image -->
+  <div class="sek-h21__bg">
+    {%- if section.settings.video_url != blank -%}
+      <video autoplay muted loop playsinline>
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+      </video>
+    {%- elsif section.settings.background_video != blank -%}
+      {{ section.settings.background_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true }}
+    {%- elsif section.settings.background_image != blank -%}
+      {{ section.settings.background_image | image_url: width: 2000 | image_tag: loading: 'eager' }}
+    {%- else -%}
+      <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);"></div>
+    {%- endif -%}
+  </div>
+
+  <!-- Overlay -->
+  <div class="sek-h21__overlay"></div>
+
+  <!-- Content -->
+  <div class="sek-h21__content">
+    <!-- Header (Heading & Text only) -->
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="sek-h21__header">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="sek-h21__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <p class="sek-h21__text">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Ticker Rows -->
+    <div class="sek-h21__tickers">
+      <!-- Row 1 -->
+      <div class="sek-h21__ticker">
+        <div class="sek-h21__ticker-track">
+          {%- for i in (1..2) -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'ticker_row_1' -%}
+                <div class="sek-h21__ticker-item" {{ block.shopify_attributes }}>
+                  {{ block.settings.text }}
+                  {%- if section.settings.show_arrows -%}
+                    <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if section.blocks.size == 0 -%}
+              <div class="sek-h21__ticker-item">Coffee beans <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+              <div class="sek-h21__ticker-item">Espresso coffee <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+              <div class="sek-h21__ticker-item">Ground coffee <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- Row 2 (Reverse) -->
+      <div class="sek-h21__ticker sek-h21__ticker--reverse">
+        <div class="sek-h21__ticker-track">
+          {%- for i in (1..2) -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'ticker_row_2' -%}
+                <div class="sek-h21__ticker-item" {{ block.shopify_attributes }}>
+                  {{ block.settings.text }}
+                  {%- if section.settings.show_arrows -%}
+                    <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if section.blocks.size == 0 -%}
+              <div class="sek-h21__ticker-item">Decaffeinated <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+              <div class="sek-h21__ticker-item">Instant coffee <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+              <div class="sek-h21__ticker-item">Coffee capsules <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="sek-h21__ticker">
+        <div class="sek-h21__ticker-track">
+          {%- for i in (1..2) -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'ticker_row_3' -%}
+                <div class="sek-h21__ticker-item" {{ block.shopify_attributes }}>
+                  {{ block.settings.text }}
+                  {%- if section.settings.show_arrows -%}
+                    <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if section.blocks.size == 0 -%}
+              <div class="sek-h21__ticker-item">ESE coffee tablets <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+              <div class="sek-h21__ticker-item">Advent calendars <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+              <div class="sek-h21__ticker-item">Coffee sets <svg class="sek-h21__ticker-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    <!-- Button (Below Tickers) -->
+    {%- if section.settings.button_text != blank -%}
+      <div class="sek-h21__btn-wrapper">
+        <a href="{{ section.settings.button_link }}" class="sek-h21__btn">
+          {{ section.settings.button_text }}
+          {%- if section.settings.show_button_arrow -%}
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          {%- endif -%}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Hero 21",
+  "tag": "div",
+  "class": "sek-hero21-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background video (Shopify hosted)"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Background video URL (external)",
+      "info": "Use for external MP4 video URLs. Takes priority over Shopify hosted video."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Fallback image",
+      "info": "Shows if no video is set"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Height"
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "Min height (mobile)",
+      "min": 400,
+      "max": 800,
+      "step": 50,
+      "default": 550,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "min_height_desktop",
+      "label": "Min height (desktop)",
+      "min": 500,
+      "max": 1000,
+      "step": 50,
+      "default": 700,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Discover our premium coffee selection"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font style",
+      "options": [
+        { "value": "sans", "label": "Sans-serif (Theme default)" },
+        { "value": "serif", "label": "Serif (Petrona)" }
+      ],
+      "default": "serif"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (mobile)",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 32,
+      "max": 80,
+      "step": 4,
+      "default": 56,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#eeebdd"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description text",
+      "default": "From single-origin beans to expertly crafted blends, find your perfect cup."
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Text size (mobile)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_size_desktop",
+      "label": "Text size (desktop)",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#eeebdd"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 400,
+      "max": 900,
+      "step": 50,
+      "default": 700,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_arrow",
+      "label": "Show arrow icon",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#e9ce39"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Button hover background",
+      "default": "#e1cb53"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#010101"
+    },
+    {
+      "type": "header",
+      "content": "Ticker Cards"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "rgba(238, 235, 221, 0.3)"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_bg",
+      "label": "Card hover background",
+      "default": "rgba(238, 235, 221, 0.5)"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card border color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_text",
+      "label": "Card text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_font_size_mobile",
+      "label": "Card font size (mobile)",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_font_size_desktop",
+      "label": "Card font size (desktop)",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrow icons in cards",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Ticker Animation"
+    },
+    {
+      "type": "range",
+      "id": "ticker_speed_mobile",
+      "label": "Animation speed mobile",
+      "info": "Duration in seconds (higher = slower)",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "default": 60,
+      "unit": "s"
+    },
+    {
+      "type": "range",
+      "id": "ticker_speed_desktop",
+      "label": "Animation speed desktop",
+      "min": 20,
+      "max": 120,
+      "step": 10,
+      "default": 50,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause animation on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "ticker_gap_mobile",
+      "label": "Gap between ticker rows (mobile)",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "ticker_gap_desktop",
+      "label": "Gap between ticker rows (desktop)",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "item_gap_mobile",
+      "label": "Gap between items (mobile)",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "item_gap_desktop",
+      "label": "Gap between items (desktop)",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 30,
+      "max": 120,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 30,
+      "max": 120,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Padding top (desktop)",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Padding bottom (desktop)",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ticker_row_1",
+      "name": "Row 1 Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Coffee beans"
+        }
+      ]
+    },
+    {
+      "type": "ticker_row_2",
+      "name": "Row 2 Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Decaffeinated"
+        }
+      ]
+    },
+    {
+      "type": "ticker_row_3",
+      "name": "Row 3 Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Coffee sets"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Hero 21",
+      "blocks": [
+        { "type": "ticker_row_1", "settings": { "text": "Coffee beans" } },
+        { "type": "ticker_row_1", "settings": { "text": "Espresso coffee" } },
+        { "type": "ticker_row_1", "settings": { "text": "Ground coffee" } },
+        { "type": "ticker_row_2", "settings": { "text": "Decaffeinated" } },
+        { "type": "ticker_row_2", "settings": { "text": "Instant coffee" } },
+        { "type": "ticker_row_2", "settings": { "text": "Coffee capsules" } },
+        { "type": "ticker_row_3", "settings": { "text": "ESE coffee tablets" } },
+        { "type": "ticker_row_3", "settings": { "text": "Advent calendars" } },
+        { "type": "ticker_row_3", "settings": { "text": "Coffee sets" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,627 @@
+{% comment %}
+  SEK Scrolling Logo Cloud - Horizontal scrolling logo marquee
+  Features: Continuous scroll animation, pause on hover, RTL support, seamless loop
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+
+{% style %}
+  /* Section Container */
+  #sek-logo-cloud-{{ section_id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
+    overflow: hidden;
+  }
+
+  @media (min-width: 750px) {
+    #sek-logo-cloud-{{ section_id }} {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Title */
+  #sek-logo-cloud-{{ section_id }} .sek-slc__title {
+    text-align: center;
+    font-size: {{ section.settings.title_size_mobile }}px;
+    font-weight: {{ section.settings.title_weight }};
+    color: {{ section.settings.title_color }};
+    margin: 0 0 {{ section.settings.title_margin_mobile }}px 0;
+    padding: 0 15px;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 750px) {
+    #sek-logo-cloud-{{ section_id }} .sek-slc__title {
+      font-size: {{ section.settings.title_size }}px;
+      margin-bottom: {{ section.settings.title_margin }}px;
+      padding: 0;
+    }
+  }
+
+  /* Marquee Container */
+  #sek-logo-cloud-{{ section_id }} .sek-slc__marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Marquee Track */
+  #sek-logo-cloud-{{ section_id }} .sek-slc__track {
+    display: flex;
+    width: fit-content;
+    animation: sek-slc-scroll-{{ section_id }} {{ section.settings.scroll_speed }}s linear infinite;
+  }
+
+  {%- if section.settings.scroll_direction == 'right' -%}
+  #sek-logo-cloud-{{ section_id }} .sek-slc__track {
+    animation-name: sek-slc-scroll-reverse-{{ section_id }};
+  }
+  {%- endif -%}
+
+  /* Pause on hover */
+  {%- if section.settings.pause_on_hover -%}
+  #sek-logo-cloud-{{ section_id }} .sek-slc__marquee:hover .sek-slc__track {
+    animation-play-state: paused;
+  }
+  {%- endif -%}
+
+  /* Keyframe animations */
+  @keyframes sek-slc-scroll-{{ section_id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-1 * var(--sek-slc-group-width)));
+    }
+  }
+
+  @keyframes sek-slc-scroll-reverse-{{ section_id }} {
+    0% {
+      transform: translateX(calc(-1 * var(--sek-slc-group-width)));
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* Logo Group */
+  #sek-logo-cloud-{{ section_id }} .sek-slc__group {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: {{ section.settings.logo_gap_mobile }}px;
+    padding-right: {{ section.settings.logo_gap_mobile }}px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-logo-cloud-{{ section_id }} .sek-slc__group {
+      gap: {{ section.settings.logo_gap }}px;
+      padding-right: {{ section.settings.logo_gap }}px;
+    }
+  }
+
+  /* Logo Slide */
+  #sek-logo-cloud-{{ section_id }} .sek-slc__slide {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: {{ section.settings.logo_width_mobile }}px;
+    height: {{ section.settings.logo_height_mobile }}px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-logo-cloud-{{ section_id }} .sek-slc__slide {
+      width: {{ section.settings.logo_width }}px;
+      height: {{ section.settings.logo_height }}px;
+    }
+  }
+
+  /* Logo Image */
+  #sek-logo-cloud-{{ section_id }} .sek-slc__logo {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    {%- if section.settings.logo_filter != 'none' -%}
+    filter: {{ section.settings.logo_filter }};
+    {%- endif -%}
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  {%- if section.settings.hover_effect -%}
+  #sek-logo-cloud-{{ section_id }} .sek-slc__slide:hover .sek-slc__logo {
+    filter: none;
+    transform: scale(1.05);
+  }
+  {%- endif -%}
+
+  /* Fade edges */
+  {%- if section.settings.fade_edges -%}
+  #sek-logo-cloud-{{ section_id }} .sek-slc__marquee::before,
+  #sek-logo-cloud-{{ section_id }} .sek-slc__marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: {{ section.settings.fade_width }}px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  #sek-logo-cloud-{{ section_id }} .sek-slc__marquee::before {
+    left: 0;
+    background: linear-gradient(to right, {{ section.settings.background_color }}, transparent);
+  }
+
+  #sek-logo-cloud-{{ section_id }} .sek-slc__marquee::after {
+    right: 0;
+    background: linear-gradient(to left, {{ section.settings.background_color }}, transparent);
+  }
+  {%- endif -%}
+
+  /* Placeholder logo */
+  #sek-logo-cloud-{{ section_id }} .sek-slc__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: {{ section.settings.placeholder_bg }};
+    border-radius: 8px;
+    color: {{ section.settings.placeholder_text }};
+    font-size: 14px;
+    font-weight: 500;
+  }
+{% endstyle %}
+
+<section id="sek-logo-cloud-{{ section_id }}" class="sek-scrolling-logo-cloud">
+  {%- if section.settings.title != blank -%}
+    <h2 class="sek-slc__title">{{ section.settings.title }}</h2>
+  {%- endif -%}
+
+  <div class="sek-slc__marquee">
+    <div class="sek-slc__track" id="sek-slc-track-{{ section_id }}">
+      <!-- First set of logos -->
+      <div class="sek-slc__group">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'logo' -%}
+            <div class="sek-slc__slide" {{ block.shopify_attributes }}>
+              {%- if block.settings.logo != blank -%}
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" target="_blank" rel="noopener">
+                {%- endif -%}
+                {{ block.settings.logo | image_url: width: 400 | image_tag:
+                  class: 'sek-slc__logo',
+                  alt: block.settings.alt_text | default: 'Partner logo',
+                  loading: 'lazy'
+                }}
+                {%- if block.settings.link != blank -%}
+                  </a>
+                {%- endif -%}
+              {%- else -%}
+                <div class="sek-slc__placeholder">LOGO</div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if section.blocks.size == 0 -%}
+          {%- for i in (1..5) -%}
+            <div class="sek-slc__slide">
+              <div class="sek-slc__placeholder">LOGO {{ i }}</div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      <!-- Duplicate set for seamless loop -->
+      <div class="sek-slc__group">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'logo' -%}
+            <div class="sek-slc__slide">
+              {%- if block.settings.logo != blank -%}
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" target="_blank" rel="noopener">
+                {%- endif -%}
+                {{ block.settings.logo | image_url: width: 400 | image_tag:
+                  class: 'sek-slc__logo',
+                  alt: block.settings.alt_text | default: 'Partner logo',
+                  loading: 'lazy'
+                }}
+                {%- if block.settings.link != blank -%}
+                  </a>
+                {%- endif -%}
+              {%- else -%}
+                <div class="sek-slc__placeholder">LOGO</div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if section.blocks.size == 0 -%}
+          {%- for i in (1..5) -%}
+            <div class="sek-slc__slide">
+              <div class="sek-slc__placeholder">LOGO {{ i }}</div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    function initLogoCloud() {
+      const sectionId = '{{ section_id }}';
+      const track = document.getElementById('sek-slc-track-' + sectionId);
+      if (!track) return;
+
+      const container = track.parentElement;
+      const groups = track.querySelectorAll('.sek-slc__group');
+      if (groups.length === 0) return;
+
+      function setupMarquee() {
+        const firstGroup = groups[0];
+        const groupWidth = firstGroup.offsetWidth;
+
+        // Set CSS variable for animation
+        track.style.setProperty('--sek-slc-group-width', groupWidth + 'px');
+
+        // Clone groups if needed to fill the viewport
+        const containerWidth = container.offsetWidth;
+        const copiesNeeded = Math.max(2, Math.ceil((containerWidth * 2) / groupWidth) + 1);
+
+        // Remove extra clones beyond the original 2
+        while (track.children.length > 2) {
+          track.removeChild(track.lastChild);
+        }
+
+        // Add more clones if needed
+        for (let i = track.children.length; i < copiesNeeded; i++) {
+          const clone = firstGroup.cloneNode(true);
+          track.appendChild(clone);
+        }
+      }
+
+      // Initial setup
+      setupMarquee();
+
+      // Handle resize
+      let resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(setupMarquee, 250);
+      });
+
+      // Reinitialize after fonts/images load
+      window.addEventListener('load', setupMarquee);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initLogoCloud);
+    } else {
+      initLogoCloud();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SEK Logo Cloud",
+  "tag": "div",
+  "class": "sek-logo-cloud-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Trusted by"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size (desktop)",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Title size (mobile)",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Title weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#3b3a3a"
+    },
+    {
+      "type": "range",
+      "id": "title_margin",
+      "label": "Space below title (desktop)",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_margin_mobile",
+      "label": "Space below title (mobile)",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Logo Size"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width (desktop)",
+      "min": 100,
+      "max": 300,
+      "step": 10,
+      "default": 200,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "label": "Logo width (mobile)",
+      "min": 80,
+      "max": 250,
+      "step": 10,
+      "default": 170,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height (desktop)",
+      "min": 40,
+      "max": 150,
+      "step": 5,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "logo_height_mobile",
+      "label": "Logo height (mobile)",
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "logo_gap",
+      "label": "Gap between logos (desktop)",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "logo_gap_mobile",
+      "label": "Gap between logos (mobile)",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll speed",
+      "info": "Duration in seconds for one complete scroll",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "default": 15,
+      "unit": "s"
+    },
+    {
+      "type": "select",
+      "id": "scroll_direction",
+      "label": "Scroll direction",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "logo_filter",
+      "label": "Logo filter",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "grayscale(100%)", "label": "Grayscale" },
+        { "value": "grayscale(100%) opacity(0.6)", "label": "Grayscale + Fade" },
+        { "value": "opacity(0.6)", "label": "Fade only" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "hover_effect",
+      "label": "Enable hover effect",
+      "info": "Removes filter and scales logo on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "fade_edges",
+      "label": "Fade edges",
+      "info": "Add gradient fade on sides",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "fade_width",
+      "label": "Fade width",
+      "min": 20,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Placeholder"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_bg",
+      "label": "Placeholder background",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_text",
+      "label": "Placeholder text color",
+      "default": "#999999"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt text",
+          "default": "Partner logo"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)",
+          "info": "Opens in new tab"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Logo Cloud",
+      "blocks": [
+        { "type": "logo", "settings": { "alt_text": "Company 1" } },
+        { "type": "logo", "settings": { "alt_text": "Company 2" } },
+        { "type": "logo", "settings": { "alt_text": "Company 3" } },
+        { "type": "logo", "settings": { "alt_text": "Company 4" } },
+        { "type": "logo", "settings": { "alt_text": "Company 5" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
