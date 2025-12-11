@@ -301,8 +301,8 @@
         "button_bg": "#e9ce39",
         "button_hover_bg": "#e1cb53",
         "button_text_color": "#010101",
-        "card_bg": "rgba(238, 235, 221, 0.3)",
-        "card_hover_bg": "rgba(238, 235, 221, 0.5)",
+        "card_bg": "#eeebdd4d",
+        "card_hover_bg": "#eeebdd80",
         "card_border": "#ffffff",
         "card_text": "#ffffff",
         "card_font_size_mobile": 14,
@@ -591,7 +591,7 @@
         "button_link": "",
         "show_button_arrow": true,
         "button_radius": 0,
-        "button_bg": "transparent",
+        "button_bg": "rgba(0,0,0,0)",
         "button_text_color": "#000000",
         "button_border_color": "#000000",
         "button_hover_bg": "#000000",
@@ -688,6 +688,569 @@
         "section_padding_top_desktop": 80,
         "section_padding_bottom_desktop": 80
       }
+    },
+    "scrolling_text_10_xJD7MC": {
+      "type": "scrolling-text-10",
+      "blocks": {
+        "text_row_RAEM9n": {
+          "type": "text_row",
+          "settings": {
+            "text_1": "BLACK FRIDAY",
+            "text_1_outline": false,
+            "text_2": "50% OFF SITEWIDE",
+            "text_2_outline": false,
+            "show_separator": true,
+            "show_icon": true,
+            "icon_type": "discount",
+            "scroll_direction": "left",
+            "scroll_speed": 25,
+            "rotation": -4,
+            "row_overlap": 0,
+            "row_background": "rgba(0,0,0,0)",
+            "text_color": "#ffffff"
+          }
+        },
+        "text_row_KGzz3g": {
+          "type": "text_row",
+          "settings": {
+            "text_1": "FREE SHIPPING",
+            "text_1_outline": false,
+            "text_2": "ON ALL ORDERS",
+            "text_2_outline": false,
+            "show_separator": true,
+            "show_icon": true,
+            "icon_type": "bolt",
+            "scroll_direction": "right",
+            "scroll_speed": 30,
+            "rotation": 4,
+            "row_overlap": -10,
+            "row_background": "#ffc200",
+            "text_color": "#000000"
+          }
+        },
+        "text_row_RRyJ49": {
+          "type": "text_row",
+          "settings": {
+            "text_1": "CYBER MONDAY",
+            "text_1_outline": false,
+            "text_2": "EXTRA 20% OFF",
+            "text_2_outline": true,
+            "show_separator": true,
+            "show_icon": true,
+            "icon_type": "fire",
+            "scroll_direction": "left",
+            "scroll_speed": 35,
+            "rotation": -3,
+            "row_overlap": -10,
+            "row_background": "#ff4500",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "text_row_RAEM9n",
+        "text_row_KGzz3g",
+        "text_row_RRyJ49"
+      ],
+      "name": "SEK Scrolling Text 10",
+      "settings": {
+        "section_background": "#000000",
+        "section_margin_top": 0,
+        "section_margin_bottom": 0
+      }
+    },
+    "before_after_12_Ly4BdW": {
+      "type": "before-after-12",
+      "blocks": {
+        "slide_D9LhQG": {
+          "type": "slide",
+          "settings": {
+            "before_image": "shopify://shop_images/after-woman-before-after-cosmetology-procedure-white-background_1.webp",
+            "after_image": "shopify://shop_images/before-woman-before-after-cosmetology-procedure-white-background.webp",
+            "name": "Sarah M.",
+            "quote": "I've seen incredible results in just 4 weeks. My skin feels smoother and more hydrated than ever!",
+            "tags": "Smoother, Hydrated, Radiant",
+            "link_text": "Shop the product",
+            "link_url": ""
+          }
+        },
+        "slide_7q4Hgr": {
+          "type": "slide",
+          "settings": {
+            "before_image": "shopify://shop_images/after-before-after-skin-treatment-comparison-womans-face.webp",
+            "after_image": "shopify://shop_images/before-before-after-skin-treatment-comparison-womans-face.webp",
+            "name": "Jessica T.",
+            "quote": "After using this for 6 weeks, my fine lines have visibly reduced. I couldn't be happier!",
+            "tags": "Firmer, Brighter, Youthful",
+            "link_text": "Shop the product",
+            "link_url": ""
+          }
+        },
+        "slide_zYLcbA": {
+          "type": "slide",
+          "settings": {
+            "before_image": "shopify://shop_images/before-health-people-youth-beauty-concept-before-after-cosmetic-operation-young-pretty-woman-portrait-before-after-cosmetic-plastic-procedure-antiage-therapy-treatment.webp",
+            "after_image": "shopify://shop_images/after-health-people-youth-beauty-concept-before-after-cosmetic-operation-young-pretty-woman-portrait-before-after-cosmetic-plastic-procedure-antiage-therapy-treatment.webp",
+            "name": "Michael R.",
+            "quote": "The transformation has been amazing. My skin tone is more even and the texture has improved dramatically.",
+            "tags": "Even Tone, Smooth, Clear",
+            "link_text": "Shop the product",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_D9LhQG",
+        "slide_7q4Hgr",
+        "slide_zYLcbA"
+      ],
+      "name": "SEK Before/After 12",
+      "settings": {
+        "heading": "Real Results",
+        "subheading": "See the transformations from our customers",
+        "before_label": "Week 0",
+        "after_label": "Week 12",
+        "autoplay": true,
+        "autoplay_speed": 6,
+        "background_color": "#f4f5f0",
+        "text_color": "#121212",
+        "heading_color": "#121212",
+        "label_background": "#222222",
+        "label_text_color": "#ffffff",
+        "tag_background": "#e8f5e9",
+        "tag_text_color": "#2e7d32",
+        "accent_color": "#4e74ff",
+        "progress_ring_color": "#121212",
+        "section_margin_top": 0,
+        "section_margin_bottom": 0
+      }
+    },
+    "shopable_video_3_hTaza6": {
+      "type": "shopable-video-3",
+      "blocks": {
+        "video_G9rqE6": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/14d4babb9a1a43728b4c5ff7dc1bf515.HD-720p-1.6Mbps-18393820.mp4",
+            "video_url": "",
+            "product": "",
+            "custom_product_title": "",
+            "custom_product_price": "",
+            "custom_compare_price": "",
+            "custom_product_url": ""
+          }
+        },
+        "video_48KkNz": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/3e5ad277d6034a8ea9d1bbc945a0c6a3.HD-720p-1.6Mbps-18393662.mp4",
+            "video_url": "",
+            "product": "",
+            "custom_product_title": "",
+            "custom_product_price": "",
+            "custom_compare_price": "",
+            "custom_product_url": ""
+          }
+        },
+        "video_X6hyFa": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/411b55423a2a40c2b2d8416ffcb457c7.HD-1080p-2.5Mbps-31771264.mp4",
+            "video_url": "",
+            "product": "",
+            "custom_product_title": "",
+            "custom_product_price": "",
+            "custom_compare_price": "",
+            "custom_product_url": ""
+          }
+        },
+        "video_UBexX3": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/4a8b0e79997648c587184c86f451ad58.HD-1080p-2.5Mbps-34175514.mp4",
+            "video_url": "",
+            "product": "",
+            "custom_product_title": "",
+            "custom_product_price": "",
+            "custom_compare_price": "",
+            "custom_product_url": ""
+          }
+        },
+        "video_YjYyma": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/60249f2409d84eedaf7900e617270f9e.HD-1080p-2.5Mbps-31784659.mp4",
+            "video_url": "",
+            "product": "",
+            "custom_product_title": "",
+            "custom_product_price": "",
+            "custom_compare_price": "",
+            "custom_product_url": ""
+          }
+        },
+        "video_QgHmpc": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/f400c737fdf74108aeff63f271bad79b.HD-1080p-2.5Mbps-31562661.mp4",
+            "video_url": "",
+            "product": "",
+            "custom_product_title": "",
+            "custom_product_price": "",
+            "custom_compare_price": "",
+            "custom_product_url": ""
+          }
+        },
+        "video_jt3Wy3": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/8afa547434eb4db2b131028e0754f1f9.HD-1080p-2.5Mbps-30966117.mp4",
+            "video_url": "",
+            "product": "",
+            "custom_product_title": "",
+            "custom_product_price": "",
+            "custom_compare_price": "",
+            "custom_product_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_G9rqE6",
+        "video_48KkNz",
+        "video_X6hyFa",
+        "video_UBexX3",
+        "video_YjYyma",
+        "video_QgHmpc",
+        "video_jt3Wy3"
+      ],
+      "name": "SEK Shoppable Video 3",
+      "settings": {
+        "heading": "COMMUNITY",
+        "heading_suffix": "FEEDBACK",
+        "autoplay_duration": 5,
+        "background_color": "#f5f5f5",
+        "text_color": "#121212",
+        "heading_color": "#121212",
+        "accent_color": "#6e44b3",
+        "section_margin_top": 0,
+        "section_margin_bottom": 0
+      }
+    },
+    "hero_29_YUHh8m": {
+      "type": "hero-29",
+      "blocks": {
+        "feature_FRcj4k": {
+          "type": "feature",
+          "settings": {
+            "title": "Vitamin D3",
+            "text": "Checks for deficiencies, which can impact the health"
+          }
+        },
+        "feature_gTCKYq": {
+          "type": "feature",
+          "settings": {
+            "title": "Biological age",
+            "text": "5 years younger than your calendar age"
+          }
+        },
+        "feature_aXA8hQ": {
+          "type": "feature",
+          "settings": {
+            "title": "ApoB",
+            "text": "Risk marker for heart and autoimmune disease"
+          }
+        }
+      },
+      "block_order": [
+        "feature_FRcj4k",
+        "feature_gTCKYq",
+        "feature_aXA8hQ"
+      ],
+      "name": "SEK Hero 29",
+      "settings": {
+        "background_image": "shopify://shop_images/breathing-and-yoga-by-the-sea_504c15ba-54b4-41fe-b948-6e9989979dc1.webp",
+        "overlay_color": "rgba(59, 60, 67, 0.2)",
+        "content_position": "left",
+        "show_badge": true,
+        "badge_text": "Excellent 4.9 | 2,000+ reviews",
+        "subheading": "",
+        "heading": "It's time you own",
+        "heading_accent": "your health",
+        "description": "Annually, beginning with over 100 lab tests and insights provided by leading doctors. Available for only $299.",
+        "button_text": "Learn more",
+        "button_url": "",
+        "button_show_arrow": false,
+        "text_color": "#3b3c43",
+        "heading_color": "#121212",
+        "heading_accent_color": "#c07957",
+        "badge_background": "#ffffff",
+        "badge_text_color": "#3b3c43",
+        "star_color": "#00b67a",
+        "button_background": "#c07957",
+        "button_text_color": "#ffffff",
+        "button_hover_background": "#3b3c43",
+        "button_hover_text_color": "#ffffff",
+        "card_background": "rgba(254, 248, 239, 0.9)",
+        "card_text_color": "#3b3c43",
+        "section_margin_top": 0,
+        "section_margin_bottom": 40
+      }
+    },
+    "countdown_timer_9_NGEVnY": {
+      "type": "countdown-timer-9",
+      "name": "SEK Countdown Timer 9",
+      "settings": {
+        "background_image": "shopify://shop_images/leire-cavia-chfoDXQwNio-unsplash.webp",
+        "overlay_color": "rgba(0, 0, 0, 0.1)",
+        "heading": "BLACK FRIDAY SALE",
+        "subtext": "Get your offer before the sale ends in",
+        "description": "Grab premium quality at unbeatable prices. Don't miss out, offer ends when the timer hits zero! – Sale will end soon!",
+        "target_date": "2026-01-01T00:00:00",
+        "expired_message": "This offer has expired",
+        "label_days": "Days",
+        "label_hours": "Hours",
+        "label_minutes": "Minutes",
+        "label_seconds": "Seconds",
+        "button_text": "View Discounted Items",
+        "button_url": "",
+        "card_border_color": "rgba(255, 255, 255, 0.4)",
+        "heading_color": "#ffffff",
+        "subtext_color": "#ffffff",
+        "timer_background": "#e8e8e8",
+        "timer_text_color": "#000000",
+        "timer_label_color": "#666666",
+        "description_color": "#ffffff",
+        "button_background": "#ffffff",
+        "button_text_color": "#000000",
+        "button_hover_background": "#f0f0f0",
+        "button_hover_text_color": "#000000",
+        "section_margin_top": 0,
+        "section_margin_bottom": 0
+      }
+    },
+    "collection_14_KQNBhM": {
+      "type": "collection-14",
+      "blocks": {
+        "collection_card_xAJNKj": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/149.webp",
+            "subtitle": "New Arrival",
+            "title": "Lip Care",
+            "text": "Discover our range of nourishing lip products.",
+            "text_align_desktop": "left",
+            "text_align_mobile": "left",
+            "button_text": "Shop Lip",
+            "button_url": "",
+            "button_style": "outline",
+            "show_arrow": true
+          }
+        },
+        "collection_card_Dt9fDC": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/30095264.webp",
+            "subtitle": "Best Sellers",
+            "title": "Cheek",
+            "text": "Add a natural glow with our blush collection.",
+            "text_align_desktop": "left",
+            "text_align_mobile": "left",
+            "button_text": "Shop Cheek",
+            "button_url": "",
+            "button_style": "outline",
+            "show_arrow": true
+          }
+        },
+        "collection_card_wNpHDa": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/30095264.webp",
+            "subtitle": "Trending",
+            "title": "Eyes",
+            "text": "Create stunning eye looks with our palettes.",
+            "text_align_desktop": "left",
+            "text_align_mobile": "left",
+            "button_text": "Shop Eyes",
+            "button_url": "",
+            "button_style": "outline",
+            "show_arrow": true
+          }
+        }
+      },
+      "block_order": [
+        "collection_card_xAJNKj",
+        "collection_card_Dt9fDC",
+        "collection_card_wNpHDa"
+      ],
+      "name": "SEK Collection 14",
+      "settings": {
+        "gap_desktop": 20,
+        "gap_mobile": 16,
+        "card_height_desktop": 500,
+        "card_height_mobile": 400,
+        "section_background": "#ffffff",
+        "overlay_color": "rgba(0, 0, 0, 0.25)",
+        "subtitle_color": "#ffffff",
+        "title_color": "#ffffff",
+        "text_color": "#ffffff",
+        "button_background": "#ffffff",
+        "button_text_color": "#000000",
+        "button_border_color": "#ffffff",
+        "button_hover_background": "#f0f0f0",
+        "button_hover_text_color": "#000000",
+        "section_margin_top": 0,
+        "section_margin_bottom": 0
+      }
+    },
+    "image_with_text13_xncXGE": {
+      "type": "image-with-text13",
+      "name": "SEK Image with Text 13",
+      "settings": {
+        "image_position": "right",
+        "image_layout": "single",
+        "image_1": "shopify://shop_images/winter-sport-ski.webp",
+        "image_2": "shopify://shop_images/winter-sport-ski-1.webp",
+        "image_3": "shopify://shop_images/winter-sport-ski-2.webp",
+        "lazy_load": true,
+        "image_gap": 10,
+        "image_border_color": "transparent",
+        "image_border_width": 0,
+        "image_border_radius": 12,
+        "subheading": "Our Story",
+        "heading": "Join the Winter Crew",
+        "subtitle": "",
+        "text": "<p>Discover our latest collection of premium products designed to elevate your everyday experience. Quality craftsmanship meets modern design.</p>",
+        "text_align_desktop": "left",
+        "text_align_mobile": "center",
+        "button_text_1": "Shop Now",
+        "button_url_1": "",
+        "button_style_1": "solid",
+        "button_show_arrow_1": true,
+        "button_text_2": "",
+        "button_url_2": "",
+        "button_style_2": "outline",
+        "button_show_arrow_2": false,
+        "heading_size_desktop": 48,
+        "heading_size_mobile": 32,
+        "text_size_desktop": 16,
+        "text_size_mobile": 14,
+        "line_height": 1.6,
+        "background_type": "solid",
+        "background_color": "#1b1a1a",
+        "gradient_start": "#667eea",
+        "gradient_end": "#764ba2",
+        "gradient_angle": 135,
+        "subheading_color": "#f3f3f3",
+        "heading_color": "#f3f3f3",
+        "text_color": "#f3f3f3",
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#000000",
+        "button_hover_background": "#333333",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 0,
+        "border_color": "transparent",
+        "border_width": 0,
+        "border_radius": 0,
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_sides_desktop": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "padding_sides_mobile": 20,
+        "section_margin_top": 0,
+        "section_margin_bottom": 0
+      }
+    },
+    "flexible_tabs_af69Xw": {
+      "type": "flexible-tabs",
+      "blocks": {
+        "tab_Dre6Rt": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Description",
+            "tab_icon": "",
+            "content_layout": "description",
+            "content_text": "<p>Indulge in the unmatched softness and elegance of our premium product. Crafted with care, it combines luxurious comfort with classic style, making it an essential piece for any discerning individual.</p><p>Elevate your everyday experience with refined simplicity and exceptional comfort. A must-have for those who appreciate the finer things in life.</p>",
+            "content_heading": "Transform your space",
+            "image_1": "shopify://shop_images/4_e28c1eed-9a47-45cb-8a4f-79d1f4b258de.webp",
+            "image_2": "shopify://shop_images/7_77ea1eab-1a1e-466e-ac15-89021044a83b.webp",
+            "content_subheading": "",
+            "video_url_1": "",
+            "video_url_2": "",
+            "feature_icon_1": "check",
+            "feature_text_1": "Machine washable",
+            "feature_icon_2": "refresh",
+            "feature_text_2": "Reversible design",
+            "feature_icon_3": "gift",
+            "feature_text_3": "The perfect gift"
+          }
+        },
+        "tab_FHyWwK": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Video",
+            "tab_icon": "play",
+            "content_layout": "video",
+            "content_text": "<p>Add your content here. Describe your product or service in detail.</p>",
+            "content_heading": "See it in action",
+            "content_subheading": "Watch our product video",
+            "video_1": "shopify://files/videos/a64108b5434e4515ba3e55a740bc3d26.HD-1080p-7.2Mbps-20123141.mp4",
+            "video_url_1": "",
+            "video_url_2": "https://youtu.be/a4tNJTZHzPg?si=Wu-pacE8qo9XWUok",
+            "feature_icon_1": "check",
+            "feature_text_1": "Machine washable",
+            "feature_icon_2": "refresh",
+            "feature_text_2": "Reversible design",
+            "feature_icon_3": "gift",
+            "feature_text_3": "The perfect gift"
+          }
+        },
+        "tab_YJHifx": {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Features",
+            "tab_icon": "",
+            "content_layout": "features",
+            "content_text": "<p>Add your content here. Describe your product or service in detail.</p>",
+            "content_heading": "",
+            "image_1": "shopify://shop_images/8_e8514562-939b-4a89-b953-7ec039fde037.webp",
+            "content_subheading": "",
+            "video_url_1": "",
+            "video_url_2": "",
+            "feature_image_1": "shopify://shop_images/8_e8514562-939b-4a89-b953-7ec039fde037.webp",
+            "feature_icon_1": "check",
+            "feature_text_1": "Machine washable",
+            "feature_image_2": "shopify://shop_images/4_327dbd28-bbeb-4914-b093-fce4e511617f.webp",
+            "feature_icon_2": "refresh",
+            "feature_text_2": "Reversible design",
+            "feature_image_3": "shopify://shop_images/5_5a0d01f1-d0c0-47c6-a08f-592708d9fe61.webp",
+            "feature_icon_3": "gift",
+            "feature_text_3": "The perfect gift"
+          }
+        }
+      },
+      "block_order": [
+        "tab_Dre6Rt",
+        "tab_FHyWwK",
+        "tab_YJHifx"
+      ],
+      "name": "SEK Flexible Tabs",
+      "settings": {
+        "section_title": "",
+        "section_subtitle": "",
+        "tab_border_radius": 100,
+        "section_background": "#ffffff",
+        "heading_color": "#000000",
+        "tab_background": "#ffffff",
+        "tab_border_color": "#e0e0e0",
+        "tab_text_color": "#333333",
+        "tab_active_background": "#000000",
+        "tab_active_text_color": "#ffffff",
+        "content_background": "#ffffff",
+        "content_text_color": "#333333",
+        "section_margin_top": 0,
+        "section_margin_bottom": 0
+      }
     }
   },
   "order": [
@@ -699,6 +1262,14 @@
     "scrolling_images_pro_fXzCMU",
     "testionomial46_AAqRRY",
     "feature25_6AnaMU",
-    "how_it_works_cFrtnh"
+    "how_it_works_cFrtnh",
+    "scrolling_text_10_xJD7MC",
+    "before_after_12_Ly4BdW",
+    "shopable_video_3_hTaza6",
+    "hero_29_YUHh8m",
+    "countdown_timer_9_NGEVnY",
+    "collection_14_KQNBhM",
+    "image_with_text13_xncXGE",
+    "flexible_tabs_af69Xw"
   ]
 }
