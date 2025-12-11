@@ -1,0 +1,501 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --scrolling-text-section-bg: {{ section.settings.section_background }};
+    margin-top: {{ section.settings.section_margin_top }}px;
+    margin-bottom: {{ section.settings.section_margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&display=swap');
+
+  .scrolling-text-10 {
+    background-color: var(--scrolling-text-section-bg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .scrolling-text-10__row {
+    position: relative;
+    overflow: hidden;
+    padding: 12px 0;
+    transform-origin: center;
+  }
+
+  .scrolling-text-10__row::before,
+  .scrolling-text-10__row::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .scrolling-text-10__row::before {
+    left: 0;
+    background: linear-gradient(to right, var(--row-bg, transparent), transparent);
+  }
+
+  .scrolling-text-10__row::after {
+    right: 0;
+    background: linear-gradient(to left, var(--row-bg, transparent), transparent);
+  }
+
+  .scrolling-text-10__track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    gap: 0;
+  }
+
+  .scrolling-text-10__row[data-direction="left"] .scrolling-text-10__track {
+    animation: scrollTextLeft var(--scroll-speed, 30s) linear infinite;
+  }
+
+  .scrolling-text-10__row[data-direction="right"] .scrolling-text-10__track {
+    animation: scrollTextRight var(--scroll-speed, 30s) linear infinite;
+  }
+
+  .scrolling-text-10__row:hover .scrolling-text-10__track {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollTextLeft {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes scrollTextRight {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .scrolling-text-10__content {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .scrolling-text-10__item {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 0 30px;
+    flex-shrink: 0;
+  }
+
+  .scrolling-text-10__text {
+    font-family: 'Anton', sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  .scrolling-text-10__text--filled {
+    color: var(--text-color, #ffffff);
+  }
+
+  .scrolling-text-10__text--outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--text-color, #ffffff);
+    text-stroke: 2px var(--text-color, #ffffff);
+  }
+
+  .scrolling-text-10__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .scrolling-text-10__icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .scrolling-text-10__icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .scrolling-text-10__separator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--text-color, #ffffff);
+    flex-shrink: 0;
+  }
+
+  /* Desktop Styles */
+  @media (min-width: 768px) {
+    .scrolling-text-10__row {
+      padding: 16px 0;
+    }
+
+    .scrolling-text-10__item {
+      gap: 50px;
+      padding: 0 50px;
+    }
+
+    .scrolling-text-10__text {
+      font-size: 80px;
+      letter-spacing: 4px;
+    }
+
+    .scrolling-text-10__text--outline {
+      -webkit-text-stroke-width: 3px;
+    }
+
+    .scrolling-text-10__icon svg,
+    .scrolling-text-10__icon img {
+      width: 70px;
+      height: 70px;
+    }
+
+    .scrolling-text-10__separator {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .scrolling-text-10__text {
+      font-size: 100px;
+    }
+
+    .scrolling-text-10__icon svg,
+    .scrolling-text-10__icon img {
+      width: 90px;
+      height: 90px;
+    }
+  }
+</style>
+
+<section class="scrolling-text-10">
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'text_row' -%}
+        {% assign rotation = block.settings.rotation | default: 0 %}
+        {% assign speed = block.settings.scroll_speed | append: 's' %}
+
+        <div
+          class="scrolling-text-10__row"
+          data-direction="{{ block.settings.scroll_direction }}"
+          style="
+            --row-bg: {{ block.settings.row_background }};
+            --text-color: {{ block.settings.text_color }};
+            --scroll-speed: {{ speed }};
+            background-color: {{ block.settings.row_background }};
+            transform: rotate({{ rotation }}deg);
+            margin: {{ block.settings.row_overlap }}px 0;
+          "
+          {{ block.shopify_attributes }}
+        >
+          <div class="scrolling-text-10__track">
+            {%- for i in (1..2) -%}
+              <div class="scrolling-text-10__content">
+                {%- for j in (1..6) -%}
+                  <div class="scrolling-text-10__item">
+                    {%- if block.settings.show_icon and block.settings.icon_image != blank -%}
+                      <span class="scrolling-text-10__icon">
+                        <img
+                          src="{{ block.settings.icon_image | image_url: width: 180 }}"
+                          alt=""
+                          loading="lazy"
+                        >
+                      </span>
+                    {%- elsif block.settings.show_icon -%}
+                      <span class="scrolling-text-10__icon">
+                        {%- case block.settings.icon_type -%}
+                          {%- when 'star' -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: {{ block.settings.text_color }}">
+                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                          {%- when 'bolt' -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: {{ block.settings.text_color }}">
+                              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                          {%- when 'fire' -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: {{ block.settings.text_color }}">
+                              <path d="M12 23c-4.97 0-9-3.58-9-8 0-2.52 1.17-4.83 3-6.36V8c0-4.42 3.58-8 8-8 .35 0 .69.03 1.03.07C13.74 1.43 12.5 3.55 12.5 6c0 2.34 1.29 4.38 3.19 5.46.71.4 1.31.95 1.31 1.79v.25c0 1.24-.76 2.35-1.9 2.8-.13.05-.26.09-.4.14-.31.11-.6.26-.87.44-.82.55-1.33 1.41-1.33 2.37 0 1.42 1.23 2.74 2.75 2.74.72 0 1.37-.28 1.85-.73A8.94 8.94 0 0 0 21 15c0-4.42-4.03-8-9-8"/>
+                            </svg>
+                          {%- when 'discount' -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: {{ block.settings.text_color }}">
+                              <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
+                            </svg>
+                          {%- when 'heart' -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: {{ block.settings.text_color }}">
+                              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                          {%- when 'circle' -%}
+                            <span class="scrolling-text-10__separator"></span>
+                          {%- else -%}
+                            <span class="scrolling-text-10__separator"></span>
+                        {%- endcase -%}
+                      </span>
+                    {%- endif -%}
+
+                    {%- if block.settings.text_1 != blank -%}
+                      <p class="scrolling-text-10__text scrolling-text-10__text--{% if block.settings.text_1_outline %}outline{% else %}filled{% endif %}">
+                        {{ block.settings.text_1 }}
+                      </p>
+                    {%- endif -%}
+
+                    {%- if block.settings.text_2 != blank -%}
+                      {%- if block.settings.show_separator -%}
+                        <span class="scrolling-text-10__separator"></span>
+                      {%- endif -%}
+                      <p class="scrolling-text-10__text scrolling-text-10__text--{% if block.settings.text_2_outline %}outline{% else %}filled{% endif %}">
+                        {{ block.settings.text_2 }}
+                      </p>
+                    {%- endif -%}
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+    {%- endcase -%}
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "SEK Scrolling Text 10",
+  "tag": "section",
+  "class": "section-scrolling-text-10",
+  "settings": [
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_row",
+      "name": "Text row",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Text content"
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Text 1",
+          "default": "BLACK FRIDAY"
+        },
+        {
+          "type": "checkbox",
+          "id": "text_1_outline",
+          "label": "Text 1 outline style",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Text 2",
+          "default": "50% OFF SITEWIDE"
+        },
+        {
+          "type": "checkbox",
+          "id": "text_2_outline",
+          "label": "Text 2 outline style",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_separator",
+          "label": "Show separator between texts",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Icon"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_icon",
+          "label": "Show icon",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon type",
+          "options": [
+            { "value": "circle", "label": "Circle dot" },
+            { "value": "star", "label": "Star" },
+            { "value": "bolt", "label": "Lightning bolt" },
+            { "value": "fire", "label": "Fire" },
+            { "value": "discount", "label": "Discount tag" },
+            { "value": "heart", "label": "Heart" }
+          ],
+          "default": "star"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Custom icon image",
+          "info": "Overrides icon type if set"
+        },
+        {
+          "type": "header",
+          "content": "Animation"
+        },
+        {
+          "type": "select",
+          "id": "scroll_direction",
+          "label": "Scroll direction",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "range",
+          "id": "scroll_speed",
+          "label": "Scroll speed (seconds)",
+          "min": 10,
+          "max": 120,
+          "step": 5,
+          "unit": "s",
+          "default": 30,
+          "info": "Lower = faster"
+        },
+        {
+          "type": "range",
+          "id": "rotation",
+          "label": "Row rotation",
+          "min": -15,
+          "max": 15,
+          "step": 1,
+          "unit": "°",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "row_overlap",
+          "label": "Row overlap (negative margin)",
+          "min": -30,
+          "max": 20,
+          "step": 2,
+          "unit": "px",
+          "default": 0,
+          "info": "Negative values overlap rows"
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "row_background",
+          "label": "Row background",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#ffffff"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Scrolling Text 10",
+      "blocks": [
+        {
+          "type": "text_row",
+          "settings": {
+            "text_1": "BLACK FRIDAY",
+            "text_2": "50% OFF SITEWIDE",
+            "scroll_direction": "left",
+            "rotation": -4,
+            "row_background": "transparent",
+            "text_color": "#ffffff",
+            "icon_type": "discount",
+            "scroll_speed": 25
+          }
+        },
+        {
+          "type": "text_row",
+          "settings": {
+            "text_1": "FREE SHIPPING",
+            "text_2": "ON ALL ORDERS",
+            "scroll_direction": "right",
+            "rotation": 4,
+            "row_background": "#ffc200",
+            "text_color": "#000000",
+            "icon_type": "bolt",
+            "scroll_speed": 30,
+            "row_overlap": -10
+          }
+        },
+        {
+          "type": "text_row",
+          "settings": {
+            "text_1": "CYBER MONDAY",
+            "text_2": "EXTRA 20% OFF",
+            "text_2_outline": true,
+            "scroll_direction": "left",
+            "rotation": -3,
+            "row_background": "#ff4500",
+            "text_color": "#ffffff",
+            "icon_type": "fire",
+            "scroll_speed": 35,
+            "row_overlap": -10
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

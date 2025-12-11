@@ -1,0 +1,667 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --hero29-overlay: {{ section.settings.overlay_color }};
+    --hero29-text: {{ section.settings.text_color }};
+    --hero29-heading: {{ section.settings.heading_color }};
+    --hero29-heading-accent: {{ section.settings.heading_accent_color }};
+    --hero29-btn-bg: {{ section.settings.button_background }};
+    --hero29-btn-text: {{ section.settings.button_text_color }};
+    --hero29-btn-hover-bg: {{ section.settings.button_hover_background }};
+    --hero29-btn-hover-text: {{ section.settings.button_hover_text_color }};
+    --hero29-badge-bg: {{ section.settings.badge_background }};
+    --hero29-badge-text: {{ section.settings.badge_text_color }};
+    --hero29-star-color: {{ section.settings.star_color }};
+    --hero29-card-bg: {{ section.settings.card_background }};
+    --hero29-card-text: {{ section.settings.card_text_color }};
+    margin-top: {{ section.settings.section_margin_top }}px;
+    margin-bottom: {{ section.settings.section_margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+  .hero-29 {
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .hero-29__main {
+    position: relative;
+    min-height: 460px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-29__background {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .hero-29__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-29__bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--hero29-overlay);
+  }
+
+  .hero-29__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-29__container--left {
+    justify-content: flex-start;
+  }
+
+  .hero-29__container--right {
+    justify-content: flex-end;
+  }
+
+  .hero-29__container--center {
+    justify-content: center;
+  }
+
+  .hero-29__content {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .hero-29__content--left {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .hero-29__content--right {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .hero-29__content--center {
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero-29__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--hero29-badge-bg);
+    color: var(--hero29-badge-text);
+    padding: 10px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .hero-29__stars {
+    display: flex;
+    gap: 3px;
+  }
+
+  .hero-29__star-box {
+    width: 22px;
+    height: 22px;
+    background: var(--hero29-star-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+  }
+
+  .hero-29__star-box svg {
+    width: 14px;
+    height: 14px;
+    fill: #fff;
+  }
+
+  .hero-29__subheading {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--hero29-text);
+    margin: 0;
+    opacity: 0.9;
+  }
+
+  .hero-29__heading {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--hero29-heading);
+    margin: 0;
+  }
+
+  .hero-29__heading-accent {
+    display: block;
+    color: var(--hero29-heading-accent);
+  }
+
+  .hero-29__description {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--hero29-text);
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  .hero-29__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--hero29-btn-bg);
+    color: var(--hero29-btn-text);
+    padding: 16px 36px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    text-decoration: none;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 12px;
+  }
+
+  .hero-29__button:hover {
+    background: var(--hero29-btn-hover-bg);
+    color: var(--hero29-btn-hover-text);
+  }
+
+  .hero-29__button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Feature Cards - At bottom of hero, slightly overlapping out */
+  .hero-29__features {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 24px;
+  }
+
+  .hero-29__features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .hero-29__feature-card {
+    background: var(--hero29-card-bg);
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .hero-29__feature-title {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--hero29-card-text);
+    margin: 0 0 8px;
+  }
+
+  .hero-29__feature-text {
+    font-size: 13px;
+    color: var(--hero29-card-text);
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Desktop Styles */
+  @media (min-width: 768px) {
+    .hero-29 {
+      margin-bottom: 80px;
+    }
+
+    .hero-29__main {
+      min-height: 600px;
+    }
+
+    .hero-29__container {
+      padding: 80px 40px;
+    }
+
+    .hero-29__content {
+      max-width: 50%;
+    }
+
+    .hero-29__heading {
+      font-size: 48px;
+    }
+
+    .hero-29__description {
+      font-size: 16px;
+    }
+
+    .hero-29__features {
+      bottom: -70px;
+      padding: 0 40px;
+    }
+
+    .hero-29__features-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-29 {
+      margin-bottom: 100px;
+    }
+
+    .hero-29__main {
+      min-height: 700px;
+    }
+
+    .hero-29__container {
+      padding: 100px 60px;
+    }
+
+    .hero-29__content {
+      max-width: 45%;
+      gap: 24px;
+    }
+
+    .hero-29__badge {
+      font-size: 14px;
+      padding: 12px 22px;
+    }
+
+    .hero-29__star-box {
+      width: 24px;
+      height: 24px;
+    }
+
+    .hero-29__star-box svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .hero-29__subheading {
+      font-size: 13px;
+    }
+
+    .hero-29__heading {
+      font-size: 56px;
+    }
+
+    .hero-29__features {
+      bottom: -80px;
+      padding: 0 80px;
+    }
+
+    .hero-29__features-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .hero-29__feature-card {
+      padding: 28px 32px;
+    }
+
+    .hero-29__feature-title {
+      font-size: 22px;
+    }
+
+    .hero-29__feature-text {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<section class="hero-29">
+  <div class="hero-29__main">
+    <div class="hero-29__background">
+      {%- if section.settings.background_image != blank -%}
+        <img
+          src="{{ section.settings.background_image | image_url: width: 2000 }}"
+          alt="{{ section.settings.heading | escape }}"
+          class="hero-29__bg-image"
+          loading="eager"
+        >
+      {%- else -%}
+        <div class="hero-29__bg-image" style="background: linear-gradient(135deg, #fef8ef 0%, #f5e6d3 100%);"></div>
+      {%- endif -%}
+      <div class="hero-29__bg-overlay"></div>
+    </div>
+
+    <div class="hero-29__container hero-29__container--{{ section.settings.content_position }}">
+      <div class="hero-29__content hero-29__content--{{ section.settings.content_position }}">
+        {%- if section.settings.show_badge -%}
+          <div class="hero-29__badge">
+            <div class="hero-29__stars">
+              {%- for i in (1..5) -%}
+                <span class="hero-29__star-box">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                </span>
+              {%- endfor -%}
+            </div>
+            <span>{{ section.settings.badge_text }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.subheading != blank -%}
+          <p class="hero-29__subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h1 class="hero-29__heading">
+            {{ section.settings.heading }}
+            {%- if section.settings.heading_accent != blank -%}
+              <span class="hero-29__heading-accent">{{ section.settings.heading_accent }}</span>
+            {%- endif -%}
+          </h1>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <p class="hero-29__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.button_text != blank -%}
+          <a href="{{ section.settings.button_url }}" class="hero-29__button">
+            {{ section.settings.button_text }}
+            {%- if section.settings.button_show_arrow -%}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="hero-29__features">
+        <div class="hero-29__features-grid">
+          {%- for block in section.blocks -%}
+            <div class="hero-29__feature-card" {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}
+                <h3 class="hero-29__feature-title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="hero-29__feature-text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Hero 29",
+  "tag": "section",
+  "class": "section-hero-29",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "rgba(59, 60, 67, 0.2)"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show rating badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Excellent 4.9 | 2,000+ reviews"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (line 1)",
+      "default": "It's time you own"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading (line 2 - accent color)",
+      "default": "your health"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Annually, beginning with over 100 lab tests and insights provided by leading doctors. Available for only $299."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_show_arrow",
+      "label": "Show arrow icon",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#3b3c43"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "heading_accent_color",
+      "label": "Heading accent color",
+      "default": "#c07957"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#3b3c43"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star box color",
+      "default": "#00b67a"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#c07957"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#3b3c43"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Feature cards"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "rgba(254, 248, 239, 0.9)"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#3b3c43"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Vitamin D3"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "Checks for deficiencies, which can impact the health"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Hero 29",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Vitamin D3",
+            "text": "Checks for deficiencies, which can impact the health"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Biological age",
+            "text": "5 years younger than your calendar age"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "ApoB",
+            "text": "Risk marker for heart and autoimmune disease"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

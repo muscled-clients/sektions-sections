@@ -1,0 +1,818 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --ba12-bg: {{ section.settings.background_color }};
+    --ba12-text: {{ section.settings.text_color }};
+    --ba12-heading: {{ section.settings.heading_color }};
+    --ba12-label-bg: {{ section.settings.label_background }};
+    --ba12-label-text: {{ section.settings.label_text_color }};
+    --ba12-tag-bg: {{ section.settings.tag_background }};
+    --ba12-tag-text: {{ section.settings.tag_text_color }};
+    --ba12-accent: {{ section.settings.accent_color }};
+    --ba12-progress-ring: {{ section.settings.progress_ring_color }};
+    margin-top: {{ section.settings.section_margin_top }}px;
+    margin-bottom: {{ section.settings.section_margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+  .before-after-12 {
+    background-color: var(--ba12-bg);
+    padding: 40px 20px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .before-after-12__container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .before-after-12__header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .before-after-12__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ba12-heading);
+    margin: 0 0 10px;
+  }
+
+  .before-after-12__subtitle {
+    font-size: 14px;
+    color: var(--ba12-text);
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  /* Thumbnail Navigation */
+  .before-after-12__thumbnails {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+
+  .before-after-12__thumb {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.5;
+  }
+
+  .before-after-12__thumb:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+
+  .before-after-12__thumb.active {
+    opacity: 1;
+  }
+
+  .before-after-12__thumb-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .before-after-12__thumb-progress {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    transform: rotate(-90deg);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .before-after-12__thumb.active .before-after-12__thumb-progress {
+    opacity: 1;
+  }
+
+  .before-after-12__thumb-progress circle {
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .before-after-12__thumb-progress .progress-bg {
+    stroke: rgba(0, 0, 0, 0.1);
+  }
+
+  .before-after-12__thumb-progress .progress-ring {
+    stroke: var(--ba12-progress-ring);
+    stroke-dasharray: 188.5;
+    stroke-dashoffset: 188.5;
+    stroke-linecap: round;
+  }
+
+  .before-after-12__thumb.active.animating .before-after-12__thumb-progress .progress-ring {
+    animation: progressRing 6s linear forwards;
+  }
+
+  @keyframes progressRing {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Carousel */
+  .before-after-12__carousel {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .before-after-12__slides {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .before-after-12__slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+  }
+
+  .before-after-12__slide-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Image Grid */
+  .before-after-12__images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .before-after-12__image-wrap {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+  }
+
+  .before-after-12__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .before-after-12__label {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: var(--ba12-label-bg);
+    color: var(--ba12-label-text);
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 100px;
+  }
+
+  /* Content */
+  .before-after-12__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px 0;
+  }
+
+  .before-after-12__name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ba12-heading);
+    margin: 0;
+  }
+
+  .before-after-12__quote {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ba12-text);
+    margin: 0;
+    font-style: italic;
+  }
+
+  .before-after-12__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .before-after-12__tag {
+    background: var(--ba12-tag-bg);
+    color: var(--ba12-tag-text);
+    padding: 6px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+  }
+
+  .before-after-12__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ba12-accent);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: gap 0.3s ease;
+  }
+
+  .before-after-12__link:hover {
+    gap: 12px;
+  }
+
+  .before-after-12__link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Navigation Arrows */
+  .before-after-12__nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .before-after-12__nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--ba12-text);
+    background: transparent;
+    color: var(--ba12-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .before-after-12__nav-btn:hover {
+    background: var(--ba12-text);
+    color: var(--ba12-bg);
+  }
+
+  .before-after-12__nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .before-after-12__nav-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Desktop Styles */
+  @media (min-width: 768px) {
+    .before-after-12 {
+      padding: 60px 40px;
+    }
+
+    .before-after-12__title {
+      font-size: 36px;
+    }
+
+    .before-after-12__subtitle {
+      font-size: 16px;
+    }
+
+    .before-after-12__thumbnails {
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .before-after-12__thumb {
+      width: 70px;
+      height: 70px;
+    }
+
+    .before-after-12__slide-inner {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .before-after-12__images {
+      gap: 20px;
+    }
+
+    .before-after-12__image-wrap {
+      border-radius: 16px;
+    }
+
+    .before-after-12__label {
+      padding: 8px 18px;
+      font-size: 12px;
+      bottom: 16px;
+      left: 16px;
+    }
+
+    .before-after-12__content {
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .before-after-12__name {
+      font-size: 26px;
+    }
+
+    .before-after-12__quote {
+      font-size: 17px;
+    }
+
+    .before-after-12__tag {
+      padding: 8px 16px;
+      font-size: 11px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .before-after-12 {
+      padding: 80px 80px;
+    }
+
+    .before-after-12__title {
+      font-size: 42px;
+    }
+
+    .before-after-12__thumb {
+      width: 80px;
+      height: 80px;
+    }
+
+    .before-after-12__slide-inner {
+      gap: 60px;
+    }
+
+    .before-after-12__name {
+      font-size: 32px;
+    }
+  }
+</style>
+
+<section class="before-after-12" data-section-id="{{ section.id }}">
+  <div class="before-after-12__container">
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="before-after-12__header">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="before-after-12__title">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="before-after-12__subtitle">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 1 -%}
+      <div class="before-after-12__thumbnails">
+        {%- for block in section.blocks -%}
+          <button
+            class="before-after-12__thumb{% if forloop.first %} active animating{% endif %}"
+            data-slide-index="{{ forloop.index0 }}"
+            aria-label="Go to slide {{ forloop.index }}"
+          >
+            {%- if block.settings.thumbnail != blank -%}
+              <img
+                src="{{ block.settings.thumbnail | image_url: width: 200 }}"
+                alt="{{ block.settings.name }}"
+                class="before-after-12__thumb-img"
+                loading="lazy"
+              >
+            {%- elsif block.settings.before_image != blank -%}
+              <img
+                src="{{ block.settings.before_image | image_url: width: 200 }}"
+                alt="{{ block.settings.name }}"
+                class="before-after-12__thumb-img"
+                loading="lazy"
+              >
+            {%- else -%}
+              <div class="before-after-12__thumb-img" style="background: #ddd;"></div>
+            {%- endif -%}
+            <svg class="before-after-12__thumb-progress" viewBox="0 0 68 68">
+              <circle class="progress-bg" cx="34" cy="34" r="30" />
+              <circle class="progress-ring" cx="34" cy="34" r="30" />
+            </svg>
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="before-after-12__carousel">
+      <div class="before-after-12__slides">
+        {%- for block in section.blocks -%}
+          <div class="before-after-12__slide" {{ block.shopify_attributes }}>
+            <div class="before-after-12__slide-inner">
+              <div class="before-after-12__images">
+                <div class="before-after-12__image-wrap">
+                  {%- if block.settings.before_image != blank -%}
+                    <img
+                      src="{{ block.settings.before_image | image_url: width: 800 }}"
+                      alt="Before"
+                      class="before-after-12__image"
+                      loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                    >
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'before-after-12__image' }}
+                  {%- endif -%}
+                  <span class="before-after-12__label">{{ section.settings.before_label }}</span>
+                </div>
+
+                <div class="before-after-12__image-wrap">
+                  {%- if block.settings.after_image != blank -%}
+                    <img
+                      src="{{ block.settings.after_image | image_url: width: 800 }}"
+                      alt="After"
+                      class="before-after-12__image"
+                      loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                    >
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'before-after-12__image' }}
+                  {%- endif -%}
+                  <span class="before-after-12__label">{{ section.settings.after_label }}</span>
+                </div>
+              </div>
+
+              <div class="before-after-12__content">
+                {%- if block.settings.name != blank -%}
+                  <h3 class="before-after-12__name">{{ block.settings.name }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.quote != blank -%}
+                  <p class="before-after-12__quote">"{{ block.settings.quote }}"</p>
+                {%- endif -%}
+
+                {%- if block.settings.tags != blank -%}
+                  <div class="before-after-12__tags">
+                    {%- assign tag_list = block.settings.tags | split: ',' -%}
+                    {%- for tag in tag_list -%}
+                      <span class="before-after-12__tag">{{ tag | strip }}</span>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+
+                {%- if block.settings.link_text != blank and block.settings.link_url != blank -%}
+                  <a href="{{ block.settings.link_url }}" class="before-after-12__link">
+                    {{ block.settings.link_text }}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"/>
+                      <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.blocks.size > 1 -%}
+        <div class="before-after-12__nav">
+          <button class="before-after-12__nav-btn before-after-12__nav-prev" aria-label="Previous slide">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
+          <button class="before-after-12__nav-btn before-after-12__nav-next" aria-label="Next slide">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const section = document.querySelector('.before-after-12[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const slides = section.querySelector('.before-after-12__slides');
+    const slideElements = section.querySelectorAll('.before-after-12__slide');
+    const thumbs = section.querySelectorAll('.before-after-12__thumb');
+    const prevBtn = section.querySelector('.before-after-12__nav-prev');
+    const nextBtn = section.querySelector('.before-after-12__nav-next');
+
+    let currentIndex = 0;
+    let autoplayInterval = null;
+    const autoplayDuration = {{ section.settings.autoplay_speed }}000;
+    const autoplayEnabled = {{ section.settings.autoplay }};
+
+    function goToSlide(index) {
+      if (index < 0) index = slideElements.length - 1;
+      if (index >= slideElements.length) index = 0;
+
+      currentIndex = index;
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      thumbs.forEach((thumb, i) => {
+        thumb.classList.remove('active', 'animating');
+        if (i === currentIndex) {
+          thumb.classList.add('active');
+          void thumb.offsetWidth;
+          thumb.classList.add('animating');
+        }
+      });
+    }
+
+    function startAutoplay() {
+      if (!autoplayEnabled || slideElements.length <= 1) return;
+      stopAutoplay();
+      autoplayInterval = setInterval(() => {
+        goToSlide(currentIndex + 1);
+      }, autoplayDuration);
+    }
+
+    function stopAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
+    }
+
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => {
+        stopAutoplay();
+        goToSlide(index);
+        startAutoplay();
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        stopAutoplay();
+        goToSlide(currentIndex - 1);
+        startAutoplay();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        stopAutoplay();
+        goToSlide(currentIndex + 1);
+        startAutoplay();
+      });
+    }
+
+    section.addEventListener('mouseenter', stopAutoplay);
+    section.addEventListener('mouseleave', startAutoplay);
+
+    startAutoplay();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SEK Before/After 12",
+  "tag": "section",
+  "class": "section-before-after-12",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Real Results"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "See the transformations from our customers"
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before label",
+      "default": "Week 0"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After label",
+      "default": "Week 12"
+    },
+    {
+      "type": "header",
+      "content": "Autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed (seconds)",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f4f5f0"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "label_background",
+      "label": "Label background",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "label_text_color",
+      "label": "Label text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tag_background",
+      "label": "Tag background",
+      "default": "#e8f5e9"
+    },
+    {
+      "type": "color",
+      "id": "tag_text_color",
+      "label": "Tag text color",
+      "default": "#2e7d32"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (links)",
+      "default": "#4e74ff"
+    },
+    {
+      "type": "color",
+      "id": "progress_ring_color",
+      "label": "Progress ring color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Before/After slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Images"
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before image"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After image"
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Thumbnail (optional)",
+          "info": "Uses before image if not set"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name / Title",
+          "default": "Sarah M."
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote / Testimonial",
+          "default": "I've seen incredible results in just 4 weeks. My skin feels smoother and more hydrated than ever!"
+        },
+        {
+          "type": "text",
+          "id": "tags",
+          "label": "Benefit tags",
+          "default": "Smoother, Hydrated, Radiant",
+          "info": "Separate with commas"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "Shop the product"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Before/After 12",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "name": "Sarah M.",
+            "quote": "I've seen incredible results in just 4 weeks. My skin feels smoother and more hydrated than ever!",
+            "tags": "Smoother, Hydrated, Radiant",
+            "link_text": "Shop the product"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "name": "Jessica T.",
+            "quote": "After using this for 6 weeks, my fine lines have visibly reduced. I couldn't be happier!",
+            "tags": "Firmer, Brighter, Youthful",
+            "link_text": "Shop the product"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "name": "Michael R.",
+            "quote": "The transformation has been amazing. My skin tone is more even and the texture has improved dramatically.",
+            "tags": "Even Tone, Smooth, Clear",
+            "link_text": "Shop the product"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

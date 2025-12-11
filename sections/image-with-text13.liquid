@@ -1,0 +1,936 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    /* Padding */
+    --iwt13-padding-top-desktop: {{ section.settings.padding_top_desktop }}px;
+    --iwt13-padding-bottom-desktop: {{ section.settings.padding_bottom_desktop }}px;
+    --iwt13-padding-sides-desktop: {{ section.settings.padding_sides_desktop }}px;
+    --iwt13-padding-top-mobile: {{ section.settings.padding_top_mobile }}px;
+    --iwt13-padding-bottom-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --iwt13-padding-sides-mobile: {{ section.settings.padding_sides_mobile }}px;
+    /* Margin */
+    --iwt13-margin-top: {{ section.settings.section_margin_top }}px;
+    --iwt13-margin-bottom: {{ section.settings.section_margin_bottom }}px;
+    /* Border */
+    --iwt13-border-color: {{ section.settings.border_color }};
+    --iwt13-border-width: {{ section.settings.border_width }}px;
+    --iwt13-border-radius: {{ section.settings.border_radius }}px;
+    /* Background */
+    --iwt13-bg: {{ section.settings.background_color }};
+    /* Image */
+    --iwt13-image-border-color: {{ section.settings.image_border_color }};
+    --iwt13-image-border-width: {{ section.settings.image_border_width }}px;
+    --iwt13-image-border-radius: {{ section.settings.image_border_radius }}px;
+    --iwt13-image-gap: {{ section.settings.image_gap }}px;
+    /* Typography */
+    --iwt13-subheading-color: {{ section.settings.subheading_color }};
+    --iwt13-heading-color: {{ section.settings.heading_color }};
+    --iwt13-heading-size-desktop: {{ section.settings.heading_size_desktop }}px;
+    --iwt13-heading-size-mobile: {{ section.settings.heading_size_mobile }}px;
+    --iwt13-text-color: {{ section.settings.text_color }};
+    --iwt13-text-size-desktop: {{ section.settings.text_size_desktop }}px;
+    --iwt13-text-size-mobile: {{ section.settings.text_size_mobile }}px;
+    --iwt13-line-height: {{ section.settings.line_height }};
+    /* Button */
+    --iwt13-btn-bg: {{ section.settings.button_background }};
+    --iwt13-btn-text: {{ section.settings.button_text_color }};
+    --iwt13-btn-border: {{ section.settings.button_border_color }};
+    --iwt13-btn-hover-bg: {{ section.settings.button_hover_background }};
+    --iwt13-btn-hover-text: {{ section.settings.button_hover_text_color }};
+    --iwt13-btn-radius: {{ section.settings.button_border_radius }}px;
+    margin-top: var(--iwt13-margin-top);
+    margin-bottom: var(--iwt13-margin-bottom);
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Josefin+Sans:wght@400;500;600;700&display=swap');
+
+  .image-with-text-13 {
+    {% if section.settings.background_type == 'gradient' %}
+      background: linear-gradient({{ section.settings.gradient_angle }}deg, {{ section.settings.gradient_start }} 0%, {{ section.settings.gradient_end }} 100%);
+    {% else %}
+      background: var(--iwt13-bg, #fff);
+    {% endif %}
+    border: var(--iwt13-border-width) solid var(--iwt13-border-color);
+    border-radius: var(--iwt13-border-radius);
+    padding: var(--iwt13-padding-top-mobile) var(--iwt13-padding-sides-mobile) var(--iwt13-padding-bottom-mobile);
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+  }
+
+  .image-with-text-13__container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .image-with-text-13__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  /* Image Column */
+  .image-with-text-13__images {
+    display: grid;
+    gap: var(--iwt13-image-gap, 10px);
+    order: 1;
+  }
+
+  .image-with-text-13__images--single {
+    grid-template-columns: 1fr;
+  }
+
+  .image-with-text-13__images--two {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .image-with-text-13__images--three {
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .image-with-text-13__images--three .image-with-text-13__image-wrapper:first-child {
+    grid-row: span 2;
+  }
+
+  .image-with-text-13__image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border: var(--iwt13-image-border-width) solid var(--iwt13-image-border-color);
+    border-radius: var(--iwt13-image-border-radius);
+  }
+
+  .image-with-text-13__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 1 / 1;
+  }
+
+  .image-with-text-13__images--two .image-with-text-13__image,
+  .image-with-text-13__images--three .image-with-text-13__image {
+    aspect-ratio: auto;
+    min-height: 200px;
+  }
+
+  .image-with-text-13__images--three .image-with-text-13__image-wrapper:first-child .image-with-text-13__image {
+    height: 100%;
+  }
+
+  /* Content Column */
+  .image-with-text-13__content {
+    order: 2;
+    text-align: center;
+  }
+
+  .image-with-text-13__content--left {
+    text-align: left;
+  }
+
+  .image-with-text-13__content--center {
+    text-align: center;
+  }
+
+  .image-with-text-13__content--right {
+    text-align: right;
+  }
+
+  .image-with-text-13__subheading {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--iwt13-subheading-color, #666);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+  }
+
+  .image-with-text-13__heading {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: var(--iwt13-heading-size-mobile);
+    font-weight: 700;
+    color: var(--iwt13-heading-color, #000);
+    margin: 0 0 8px;
+    line-height: 1.2;
+  }
+
+  .image-with-text-13__subtitle {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: calc(var(--iwt13-heading-size-mobile) * 0.6);
+    font-weight: 700;
+    color: var(--iwt13-heading-color, #000);
+    margin: 0 0 16px;
+    line-height: 1.2;
+  }
+
+  .image-with-text-13__text {
+    font-size: var(--iwt13-text-size-mobile);
+    line-height: var(--iwt13-line-height);
+    color: var(--iwt13-text-color, #333);
+    margin: 0 0 24px;
+  }
+
+  .image-with-text-13__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .image-with-text-13__content--left .image-with-text-13__buttons {
+    justify-content: flex-start;
+  }
+
+  .image-with-text-13__content--center .image-with-text-13__buttons {
+    justify-content: center;
+  }
+
+  .image-with-text-13__content--right .image-with-text-13__buttons {
+    justify-content: flex-end;
+  }
+
+  /* Button base */
+  .image-with-text-13__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: var(--iwt13-btn-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .image-with-text-13__button--solid {
+    background: var(--iwt13-btn-bg);
+    color: var(--iwt13-btn-text);
+    border: 2px solid var(--iwt13-btn-bg);
+  }
+
+  .image-with-text-13__button--solid:hover {
+    background: var(--iwt13-btn-hover-bg);
+    color: var(--iwt13-btn-hover-text);
+    border-color: var(--iwt13-btn-hover-bg);
+  }
+
+  .image-with-text-13__button--outline {
+    background: transparent;
+    color: var(--iwt13-btn-text);
+    border: 2px solid var(--iwt13-btn-border);
+  }
+
+  .image-with-text-13__button--outline:hover {
+    background: var(--iwt13-btn-hover-bg);
+    color: var(--iwt13-btn-hover-text);
+    border-color: var(--iwt13-btn-hover-bg);
+  }
+
+  .image-with-text-13__button svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .image-with-text-13__button:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Desktop styles */
+  @media (min-width: 768px) {
+    .image-with-text-13 {
+      padding: var(--iwt13-padding-top-desktop) var(--iwt13-padding-sides-desktop) var(--iwt13-padding-bottom-desktop);
+    }
+
+    .image-with-text-13__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .image-with-text-13__grid--image-right .image-with-text-13__images {
+      order: 2;
+    }
+
+    .image-with-text-13__grid--image-right .image-with-text-13__content {
+      order: 1;
+    }
+
+    .image-with-text-13__grid--image-left .image-with-text-13__images {
+      order: 1;
+    }
+
+    .image-with-text-13__grid--image-left .image-with-text-13__content {
+      order: 2;
+    }
+
+    .image-with-text-13__content {
+      text-align: left;
+    }
+
+    .image-with-text-13__heading {
+      font-size: var(--iwt13-heading-size-desktop);
+    }
+
+    .image-with-text-13__subtitle {
+      font-size: calc(var(--iwt13-heading-size-desktop) * 0.6);
+    }
+
+    .image-with-text-13__text {
+      font-size: var(--iwt13-text-size-desktop);
+    }
+
+    .image-with-text-13__button {
+      padding: 16px 32px;
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .image-with-text-13__grid {
+      gap: 64px;
+    }
+  }
+
+  /* Mobile text alignment override */
+  @media (max-width: 767px) {
+    .image-with-text-13__content[data-mobile-align="left"] {
+      text-align: left;
+    }
+
+    .image-with-text-13__content[data-mobile-align="left"] .image-with-text-13__buttons {
+      justify-content: flex-start;
+    }
+
+    .image-with-text-13__content[data-mobile-align="center"] {
+      text-align: center;
+    }
+
+    .image-with-text-13__content[data-mobile-align="center"] .image-with-text-13__buttons {
+      justify-content: center;
+    }
+
+    .image-with-text-13__content[data-mobile-align="right"] {
+      text-align: right;
+    }
+
+    .image-with-text-13__content[data-mobile-align="right"] .image-with-text-13__buttons {
+      justify-content: flex-end;
+    }
+  }
+</style>
+
+<section class="image-with-text-13">
+  <div class="image-with-text-13__container">
+    <div class="image-with-text-13__grid image-with-text-13__grid--image-{{ section.settings.image_position }}">
+
+      <!-- Images -->
+      <div class="image-with-text-13__images image-with-text-13__images--{{ section.settings.image_layout }}">
+        {%- if section.settings.image_1 != blank -%}
+          <div class="image-with-text-13__image-wrapper">
+            <img
+              src="{{ section.settings.image_1 | image_url: width: 800 }}"
+              alt="{{ section.settings.heading | escape }}"
+              class="image-with-text-13__image"
+              {% if section.settings.lazy_load %}loading="lazy"{% else %}loading="eager"{% endif %}
+            >
+          </div>
+        {%- else -%}
+          <div class="image-with-text-13__image-wrapper">
+            <div class="image-with-text-13__image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); aspect-ratio: 1/1;"></div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.image_layout == 'two' or section.settings.image_layout == 'three' -%}
+          {%- if section.settings.image_2 != blank -%}
+            <div class="image-with-text-13__image-wrapper">
+              <img
+                src="{{ section.settings.image_2 | image_url: width: 800 }}"
+                alt="{{ section.settings.heading | escape }}"
+                class="image-with-text-13__image"
+                {% if section.settings.lazy_load %}loading="lazy"{% else %}loading="eager"{% endif %}
+              >
+            </div>
+          {%- else -%}
+            <div class="image-with-text-13__image-wrapper">
+              <div class="image-with-text-13__image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); aspect-ratio: 1/1;"></div>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if section.settings.image_layout == 'three' -%}
+          {%- if section.settings.image_3 != blank -%}
+            <div class="image-with-text-13__image-wrapper">
+              <img
+                src="{{ section.settings.image_3 | image_url: width: 800 }}"
+                alt="{{ section.settings.heading | escape }}"
+                class="image-with-text-13__image"
+                {% if section.settings.lazy_load %}loading="lazy"{% else %}loading="eager"{% endif %}
+              >
+            </div>
+          {%- else -%}
+            <div class="image-with-text-13__image-wrapper">
+              <div class="image-with-text-13__image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); aspect-ratio: 1/1;"></div>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+      <!-- Content -->
+      <div
+        class="image-with-text-13__content image-with-text-13__content--{{ section.settings.text_align_desktop }}"
+        data-mobile-align="{{ section.settings.text_align_mobile }}"
+      >
+        {%- if section.settings.subheading != blank -%}
+          <p class="image-with-text-13__subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="image-with-text-13__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.subtitle != blank -%}
+          <p class="image-with-text-13__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="image-with-text-13__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.button_text_1 != blank or section.settings.button_text_2 != blank -%}
+          <div class="image-with-text-13__buttons">
+            {%- if section.settings.button_text_1 != blank -%}
+              <a href="{{ section.settings.button_url_1 }}" class="image-with-text-13__button image-with-text-13__button--{{ section.settings.button_style_1 }}">
+                {{ section.settings.button_text_1 }}
+                {%- if section.settings.button_show_arrow_1 -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.button_text_2 != blank -%}
+              <a href="{{ section.settings.button_url_2 }}" class="image-with-text-13__button image-with-text-13__button--{{ section.settings.button_style_2 }}">
+                {{ section.settings.button_text_2 }}
+                {%- if section.settings.button_show_arrow_2 -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Image with Text 13",
+  "tag": "section",
+  "class": "section-image-with-text-13",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position (Desktop)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "image_layout",
+      "label": "Image grid layout",
+      "options": [
+        { "value": "single", "label": "Single image" },
+        { "value": "two", "label": "Two images" },
+        { "value": "three", "label": "Three images" }
+      ],
+      "default": "single"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2",
+      "info": "Used when layout is 'Two images' or 'Three images'"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3",
+      "info": "Used when layout is 'Three images'"
+    },
+    {
+      "type": "checkbox",
+      "id": "lazy_load",
+      "label": "Enable lazy loading",
+      "default": true,
+      "info": "Improves page load performance"
+    },
+    {
+      "type": "header",
+      "content": "Image styling"
+    },
+    {
+      "type": "range",
+      "id": "image_gap",
+      "label": "Gap between images",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "image_border_color",
+      "label": "Image border color",
+      "default": "transparent"
+    },
+    {
+      "type": "range",
+      "id": "image_border_width",
+      "label": "Image border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading (above heading)",
+      "default": "Our Story"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join the Winter Crew"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle (below heading)",
+      "info": "Optional text that appears below the heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Discover our latest collection of premium products designed to elevate your everyday experience. Quality craftsmanship meets modern design.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Text alignment"
+    },
+    {
+      "type": "select",
+      "id": "text_align_desktop",
+      "label": "Text alignment (Desktop)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Text alignment (Mobile)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Button 1"
+    },
+    {
+      "type": "text",
+      "id": "button_text_1",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_url_1",
+      "label": "Button URL"
+    },
+    {
+      "type": "select",
+      "id": "button_style_1",
+      "label": "Button style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "outline", "label": "Outline" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_show_arrow_1",
+      "label": "Show arrow icon",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Button 2"
+    },
+    {
+      "type": "text",
+      "id": "button_text_2",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_url_2",
+      "label": "Button URL"
+    },
+    {
+      "type": "select",
+      "id": "button_style_2",
+      "label": "Button style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "outline", "label": "Outline" }
+      ],
+      "default": "outline"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_show_arrow_2",
+      "label": "Show arrow icon",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (Desktop)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (Mobile)",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "text_size_desktop",
+      "label": "Text size (Desktop)",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Text size (Mobile)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "label": "Text line height",
+      "min": 1.2,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.6
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "Background type",
+      "options": [
+        { "value": "solid", "label": "Solid color" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "gradient_start",
+      "label": "Gradient start color",
+      "default": "#667eea"
+    },
+    {
+      "type": "color",
+      "id": "gradient_end",
+      "label": "Gradient end color",
+      "default": "#764ba2"
+    },
+    {
+      "type": "range",
+      "id": "gradient_angle",
+      "label": "Gradient angle",
+      "min": 0,
+      "max": 360,
+      "step": 15,
+      "unit": "°",
+      "default": 135
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Button colors"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button border color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section border"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "transparent"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Padding (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_sides_desktop",
+      "label": "Padding sides",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Padding (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_sides_mobile",
+      "label": "Padding sides",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Section margin"
+    },
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Image with Text 13"
+    }
+  ]
+}
+{% endschema %}

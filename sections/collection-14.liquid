@@ -1,0 +1,617 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --col14-gap-desktop: {{ section.settings.gap_desktop }}px;
+    --col14-gap-mobile: {{ section.settings.gap_mobile }}px;
+    --col14-card-height-desktop: {{ section.settings.card_height_desktop }}px;
+    --col14-card-height-mobile: {{ section.settings.card_height_mobile }}px;
+    --col14-overlay: {{ section.settings.overlay_color }};
+    --col14-subtitle: {{ section.settings.subtitle_color }};
+    --col14-title: {{ section.settings.title_color }};
+    --col14-text: {{ section.settings.text_color }};
+    --col14-btn-bg: {{ section.settings.button_background }};
+    --col14-btn-text: {{ section.settings.button_text_color }};
+    --col14-btn-border: {{ section.settings.button_border_color }};
+    --col14-btn-hover-bg: {{ section.settings.button_hover_background }};
+    --col14-btn-hover-text: {{ section.settings.button_hover_text_color }};
+    --col14-section-bg: {{ section.settings.section_background }};
+    margin-top: {{ section.settings.section_margin_top }}px;
+    margin-bottom: {{ section.settings.section_margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+  .collection-14 {
+    background: var(--col14-section-bg, #fff);
+    padding: 40px 20px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .collection-14__container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .collection-14__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--col14-gap-mobile, 16px);
+  }
+
+  .collection-14__card {
+    position: relative;
+    height: var(--col14-card-height-mobile, 400px);
+    border-radius: 12px;
+    overflow: hidden;
+    flex: 1 1 0;
+    transition: flex 0.5s ease;
+  }
+
+  .collection-14__card-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .collection-14__card-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--col14-overlay, rgba(0, 0, 0, 0.2));
+    transition: background 0.3s ease;
+  }
+
+  .collection-14__card-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+    z-index: 2;
+  }
+
+  /* Text alignment classes */
+  .collection-14__card-content--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .collection-14__card-content--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .collection-14__card-content--right {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .collection-14__subtitle {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--col14-subtitle, #fff);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 8px;
+    opacity: 0.9;
+  }
+
+  .collection-14__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--col14-title, #fff);
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+
+  .collection-14__text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--col14-text, rgba(255, 255, 255, 0.9));
+    margin: 0 0 20px;
+    max-width: 320px;
+  }
+
+  /* Button base styles */
+  .collection-14__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    text-decoration: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 12px 24px;
+  }
+
+  /* Button style: solid */
+  .collection-14__button--solid {
+    background: var(--col14-btn-bg, #fff);
+    color: var(--col14-btn-text, #000);
+    border: none;
+  }
+
+  .collection-14__button--solid:hover {
+    background: var(--col14-btn-hover-bg, #f0f0f0);
+    color: var(--col14-btn-hover-text, #000);
+  }
+
+  /* Button style: outline */
+  .collection-14__button--outline {
+    background: transparent;
+    color: var(--col14-btn-text, #fff);
+    border: 1px solid var(--col14-btn-border, #fff);
+  }
+
+  .collection-14__button--outline:hover {
+    background: var(--col14-btn-hover-bg, #fff);
+    color: var(--col14-btn-hover-text, #000);
+    border-color: var(--col14-btn-hover-bg, #fff);
+  }
+
+  /* Button style: link */
+  .collection-14__button--link {
+    background: transparent;
+    color: var(--col14-btn-text, #fff);
+    border: none;
+    padding: 8px 0;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .collection-14__button--link:hover {
+    color: var(--col14-btn-hover-text, rgba(255, 255, 255, 0.8));
+  }
+
+  .collection-14__button svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .collection-14__button:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Desktop styles */
+  @media (min-width: 768px) {
+    .collection-14 {
+      padding: 60px 40px;
+    }
+
+    .collection-14__grid {
+      flex-direction: row;
+      gap: var(--col14-gap-desktop, 20px);
+    }
+
+    .collection-14__card {
+      height: var(--col14-card-height-desktop, 500px);
+    }
+
+    .collection-14__card-content {
+      padding: 32px;
+    }
+
+    .collection-14__subtitle {
+      font-size: 13px;
+    }
+
+    .collection-14__title {
+      font-size: 36px;
+    }
+
+    .collection-14__text {
+      font-size: 14px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    .collection-14__button {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease 0.1s;
+    }
+
+    .collection-14__card:hover {
+      flex: 2 1 0;
+    }
+
+    .collection-14__card:hover .collection-14__card-image {
+      transform: scale(1.05);
+    }
+
+    .collection-14__card:hover .collection-14__text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .collection-14__card:hover .collection-14__button {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .collection-14__card-content {
+      padding: 40px;
+    }
+
+    .collection-14__title {
+      font-size: 42px;
+    }
+
+    .collection-14__text {
+      font-size: 15px;
+      max-width: 380px;
+    }
+
+    .collection-14__button {
+      font-size: 14px;
+      padding: 14px 28px;
+    }
+  }
+
+  /* Mobile text alignment override */
+  @media (max-width: 767px) {
+    .collection-14__card-content[data-mobile-align="left"] {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .collection-14__card-content[data-mobile-align="center"] {
+      align-items: center;
+      text-align: center;
+    }
+
+    .collection-14__card-content[data-mobile-align="right"] {
+      align-items: flex-end;
+      text-align: right;
+    }
+  }
+</style>
+
+<section class="collection-14">
+  <div class="collection-14__container">
+    <div class="collection-14__grid">
+      {%- for block in section.blocks -%}
+        <div class="collection-14__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 1200 }}"
+              alt="{{ block.settings.title | escape }}"
+              class="collection-14__card-image"
+              loading="lazy"
+            >
+          {%- else -%}
+            <div class="collection-14__card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+          {%- endif -%}
+
+          <div class="collection-14__card-overlay"></div>
+
+          <div
+            class="collection-14__card-content collection-14__card-content--{{ block.settings.text_align_desktop }}"
+            data-mobile-align="{{ block.settings.text_align_mobile }}"
+          >
+            {%- if block.settings.subtitle != blank -%}
+              <p class="collection-14__subtitle">{{ block.settings.subtitle }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.title != blank -%}
+              <h3 class="collection-14__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.text != blank -%}
+              <p class="collection-14__text">{{ block.settings.text }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.button_text != blank -%}
+              <a href="{{ block.settings.button_url }}" class="collection-14__button collection-14__button--{{ block.settings.button_style }}">
+                {{ block.settings.button_text }}
+                {%- if block.settings.show_arrow -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Collection 14",
+  "tag": "section",
+  "class": "section-collection-14",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "label": "Gap between cards (Desktop)",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Gap between cards (Mobile)",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Card dimensions"
+    },
+    {
+      "type": "range",
+      "id": "card_height_desktop",
+      "label": "Card height (Desktop)",
+      "min": 300,
+      "max": 700,
+      "step": 20,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "card_height_mobile",
+      "label": "Card height (Mobile)",
+      "min": 260,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Card overlay color",
+      "default": "rgba(0, 0, 0, 0.25)"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Button colors"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button border color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection card",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "New Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Collection Name"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Discover our latest collection of premium products."
+        },
+        {
+          "type": "header",
+          "content": "Text alignment"
+        },
+        {
+          "type": "select",
+          "id": "text_align_desktop",
+          "label": "Text alignment (Desktop)",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "text_align_mobile",
+          "label": "Text alignment (Mobile)",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            { "value": "solid", "label": "Solid" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "link", "label": "Link" }
+          ],
+          "default": "solid"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_arrow",
+          "label": "Show arrow icon",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Collection 14",
+      "blocks": [
+        {
+          "type": "collection_card",
+          "settings": {
+            "subtitle": "New Arrival",
+            "title": "Lip Care",
+            "text": "Discover our range of nourishing lip products.",
+            "button_text": "Shop Lip",
+            "button_style": "outline"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "subtitle": "Best Sellers",
+            "title": "Cheek",
+            "text": "Add a natural glow with our blush collection.",
+            "button_text": "Shop Cheek",
+            "button_style": "outline"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "subtitle": "Trending",
+            "title": "Eyes",
+            "text": "Create stunning eye looks with our palettes.",
+            "button_text": "Shop Eyes",
+            "button_style": "outline"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

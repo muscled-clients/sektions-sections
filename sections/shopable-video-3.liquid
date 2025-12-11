@@ -1,0 +1,884 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --sv3-bg: {{ section.settings.background_color }};
+    --sv3-text: {{ section.settings.text_color }};
+    --sv3-heading: {{ section.settings.heading_color }};
+    --sv3-accent: {{ section.settings.accent_color }};
+    margin-top: {{ section.settings.section_margin_top }}px;
+    margin-bottom: {{ section.settings.section_margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+  .shoppable-video-3 {
+    background-color: var(--sv3-bg);
+    padding: 40px 0;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+  }
+
+  .shoppable-video-3__container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .shoppable-video-3__header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .shoppable-video-3__title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--sv3-heading);
+    margin: 0;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .shoppable-video-3__title span {
+    font-weight: 400;
+    opacity: 0.7;
+  }
+
+  /* Carousel */
+  .shoppable-video-3__carousel-wrap {
+    position: relative;
+    padding: 0 40px;
+  }
+
+  .shoppable-video-3__carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+    padding: 10px 0;
+  }
+
+  .shoppable-video-3__carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Video Card - Clean, no overlay */
+  .shoppable-video-3__card {
+    flex: 0 0 calc(70% - 8px);
+    scroll-snap-align: center;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #f5f5f5;
+    aspect-ratio: 9 / 12;
+  }
+
+  .shoppable-video-3__video-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .shoppable-video-3__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .shoppable-video-3__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .shoppable-video-3__card.playing .shoppable-video-3__poster {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Active card styling */
+  .shoppable-video-3__card.active {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+
+  /* Navigation Arrows */
+  .shoppable-video-3__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  .shoppable-video-3__nav:hover {
+    background: #f5f5f5;
+  }
+
+  .shoppable-video-3__nav--prev {
+    left: 0;
+  }
+
+  .shoppable-video-3__nav--next {
+    right: 0;
+  }
+
+  .shoppable-video-3__nav svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Modal - Right side overlay */
+  .shoppable-video-3__modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(245, 245, 245, 0.75);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+
+  .shoppable-video-3__modal.active {
+    display: flex;
+  }
+
+  .shoppable-video-3__modal-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-right: 5%;
+  }
+
+  /* Modal Close - Left side */
+  .shoppable-video-3__modal-close {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(80, 80, 80, 0.9);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    transition: background 0.3s ease;
+  }
+
+  .shoppable-video-3__modal-close:hover {
+    background: rgba(60, 60, 60, 1);
+  }
+
+  .shoppable-video-3__modal-close svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Modal Video Container */
+  .shoppable-video-3__modal-video-wrap {
+    position: relative;
+    width: 340px;
+    max-height: 85vh;
+    aspect-ratio: 9 / 16;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  }
+
+  .shoppable-video-3__modal-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Modal Navigation - Outside video on right */
+  .shoppable-video-3__modal-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 10;
+  }
+
+  .shoppable-video-3__modal-nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .shoppable-video-3__modal-nav-btn:hover {
+    background: #f5f5f5;
+    transform: scale(1.05);
+  }
+
+  .shoppable-video-3__modal-nav-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Modal Sound Toggle - Bottom right corner of video */
+  .shoppable-video-3__modal-sound {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(60, 60, 60, 0.9);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.3s ease;
+  }
+
+  .shoppable-video-3__modal-sound:hover {
+    background: rgba(40, 40, 40, 1);
+  }
+
+  .shoppable-video-3__modal-sound svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Modal Product Card - Bottom of video */
+  .shoppable-video-3__modal-product {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 70px;
+    padding: 10px 12px;
+    background: #fff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+
+  .shoppable-video-3__modal-product-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    object-fit: cover;
+    background: #f5f5f5;
+    border: 1px solid #eee;
+  }
+
+  .shoppable-video-3__modal-product-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .shoppable-video-3__modal-product-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .shoppable-video-3__modal-product-prices {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .shoppable-video-3__modal-product-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+  }
+
+  .shoppable-video-3__modal-product-compare {
+    font-size: 12px;
+    color: #999;
+    text-decoration: line-through;
+    margin: 0;
+  }
+
+  /* Desktop Styles */
+  @media (min-width: 768px) {
+    .shoppable-video-3 {
+      padding: 50px 0;
+    }
+
+    .shoppable-video-3__container {
+      padding: 0 40px;
+    }
+
+    .shoppable-video-3__carousel-wrap {
+      padding: 0 50px;
+    }
+
+    .shoppable-video-3__carousel {
+      gap: 20px;
+    }
+
+    .shoppable-video-3__card {
+      flex: 0 0 calc(25% - 15px);
+    }
+
+    .shoppable-video-3__modal-video-wrap {
+      width: 380px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .shoppable-video-3__container {
+      padding: 0 60px;
+    }
+
+    .shoppable-video-3__card {
+      flex: 0 0 calc(20% - 16px);
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .shoppable-video-3__card {
+      flex: 0 0 calc(16.666% - 17px);
+    }
+  }
+</style>
+
+<section class="shoppable-video-3" data-section-id="{{ section.id }}">
+  <div class="shoppable-video-3__container">
+    {%- if section.settings.heading != blank -%}
+      <div class="shoppable-video-3__header">
+        <h2 class="shoppable-video-3__title">
+          {{ section.settings.heading }} <span>{{ section.settings.heading_suffix }}</span>
+        </h2>
+      </div>
+    {%- endif -%}
+
+    <div class="shoppable-video-3__carousel-wrap">
+      <div class="shoppable-video-3__carousel" data-carousel>
+        {%- for block in section.blocks -%}
+          <div
+            class="shoppable-video-3__card{% if forloop.first %} active{% endif %}"
+            data-index="{{ forloop.index0 }}"
+            data-video-url="{{ block.settings.video_url }}"
+            data-product-image="{%- if block.settings.product != blank -%}{{ block.settings.product.featured_image | image_url: width: 200 }}{%- elsif block.settings.custom_product_image != blank -%}{{ block.settings.custom_product_image | image_url: width: 200 }}{%- endif -%}"
+            data-product-title="{%- if block.settings.product != blank -%}{{ block.settings.product.title }}{%- else -%}{{ block.settings.custom_product_title }}{%- endif -%}"
+            data-product-price="{%- if block.settings.product != blank -%}{{ block.settings.product.price | money }}{%- else -%}{{ block.settings.custom_product_price }}{%- endif -%}"
+            data-product-compare="{%- if block.settings.product != blank and block.settings.product.compare_at_price > block.settings.product.price -%}{{ block.settings.product.compare_at_price | money }}{%- else -%}{{ block.settings.custom_compare_price }}{%- endif -%}"
+            data-product-url="{%- if block.settings.product != blank -%}{{ block.settings.product.url }}{%- else -%}{{ block.settings.custom_product_url }}{%- endif -%}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="shoppable-video-3__video-wrapper">
+              {%- if block.settings.poster_image != blank -%}
+                <img
+                  src="{{ block.settings.poster_image | image_url: width: 600 }}"
+                  alt=""
+                  class="shoppable-video-3__poster"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                >
+              {%- endif -%}
+
+              {%- if block.settings.video_url != blank -%}
+                <video
+                  class="shoppable-video-3__video"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source src="{{ block.settings.video_url }}" type="video/mp4">
+                </video>
+              {%- elsif block.settings.video != blank -%}
+                <video
+                  class="shoppable-video-3__video"
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  {%- for source in block.settings.video.sources -%}
+                    <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                  {%- endfor -%}
+                </video>
+              {%- else -%}
+                <div class="shoppable-video-3__video" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <button class="shoppable-video-3__nav shoppable-video-3__nav--prev" aria-label="Previous" data-prev>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <button class="shoppable-video-3__nav shoppable-video-3__nav--next" aria-label="Next" data-next>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="shoppable-video-3__modal" data-modal>
+    <button class="shoppable-video-3__modal-close" data-modal-close aria-label="Close">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <div class="shoppable-video-3__modal-inner">
+      <div class="shoppable-video-3__modal-video-wrap">
+        <video class="shoppable-video-3__modal-video" data-modal-video playsinline loop></video>
+
+        <!-- Sound Toggle -->
+        <button class="shoppable-video-3__modal-sound" data-mute-toggle aria-label="Toggle sound">
+          <svg class="icon-muted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+          <svg class="icon-unmuted" style="display:none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+        </button>
+
+        <!-- Product Card -->
+        <div class="shoppable-video-3__modal-product" data-modal-product style="display: none;">
+          <img class="shoppable-video-3__modal-product-img" data-modal-product-img src="" alt="">
+          <div class="shoppable-video-3__modal-product-info">
+            <p class="shoppable-video-3__modal-product-title" data-modal-product-title></p>
+            <div class="shoppable-video-3__modal-product-prices">
+              <p class="shoppable-video-3__modal-product-price" data-modal-product-price></p>
+              <p class="shoppable-video-3__modal-product-compare" data-modal-product-compare></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vertical Navigation - Outside video -->
+      <div class="shoppable-video-3__modal-nav">
+        <button class="shoppable-video-3__modal-nav-btn" data-modal-prev aria-label="Previous video">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"/>
+          </svg>
+        </button>
+        <button class="shoppable-video-3__modal-nav-btn" data-modal-next aria-label="Next video">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const section = document.querySelector('.shoppable-video-3[data-section-id="{{ section.id }}"]');
+  if (!section) return;
+
+  const carousel = section.querySelector('[data-carousel]');
+  const cards = section.querySelectorAll('.shoppable-video-3__card');
+  const prevBtn = section.querySelector('[data-prev]');
+  const nextBtn = section.querySelector('[data-next]');
+  const modal = section.querySelector('[data-modal]');
+  const modalVideo = modal.querySelector('[data-modal-video]');
+  const modalClose = modal.querySelector('[data-modal-close]');
+  const muteToggle = modal.querySelector('[data-mute-toggle]');
+  const modalPrev = modal.querySelector('[data-modal-prev]');
+  const modalNext = modal.querySelector('[data-modal-next]');
+  const modalProduct = modal.querySelector('[data-modal-product]');
+  const modalProductImg = modal.querySelector('[data-modal-product-img]');
+  const modalProductTitle = modal.querySelector('[data-modal-product-title]');
+  const modalProductPrice = modal.querySelector('[data-modal-product-price]');
+  const modalProductCompare = modal.querySelector('[data-modal-product-compare]');
+
+  let currentIndex = 0;
+  let currentModalIndex = 0;
+  let isMuted = true;
+  let autoplayTimer = null;
+  const autoplayDuration = {{ section.settings.autoplay_duration }}000;
+
+  // Sequential autoplay
+  function playVideo(index) {
+    cards.forEach((card, i) => {
+      const video = card.querySelector('video');
+      card.classList.remove('active', 'playing');
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+    });
+
+    const activeCard = cards[index];
+    const video = activeCard.querySelector('video');
+    activeCard.classList.add('active', 'playing');
+
+    if (video) {
+      video.play().catch(() => {});
+    }
+
+    // Scroll card into view
+    const cardLeft = activeCard.offsetLeft;
+    const cardWidth = activeCard.offsetWidth;
+    const carouselWidth = carousel.offsetWidth;
+    const scrollTarget = cardLeft - (carouselWidth / 2) + (cardWidth / 2);
+    carousel.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+  }
+
+  function nextVideo() {
+    currentIndex = (currentIndex + 1) % cards.length;
+    playVideo(currentIndex);
+  }
+
+  function prevVideo() {
+    currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+    playVideo(currentIndex);
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(nextVideo, autoplayDuration);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  // Carousel navigation
+  prevBtn.addEventListener('click', () => {
+    stopAutoplay();
+    prevVideo();
+    startAutoplay();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    stopAutoplay();
+    nextVideo();
+    startAutoplay();
+  });
+
+  // Click to open modal
+  cards.forEach((card, index) => {
+    card.addEventListener('click', () => {
+      stopAutoplay();
+      openModal(index);
+    });
+  });
+
+  // Modal functions
+  function openModal(index) {
+    currentModalIndex = index;
+    const card = cards[index];
+    const videoUrl = card.dataset.videoUrl;
+    const video = card.querySelector('video');
+
+    if (videoUrl) {
+      modalVideo.src = videoUrl;
+    } else if (video) {
+      const source = video.querySelector('source');
+      if (source) modalVideo.src = source.src;
+    }
+
+    modalVideo.muted = isMuted;
+    modalVideo.play().catch(() => {});
+
+    // Product info
+    const productImg = card.dataset.productImage;
+    const productTitle = card.dataset.productTitle;
+    const productPrice = card.dataset.productPrice;
+    const productCompare = card.dataset.productCompare;
+
+    if (productTitle) {
+      if (productImg) modalProductImg.src = productImg;
+      modalProductTitle.textContent = productTitle;
+      modalProductPrice.textContent = productPrice || '';
+      modalProductCompare.textContent = productCompare || '';
+      modalProductCompare.style.display = productCompare ? 'block' : 'none';
+      modalProduct.style.display = 'flex';
+    } else {
+      modalProduct.style.display = 'none';
+    }
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    modalVideo.pause();
+    modalVideo.src = '';
+    document.body.style.overflow = '';
+    startAutoplay();
+  }
+
+  function navigateModal(direction) {
+    currentModalIndex += direction;
+    if (currentModalIndex < 0) currentModalIndex = cards.length - 1;
+    if (currentModalIndex >= cards.length) currentModalIndex = 0;
+    openModal(currentModalIndex);
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowUp') navigateModal(-1);
+    if (e.key === 'ArrowDown') navigateModal(1);
+  });
+
+  modalPrev.addEventListener('click', () => navigateModal(-1));
+  modalNext.addEventListener('click', () => navigateModal(1));
+
+  muteToggle.addEventListener('click', () => {
+    isMuted = !isMuted;
+    modalVideo.muted = isMuted;
+    muteToggle.querySelector('.icon-muted').style.display = isMuted ? 'block' : 'none';
+    muteToggle.querySelector('.icon-unmuted').style.display = isMuted ? 'none' : 'block';
+  });
+
+  modalVideo.addEventListener('ended', () => {
+    navigateModal(1);
+  });
+
+  // Pause autoplay on hover
+  section.addEventListener('mouseenter', stopAutoplay);
+  section.addEventListener('mouseleave', () => {
+    if (!modal.classList.contains('active')) startAutoplay();
+  });
+
+  // Start sequential autoplay
+  playVideo(0);
+  startAutoplay();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "SEK Shoppable Video 3",
+  "tag": "section",
+  "class": "section-shoppable-video-3",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "COMMUNITY"
+    },
+    {
+      "type": "text",
+      "id": "heading_suffix",
+      "label": "Heading suffix (lighter)",
+      "default": "FEEDBACK"
+    },
+    {
+      "type": "header",
+      "content": "Autoplay"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_duration",
+      "label": "Autoplay duration (seconds)",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "default": 5,
+      "info": "Time before switching to next video"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#6e44b3"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Video"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video (Shopify hosted)"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (external)",
+          "info": "Direct link to MP4 file. Overrides Shopify video."
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_image",
+          "label": "Poster/Thumbnail image",
+          "info": "Shown before video plays"
+        },
+        {
+          "type": "header",
+          "content": "Product (Shopify)"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Product (Custom)"
+        },
+        {
+          "type": "paragraph",
+          "content": "Use these fields if not linking to a Shopify product"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_product_image",
+          "label": "Product image"
+        },
+        {
+          "type": "text",
+          "id": "custom_product_title",
+          "label": "Product title"
+        },
+        {
+          "type": "text",
+          "id": "custom_product_price",
+          "label": "Product price",
+          "info": "e.g. $29.99"
+        },
+        {
+          "type": "text",
+          "id": "custom_compare_price",
+          "label": "Compare at price",
+          "info": "e.g. $39.99 (shown with strikethrough)"
+        },
+        {
+          "type": "url",
+          "id": "custom_product_url",
+          "label": "Product URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Shoppable Video 3",
+      "blocks": [
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1007 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --ftabs-section-bg: {{ section.settings.section_background }};
+    --ftabs-tab-bg: {{ section.settings.tab_background }};
+    --ftabs-tab-text: {{ section.settings.tab_text_color }};
+    --ftabs-tab-active-bg: {{ section.settings.tab_active_background }};
+    --ftabs-tab-active-text: {{ section.settings.tab_active_text_color }};
+    --ftabs-tab-border: {{ section.settings.tab_border_color }};
+    --ftabs-tab-radius: {{ section.settings.tab_border_radius }}px;
+    --ftabs-content-bg: {{ section.settings.content_background }};
+    --ftabs-content-text: {{ section.settings.content_text_color }};
+    --ftabs-heading-color: {{ section.settings.heading_color }};
+    margin-top: {{ section.settings.section_margin_top }}px;
+    margin-bottom: {{ section.settings.section_margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Josefin+Sans:wght@400;500;600;700&display=swap');
+
+  .flexible-tabs {
+    background: var(--ftabs-section-bg, #fff);
+    padding: 40px 20px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .flexible-tabs__container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .flexible-tabs__header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .flexible-tabs__title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ftabs-heading-color, #000);
+    margin: 0 0 8px;
+  }
+
+  .flexible-tabs__subtitle {
+    font-size: 14px;
+    color: var(--ftabs-content-text, #666);
+    margin: 0;
+  }
+
+  /* Tab Navigation - Grouped Pill Container */
+  .flexible-tabs__nav-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+
+  .flexible-tabs__nav {
+    display: inline-flex;
+    background: var(--ftabs-tab-bg, #fff);
+    border: 1px solid var(--ftabs-tab-border, #e0e0e0);
+    border-radius: var(--ftabs-tab-radius, 100px);
+    padding: 4px;
+    gap: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .flexible-tabs__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .flexible-tabs__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    color: var(--ftabs-tab-text, #333);
+    border: none;
+    border-radius: calc(var(--ftabs-tab-radius, 100px) - 4px);
+    padding: 10px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+  }
+
+  .flexible-tabs__tab:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .flexible-tabs__tab.active {
+    background: var(--ftabs-tab-active-bg, #000);
+    color: var(--ftabs-tab-active-text, #fff);
+  }
+
+  .flexible-tabs__tab-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .flexible-tabs__tab-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Tab Content */
+  .flexible-tabs__content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .flexible-tabs__content.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Content Inner */
+  .flexible-tabs__content-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .flexible-tabs__content-heading {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ftabs-heading-color, #000);
+    margin: 0;
+  }
+
+  .flexible-tabs__content-subheading {
+    font-size: 13px;
+    color: var(--ftabs-content-text, #666);
+    margin: 0;
+    text-align: center;
+  }
+
+  .flexible-tabs__content-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ftabs-content-text, #333);
+    margin: 0;
+  }
+
+  .flexible-tabs__content-text p {
+    margin: 0 0 16px;
+  }
+
+  .flexible-tabs__content-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Images Grid */
+  .flexible-tabs__images {
+    display: grid;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .flexible-tabs__images--1 {
+    grid-template-columns: 1fr;
+  }
+
+  .flexible-tabs__images--2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .flexible-tabs__images--3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .flexible-tabs__image-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .flexible-tabs__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* Video */
+  .flexible-tabs__videos {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .flexible-tabs__video-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .flexible-tabs__video {
+    width: 100%;
+    display: block;
+  }
+
+  .flexible-tabs__video-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flexible-tabs__video-placeholder svg {
+    width: 60px;
+    height: 60px;
+    color: #fff;
+    opacity: 0.8;
+  }
+
+  /* Features Grid */
+  .flexible-tabs__features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .flexible-tabs__feature-card {
+    text-align: center;
+  }
+
+  .flexible-tabs__feature-image {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .flexible-tabs__feature-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .flexible-tabs__feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--ftabs-content-text, #333);
+  }
+
+  .flexible-tabs__feature-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--ftabs-tab-active-bg, #000);
+  }
+
+  /* Button */
+  .flexible-tabs__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ftabs-tab-active-bg, #000);
+    color: var(--ftabs-tab-active-text, #fff);
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    align-self: flex-start;
+  }
+
+  .flexible-tabs__button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  .flexible-tabs__button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Desktop styles */
+  @media (min-width: 768px) {
+    .flexible-tabs {
+      padding: 60px 40px;
+    }
+
+    .flexible-tabs__header {
+      margin-bottom: 40px;
+    }
+
+    .flexible-tabs__title {
+      font-size: 36px;
+    }
+
+    .flexible-tabs__nav {
+      padding: 5px;
+      gap: 5px;
+    }
+
+    .flexible-tabs__tab {
+      padding: 12px 22px;
+      font-size: 14px;
+    }
+
+    .flexible-tabs__content-heading {
+      font-size: 26px;
+    }
+
+    .flexible-tabs__features-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .flexible-tabs__title {
+      font-size: 42px;
+    }
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 767px) {
+    .flexible-tabs__images--2,
+    .flexible-tabs__images--3 {
+      grid-template-columns: 1fr;
+    }
+
+    .flexible-tabs__features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section class="flexible-tabs" data-section-id="{{ section.id }}">
+  <div class="flexible-tabs__container">
+    {%- if section.settings.section_title != blank or section.settings.section_subtitle != blank -%}
+      <div class="flexible-tabs__header">
+        {%- if section.settings.section_title != blank -%}
+          <h2 class="flexible-tabs__title">{{ section.settings.section_title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.section_subtitle != blank -%}
+          <p class="flexible-tabs__subtitle">{{ section.settings.section_subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Tab Navigation - Grouped Pill -->
+    <div class="flexible-tabs__nav-wrapper">
+      <div class="flexible-tabs__nav">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'tab' -%}
+            <button
+              class="flexible-tabs__tab {% if forloop.first %}active{% endif %}"
+              data-tab-id="tab-{{ block.id }}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.tab_icon != blank -%}
+                <span class="flexible-tabs__tab-icon">
+                  {%- case block.settings.tab_icon -%}
+                    {%- when 'star' -%}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    {%- when 'heart' -%}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    {%- when 'check' -%}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    {%- when 'info' -%}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    {%- when 'play' -%}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    {%- when 'box' -%}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    {%- when 'gift' -%}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                    {%- when 'refresh' -%}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                  {%- endcase -%}
+                </span>
+              {%- endif -%}
+              {{ block.settings.tab_title }}
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Tab Content -->
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'tab' -%}
+        <div
+          class="flexible-tabs__content {% if forloop.first %}active{% endif %}"
+          data-tab-content="tab-{{ block.id }}"
+        >
+          <div class="flexible-tabs__content-inner">
+            {%- case block.settings.content_layout -%}
+
+              {%- when 'description' -%}
+                {%- if block.settings.content_text != blank -%}
+                  <div class="flexible-tabs__content-text">{{ block.settings.content_text }}</div>
+                {%- endif -%}
+
+                {%- if block.settings.content_heading != blank -%}
+                  <h3 class="flexible-tabs__content-heading">{{ block.settings.content_heading }}</h3>
+                {%- endif -%}
+
+                {%- assign image_count = 0 -%}
+                {%- if block.settings.image_1 != blank %}{% assign image_count = image_count | plus: 1 %}{% endif -%}
+                {%- if block.settings.image_2 != blank %}{% assign image_count = image_count | plus: 1 %}{% endif -%}
+
+                {%- if image_count > 0 -%}
+                  <div class="flexible-tabs__images flexible-tabs__images--{{ image_count }}">
+                    {%- if block.settings.image_1 != blank -%}
+                      <div class="flexible-tabs__image-wrapper">
+                        <img src="{{ block.settings.image_1 | image_url: width: 600 }}" alt="" class="flexible-tabs__image" loading="lazy">
+                      </div>
+                    {%- endif -%}
+                    {%- if block.settings.image_2 != blank -%}
+                      <div class="flexible-tabs__image-wrapper">
+                        <img src="{{ block.settings.image_2 | image_url: width: 600 }}" alt="" class="flexible-tabs__image" loading="lazy">
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+
+              {%- when 'video' -%}
+                {%- if block.settings.content_heading != blank -%}
+                  <h3 class="flexible-tabs__content-heading" style="text-align: center;">{{ block.settings.content_heading }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.content_subheading != blank -%}
+                  <p class="flexible-tabs__content-subheading">{{ block.settings.content_subheading }}</p>
+                {%- endif -%}
+
+                <div class="flexible-tabs__videos">
+                  {%- if block.settings.video_1 != blank -%}
+                    <div class="flexible-tabs__video-wrapper">
+                      {{ block.settings.video_1 | video_tag: autoplay: false, loop: false, muted: false, controls: true, class: 'flexible-tabs__video' }}
+                    </div>
+                  {%- elsif block.settings.video_url_1 != blank -%}
+                    <div class="flexible-tabs__video-wrapper">
+                      <iframe
+                        class="flexible-tabs__video flexible-tabs__embed-video"
+                        data-video-url="{{ block.settings.video_url_1 }}"
+                        style="aspect-ratio: 16/9; border: none; width: 100%;"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      ></iframe>
+                    </div>
+                  {%- else -%}
+                    <div class="flexible-tabs__video-wrapper">
+                      <div class="flexible-tabs__video-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                      </div>
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.video_2 != blank -%}
+                    <div class="flexible-tabs__video-wrapper">
+                      {{ block.settings.video_2 | video_tag: autoplay: false, loop: false, muted: false, controls: true, class: 'flexible-tabs__video' }}
+                    </div>
+                  {%- elsif block.settings.video_url_2 != blank -%}
+                    <div class="flexible-tabs__video-wrapper">
+                      <iframe
+                        class="flexible-tabs__video flexible-tabs__embed-video"
+                        data-video-url="{{ block.settings.video_url_2 }}"
+                        style="aspect-ratio: 16/9; border: none; width: 100%;"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      ></iframe>
+                    </div>
+                  {%- endif -%}
+                </div>
+
+              {%- when 'features' -%}
+                <div class="flexible-tabs__features-grid">
+                  {%- if block.settings.feature_image_1 or block.settings.feature_text_1 != blank -%}
+                    <div class="flexible-tabs__feature-card">
+                      {%- if block.settings.feature_image_1 -%}
+                        <div class="flexible-tabs__feature-image">
+                          {{ block.settings.feature_image_1 | image_url: width: 500 | image_tag: loading: 'lazy', alt: block.settings.feature_text_1 }}
+                        </div>
+                      {%- endif -%}
+                      {%- if block.settings.feature_text_1 != blank -%}
+                        <div class="flexible-tabs__feature-item">
+                          {%- if block.settings.feature_icon_1 != blank -%}
+                            <span class="flexible-tabs__feature-icon">
+                              {%- case block.settings.feature_icon_1 -%}
+                                {%- when 'check' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                                {%- when 'refresh' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                                {%- when 'gift' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                                {%- when 'star' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                              {%- endcase -%}
+                            </span>
+                          {%- endif -%}
+                          <span>{{ block.settings.feature_text_1 }}</span>
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.feature_image_2 or block.settings.feature_text_2 != blank -%}
+                    <div class="flexible-tabs__feature-card">
+                      {%- if block.settings.feature_image_2 -%}
+                        <div class="flexible-tabs__feature-image">
+                          {{ block.settings.feature_image_2 | image_url: width: 500 | image_tag: loading: 'lazy', alt: block.settings.feature_text_2 }}
+                        </div>
+                      {%- endif -%}
+                      {%- if block.settings.feature_text_2 != blank -%}
+                        <div class="flexible-tabs__feature-item">
+                          {%- if block.settings.feature_icon_2 != blank -%}
+                            <span class="flexible-tabs__feature-icon">
+                              {%- case block.settings.feature_icon_2 -%}
+                                {%- when 'check' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                                {%- when 'refresh' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                                {%- when 'gift' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                                {%- when 'star' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                              {%- endcase -%}
+                            </span>
+                          {%- endif -%}
+                          <span>{{ block.settings.feature_text_2 }}</span>
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.feature_image_3 or block.settings.feature_text_3 != blank -%}
+                    <div class="flexible-tabs__feature-card">
+                      {%- if block.settings.feature_image_3 -%}
+                        <div class="flexible-tabs__feature-image">
+                          {{ block.settings.feature_image_3 | image_url: width: 500 | image_tag: loading: 'lazy', alt: block.settings.feature_text_3 }}
+                        </div>
+                      {%- endif -%}
+                      {%- if block.settings.feature_text_3 != blank -%}
+                        <div class="flexible-tabs__feature-item">
+                          {%- if block.settings.feature_icon_3 != blank -%}
+                            <span class="flexible-tabs__feature-icon">
+                              {%- case block.settings.feature_icon_3 -%}
+                                {%- when 'check' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                                {%- when 'refresh' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                                {%- when 'gift' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                                {%- when 'star' -%}
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                              {%- endcase -%}
+                            </span>
+                          {%- endif -%}
+                          <span>{{ block.settings.feature_text_3 }}</span>
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+
+            {%- endcase -%}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const section = document.querySelector('.flexible-tabs[data-section-id="{{ section.id }}"]');
+  if (!section) return;
+
+  const tabs = section.querySelectorAll('.flexible-tabs__tab');
+  const contents = section.querySelectorAll('.flexible-tabs__content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      const tabId = this.dataset.tabId;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+
+      contents.forEach(content => {
+        if (content.dataset.tabContent === tabId) {
+          content.classList.add('active');
+        } else {
+          content.classList.remove('active');
+        }
+      });
+    });
+  });
+
+  // Parse and set video embed URLs
+  function getEmbedUrl(url) {
+    if (!url) return null;
+
+    // YouTube patterns
+    // youtube.com/watch?v=VIDEO_ID
+    let match = url.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/);
+    if (match) return 'https://www.youtube.com/embed/' + match[1];
+
+    // youtu.be/VIDEO_ID
+    match = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+    if (match) return 'https://www.youtube.com/embed/' + match[1];
+
+    // youtube.com/embed/VIDEO_ID (already embed format)
+    match = url.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/);
+    if (match) return 'https://www.youtube.com/embed/' + match[1];
+
+    // Vimeo patterns
+    // vimeo.com/VIDEO_ID
+    match = url.match(/vimeo\.com\/(\d+)/);
+    if (match) return 'https://player.vimeo.com/video/' + match[1];
+
+    // player.vimeo.com/video/VIDEO_ID (already embed format)
+    match = url.match(/player\.vimeo\.com\/video\/(\d+)/);
+    if (match) return 'https://player.vimeo.com/video/' + match[1];
+
+    // Return original if no match (might already be valid)
+    return url;
+  }
+
+  // Process all embed video iframes
+  const embedVideos = section.querySelectorAll('.flexible-tabs__embed-video');
+  embedVideos.forEach(iframe => {
+    const videoUrl = iframe.dataset.videoUrl;
+    if (videoUrl) {
+      const embedUrl = getEmbedUrl(videoUrl);
+      if (embedUrl) {
+        iframe.src = embedUrl;
+      }
+    }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "SEK Flexible Tabs",
+  "tag": "section",
+  "class": "section-flexible-tabs",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section subtitle"
+    },
+    {
+      "type": "header",
+      "content": "Tab styling"
+    },
+    {
+      "type": "range",
+      "id": "tab_border_radius",
+      "label": "Tab border radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "tab_background",
+      "label": "Tab container background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tab_border_color",
+      "label": "Tab container border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "tab_text_color",
+      "label": "Tab text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_background",
+      "label": "Active tab background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text_color",
+      "label": "Active tab text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "content_background",
+      "label": "Content background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "content_text_color",
+      "label": "Content text color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "section_margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Tab button"
+        },
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab title",
+          "default": "Tab"
+        },
+        {
+          "type": "select",
+          "id": "tab_icon",
+          "label": "Tab icon",
+          "options": [
+            { "value": "", "label": "None" },
+            { "value": "star", "label": "Star" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "check", "label": "Check" },
+            { "value": "info", "label": "Info" },
+            { "value": "play", "label": "Play" },
+            { "value": "box", "label": "Box" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "refresh", "label": "Refresh" }
+          ],
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Content type"
+        },
+        {
+          "type": "select",
+          "id": "content_layout",
+          "label": "Content layout",
+          "options": [
+            { "value": "description", "label": "Description + Images" },
+            { "value": "video", "label": "Video" },
+            { "value": "features", "label": "Features with images" }
+          ],
+          "default": "description"
+        },
+        {
+          "type": "header",
+          "content": "Description content"
+        },
+        {
+          "type": "richtext",
+          "id": "content_text",
+          "label": "Description text",
+          "default": "<p>Add your content here. Describe your product or service in detail.</p>"
+        },
+        {
+          "type": "text",
+          "id": "content_heading",
+          "label": "Subheading (above images)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "header",
+          "content": "Video content"
+        },
+        {
+          "type": "text",
+          "id": "content_subheading",
+          "label": "Video subtitle"
+        },
+        {
+          "type": "video",
+          "id": "video_1",
+          "label": "Video 1"
+        },
+        {
+          "type": "text",
+          "id": "video_url_1",
+          "label": "Or YouTube/Vimeo embed URL",
+          "info": "Use embed URL (e.g., https://www.youtube.com/embed/...)"
+        },
+        {
+          "type": "video",
+          "id": "video_2",
+          "label": "Video 2 (optional)"
+        },
+        {
+          "type": "text",
+          "id": "video_url_2",
+          "label": "Or YouTube/Vimeo embed URL"
+        },
+        {
+          "type": "header",
+          "content": "Feature 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_image_1",
+          "label": "Feature image 1"
+        },
+        {
+          "type": "select",
+          "id": "feature_icon_1",
+          "label": "Feature icon 1",
+          "options": [
+            { "value": "", "label": "None" },
+            { "value": "check", "label": "Check" },
+            { "value": "refresh", "label": "Refresh/Reversible" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "text",
+          "id": "feature_text_1",
+          "label": "Feature text 1",
+          "default": "Machine washable"
+        },
+        {
+          "type": "header",
+          "content": "Feature 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_image_2",
+          "label": "Feature image 2"
+        },
+        {
+          "type": "select",
+          "id": "feature_icon_2",
+          "label": "Feature icon 2",
+          "options": [
+            { "value": "", "label": "None" },
+            { "value": "check", "label": "Check" },
+            { "value": "refresh", "label": "Refresh/Reversible" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "refresh"
+        },
+        {
+          "type": "text",
+          "id": "feature_text_2",
+          "label": "Feature text 2",
+          "default": "Reversible design"
+        },
+        {
+          "type": "header",
+          "content": "Feature 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_image_3",
+          "label": "Feature image 3"
+        },
+        {
+          "type": "select",
+          "id": "feature_icon_3",
+          "label": "Feature icon 3",
+          "options": [
+            { "value": "", "label": "None" },
+            { "value": "check", "label": "Check" },
+            { "value": "refresh", "label": "Refresh/Reversible" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "gift"
+        },
+        {
+          "type": "text",
+          "id": "feature_text_3",
+          "label": "Feature text 3",
+          "default": "The perfect gift"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Flexible Tabs",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Description",
+            "content_layout": "description",
+            "content_text": "<p>Indulge in the unmatched softness and elegance of our premium product. Crafted with care, it combines luxurious comfort with classic style, making it an essential piece for any discerning individual.</p><p>Elevate your everyday experience with refined simplicity and exceptional comfort. A must-have for those who appreciate the finer things in life.</p>",
+            "content_heading": "Transform your space"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Video",
+            "tab_icon": "play",
+            "content_layout": "video",
+            "content_heading": "See it in action",
+            "content_subheading": "Watch our product video"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Features",
+            "content_layout": "features",
+            "feature_text_1": "Machine washable",
+            "feature_icon_1": "check",
+            "feature_text_2": "Reversible design",
+            "feature_icon_2": "refresh",
+            "feature_text_3": "The perfect gift",
+            "feature_icon_3": "gift"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
