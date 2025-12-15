@@ -133,8 +133,21 @@
   @media (max-width: 1024px) {
     #feature-grid-{{ section.id }} .feature-grid {
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, {{ section.settings.card_height_tablet }}px);
+      grid-template-rows: auto;
       gap: {{ section.settings.grid_gap_mobile }}px;
+    }
+
+    #feature-grid-{{ section.id }} .feature-card {
+      height: {{ section.settings.card_height_tablet }}px;
+    }
+
+    #feature-grid-{{ section.id }} .feature-card:nth-child(1),
+    #feature-grid-{{ section.id }} .feature-card:nth-child(2),
+    #feature-grid-{{ section.id }} .feature-card:nth-child(3),
+    #feature-grid-{{ section.id }} .feature-card:nth-child(4),
+    #feature-grid-{{ section.id }} .feature-card:nth-child(5) {
+      grid-column: auto;
+      grid-row: auto;
     }
 
     #feature-grid-{{ section.id }} .feature-card-title {
