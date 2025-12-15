@@ -220,11 +220,10 @@
       padding: {{ section.settings.button_padding_vertical | minus: 2 }}px {{ section.settings.button_padding_horizontal | minus: 8 }}px;
     }
 
+    /* Hide navigation arrows on mobile */
     #collection-carousel-{{ section.id }} .swiper-button-prev,
     #collection-carousel-{{ section.id }} .swiper-button-next {
-      width: {{ section.settings.arrow_size | minus: 10 }}px !important;
-      height: {{ section.settings.arrow_size | minus: 10 }}px !important;
-      top: 145px !important;
+      display: none !important;
     }
   }
 </style>
