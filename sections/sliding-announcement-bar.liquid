@@ -264,7 +264,16 @@
 
     #announcement-bar-{{ section.id }} .card-content {
       font-size: 13px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #announcement-bar-{{ section.id }} .announcement-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Hide navigation arrows on mobile */
@@ -438,7 +447,19 @@
         // Mobile view: slide by card width + gap (calc(100vw - 40px) + 8px gap)
         const cardWidth = window.innerWidth - 40;
         const gap = 8;
-        const translateX = -currentPair * (cardWidth + gap);
+        const padding = 8; // Left padding of cards-wrapper
+
+        let translateX;
+        if (currentPair === 0) {
+          // First card: start at 0 (shows next card edge on right)
+          translateX = 0;
+        } else if (currentPair === totalCards - 1) {
+          // Last card: stop so previous card edge shows on left
+          translateX = -((totalCards - 1) * (cardWidth + gap)) + (window.innerWidth - cardWidth - padding - gap);
+        } else {
+          // Middle cards: normal slide
+          translateX = -currentPair * (cardWidth + gap);
+        }
         cardsWrapper.style.transform = `translateX(${translateX}px)`;
       } else {
         // Desktop view: show two cards at a time (50% width)
