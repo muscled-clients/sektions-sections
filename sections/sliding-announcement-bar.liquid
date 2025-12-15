@@ -1,4 +1,7 @@
 <style>
+  /* Google Fonts Import */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;500;600;700&display=swap');
+
   /* Container Styles */
   #announcement-bar-{{ section.id }} {
     position: relative;
@@ -37,11 +40,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px 20px;
+    padding: {{ section.settings.padding_vertical }}px {{ section.settings.padding_horizontal }}px;
     text-align: center;
     position: relative;
     box-sizing: border-box;
-    min-height: 50px;
+    min-height: {{ section.settings.bar_height }}px;
     flex-shrink: 0;
     border-radius: 12px;
     margin: 0;
@@ -55,13 +58,13 @@
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
-    gap: 6px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: 0;
+    gap: {{ section.settings.content_gap }}px;
+    font-size: {{ section.settings.text_size }}px;
+    font-weight: {{ section.settings.text_weight }};
+    line-height: {{ section.settings.line_height }};
+    letter-spacing: {{ section.settings.letter_spacing }}px;
     position: relative;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: {{ section.settings.font_family }};
     width: 100%;
     text-align: center;
   }
@@ -71,42 +74,41 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    color: #333;
+    background: {{ section.settings.arrow_background }};
+    color: {{ section.settings.arrow_color }};
     border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    width: {{ section.settings.arrow_size }}px;
+    height: {{ section.settings.arrow_size }}px;
+    border-radius: {{ section.settings.arrow_border_radius }}%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: {{ section.settings.arrow_icon_size }}px;
     font-weight: bold;
-    opacity: 0.8;
+    opacity: {{ section.settings.arrow_opacity }};
     transition: all 0.3s ease;
     z-index: 1000;
     padding: 0;
     line-height: 1;
-    font-family: Arial, sans-serif;
+    font-family: inherit;
     user-select: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   #announcement-bar-{{ section.id }} .nav-arrow:hover {
-    opacity: 1;
+    opacity: {{ section.settings.arrow_hover_opacity }};
     transform: translateY(-50%) scale(1.1);
-    background: rgba(255, 255, 255, 1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
   #announcement-bar-{{ section.id }} .nav-arrow.prev {
-    left: 16px;
+    left: {{ section.settings.arrow_offset }}px;
     display: none;
   }
 
   #announcement-bar-{{ section.id }} .nav-arrow.next {
-    right: 16px;
+    right: {{ section.settings.arrow_offset }}px;
   }
 
   /* Hide arrows when not needed */
@@ -129,7 +131,7 @@
   #announcement-bar-{{ section.id }} .inline-icon {
     display: inline-flex;
     align-items: center;
-    font-size: 16px;
+    font-size: {{ section.settings.icon_size }}px;
     flex-shrink: 0;
   }
 
@@ -154,14 +156,14 @@
   /* Links */
   #announcement-bar-{{ section.id }} .announcement-link {
     color: inherit;
-    text-decoration: underline;
-    font-weight: 400;
+    text-decoration: {{ section.settings.link_underline }};
+    font-weight: {{ section.settings.link_weight }};
     transition: opacity 0.3s ease;
     margin-left: 4px;
   }
 
   #announcement-bar-{{ section.id }} .announcement-link:hover {
-    opacity: 0.8;
+    opacity: {{ section.settings.link_hover_opacity }};
   }
 
   /* Info Icon and Tooltip */
@@ -234,55 +236,76 @@
 
   /* Mobile Responsive */
   @media screen and (max-width: 768px) {
+    #announcement-bar-{{ section.id }} {
+      overflow: hidden;
+    }
+
+    #announcement-bar-{{ section.id }} .announcement-slider {
+      overflow: hidden;
+      width: 100%;
+    }
+
     #announcement-bar-{{ section.id }} .cards-wrapper {
+      display: flex;
       flex-direction: row;
+      flex-wrap: nowrap;
       gap: 0;
       padding: 0;
+      width: max-content;
     }
 
     #announcement-bar-{{ section.id }} .announcement-card {
-      min-width: 100%;
-      width: 100%;
-      min-height: 50px;
-      padding: 12px 40px;
+      min-width: 100vw;
+      width: 100vw;
+      max-width: 100vw;
+      min-height: {{ section.settings.mobile_bar_height }}px;
+      padding: {{ section.settings.mobile_padding_vertical }}px {{ section.settings.mobile_padding_horizontal }}px;
       height: auto;
       border-radius: 0;
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
 
     #announcement-bar-{{ section.id }} .card-content {
-      font-size: 13px;
+      font-size: {{ section.settings.mobile_text_size }}px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     #announcement-bar-{{ section.id }} .nav-arrow {
-      width: 28px;
-      height: 28px;
-      font-size: 14px;
+      width: {{ section.settings.mobile_arrow_size }}px;
+      height: {{ section.settings.mobile_arrow_size }}px;
+      font-size: {{ section.settings.mobile_arrow_icon_size }}px;
     }
 
     #announcement-bar-{{ section.id }} .nav-arrow.prev {
-      left: 12px;
+      left: {{ section.settings.mobile_arrow_offset }}px;
       display: flex;
     }
 
     #announcement-bar-{{ section.id }} .nav-arrow.next {
-      right: 12px;
+      right: {{ section.settings.mobile_arrow_offset }}px;
     }
 
     #announcement-bar-{{ section.id }} .tooltip {
       width: {{ section.settings.mobile_tooltip_width }}px;
       font-size: {{ section.settings.mobile_tooltip_font_size }}px;
     }
+
+    #announcement-bar-{{ section.id }} .inline-icon {
+      font-size: {{ section.settings.mobile_icon_size }}px;
+    }
   }
 
   /* Small Mobile */
   @media screen and (max-width: 480px) {
     #announcement-bar-{{ section.id }} .card-content {
-      font-size: 12px;
+      font-size: {{ section.settings.small_mobile_text_size }}px;
       gap: 4px;
     }
 
     #announcement-bar-{{ section.id }} .inline-icon {
-      font-size: 14px;
+      font-size: {{ section.settings.mobile_icon_size | minus: 2 }}px;
     }
   }
 
@@ -631,23 +654,47 @@
       "label": "Font family",
       "options": [
         {
-          "value": "system-ui, sans-serif",
-          "label": "System"
+          "value": "inherit",
+          "label": "Default"
         },
         {
-          "value": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+          "value": "Inter, sans-serif",
+          "label": "Inter"
+        },
+        {
+          "value": "Poppins, sans-serif",
+          "label": "Poppins"
+        },
+        {
+          "value": "Roboto, sans-serif",
+          "label": "Roboto"
+        },
+        {
+          "value": "Open Sans, sans-serif",
+          "label": "Open Sans"
+        },
+        {
+          "value": "system-ui, sans-serif",
+          "label": "System UI"
+        },
+        {
+          "value": "Arial, sans-serif",
+          "label": "Arial"
+        },
+        {
+          "value": "Helvetica, sans-serif",
           "label": "Helvetica"
         },
         {
-          "value": "Georgia, 'Times New Roman', serif",
+          "value": "Georgia, serif",
           "label": "Georgia"
         },
         {
-          "value": "'Courier New', Courier, monospace",
-          "label": "Courier"
+          "value": "Verdana, sans-serif",
+          "label": "Verdana"
         }
       ],
-      "default": "system-ui, sans-serif"
+      "default": "inherit"
     },
     {
       "type": "range",
@@ -689,19 +736,11 @@
           "label": "Normal"
         },
         {
-          "value": "500",
-          "label": "Medium"
-        },
-        {
-          "value": "600",
-          "label": "Semi Bold"
-        },
-        {
           "value": "700",
           "label": "Bold"
         }
       ],
-      "default": "500"
+      "default": "400"
     },
     {
       "type": "range",
@@ -830,19 +869,11 @@
           "label": "Normal"
         },
         {
-          "value": "500",
-          "label": "Medium"
-        },
-        {
-          "value": "600",
-          "label": "Semi Bold"
-        },
-        {
           "value": "700",
           "label": "Bold"
         }
       ],
-      "default": "600"
+      "default": "700"
     },
     {
       "type": "range",
