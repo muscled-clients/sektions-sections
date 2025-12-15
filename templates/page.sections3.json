@@ -1580,8 +1580,8 @@
         "link_border_radius": 6,
         "link_border_thickness": 0,
         "link_color": "#202020",
-        "link_background": "transparent",
-        "link_border_color": "transparent",
+        "link_background": "rgba(0,0,0,0)",
+        "link_border_color": "rgba(0,0,0,0)",
         "link_hover_color": "#ffffff",
         "link_hover_background": "#297373",
         "link_hover_border_color": "#297373",
@@ -1604,7 +1604,7 @@
         "section_border_color": "#e0e0e0",
         "toggle_background": "#00a86e",
         "toggle_icon_color": "#ffffff",
-        "mobile_menu_background": "rgba(255, 255, 255, 0.95)"
+        "mobile_menu_background": "#fffffff2"
       }
     }
   },
