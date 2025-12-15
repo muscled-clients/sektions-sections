@@ -234,38 +234,42 @@
 
   /* Mobile Responsive */
   @media screen and (max-width: 768px) {
+    #announcement-bar-{{ section.id }} {
+      overflow: hidden;
+    }
+
+    #announcement-bar-{{ section.id }} .announcement-slider {
+      overflow: hidden;
+      width: 100%;
+    }
+
     #announcement-bar-{{ section.id }} .cards-wrapper {
+      display: flex;
       flex-direction: row;
-      gap: 0;
-      padding: 0;
+      flex-wrap: nowrap;
+      gap: 8px;
+      padding: 0 8px;
+      width: max-content;
     }
 
     #announcement-bar-{{ section.id }} .announcement-card {
-      min-width: 100%;
-      width: 100%;
+      min-width: calc(100vw - 40px);
+      width: calc(100vw - 40px);
       min-height: 50px;
-      padding: 12px 40px;
+      padding: 12px 16px;
       height: auto;
-      border-radius: 0;
+      border-radius: 8px;
+      flex-shrink: 0;
     }
 
     #announcement-bar-{{ section.id }} .card-content {
       font-size: 13px;
+      flex-wrap: wrap;
     }
 
+    /* Hide navigation arrows on mobile */
     #announcement-bar-{{ section.id }} .nav-arrow {
-      width: 28px;
-      height: 28px;
-      font-size: 14px;
-    }
-
-    #announcement-bar-{{ section.id }} .nav-arrow.prev {
-      left: 12px;
-      display: flex;
-    }
-
-    #announcement-bar-{{ section.id }} .nav-arrow.next {
-      right: 12px;
+      display: none !important;
     }
 
     #announcement-bar-{{ section.id }} .tooltip {
@@ -430,15 +434,22 @@
 
       isTransitioning = true;
 
-      // Mobile view: show one card at a time (100% width)
-      // Desktop view: show two cards at a time (50% width)
-      const translateX = isMobile ? -currentPair * 100 : -currentPair * 50;
-      cardsWrapper.style.transform = `translateX(${translateX}%)`;
+      if (isMobile) {
+        // Mobile view: slide by card width + gap (calc(100vw - 40px) + 8px gap)
+        const cardWidth = window.innerWidth - 40;
+        const gap = 8;
+        const translateX = -currentPair * (cardWidth + gap);
+        cardsWrapper.style.transform = `translateX(${translateX}px)`;
+      } else {
+        // Desktop view: show two cards at a time (50% width)
+        const translateX = -currentPair * 50;
+        cardsWrapper.style.transform = `translateX(${translateX}%)`;
+      }
 
-      // Update button states
+      // Update button states (only for desktop, arrows hidden on mobile)
       const maxIndex = isMobile ? totalCards - 1 : totalPairs - 1;
 
-      if (prevButton) {
+      if (prevButton && !isMobile) {
         if (currentPair === 0) {
           prevButton.style.display = 'none';
         } else {
@@ -447,7 +458,7 @@
           prevButton.disabled = false;
         }
       }
-      if (nextButton) {
+      if (nextButton && !isMobile) {
         if (currentPair >= maxIndex) {
           nextButton.style.display = 'none';
         } else {
