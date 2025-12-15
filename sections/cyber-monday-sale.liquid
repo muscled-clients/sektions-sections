@@ -152,22 +152,30 @@
     }
 
     #cyber-monday-sale-{{ section.id }} .countdown-timer {
-      padding: {{ section.settings.timer_padding_vertical | minus: 10 }}px {{ section.settings.timer_padding_horizontal | minus: 10 }}px;
-      gap: 8px;
+      padding: 20px 10px;
+      gap: 4px;
+      flex-wrap: nowrap;
+      justify-content: center;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .time-unit {
+      min-width: 50px;
     }
 
     #cyber-monday-sale-{{ section.id }} .time-number {
-      font-size: {{ section.settings.timer_number_size | minus: 10 }}px;
-      margin-bottom: 5px;
+      font-size: 28px;
+      margin-bottom: 4px;
+      letter-spacing: 0;
     }
 
     #cyber-monday-sale-{{ section.id }} .time-label {
-      font-size: {{ section.settings.timer_label_size | minus: 2 }}px;
+      font-size: 10px;
     }
 
     #cyber-monday-sale-{{ section.id }} .time-separator {
-      font-size: {{ section.settings.timer_number_size | minus: 10 }}px;
-      margin-bottom: 18px;
+      font-size: 24px;
+      margin-bottom: 16px;
+      letter-spacing: 0;
     }
 
     #cyber-monday-sale-{{ section.id }} .sale-description {
@@ -178,6 +186,31 @@
     #cyber-monday-sale-{{ section.id }} .shop-now-btn {
       padding: 10px 30px;
       font-size: {{ section.settings.button_font_size | minus: 2 }}px;
+    }
+  }
+
+  /* Small Mobile */
+  @media (max-width: 380px) {
+    #cyber-monday-sale-{{ section.id }} .countdown-timer {
+      gap: 2px;
+      padding: 15px 5px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .time-unit {
+      min-width: 40px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .time-number {
+      font-size: 22px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .time-label {
+      font-size: 9px;
+    }
+
+    #cyber-monday-sale-{{ section.id }} .time-separator {
+      font-size: 18px;
+      margin-bottom: 12px;
     }
   }
 </style>
