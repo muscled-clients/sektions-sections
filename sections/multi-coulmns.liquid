@@ -1,0 +1,510 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --mc-bg: {{ section.settings.background_color }};
+    --mc-heading-color: {{ section.settings.heading_color }};
+    --mc-text-color: {{ section.settings.text_color }};
+    --mc-badge-bg: {{ section.settings.badge_background }};
+    --mc-badge-text: {{ section.settings.badge_text_color }};
+    --mc-btn-bg: {{ section.settings.button_background }};
+    --mc-btn-text: {{ section.settings.button_text_color }};
+    --mc-card-bg: {{ section.settings.card_background }};
+    --mc-card-radius: {{ section.settings.card_border_radius }}px;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Josefin+Sans:wght@400;500;600;700&display=swap');
+
+  .multi-columns {
+    background: var(--mc-bg, #f4eed7);
+    padding: 50px 20px;
+    font-family: 'Assistant', sans-serif;
+  }
+
+  .multi-columns__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .multi-columns__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .multi-columns__subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--mc-text-color, #453b37);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+    opacity: 0.8;
+  }
+
+  .multi-columns__title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--mc-heading-color, #453b37);
+    margin: 0;
+    line-height: 1.15;
+  }
+
+  /* Swiper Container */
+  .multi-columns__carousel {
+    position: relative;
+  }
+
+  .multi-columns__swiper {
+    overflow: hidden;
+  }
+
+  /* Column Card */
+  .multi-columns__card {
+    background: var(--mc-card-bg, #ffffff);
+    border-radius: var(--mc-card-radius, 28px);
+    padding: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .multi-columns__badge {
+    width: 50px;
+    height: 50px;
+    background: var(--mc-badge-bg, #e86940);
+    color: var(--mc-badge-text, #ffffff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .multi-columns__image {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    aspect-ratio: 4/3;
+  }
+
+  .multi-columns__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .multi-columns__image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e0d5c8 0%, #c9bfb2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .multi-columns__image-placeholder svg {
+    width: 48px;
+    height: 48px;
+    color: #a89f94;
+  }
+
+  .multi-columns__card-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--mc-heading-color, #453b37);
+    margin: 0 0 12px;
+  }
+
+  .multi-columns__card-text {
+    font-size: 15px;
+    color: var(--mc-text-color, #453b37);
+    line-height: 1.6;
+    margin: 0 0 20px;
+    opacity: 0.85;
+    flex-grow: 1;
+  }
+
+  .multi-columns__card-button {
+    display: inline-block;
+    background: var(--mc-btn-bg, #453b37);
+    color: var(--mc-btn-text, #ffffff);
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-align: center;
+    align-self: flex-start;
+  }
+
+  .multi-columns__card-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  /* Navigation */
+  .multi-columns__nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .multi-columns__nav-btn {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 2px solid var(--mc-heading-color, #453b37);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .multi-columns__nav-btn:hover {
+    background: var(--mc-heading-color, #453b37);
+  }
+
+  .multi-columns__nav-btn:hover svg {
+    color: var(--mc-bg, #f4eed7);
+  }
+
+  .multi-columns__nav-btn svg {
+    width: 20px;
+    height: 20px;
+    color: var(--mc-heading-color, #453b37);
+    transition: color 0.3s ease;
+  }
+
+  .multi-columns__nav-btn.swiper-button-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .multi-columns__nav-btn.swiper-button-disabled:hover {
+    background: transparent;
+  }
+
+  .multi-columns__nav-btn.swiper-button-disabled:hover svg {
+    color: var(--mc-heading-color, #453b37);
+  }
+
+  /* Desktop - Grid Layout */
+  @media (min-width: 768px) {
+    .multi-columns {
+      padding: 60px 30px;
+    }
+
+    .multi-columns__title {
+      font-size: 42px;
+    }
+
+    .multi-columns__header {
+      margin-bottom: 50px;
+    }
+
+    .multi-columns__card {
+      padding: 28px;
+    }
+
+    .multi-columns__card-title {
+      font-size: 22px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .multi-columns {
+      padding: 70px 40px;
+    }
+
+    .multi-columns__title {
+      font-size: 50px;
+    }
+
+    .multi-columns__nav {
+      display: none;
+    }
+  }
+</style>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<section class="multi-columns" data-section-id="{{ section.id }}">
+  <div class="multi-columns__container">
+    <!-- Header -->
+    {%- if section.settings.subtitle != blank or section.settings.title != blank -%}
+      <div class="multi-columns__header">
+        {%- if section.settings.subtitle != blank -%}
+          <p class="multi-columns__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="multi-columns__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Columns Carousel -->
+    <div class="multi-columns__carousel">
+      <div class="multi-columns__swiper swiper">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="swiper-slide" {{ block.shopify_attributes }}>
+              <div class="multi-columns__card">
+                {%- if section.settings.show_numbers -%}
+                  <div class="multi-columns__badge">{{ forloop.index }}</div>
+                {%- endif -%}
+
+                <div class="multi-columns__image">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.title }}
+                  {%- else -%}
+                    <div class="multi-columns__image-placeholder">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                  {%- endif -%}
+                </div>
+
+                {%- if block.settings.title != blank -%}
+                  <h3 class="multi-columns__card-title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.text != blank -%}
+                  <p class="multi-columns__card-text">{{ block.settings.text }}</p>
+                {%- endif -%}
+
+                {%- if block.settings.button_text != blank -%}
+                  <a href="{{ block.settings.button_link }}" class="multi-columns__card-button">
+                    {{ block.settings.button_text }}
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="multi-columns__nav">
+        <button class="multi-columns__nav-btn multi-columns__nav-btn--prev" aria-label="Previous">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="multi-columns__nav-btn multi-columns__nav-btn--next" aria-label="Next">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const section = document.querySelector('.multi-columns[data-section-id="{{ section.id }}"]');
+  if (!section) return;
+
+  const swiperEl = section.querySelector('.multi-columns__swiper');
+  const prevBtn = section.querySelector('.multi-columns__nav-btn--prev');
+  const nextBtn = section.querySelector('.multi-columns__nav-btn--next');
+
+  const swiper = new Swiper(swiperEl, {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: {
+      prevEl: prevBtn,
+      nextEl: nextBtn
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 24
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 30
+      }
+    }
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "SEK Multi Columns",
+  "tag": "section",
+  "class": "section-multi-columns",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "All natural ingredients"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Home made cleaners"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_numbers",
+      "label": "Show numbered badges",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f4eed7"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#453b37"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#453b37"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#e86940"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#453b37"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Column Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Pair text with an image to focus on your chosen product, collection, or blog post."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Multi Columns",
+      "blocks": [
+        { "type": "column", "settings": { "title": "Column One", "text": "Pair text with an image to focus on your chosen product, collection, or blog post.", "button_text": "Learn More" } },
+        { "type": "column", "settings": { "title": "Column Two", "text": "Pair text with an image to focus on your chosen product, collection, or blog post.", "button_text": "Learn More" } },
+        { "type": "column", "settings": { "title": "Column Three", "text": "Pair text with an image to focus on your chosen product, collection, or blog post.", "button_text": "Learn More" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

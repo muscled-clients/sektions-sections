@@ -1,0 +1,719 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --ss11-overlay: {{ section.settings.overlay_color }};
+    --ss11-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --ss11-text-color: {{ section.settings.text_color }};
+    --ss11-heading-color: {{ section.settings.heading_color }};
+    --ss11-btn-bg: {{ section.settings.button_background }};
+    --ss11-btn-text: {{ section.settings.button_text_color }};
+    --ss11-accent: {{ section.settings.accent_color }};
+    --ss11-badge-bg: {{ section.settings.badge_background }};
+    --ss11-badge-text: {{ section.settings.badge_text_color }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Trirong:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+  .slideshow-11 {
+    position: relative;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .slideshow-11__swiper {
+    width: 100%;
+    height: {{ section.settings.mobile_height }}vh;
+  }
+
+  .slideshow-11__slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Background Image */
+  .slideshow-11__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .slideshow-11__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slideshow-11__bg-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  }
+
+  /* Overlay */
+  .slideshow-11__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--ss11-overlay, #000000);
+    opacity: var(--ss11-overlay-opacity, 0.2);
+    z-index: 2;
+  }
+
+  /* Content */
+  .slideshow-11__content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 20px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .slideshow-11__content--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .slideshow-11__content--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .slideshow-11__content--right {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .slideshow-11__inner {
+    max-width: 650px;
+  }
+
+  /* Badge (Trustpilot style) */
+  .slideshow-11__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ss11-badge-bg, #00b67a);
+    color: var(--ss11-badge-text, #ffffff);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .slideshow-11__badge-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .slideshow-11__badge-star {
+    width: 16px;
+    height: 16px;
+  }
+
+  .slideshow-11__badge-text {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .slideshow-11__badge-label {
+    font-weight: 500;
+  }
+
+  .slideshow-11__badge-rating {
+    font-weight: 700;
+    color: #00b67a;
+  }
+
+  /* Heading */
+  .slideshow-11__heading {
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--ss11-heading-color, #ffffff);
+    margin: 0 0 20px;
+    line-height: 1.1;
+  }
+
+  .slideshow-11__heading-line {
+    display: block;
+  }
+
+  .slideshow-11__heading-animated {
+    position: relative;
+    display: inline-block;
+    border-bottom: 3px solid var(--ss11-heading-color, #ffffff);
+    padding-bottom: 4px;
+  }
+
+  .slideshow-11__heading-text {
+    display: inline;
+  }
+
+  .slideshow-11__cursor {
+    display: inline-block;
+    width: 3px;
+    height: 0.9em;
+    background: var(--ss11-heading-color, #ffffff);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: slideshow11-blink 0.8s infinite;
+  }
+
+  @keyframes slideshow11-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  /* Description */
+  .slideshow-11__description {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ss11-text-color, #ffffff);
+    line-height: 1.7;
+    margin: 0 0 28px;
+    opacity: 0.95;
+  }
+
+  /* Button */
+  .slideshow-11__button {
+    display: inline-block;
+    background: var(--ss11-btn-bg, #ffffff);
+    color: var(--ss11-btn-text, #121212);
+    padding: 14px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0;
+    transition: all 0.3s ease;
+  }
+
+  .slideshow-11__button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  /* Pagination */
+  .slideshow-11__pagination {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+  }
+
+  .slideshow-11__pagination .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .slideshow-11__pagination .swiper-pagination-bullet-active {
+    background: #ffffff;
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    .slideshow-11__swiper {
+      height: {{ section.settings.desktop_height }}vh;
+    }
+
+    .slideshow-11__content {
+      padding: 100px 40px 80px;
+    }
+
+    .slideshow-11__heading {
+      font-size: 54px;
+    }
+
+    .slideshow-11__description {
+      font-size: 18px;
+    }
+
+    .slideshow-11__badge {
+      font-size: 14px;
+      padding: 8px 14px;
+    }
+
+    .slideshow-11__badge-star {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .slideshow-11__content {
+      padding: 120px 60px 100px;
+    }
+
+    .slideshow-11__heading {
+      font-size: 68px;
+    }
+
+    .slideshow-11__inner {
+      max-width: 700px;
+    }
+
+    .slideshow-11__description {
+      font-size: 19px;
+    }
+
+    .slideshow-11__button {
+      padding: 16px 40px;
+      font-size: 15px;
+    }
+  }
+</style>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<section class="slideshow-11" data-section-id="{{ section.id }}">
+  <div class="slideshow-11__swiper swiper">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        <div class="slideshow-11__slide swiper-slide" {{ block.shopify_attributes }}>
+          <!-- Background -->
+          <div class="slideshow-11__bg">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', alt: block.settings.heading }}
+            {%- else -%}
+              <div class="slideshow-11__bg-placeholder"></div>
+            {%- endif -%}
+          </div>
+
+          <!-- Overlay -->
+          <div class="slideshow-11__overlay"></div>
+
+          <!-- Content -->
+          <div class="slideshow-11__content slideshow-11__content--{{ block.settings.content_alignment }}">
+            <div class="slideshow-11__inner">
+              {%- if block.settings.show_badge -%}
+                <div class="slideshow-11__badge">
+                  <div class="slideshow-11__badge-stars">
+                    {%- for i in (1..5) -%}
+                      <svg class="slideshow-11__badge-star" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                      </svg>
+                    {%- endfor -%}
+                  </div>
+                  <div class="slideshow-11__badge-text">
+                    <span class="slideshow-11__badge-label">{{ block.settings.badge_label }}</span>
+                    <span class="slideshow-11__badge-rating">{{ block.settings.badge_rating }}</span>
+                  </div>
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.heading != blank or block.settings.animated_words != blank -%}
+                <h2 class="slideshow-11__heading">
+                  {%- if block.settings.heading != blank -%}
+                    <span class="slideshow-11__heading-line">{{ block.settings.heading }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.animated_words != blank -%}
+                    <span class="slideshow-11__heading-animated">
+                      <span class="slideshow-11__heading-text" data-words="{{ block.settings.animated_words }}">{{ block.settings.animated_words | split: ',' | first | strip }}</span><span class="slideshow-11__cursor"></span>
+                    </span>
+                  {%- endif -%}
+                </h2>
+              {%- endif -%}
+
+              {%- if block.settings.description != blank -%}
+                <p class="slideshow-11__description">{{ block.settings.description }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.button_text != blank -%}
+                <a href="{{ block.settings.button_link }}" class="slideshow-11__button">
+                  {{ block.settings.button_text }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Pagination -->
+    <div class="slideshow-11__pagination"></div>
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const section = document.querySelector('.slideshow-11[data-section-id="{{ section.id }}"]');
+  if (!section) return;
+
+  const swiperEl = section.querySelector('.slideshow-11__swiper');
+  const paginationEl = section.querySelector('.slideshow-11__pagination');
+
+  // Initialize Swiper
+  const swiper = new Swiper(swiperEl, {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: {{ section.blocks.size }} > 1,
+    autoplay: {
+      delay: {{ section.settings.autoplay_speed | times: 1000 }},
+      disableOnInteraction: false
+    },
+    effect: 'fade',
+    fadeEffect: {
+      crossFade: true
+    },
+    pagination: {
+      el: paginationEl,
+      clickable: true
+    }
+  });
+
+  // Typewriter effect
+  const typewriterSpeed = {{ section.settings.typewriter_speed }};
+  const pauseDuration = {{ section.settings.typewriter_pause | times: 1000 }};
+
+  section.querySelectorAll('.slideshow-11__heading-text').forEach(function(element) {
+    const wordsAttr = element.dataset.words;
+    if (!wordsAttr) return;
+
+    const words = wordsAttr.split(',').map(w => w.trim());
+    if (words.length <= 1) return;
+
+    let currentWordIndex = 0;
+    let currentCharIndex = words[0].length;
+    let isDeleting = false;
+
+    function typeWriter() {
+      const currentWord = words[currentWordIndex];
+
+      if (isDeleting) {
+        currentCharIndex--;
+        element.textContent = currentWord.substring(0, currentCharIndex);
+
+        if (currentCharIndex === 0) {
+          isDeleting = false;
+          currentWordIndex = (currentWordIndex + 1) % words.length;
+          setTimeout(typeWriter, 300);
+        } else {
+          setTimeout(typeWriter, typewriterSpeed / 2);
+        }
+      } else {
+        currentCharIndex++;
+        element.textContent = words[currentWordIndex].substring(0, currentCharIndex);
+
+        if (currentCharIndex === words[currentWordIndex].length) {
+          isDeleting = true;
+          setTimeout(typeWriter, pauseDuration);
+        } else {
+          setTimeout(typeWriter, typewriterSpeed);
+        }
+      }
+    }
+
+    setTimeout(typeWriter, pauseDuration);
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "SEK Slideshow 11",
+  "tag": "section",
+  "class": "section-slideshow-11",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 95
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 85
+    },
+    {
+      "type": "header",
+      "content": "Slideshow"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Typewriter animation"
+    },
+    {
+      "type": "range",
+      "id": "typewriter_speed",
+      "label": "Typing speed",
+      "min": 50,
+      "max": 200,
+      "step": 10,
+      "unit": "ms",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "typewriter_pause",
+      "label": "Pause duration",
+      "min": 1,
+      "max": 5,
+      "step": 0.5,
+      "unit": "s",
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#00b67a"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#00b67a"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image"
+        },
+        {
+          "type": "header",
+          "content": "Badge"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_badge",
+          "label": "Show rating badge",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "badge_label",
+          "label": "Badge label",
+          "default": "Excellent"
+        },
+        {
+          "type": "text",
+          "id": "badge_rating",
+          "label": "Badge rating",
+          "default": "4.9"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading (first line)",
+          "default": "Festival"
+        },
+        {
+          "type": "text",
+          "id": "animated_words",
+          "label": "Animated words (comma separated)",
+          "default": "accessories, essentials, gear",
+          "info": "These words will cycle with typewriter effect"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Welcome to Made For Festivals, your ultimate guide to the best festivals in the US. Whether you're into music, arts, or food festivals, we've got you covered."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "content_alignment",
+          "label": "Content alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Slideshow 11",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Festival",
+            "animated_words": "accessories, essentials, gear, must-haves",
+            "description": "Welcome to Made For Festivals, your ultimate guide to the best festivals in the US. Whether you're into music, arts, or food festivals, we've got you covered with premium quality products.",
+            "button_text": "Shop now",
+            "badge_label": "Excellent",
+            "badge_rating": "4.9",
+            "content_alignment": "left"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Summer",
+            "animated_words": "collection, styles, vibes, looks",
+            "description": "Discover our latest summer collection featuring comfortable and stylish festival wear for every occasion. From sunrise sets to late-night dance floors, we've got the perfect outfit.",
+            "button_text": "Explore collection",
+            "badge_label": "Excellent",
+            "badge_rating": "4.9",
+            "content_alignment": "center"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Premium",
+            "animated_words": "quality, craftsmanship, design, materials",
+            "description": "Handcrafted with attention to detail and built to last. Each piece is designed for those who demand excellence and refuse to compromise on quality or style.",
+            "button_text": "Discover more",
+            "badge_label": "Excellent",
+            "badge_rating": "4.9",
+            "content_alignment": "right"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

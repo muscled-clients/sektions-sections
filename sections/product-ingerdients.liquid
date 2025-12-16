@@ -1,0 +1,572 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --pi4-bg: {{ section.settings.background_color }};
+    --pi4-heading-color: {{ section.settings.heading_color }};
+    --pi4-text-color: {{ section.settings.text_color }};
+    --pi4-border-color: {{ section.settings.border_color }};
+    --pi4-accent-color: {{ section.settings.accent_color }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600;700&display=swap');
+
+  .product-ingredients-4 {
+    background: var(--pi4-bg, #fff);
+    padding: 60px 20px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .product-ingredients-4__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .product-ingredients-4__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .product-ingredients-4__heading {
+    font-family: 'EB Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--pi4-heading-color, #121212);
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+
+  .product-ingredients-4__subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--pi4-text-color, #666);
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  /* Circular Layout Container */
+  .product-ingredients-4__layout {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    min-height: 500px;
+  }
+
+  /* Center Circle */
+  .product-ingredients-4__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 1px solid var(--pi4-border-color, #ececec);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--pi4-bg, #fff);
+    z-index: 1;
+  }
+
+  .product-ingredients-4__center-image {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+  }
+
+  .product-ingredients-4__center-placeholder {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, var(--pi4-accent-color) 0%, var(--pi4-border-color) 100%);
+    border-radius: 50%;
+    opacity: 0.3;
+  }
+
+  /* Ingredient Items */
+  .product-ingredients-4__items {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+  }
+
+  .product-ingredients-4__item {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 140px;
+    z-index: 2;
+  }
+
+  .product-ingredients-4__item-image-wrapper {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid var(--pi4-border-color, #ececec);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--pi4-bg, #fff);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .product-ingredients-4__item-image {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+  }
+
+  .product-ingredients-4__item-placeholder {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--pi4-accent-color) 0%, var(--pi4-border-color) 100%);
+    border-radius: 50%;
+    opacity: 0.3;
+  }
+
+  .product-ingredients-4__item-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--pi4-heading-color, #121212);
+    margin: 0 0 4px;
+  }
+
+  .product-ingredients-4__item-description {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--pi4-text-color, #666);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Position items in circular pattern - 8 positions */
+  .product-ingredients-4__item:nth-child(1) {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .product-ingredients-4__item:nth-child(2) {
+    top: 10%;
+    right: 5%;
+  }
+
+  .product-ingredients-4__item:nth-child(3) {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+
+  .product-ingredients-4__item:nth-child(4) {
+    bottom: 10%;
+    right: 5%;
+  }
+
+  .product-ingredients-4__item:nth-child(5) {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .product-ingredients-4__item:nth-child(6) {
+    bottom: 10%;
+    left: 5%;
+  }
+
+  .product-ingredients-4__item:nth-child(7) {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .product-ingredients-4__item:nth-child(8) {
+    top: 10%;
+    left: 5%;
+  }
+
+  /* Desktop adjustments */
+  @media (min-width: 768px) {
+    .product-ingredients-4 {
+      padding: 80px 40px;
+    }
+
+    .product-ingredients-4__heading {
+      font-size: 42px;
+    }
+
+    .product-ingredients-4__subtitle {
+      font-size: 15px;
+    }
+
+    .product-ingredients-4__layout {
+      min-height: 600px;
+    }
+
+    .product-ingredients-4__items {
+      min-height: 600px;
+    }
+
+    .product-ingredients-4__center {
+      width: 320px;
+      height: 320px;
+    }
+
+    .product-ingredients-4__center-image {
+      width: 240px;
+      height: 240px;
+    }
+
+    .product-ingredients-4__item-image-wrapper {
+      width: 110px;
+      height: 110px;
+    }
+
+    .product-ingredients-4__item-image {
+      width: 80px;
+      height: 80px;
+    }
+
+    .product-ingredients-4__item-title {
+      font-size: 18px;
+    }
+
+    .product-ingredients-4__item-description {
+      font-size: 12px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .product-ingredients-4__heading {
+      font-size: 52px;
+    }
+
+    .product-ingredients-4__layout {
+      min-height: 650px;
+    }
+
+    .product-ingredients-4__items {
+      min-height: 650px;
+    }
+
+    .product-ingredients-4__center {
+      width: 350px;
+      height: 350px;
+    }
+
+    .product-ingredients-4__center-image {
+      width: 260px;
+      height: 260px;
+    }
+
+    .product-ingredients-4__item-image-wrapper {
+      width: 120px;
+      height: 120px;
+    }
+
+    .product-ingredients-4__item-image {
+      width: 90px;
+      height: 90px;
+    }
+
+    .product-ingredients-4__item {
+      max-width: 160px;
+    }
+  }
+
+  /* Mobile - Stack vertically */
+  @media (max-width: 767px) {
+    .product-ingredients-4__layout {
+      min-height: auto;
+    }
+
+    .product-ingredients-4__center {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      margin: 0 auto 40px;
+      width: 200px;
+      height: 200px;
+    }
+
+    .product-ingredients-4__center-image {
+      width: 140px;
+      height: 140px;
+    }
+
+    .product-ingredients-4__items {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px 20px;
+      min-height: auto;
+    }
+
+    .product-ingredients-4__item {
+      position: relative;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: none !important;
+      max-width: none;
+    }
+
+    .product-ingredients-4__item-image-wrapper {
+      width: 90px;
+      height: 90px;
+    }
+
+    .product-ingredients-4__item-image {
+      width: 60px;
+      height: 60px;
+    }
+  }
+</style>
+
+<section class="product-ingredients-4" data-section-id="{{ section.id }}">
+  <div class="product-ingredients-4__container">
+    {%- if section.settings.heading != blank or section.settings.subtitle != blank -%}
+      <div class="product-ingredients-4__header">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="product-ingredients-4__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="product-ingredients-4__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="product-ingredients-4__layout">
+      <!-- Center Image -->
+      <div class="product-ingredients-4__center">
+        {%- if section.settings.center_image != blank -%}
+          <img
+            src="{{ section.settings.center_image | image_url: width: 520 }}"
+            alt="{{ section.settings.heading | default: 'Product' }}"
+            class="product-ingredients-4__center-image"
+            loading="lazy"
+          >
+        {%- else -%}
+          <div class="product-ingredients-4__center-placeholder"></div>
+        {%- endif -%}
+      </div>
+
+      <!-- Ingredient Items -->
+      <div class="product-ingredients-4__items">
+        {%- for block in section.blocks -%}
+          <div class="product-ingredients-4__item" {{ block.shopify_attributes }}>
+            <div class="product-ingredients-4__item-image-wrapper">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 180 }}"
+                  alt="{{ block.settings.title }}"
+                  class="product-ingredients-4__item-image"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="product-ingredients-4__item-placeholder"></div>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.title != blank -%}
+              <h3 class="product-ingredients-4__item-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <p class="product-ingredients-4__item-description">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Product Ingredients 4",
+  "tag": "section",
+  "class": "section-product-ingredients-4",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Active ingredients"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Discover the powerful natural ingredients that make our products effective and gentle on your skin."
+    },
+    {
+      "type": "image_picker",
+      "id": "center_image",
+      "label": "Center image",
+      "info": "Product or hero image displayed in the center"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#ececec"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#121212",
+      "info": "Used for placeholder gradients"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Ingredient image",
+          "info": "Recommended: SVG or PNG with transparent background"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Ingredient"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Natural benefit for your skin"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Product Ingredients 4",
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Coconut",
+            "description": "Deep hydration"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Passion Fruit",
+            "description": "Rich in antioxidants"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Dragon Fruit",
+            "description": "Vitamin C boost"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Avocado",
+            "description": "Nourishing oils"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Mango",
+            "description": "Skin brightening"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Aloe Vera",
+            "description": "Soothing & calming"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Green Tea",
+            "description": "Anti-aging properties"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Vitamin E",
+            "description": "Skin protection"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

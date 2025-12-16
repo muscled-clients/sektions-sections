@@ -1,0 +1,614 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --f8-bg: {{ section.settings.background_color }};
+    --f8-heading-color: {{ section.settings.heading_color }};
+    --f8-text-color: {{ section.settings.text_color }};
+    --f8-btn-bg: {{ section.settings.button_background }};
+    --f8-btn-text: {{ section.settings.button_text_color }};
+    --f8-bar-bg: {{ section.settings.features_bar_background }};
+    --f8-bar-text: {{ section.settings.features_bar_text_color }};
+    --f8-card-bg: {{ section.settings.card_background }};
+    --f8-card-border: {{ section.settings.card_border_color }};
+    --f8-icon-color: {{ section.settings.icon_color }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Josefin+Sans:wght@400;500;600;700&display=swap');
+
+  .features-8 {
+    background: var(--f8-bg, #ffffff);
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* Main Content Area */
+  .features-8__main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 40px 20px;
+  }
+
+  /* Left Content */
+  .features-8__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .features-8__heading {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--f8-heading-color, #41441c);
+    margin: 0 0 20px;
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
+  .features-8__description {
+    font-size: 14px;
+    color: var(--f8-text-color, #5a5a5a);
+    line-height: 1.7;
+    margin: 0 0 24px;
+  }
+
+  .features-8__button {
+    display: inline-block;
+    background: var(--f8-btn-bg, #41441c);
+    color: var(--f8-btn-text, #ffffff);
+    padding: 14px 32px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .features-8__button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  .features-8__guarantee {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--f8-heading-color, #41441c);
+  }
+
+  .features-8__guarantee svg {
+    width: 18px;
+    height: 18px;
+    color: var(--f8-heading-color, #41441c);
+  }
+
+  /* Image Collage */
+  .features-8__collage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 100px);
+    gap: 8px;
+  }
+
+  .features-8__collage-item {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .features-8__collage-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .features-8__collage-item:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .features-8__collage-item:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .features-8__collage-item:nth-child(3) {
+    grid-column: 3;
+    grid-row: 1 / 3;
+  }
+
+  .features-8__collage-item:nth-child(4) {
+    grid-column: 2;
+    grid-row: 2 / 4;
+  }
+
+  .features-8__collage-item:nth-child(5) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .features-8__collage-item:nth-child(6) {
+    grid-column: 3;
+    grid-row: 3;
+  }
+
+  .features-8__collage-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #d4a574 0%, #b8956e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .features-8__collage-placeholder svg {
+    width: 32px;
+    height: 32px;
+    color: #fff;
+    opacity: 0.5;
+  }
+
+  /* Features Bar */
+  .features-8__bar {
+    background: var(--f8-bar-bg, #ffffff);
+    padding: 24px 20px;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .features-8__bar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .features-8__feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    padding: 20px 16px;
+    background: var(--f8-card-bg, #ffffff);
+    border: 1px solid var(--f8-card-border, #e0e0e0);
+    border-radius: 8px;
+  }
+
+  .features-8__feature-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .features-8__feature-icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .features-8__feature-icon svg {
+    width: 40px;
+    height: 40px;
+    color: var(--f8-icon-color, #41441c);
+  }
+
+  .features-8__feature-title {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--f8-bar-text, #41441c);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0;
+  }
+
+  /* Tablet styles */
+  @media (min-width: 768px) {
+    .features-8__main {
+      flex-direction: row;
+      padding: 50px 30px;
+      gap: 40px;
+    }
+
+    .features-8__content {
+      flex: 0 0 40%;
+    }
+
+    .features-8__collage {
+      flex: 1;
+      grid-template-rows: repeat(3, 120px);
+      gap: 12px;
+    }
+
+    .features-8__heading {
+      font-size: 32px;
+    }
+
+    .features-8__bar-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .features-8__feature {
+      padding: 24px 16px;
+    }
+
+    .features-8__feature-icon {
+      width: 52px;
+      height: 52px;
+    }
+
+    .features-8__feature-icon svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    .features-8__feature-title {
+      font-size: 12px;
+    }
+  }
+
+  /* Desktop styles */
+  @media (min-width: 1024px) {
+    .features-8__main {
+      padding: 60px 60px;
+      gap: 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .features-8__content {
+      flex: 0 0 35%;
+    }
+
+    .features-8__collage {
+      grid-template-rows: repeat(3, 140px);
+      gap: 16px;
+    }
+
+    .features-8__heading {
+      font-size: 36px;
+    }
+
+    .features-8__description {
+      font-size: 15px;
+    }
+
+    .features-8__bar {
+      padding: 30px 60px;
+    }
+
+    .features-8__bar-grid {
+      gap: 20px;
+    }
+
+    .features-8__feature {
+      padding: 28px 20px;
+    }
+
+    .features-8__feature-icon {
+      width: 56px;
+      height: 56px;
+    }
+
+    .features-8__feature-icon svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .features-8__feature-title {
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+  }
+</style>
+
+<section class="features-8" data-section-id="{{ section.id }}">
+  <!-- Main Content: Text + Image Collage -->
+  <div class="features-8__main">
+    <!-- Left Content -->
+    <div class="features-8__content">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="features-8__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <p class="features-8__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.button_text != blank -%}
+        <a href="{{ section.settings.button_link }}" class="features-8__button">
+          {{ section.settings.button_text }}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.guarantee_text != blank -%}
+        <div class="features-8__guarantee">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>{{ section.settings.guarantee_text }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Right Image Collage -->
+    <div class="features-8__collage">
+      {%- assign collage_images = section.blocks | where: "type", "collage_image" -%}
+      {%- for block in collage_images limit: 6 -%}
+        <div class="features-8__collage-item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: 'Collage image' }}
+          {%- else -%}
+            <div class="features-8__collage-placeholder">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+      {%- assign collage_count = collage_images.size -%}
+      {%- if collage_count < 6 -%}
+        {%- for i in (1..6) -%}
+          {%- if i > collage_count -%}
+            <div class="features-8__collage-item">
+              <div class="features-8__collage-placeholder">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- Features Bar -->
+  <div class="features-8__bar">
+    <div class="features-8__bar-grid">
+      {%- assign feature_blocks = section.blocks | where: "type", "feature" -%}
+      {%- for block in feature_blocks -%}
+        <div class="features-8__feature" {{ block.shopify_attributes }}>
+          <div class="features-8__feature-icon">
+            {%- if block.settings.icon_image != blank -%}
+              {{ block.settings.icon_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: block.settings.title }}
+            {%- else -%}
+              {%- case block.settings.icon_type -%}
+                {%- when 'gift' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                {%- when 'cotton' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-1.5 2-2 4-2 6s1.5 3 2 3 2-1 2-3-0.5-4-2-6z"/><path d="M8 8c-2 1-3 3-3 5s2 3 3 3 2-1.5 2-3-0-3-2-5z"/><path d="M16 8c2 1 3 3 3 5s-2 3-3 3-2-1.5-2-3 0-3 2-5z"/><path d="M12 16v6"/><path d="M9 18l3-2 3 2"/></svg>
+                {%- when 'wash' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="13" r="5"/><circle cx="12" cy="13" r="2"/><circle cx="6" cy="8" r="1"/></svg>
+                {%- when 'refresh' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.8 1 6.5 2.6"/><path d="M21 3v6h-6"/></svg>
+                {%- when 'leaf' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                {%- when 'heart' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                {%- when 'shield' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                {%- when 'truck' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                {%- when 'star' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                {%- else -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {%- endcase -%}
+            {%- endif -%}
+          </div>
+          {%- if block.settings.title != blank -%}
+            <p class="features-8__feature-title">{{ block.settings.title }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Features 8",
+  "tag": "section",
+  "class": "section-features-8",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We Bring Tranquility To Your Home"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "We're crafting a remarkable collection of rug throws for those who seek to elevate their living spaces and embrace their unique style. Be a part of the texture revolution."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop All Rugs"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Guarantee text",
+      "default": "60 day money-back guarantee"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#41441c"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#5a5a5a"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#41441c"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Features bar colors"
+    },
+    {
+      "type": "color",
+      "id": "features_bar_background",
+      "label": "Bar background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "features_bar_text_color",
+      "label": "Bar text color",
+      "default": "#41441c"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Feature card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Feature card border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#41441c"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collage_image",
+      "name": "Collage Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Custom icon image",
+          "info": "Upload a custom icon (optional)"
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Or select icon",
+          "options": [
+            { "value": "gift", "label": "Gift" },
+            { "value": "cotton", "label": "Cotton/Plant" },
+            { "value": "wash", "label": "Washing Machine" },
+            { "value": "refresh", "label": "Refresh/Reversible" },
+            { "value": "leaf", "label": "Leaf/Eco" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "truck", "label": "Truck/Shipping" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "gift",
+          "info": "Used if no custom image uploaded"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Features 8",
+      "blocks": [
+        { "type": "collage_image" },
+        { "type": "collage_image" },
+        { "type": "collage_image" },
+        { "type": "collage_image" },
+        { "type": "collage_image" },
+        { "type": "collage_image" },
+        { "type": "feature", "settings": { "icon_type": "gift", "title": "The Perfect Gift" } },
+        { "type": "feature", "settings": { "icon_type": "cotton", "title": "100% Cotton" } },
+        { "type": "feature", "settings": { "icon_type": "wash", "title": "Machine Washable" } },
+        { "type": "feature", "settings": { "icon_type": "refresh", "title": "Reversible Design" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

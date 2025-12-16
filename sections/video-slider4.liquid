@@ -1,0 +1,916 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --vs4-bg: {{ section.settings.background_color }};
+    --vs4-text: {{ section.settings.text_color }};
+    --vs4-heading: {{ section.settings.heading_color }};
+    --vs4-label: {{ section.settings.label_color }};
+    --vs4-card-radius: {{ section.settings.card_border_radius }}px;
+    --vs4-star-color: {{ section.settings.star_color }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .swiper-slide {
+    width: 200px !important;
+    max-width: 200px !important;
+    flex-shrink: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} .video-slider-4__card {
+    width: 200px !important;
+    max-width: 200px !important;
+  }
+
+  #shopify-section-{{ section.id }} .video-slider-4__video-container {
+    height: 290px !important;
+  }
+
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} .swiper-slide,
+    #shopify-section-{{ section.id }} .video-slider-4__card {
+      width: 220px !important;
+      max-width: 220px !important;
+    }
+    #shopify-section-{{ section.id }} .video-slider-4__video-container {
+      height: 320px !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .swiper-slide,
+    #shopify-section-{{ section.id }} .video-slider-4__card {
+      width: 260px !important;
+      max-width: 260px !important;
+    }
+    #shopify-section-{{ section.id }} .video-slider-4__video-container {
+      height: 380px !important;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    #shopify-section-{{ section.id }} .swiper-slide,
+    #shopify-section-{{ section.id }} .video-slider-4__card {
+      width: 280px !important;
+      max-width: 280px !important;
+    }
+    #shopify-section-{{ section.id }} .video-slider-4__video-container {
+      height: 410px !important;
+    }
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+  .video-slider-4 {
+    background: var(--vs4-bg, #ffffff);
+    padding: 40px 0;
+    font-family: 'Inter', sans-serif;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .video-slider-4__slider-outer {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .video-slider-4__container {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  /* Header */
+  .video-slider-4__header {
+    text-align: center;
+    margin-bottom: 30px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+  }
+
+  .video-slider-4__label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--vs4-label, #4c8ae7);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+
+  .video-slider-4__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--vs4-heading, #121212);
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+
+  .video-slider-4__subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--vs4-text, #666666);
+    margin: 0;
+    line-height: 1.5;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Slider Container */
+  .video-slider-4__slider-wrapper {
+    position: relative;
+    padding: 0;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .video-slider-4__slider {
+    overflow: visible !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .video-slider-4__slider .swiper-wrapper {
+    align-items: stretch;
+  }
+
+  .video-slider-4 .swiper {
+    overflow: visible !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .video-slider-4 .swiper-slide:first-child {
+    margin-left: 0;
+  }
+
+  .video-slider-4 .swiper-slide {
+    width: 200px !important;
+    height: auto !important;
+    flex-shrink: 0;
+  }
+
+  /* Card */
+  .video-slider-4__card {
+    background: #3d3d3d;
+    border-radius: var(--vs4-card-radius, 24px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    max-width: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Video Container */
+  .video-slider-4__video-container {
+    position: relative;
+    width: 100%;
+    height: 290px;
+    overflow: hidden;
+  }
+
+  .video-slider-4__video,
+  .video-slider-4__video video,
+  .video-slider-4__video img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-slider-4__video-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 14px;
+  }
+
+  /* Video Controls */
+  .video-slider-4__controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+  }
+
+  .video-slider-4__control-btn {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: none;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .video-slider-4__control-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  .video-slider-4__control-btn svg {
+    width: 14px;
+    height: 14px;
+    color: #ffffff;
+  }
+
+  .video-slider-4__control-btn .icon-pause,
+  .video-slider-4__control-btn .icon-unmute {
+    display: none;
+  }
+
+  .video-slider-4__control-btn.playing .icon-play {
+    display: none;
+  }
+
+  .video-slider-4__control-btn.playing .icon-pause {
+    display: block;
+  }
+
+  .video-slider-4__control-btn.unmuted .icon-mute {
+    display: none;
+  }
+
+  .video-slider-4__control-btn.unmuted .icon-unmute {
+    display: block;
+  }
+
+  /* Watermark */
+  .video-slider-4__watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* Card Info */
+  .video-slider-4__info {
+    background: #3d3d3d;
+    padding: 12px 10px;
+    text-align: center;
+  }
+
+  .video-slider-4__stars {
+    display: flex;
+    justify-content: center;
+    gap: 1px;
+    margin-bottom: 6px;
+  }
+
+  .video-slider-4__star {
+    width: 14px;
+    height: 14px;
+    color: var(--vs4-star-color, #f5a623);
+  }
+
+  .video-slider-4__author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 2px;
+  }
+
+  .video-slider-4__author-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .video-slider-4__verified {
+    width: 14px;
+    height: 14px;
+    color: #4c8ae7;
+  }
+
+  .video-slider-4__product {
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Navigation */
+  .video-slider-4__navigation {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .video-slider-4__nav-btn {
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1.5px solid #d0d0d0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .video-slider-4__nav-btn:hover {
+    background: #f5f5f5;
+    border-color: #999;
+  }
+
+  .video-slider-4__nav-btn.swiper-button-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .video-slider-4__nav-btn svg {
+    width: 14px;
+    height: 14px;
+    color: #333;
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .video-slider-4 {
+      padding: 50px 0;
+    }
+
+    .video-slider-4__title {
+      font-size: 28px;
+    }
+
+    .video-slider-4 .swiper-slide {
+      width: 220px !important;
+    }
+
+    .video-slider-4__card {
+      width: 220px;
+      max-width: 220px;
+    }
+
+    .video-slider-4__video-container {
+      height: 320px;
+    }
+
+    .video-slider-4__header {
+      margin-bottom: 35px;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .video-slider-4 {
+      padding: 60px 0;
+    }
+
+    .video-slider-4__title {
+      font-size: 32px;
+    }
+
+    .video-slider-4__subtitle {
+      font-size: 14px;
+    }
+
+    .video-slider-4 .swiper-slide {
+      width: 260px !important;
+    }
+
+    .video-slider-4__card {
+      width: 260px;
+      max-width: 260px;
+    }
+
+    .video-slider-4__video-container {
+      height: 380px;
+    }
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1400px) {
+    .video-slider-4 {
+      padding: 70px 0;
+    }
+
+    .video-slider-4 .swiper-slide {
+      width: 280px !important;
+    }
+
+    .video-slider-4__card {
+      width: 280px;
+      max-width: 280px;
+    }
+
+    .video-slider-4__video-container {
+      height: 410px;
+    }
+  }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<section class="video-slider-4" data-section-id="{{ section.id }}">
+  <div class="video-slider-4__container">
+    <!-- Header -->
+    {%- if section.settings.label != blank or section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="video-slider-4__header">
+        {%- if section.settings.label != blank -%}
+          <div class="video-slider-4__label">{{ section.settings.label }}</div>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="video-slider-4__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="video-slider-4__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Slider -->
+    <div class="video-slider-4__slider-outer">
+      <div class="video-slider-4__slider-wrapper">
+        <div class="video-slider-4__slider swiper">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="video-slider-4__slide swiper-slide" {{ block.shopify_attributes }}>
+              <div class="video-slider-4__card">
+                <div class="video-slider-4__video-container">
+                  <div class="video-slider-4__video">
+                    {%- if block.settings.video != blank -%}
+                      <video class="video-slider-4__video-element" muted loop playsinline preload="auto" {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 800 }}"{% endif %}>
+                        {%- for source in block.settings.video.sources -%}
+                          <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                        {%- endfor -%}
+                      </video>
+                    {%- elsif block.settings.poster != blank -%}
+                      {{ block.settings.poster | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.author_name }}
+                    {%- else -%}
+                      <div class="video-slider-4__video-placeholder">
+                        <span>Add video</span>
+                      </div>
+                    {%- endif -%}
+                  </div>
+
+                  <!-- Controls -->
+                  <div class="video-slider-4__controls">
+                    <button class="video-slider-4__control-btn video-slider-4__mute-btn" type="button" aria-label="Toggle mute">
+                      <svg class="icon-mute" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                        <line x1="23" y1="9" x2="17" y2="15"/>
+                        <line x1="17" y1="9" x2="23" y2="15"/>
+                      </svg>
+                      <svg class="icon-unmute" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                      </svg>
+                    </button>
+                    <button class="video-slider-4__control-btn video-slider-4__play-btn" type="button" aria-label="Toggle play">
+                      <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                      </svg>
+                      <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="6" y="4" width="4" height="16"/>
+                        <rect x="14" y="4" width="4" height="16"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Watermark -->
+                  {%- if section.settings.watermark != blank -%}
+                    <div class="video-slider-4__watermark">{{ section.settings.watermark }}</div>
+                  {%- endif -%}
+                </div>
+
+                <!-- Info (outside video container) -->
+                <div class="video-slider-4__info">
+                  {%- if block.settings.show_stars -%}
+                    <div class="video-slider-4__stars">
+                      {%- for i in (1..5) -%}
+                        <svg class="video-slider-4__star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.author_name != blank -%}
+                    <div class="video-slider-4__author">
+                      <span class="video-slider-4__author-name">{{ block.settings.author_name }}</span>
+                      {%- if block.settings.verified -%}
+                        <svg class="video-slider-4__verified" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.product_name != blank -%}
+                    <div class="video-slider-4__product">{{ block.settings.product_name }}</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="video-slider-4__navigation">
+        <button class="video-slider-4__nav-btn video-slider-4__prev" type="button" aria-label="Previous slide">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button class="video-slider-4__nav-btn video-slider-4__next" type="button" aria-label="Next slide">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
+
+    const swiperEl = section.querySelector('.video-slider-4__slider');
+    const prevBtn = section.querySelector('.video-slider-4__prev');
+    const nextBtn = section.querySelector('.video-slider-4__next');
+
+    // Initialize Swiper
+    const totalSlides = {{ section.blocks.size }};
+    const swiper = new Swiper(swiperEl, {
+      slidesPerView: 'auto',
+      spaceBetween: 16,
+      centeredSlides: true,
+      loop: true,
+      loopedSlides: Math.max(totalSlides, 5),
+      grabCursor: true,
+      speed: 400,
+      navigation: {
+        prevEl: prevBtn,
+        nextEl: nextBtn
+      },
+      breakpoints: {
+        768: {
+          spaceBetween: 20
+        },
+        1024: {
+          spaceBetween: 24
+        },
+        1400: {
+          spaceBetween: 28
+        }
+      },
+      on: {
+        init: function() {
+          const self = this;
+          setTimeout(function() {
+            self.update();
+            self.slideToLoop(0, 0);
+            handleVideoAutoplay();
+          }, 50);
+        },
+        slideChange: function() {
+          handleVideoAutoplay();
+        }
+      }
+    });
+
+    // Force update after a short delay
+    setTimeout(function() {
+      swiper.update();
+      swiper.slideToLoop(0, 0);
+    }, 100);
+
+    // Video autoplay handling - play center video, pause others
+    function handleVideoAutoplay() {
+      const allSlides = section.querySelectorAll('.swiper-slide');
+
+      allSlides.forEach((slide) => {
+        const video = slide.querySelector('.video-slider-4__video-element');
+        const playBtn = slide.querySelector('.video-slider-4__play-btn');
+
+        if (video) {
+          // Check if this slide is the active/center one
+          if (slide.classList.contains('swiper-slide-active')) {
+            video.play().catch(() => {});
+            if (playBtn) playBtn.classList.add('playing');
+          } else {
+            video.pause();
+            video.currentTime = 0;
+            if (playBtn) playBtn.classList.remove('playing');
+          }
+        }
+      });
+    }
+
+    // Play/Pause controls
+    const playButtons = section.querySelectorAll('.video-slider-4__play-btn');
+    playButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.video-slider-4__card');
+        const video = card.querySelector('.video-slider-4__video-element');
+        if (video) {
+          if (video.paused) {
+            video.play().catch(() => {});
+            this.classList.add('playing');
+          } else {
+            video.pause();
+            this.classList.remove('playing');
+          }
+        }
+      });
+    });
+
+    // Mute controls
+    const muteButtons = section.querySelectorAll('.video-slider-4__mute-btn');
+    muteButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.video-slider-4__card');
+        const video = card.querySelector('.video-slider-4__video-element');
+        if (video) {
+          video.muted = !video.muted;
+          this.classList.toggle('unmuted', !video.muted);
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Video Slider 4",
+  "tag": "section",
+  "class": "section-video-slider-4",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "OUR TESTIMONIALS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Why people love our brand"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Don't just take our word for it, see what our customers are saying and find out why they choose us!"
+    },
+    {
+      "type": "header",
+      "content": "Video Settings"
+    },
+    {
+      "type": "text",
+      "id": "watermark",
+      "label": "Watermark text",
+      "default": "unda",
+      "info": "Brand name displayed on videos"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#4c8ae7"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#f5a623"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_card",
+      "name": "Video Card",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Media"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Upload a vertical video (9:16 aspect ratio recommended)"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Poster image",
+          "info": "Displayed before video plays or if no video is uploaded"
+        },
+        {
+          "type": "header",
+          "content": "Author Info"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author name",
+          "default": "Customer Name"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show verified badge",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_stars",
+          "label": "Show star rating",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product name",
+          "default": "Product Name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Video Slider 4",
+      "settings": {
+        "label": "OUR TESTIMONIALS",
+        "title": "Why people love our brand",
+        "subtitle": "Don't just take our word for it, see what our customers are saying and find out why they choose us!",
+        "watermark": "unda"
+      },
+      "blocks": [
+        {
+          "type": "video_card",
+          "settings": {
+            "author_name": "Matt H.",
+            "verified": true,
+            "show_stars": true,
+            "product_name": "Unda 2.0 Eggshell"
+          }
+        },
+        {
+          "type": "video_card",
+          "settings": {
+            "author_name": "Sarah M.",
+            "verified": true,
+            "show_stars": true,
+            "product_name": "Unda 2.0 Eggshell"
+          }
+        },
+        {
+          "type": "video_card",
+          "settings": {
+            "author_name": "James T.",
+            "verified": true,
+            "show_stars": true,
+            "product_name": "Unda 2.0 Eggshell"
+          }
+        },
+        {
+          "type": "video_card",
+          "settings": {
+            "author_name": "Emily R.",
+            "verified": true,
+            "show_stars": true,
+            "product_name": "Unda Pro Black"
+          }
+        },
+        {
+          "type": "video_card",
+          "settings": {
+            "author_name": "Michael D.",
+            "verified": true,
+            "show_stars": true,
+            "product_name": "Unda 2.0 Navy"
+          }
+        },
+        {
+          "type": "video_card",
+          "settings": {
+            "author_name": "Kelly J.",
+            "verified": true,
+            "show_stars": true,
+            "product_name": "Unda 2.0 Stainless Steel"
+          }
+        },
+        {
+          "type": "video_card",
+          "settings": {
+            "author_name": "David W.",
+            "verified": true,
+            "show_stars": true,
+            "product_name": "Unda Pro White"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

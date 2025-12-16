@@ -1,0 +1,459 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --sm-bg: {{ section.settings.background_color }};
+    --sm-text: {{ section.settings.text_color }};
+    --sm-caption-color: {{ section.settings.caption_color }};
+    --sm-card-radius: {{ section.settings.card_border_radius }}px;
+    --sm-gap: {{ section.settings.gap }}px;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+  .scrolling-media {
+    background: var(--sm-bg, #ffffff);
+    padding: 50px 0;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .scrolling-media__container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Header */
+  .scrolling-media__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .scrolling-media__title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--sm-text, #121212);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .scrolling-media__subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--sm-text, #121212);
+    opacity: 0.7;
+    margin: 8px 0 0;
+  }
+
+  /* Scrolling Track */
+  .scrolling-media__track {
+    display: flex;
+    gap: var(--sm-gap, 20px);
+    width: fit-content;
+    animation: scrolling-media-scroll {{ section.settings.scroll_speed }}s linear infinite;
+  }
+
+  .scrolling-media__wrapper {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .scrolling-media__wrapper:hover .scrolling-media__track {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrolling-media-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Items */
+  .scrolling-media__item {
+    flex-shrink: 0;
+    width: {{ section.settings.mobile_width }}px;
+  }
+
+  .scrolling-media__media {
+    position: relative;
+    width: 100%;
+    padding-bottom: {{ section.settings.aspect_ratio }}%;
+    overflow: hidden;
+    border-radius: var(--sm-card-radius, 16px);
+    background: #f0f0f0;
+  }
+
+  .scrolling-media__media img,
+  .scrolling-media__media video,
+  .scrolling-media__media iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .scrolling-media__media video {
+    background: #000;
+  }
+
+  .scrolling-media__media-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 14px;
+  }
+
+  /* Caption */
+  .scrolling-media__caption {
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--sm-caption-color, #121212);
+    line-height: 1.4;
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .scrolling-media {
+      padding: 60px 0;
+    }
+
+    .scrolling-media__container {
+      padding: 0 30px;
+    }
+
+    .scrolling-media__title {
+      font-size: 38px;
+    }
+
+    .scrolling-media__subtitle {
+      font-size: 17px;
+    }
+
+    .scrolling-media__item {
+      width: {{ section.settings.tablet_width }}px;
+    }
+
+    .scrolling-media__caption {
+      font-size: 15px;
+      margin-top: 14px;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .scrolling-media {
+      padding: 70px 0;
+    }
+
+    .scrolling-media__container {
+      padding: 0 40px;
+    }
+
+    .scrolling-media__title {
+      font-size: 42px;
+    }
+
+    .scrolling-media__item {
+      width: {{ section.settings.desktop_width }}px;
+    }
+
+    .scrolling-media__caption {
+      font-size: 16px;
+      margin-top: 16px;
+    }
+  }
+
+  /* Mobile - No pause on hover */
+  @media (max-width: 1023px) {
+    .scrolling-media__wrapper:hover .scrolling-media__track {
+      animation-play-state: running;
+    }
+  }
+</style>
+
+<section class="scrolling-media" data-section-id="{{ section.id }}">
+  <div class="scrolling-media__container">
+    <!-- Header -->
+    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="scrolling-media__header">
+        {%- if section.settings.title != blank -%}
+          <h2 class="scrolling-media__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="scrolling-media__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Scrolling Wrapper -->
+    <div class="scrolling-media__wrapper">
+      <div class="scrolling-media__track">
+        <!-- First Set -->
+        {%- for block in section.blocks -%}
+          <div class="scrolling-media__item" {{ block.shopify_attributes }}>
+            <div class="scrolling-media__media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.caption }}
+              {%- elsif block.settings.video != blank -%}
+                <video autoplay muted loop playsinline preload="metadata">
+                  {%- for source in block.settings.video.sources -%}
+                    <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                  {%- endfor -%}
+                </video>
+              {%- elsif block.settings.video_url != blank -%}
+                <iframe src="{{ block.settings.video_url }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+              {%- else -%}
+                <div class="scrolling-media__media-placeholder">
+                  <span>Media</span>
+                </div>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.caption != blank -%}
+              <div class="scrolling-media__caption">{{ block.settings.caption }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+
+        <!-- Duplicate Set for Infinite Loop -->
+        {%- for block in section.blocks -%}
+          <div class="scrolling-media__item">
+            <div class="scrolling-media__media">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.caption }}
+              {%- elsif block.settings.video != blank -%}
+                <video autoplay muted loop playsinline preload="metadata">
+                  {%- for source in block.settings.video.sources -%}
+                    <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                  {%- endfor -%}
+                </video>
+              {%- elsif block.settings.video_url != blank -%}
+                <iframe src="{{ block.settings.video_url }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+              {%- else -%}
+                <div class="scrolling-media__media-placeholder">
+                  <span>Media</span>
+                </div>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.caption != blank -%}
+              <div class="scrolling-media__caption">{{ block.settings.caption }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Scrolling Media",
+  "tag": "section",
+  "class": "section-scrolling-media",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Newsroom"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "info": "Leave empty to hide"
+    },
+    {
+      "type": "header",
+      "content": "Scroll settings"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 40,
+      "info": "Duration for one complete loop"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between items",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Card dimensions"
+    },
+    {
+      "type": "range",
+      "id": "mobile_width",
+      "label": "Mobile card width",
+      "min": 180,
+      "max": 320,
+      "step": 10,
+      "unit": "px",
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "tablet_width",
+      "label": "Tablet card width",
+      "min": 240,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 330
+    },
+    {
+      "type": "range",
+      "id": "desktop_width",
+      "label": "Desktop card width",
+      "min": 280,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 450
+    },
+    {
+      "type": "range",
+      "id": "aspect_ratio",
+      "label": "Image aspect ratio",
+      "min": 75,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "info": "100% = Square, 75% = Landscape, 135% = Portrait"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "media",
+      "name": "Media Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Upload Video",
+          "info": "Upload a video file"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Or video embed URL",
+          "info": "YouTube, TikTok, Vimeo, or other embed URL"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "info": "Optional text below media"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Scrolling Media",
+      "blocks": [
+        { "type": "media", "settings": { "caption": "Introducing Our New Spring Collection - Fresh styles for the season ahead" } },
+        { "type": "media", "settings": { "caption": "Behind the Scenes - A look at our sustainable manufacturing process" } },
+        { "type": "media", "settings": { "caption": "Customer Spotlight - How @sarah_styles rocks our bestsellers" } },
+        { "type": "media", "settings": { "caption": "Featured in Vogue - Our founder discusses the brand's vision for 2024" } },
+        { "type": "media", "settings": { "caption": "Community Event - Thank you to everyone who joined our NYC pop-up" } },
+        { "type": "media", "settings": { "caption": "New Store Opening - Visit us at our flagship location in Los Angeles" } },
+        { "type": "media", "settings": { "caption": "Collaboration Announcement - Partnering with emerging designers" } },
+        { "type": "media", "settings": { "caption": "Sustainability Report - Our commitment to eco-friendly practices" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

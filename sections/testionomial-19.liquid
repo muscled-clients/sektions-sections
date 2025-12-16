@@ -1,0 +1,778 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --t19-bg: {{ section.settings.background_color }};
+    --t19-heading-color: {{ section.settings.heading_color }};
+    --t19-text-color: {{ section.settings.text_color }};
+    --t19-card-bg: {{ section.settings.card_background }};
+    --t19-card-border: {{ section.settings.card_border_color }};
+    --t19-star-color: {{ section.settings.star_color }};
+    --t19-accent: {{ section.settings.accent_color }};
+    --t19-card-radius: {{ section.settings.card_border_radius }}px;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+  .testimonials-19 {
+    background: var(--t19-bg, #f8f7f3);
+    padding: 50px 20px;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+  }
+
+  .testimonials-19__container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .testimonials-19__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .testimonials-19__subtitle {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--t19-accent, #b7b491);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0 0 12px;
+  }
+
+  .testimonials-19__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--t19-heading-color, #333333);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  /* Carousel */
+  .testimonials-19__carousel {
+    position: relative;
+  }
+
+  .testimonials-19__swiper {
+    overflow: visible;
+    padding: 10px 0;
+  }
+
+  .testimonials-19__slide {
+    height: auto;
+    width: 280px !important;
+    flex-shrink: 0;
+  }
+
+  .testimonials-19__slide--image {
+    width: 240px !important;
+  }
+
+  .testimonials-19__slide--testimonial,
+  .testimonials-19__slide--press {
+    width: 280px !important;
+  }
+
+  /* Base Card */
+  .testimonials-19__card {
+    background: var(--t19-card-bg, #ffffff);
+    border-radius: var(--t19-card-radius, 12px);
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* ===== IMAGE CARD ===== */
+  .testimonials-19__card--image {
+    position: relative;
+    min-height: 320px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .testimonials-19__card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .testimonials-19__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .testimonials-19__card-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #d4cfc5 0%, #b8b3a9 100%);
+  }
+
+  .testimonials-19__card-overlay {
+    position: relative;
+    z-index: 2;
+    padding: 24px;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
+  }
+
+  .testimonials-19__card-overlay-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 500;
+    font-style: italic;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  /* ===== TESTIMONIAL CARD ===== */
+  .testimonials-19__card--testimonial {
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--t19-card-border, #e8e8e8);
+  }
+
+  .testimonials-19__stars {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+
+  .testimonials-19__star {
+    width: 16px;
+    height: 16px;
+    color: var(--t19-star-color, #e8b923);
+  }
+
+  .testimonials-19__star--empty {
+    color: #ddd;
+  }
+
+  .testimonials-19__quote {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--t19-text-color, #555555);
+    line-height: 1.7;
+    margin: 0 0 20px;
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  .testimonials-19__author {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .testimonials-19__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .testimonials-19__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .testimonials-19__avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--t19-accent, #b7b491) 0%, #a0a080 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .testimonials-19__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .testimonials-19__name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--t19-heading-color, #333333);
+    margin: 0;
+  }
+
+  .testimonials-19__verified {
+    font-size: 11px;
+    color: var(--t19-text-color, #666666);
+    opacity: 0.8;
+  }
+
+  /* ===== PRESS/QUOTE CARD ===== */
+  .testimonials-19__card--press {
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid var(--t19-card-border, #e8e8e8);
+  }
+
+  .testimonials-19__press-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--t19-heading-color, #333333);
+    margin: 0 0 12px;
+    line-height: 1.4;
+  }
+
+  .testimonials-19__press-text {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--t19-text-color, #555555);
+    line-height: 1.6;
+    margin: 0 0 20px;
+    flex-grow: 1;
+  }
+
+  .testimonials-19__press-logo {
+    max-width: 140px;
+    margin-top: auto;
+  }
+
+  .testimonials-19__press-logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.8;
+  }
+
+  /* Navigation */
+  .testimonials-19__nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .testimonials-19__nav-btn {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1.5px solid var(--t19-heading-color, #333333);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .testimonials-19__nav-btn:hover {
+    background: var(--t19-heading-color, #333333);
+  }
+
+  .testimonials-19__nav-btn:hover svg {
+    color: var(--t19-bg, #f8f7f3);
+  }
+
+  .testimonials-19__nav-btn svg {
+    width: 18px;
+    height: 18px;
+    color: var(--t19-heading-color, #333333);
+    transition: color 0.3s ease;
+  }
+
+  .testimonials-19__nav-btn.swiper-button-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .testimonials-19__nav-btn.swiper-button-disabled:hover {
+    background: transparent;
+  }
+
+  .testimonials-19__nav-btn.swiper-button-disabled:hover svg {
+    color: var(--t19-heading-color, #333333);
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .testimonials-19 {
+      padding: 60px 30px;
+    }
+
+    .testimonials-19__title {
+      font-size: 34px;
+    }
+
+    .testimonials-19__header {
+      margin-bottom: 50px;
+    }
+
+    .testimonials-19__slide--image {
+      width: 260px !important;
+    }
+
+    .testimonials-19__slide--testimonial,
+    .testimonials-19__slide--press {
+      width: 300px !important;
+    }
+
+    .testimonials-19__card--image {
+      min-height: 360px;
+    }
+
+    .testimonials-19__card-overlay-text {
+      font-size: 24px;
+    }
+
+    .testimonials-19__quote {
+      font-size: 14px;
+    }
+
+    .testimonials-19__press-quote {
+      font-size: 20px;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .testimonials-19 {
+      padding: 70px 40px;
+    }
+
+    .testimonials-19__title {
+      font-size: 38px;
+    }
+
+    .testimonials-19__swiper {
+      overflow: hidden;
+    }
+
+    .testimonials-19__slide--image {
+      width: 280px !important;
+    }
+
+    .testimonials-19__slide--testimonial,
+    .testimonials-19__slide--press {
+      width: 320px !important;
+    }
+
+    .testimonials-19__card--image {
+      min-height: 380px;
+    }
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1400px) {
+    .testimonials-19__slide--image {
+      width: 300px !important;
+    }
+
+    .testimonials-19__slide--testimonial,
+    .testimonials-19__slide--press {
+      width: 340px !important;
+    }
+
+    .testimonials-19__card--image {
+      min-height: 420px;
+    }
+  }
+</style>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<section class="testimonials-19" data-section-id="{{ section.id }}">
+  <div class="testimonials-19__container">
+    <!-- Header -->
+    {%- if section.settings.subtitle != blank or section.settings.title != blank -%}
+      <div class="testimonials-19__header">
+        {%- if section.settings.subtitle != blank -%}
+          <p class="testimonials-19__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="testimonials-19__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Mixed Cards Carousel -->
+    <div class="testimonials-19__carousel">
+      <div class="testimonials-19__swiper swiper">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="testimonials-19__slide testimonials-19__slide--{{ block.type }} swiper-slide" {{ block.shopify_attributes }}>
+
+              {%- case block.type -%}
+                {%- when 'image' -%}
+                  <!-- Image Card -->
+                  <div class="testimonials-19__card testimonials-19__card--image">
+                    <div class="testimonials-19__card-image">
+                      {%- if block.settings.image != blank -%}
+                        {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.overlay_text }}
+                      {%- else -%}
+                        <div class="testimonials-19__card-image-placeholder"></div>
+                      {%- endif -%}
+                    </div>
+                    {%- if block.settings.overlay_text != blank -%}
+                      <div class="testimonials-19__card-overlay">
+                        <p class="testimonials-19__card-overlay-text">{{ block.settings.overlay_text }}</p>
+                      </div>
+                    {%- endif -%}
+                  </div>
+
+                {%- when 'testimonial' -%}
+                  <!-- Testimonial Card -->
+                  <div class="testimonials-19__card testimonials-19__card--testimonial">
+                    {%- if section.settings.show_stars -%}
+                      <div class="testimonials-19__stars">
+                        {%- for i in (1..5) -%}
+                          {%- if i <= block.settings.rating -%}
+                            <svg class="testimonials-19__star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                          {%- else -%}
+                            <svg class="testimonials-19__star testimonials-19__star--empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+
+                    {%- if block.settings.quote != blank -%}
+                      <p class="testimonials-19__quote">"{{ block.settings.quote }}"</p>
+                    {%- endif -%}
+
+                    <div class="testimonials-19__author">
+                      <div class="testimonials-19__avatar">
+                        {%- if block.settings.avatar != blank -%}
+                          {{ block.settings.avatar | image_url: width: 200 | image_tag: loading: 'lazy', alt: block.settings.name }}
+                        {%- else -%}
+                          <div class="testimonials-19__avatar-placeholder">
+                            {{ block.settings.name | slice: 0 | upcase }}
+                          </div>
+                        {%- endif -%}
+                      </div>
+                      <div class="testimonials-19__info">
+                        {%- if block.settings.name != blank -%}
+                          <p class="testimonials-19__name">{{ block.settings.name }}</p>
+                        {%- endif -%}
+                        {%- if section.settings.show_verified -%}
+                          <span class="testimonials-19__verified">- Verified Buyer</span>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  </div>
+
+                {%- when 'press' -%}
+                  <!-- Press/Quote Card -->
+                  <div class="testimonials-19__card testimonials-19__card--press">
+                    {%- if block.settings.quote != blank -%}
+                      <p class="testimonials-19__press-quote">{{ block.settings.quote }}</p>
+                    {%- endif -%}
+
+                    {%- if block.settings.description != blank -%}
+                      <p class="testimonials-19__press-text">"{{ block.settings.description }}"</p>
+                    {%- endif -%}
+
+                    {%- if block.settings.logo != blank -%}
+                      <div class="testimonials-19__press-logo">
+                        {{ block.settings.logo | image_url: width: 300 | image_tag: loading: 'lazy', alt: 'Press logo' }}
+                      </div>
+                    {%- endif -%}
+                  </div>
+
+              {%- endcase -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="testimonials-19__nav">
+        <button class="testimonials-19__nav-btn testimonials-19__nav-btn--prev" aria-label="Previous">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="testimonials-19__nav-btn testimonials-19__nav-btn--next" aria-label="Next">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const section = document.querySelector('.testimonials-19[data-section-id="{{ section.id }}"]');
+  if (!section) return;
+
+  const swiperEl = section.querySelector('.testimonials-19__swiper');
+  const prevBtn = section.querySelector('.testimonials-19__nav-btn--prev');
+  const nextBtn = section.querySelector('.testimonials-19__nav-btn--next');
+
+  const swiper = new Swiper(swiperEl, {
+    slidesPerView: 'auto',
+    spaceBetween: 16,
+    watchOverflow: true,
+    navigation: {
+      prevEl: prevBtn,
+      nextEl: nextBtn
+    },
+    breakpoints: {
+      768: {
+        spaceBetween: 20
+      },
+      1024: {
+        spaceBetween: 24
+      }
+    },
+    on: {
+      init: function() {
+        updateNavVisibility(this);
+      },
+      resize: function() {
+        updateNavVisibility(this);
+      }
+    }
+  });
+
+  function updateNavVisibility(swiper) {
+    const nav = section.querySelector('.testimonials-19__nav');
+    if (nav) {
+      if (swiper.isLocked) {
+        nav.style.display = 'none';
+      } else {
+        nav.style.display = 'flex';
+      }
+    }
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "SEK Testimonials 19",
+  "tag": "section",
+  "class": "section-testimonials-19",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "info": "Leave empty to hide"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "header",
+      "content": "Display options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stars",
+      "label": "Show star ratings",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_verified",
+      "label": "Show verified buyer text",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f8f7f3"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border color",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#e8b923"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#b7b491"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "overlay_text",
+          "label": "Overlay text",
+          "default": "Over 2 Million Jewelry Pieces Sold"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Customer photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer name",
+          "default": "Jane S."
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review text",
+          "default": "I love the unique designs offered by this brand. They're not your typical pieces of jewelry, and they're sure to turn heads."
+        }
+      ]
+    },
+    {
+      "type": "press",
+      "name": "Press Quote",
+      "settings": [
+        {
+          "type": "text",
+          "id": "quote",
+          "label": "Headline quote",
+          "default": "Their pieces are the perfect choice."
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Their timeless designs and impeccable quality make them a must-have for any discerning jewelry enthusiast."
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Publication logo",
+          "info": "e.g., Forbes, Vogue logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Testimonials 19",
+      "blocks": [
+        { "type": "image", "settings": { "overlay_text": "Over 2 Million Jewelry Pieces Sold" } },
+        { "type": "testimonial", "settings": { "name": "Sarah Johnson", "rating": 5, "quote": "This product exceeded my expectations! The quality is amazing and customer service was incredibly helpful. Would definitely recommend to anyone looking for a great experience." } },
+        { "type": "press", "settings": { "quote": "Their pieces are the perfect choice.", "description": "Their timeless designs and impeccable quality make them a must-have for any discerning jewelry enthusiast." } },
+        { "type": "testimonial", "settings": { "name": "Michael Chen", "rating": 5, "quote": "Best purchase I've made this year. Fast shipping and the product looks even better in person. The attention to detail is remarkable." } },
+        { "type": "image", "settings": { "overlay_text": "Free Shipping Worldwide" } },
+        { "type": "testimonial", "settings": { "name": "Emily Rodriguez", "rating": 5, "quote": "I've been a customer for over a year now and the quality has remained consistently excellent. Their customer support team is always quick to respond and truly cares about customer satisfaction." } },
+        { "type": "press", "settings": { "quote": "A brand that stands out from the rest.", "description": "With innovative designs and commitment to sustainability, this brand is setting new standards in the industry." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

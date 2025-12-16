@@ -1,0 +1,778 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --f24-bg: {{ section.settings.background_color }};
+    --f24-text: {{ section.settings.text_color }};
+    --f24-heading: {{ section.settings.heading_color }};
+    --f24-tab-bg: {{ section.settings.tab_background }};
+    --f24-tab-active: {{ section.settings.tab_active_color }};
+    --f24-progress: {{ section.settings.progress_color }};
+    --f24-btn-bg: {{ section.settings.button_background }};
+    --f24-btn-text: {{ section.settings.button_text_color }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  .feature-24 {
+    background: var(--f24-bg, #ffffff);
+    padding: 50px 20px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .feature-24__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .feature-24__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  /* Content Side */
+  .feature-24__content {
+    text-align: center;
+  }
+
+  .feature-24__label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--f24-progress, #ff6a1b);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+
+  .feature-24__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--f24-heading, #1a1a1a);
+    margin: 0 0 16px;
+    line-height: 1.2;
+  }
+
+  .feature-24__subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--f24-text, #666666);
+    margin: 0 0 32px;
+    line-height: 1.6;
+  }
+
+  /* Tabs */
+  .feature-24__tabs {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .feature-24__tab-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .feature-24__tab {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    background: var(--f24-tab-bg, #f5f5f5);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .feature-24__tab:hover {
+    background: var(--f24-tab-active, #e8e8e8);
+  }
+
+  .feature-24__tab.active {
+    background: var(--f24-tab-active, #e8e8e8);
+  }
+
+  .feature-24__tab-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--f24-text, #666666);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .feature-24__tab-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--f24-heading, #1a1a1a);
+  }
+
+  .feature-24__tab-icon img,
+  .feature-24__tab-icon svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Progress Circle */
+  .feature-24__progress {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 70px;
+    height: 70px;
+    transform: rotate(-90deg);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .feature-24__tab.active .feature-24__progress {
+    opacity: 1;
+  }
+
+  .feature-24__progress-circle {
+    fill: none;
+    stroke: var(--f24-progress, #ff6a1b);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 204;
+    stroke-dashoffset: 204;
+  }
+
+  .feature-24__tab.active .feature-24__progress-circle {
+    animation: progress-fill var(--autoplay-duration, 6s) linear forwards;
+  }
+
+  @keyframes progress-fill {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Tab Content */
+  .feature-24__tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .feature-24__tab-content.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .feature-24__tab-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--f24-heading, #1a1a1a);
+    margin: 0 0 12px;
+  }
+
+  .feature-24__tab-description {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--f24-text, #666666);
+    margin: 0 0 24px;
+    line-height: 1.6;
+  }
+
+  /* Button */
+  .feature-24__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--f24-btn-bg, #1a1a1a);
+    color: var(--f24-btn-text, #ffffff);
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .feature-24__button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  .feature-24__button-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Image Side */
+  .feature-24__image-container {
+    position: relative;
+    order: -1;
+  }
+
+  .feature-24__image-wrapper {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+
+  .feature-24__image {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .feature-24__image.active {
+    display: block;
+  }
+
+  .feature-24__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feature-24__image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 14px;
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .feature-24 {
+      padding: 60px 30px;
+    }
+
+    .feature-24__title {
+      font-size: 32px;
+    }
+
+    .feature-24__tab {
+      width: 72px;
+      height: 72px;
+    }
+
+    .feature-24__progress {
+      width: 78px;
+      height: 78px;
+    }
+
+    .feature-24__tab-icon {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .feature-24 {
+      padding: 80px 40px;
+    }
+
+    .feature-24__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .feature-24__content {
+      text-align: left;
+      order: {% if section.settings.image_position == 'right' %}1{% else %}2{% endif %};
+    }
+
+    .feature-24__image-container {
+      order: {% if section.settings.image_position == 'right' %}2{% else %}1{% endif %};
+    }
+
+    .feature-24__title {
+      font-size: 36px;
+    }
+
+    .feature-24__tabs {
+      justify-content: flex-start;
+    }
+
+    .feature-24__image-wrapper {
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1400px) {
+    .feature-24 {
+      padding: 100px 60px;
+    }
+
+    .feature-24__grid {
+      gap: 80px;
+    }
+
+    .feature-24__title {
+      font-size: 42px;
+    }
+  }
+</style>
+
+<section class="feature-24" data-section-id="{{ section.id }}" data-autoplay-duration="{{ section.settings.autoplay_duration }}">
+  <div class="feature-24__container">
+    <div class="feature-24__grid">
+      <!-- Content -->
+      <div class="feature-24__content">
+        {%- if section.settings.label != blank -%}
+          <div class="feature-24__label">{{ section.settings.label }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.title != blank -%}
+          <h2 class="feature-24__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.subtitle != blank -%}
+          <p class="feature-24__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+
+        <!-- Tabs -->
+        <div class="feature-24__tabs">
+          {%- for block in section.blocks -%}
+            <div class="feature-24__tab-wrapper">
+              <button class="feature-24__tab {% if forloop.first %}active{% endif %}"
+                      data-tab-index="{{ forloop.index0 }}"
+                      {{ block.shopify_attributes }}>
+                <svg class="feature-24__progress" viewBox="0 0 70 70">
+                  <circle class="feature-24__progress-circle" cx="35" cy="35" r="32.5"></circle>
+                </svg>
+                <div class="feature-24__tab-icon">
+                  {%- if block.settings.icon != blank -%}
+                    {{ block.settings.icon | image_url: width: 64 | image_tag }}
+                  {%- else -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 6v6l4 2"/>
+                    </svg>
+                  {%- endif -%}
+                </div>
+              </button>
+              {%- if block.settings.tab_label != blank -%}
+                <span class="feature-24__tab-label">{{ block.settings.tab_label }}</span>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <!-- Tab Contents -->
+        {%- for block in section.blocks -%}
+          <div class="feature-24__tab-content {% if forloop.first %}active{% endif %}" data-content-index="{{ forloop.index0 }}">
+            {%- if block.settings.tab_title != blank -%}
+              <h3 class="feature-24__tab-title">{{ block.settings.tab_title }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.tab_description != blank -%}
+              <p class="feature-24__tab-description">{{ block.settings.tab_description }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.button_text != blank -%}
+              <a href="{{ block.settings.button_link }}" class="feature-24__button">
+                <span>{{ block.settings.button_text }}</span>
+                <svg class="feature-24__button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <!-- Image -->
+      <div class="feature-24__image-container">
+        <div class="feature-24__image-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="feature-24__image {% if forloop.first %}active{% endif %}" data-image-index="{{ forloop.index0 }}">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.tab_title }}
+              {%- else -%}
+                <div class="feature-24__image-placeholder">
+                  <span>Add image</span>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
+
+    const tabs = section.querySelectorAll('.feature-24__tab');
+    const contents = section.querySelectorAll('.feature-24__tab-content');
+    const images = section.querySelectorAll('.feature-24__image, [data-image-index]');
+    const autoplayDuration = parseInt(section.dataset.autoplayDuration) * 1000 || 6000;
+
+    let currentIndex = 0;
+    let autoplayInterval = null;
+
+    // Set CSS variable for animation duration
+    section.style.setProperty('--autoplay-duration', (autoplayDuration / 1000) + 's');
+
+    function switchTab(index) {
+      // Remove active from all
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+      images.forEach(i => i.classList.remove('active'));
+
+      // Add active to current
+      if (tabs[index]) tabs[index].classList.add('active');
+      if (contents[index]) contents[index].classList.add('active');
+      if (images[index]) images[index].classList.add('active');
+
+      currentIndex = index;
+    }
+
+    // Tab click handlers
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', function() {
+        switchTab(index);
+        resetAutoplay();
+      });
+    });
+
+    // Autoplay
+    function startAutoplay() {
+      if ({{ section.settings.autoplay }} && tabs.length > 1) {
+        autoplayInterval = setInterval(function() {
+          const nextIndex = (currentIndex + 1) % tabs.length;
+          switchTab(nextIndex);
+        }, autoplayDuration);
+      }
+    }
+
+    function resetAutoplay() {
+      clearInterval(autoplayInterval);
+      startAutoplay();
+    }
+
+    // Intersection Observer for autoplay
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          startAutoplay();
+        } else {
+          clearInterval(autoplayInterval);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(section);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Feature 24",
+  "tag": "section",
+  "class": "section-feature-24",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "OUR INGREDIENTS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Fresh, Natural Ingredients"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "We source only the finest organic ingredients to create our signature blends."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_duration",
+      "label": "Autoplay duration",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f5f5f0"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "tab_background",
+      "label": "Tab background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_color",
+      "label": "Tab active background",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "color",
+      "id": "progress_color",
+      "label": "Progress circle color",
+      "default": "#ff6a1b"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_tab",
+      "name": "Feature Tab",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Tab Icon"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image",
+          "info": "Upload a small icon (64x64 recommended)"
+        },
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "info": "Short label shown below icon"
+        },
+        {
+          "type": "header",
+          "content": "Tab Content"
+        },
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "tab_description",
+          "label": "Description",
+          "default": "Describe this feature and its benefits to your customers."
+        },
+        {
+          "type": "header",
+          "content": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Feature image"
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Feature 24",
+      "settings": {
+        "label": "OUR INGREDIENTS",
+        "title": "Fresh, Natural Ingredients",
+        "subtitle": "We source only the finest organic ingredients to create our signature blends that nourish your body and delight your taste buds.",
+        "autoplay": true,
+        "autoplay_duration": 6
+      },
+      "blocks": [
+        {
+          "type": "feature_tab",
+          "settings": {
+            "tab_label": "PARSLEY",
+            "tab_title": "Fresh Parsley",
+            "tab_description": "Our organic parsley is hand-picked at peak freshness, delivering essential vitamins and a crisp, clean flavor that elevates every blend.",
+            "button_text": "Explore Ingredients"
+          }
+        },
+        {
+          "type": "feature_tab",
+          "settings": {
+            "tab_label": "KALE",
+            "tab_title": "Organic Kale",
+            "tab_description": "Nutrient-dense and sustainably grown, our kale provides a powerhouse of antioxidants and fiber in every delicious sip.",
+            "button_text": "Explore Ingredients"
+          }
+        },
+        {
+          "type": "feature_tab",
+          "settings": {
+            "tab_label": "LEMON",
+            "tab_title": "Meyer Lemon",
+            "tab_description": "Sourced from California orchards, our Meyer lemons add a bright, zesty note while boosting vitamin C and natural flavor.",
+            "button_text": "Explore Ingredients"
+          }
+        },
+        {
+          "type": "feature_tab",
+          "settings": {
+            "tab_label": "MINT",
+            "tab_title": "Wild Mint",
+            "tab_description": "Freshly harvested wild mint brings a cooling, refreshing element that aids digestion and awakens your senses.",
+            "button_text": "Explore Ingredients"
+          }
+        },
+        {
+          "type": "feature_tab",
+          "settings": {
+            "tab_label": "GINGER",
+            "tab_title": "Ginger Root",
+            "tab_description": "Our premium ginger root is known for its anti-inflammatory properties and adds a warming, spicy kick to our wellness blends.",
+            "button_text": "Explore Ingredients"
+          }
+        },
+        {
+          "type": "feature_tab",
+          "settings": {
+            "tab_label": "APPLE",
+            "tab_title": "Green Apple",
+            "tab_description": "Crisp and naturally sweet, our green apples provide the perfect balance of flavor and natural sweetness without added sugars.",
+            "button_text": "Explore Ingredients"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
