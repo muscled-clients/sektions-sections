@@ -327,6 +327,11 @@
     font-size: 16px;
   }
 
+  /* Hide fixed cart button on desktop */
+  #box-builder-{{ section.id }} .fixed-cart-btn {
+    display: none;
+  }
+
   @media (max-width: 1024px) {
     #box-builder-{{ section.id }} .box-builder-wrapper {
       grid-template-columns: 1fr;
@@ -339,15 +344,77 @@
   }
 
   @media (max-width: 768px) {
+    #box-builder-{{ section.id }} {
+      padding-bottom: 80px;
+    }
+
+    #box-builder-{{ section.id }} .box-builder-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #box-builder-{{ section.id }} .box-sidebar {
+      order: -1;
+      margin-bottom: 20px;
+    }
+
     #box-builder-{{ section.id }} .products-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
+      gap: 12px;
+      order: 1;
     }
-  }
 
-  @media (max-width: 480px) {
-    #box-builder-{{ section.id }} .products-grid {
-      grid-template-columns: 1fr;
+    #box-builder-{{ section.id }} .product-card {
+      padding: 15px;
+    }
+
+    #box-builder-{{ section.id }} .product-title {
+      font-size: 14px;
+      min-height: 40px;
+    }
+
+    #box-builder-{{ section.id }} .product-description {
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    #box-builder-{{ section.id }} .add-to-box-btn {
+      padding: 10px 15px;
+      font-size: 12px;
+    }
+
+    #box-builder-{{ section.id }} .quantity-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+    }
+
+    #box-builder-{{ section.id }} .quantity-input {
+      width: 50px;
+      height: 40px;
+      font-size: 16px;
+    }
+
+    /* Fixed Add to Cart button at bottom */
+    #box-builder-{{ section.id }} .fixed-cart-btn {
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 15px 20px;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    #box-builder-{{ section.id }} .fixed-cart-btn .add-to-cart-btn {
+      margin: 0;
+    }
+
+    /* Hide the original add to cart in sidebar on mobile */
+    #box-builder-{{ section.id }} .sidebar-content > .add-to-cart-btn {
+      display: none;
     }
   }
 </style>
@@ -446,6 +513,13 @@
         </div>
       </div>
     </div>
+
+    <!-- Fixed Add to Cart for Mobile -->
+    <div class="fixed-cart-btn">
+      <button class="add-to-cart-btn" id="add-to-cart-mobile-{{ section.id }}" disabled>
+        Add to Cart
+      </button>
+    </div>
   </div>
 </section>
 
@@ -455,6 +529,7 @@
   const productsGrid = document.getElementById(`products-grid-${sectionId}`);
   const selectedProductsList = document.getElementById(`selected-products-${sectionId}`);
   const addToCartBtn = document.getElementById(`add-to-cart-${sectionId}`);
+  const addToCartBtnMobile = document.getElementById(`add-to-cart-mobile-${sectionId}`);
   const itemsCountEl = document.getElementById(`items-count-${sectionId}`);
   const maxItemsEl = document.getElementById(`max-items-${sectionId}`);
 
@@ -620,8 +695,11 @@
       });
     }
 
-    // Enable/disable add to cart button
+    // Enable/disable add to cart buttons (desktop and mobile)
     addToCartBtn.disabled = totalItems === 0;
+    if (addToCartBtnMobile) {
+      addToCartBtnMobile.disabled = totalItems === 0;
+    }
   }
 
   function enforceBoxLimit() {
@@ -642,7 +720,7 @@
   };
 
   // Add to cart functionality
-  addToCartBtn.addEventListener('click', async function() {
+  async function handleAddToCart() {
     if (selectedProducts.size === 0) return;
 
     // Prepare items for cart
@@ -674,7 +752,12 @@
       console.error('Error adding to cart:', error);
       alert('An error occurred. Please try again.');
     }
-  });
+  }
+
+  addToCartBtn.addEventListener('click', handleAddToCart);
+  if (addToCartBtnMobile) {
+    addToCartBtnMobile.addEventListener('click', handleAddToCart);
+  }
 
   // Initialize
   updateSidebar();
