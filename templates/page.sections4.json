@@ -1343,6 +1343,50 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "hero18_WeFjNf": {
+      "type": "hero18",
+      "blocks": {
+        "sticker_h4Bfec": {
+          "type": "sticker",
+          "settings": {
+            "sticker_text": "Buy two or more & save 15%",
+            "sticker_color": "cream",
+            "parallax_speed": 0.5
+          }
+        },
+        "sticker_Gmg84H": {
+          "type": "sticker",
+          "settings": {
+            "sticker_text": "FREE shipping",
+            "sticker_color": "cream",
+            "parallax_speed": 0.6
+          }
+        }
+      },
+      "block_order": [
+        "sticker_h4Bfec",
+        "sticker_Gmg84H"
+      ],
+      "name": "SEK Hero 18",
+      "settings": {
+        "logo": "shopify://shop_images/BENI_Brandmark_Charcoal.webp",
+        "heading": "Discover Our Collection",
+        "heading_accent": "",
+        "subtitle": "Explore our carefully curated selection of premium products designed for modern living.",
+        "image": "shopify://shop_images/beni-2.webp",
+        "button_text": "Shop Now",
+        "button_link": "",
+        "background_color": "#ffffff",
+        "heading_color": "#000000",
+        "text_color": "#666666",
+        "accent_color": "#ff6c1c",
+        "border_color": "#000000",
+        "sticker_background": "#b5fd9d",
+        "sticker_text_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
@@ -1363,6 +1407,7 @@
     "collection_14_KQNBhM",
     "image_with_text13_xncXGE",
     "flexible_tabs_af69Xw",
-    "product_ingerdients_AypkCa"
+    "product_ingerdients_AypkCa",
+    "hero18_WeFjNf"
   ]
 }
