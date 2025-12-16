@@ -247,12 +247,43 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "countdown_timer3_zL66LU": {
+      "type": "countdown-timer3",
+      "name": "SEK Countdown Timer 3",
+      "settings": {
+        "image_position": "right",
+        "image_border_radius": 0,
+        "image": "shopify://shop_images/Screenshot_2023-12-29_at_10.00.18.webp",
+        "subtitle": "SALE NOW ON",
+        "title": "Countdown to savings!",
+        "description": "Don't miss out on exclusive discounts and limited-time offers. Shop now before time runs out and secure your favorite items at unbeatable prices!",
+        "end_date": "2026-12-31T23:59:59",
+        "days_label": "Days",
+        "hours_label": "Hours",
+        "minutes_label": "Minutes",
+        "seconds_label": "Seconds",
+        "expired_message": "This offer has ended. Check back soon for new deals!",
+        "button_text": "SHOP NOW",
+        "button_link": "",
+        "background_color": "#fcf8f5",
+        "heading_color": "#000000",
+        "text_color": "#000000",
+        "timer_border_color": "#cac6c4",
+        "timer_number_color": "#000000",
+        "timer_label_color": "#000000",
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
     "main",
     "slideshow_11_jCyXpJ",
     "scrolling_media_PDYQCV",
-    "feature_product_2_6mJRqT"
+    "feature_product_2_6mJRqT",
+    "countdown_timer3_zL66LU"
   ]
 }
