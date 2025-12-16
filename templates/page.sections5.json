@@ -88,10 +88,105 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "scrolling_media_PDYQCV": {
+      "type": "scrolling-media",
+      "blocks": {
+        "media_qezzBj": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/hooch_499287228_17970071435878440_1771847704129844329_n.webp",
+            "video_url": "",
+            "caption": "Introducing Our New Spring Collection - Fresh styles for the season ahead"
+          }
+        },
+        "media_ndWbWb": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/hooch_517190323_18072699031957266_5680404169576951438_n.webp",
+            "video_url": "",
+            "caption": "Behind the Scenes - A look at our sustainable manufacturing process"
+          }
+        },
+        "media_khxJfC": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/hooch_568612473_17983325789878440_2048844255331698103_n.jpg",
+            "video_url": "",
+            "caption": "Customer Spotlight - How @sarah_styles rocks our bestsellers"
+          }
+        },
+        "media_hjNqnV": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/hooch_499287228_17970071435878440_1771847704129844329_n.webp",
+            "video_url": "",
+            "caption": "Community Event - Thank you to everyone who joined our NYC pop-up"
+          }
+        },
+        "media_Jb4xnt": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/hooch_568612473_17983325789878440_2048844255331698103_n.jpg",
+            "video_url": "",
+            "caption": "Featured in Vogue - Our founder discusses the brand's vision for 2024"
+          }
+        },
+        "media_84FiqL": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/hooch_499287228_17970071435878440_1771847704129844329_n.webp",
+            "video_url": "",
+            "caption": "New Store Opening - Visit us at our flagship location in Los Angeles"
+          }
+        },
+        "media_pMgtqE": {
+          "type": "media",
+          "settings": {
+            "video_url": "",
+            "caption": "Collaboration Announcement - Partnering with emerging designers"
+          }
+        },
+        "media_JFLGxr": {
+          "type": "media",
+          "settings": {
+            "video_url": "",
+            "caption": "Sustainability Report - Our commitment to eco-friendly practices"
+          }
+        }
+      },
+      "block_order": [
+        "media_qezzBj",
+        "media_ndWbWb",
+        "media_khxJfC",
+        "media_hjNqnV",
+        "media_Jb4xnt",
+        "media_84FiqL",
+        "media_pMgtqE",
+        "media_JFLGxr"
+      ],
+      "name": "SEK Scrolling Media",
+      "settings": {
+        "title": "Newsroom",
+        "subtitle": "",
+        "scroll_speed": 40,
+        "gap": 20,
+        "mobile_width": 240,
+        "tablet_width": 330,
+        "desktop_width": 450,
+        "aspect_ratio": 100,
+        "card_border_radius": 24,
+        "background_color": "#ffffff",
+        "text_color": "#121212",
+        "caption_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
     "main",
-    "slideshow_11_jCyXpJ"
+    "slideshow_11_jCyXpJ",
+    "scrolling_media_PDYQCV"
   ]
 }
