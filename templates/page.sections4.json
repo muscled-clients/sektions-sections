@@ -1669,6 +1669,89 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "testionomial_19_aTHT4L": {
+      "type": "testionomial-19",
+      "blocks": {
+        "image_CExge7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/pexels-majesticaljasmin-5411883.webp",
+            "overlay_text": "Over 2 Million Jewelry Pieces Sold"
+          }
+        },
+        "testimonial_iqFKMU": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Sarah Johnson",
+            "rating": 5,
+            "quote": "This product exceeded my expectations! The quality is amazing and customer service was incredibly helpful. Would definitely recommend to anyone looking for a great experience."
+          }
+        },
+        "press_wHfehb": {
+          "type": "press",
+          "settings": {
+            "quote": "Their pieces are the perfect choice.",
+            "description": "Their timeless designs and impeccable quality make them a must-have for any discerning jewelry enthusiast."
+          }
+        },
+        "testimonial_j8Cfem": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Michael Chen",
+            "rating": 5,
+            "quote": "Best purchase I've made this year. Fast shipping and the product looks even better in person. The attention to detail is remarkable."
+          }
+        },
+        "image_eJDGwE": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/pexels-n-voitkevich-4773095_6e31f22e-9d73-4786-b9fe-2b9e2525e0a9.webp",
+            "overlay_text": "Free Shipping Worldwide"
+          }
+        },
+        "testimonial_aW7VtX": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Emily Rodriguez",
+            "rating": 5,
+            "quote": "I've been a customer for over a year now and the quality has remained consistently excellent. Their customer support team is always quick to respond and truly cares about customer satisfaction."
+          }
+        },
+        "press_bqm69L": {
+          "type": "press",
+          "settings": {
+            "quote": "A brand that stands out from the rest.",
+            "description": "With innovative designs and commitment to sustainability, this brand is setting new standards in the industry."
+          }
+        }
+      },
+      "block_order": [
+        "image_CExge7",
+        "testimonial_iqFKMU",
+        "press_wHfehb",
+        "testimonial_j8Cfem",
+        "image_eJDGwE",
+        "testimonial_aW7VtX",
+        "press_bqm69L"
+      ],
+      "name": "SEK Testimonials 19",
+      "settings": {
+        "subtitle": "",
+        "title": "What Our Customers Say",
+        "show_stars": true,
+        "show_verified": true,
+        "card_border_radius": 12,
+        "background_color": "#f8f7f3",
+        "heading_color": "#333333",
+        "text_color": "#555555",
+        "card_background": "#ffffff",
+        "card_border_color": "#e8e8e8",
+        "star_color": "#e8b923",
+        "accent_color": "#b7b491",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
@@ -1695,6 +1778,7 @@
     "video_with_text2_PcxQfU",
     "video_from_social_nzDpfd",
     "features8_4cAydf",
-    "multi_coulmns_e7fB7L"
+    "multi_coulmns_e7fB7L",
+    "testionomial_19_aTHT4L"
   ]
 }
