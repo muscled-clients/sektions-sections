@@ -1443,6 +1443,74 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "video_from_social_nzDpfd": {
+      "type": "video-from-social",
+      "blocks": {
+        "video_EDrpaa": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/426fbd24ac434a22b2fd9745f7611aa8.HD-1080p-3.3Mbps-39796242.mp4",
+            "video_url": "",
+            "social_platform": "youtube"
+          }
+        },
+        "video_XpHaQY": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/3d8dbe6080e5441cadc845f199b5945d.HD-1080p-2.5Mbps-29746175.mp4",
+            "video_url": "",
+            "social_platform": "youtube"
+          }
+        },
+        "video_WwBPqK": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/83b26c5b4c844ff5a6ba615eb7664676.HD-1080p-4.8Mbps-29988344.mp4",
+            "video_url": "",
+            "social_platform": "instagram"
+          }
+        },
+        "video_kTtkAM": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/46e451d1d94a4cdba73d98c4d5721fdc.HD-1080p-2.5Mbps-41130829.mp4",
+            "video_url": "",
+            "social_platform": "pinterest"
+          }
+        },
+        "video_C748BH": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/46aa63fc57da4b07a07ab095d0a1084a.HD-1080p-3.3Mbps-41130965_f212ff4b-f322-4e3b-a452-5f4595e3b792.mp4",
+            "video_url": "",
+            "social_platform": "tiktok"
+          }
+        }
+      },
+      "block_order": [
+        "video_EDrpaa",
+        "video_XpHaQY",
+        "video_WwBPqK",
+        "video_kTtkAM",
+        "video_C748BH"
+      ],
+      "name": "SEK Video from Social 6",
+      "settings": {
+        "heading": "Follow us on socials",
+        "show_tiktok_icon": true,
+        "show_instagram_icon": true,
+        "staggered_layout": false,
+        "video_border_radius": 20,
+        "autoplay": true,
+        "background_color": "#e0d4f7",
+        "heading_color": "#3b4fd9",
+        "video_border_color": "#3b4fd9",
+        "icon_color": "#3b4fd9",
+        "icon_ring_color": "#b8ff57",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
@@ -1466,6 +1534,7 @@
     "product_ingerdients_AypkCa",
     "hero18_WeFjNf",
     "feature_product_ih3QqF",
-    "video_with_text2_PcxQfU"
+    "video_with_text2_PcxQfU",
+    "video_from_social_nzDpfd"
   ]
 }
