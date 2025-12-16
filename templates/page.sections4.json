@@ -1612,6 +1612,63 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "multi_coulmns_e7fB7L": {
+      "type": "multi-coulmns",
+      "blocks": {
+        "column_eBfmEw": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/handmade-soap-wrapped.webp",
+            "title": "Column One",
+            "text": "Pair text with an image to focus on your chosen product, collection, or blog post.",
+            "button_text": "Learn More",
+            "button_link": ""
+          }
+        },
+        "column_nnmArm": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/colorful-layered-soap.webp",
+            "title": "Column Two",
+            "text": "Pair text with an image to focus on your chosen product, collection, or blog post.",
+            "button_text": "Learn More",
+            "button_link": ""
+          }
+        },
+        "column_iCVwdT": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/home-made-cleansers.webp",
+            "title": "Column Three",
+            "text": "Pair text with an image to focus on your chosen product, collection, or blog post.",
+            "button_text": "Learn More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_eBfmEw",
+        "column_nnmArm",
+        "column_iCVwdT"
+      ],
+      "name": "SEK Multi Columns",
+      "settings": {
+        "subtitle": "All natural ingredients",
+        "title": "Home made cleaners",
+        "show_numbers": true,
+        "card_border_radius": 28,
+        "background_color": "#f4eed7",
+        "heading_color": "#453b37",
+        "text_color": "#453b37",
+        "card_background": "#ffffff",
+        "badge_background": "#e86940",
+        "badge_text_color": "#ffffff",
+        "button_background": "#453b37",
+        "button_text_color": "#ffffff",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
@@ -1637,6 +1694,7 @@
     "feature_product_ih3QqF",
     "video_with_text2_PcxQfU",
     "video_from_social_nzDpfd",
-    "features8_4cAydf"
+    "features8_4cAydf",
+    "multi_coulmns_e7fB7L"
   ]
 }
