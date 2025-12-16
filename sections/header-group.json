@@ -135,6 +135,7 @@
     },
     "header": {
       "type": "header",
+      "disabled": true,
       "settings": {
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
@@ -151,12 +152,111 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "header5_hkayhf": {
+      "type": "header5",
+      "blocks": {
+        "menu_item_i4fQnw": {
+          "type": "menu_item",
+          "settings": {
+            "title": "Shop",
+            "link": "",
+            "has_dropdown": true,
+            "dropdown_link_1": "All Products",
+            "dropdown_url_1": "",
+            "dropdown_link_2": "New Arrivals",
+            "dropdown_url_2": "",
+            "dropdown_link_3": "Best Sellers",
+            "dropdown_url_3": "",
+            "dropdown_link_4": "Sale",
+            "dropdown_url_4": "",
+            "dropdown_link_5": "",
+            "dropdown_url_5": ""
+          }
+        },
+        "menu_item_ALVACX": {
+          "type": "menu_item",
+          "settings": {
+            "title": "Collections",
+            "link": "",
+            "has_dropdown": true,
+            "dropdown_link_1": "Summer Collection",
+            "dropdown_url_1": "",
+            "dropdown_link_2": "Winter Collection",
+            "dropdown_url_2": "",
+            "dropdown_link_3": "Limited Edition",
+            "dropdown_url_3": "",
+            "dropdown_link_4": "",
+            "dropdown_url_4": "",
+            "dropdown_link_5": "",
+            "dropdown_url_5": ""
+          }
+        },
+        "menu_item_gqdCmn": {
+          "type": "menu_item",
+          "settings": {
+            "title": "About",
+            "link": "",
+            "has_dropdown": false,
+            "dropdown_link_1": "",
+            "dropdown_url_1": "",
+            "dropdown_link_2": "",
+            "dropdown_url_2": "",
+            "dropdown_link_3": "",
+            "dropdown_url_3": "",
+            "dropdown_link_4": "",
+            "dropdown_url_4": "",
+            "dropdown_link_5": "",
+            "dropdown_url_5": ""
+          }
+        },
+        "menu_item_VAKgNQ": {
+          "type": "menu_item",
+          "settings": {
+            "title": "Contact",
+            "link": "",
+            "has_dropdown": false,
+            "dropdown_link_1": "",
+            "dropdown_url_1": "",
+            "dropdown_link_2": "",
+            "dropdown_url_2": "",
+            "dropdown_link_3": "",
+            "dropdown_url_3": "",
+            "dropdown_link_4": "",
+            "dropdown_url_4": "",
+            "dropdown_link_5": "",
+            "dropdown_url_5": ""
+          }
+        }
+      },
+      "block_order": [
+        "menu_item_i4fQnw",
+        "menu_item_ALVACX",
+        "menu_item_gqdCmn",
+        "menu_item_VAKgNQ"
+      ],
+      "name": "SEK Header 5",
+      "settings": {
+        "logo": "shopify://shop_images/BENI_Brandmark_Charcoal.webp",
+        "logo_subtext": "",
+        "show_search": true,
+        "show_account": true,
+        "show_cart": true,
+        "background_color": "#ffffff",
+        "text_color": "#121212",
+        "border_color": "#e5e5e5",
+        "link_hover_color": "#666666",
+        "dropdown_background": "#ffffff",
+        "dropdown_text_color": "#333333",
+        "mobile_menu_background": "#ffffff"
+      }
     }
   },
   "order": [
     "announcement_marquee_HPFki8",
     "announcement-bar",
     "scrolling_announcement_bar_r4PTFf",
-    "header"
+    "header",
+    "header5_hkayhf"
   ]
 }

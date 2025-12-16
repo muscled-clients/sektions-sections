@@ -15,9 +15,83 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "slideshow_11_jCyXpJ": {
+      "type": "slideshow-11",
+      "blocks": {
+        "slide_NmNCTz": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/adolfo-felix-FrLT-DQpalU-unsplash.webp",
+            "show_badge": true,
+            "badge_label": "Excellent",
+            "badge_rating": "4.9",
+            "heading": "Festival",
+            "animated_words": "accessories, essentials, gear, must-haves",
+            "description": "Welcome to Made For Festivals, your ultimate guide to the best festivals in the US. Whether you're into music, arts, or food festivals, we've got you covered with premium quality products.",
+            "button_text": "Shop now",
+            "button_link": "",
+            "content_alignment": "left"
+          }
+        },
+        "slide_Q9YQeT": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/adolfo-felix-FrLT-DQpalU-unsplash.webp",
+            "show_badge": true,
+            "badge_label": "Excellent",
+            "badge_rating": "4.9",
+            "heading": "Summer",
+            "animated_words": "collection, styles, vibes, looks",
+            "description": "Discover our latest summer collection featuring comfortable and stylish festival wear for every occasion. From sunrise sets to late-night dance floors, we've got the perfect outfit.",
+            "button_text": "Explore collection",
+            "button_link": "",
+            "content_alignment": "center"
+          }
+        },
+        "slide_r3wQRR": {
+          "type": "slide",
+          "settings": {
+            "show_badge": true,
+            "badge_label": "Excellent",
+            "badge_rating": "4.9",
+            "heading": "Premium",
+            "animated_words": "quality, craftsmanship, design, materials",
+            "description": "Handcrafted with attention to detail and built to last. Each piece is designed for those who demand excellence and refuse to compromise on quality or style.",
+            "button_text": "Discover more",
+            "button_link": "",
+            "content_alignment": "right"
+          }
+        }
+      },
+      "block_order": [
+        "slide_NmNCTz",
+        "slide_Q9YQeT",
+        "slide_r3wQRR"
+      ],
+      "name": "SEK Slideshow 11",
+      "settings": {
+        "desktop_height": 95,
+        "mobile_height": 85,
+        "autoplay_speed": 6,
+        "typewriter_speed": 100,
+        "typewriter_pause": 2,
+        "overlay_color": "#000000",
+        "overlay_opacity": 20,
+        "heading_color": "#ffffff",
+        "text_color": "#ffffff",
+        "button_background": "#ffffff",
+        "button_text_color": "#121212",
+        "badge_background": "#00b67a",
+        "badge_text_color": "#ffffff",
+        "accent_color": "#00b67a",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "slideshow_11_jCyXpJ"
   ]
 }
