@@ -600,6 +600,85 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "hotspt_10_4TeqXx": {
+      "type": "hotspt-10",
+      "blocks": {
+        "feature_TDQFbC": {
+          "type": "feature",
+          "settings": {
+            "text": "Clean Ingredients"
+          }
+        },
+        "feature_QJTcCz": {
+          "type": "feature",
+          "settings": {
+            "text": "Naturally Derived"
+          }
+        },
+        "feature_CU4LEG": {
+          "type": "feature",
+          "settings": {
+            "text": "No Sketchy Additives"
+          }
+        },
+        "feature_VXCV6N": {
+          "type": "feature",
+          "settings": {
+            "text": "Happiness Guarantee"
+          }
+        },
+        "hotspot_B3B9zQ": {
+          "type": "hotspot",
+          "settings": {
+            "position_top": 59,
+            "position_left": 31,
+            "product_title": "Sports Bottle",
+            "product_description": "32oz insulated",
+            "product_price": "$28.00",
+            "product_link": ""
+          }
+        },
+        "hotspot_TzgcDX": {
+          "type": "hotspot",
+          "settings": {
+            "position_top": 47,
+            "position_left": 58,
+            "product_title": "Recovery Shake",
+            "product_description": "Plant-based protein blend",
+            "product_price": "$34.00",
+            "product_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "feature_TDQFbC",
+        "feature_QJTcCz",
+        "feature_CU4LEG",
+        "feature_VXCV6N",
+        "hotspot_B3B9zQ",
+        "hotspot_TzgcDX"
+      ],
+      "name": "SEK Hotspots 10",
+      "settings": {
+        "image": "shopify://shop_images/lyfefuel-AzUN9FFe96Y-unsplash_2e344113-15ee-4aa9-b9d8-133251e0318e.webp",
+        "image_position": "left",
+        "image_border_radius": 0,
+        "title": "Essentials Nutrition Shake",
+        "description": "Achieving optimal health does not necessitate a plethora of supplements. Enhance nutrition in its natural form by closing nutrient gaps with a balanced, simple, and delicious fix for the myriad health benefits that only real, whole foods can offer.",
+        "button_text": "SHOP NOW",
+        "button_link": "",
+        "background_color": "#f5f5f0",
+        "heading_color": "#121212",
+        "text_color": "#121212",
+        "hotspot_background": "#cbe514",
+        "hotspot_text_color": "#121212",
+        "popup_background": "#ffffff",
+        "button_background": "#cbe514",
+        "button_text_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
@@ -611,6 +690,7 @@
     "multi_column_video_hcKNba",
     "hero6_7Xx3T3",
     "video_slider4_CMLKaY",
-    "feature24_DE9ncn"
+    "feature24_DE9ncn",
+    "hotspt_10_4TeqXx"
   ]
 }
