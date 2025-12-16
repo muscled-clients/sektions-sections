@@ -182,11 +182,77 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "feature_product_2_6mJRqT": {
+      "type": "feature-product-2",
+      "blocks": {
+        "feature_pr4jkc": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Lightweight & breathable design"
+          }
+        },
+        "feature_z3EC4C": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Advanced cushioning technology"
+          }
+        },
+        "feature_KrGnrA": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Durable non-slip outsole"
+          }
+        },
+        "feature_WACDWQ": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Ergonomic fit for all-day comfort"
+          }
+        }
+      },
+      "block_order": [
+        "feature_pr4jkc",
+        "feature_z3EC4C",
+        "feature_KrGnrA",
+        "feature_WACDWQ"
+      ],
+      "name": "SEK Featured Product 2",
+      "settings": {
+        "image_position": "left",
+        "image_border_radius": 8,
+        "product_image": "shopify://shop_images/dushawn-jovic-MQawsjT4t6k-unsplash_091a8854-3a5c-4629-aa19-50cecbcb1c56.webp",
+        "show_badge": true,
+        "badge_text": "Best Seller",
+        "product_title": "Premium Running Shoes",
+        "accent_word": "Premium",
+        "description": "Experience ultimate comfort and performance with our premium running shoes. Engineered for athletes who demand the best, featuring advanced cushioning technology and breathable materials that keep your feet cool during intense workouts.",
+        "show_reviews": true,
+        "review_text": "2,847 reviews",
+        "show_stock_alert": false,
+        "stock_alert_text": "Head's up, we're low on stock!",
+        "button_text": "GET YOURS NOW",
+        "button_subtext": "30-Day satisfaction guarantee",
+        "button_link": "",
+        "button_border_radius": 50,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "text_color": "#666666",
+        "accent_color": "#3b8247",
+        "button_background": "#ffe658",
+        "button_text_color": "#1a1a1a",
+        "star_color": "#ffc107",
+        "badge_background": "#ffffff",
+        "badge_text_color": "#1a1a1a",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
     "main",
     "slideshow_11_jCyXpJ",
-    "scrolling_media_PDYQCV"
+    "scrolling_media_PDYQCV",
+    "feature_product_2_6mJRqT"
   ]
 }
