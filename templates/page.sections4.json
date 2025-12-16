@@ -968,7 +968,7 @@
       "name": "SEK Hero 29",
       "settings": {
         "background_image": "shopify://shop_images/breathing-and-yoga-by-the-sea_504c15ba-54b4-41fe-b948-6e9989979dc1.webp",
-        "overlay_color": "rgba(59, 60, 67, 0.2)",
+        "overlay_color": "#3b3c4333",
         "content_position": "left",
         "show_badge": true,
         "badge_text": "Excellent 4.9 | 2,000+ reviews",
@@ -989,7 +989,7 @@
         "button_text_color": "#ffffff",
         "button_hover_background": "#3b3c43",
         "button_hover_text_color": "#ffffff",
-        "card_background": "rgba(254, 248, 239, 0.9)",
+        "card_background": "#fef8efe6",
         "card_text_color": "#3b3c43",
         "section_margin_top": 0,
         "section_margin_bottom": 40
@@ -1000,7 +1000,7 @@
       "name": "SEK Countdown Timer 9",
       "settings": {
         "background_image": "shopify://shop_images/leire-cavia-chfoDXQwNio-unsplash.webp",
-        "overlay_color": "rgba(0, 0, 0, 0.1)",
+        "overlay_color": "#0000001a",
         "heading": "BLACK FRIDAY SALE",
         "subtext": "Get your offer before the sale ends in",
         "description": "Grab premium quality at unbeatable prices. Don't miss out, offer ends when the timer hits zero! – Sale will end soon!",
@@ -1012,7 +1012,7 @@
         "label_seconds": "Seconds",
         "button_text": "View Discounted Items",
         "button_url": "",
-        "card_border_color": "rgba(255, 255, 255, 0.4)",
+        "card_border_color": "#ffffff66",
         "heading_color": "#ffffff",
         "subtext_color": "#ffffff",
         "timer_background": "#e8e8e8",
@@ -1088,7 +1088,7 @@
         "card_height_desktop": 500,
         "card_height_mobile": 400,
         "section_background": "#ffffff",
-        "overlay_color": "rgba(0, 0, 0, 0.25)",
+        "overlay_color": "#00000040",
         "subtitle_color": "#ffffff",
         "title_color": "#ffffff",
         "text_color": "#ffffff",
@@ -1112,7 +1112,7 @@
         "image_3": "shopify://shop_images/winter-sport-ski-2.webp",
         "lazy_load": true,
         "image_gap": 10,
-        "image_border_color": "transparent",
+        "image_border_color": "rgba(0,0,0,0)",
         "image_border_width": 0,
         "image_border_radius": 12,
         "subheading": "Our Story",
@@ -1148,7 +1148,7 @@
         "button_hover_background": "#333333",
         "button_hover_text_color": "#ffffff",
         "button_border_radius": 0,
-        "border_color": "transparent",
+        "border_color": "rgba(0,0,0,0)",
         "border_width": 0,
         "border_radius": 0,
         "padding_top_desktop": 60,
@@ -1251,6 +1251,98 @@
         "section_margin_top": 0,
         "section_margin_bottom": 0
       }
+    },
+    "product_ingerdients_AypkCa": {
+      "type": "product-ingerdients",
+      "blocks": {
+        "ingredient_Q3QqPF": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/coconut_700x700_2bb329f8-d398-46fa-9a7e-a7db880bf518.svg",
+            "title": "Coconut",
+            "description": "Deep hydration"
+          }
+        },
+        "ingredient_x39LcQ": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/passion-fruit_700x700_5ed08cde-5a8a-4cef-a02e-9809867b0825.svg",
+            "title": "Passion Fruit",
+            "description": "Rich in antioxidants"
+          }
+        },
+        "ingredient_RtXxxY": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/dragon-fruit_700x700_7511d8bb-0d15-4e7e-9bc1-396ebed69cbd.svg",
+            "title": "Dragon Fruit",
+            "description": "Vitamin C boost"
+          }
+        },
+        "ingredient_U6thPK": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/olive_700x700_9770f74f-1d5e-4291-89a7-69882c52a2f1.svg",
+            "title": "Avocado",
+            "description": "Nourishing oils"
+          }
+        },
+        "ingredient_hwqpaR": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/passion-fruit_700x700_5ed08cde-5a8a-4cef-a02e-9809867b0825.svg",
+            "title": "Mango",
+            "description": "Skin brightening"
+          }
+        },
+        "ingredient_ANjMjt": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/olive_700x700_9770f74f-1d5e-4291-89a7-69882c52a2f1.svg",
+            "title": "Aloe Vera",
+            "description": "Soothing & calming"
+          }
+        },
+        "ingredient_dMRiWJ": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/passion-fruit_700x700_5ed08cde-5a8a-4cef-a02e-9809867b0825.svg",
+            "title": "Green Tea",
+            "description": "Anti-aging properties"
+          }
+        },
+        "ingredient_3mfy8W": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/apricot_700x700_93e123ba-0407-49e7-9849-4eb43510b22f.svg",
+            "title": "Vitamin E",
+            "description": "Skin protection"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_Q3QqPF",
+        "ingredient_x39LcQ",
+        "ingredient_RtXxxY",
+        "ingredient_U6thPK",
+        "ingredient_hwqpaR",
+        "ingredient_ANjMjt",
+        "ingredient_dMRiWJ",
+        "ingredient_3mfy8W"
+      ],
+      "name": "SEK Product Ingredients 4",
+      "settings": {
+        "heading": "Active ingredients",
+        "subtitle": "Discover the powerful natural ingredients that make our products effective and gentle on your skin.",
+        "center_image": "shopify://shop_images/pexels-doterra-international-llc-2204678-3969193_1.jpg",
+        "background_color": "#ffffff",
+        "heading_color": "#121212",
+        "text_color": "#666666",
+        "border_color": "#ececec",
+        "accent_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
@@ -1270,6 +1362,7 @@
     "countdown_timer_9_NGEVnY",
     "collection_14_KQNBhM",
     "image_with_text13_xncXGE",
-    "flexible_tabs_af69Xw"
+    "flexible_tabs_af69Xw",
+    "product_ingerdients_AypkCa"
   ]
 }
