@@ -1,0 +1,675 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --ss8-text: {{ section.settings.text_color }};
+    --ss8-overlay: {{ section.settings.overlay_opacity }};
+    --ss8-btn-bg: {{ section.settings.button_bg_color }};
+    --ss8-btn-text: {{ section.settings.button_text_color }};
+    --ss8-btn-hover: {{ section.settings.button_hover_color }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap');
+
+  .slideshow-8 {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Background Image */
+  .slideshow-8__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .slideshow-8__bg-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .slideshow-8__bg-image.active {
+    opacity: 1;
+  }
+
+  .slideshow-8__bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slideshow-8__bg-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #8b9a7d 0%, #5d6b52 100%);
+  }
+
+  /* Overlay */
+  .slideshow-8__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, var(--ss8-overlay, 0.15));
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Content Container */
+  .slideshow-8__container {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Header */
+  .slideshow-8__header {
+    color: var(--ss8-text, #ffffff);
+  }
+
+  .slideshow-8__label {
+    font-family: 'EB Garamond', serif;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0 0 4px;
+  }
+
+  .slideshow-8__subtitle {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+    opacity: 0.9;
+    margin: 0;
+  }
+
+  /* Bottom Section */
+  .slideshow-8__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Slide Content */
+  .slideshow-8__content-wrapper {
+    color: var(--ss8-text, #ffffff);
+  }
+
+  .slideshow-8__slide-content {
+    display: none;
+  }
+
+  .slideshow-8__slide-content.active {
+    display: block;
+  }
+
+  .slideshow-8__title {
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1.2;
+    margin: 0 0 8px;
+    display: none;
+  }
+
+  .slideshow-8__description {
+    font-size: 14px;
+    line-height: 1.7;
+    opacity: 0.95;
+    margin: 0 0 20px;
+    max-width: 520px;
+  }
+
+  .slideshow-8__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: var(--ss8-btn-bg, #1a1a1a);
+    color: var(--ss8-btn-text, #ffffff);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    border-radius: 30px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+
+  .slideshow-8__btn:hover {
+    background: var(--ss8-btn-hover, #333333);
+    transform: translateY(-1px);
+  }
+
+  .slideshow-8__btn svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.25s ease;
+  }
+
+  .slideshow-8__btn:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Thumbnails */
+  .slideshow-8__thumbnails-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-self: flex-end;
+    width: 100%;
+  }
+
+  .slideshow-8__thumbnails-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ss8-text, #ffffff);
+    opacity: 0.85;
+  }
+
+  .slideshow-8__thumbnails {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .slideshow-8__thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slideshow-8__thumbnail {
+    flex-shrink: 0;
+    width: 100px;
+    aspect-ratio: 4 / 5;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.25s ease;
+    opacity: 0.7;
+    border: 2px solid transparent;
+  }
+
+  .slideshow-8__thumbnail.active {
+    opacity: 1;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .slideshow-8__thumbnail:hover {
+    opacity: 1;
+  }
+
+  .slideshow-8__thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .slideshow-8__thumbnail:hover img {
+    transform: scale(1.05);
+  }
+
+  .slideshow-8__thumbnail-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #d4c4a8 0%, #b8a88a 100%);
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .slideshow-8 {
+      height: 85vh;
+      min-height: 550px;
+    }
+
+    .slideshow-8__container {
+      padding: 50px 40px;
+    }
+
+    .slideshow-8__label {
+      font-size: 60px;
+    }
+
+    .slideshow-8__subtitle {
+      font-size: 22px;
+    }
+
+    .slideshow-8__bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .slideshow-8__content-wrapper {
+      max-width: 50%;
+    }
+
+    .slideshow-8__description {
+      font-size: 14px;
+    }
+
+    .slideshow-8__thumbnails-wrapper {
+      width: auto;
+      align-items: flex-end;
+    }
+
+    .slideshow-8__thumbnail {
+      width: 120px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .slideshow-8 {
+      height: 100vh;
+      min-height: 650px;
+    }
+
+    .slideshow-8__container {
+      padding: 50px 60px;
+    }
+
+    .slideshow-8__label {
+      font-size: 72px;
+    }
+
+    .slideshow-8__subtitle {
+      font-size: 26px;
+    }
+
+    .slideshow-8__content-wrapper {
+      max-width: 45%;
+    }
+
+    .slideshow-8__description {
+      font-size: 15px;
+      margin-bottom: 24px;
+      max-width: 550px;
+    }
+
+    .slideshow-8__btn {
+      padding: 16px 32px;
+      font-size: 14px;
+    }
+
+    .slideshow-8__thumbnail {
+      width: 140px;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .slideshow-8__label {
+      font-size: 80px;
+    }
+
+    .slideshow-8__subtitle {
+      font-size: 28px;
+    }
+
+    .slideshow-8__description {
+      font-size: 16px;
+    }
+
+    .slideshow-8__thumbnail {
+      width: 150px;
+    }
+  }
+</style>
+
+<section class="slideshow-8" data-section-id="{{ section.id }}">
+  <!-- Background Images -->
+  <div class="slideshow-8__bg">
+    {%- for block in section.blocks -%}
+      <div class="slideshow-8__bg-image{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}">
+        {%- if block.settings.image != blank -%}
+          {{ block.settings.image | image_url: width: 2400 | image_tag: loading: 'eager' }}
+        {%- else -%}
+          <div class="slideshow-8__bg-placeholder"></div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <!-- Content Overlay -->
+  <div class="slideshow-8__container">
+    <!-- Header -->
+    <div class="slideshow-8__header">
+      {%- if section.settings.label != blank -%}
+        <h2 class="slideshow-8__label">{{ section.settings.label }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <p class="slideshow-8__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="slideshow-8__bottom">
+      <!-- Slide Content -->
+      <div class="slideshow-8__content-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="slideshow-8__slide-content{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}
+              <h3 class="slideshow-8__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <p class="slideshow-8__description">{{ block.settings.description }}</p>
+            {%- endif -%}
+            {%- if block.settings.button_text != blank -%}
+              <a href="{{ block.settings.button_link }}" class="slideshow-8__btn">
+                {{ block.settings.button_text }}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <!-- Thumbnails -->
+      {%- if section.blocks.size > 0 -%}
+        <div class="slideshow-8__thumbnails-wrapper">
+          {%- if section.settings.thumbnails_label != blank -%}
+            <span class="slideshow-8__thumbnails-label">{{ section.settings.thumbnails_label }}</span>
+          {%- endif -%}
+          <div class="slideshow-8__thumbnails">
+            {%- for block in section.blocks -%}
+              <div class="slideshow-8__thumbnail{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}">
+                {%- if block.settings.thumbnail != blank -%}
+                  {{ block.settings.thumbnail | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                {%- elsif block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+                {%- else -%}
+                  <div class="slideshow-8__thumbnail-placeholder"></div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
+
+    const bgImages = section.querySelectorAll('.slideshow-8__bg-image');
+    const contents = section.querySelectorAll('.slideshow-8__slide-content');
+    const thumbnails = section.querySelectorAll('.slideshow-8__thumbnail');
+
+    let currentIndex = 0;
+    let autoplayInterval;
+    const autoplaySpeed = {{ section.settings.autoplay_speed | default: 6000 }};
+
+    function goToSlide(index) {
+      // Update background
+      bgImages.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
+
+      // Update content
+      contents.forEach((content, i) => {
+        content.classList.toggle('active', i === index);
+      });
+
+      // Update thumbnails
+      thumbnails.forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+      });
+
+      currentIndex = index;
+    }
+
+    function nextSlide() {
+      const next = (currentIndex + 1) % bgImages.length;
+      goToSlide(next);
+    }
+
+    // Thumbnail click
+    thumbnails.forEach((thumb, i) => {
+      thumb.addEventListener('click', () => {
+        goToSlide(i);
+        resetAutoplay();
+      });
+    });
+
+    // Autoplay
+    function startAutoplay() {
+      if (bgImages.length > 1) {
+        autoplayInterval = setInterval(nextSlide, autoplaySpeed);
+      }
+    }
+
+    function resetAutoplay() {
+      clearInterval(autoplayInterval);
+      startAutoplay();
+    }
+
+    startAutoplay();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Slideshow 8",
+  "tag": "section",
+  "class": "section-slideshow-8",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "New in"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Essentials collections"
+    },
+    {
+      "type": "header",
+      "content": "Thumbnails"
+    },
+    {
+      "type": "text",
+      "id": "thumbnails_label",
+      "label": "Thumbnails label",
+      "default": "SHOP BY CATEGORY"
+    },
+    {
+      "type": "header",
+      "content": "Slideshow"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed",
+      "min": 3000,
+      "max": 9500,
+      "step": 500,
+      "unit": "ms",
+      "default": 6000
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 0.6,
+      "step": 0.1,
+      "default": 0.2
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Background"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Slide title",
+          "default": "Collection Name"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "A brief description of this collection or product category."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "header",
+          "content": "Thumbnail"
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Thumbnail image",
+          "info": "Optional. Uses background image if not set."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Slideshow 8",
+      "settings": {
+        "label": "New in",
+        "subtitle": "Essentials collections",
+        "thumbnails_label": "SHOP BY CATEGORY"
+      },
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "title": "French Wire",
+            "description": "French wire earrings are a versatile and stylish option for everyday wear. Their simple yet elegant design makes them perfect for any outfit. Available in a variety of materials and styles, French wire earrings are a must-have for any jewelry collection.",
+            "button_text": "Shop now"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Pearl Collection",
+            "description": "Timeless elegance meets modern design in our pearl collection. Each piece is carefully crafted to showcase the natural beauty of freshwater pearls, perfect for special occasions or everyday luxury.",
+            "button_text": "Shop now"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

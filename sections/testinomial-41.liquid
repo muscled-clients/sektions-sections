@@ -1,0 +1,588 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --tm41-bg: {{ section.settings.background_color }};
+    --tm41-card-bg: {{ section.settings.card_background }};
+    --tm41-card-text: {{ section.settings.card_text_color }};
+    --tm41-username: {{ section.settings.username_color }};
+    --tm41-speed: {{ section.settings.animation_speed }}s;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+  .testimonials-41 {
+    background: var(--tm41-bg, #3d6b6b);
+    padding: 60px 0;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .testimonials-41__track {
+    display: flex;
+    width: max-content;
+    animation: tm41-scroll var(--tm41-speed, 30s) linear infinite;
+  }
+
+  .testimonials-41__track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes tm41-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .testimonials-41__items {
+    display: flex;
+    gap: 20px;
+  }
+
+  .testimonials-41__item {
+    position: relative;
+    flex-shrink: 0;
+    width: 200px;
+  }
+
+  .testimonials-41__image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .testimonials-41__image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .testimonials-41__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #a8b5a0 0%, #7d8a75 100%);
+  }
+
+  /* Testimonial Card - floats between images */
+  .testimonials-41__card {
+    position: absolute;
+    background: var(--tm41-card-bg, #ffffff);
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    max-width: 180px;
+    z-index: 5;
+  }
+
+  .testimonials-41__card--top-left {
+    top: 20px;
+    left: calc(100% + 8px);
+  }
+
+  .testimonials-41__card--top-right {
+    top: 20px;
+    left: calc(100% + 8px);
+  }
+
+  .testimonials-41__card--bottom-left {
+    bottom: 20px;
+    left: calc(100% + 8px);
+  }
+
+  .testimonials-41__card--bottom-right {
+    bottom: 20px;
+    left: calc(100% + 8px);
+  }
+
+  .testimonials-41__card--center-bottom {
+    bottom: 30px;
+    left: calc(100% + 8px);
+  }
+
+  .testimonials-41__author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .testimonials-41__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .testimonials-41__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .testimonials-41__avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e0e0e0 0%, #b0b0b0 100%);
+  }
+
+  .testimonials-41__username {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tm41-username, #1a1a1a);
+  }
+
+  .testimonials-41__verified {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .testimonials-41__verified svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .testimonials-41__text {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--tm41-card-text, #333333);
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .testimonials-41 {
+      padding: 80px 0;
+    }
+
+    .testimonials-41__items {
+      gap: 24px;
+    }
+
+    .testimonials-41__item {
+      width: 280px;
+    }
+
+    .testimonials-41__card {
+      padding: 14px 16px;
+      max-width: 200px;
+    }
+
+    .testimonials-41__avatar {
+      width: 36px;
+      height: 36px;
+    }
+
+    .testimonials-41__username {
+      font-size: 13px;
+    }
+
+    .testimonials-41__text {
+      font-size: 13px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .testimonials-41 {
+      padding: 100px 0;
+    }
+
+    .testimonials-41__items {
+      gap: 28px;
+    }
+
+    .testimonials-41__item {
+      width: 320px;
+    }
+
+    .testimonials-41__image-wrapper {
+      border-radius: 16px;
+    }
+
+    .testimonials-41__card {
+      padding: 16px 18px;
+      max-width: 240px;
+      border-radius: 12px;
+    }
+
+    .testimonials-41__card--top-left {
+      top: 30px;
+      left: calc(100% + 12px);
+    }
+
+    .testimonials-41__card--top-right {
+      top: 30px;
+      left: calc(100% + 12px);
+    }
+
+    .testimonials-41__card--bottom-left {
+      bottom: 30px;
+      left: calc(100% + 12px);
+    }
+
+    .testimonials-41__card--bottom-right {
+      bottom: 30px;
+      left: calc(100% + 12px);
+    }
+
+    .testimonials-41__card--center-bottom {
+      bottom: 40px;
+      left: calc(100% + 12px);
+    }
+
+    .testimonials-41__avatar {
+      width: 40px;
+      height: 40px;
+    }
+
+    .testimonials-41__username {
+      font-size: 14px;
+    }
+
+    .testimonials-41__verified {
+      width: 16px;
+      height: 16px;
+    }
+
+    .testimonials-41__text {
+      font-size: 14px;
+      line-height: 1.55;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .testimonials-41__items {
+      gap: 32px;
+    }
+
+    .testimonials-41__item {
+      width: 360px;
+    }
+
+    .testimonials-41__card {
+      max-width: 260px;
+    }
+  }
+</style>
+
+<section class="testimonials-41">
+  <div class="testimonials-41__track">
+    <!-- First set of items -->
+    <div class="testimonials-41__items">
+      {%- for block in section.blocks -%}
+        <div class="testimonials-41__item" {{ block.shopify_attributes }}>
+          <div class="testimonials-41__image-wrapper">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+            {%- else -%}
+              <div class="testimonials-41__placeholder"></div>
+            {%- endif -%}
+          </div>
+
+          {%- if block.settings.show_card and block.settings.testimonial_text != blank -%}
+            <div class="testimonials-41__card testimonials-41__card--{{ block.settings.card_position }}">
+              <div class="testimonials-41__author">
+                <div class="testimonials-41__avatar">
+                  {%- if block.settings.avatar != blank -%}
+                    {{ block.settings.avatar | image_url: width: 100 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    <div class="testimonials-41__avatar-placeholder"></div>
+                  {%- endif -%}
+                </div>
+                <span class="testimonials-41__username">
+                  {{ block.settings.username }}
+                  {%- if block.settings.verified -%}
+                    <span class="testimonials-41__verified">
+                      <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="11" cy="11" r="11" fill="#1DA1F2"/>
+                        <path d="M9.5 14.5L6 11L7.5 9.5L9.5 11.5L14.5 6.5L16 8L9.5 14.5Z" fill="white"/>
+                      </svg>
+                    </span>
+                  {%- endif -%}
+                </span>
+              </div>
+              <p class="testimonials-41__text">{{ block.settings.testimonial_text }}</p>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Duplicate for seamless loop -->
+    <div class="testimonials-41__items" aria-hidden="true">
+      {%- for block in section.blocks -%}
+        <div class="testimonials-41__item">
+          <div class="testimonials-41__image-wrapper">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+            {%- else -%}
+              <div class="testimonials-41__placeholder"></div>
+            {%- endif -%}
+          </div>
+
+          {%- if block.settings.show_card and block.settings.testimonial_text != blank -%}
+            <div class="testimonials-41__card testimonials-41__card--{{ block.settings.card_position }}">
+              <div class="testimonials-41__author">
+                <div class="testimonials-41__avatar">
+                  {%- if block.settings.avatar != blank -%}
+                    {{ block.settings.avatar | image_url: width: 100 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    <div class="testimonials-41__avatar-placeholder"></div>
+                  {%- endif -%}
+                </div>
+                <span class="testimonials-41__username">
+                  {{ block.settings.username }}
+                  {%- if block.settings.verified -%}
+                    <span class="testimonials-41__verified">
+                      <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="11" cy="11" r="11" fill="#1DA1F2"/>
+                        <path d="M9.5 14.5L6 11L7.5 9.5L9.5 11.5L14.5 6.5L16 8L9.5 14.5Z" fill="white"/>
+                      </svg>
+                    </span>
+                  {%- endif -%}
+                </span>
+              </div>
+              <p class="testimonials-41__text">{{ block.settings.testimonial_text }}</p>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Testimonials 41",
+  "tag": "section",
+  "class": "section-testimonials-41",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "label": "Scroll speed",
+      "min": 15,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 30,
+      "info": "Lower = faster"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#3d6b6b"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "username_color",
+      "label": "Username color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "header",
+          "content": "Testimonial card"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_card",
+          "label": "Show testimonial card",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Author avatar"
+        },
+        {
+          "type": "text",
+          "id": "username",
+          "label": "Username",
+          "default": "@username"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show verified badge",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "testimonial_text",
+          "label": "Testimonial text",
+          "default": "This product is amazing! Highly recommend."
+        },
+        {
+          "type": "select",
+          "id": "card_position",
+          "label": "Card vertical position",
+          "options": [
+            { "value": "top-right", "label": "Top" },
+            { "value": "center-bottom", "label": "Middle" },
+            { "value": "bottom-right", "label": "Bottom" }
+          ],
+          "default": "top-right",
+          "info": "Card floats in the gap to the right of this image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Testimonials 41",
+      "settings": {
+        "background_color": "#3d6b6b",
+        "animation_speed": 30
+      },
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "show_card": false,
+            "username": "@SarahJFit",
+            "verified": true,
+            "testimonial_text": "It's genuinely satisfying and keeps me full for hours. The best, I highly recommend!!!"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "show_card": true,
+            "username": "@SarahJFit",
+            "verified": true,
+            "testimonial_text": "It's genuinely satisfying and keeps me full for hours. The best, I highly recommend!!!",
+            "card_position": "top-right"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "show_card": false,
+            "username": "@MikeEats",
+            "verified": true,
+            "testimonial_text": "Best protein bar I've ever had!"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "show_card": false,
+            "username": "@HealthyLiving",
+            "verified": true,
+            "testimonial_text": "Perfect for my morning routine."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "show_card": true,
+            "username": "@JessicaLFamily",
+            "verified": true,
+            "testimonial_text": "Getting my kids to eat healthy snacks can be a battle, but they absolutely adore these bars! Stocking up on these!",
+            "card_position": "center-bottom"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "show_card": false,
+            "username": "@FitnessPro",
+            "verified": true,
+            "testimonial_text": "Great for post-workout!"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "show_card": true,
+            "username": "@LauraGHealth",
+            "verified": true,
+            "testimonial_text": "It's not just a protein bar, it's a genuinely delicious and wholesome snack that I look forward to eating. Bravo!",
+            "card_position": "top-right"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "show_card": false,
+            "username": "@NaturalNutrition",
+            "verified": true,
+            "testimonial_text": "Clean ingredients, great taste!"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

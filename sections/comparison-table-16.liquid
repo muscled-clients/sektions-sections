@@ -1,0 +1,773 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --ct16-bg: {{ section.settings.background_color }};
+    --ct16-heading: {{ section.settings.heading_color }};
+    --ct16-text: {{ section.settings.text_color }};
+    --ct16-check: {{ section.settings.check_color }};
+    --ct16-x: {{ section.settings.x_color }};
+    --ct16-card-bg: {{ section.settings.card_background }};
+    --ct16-card-text: {{ section.settings.card_text_color }};
+    --ct16-border: {{ section.settings.border_color }};
+    --ct16-accent: {{ section.settings.accent_color }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Assistant:wght@400;500;600&display=swap');
+
+  .comparison-table-16 {
+    background: var(--ct16-bg, #ffffff);
+    padding: 40px 0;
+    font-family: 'Assistant', sans-serif;
+  }
+
+  .comparison-table-16__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .comparison-table-16__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .comparison-table-16__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--ct16-heading, #1a1b18);
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+
+  .comparison-table-16__subtitle {
+    font-size: 16px;
+    color: var(--ct16-text, #666666);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Grid Layout */
+  .comparison-table-16__grid {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+  }
+
+  /* Column Card */
+  .comparison-table-16__column {
+    flex: 1;
+    min-width: 180px;
+    border: 1px solid var(--ct16-border, #e5e5e5);
+    border-right: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comparison-table-16__column:last-child {
+    border-right: 1px solid var(--ct16-border, #e5e5e5);
+  }
+
+  .comparison-table-16__column:first-child {
+    min-width: 220px;
+    max-width: 250px;
+  }
+
+  /* Column Header */
+  .comparison-table-16__column-header {
+    padding: 16px 20px;
+    text-align: center;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--ct16-border, #e5e5e5);
+  }
+
+  .comparison-table-16__column:first-child .comparison-table-16__column-header {
+    justify-content: center;
+  }
+
+  .comparison-table-16__column-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ct16-heading, #1a1b18);
+    margin: 0;
+  }
+
+  .comparison-table-16__column-title--badge {
+    background: var(--ct16-accent, #f97316);
+    color: #ffffff;
+    padding: 8px 24px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* Column Content */
+  .comparison-table-16__column-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Product Cell */
+  .comparison-table-16__product-cell {
+    flex: 1;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-bottom: 1px solid var(--ct16-border, #e5e5e5);
+  }
+
+  .comparison-table-16__product-cell:last-child {
+    border-bottom: none;
+  }
+
+  .comparison-table-16__product-image {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .comparison-table-16__product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .comparison-table-16__product-image-placeholder {
+    width: 80px;
+    height: 80px;
+    background: var(--ct16-card-bg, #f97316);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .comparison-table-16__product-image-placeholder svg {
+    width: 40px;
+    height: 40px;
+    color: #ffffff;
+  }
+
+  .comparison-table-16__product-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ct16-heading, #1a1b18);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* Value Cell */
+  .comparison-table-16__value-cell {
+    flex: 1;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-bottom: 1px solid var(--ct16-border, #e5e5e5);
+    min-height: 140px;
+  }
+
+  .comparison-table-16__value-cell:last-child {
+    border-bottom: none;
+  }
+
+  .comparison-table-16__icon {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .comparison-table-16__icon--check {
+    color: var(--ct16-check, #22c55e);
+  }
+
+  .comparison-table-16__icon--x {
+    color: var(--ct16-x, #ef4444);
+  }
+
+  .comparison-table-16__cell-text {
+    font-size: 13px;
+    color: var(--ct16-text, #666666);
+    line-height: 1.5;
+    max-width: 160px;
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .comparison-table-16 {
+      padding: 60px 0;
+    }
+
+    .comparison-table-16__title {
+      font-size: 42px;
+    }
+
+    .comparison-table-16__subtitle {
+      font-size: 18px;
+    }
+
+    .comparison-table-16__column {
+      min-width: 160px;
+    }
+
+    .comparison-table-16__column:first-child {
+      min-width: 200px;
+    }
+
+    .comparison-table-16__product-image,
+    .comparison-table-16__product-image-placeholder {
+      width: 90px;
+      height: 90px;
+    }
+
+    .comparison-table-16__product-title {
+      font-size: 11px;
+    }
+
+    .comparison-table-16__cell-text {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .comparison-table-16 {
+      padding: 80px 0;
+    }
+
+    .comparison-table-16__column:first-child {
+      min-width: 220px;
+      max-width: 260px;
+    }
+
+    .comparison-table-16__product-image,
+    .comparison-table-16__product-image-placeholder {
+      width: 100px;
+      height: 100px;
+    }
+
+    .comparison-table-16__product-title {
+      font-size: 12px;
+    }
+
+    .comparison-table-16__value-cell {
+      padding: 30px 20px;
+    }
+  }
+</style>
+
+<section class="comparison-table-16" data-section-id="{{ section.id }}">
+  <div class="comparison-table-16__container">
+    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="comparison-table-16__header">
+        {%- if section.settings.title != blank -%}
+          <h2 class="comparison-table-16__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="comparison-table-16__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="comparison-table-16__grid">
+      <!-- Product Column -->
+      <div class="comparison-table-16__column">
+        <div class="comparison-table-16__column-header">
+          <span class="comparison-table-16__column-title comparison-table-16__column-title--badge">{{ section.settings.product_column_header | default: 'Product' }}</span>
+        </div>
+        <div class="comparison-table-16__column-content">
+          {%- for block in section.blocks -%}
+            <div class="comparison-table-16__product-cell" {{ block.shopify_attributes }}>
+              <div class="comparison-table-16__product-image">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: block.settings.title }}
+                {%- else -%}
+                  <div class="comparison-table-16__product-image-placeholder" style="background: {{ block.settings.card_bg | default: section.settings.card_background }};">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <rect x="3" y="3" width="18" height="18" rx="2"/>
+                      <path d="M9 9h.01M15 9h.01M9 15h6"/>
+                    </svg>
+                  </div>
+                {%- endif -%}
+              </div>
+              <p class="comparison-table-16__product-title">{{ block.settings.title }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- Column 1 -->
+      {%- if section.settings.column_1 != blank -%}
+        <div class="comparison-table-16__column">
+          <div class="comparison-table-16__column-header">
+            <span class="comparison-table-16__column-title">{{ section.settings.column_1 }}</span>
+          </div>
+          <div class="comparison-table-16__column-content">
+            {%- for block in section.blocks -%}
+              <div class="comparison-table-16__value-cell">
+                {%- if block.settings.col_1_value -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--check">✓</span>
+                {%- else -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--x">✗</span>
+                {%- endif -%}
+                {%- if block.settings.col_1_text != blank -%}
+                  <span class="comparison-table-16__cell-text">{{ block.settings.col_1_text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Column 2 -->
+      {%- if section.settings.column_2 != blank -%}
+        <div class="comparison-table-16__column">
+          <div class="comparison-table-16__column-header">
+            <span class="comparison-table-16__column-title">{{ section.settings.column_2 }}</span>
+          </div>
+          <div class="comparison-table-16__column-content">
+            {%- for block in section.blocks -%}
+              <div class="comparison-table-16__value-cell">
+                {%- if block.settings.col_2_value -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--check">✓</span>
+                {%- else -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--x">✗</span>
+                {%- endif -%}
+                {%- if block.settings.col_2_text != blank -%}
+                  <span class="comparison-table-16__cell-text">{{ block.settings.col_2_text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Column 3 -->
+      {%- if section.settings.column_3 != blank -%}
+        <div class="comparison-table-16__column">
+          <div class="comparison-table-16__column-header">
+            <span class="comparison-table-16__column-title">{{ section.settings.column_3 }}</span>
+          </div>
+          <div class="comparison-table-16__column-content">
+            {%- for block in section.blocks -%}
+              <div class="comparison-table-16__value-cell">
+                {%- if block.settings.col_3_value -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--check">✓</span>
+                {%- else -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--x">✗</span>
+                {%- endif -%}
+                {%- if block.settings.col_3_text != blank -%}
+                  <span class="comparison-table-16__cell-text">{{ block.settings.col_3_text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Column 4 -->
+      {%- if section.settings.column_4 != blank -%}
+        <div class="comparison-table-16__column">
+          <div class="comparison-table-16__column-header">
+            <span class="comparison-table-16__column-title">{{ section.settings.column_4 }}</span>
+          </div>
+          <div class="comparison-table-16__column-content">
+            {%- for block in section.blocks -%}
+              <div class="comparison-table-16__value-cell">
+                {%- if block.settings.col_4_value -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--check">✓</span>
+                {%- else -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--x">✗</span>
+                {%- endif -%}
+                {%- if block.settings.col_4_text != blank -%}
+                  <span class="comparison-table-16__cell-text">{{ block.settings.col_4_text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Column 5 -->
+      {%- if section.settings.column_5 != blank -%}
+        <div class="comparison-table-16__column">
+          <div class="comparison-table-16__column-header">
+            <span class="comparison-table-16__column-title">{{ section.settings.column_5 }}</span>
+          </div>
+          <div class="comparison-table-16__column-content">
+            {%- for block in section.blocks -%}
+              <div class="comparison-table-16__value-cell">
+                {%- if block.settings.col_5_value -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--check">✓</span>
+                {%- else -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--x">✗</span>
+                {%- endif -%}
+                {%- if block.settings.col_5_text != blank -%}
+                  <span class="comparison-table-16__cell-text">{{ block.settings.col_5_text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Column 6 -->
+      {%- if section.settings.column_6 != blank -%}
+        <div class="comparison-table-16__column">
+          <div class="comparison-table-16__column-header">
+            <span class="comparison-table-16__column-title">{{ section.settings.column_6 }}</span>
+          </div>
+          <div class="comparison-table-16__column-content">
+            {%- for block in section.blocks -%}
+              <div class="comparison-table-16__value-cell">
+                {%- if block.settings.col_6_value -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--check">✓</span>
+                {%- else -%}
+                  <span class="comparison-table-16__icon comparison-table-16__icon--x">✗</span>
+                {%- endif -%}
+                {%- if block.settings.col_6_text != blank -%}
+                  <span class="comparison-table-16__cell-text">{{ block.settings.col_6_text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Comparison Table 16",
+  "tag": "section",
+  "class": "section-comparison-table-16",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Compare Our Products"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "See how our supplements stack up against the competition"
+    },
+    {
+      "type": "header",
+      "content": "Table Columns"
+    },
+    {
+      "type": "text",
+      "id": "product_column_header",
+      "label": "Product column header",
+      "default": "Product"
+    },
+    {
+      "type": "text",
+      "id": "column_1",
+      "label": "Column 1 header",
+      "default": "Oil"
+    },
+    {
+      "type": "text",
+      "id": "column_2",
+      "label": "Column 2 header",
+      "default": "Zinc"
+    },
+    {
+      "type": "text",
+      "id": "column_3",
+      "label": "Column 3 header",
+      "default": "Vitamin D3"
+    },
+    {
+      "type": "text",
+      "id": "column_4",
+      "label": "Column 4 header",
+      "default": "Bee Propolis"
+    },
+    {
+      "type": "text",
+      "id": "column_5",
+      "label": "Column 5 header"
+    },
+    {
+      "type": "text",
+      "id": "column_6",
+      "label": "Column 6 header"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1b18"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Product badge color",
+      "default": "#f97316"
+    },
+    {
+      "type": "color",
+      "id": "check_color",
+      "label": "Checkmark color",
+      "default": "#22c55e"
+    },
+    {
+      "type": "color",
+      "id": "x_color",
+      "label": "X mark color",
+      "default": "#ef4444"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Default product icon background",
+      "default": "#f97316"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Default product icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product Row",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Product Info"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product title",
+          "default": "Product Name"
+        },
+        {
+          "type": "color",
+          "id": "card_bg",
+          "label": "Placeholder icon background"
+        },
+        {
+          "type": "header",
+          "content": "Column 1"
+        },
+        {
+          "type": "checkbox",
+          "id": "col_1_value",
+          "label": "Has feature (check = yes, unchecked = no)",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "col_1_text",
+          "label": "Description text"
+        },
+        {
+          "type": "header",
+          "content": "Column 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "col_2_value",
+          "label": "Has feature",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "col_2_text",
+          "label": "Description text"
+        },
+        {
+          "type": "header",
+          "content": "Column 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "col_3_value",
+          "label": "Has feature",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "col_3_text",
+          "label": "Description text"
+        },
+        {
+          "type": "header",
+          "content": "Column 4"
+        },
+        {
+          "type": "checkbox",
+          "id": "col_4_value",
+          "label": "Has feature",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "col_4_text",
+          "label": "Description text"
+        },
+        {
+          "type": "header",
+          "content": "Column 5"
+        },
+        {
+          "type": "checkbox",
+          "id": "col_5_value",
+          "label": "Has feature",
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "col_5_text",
+          "label": "Description text"
+        },
+        {
+          "type": "header",
+          "content": "Column 6"
+        },
+        {
+          "type": "checkbox",
+          "id": "col_6_value",
+          "label": "Has feature",
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "col_6_text",
+          "label": "Description text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Comparison Table 16",
+      "settings": {
+        "title": "Compare Our Products",
+        "subtitle": "See how our supplements stack up against the competition",
+        "column_1": "Oil",
+        "column_2": "Zinc",
+        "column_3": "Vitamin D3",
+        "column_4": "Bee Propolis"
+      },
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "title": "Daily Defence Supplement",
+            "card_bg": "#f97316",
+            "col_1_value": true,
+            "col_1_text": "Avocado oil liposomes – superior absorption, rich in antioxidants",
+            "col_2_value": true,
+            "col_2_text": "15mg – high-potency chelated zinc for optimal immune function",
+            "col_3_value": true,
+            "col_3_text": "15mg – high-potency chelated zinc for optimal immune function",
+            "col_4_value": true,
+            "col_4_text": "100mg – high-quality, standardized extract for immune & antioxidant benefits"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "The Average Immunity Supplement",
+            "card_bg": "#fb923c",
+            "col_1_value": false,
+            "col_1_text": "Seed oil liposomes – standard liposome delivery",
+            "col_2_value": false,
+            "col_2_text": "10mg – typical amount of zinc",
+            "col_3_value": false,
+            "col_3_text": "1000 IU – commonly found in immunity supplements",
+            "col_4_value": true,
+            "col_4_text": "50mg – standard bee propolis extract"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

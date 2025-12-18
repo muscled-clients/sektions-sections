@@ -1,0 +1,645 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --hero-pro-text: {{ section.settings.text_color }};
+    --hero-pro-text-bold: {{ section.settings.text_bold_color }};
+    --hero-pro-text-italic: {{ section.settings.text_italic_color }};
+    --hero-pro-badge-bg: {{ section.settings.badge_background }};
+    --hero-pro-badge-text: {{ section.settings.badge_text_color }};
+    --hero-pro-btn-primary-bg: {{ section.settings.button_primary_bg }};
+    --hero-pro-btn-primary-text: {{ section.settings.button_primary_text_color }};
+    --hero-pro-btn-secondary-bg: {{ section.settings.button_secondary_bg }};
+    --hero-pro-btn-secondary-text: {{ section.settings.button_secondary_text_color }};
+    --hero-pro-review-bg: {{ section.settings.review_badge_bg }};
+    --hero-pro-overlay: {{ section.settings.overlay_color }};
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@400;500;600;700&display=swap');
+
+  .hero-pro {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+  }
+
+  .hero-pro__media {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .hero-pro__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-pro__media-desktop,
+  .hero-pro__media-mobile,
+  .hero-pro__media-placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-pro__media-desktop {
+    display: block;
+  }
+
+  .hero-pro__media-mobile {
+    display: block;
+  }
+
+  .hero-pro--has-both .hero-pro__media-desktop {
+    display: none;
+  }
+
+  .hero-pro__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--hero-pro-overlay, rgba(0, 0, 0, 0.3));
+    pointer-events: none;
+  }
+
+  .hero-pro__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 24px;
+  }
+
+  .hero-pro__content {
+    max-width: 650px;
+  }
+
+  /* Badge */
+  .hero-pro__badge {
+    display: inline-block;
+    background: var(--hero-pro-badge-bg, #e67e22);
+    color: var(--hero-pro-badge-text, #ffffff);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* Title */
+  .hero-pro__title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--hero-pro-text, #b7d3ff);
+    margin: 0 0 20px;
+  }
+
+  .hero-pro__title strong {
+    color: var(--hero-pro-text-bold, #ffffff);
+  }
+
+  .hero-pro__title em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: var(--hero-pro-text-italic, #ffffff);
+  }
+
+  /* Review Badge */
+  .hero-pro__review {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--hero-pro-review-bg, rgba(255, 255, 255, 0.15));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 10px 16px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+  }
+
+  .hero-pro__review-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .hero-pro__review-stars svg {
+    width: 14px;
+    height: 14px;
+    fill: #fbbf24;
+  }
+
+  .hero-pro__review-text {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--hero-pro-text, #b7d3ff);
+  }
+
+  /* Features */
+  .hero-pro__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .hero-pro__feature {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--hero-pro-text, #b7d3ff);
+  }
+
+  .hero-pro__feature-icon {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-pro__feature-icon svg {
+    width: 16px;
+    height: 16px;
+    color: currentColor;
+  }
+
+  /* Buttons */
+  .hero-pro__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .hero-pro__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-pro__btn--primary {
+    background: var(--hero-pro-btn-primary-bg, #27a0e4);
+    color: var(--hero-pro-btn-primary-text, #ffffff);
+  }
+
+  .hero-pro__btn--primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .hero-pro__btn--primary:hover::before {
+    left: 100%;
+  }
+
+  .hero-pro__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 160, 228, 0.4);
+  }
+
+  .hero-pro__btn--secondary {
+    background: var(--hero-pro-btn-secondary-bg, #0e2b45);
+    color: var(--hero-pro-btn-secondary-text, #ffffff);
+  }
+
+  .hero-pro__btn--secondary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+  }
+
+  /* Guarantee */
+  .hero-pro__guarantee {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--hero-pro-text, #b7d3ff);
+  }
+
+  .hero-pro__guarantee-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .hero-pro__guarantee-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .hero-pro__title {
+      font-size: 48px;
+    }
+
+    .hero-pro__features {
+      gap: 20px;
+    }
+
+    .hero-pro__feature {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-pro--has-both .hero-pro__media-mobile {
+      display: none;
+    }
+
+    .hero-pro--has-both .hero-pro__media-desktop {
+      display: block;
+    }
+
+    .hero-pro__container {
+      padding: 100px 60px;
+    }
+
+    .hero-pro__title {
+      font-size: 56px;
+    }
+
+    .hero-pro__badge {
+      font-size: 12px;
+      padding: 10px 20px;
+    }
+
+    .hero-pro__review {
+      padding: 12px 20px;
+    }
+
+    .hero-pro__review-text {
+      font-size: 14px;
+    }
+
+    .hero-pro__feature {
+      font-size: 15px;
+    }
+
+    .hero-pro__btn {
+      font-size: 15px;
+      padding: 16px 36px;
+    }
+
+    .hero-pro__guarantee {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .hero-pro__title {
+      font-size: 64px;
+    }
+
+    .hero-pro__content {
+      max-width: 700px;
+    }
+  }
+</style>
+
+{%- liquid
+  assign has_desktop = false
+  assign has_mobile = false
+  assign has_both = false
+  if section.settings.image_desktop != blank
+    assign has_desktop = true
+  endif
+  if section.settings.image_mobile != blank
+    assign has_mobile = true
+  endif
+  if has_desktop and has_mobile
+    assign has_both = true
+  endif
+-%}
+
+<section class="hero-pro{% if has_both %} hero-pro--has-both{% endif %}" data-section-id="{{ section.id }}">
+  <!-- Background Media -->
+  <div class="hero-pro__media">
+    {%- if has_mobile -%}
+      <div class="hero-pro__media-mobile">
+        {{ section.settings.image_mobile | image_url: width: 1200 | image_tag: loading: 'eager' }}
+      </div>
+    {%- endif -%}
+    {%- if has_desktop -%}
+      <div class="hero-pro__media-desktop">
+        {{ section.settings.image_desktop | image_url: width: 2400 | image_tag: loading: 'eager' }}
+      </div>
+    {%- endif -%}
+    {%- unless has_desktop or has_mobile -%}
+      <div class="hero-pro__media-placeholder" style="background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%); width: 100%; height: 100%;"></div>
+    {%- endunless -%}
+  </div>
+
+  <div class="hero-pro__container">
+    <div class="hero-pro__content">
+      {%- if section.settings.badge_text != blank -%}
+        <span class="hero-pro__badge">{{ section.settings.badge_text }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h1 class="hero-pro__title">{{ section.settings.title }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.show_reviews -%}
+        <div class="hero-pro__review">
+          <div class="hero-pro__review-stars">
+            {%- for i in (1..5) -%}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <span class="hero-pro__review-text">{{ section.settings.review_text }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="hero-pro__features">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature' -%}
+              <div class="hero-pro__feature" {{ block.shopify_attributes }}>
+                <span class="hero-pro__feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                  </svg>
+                </span>
+                <span>{{ block.settings.text }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="hero-pro__buttons">
+        {%- if section.settings.button_primary_text != blank -%}
+          <a href="{{ section.settings.button_primary_link }}" class="hero-pro__btn hero-pro__btn--primary">
+            {{ section.settings.button_primary_text }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button_secondary_text != blank -%}
+          <a href="{{ section.settings.button_secondary_link }}" class="hero-pro__btn hero-pro__btn--secondary">
+            {{ section.settings.button_secondary_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.guarantee_text != blank -%}
+        <div class="hero-pro__guarantee">
+          <span class="hero-pro__guarantee-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>{{ section.settings.guarantee_text }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Hero Pro",
+  "tag": "section",
+  "class": "section-hero-pro",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image"
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "NOW ON SALE"
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "html",
+      "id": "title",
+      "label": "Title",
+      "info": "Use <strong> for bold white text and <em> for italic text",
+      "default": "<strong>Reduce stress.</strong> <em>Sleep peacefully.</em> <em>Carry peace.</em>"
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show review badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_text",
+      "label": "Review text",
+      "default": "4.8/5 based on 115,130 reviews"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_primary_text",
+      "label": "Primary button text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_secondary_text",
+      "label": "Secondary button text",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "button_secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Guarantee text",
+      "default": "30-Day Money-Back Guarantee"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#b7d3ff"
+    },
+    {
+      "type": "color",
+      "id": "text_bold_color",
+      "label": "Bold text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_italic_color",
+      "label": "Italic text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#e67e22"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "review_badge_bg",
+      "label": "Review badge background",
+      "default": "rgba(255, 255, 255, 0.15)"
+    },
+    {
+      "type": "color",
+      "id": "button_primary_bg",
+      "label": "Primary button background",
+      "default": "#27a0e4"
+    },
+    {
+      "type": "color",
+      "id": "button_primary_text_color",
+      "label": "Primary button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_secondary_bg",
+      "label": "Secondary button background",
+      "default": "#0e2b45"
+    },
+    {
+      "type": "color",
+      "id": "button_secondary_text_color",
+      "label": "Secondary button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color_background",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 70%)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature text",
+          "default": "Feature benefit"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Hero Pro",
+      "settings": {
+        "badge_text": "NOW ON SALE",
+        "title": "<strong>Reduce stress.</strong> <em>Sleep peacefully.</em> <em>Carry peace.</em>",
+        "review_text": "4.8/5 based on 115,130 reviews",
+        "button_primary_text": "SHOP NOW",
+        "button_secondary_text": "LEARN MORE",
+        "guarantee_text": "30-Day Money-Back Guarantee"
+      },
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Balance nervous system"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Instant pain relief"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Clinically tested"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

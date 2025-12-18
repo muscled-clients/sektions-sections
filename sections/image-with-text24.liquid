@@ -1,0 +1,595 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --iwt24-bg: {{ section.settings.background_color }};
+    --iwt24-heading: {{ section.settings.heading_color }};
+    --iwt24-text: {{ section.settings.text_color }};
+    --iwt24-accent: {{ section.settings.accent_color }};
+    --iwt24-btn-bg: {{ section.settings.button_background }};
+    --iwt24-btn-text: {{ section.settings.button_text_color }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400&family=Inter:wght@400;500;600;700&display=swap');
+
+  .image-with-text-24 {
+    background: var(--iwt24-bg, #ffffff);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .image-with-text-24__container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .image-with-text-24__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* Image - Sticky */
+  .image-with-text-24__image-col {
+    order: 1;
+  }
+
+  .image-with-text-24__image-sticky {
+    position: relative;
+  }
+
+  .image-with-text-24__image-wrapper {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f0f0f0;
+    aspect-ratio: 3 / 4;
+  }
+
+  .image-with-text-24__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .image-with-text-24__image.active {
+    opacity: 1;
+  }
+
+  .image-with-text-24__image-placeholder {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #e8e0f0 0%, #d0c8e0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 14px;
+  }
+
+  /* Content */
+  .image-with-text-24__content {
+    order: 2;
+  }
+
+  .image-with-text-24__header {
+    margin-bottom: 40px;
+  }
+
+  .image-with-text-24__title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--iwt24-heading, #1a1a5e);
+    margin: 0 0 16px;
+  }
+
+  .image-with-text-24__subtitle {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--iwt24-text, #1a1a5e);
+    margin: 0;
+    max-width: 500px;
+  }
+
+  /* Features */
+  .image-with-text-24__features {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .image-with-text-24__feature {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    padding: 24px 0;
+  }
+
+  .image-with-text-24__feature-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 12px;
+    flex-shrink: 0;
+  }
+
+  .image-with-text-24__feature-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--iwt24-accent, #1a1a5e);
+    opacity: 0.3;
+    flex-shrink: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .image-with-text-24__feature.active .image-with-text-24__feature-dot {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .image-with-text-24__feature-line {
+    width: 2px;
+    flex: 1;
+    background: var(--iwt24-accent, #1a1a5e);
+    opacity: 0.15;
+    margin-top: 8px;
+  }
+
+  .image-with-text-24__feature:last-child .image-with-text-24__feature-line {
+    display: none;
+  }
+
+  .image-with-text-24__feature-content {
+    flex: 1;
+  }
+
+  .image-with-text-24__feature-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--iwt24-heading, #1a1a5e);
+    margin: 0 0 8px;
+    line-height: 1.4;
+  }
+
+  .image-with-text-24__feature-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--iwt24-text, #1a1a5e);
+    margin: 0;
+    opacity: 0.75;
+  }
+
+  /* Button */
+  .image-with-text-24__btn-wrapper {
+    padding-top: 16px;
+    padding-left: 32px;
+  }
+
+  .image-with-text-24__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    background: var(--iwt24-btn-bg, #1a1a5e);
+    color: var(--iwt24-btn-text, #ffffff);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .image-with-text-24__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 26, 94, 0.3);
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .image-with-text-24__title {
+      font-size: 40px;
+    }
+
+    .image-with-text-24__subtitle {
+      font-size: 15px;
+    }
+
+    .image-with-text-24__feature {
+      padding: 28px 0;
+    }
+
+    .image-with-text-24__feature-title {
+      font-size: 18px;
+    }
+
+    .image-with-text-24__feature-text {
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .image-with-text-24__container {
+      padding: 0 40px;
+    }
+
+    .image-with-text-24__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+
+    .image-with-text-24__image-col {
+      order: {{ section.settings.image_position }};
+    }
+
+    .image-with-text-24__content {
+      order: {% if section.settings.image_position == '1' %}2{% else %}1{% endif %};
+      padding: 60px 0;
+    }
+
+    .image-with-text-24__image-sticky {
+      position: sticky;
+      top: 100px;
+    }
+
+    .image-with-text-24__image-wrapper {
+      aspect-ratio: 4 / 5;
+    }
+
+    .image-with-text-24__header {
+      margin-bottom: 48px;
+    }
+
+    .image-with-text-24__title {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .image-with-text-24__subtitle {
+      font-size: 16px;
+    }
+
+    .image-with-text-24__feature {
+      padding: 32px 0;
+    }
+
+    .image-with-text-24__feature-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .image-with-text-24__feature-text {
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .image-with-text-24__btn-wrapper {
+      padding-top: 24px;
+    }
+
+    .image-with-text-24__btn {
+      padding: 16px 40px;
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .image-with-text-24__grid {
+      gap: 100px;
+    }
+
+    .image-with-text-24__title {
+      font-size: 52px;
+    }
+  }
+</style>
+
+<section class="image-with-text-24" data-section-id="{{ section.id }}">
+  <div class="image-with-text-24__container">
+    <div class="image-with-text-24__grid">
+      <!-- Image Column -->
+      <div class="image-with-text-24__image-col">
+        <div class="image-with-text-24__image-sticky">
+          <div class="image-with-text-24__image-wrapper">
+            {%- for block in section.blocks -%}
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 800 }}"
+                  alt="{{ block.settings.title }}"
+                  class="image-with-text-24__image{% if forloop.first %} active{% endif %}"
+                  data-index="{{ forloop.index0 }}"
+                  loading="lazy"
+                >
+              {%- else -%}
+                {%- if forloop.first -%}
+                  <div class="image-with-text-24__image-placeholder">
+                    <span>Add images to features</span>
+                  </div>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="image-with-text-24__content">
+        <div class="image-with-text-24__header">
+          {%- if section.settings.title != blank -%}
+            <h2 class="image-with-text-24__title">{{ section.settings.title }}</h2>
+          {%- endif -%}
+
+          {%- if section.settings.subtitle != blank -%}
+            <p class="image-with-text-24__subtitle">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="image-with-text-24__features">
+            {%- for block in section.blocks -%}
+              <div class="image-with-text-24__feature{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+                <div class="image-with-text-24__feature-indicator">
+                  <span class="image-with-text-24__feature-dot"></span>
+                  <span class="image-with-text-24__feature-line"></span>
+                </div>
+                <div class="image-with-text-24__feature-content">
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="image-with-text-24__feature-title">{{ block.settings.title }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <p class="image-with-text-24__feature-text">{{ block.settings.text }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_text != blank -%}
+          <div class="image-with-text-24__btn-wrapper">
+            <a href="{{ section.settings.button_link }}" class="image-with-text-24__btn">
+              {{ section.settings.button_text }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const features = section.querySelectorAll('.image-with-text-24__feature');
+    const images = section.querySelectorAll('.image-with-text-24__image');
+
+    if (features.length === 0) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -30% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = entry.target.dataset.index;
+
+          // Update active feature
+          features.forEach(f => f.classList.remove('active'));
+          entry.target.classList.add('active');
+
+          // Update active image
+          images.forEach(img => img.classList.remove('active'));
+          const activeImage = section.querySelector(`.image-with-text-24__image[data-index="${index}"]`);
+          if (activeImage) {
+            activeImage.classList.add('active');
+          }
+        }
+      });
+    }, observerOptions);
+
+    features.forEach(feature => {
+      observer.observe(feature);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Image with Text 24",
+  "tag": "section",
+  "class": "section-image-with-text-24",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "All glow. No gimmicks."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Our skincare is crafted with the most effective ingredients out there, and nothing extra."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position (desktop)",
+      "options": [
+        { "value": "1", "label": "Left" },
+        { "value": "2", "label": "Right" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a5e"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1a1a5e"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (dots)",
+      "default": "#1a1a5e"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#1a1a5e"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Feature image",
+          "info": "Image shown when this feature is in view"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature title",
+          "default": "Feature title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Feature description",
+          "default": "Feature description goes here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Image with Text 24",
+      "settings": {
+        "title": "All glow. No gimmicks.",
+        "subtitle": "Our skincare is crafted with the most effective ingredients out there, and nothing extra.",
+        "button_text": "Shop now"
+      },
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Clean, vegan formulas",
+            "text": "All the essentials your skin craves, and nothing you'd rather avoid. No harsh fillers, or fragrances."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Packed with high-impact ingredients",
+            "text": "When actives work smarter, your skin does too. We choose the right ones for the job and truly perform."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "In textures that guarantee absorption",
+            "text": "We've designed our advanced, skin-friendly vehicles to deliver ingredients where they're needed most."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Backed by science",
+            "text": "Built on 2,100+ studies. Proven to work through independent testing, both on real skin (in vivo) and in controlled labs (in vitro)."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,518 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --blog3-bg: {{ section.settings.background_color }};
+    --blog3-text: {{ section.settings.text_color }};
+    --blog3-heading: {{ section.settings.heading_color }};
+    --blog3-card-bg: {{ section.settings.card_background }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&display=swap');
+
+  .blog-3 {
+    background: var(--blog3-bg, #ffffff);
+    padding: 40px 0;
+    font-family: 'Assistant', sans-serif;
+    overflow: hidden;
+  }
+
+  .blog-3__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .blog-3__header {
+    margin-bottom: 24px;
+    padding: 0 20px;
+  }
+
+  .blog-3__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--blog3-heading, #1a1b18);
+    margin: 0;
+    line-height: 1.32;
+  }
+
+  /* Navigation Arrows - Positioned on sides */
+  .blog-3__nav-btn {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: #ffffff;
+    border: 1px solid rgb(211, 212, 213);
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+
+  .blog-3__prev {
+    left: 10px;
+  }
+
+  .blog-3__next {
+    right: 10px;
+  }
+
+  .blog-3__nav-btn:hover {
+    border-color: rgb(116, 121, 124);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .blog-3__nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .blog-3__nav-btn svg {
+    width: 20px;
+    height: 20px;
+    color: #1a1b18;
+  }
+
+  /* Swiper Container */
+  .blog-3__slider-wrapper {
+    position: relative;
+    padding: 0 20px;
+  }
+
+  .blog-3__swiper {
+    overflow: visible;
+  }
+
+  .blog-3__slider-container {
+    position: relative;
+  }
+
+  .blog-3__swiper .swiper-wrapper {
+    align-items: stretch;
+  }
+
+  /* Article Card */
+  .blog-3__card {
+    background: var(--blog3-card-bg, #ffffff);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-3__card-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+
+  .blog-3__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .blog-3__card:hover .blog-3__card-image img {
+    transform: scale(1.1);
+  }
+
+  .blog-3__card-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+  }
+
+  .blog-3__card-content {
+    padding: 16px 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-3__card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--blog3-heading, #1a1b18);
+    margin: 0 0 8px;
+    line-height: 1.4;
+    text-decoration: none;
+    display: block;
+  }
+
+  .blog-3__card-title:hover {
+    text-decoration: underline;
+  }
+
+  .blog-3__card-excerpt {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--blog3-text, #666666);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .blog-3 {
+      padding: 50px 0;
+    }
+
+    .blog-3__title {
+      font-size: 32px;
+    }
+
+    .blog-3__card-title {
+      font-size: 17px;
+    }
+
+    .blog-3__card-excerpt {
+      font-size: 15px;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 992px) {
+    .blog-3 {
+      padding: 60px 0;
+    }
+
+    .blog-3__nav-btn {
+      display: flex;
+    }
+
+    .blog-3__card-title {
+      font-size: 18px;
+    }
+
+    .blog-3__card-excerpt {
+      font-size: 16px;
+    }
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1400px) {
+    .blog-3 {
+      padding: 80px 0;
+    }
+
+    .blog-3__header {
+      padding: 0 40px;
+    }
+
+    .blog-3__slider-wrapper {
+      padding: 0 40px;
+    }
+
+    .blog-3__prev {
+      left: 20px;
+    }
+
+    .blog-3__next {
+      right: 20px;
+    }
+  }
+</style>
+
+<section class="blog-3" data-section-id="{{ section.id }}">
+  <div class="blog-3__container">
+    <!-- Header -->
+    <div class="blog-3__header">
+      {%- if section.settings.title != blank -%}
+        <h2 class="blog-3__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+    </div>
+
+    <!-- Slider -->
+    <div class="blog-3__slider-wrapper">
+      <!-- Navigation Arrows on sides -->
+      <button class="blog-3__nav-btn blog-3__prev" type="button" aria-label="Previous">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <button class="blog-3__nav-btn blog-3__next" type="button" aria-label="Next">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+      <div class="blog-3__swiper swiper">
+        <div class="swiper-wrapper">
+          {%- if section.settings.blog != blank -%}
+            {%- for article in blogs[section.settings.blog].articles limit: section.settings.articles_count -%}
+              <div class="swiper-slide blog-3__card">
+                <a href="{{ article.url }}" class="blog-3__card-image">
+                  {%- if article.image != blank -%}
+                    {{ article.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: article.title }}
+                  {%- else -%}
+                    <div class="blog-3__card-image-placeholder">
+                      <span>{{ article.title | truncate: 20 }}</span>
+                    </div>
+                  {%- endif -%}
+                </a>
+                <div class="blog-3__card-content">
+                  <a href="{{ article.url }}" class="blog-3__card-title">{{ article.title }}</a>
+                  {%- if article.excerpt != blank -%}
+                    <p class="blog-3__card-excerpt">{{ article.excerpt | strip_html | truncate: 100 }}</p>
+                  {%- else -%}
+                    <p class="blog-3__card-excerpt">{{ article.content | strip_html | truncate: 100 }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for block in section.blocks -%}
+              <div class="swiper-slide blog-3__card" {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.link }}" class="blog-3__card-image">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title }}
+                  {%- else -%}
+                    <div class="blog-3__card-image-placeholder">
+                      <span>Add image</span>
+                    </div>
+                  {%- endif -%}
+                </a>
+                <div class="blog-3__card-content">
+                  <a href="{{ block.settings.link }}" class="blog-3__card-title">{{ block.settings.title }}</a>
+                  {%- if block.settings.excerpt != blank -%}
+                    <p class="blog-3__card-excerpt">{{ block.settings.excerpt }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
+
+    const swiperEl = section.querySelector('.blog-3__swiper');
+    const prevBtn = section.querySelector('.blog-3__prev');
+    const nextBtn = section.querySelector('.blog-3__next');
+
+    const swiper = new Swiper(swiperEl, {
+      slidesPerView: 1.1,
+      spaceBetween: 16,
+      freeMode: true,
+      grabCursor: true,
+      touchAngle: 45,
+      breakpoints: {
+        768: {
+          slidesPerView: 2.2,
+          spaceBetween: 20
+        },
+        992: {
+          slidesPerView: 3.3,
+          spaceBetween: 24
+        },
+        1400: {
+          slidesPerView: 3.5,
+          spaceBetween: 28
+        }
+      }
+    });
+
+    // Navigation
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => swiper.slidePrev());
+      nextBtn.addEventListener('click', () => swiper.slideNext());
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Blog 3",
+  "tag": "section",
+  "class": "section-blog-3",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Articles"
+    },
+    {
+      "type": "header",
+      "content": "Blog Source"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog",
+      "info": "Select a blog to display articles from. Leave empty to use manual blocks."
+    },
+    {
+      "type": "range",
+      "id": "articles_count",
+      "label": "Number of articles",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1b18"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Article",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Article Title"
+        },
+        {
+          "type": "textarea",
+          "id": "excerpt",
+          "label": "Excerpt",
+          "default": "Some description text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Blog 3",
+      "settings": {
+        "title": "Articles"
+      },
+      "blocks": [
+        {
+          "type": "article",
+          "settings": {
+            "title": "How to add a Instafeed section to Shopify",
+            "excerpt": "Some description text"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "How to add trust badges below add to cart",
+            "excerpt": "Some description text"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "How to add a FAQ section to Shopify",
+            "excerpt": "Some description text"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "Shopify Landing Page: Boost Sales & Conversions",
+            "excerpt": "Some description text"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "Creative Shop Name Ideas: Get Inspired Now",
+            "excerpt": "Some description text"
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "title": "10 Tips for Better Product Photography",
+            "excerpt": "Some description text"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
