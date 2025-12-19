@@ -99,50 +99,103 @@
     }
   }
 
+  @media (max-width: 1024px) {
+    .mission-video-section {
+      overflow-x: hidden;
+    }
+
+    .mission-video__container {
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .mission-video__wrapper {
+      gap: 0;
+    }
+  }
+
   @media (max-width: 768px) {
     .mission-video-section {
       padding: 0;
-      background-color: #ffffff;
+      background-color: {{ section.settings.background_color }};
+      overflow-x: hidden;
     }
 
     .mission-video__container {
       padding: 0;
+      max-width: 100%;
+      overflow: hidden;
     }
 
     .mission-video__wrapper {
       grid-template-columns: 1fr;
       gap: 0;
+      width: 100%;
     }
 
     .mission-video__media {
       min-height: {{ section.settings.mobile_media_height }}px;
       border-radius: 0;
-      margin: 0 20px;
+      margin: 0 15px;
+      width: calc(100% - 30px);
+    }
+
+    .mission-video__video,
+    .mission-video__image {
+      width: 100%;
     }
 
     .mission-video__content {
-      padding: 50px 30px 60px 30px;
-      background-color: #ffffff;
+      padding: 40px 20px 50px;
+      background-color: {{ section.settings.background_color }};
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .mission-video__title {
       font-size: {{ section.settings.mobile_title_size }}px;
       font-style: italic;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       color: {{ section.settings.title_color }};
+      word-wrap: break-word;
     }
 
     .mission-video__description {
       font-size: {{ section.settings.mobile_description_size }}px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       max-width: 100%;
       line-height: 1.6;
       color: {{ section.settings.description_color }};
     }
 
     .mission-video__button {
-      padding: 14px 32px;
+      padding: 12px 28px;
       font-size: {{ section.settings.button_font_size | minus: 1 }}px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .mission-video__media {
+      min-height: 280px;
+      margin: 0 12px;
+      width: calc(100% - 24px);
+    }
+
+    .mission-video__content {
+      padding: 30px 15px 40px;
+    }
+
+    .mission-video__title {
+      font-size: {{ section.settings.mobile_title_size | minus: 4 }}px;
+    }
+
+    .mission-video__description {
+      font-size: {{ section.settings.mobile_description_size | minus: 1 }}px;
+    }
+
+    .mission-video__button {
+      padding: 10px 24px;
+      font-size: 12px;
     }
   }
 </style>
