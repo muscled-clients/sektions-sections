@@ -1,8 +1,11 @@
 <style>
   .nutrition-hero-section {
     width: 100%;
+    max-width: 100vw;
     padding: {{ section.settings.section_padding_top }}px 20px {{ section.settings.section_padding_bottom }}px;
     background-color: {{ section.settings.background_color }};
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
 
   .nutrition-hero-container {
@@ -12,6 +15,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
+    overflow: hidden;
   }
 
   .nutrition-hero-content {
@@ -136,12 +140,15 @@
     .nutrition-hero-section {
       padding: 40px 15px;
       overflow-x: hidden;
+      max-width: 100vw;
+      box-sizing: border-box;
     }
 
     .nutrition-hero-container {
       grid-template-columns: 1fr;
       gap: 30px;
       max-width: 100%;
+      width: 100%;
       overflow: hidden;
     }
 
