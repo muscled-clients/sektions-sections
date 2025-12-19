@@ -133,57 +133,80 @@
   }
 
   @media (max-width: 768px) {
+    .nutrition-hero-section {
+      padding: 40px 15px;
+      overflow-x: hidden;
+    }
+
     .nutrition-hero-container {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 30px;
+      max-width: 100%;
+      overflow: hidden;
     }
 
     .nutrition-hero-content {
       align-items: center;
       text-align: center;
-      padding: 20px;
+      padding: 0;
       min-height: auto;
+      width: 100%;
     }
 
     .nutrition-hero-image-wrapper {
       padding: 0;
       min-height: auto;
+      width: 100%;
     }
 
     .nutrition-hero-image-wrapper img {
       height: auto;
       max-height: none;
+      width: 100%;
     }
 
     .nutrition-hero-heading {
-      font-size: 42px;
+      font-size: 36px;
+      word-wrap: break-word;
     }
 
     .nutrition-hero-subheading {
-      font-size: 18px;
+      font-size: 16px;
       max-width: 100%;
     }
 
     .nutrition-hero-rating {
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .nutrition-hero-features {
-      gap: 24px;
+      gap: 16px;
       justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .nutrition-hero-feature {
+      flex: 0 0 auto;
+      min-width: 80px;
+      max-width: 100px;
     }
 
     .nutrition-hero-feature-text {
-      font-size: 13px;
+      font-size: 12px;
+      white-space: normal;
+      word-wrap: break-word;
     }
 
     .nutrition-hero-feature-icon {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
     }
 
     .nutrition-hero-button {
-      padding: 14px 42px;
+      padding: 14px 36px;
+      font-size: 15px;
     }
 
     .nutrition-hero-image-wrapper {
@@ -192,25 +215,47 @@
   }
 
   @media (max-width: 480px) {
+    .nutrition-hero-section {
+      padding: 30px 12px;
+    }
+
     .nutrition-hero-heading {
-      font-size: 36px;
+      font-size: 28px;
     }
 
     .nutrition-hero-subheading {
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .nutrition-hero-features {
-      gap: 16px;
+      gap: 12px;
+    }
+
+    .nutrition-hero-feature {
+      min-width: 70px;
+      max-width: 90px;
     }
 
     .nutrition-hero-feature-icon {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
     }
 
     .nutrition-hero-feature-text {
-      font-size: 12px;
+      font-size: 11px;
+    }
+
+    .nutrition-hero-button {
+      padding: 12px 28px;
+      font-size: 14px;
+    }
+
+    .nutrition-hero-rating-text {
+      font-size: 14px;
+    }
+
+    .nutrition-hero-stars {
+      font-size: 16px;
     }
   }
 </style>
