@@ -96,10 +96,12 @@
   @media (max-width: 768px) {
     .craftsman-asymmetric-container {
       flex-direction: column;
+      max-width: 100%;
     }
 
     .craftsman-content-column {
       flex: 1;
+      width: 100%;
       padding: 40px 24px 50px;
       min-height: auto;
     }
@@ -110,6 +112,17 @@
       order: -1;
       padding: 0;
       margin-left: 0;
+    }
+
+    .craftsman-image-wrapper {
+      width: 100%;
+    }
+
+    .craftsman-image-wrapper img {
+      width: 100%;
+      min-height: 280px;
+      max-height: 350px;
+      object-fit: cover;
     }
 
     .craftsman-title {
@@ -128,13 +141,7 @@
       padding: 12px 32px;
       font-size: 14px;
       width: auto;
-      text-align: center;
-    }
-
-    .craftsman-image-wrapper img {
-      min-height: 280px;
-      max-height: 350px;
-      object-fit: cover;
+      display: inline-block;
     }
   }
 
@@ -163,6 +170,8 @@
     .craftsman-btn {
       padding: 11px 28px;
       font-size: 13px;
+      width: auto;
+      display: inline-block;
     }
 
     .craftsman-image-wrapper img {
