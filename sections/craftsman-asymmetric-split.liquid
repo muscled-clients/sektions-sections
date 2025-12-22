@@ -96,22 +96,27 @@
   @media (max-width: 768px) {
     .craftsman-asymmetric-container {
       flex-direction: column;
-      max-width: 100%;
+      position: relative;
     }
 
     .craftsman-content-column {
       flex: 1;
       width: 100%;
-      padding: 40px 24px 50px;
+      padding: 80px 24px 50px;
       min-height: auto;
+      margin-top: -60px;
+      position: relative;
+      z-index: 1;
     }
 
     .craftsman-image-column {
       flex: 1;
-      width: 100%;
+      width: 85%;
+      margin: 0 auto;
       order: -1;
       padding: 0;
-      margin-left: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .craftsman-image-wrapper {
@@ -121,7 +126,7 @@
     .craftsman-image-wrapper img {
       width: 100%;
       min-height: 280px;
-      max-height: 350px;
+      max-height: 400px;
       object-fit: cover;
     }
 
@@ -153,7 +158,12 @@
     }
 
     .craftsman-content-column {
-      padding: 30px 20px 40px;
+      padding: 70px 20px 40px;
+      margin-top: -50px;
+    }
+
+    .craftsman-image-column {
+      width: 80%;
     }
 
     .craftsman-title {
@@ -176,7 +186,7 @@
 
     .craftsman-image-wrapper img {
       min-height: 240px;
-      max-height: 300px;
+      max-height: 350px;
     }
   }
 </style>
