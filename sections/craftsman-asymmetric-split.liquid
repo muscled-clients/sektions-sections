@@ -92,6 +92,7 @@
     object-fit: cover;
   }
 
+  /* Tablet */
   @media (max-width: 768px) {
     .craftsman-asymmetric-container {
       flex-direction: column;
@@ -99,7 +100,7 @@
 
     .craftsman-content-column {
       flex: 1;
-      padding: 50px 30px 60px;
+      padding: 40px 24px 50px;
       min-height: auto;
     }
 
@@ -112,50 +113,61 @@
     }
 
     .craftsman-title {
-      font-size: 24px;
-      margin-bottom: 26px;
+      font-size: 22px;
+      margin-bottom: 20px;
     }
 
     .craftsman-description {
       font-size: 15px;
-      line-height: 1.65;
-      margin-bottom: 35px;
+      line-height: 1.6;
+      margin-bottom: 30px;
       max-width: 100%;
     }
 
     .craftsman-btn {
-      padding: 13px 40px;
+      padding: 12px 32px;
       font-size: 14px;
-      width: 100%;
+      width: auto;
       text-align: center;
     }
 
     .craftsman-image-wrapper img {
-      min-height: 380px;
+      min-height: 280px;
+      max-height: 350px;
       object-fit: cover;
     }
   }
 
+  /* Mobile */
   @media (max-width: 480px) {
+    .craftsman-asymmetric-section {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
     .craftsman-content-column {
-      padding: 40px 25px 50px;
+      padding: 30px 20px 40px;
     }
 
     .craftsman-title {
-      font-size: 22px;
-      margin-bottom: 22px;
+      font-size: 20px;
+      margin-bottom: 16px;
     }
 
     .craftsman-description {
       font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 24px;
     }
 
     .craftsman-btn {
-      padding: 12px 35px;
+      padding: 11px 28px;
+      font-size: 13px;
     }
 
     .craftsman-image-wrapper img {
-      min-height: 320px;
+      min-height: 240px;
+      max-height: 300px;
     }
   }
 </style>
