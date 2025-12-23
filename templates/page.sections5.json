@@ -993,7 +993,7 @@
         "text_italic_color": "#ffffff",
         "badge_background": "#e67e22",
         "badge_text_color": "#ffffff",
-        "review_badge_bg": "rgba(255, 255, 255, 0.15)",
+        "review_badge_bg": "#ffffff26",
         "button_primary_bg": "#27a0e4",
         "button_primary_text_color": "#ffffff",
         "button_secondary_bg": "#0e2b45",
@@ -1462,6 +1462,84 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "map_4DqMCL": {
+      "type": "map",
+      "name": "SEK Map",
+      "settings": {
+        "map_address": "Havnegade 12, Copenhagen, Denmark",
+        "map_zoom": 15,
+        "title": "Find us here",
+        "address": "Havnegade 12\nCopenhagen, Denmark\n1058",
+        "show_hours": true,
+        "hours_weekday": "9:00 AM - 6:00 PM",
+        "hours_saturday": "10:00 AM - 4:00 PM",
+        "hours_sunday": "Closed",
+        "phone": "+45 12 34 56 78",
+        "email": "hello@example.com",
+        "button_text": "Get directions",
+        "background_color": "#ffffff",
+        "card_background": "#ffffff",
+        "text_color": "#000000",
+        "button_bg_color": "#111111",
+        "button_text_color": "#ffffff",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "multi_columnvideo2_rXBM6J": {
+      "type": "multi-columnvideo2",
+      "blocks": {
+        "column_gQ6jih": {
+          "type": "column",
+          "settings": {
+            "video": "shopify://files/videos/d7f923d76cb44d3a935eb880daa58993.HD-1080p-2.5Mbps-34357994.mp4",
+            "video_url": "",
+            "title": "Cleanse Your Skin",
+            "text": "Start with a gentle cleanser to remove dirt and impurities from your face."
+          }
+        },
+        "column_e4RBDW": {
+          "type": "column",
+          "settings": {
+            "video": "shopify://files/videos/c2e74848a3d449ab8bc122a900bb3fb2.HD-1080p-2.5Mbps-30157967.mp4",
+            "video_url": "",
+            "title": "Apply the Serum",
+            "text": "Use 2-3 drops of serum and gently pat onto your face and neck."
+          }
+        },
+        "column_UWL8jB": {
+          "type": "column",
+          "settings": {
+            "video": "shopify://files/videos/a80d62aa9ae3425ebbb02386ddc51451.HD-1080p-2.5Mbps-30157980.mp4",
+            "video_url": "",
+            "title": "Moisturize & Protect",
+            "text": "Finish with moisturizer and SPF to lock in hydration and protect your skin."
+          }
+        }
+      },
+      "block_order": [
+        "column_gQ6jih",
+        "column_e4RBDW",
+        "column_UWL8jB"
+      ],
+      "name": "SEK Multicolumns Video 2",
+      "settings": {
+        "subtitle": "How To",
+        "heading": "Step by Step Guide",
+        "description": "Follow our simple steps to get the best results with our products.",
+        "columns_desktop": "3",
+        "show_numbers": true,
+        "button_text": "Shop Now",
+        "button_link": "",
+        "background_color": "#ffffff",
+        "text_color": "#333333",
+        "accent_color": "#d7ae0b",
+        "button_bg_color": "#333333",
+        "button_text_color": "#ffffff",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
@@ -1486,6 +1564,8 @@
     "slideshow8_xq7tem",
     "testinomial_41_tiDPFn",
     "video_slider2_68iMXt",
-    "countdown_timer4_UixKME"
+    "countdown_timer4_UixKME",
+    "multi_columnvideo2_rXBM6J",
+    "map_4DqMCL"
   ]
 }
