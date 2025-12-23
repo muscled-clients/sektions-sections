@@ -307,49 +307,403 @@
     width: auto;
   }
 
-  /* Desktop Styles */
-  @media (min-width: 1024px) {
+  /* Responsive - Small Mobile (< 400px) - Base styles */
+  .footer-4 {
+    padding: 40px 16px 24px;
+  }
+
+  .footer-4__newsletter {
+    gap: 12px;
+    margin-bottom: 32px;
+    padding-bottom: 28px;
+  }
+
+  .footer-4__newsletter-title {
+    font-size: 18px;
+  }
+
+  .footer-4__newsletter-form {
+    gap: 10px;
+  }
+
+  .footer-4__newsletter-input {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  .footer-4__newsletter-button {
+    padding: 12px 20px;
+    font-size: 12px;
+  }
+
+  .footer-4__main {
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+
+  .footer-4__brand {
+    gap: 14px;
+  }
+
+  .footer-4__logo {
+    max-width: 140px;
+  }
+
+  .footer-4__logo-text {
+    font-size: 20px;
+  }
+
+  .footer-4__description {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .footer-4__social {
+    gap: 12px;
+    margin-top: 6px;
+  }
+
+  .footer-4__social-link {
+    width: 36px;
+    height: 36px;
+  }
+
+  .footer-4__social-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .footer-4__tab-header {
+    padding: 14px 0;
+  }
+
+  .footer-4__tab-title {
+    font-size: 14px;
+  }
+
+  .footer-4__tab-arrow {
+    width: 10px;
+    height: 10px;
+  }
+
+  .footer-4__tab-inner {
+    padding-bottom: 14px;
+  }
+
+  .footer-4__tab-text {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .footer-4__tab-links {
+    gap: 10px;
+  }
+
+  .footer-4__tab-link {
+    font-size: 13px;
+  }
+
+  .footer-4__bottom {
+    gap: 16px;
+    padding-top: 24px;
+  }
+
+  .footer-4__copyright {
+    font-size: 11px;
+  }
+
+  .footer-4__payments {
+    gap: 6px;
+  }
+
+  .footer-4__payment-icon {
+    height: 20px;
+  }
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
     .footer-4 {
-      padding: 80px 80px 40px;
+      padding: 45px 18px 26px;
+    }
+
+    .footer-4__newsletter {
+      gap: 14px;
+      margin-bottom: 36px;
+      padding-bottom: 32px;
+    }
+
+    .footer-4__newsletter-title {
+      font-size: 20px;
+    }
+
+    .footer-4__newsletter-input {
+      padding: 12px 16px;
+      font-size: 13px;
+    }
+
+    .footer-4__newsletter-button {
+      padding: 12px 24px;
+      font-size: 13px;
+    }
+
+    .footer-4__main {
+      gap: 32px;
+      margin-bottom: 36px;
+    }
+
+    .footer-4__brand {
+      gap: 16px;
+    }
+
+    .footer-4__logo {
+      max-width: 150px;
+    }
+
+    .footer-4__logo-text {
+      font-size: 21px;
+    }
+
+    .footer-4__description {
+      font-size: 13px;
+    }
+
+    .footer-4__social {
+      gap: 14px;
+    }
+
+    .footer-4__social-link {
+      width: 38px;
+      height: 38px;
+    }
+
+    .footer-4__social-link svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .footer-4__tab-header {
+      padding: 16px 0;
+    }
+
+    .footer-4__tab-title {
+      font-size: 15px;
+    }
+
+    .footer-4__tab-links {
+      gap: 11px;
+    }
+
+    .footer-4__tab-link {
+      font-size: 13px;
+    }
+
+    .footer-4__bottom {
+      gap: 18px;
+      padding-top: 26px;
+    }
+
+    .footer-4__copyright {
+      font-size: 12px;
+    }
+
+    .footer-4__payment-icon {
+      height: 22px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .footer-4 {
+      padding: 50px 20px 28px;
+    }
+
+    .footer-4__newsletter {
+      gap: 16px;
+      margin-bottom: 40px;
+      padding-bottom: 36px;
+    }
+
+    .footer-4__newsletter-title {
+      font-size: 22px;
+    }
+
+    .footer-4__newsletter-form {
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-4__newsletter-input {
+      padding: 14px 16px;
+      font-size: 14px;
+      flex: 1;
+    }
+
+    .footer-4__newsletter-button {
+      padding: 14px 26px;
+      font-size: 13px;
+    }
+
+    .footer-4__main {
+      gap: 36px;
+      margin-bottom: 40px;
+    }
+
+    .footer-4__brand {
+      gap: 18px;
+    }
+
+    .footer-4__logo {
+      max-width: 160px;
+    }
+
+    .footer-4__logo-text {
+      font-size: 22px;
+    }
+
+    .footer-4__description {
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .footer-4__social {
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .footer-4__social-link {
+      width: 40px;
+      height: 40px;
+    }
+
+    .footer-4__social-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-4__tab-header {
+      padding: 18px 0;
+    }
+
+    .footer-4__tab-title {
+      font-size: 16px;
+    }
+
+    .footer-4__tab-arrow {
+      width: 12px;
+      height: 12px;
+    }
+
+    .footer-4__tab-inner {
+      padding-bottom: 18px;
+    }
+
+    .footer-4__tab-text {
+      font-size: 14px;
+    }
+
+    .footer-4__tab-links {
+      gap: 12px;
+    }
+
+    .footer-4__tab-link {
+      font-size: 14px;
+    }
+
+    .footer-4__bottom {
+      gap: 20px;
+      padding-top: 28px;
+    }
+
+    .footer-4__copyright {
+      font-size: 12px;
+    }
+
+    .footer-4__payments {
+      gap: 8px;
+    }
+
+    .footer-4__payment-icon {
+      height: 24px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .footer-4 {
+      padding: 60px 30px 32px;
     }
 
     .footer-4__newsletter {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 45px;
+      padding-bottom: 40px;
+    }
+
+    .footer-4__newsletter-title {
+      font-size: 24px;
     }
 
     .footer-4__newsletter-form {
-      flex-direction: row;
-      align-items: center;
+      max-width: none;
     }
 
     .footer-4__newsletter-input {
-      min-width: 280px;
+      min-width: 220px;
+      padding: 14px 18px;
+      font-size: 14px;
+    }
+
+    .footer-4__newsletter-button {
+      padding: 14px 28px;
+      font-size: 14px;
     }
 
     .footer-4__main {
-      grid-template-columns: 1fr 1.5fr;
-      gap: 60px;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 45px;
+    }
+
+    .footer-4__brand {
+      gap: 20px;
     }
 
     .footer-4__logo {
-      max-width: 220px;
+      max-width: 180px;
+    }
+
+    .footer-4__logo-text {
+      font-size: 24px;
+    }
+
+    .footer-4__description {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .footer-4__social {
+      gap: 16px;
+      margin-top: 10px;
     }
 
     .footer-4__tabs {
       flex-direction: row;
-      gap: 40px;
+      flex-wrap: wrap;
+      gap: 24px;
     }
 
     .footer-4__tab {
       flex: 1;
+      min-width: calc(50% - 12px);
       border-bottom: none;
     }
 
     .footer-4__tab-header {
       cursor: default;
-      padding: 0 0 15px;
+      padding: 0 0 12px;
       border-bottom: 1px solid var(--footer-border);
     }
 
@@ -363,7 +717,7 @@
     }
 
     .footer-4__tab-inner {
-      padding-top: 15px;
+      padding-top: 12px;
       padding-bottom: 0;
     }
 
@@ -371,6 +725,94 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      padding-top: 30px;
+    }
+
+    .footer-4__copyright {
+      font-size: 13px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .footer-4 {
+      padding: 70px 50px 36px;
+    }
+
+    .footer-4__newsletter {
+      margin-bottom: 50px;
+      padding-bottom: 44px;
+    }
+
+    .footer-4__newsletter-input {
+      min-width: 260px;
+    }
+
+    .footer-4__main {
+      grid-template-columns: 1fr 1.5fr;
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-4__logo {
+      max-width: 200px;
+    }
+
+    .footer-4__tabs {
+      gap: 32px;
+    }
+
+    .footer-4__tab {
+      min-width: auto;
+    }
+
+    .footer-4__tab-header {
+      padding: 0 0 14px;
+    }
+
+    .footer-4__tab-inner {
+      padding-top: 14px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .footer-4 {
+      padding: 80px 80px 40px;
+    }
+
+    .footer-4__newsletter {
+      margin-bottom: 55px;
+      padding-bottom: 48px;
+    }
+
+    .footer-4__newsletter-title {
+      font-size: 26px;
+    }
+
+    .footer-4__newsletter-input {
+      min-width: 300px;
+    }
+
+    .footer-4__main {
+      gap: 60px;
+      margin-bottom: 55px;
+    }
+
+    .footer-4__logo {
+      max-width: 220px;
+    }
+
+    .footer-4__tabs {
+      gap: 40px;
+    }
+
+    .footer-4__tab-header {
+      padding: 0 0 15px;
+    }
+
+    .footer-4__tab-inner {
+      padding-top: 15px;
     }
   }
 </style>

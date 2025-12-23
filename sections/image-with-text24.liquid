@@ -196,29 +196,239 @@
     box-shadow: 0 6px 20px rgba(26, 26, 94, 0.3);
   }
 
-  /* Responsive */
-  @media (min-width: 768px) {
+  /* Responsive - Small Mobile (< 400px) - Base styles */
+  .image-with-text-24__container {
+    padding: 0 16px;
+  }
+
+  .image-with-text-24__grid {
+    gap: 24px;
+  }
+
+  .image-with-text-24__header {
+    margin-bottom: 24px;
+  }
+
+  .image-with-text-24__title {
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+
+  .image-with-text-24__subtitle {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .image-with-text-24__feature {
+    gap: 14px;
+    padding: 18px 0;
+  }
+
+  .image-with-text-24__feature-indicator {
+    width: 10px;
+  }
+
+  .image-with-text-24__feature-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .image-with-text-24__feature-title {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .image-with-text-24__feature-text {
+    font-size: 13px;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .image-with-text-24__btn-wrapper {
+    padding-top: 12px;
+    padding-left: 24px;
+  }
+
+  .image-with-text-24__btn {
+    padding: 12px 24px;
+    font-size: 13px;
+    border-radius: 25px;
+  }
+
+  .image-with-text-24__image-wrapper {
+    border-radius: 12px;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    .image-with-text-24__container {
+      padding: 0 18px;
+    }
+
+    .image-with-text-24__grid {
+      gap: 28px;
+    }
+
+    .image-with-text-24__header {
+      margin-bottom: 28px;
+    }
+
     .image-with-text-24__title {
-      font-size: 40px;
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .image-with-text-24__subtitle {
+      font-size: 14px;
+    }
+
+    .image-with-text-24__feature {
+      gap: 16px;
+      padding: 20px 0;
+    }
+
+    .image-with-text-24__feature-title {
+      font-size: 15px;
+    }
+
+    .image-with-text-24__feature-text {
+      font-size: 13px;
+      -webkit-line-clamp: 4;
+    }
+
+    .image-with-text-24__btn {
+      padding: 12px 28px;
+      font-size: 13px;
+    }
+
+    .image-with-text-24__image-wrapper {
+      aspect-ratio: 4 / 5;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .image-with-text-24__container {
+      padding: 0 20px;
+    }
+
+    .image-with-text-24__grid {
+      gap: 32px;
+    }
+
+    .image-with-text-24__header {
+      margin-bottom: 32px;
+    }
+
+    .image-with-text-24__title {
+      font-size: 30px;
+    }
+
+    .image-with-text-24__subtitle {
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .image-with-text-24__feature {
+      gap: 18px;
+      padding: 22px 0;
+    }
+
+    .image-with-text-24__feature-indicator {
+      width: 12px;
+    }
+
+    .image-with-text-24__feature-dot {
+      width: 12px;
+      height: 12px;
+    }
+
+    .image-with-text-24__feature-title {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .image-with-text-24__feature-text {
+      font-size: 14px;
+      -webkit-line-clamp: 5;
+    }
+
+    .image-with-text-24__btn-wrapper {
+      padding-left: 30px;
+    }
+
+    .image-with-text-24__btn {
+      padding: 14px 30px;
+      font-size: 14px;
+    }
+
+    .image-with-text-24__image-wrapper {
+      border-radius: 14px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .image-with-text-24__container {
+      padding: 0 30px;
+    }
+
+    .image-with-text-24__grid {
+      gap: 40px;
+    }
+
+    .image-with-text-24__header {
+      margin-bottom: 36px;
+    }
+
+    .image-with-text-24__title {
+      font-size: 36px;
+      margin-bottom: 16px;
     }
 
     .image-with-text-24__subtitle {
       font-size: 15px;
+      line-height: 1.7;
     }
 
     .image-with-text-24__feature {
-      padding: 28px 0;
+      gap: 20px;
+      padding: 26px 0;
     }
 
     .image-with-text-24__feature-title {
-      font-size: 18px;
+      font-size: 17px;
     }
 
     .image-with-text-24__feature-text {
-      font-size: 15px;
+      font-size: 14px;
+      -webkit-line-clamp: unset;
+      display: block;
+      overflow: visible;
+    }
+
+    .image-with-text-24__btn-wrapper {
+      padding-top: 16px;
+      padding-left: 32px;
+    }
+
+    .image-with-text-24__btn {
+      padding: 14px 32px;
+      font-size: 14px;
+      border-radius: 30px;
+    }
+
+    .image-with-text-24__image-wrapper {
+      border-radius: 16px;
+      aspect-ratio: 3 / 4;
     }
   }
 
+  /* Desktop (1024px+) */
   @media (min-width: 1024px) {
     .image-with-text-24__container {
       padding: 0 40px;
@@ -226,7 +436,7 @@
 
     .image-with-text-24__grid {
       grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      gap: 60px;
     }
 
     .image-with-text-24__image-col {
@@ -235,7 +445,7 @@
 
     .image-with-text-24__content {
       order: {% if section.settings.image_position == '1' %}2{% else %}1{% endif %};
-      padding: 60px 0;
+      padding: 40px 0;
     }
 
     .image-with-text-24__image-sticky {
@@ -248,11 +458,62 @@
     }
 
     .image-with-text-24__header {
+      margin-bottom: 44px;
+    }
+
+    .image-with-text-24__title {
+      font-size: 42px;
+      margin-bottom: 18px;
+    }
+
+    .image-with-text-24__subtitle {
+      font-size: 15px;
+    }
+
+    .image-with-text-24__feature {
+      padding: 28px 0;
+    }
+
+    .image-with-text-24__feature-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .image-with-text-24__feature-text {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .image-with-text-24__btn-wrapper {
+      padding-top: 20px;
+    }
+
+    .image-with-text-24__btn {
+      padding: 15px 36px;
+      font-size: 14px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .image-with-text-24__container {
+      padding: 0 50px;
+    }
+
+    .image-with-text-24__grid {
+      gap: 100px;
+    }
+
+    .image-with-text-24__content {
+      padding: 60px 0;
+    }
+
+    .image-with-text-24__header {
       margin-bottom: 48px;
     }
 
     .image-with-text-24__title {
-      font-size: 48px;
+      font-size: 52px;
       margin-bottom: 20px;
     }
 
@@ -266,12 +527,10 @@
 
     .image-with-text-24__feature-title {
       font-size: 20px;
-      margin-bottom: 10px;
     }
 
     .image-with-text-24__feature-text {
       font-size: 16px;
-      line-height: 1.7;
     }
 
     .image-with-text-24__btn-wrapper {
@@ -281,16 +540,6 @@
     .image-with-text-24__btn {
       padding: 16px 40px;
       font-size: 15px;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .image-with-text-24__grid {
-      gap: 100px;
-    }
-
-    .image-with-text-24__title {
-      font-size: 52px;
     }
   }
 </style>

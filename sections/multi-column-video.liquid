@@ -12,50 +12,95 @@
   }
 {% endstyle %}
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
+  .multicolumn-video,
+  .multicolumn-video * {
+    box-sizing: border-box;
+  }
+
+  /* Base - Small Mobile (< 400px) */
   .multicolumn-video {
     background: var(--mcv-bg, #ffffff);
-    padding: 60px 20px;
+    padding: 30px 0;
     font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   .multicolumn-video__container {
     max-width: 1400px;
     margin: 0 auto;
+    width: 100%;
   }
 
   /* Header */
   .multicolumn-video__header {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 24px;
+    padding: 0 15px;
   }
 
   .multicolumn-video__title {
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 700;
     color: var(--mcv-heading, #000000);
-    margin: 0 0 16px;
+    margin: 0 0 10px;
     line-height: 1.2;
   }
 
   .multicolumn-video__subtitle {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 400;
     color: var(--mcv-text, #1d1d1f);
     margin: 0;
     line-height: 1.6;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 100%;
   }
 
-  /* Grid */
+  /* Swiper for Mobile/Tablet - visible by default */
+  .multicolumn-video__swiper {
+    overflow: visible !important;
+    padding: 0 15px;
+    display: block;
+  }
+
+  .multicolumn-video__swiper .swiper-slide {
+    width: 80%;
+    height: auto;
+  }
+
+  /* Pagination - visible by default */
+  .multicolumn-video__pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .multicolumn-video__pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: var(--mcv-text, #1d1d1f);
+    opacity: 0.25;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .multicolumn-video__pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: var(--mcv-btn-bg, #424750);
+  }
+
+  /* Grid - Hidden on mobile, shown on desktop */
   .multicolumn-video__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
+    display: none !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
   }
 
   /* Card */
@@ -65,6 +110,7 @@
     overflow: hidden;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
   }
 
   .multicolumn-video__card:hover {
@@ -104,28 +150,32 @@
     align-items: center;
     justify-content: center;
     color: #999;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   /* Content */
   .multicolumn-video__content {
-    padding: 32px 24px;
+    padding: 20px 16px;
   }
 
   .multicolumn-video__card-title {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
     color: #1d1d1f;
-    margin: 0 0 12px;
+    margin: 0 0 8px;
     line-height: 1.3;
   }
 
   .multicolumn-video__card-description {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 400;
     color: #1d1d1f;
-    line-height: 1.6;
-    margin: 0 0 24px;
+    line-height: 1.5;
+    margin: 0 0 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   /* Button */
@@ -133,8 +183,8 @@
     display: inline-block;
     background: var(--mcv-btn-bg, #424750);
     color: var(--mcv-btn-text, #ffffff);
-    padding: 14px 32px;
-    font-size: 13px;
+    padding: 10px 20px;
+    font-size: 11px;
     font-weight: 600;
     text-decoration: none;
     border-radius: 4px;
@@ -148,15 +198,163 @@
     transform: translateY(-1px);
   }
 
-  /* Tablet */
-  @media (min-width: 768px) {
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
     .multicolumn-video {
-      padding: 70px 30px;
+      padding: 36px 0;
     }
 
-    .multicolumn-video__grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
+    .multicolumn-video__header {
+      margin-bottom: 28px;
+      padding: 0 20px;
+    }
+
+    .multicolumn-video__title {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    .multicolumn-video__subtitle {
+      font-size: 14px;
+    }
+
+    .multicolumn-video__swiper {
+      padding: 0 20px;
+    }
+
+    .multicolumn-video__swiper .swiper-slide {
+      width: 75%;
+    }
+
+    .multicolumn-video__content {
+      padding: 22px 18px;
+    }
+
+    .multicolumn-video__card-title {
+      font-size: 19px;
+    }
+
+    .multicolumn-video__card-description {
+      font-size: 13px;
+      -webkit-line-clamp: 4;
+    }
+
+    .multicolumn-video__button {
+      padding: 11px 22px;
+      font-size: 12px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .multicolumn-video {
+      padding: 44px 0;
+    }
+
+    .multicolumn-video__header {
+      margin-bottom: 32px;
+      padding: 0 24px;
+    }
+
+    .multicolumn-video__title {
+      font-size: 30px;
+    }
+
+    .multicolumn-video__subtitle {
+      font-size: 15px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .multicolumn-video__swiper {
+      padding: 0 24px;
+    }
+
+    .multicolumn-video__swiper .swiper-slide {
+      width: 55%;
+    }
+
+    .multicolumn-video__content {
+      padding: 24px 20px;
+    }
+
+    .multicolumn-video__card-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .multicolumn-video__card-description {
+      font-size: 14px;
+      margin-bottom: 18px;
+      -webkit-line-clamp: unset;
+      display: block;
+      overflow: visible;
+    }
+
+    .multicolumn-video__button {
+      padding: 12px 26px;
+      font-size: 12px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .multicolumn-video {
+      padding: 55px 0;
+    }
+
+    .multicolumn-video__header {
+      margin-bottom: 40px;
+      padding: 0 30px;
+    }
+
+    .multicolumn-video__title {
+      font-size: 36px;
+      margin-bottom: 14px;
+    }
+
+    .multicolumn-video__subtitle {
+      font-size: 16px;
+      max-width: 600px;
+    }
+
+    .multicolumn-video__swiper {
+      padding: 0 30px;
+    }
+
+    .multicolumn-video__swiper .swiper-slide {
+      width: 45%;
+    }
+
+    .multicolumn-video__content {
+      padding: 28px 22px;
+    }
+
+    .multicolumn-video__card-title {
+      font-size: 22px;
+    }
+
+    .multicolumn-video__card-description {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .multicolumn-video__button {
+      padding: 13px 28px;
+      font-size: 12px;
+    }
+  }
+
+  /* Desktop (1024px+) - Switch to Grid */
+  @media (min-width: 1024px) {
+    .multicolumn-video {
+      padding: 70px 40px;
+    }
+
+    .multicolumn-video__header {
+      margin-bottom: 50px;
+      padding: 0;
     }
 
     .multicolumn-video__title {
@@ -164,38 +362,79 @@
     }
 
     .multicolumn-video__subtitle {
-      font-size: 19px;
+      font-size: 17px;
+      max-width: 700px;
     }
-  }
 
-  /* Desktop */
-  @media (min-width: 1024px) {
-    .multicolumn-video {
-      padding: 80px 40px;
+    /* Hide swiper, show grid */
+    .multicolumn-video__swiper {
+      display: none !important;
+    }
+
+    .multicolumn-video__pagination {
+      display: none !important;
     }
 
     .multicolumn-video__grid {
+      display: grid !important;
       grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
-      gap: 40px;
+      gap: 32px;
+    }
+
+    .multicolumn-video__media {
+      padding-bottom: 70%;
+    }
+
+    .multicolumn-video__content {
+      padding: 30px 24px;
+    }
+
+    .multicolumn-video__card-title {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .multicolumn-video__card-description {
+      font-size: 15px;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    .multicolumn-video__button {
+      padding: 14px 32px;
+      font-size: 13px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .multicolumn-video {
+      padding: 90px 60px;
+    }
+
+    .multicolumn-video__header {
+      margin-bottom: 60px;
     }
 
     .multicolumn-video__title {
       font-size: 48px;
     }
 
-    .multicolumn-video__media {
-      padding-bottom: 70%;
-    }
-  }
-
-  /* Large Desktop */
-  @media (min-width: 1400px) {
-    .multicolumn-video {
-      padding: 90px 60px;
+    .multicolumn-video__subtitle {
+      font-size: 18px;
     }
 
     .multicolumn-video__grid {
-      gap: 48px;
+      gap: 40px;
+    }
+
+    .multicolumn-video__content {
+      padding: 32px 28px;
+    }
+
+    .multicolumn-video__card-description {
+      font-size: 15px;
+      margin-bottom: 24px;
     }
   }
 </style>
@@ -214,7 +453,55 @@
       </div>
     {%- endif -%}
 
-    <!-- Grid -->
+    <!-- Swiper for Mobile/Tablet -->
+    <div class="multicolumn-video__swiper swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="swiper-slide">
+            <div class="multicolumn-video__card" {{ block.shopify_attributes }}>
+              <!-- Media -->
+              <div class="multicolumn-video__media">
+                {%- if block.settings.video != blank -%}
+                  <video class="multicolumn-video__video" muted loop playsinline preload="metadata" {% if section.settings.autoplay %}autoplay{% endif %}>
+                    {%- for source in block.settings.video.sources -%}
+                      <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                    {%- endfor -%}
+                  </video>
+                {%- elsif block.settings.video_url != blank -%}
+                  <iframe src="{{ block.settings.video_url }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                {%- elsif block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.title }}
+                {%- else -%}
+                  <div class="multicolumn-video__media-placeholder">
+                    <span>Add media</span>
+                  </div>
+                {%- endif -%}
+              </div>
+
+              <!-- Content -->
+              <div class="multicolumn-video__content">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="multicolumn-video__card-title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.description != blank -%}
+                  <p class="multicolumn-video__card-description">{{ block.settings.description }}</p>
+                {%- endif -%}
+
+                {%- if block.settings.button_text != blank -%}
+                  <a href="{{ block.settings.button_link }}" class="multicolumn-video__button">
+                    {{ block.settings.button_text }}
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="multicolumn-video__pagination"></div>
+
+    <!-- Grid for Desktop -->
     <div class="multicolumn-video__grid">
       {%- for block in section.blocks -%}
         <div class="multicolumn-video__card" {{ block.shopify_attributes }}>
@@ -259,11 +546,40 @@
   </div>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const sectionId = '{{ section.id }}';
     const section = document.querySelector(`[data-section-id="${sectionId}"]`);
     if (!section) return;
+
+    // Initialize Swiper for mobile
+    const swiperEl = section.querySelector('.multicolumn-video__swiper');
+    const paginationEl = section.querySelector('.multicolumn-video__pagination');
+
+    if (swiperEl && typeof Swiper !== 'undefined') {
+      new Swiper(swiperEl, {
+        slidesPerView: 'auto',
+        spaceBetween: 16,
+        grabCursor: true,
+        touchEventsTarget: 'container',
+        pagination: {
+          el: paginationEl,
+          clickable: true
+        },
+        breakpoints: {
+          400: {
+            spaceBetween: 20
+          },
+          550: {
+            spaceBetween: 20
+          },
+          768: {
+            spaceBetween: 24
+          }
+        }
+      });
+    }
 
     const videos = section.querySelectorAll('.multicolumn-video__video');
 

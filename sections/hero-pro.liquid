@@ -17,18 +17,30 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@400;500;600;700&display=swap');
 
+  .hero-pro,
+  .hero-pro * {
+    box-sizing: border-box;
+  }
+
   .hero-pro {
     position: relative;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     font-family: 'Montserrat', sans-serif;
     overflow: hidden;
+    width: 100%;
   }
 
   .hero-pro__media {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
     z-index: 1;
   }
 
@@ -36,35 +48,44 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: block;
   }
 
   .hero-pro__media-desktop,
   .hero-pro__media-mobile,
   .hero-pro__media-placeholder {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
   }
 
+  /* Default: show mobile, hide desktop */
   .hero-pro__media-desktop {
-    display: block;
+    display: none;
   }
 
   .hero-pro__media-mobile {
     display: block;
   }
 
-  .hero-pro--has-both .hero-pro__media-desktop {
-    display: none;
+  /* When only desktop image exists (no mobile), show desktop */
+  .hero-pro:not(.hero-pro--has-both) .hero-pro__media-desktop {
+    display: block;
   }
 
   .hero-pro__media::after {
     content: '';
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: var(--hero-pro-overlay, rgba(0, 0, 0, 0.3));
     pointer-events: none;
+    z-index: 1;
   }
 
   .hero-pro__container {
@@ -73,11 +94,11 @@
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 80px 24px;
+    padding: 60px 16px;
   }
 
   .hero-pro__content {
-    max-width: 650px;
+    max-width: 100%;
   }
 
   /* Badge */
@@ -259,28 +280,217 @@
     fill: currentColor;
   }
 
-  /* Responsive */
-  @media (min-width: 768px) {
+  /* Responsive - Small Mobile (< 400px) */
+  @media (max-width: 399px) {
+    .hero-pro {
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    .hero-pro__container {
+      padding: 40px 12px;
+    }
+
     .hero-pro__title {
-      font-size: 48px;
+      font-size: 26px;
+      line-height: 1.2;
+      -webkit-line-clamp: 5;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .hero-pro__badge {
+      font-size: 10px;
+      padding: 6px 12px;
+      margin-bottom: 14px;
+    }
+
+    .hero-pro__review {
+      padding: 8px 12px;
+      margin-bottom: 14px;
+    }
+
+    .hero-pro__review-stars svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .hero-pro__review-text {
+      font-size: 11px;
     }
 
     .hero-pro__features {
-      gap: 20px;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .hero-pro__feature {
+      font-size: 11px;
+      gap: 6px;
+    }
+
+    .hero-pro__feature-icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    .hero-pro__feature-icon svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .hero-pro__buttons {
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .hero-pro__btn {
+      padding: 10px 20px;
+      font-size: 12px;
+    }
+
+    .hero-pro__guarantee {
+      font-size: 11px;
+    }
+
+    .hero-pro__guarantee-icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  /* Medium Mobile (400px - 549px) */
+  @media (min-width: 400px) and (max-width: 549px) {
+    .hero-pro {
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    .hero-pro__container {
+      padding: 50px 16px;
+    }
+
+    .hero-pro__title {
+      font-size: 30px;
+    }
+
+    .hero-pro__badge {
+      font-size: 10px;
+      padding: 7px 14px;
+      margin-bottom: 16px;
+    }
+
+    .hero-pro__review {
+      padding: 8px 14px;
+    }
+
+    .hero-pro__review-stars svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .hero-pro__review-text {
+      font-size: 12px;
+    }
+
+    .hero-pro__features {
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .hero-pro__feature {
+      font-size: 12px;
+    }
+
+    .hero-pro__feature-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .hero-pro__btn {
+      padding: 12px 24px;
+      font-size: 13px;
+    }
+
+    .hero-pro__guarantee {
+      font-size: 12px;
+    }
+  }
+
+  /* Large Mobile (550px - 767px) */
+  @media (min-width: 550px) and (max-width: 767px) {
+    .hero-pro__container {
+      padding: 50px 20px;
+    }
+
+    .hero-pro__title {
+      font-size: 36px;
+    }
+
+    .hero-pro__badge {
+      font-size: 11px;
+      padding: 8px 16px;
+    }
+
+    .hero-pro__review {
+      padding: 10px 16px;
+    }
+
+    .hero-pro__review-text {
+      font-size: 13px;
+    }
+
+    .hero-pro__features {
+      gap: 14px;
+    }
+
+    .hero-pro__feature {
+      font-size: 13px;
+    }
+
+    .hero-pro__btn {
+      padding: 13px 28px;
+      font-size: 13px;
+    }
+
+    .hero-pro__guarantee {
+      font-size: 13px;
+    }
+  }
+
+  /* Tablet (768px - 1023px) */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .hero-pro__container {
+      padding: 60px 32px;
+    }
+
+    .hero-pro__title {
+      font-size: 44px;
+    }
+
+    .hero-pro__features {
+      gap: 16px;
     }
 
     .hero-pro__feature {
       font-size: 14px;
     }
+
+    .hero-pro__btn {
+      padding: 14px 32px;
+      font-size: 14px;
+    }
   }
 
+  /* Desktop (1024px+) - Switch to desktop image */
   @media (min-width: 1024px) {
     .hero-pro--has-both .hero-pro__media-mobile {
-      display: none;
+      display: none !important;
     }
 
     .hero-pro--has-both .hero-pro__media-desktop {
-      display: block;
+      display: block !important;
     }
 
     .hero-pro__container {
@@ -288,7 +498,7 @@
     }
 
     .hero-pro__title {
-      font-size: 56px;
+      font-size: 52px;
     }
 
     .hero-pro__badge {
@@ -316,8 +526,13 @@
     .hero-pro__guarantee {
       font-size: 14px;
     }
+
+    .hero-pro__content {
+      max-width: 600px;
+    }
   }
 
+  /* Large Desktop (1400px+) */
   @media (min-width: 1400px) {
     .hero-pro__title {
       font-size: 64px;
@@ -325,6 +540,10 @@
 
     .hero-pro__content {
       max-width: 700px;
+    }
+
+    .hero-pro__container {
+      padding: 120px 80px;
     }
   }
 </style>
