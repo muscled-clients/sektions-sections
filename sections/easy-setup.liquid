@@ -26,7 +26,7 @@
 
   /* Header */
   #sek-easy-setup-{{ section_id }} .sek-es__header {
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
   }
 
@@ -35,9 +35,57 @@
     font-weight: 800;
     line-height: 1.2;
     color: {{ section.settings.heading_color }};
-    margin: 0;
+    margin: 0 0 16px 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+  }
+
+  /* Navigation Arrows */
+  #sek-easy-setup-{{ section_id }} .sek-es__nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+
+  #sek-easy-setup-{{ section_id }} .sek-es__nav-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    padding: 0;
+  }
+
+  #sek-easy-setup-{{ section_id }} .sek-es__nav-btn--prev {
+    background: {{ section.settings.nav_prev_bg | default: 'rgba(255, 255, 255, 0.3)' }};
+  }
+
+  #sek-easy-setup-{{ section_id }} .sek-es__nav-btn--next {
+    background: {{ section.settings.nav_next_bg | default: '#ffffff' }};
+    border: 1px solid {{ section.settings.nav_border_color | default: 'transparent' }};
+  }
+
+  #sek-easy-setup-{{ section_id }} .sek-es__nav-btn svg {
+    width: 20px;
+    height: 20px;
+    color: {{ section.settings.nav_arrow_color | default: '#3d2a47' }};
+  }
+
+  #sek-easy-setup-{{ section_id }} .sek-es__nav-btn:hover {
+    transform: scale(1.05);
+  }
+
+  #sek-easy-setup-{{ section_id }} .sek-es__nav-btn.swiper-button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  #sek-easy-setup-{{ section_id }} .sek-es__nav-btn.swiper-button-disabled:hover {
+    transform: none;
   }
 
   /* Steps Grid - Hidden on mobile, shown on tablet+ */
@@ -175,6 +223,17 @@
     #sek-easy-setup-{{ section_id }} .sek-es__heading {
       font-size: 20px;
       letter-spacing: 0.3px;
+      margin-bottom: 12px;
+    }
+
+    #sek-easy-setup-{{ section_id }} .sek-es__nav-btn {
+      width: 42px;
+      height: 42px;
+    }
+
+    #sek-easy-setup-{{ section_id }} .sek-es__nav-btn svg {
+      width: 16px;
+      height: 16px;
     }
 
     #sek-easy-setup-{{ section_id }} .sek-es__slider {
@@ -338,12 +397,18 @@
     }
 
     #sek-easy-setup-{{ section_id }} .sek-es__header {
+      text-align: center;
       margin-bottom: 32px;
     }
 
     #sek-easy-setup-{{ section_id }} .sek-es__heading {
       font-size: 32px;
       letter-spacing: 1px;
+      margin-bottom: 0;
+    }
+
+    #sek-easy-setup-{{ section_id }} .sek-es__nav {
+      display: none !important;
     }
 
     #sek-easy-setup-{{ section_id }} .sek-es__slider {
@@ -401,12 +466,18 @@
     }
 
     #sek-easy-setup-{{ section_id }} .sek-es__header {
+      text-align: center;
       margin-bottom: 40px;
     }
 
     #sek-easy-setup-{{ section_id }} .sek-es__heading {
       font-size: 38px;
       letter-spacing: 1px;
+      margin-bottom: 0;
+    }
+
+    #sek-easy-setup-{{ section_id }} .sek-es__nav {
+      display: none !important;
     }
 
     #sek-easy-setup-{{ section_id }} .sek-es__slider {
@@ -513,6 +584,21 @@
     {%- if section.settings.heading != blank -%}
       <div class="sek-es__header">
         <h2 class="sek-es__heading">{{ section.settings.heading }}</h2>
+        <!-- Navigation Arrows (Mobile Only) -->
+        <div class="sek-es__nav">
+          <button type="button" class="sek-es__nav-btn sek-es__nav-btn--prev" aria-label="Previous slide">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+          <button type="button" class="sek-es__nav-btn sek-es__nav-btn--next" aria-label="Next slide">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
       </div>
     {%- endif -%}
 
@@ -671,15 +757,22 @@
       const swiperEl = section.querySelector('.sek-es__swiper');
       if (!swiperEl) return;
 
+      const prevBtn = section.querySelector('.sek-es__nav-btn--prev');
+      const nextBtn = section.querySelector('.sek-es__nav-btn--next');
+
       // Only initialize on mobile/tablet (< 768px)
       if (window.innerWidth < 768) {
         if (typeof Swiper !== 'undefined') {
-          new Swiper(swiperEl, {
+          const swiper = new Swiper(swiperEl, {
             slidesPerView: 1.15,
             spaceBetween: 12,
             centeredSlides: false,
             grabCursor: true,
             touchEventsTarget: 'container',
+            navigation: {
+              prevEl: prevBtn,
+              nextEl: nextBtn
+            },
             breakpoints: {
               400: {
                 slidesPerView: 1.25,
@@ -845,6 +938,28 @@
     },
     {
       "type": "header",
+      "content": "Navigation Arrows (Mobile)"
+    },
+    {
+      "type": "color",
+      "id": "nav_prev_bg",
+      "label": "Previous button background",
+      "default": "rgba(255, 255, 255, 0.3)"
+    },
+    {
+      "type": "color",
+      "id": "nav_next_bg",
+      "label": "Next button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_arrow_color",
+      "label": "Arrow color",
+      "default": "#3d2a47"
+    },
+    {
+      "type": "header",
       "content": "Step Number Colors"
     },
     {
@@ -919,7 +1034,6 @@
       ]
     }
   ],
-  
   "presets": [
     {
       "name": "SEK Easy Setup Steps",
