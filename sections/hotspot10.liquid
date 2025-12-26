@@ -6,60 +6,43 @@
 {%- assign section_id = section.id -%}
 
 {% style %}
+  #sek-hotspots-simple-{{ section_id }},
+  #sek-hotspots-simple-{{ section_id }} * {
+    box-sizing: border-box;
+  }
+
   #sek-hotspots-simple-{{ section_id }} {
     padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
     background: {{ section.settings.background_color }};
-  }
-
-  @media (min-width: 750px) {
-    #sek-hotspots-simple-{{ section_id }} {
-      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
-    }
+    overflow: hidden;
+    width: 100%;
   }
 
   #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
     max-width: {{ section.settings.max_width }}px;
     margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  @media (min-width: 750px) {
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
-      padding: 0 40px;
-    }
+    padding: 0 12px;
   }
 
   /* Header */
   #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
     text-align: center;
-    margin-bottom: 30px;
-  }
-
-  @media (min-width: 750px) {
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
-      text-align: left;
-      margin-bottom: 40px;
-    }
+    margin-bottom: 20px;
   }
 
   #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
-    font-size: 30px;
+    font-size: 22px;
     font-weight: 700;
     line-height: 1.2;
     color: {{ section.settings.heading_color }};
     margin: 0;
   }
 
-  @media (min-width: 750px) {
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
-      font-size: 40px;
-    }
-  }
-
   /* Image Container */
   #sek-hotspots-simple-{{ section_id }} .sek-hss__image-wrapper {
     position: relative;
     width: 100%;
+    overflow: hidden;
   }
 
   #sek-hotspots-simple-{{ section_id }} .sek-hss__image {
@@ -78,8 +61,8 @@
   }
 
   #sek-hotspots-simple-{{ section_id }} .sek-hss__image-placeholder svg {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     opacity: 0.3;
   }
 
@@ -91,8 +74,8 @@
   }
 
   #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
     background: {{ section.settings.marker_background }};
     border: none;
     border-radius: 50%;
@@ -108,13 +91,6 @@
     appearance: none;
   }
 
-  @media (min-width: 750px) {
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
-      width: 48px;
-      height: 48px;
-    }
-  }
-
   #sek-hotspots-simple-{{ section_id }} .sek-hss__marker:hover {
     transform: scale(1.1);
   }
@@ -124,20 +100,14 @@
   }
 
   #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 300;
     line-height: 1;
     color: {{ section.settings.marker_icon_color }};
     font-family: Arial, sans-serif;
   }
 
-  @media (min-width: 750px) {
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
-      font-size: 28px;
-    }
-  }
-
-  /* Pulse Animation - subtle, not always visible */
+  /* Pulse Animation - subtle ring effect */
   #sek-hotspots-simple-{{ section_id }} .sek-hss__marker::before {
     content: '';
     position: absolute;
@@ -154,10 +124,10 @@
   @keyframes sekHssPulse-{{ section_id }} {
     0% {
       transform: scale(1);
-      opacity: 0.6;
+      opacity: 0.5;
     }
     100% {
-      transform: scale(2);
+      transform: scale(1.8);
       opacity: 0;
     }
   }
@@ -165,13 +135,13 @@
   /* Tooltip */
   #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip {
     position: absolute;
-    top: calc(100% + 16px);
+    top: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%);
     background: {{ section.settings.tooltip_background }};
-    padding: 12px;
-    min-width: 190px;
-    max-width: 260px;
+    padding: 10px;
+    min-width: 160px;
+    max-width: 200px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
     opacity: 0;
     visibility: hidden;
@@ -180,22 +150,15 @@
     z-index: 20;
   }
 
-  @media (min-width: 750px) {
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip {
-      min-width: 220px;
-      max-width: 300px;
-    }
-  }
-
   /* Tooltip Arrow */
   #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip::before {
     content: '';
     position: absolute;
-    top: -6px;
+    top: -5px;
     left: 50%;
     transform: translateX(-50%) rotate(45deg);
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background: {{ section.settings.tooltip_background }};
   }
 
@@ -207,7 +170,7 @@
   }
 
   /* Desktop Hover */
-  @media (min-width: 990px) {
+  @media (min-width: 1024px) {
     #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot:hover .sek-hss__tooltip {
       opacity: 1;
       visibility: visible;
@@ -217,8 +180,8 @@
 
   /* Tooltip Content */
   #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip-content {
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.4;
     color: {{ section.settings.tooltip_text_color }};
     margin: 0;
   }
@@ -231,39 +194,326 @@
   /* Tooltip Position Variants */
   #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="top"] .sek-hss__tooltip {
     top: auto;
-    bottom: calc(100% + 16px);
+    bottom: calc(100% + 10px);
   }
 
   #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="top"] .sek-hss__tooltip::before {
     top: auto;
-    bottom: -6px;
+    bottom: -5px;
   }
 
   #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="left"] .sek-hss__tooltip {
     top: 50%;
     left: auto;
-    right: calc(100% + 16px);
+    right: calc(100% + 10px);
     transform: translateY(-50%);
   }
 
   #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="left"] .sek-hss__tooltip::before {
     top: 50%;
     left: auto;
-    right: -6px;
+    right: -5px;
     transform: translateY(-50%) rotate(45deg);
   }
 
   #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="right"] .sek-hss__tooltip {
     top: 50%;
-    left: calc(100% + 16px);
+    left: calc(100% + 10px);
     transform: translateY(-50%);
   }
 
   #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="right"] .sek-hss__tooltip::before {
     top: 50%;
-    left: -6px;
+    left: -5px;
     right: auto;
     transform: translateY(-50%) rotate(45deg);
+  }
+
+  /* ========================================
+     RESPONSIVE BREAKPOINTS
+     ======================================== */
+
+  /* Small Mobile (< 400px) */
+  @media (max-width: 399px) {
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
+      padding: 0 10px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
+      margin-bottom: 16px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
+      font-size: 20px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
+      width: 28px;
+      height: 28px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
+      font-size: 16px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip {
+      min-width: 140px;
+      max-width: 180px;
+      padding: 8px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip-content {
+      font-size: 11px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__image-placeholder svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* Medium Mobile (400px - 549px) */
+  @media (min-width: 400px) and (max-width: 549px) {
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
+      padding: 0 14px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
+      margin-bottom: 20px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
+      font-size: 24px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
+      width: 34px;
+      height: 34px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
+      font-size: 18px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip {
+      min-width: 160px;
+      max-width: 200px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip-content {
+      font-size: 12px;
+    }
+  }
+
+  /* Large Mobile (550px - 767px) */
+  @media (min-width: 550px) and (max-width: 767px) {
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
+      padding: 0 18px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
+      margin-bottom: 24px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
+      font-size: 28px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
+      width: 38px;
+      height: 38px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
+      font-size: 20px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip {
+      min-width: 180px;
+      max-width: 240px;
+      padding: 12px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip-content {
+      font-size: 13px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__image-placeholder svg {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  /* Tablet (768px - 1023px) */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    #sek-hotspots-simple-{{ section_id }} {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
+      padding: 0 28px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
+      text-align: left;
+      margin-bottom: 32px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
+      font-size: 34px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
+      width: 42px;
+      height: 42px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
+      font-size: 22px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip {
+      top: calc(100% + 14px);
+      min-width: 200px;
+      max-width: 280px;
+      padding: 12px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip-content {
+      font-size: 14px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="top"] .sek-hss__tooltip {
+      bottom: calc(100% + 14px);
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="left"] .sek-hss__tooltip,
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="right"] .sek-hss__tooltip {
+      top: 50%;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="left"] .sek-hss__tooltip {
+      right: calc(100% + 14px);
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="right"] .sek-hss__tooltip {
+      left: calc(100% + 14px);
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__image-placeholder svg {
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    #sek-hotspots-simple-{{ section_id }} {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
+      padding: 0 40px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
+      text-align: left;
+      margin-bottom: 40px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
+      font-size: 38px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
+      width: 46px;
+      height: 46px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
+      font-size: 26px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip {
+      top: calc(100% + 16px);
+      min-width: 220px;
+      max-width: 300px;
+      padding: 14px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip::before {
+      top: -6px;
+      width: 12px;
+      height: 12px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip-content {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="top"] .sek-hss__tooltip {
+      bottom: calc(100% + 16px);
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="top"] .sek-hss__tooltip::before {
+      bottom: -6px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="left"] .sek-hss__tooltip {
+      right: calc(100% + 16px);
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="left"] .sek-hss__tooltip::before {
+      right: -6px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="right"] .sek-hss__tooltip {
+      left: calc(100% + 16px);
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot[data-position="right"] .sek-hss__tooltip::before {
+      left: -6px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__image-placeholder svg {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
+      padding: 0 60px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
+      margin-bottom: 48px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
+      font-size: 44px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
+      width: 50px;
+      height: 50px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
+      font-size: 28px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip {
+      min-width: 240px;
+      max-width: 320px;
+      padding: 16px;
+    }
+
+    #sek-hotspots-simple-{{ section_id }} .sek-hss__tooltip-content {
+      font-size: 15px;
+    }
   }
 {% endstyle %}
 
