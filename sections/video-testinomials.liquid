@@ -623,6 +623,7 @@
 
       // Count slides for loop
       const slideCount = swiperEl.querySelectorAll('.swiper-slide').length;
+      const middleSlide = Math.floor(slideCount / 2);
 
       // Initialize Swiper with coverflow effect and infinite loop
       const swiper = new Swiper(swiperEl, {
@@ -630,13 +631,14 @@
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: 'auto',
+        initialSlide: middleSlide,
         loop: true,
         loopedSlides: slideCount,
         speed: 500,
         coverflowEffect: {
           rotate: 0,
-          stretch: 50,
-          depth: 100,
+          stretch: 80,
+          depth: 150,
           modifier: 1,
           scale: 0.85,
           slideShadows: false
