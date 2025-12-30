@@ -1,125 +1,129 @@
+{% comment %}
+  SEK Shop the Look - Interactive image with product hotspots
+  Features: Full-width image with clickable hotspots, product card on right, responsive layout
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+
 {% style %}
-  #shopify-section-{{ section.id }} {
-    width: 100%;
-    max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .shop-the-look-section-{{ section.id }} {
-    --stl-bg: {{ section.settings.background_color }};
-    --stl-text: {{ section.settings.text_color }};
-    --stl-heading: {{ section.settings.heading_color }};
-    --stl-card-bg: {{ section.settings.card_background }};
-    --stl-card-border: {{ section.settings.card_border_color }};
-    --stl-dot-bg: {{ section.settings.dot_background }};
-    --stl-dot-active: {{ section.settings.dot_active_color }};
-    --stl-btn-bg: {{ section.settings.button_background }};
-    --stl-btn-text: {{ section.settings.button_text_color }};
-    --stl-sale: {{ section.settings.sale_color }};
-    background-color: var(--stl-bg);
-    color: var(--stl-text);
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-  }
-
-  .shop-the-look-section-{{ section.id }} * {
+  #sek-shop-the-look-{{ section_id }},
+  #sek-shop-the-look-{{ section_id }} * {
     box-sizing: border-box;
   }
 
-  .stl-container-{{ section.id }} {
+  #sek-shop-the-look-{{ section_id }} {
+    padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
+    background: {{ section.settings.background_color }};
+    overflow: hidden;
+    width: 100%;
+  }
+
+  #sek-shop-the-look-{{ section_id }} .sek-stl__container {
     max-width: {{ section.settings.container_width }}px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 12px;
   }
 
-  /* Header - Above section */
-  .stl-header-{{ section.id }} {
+  /* Header */
+  #sek-shop-the-look-{{ section_id }} .sek-stl__header {
     text-align: {{ section.settings.heading_alignment }};
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
-  .stl-heading-{{ section.id }} {
-    font-size: {{ section.settings.heading_size_mobile }}px;
+  #sek-shop-the-look-{{ section_id }} .sek-stl__heading {
+    font-size: 22px;
     font-weight: 600;
-    color: var(--stl-heading);
-    margin: 0;
     line-height: 1.2;
+    color: {{ section.settings.heading_color }};
+    margin: 0;
   }
 
-  /* Desktop Layout */
-  .stl-desktop-{{ section.id }} {
-    display: none;
+  /* Main Layout - Mobile First (stacked) */
+  #sek-shop-the-look-{{ section_id }} .sek-stl__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  .stl-grid-{{ section.id }} {
-    display: grid;
-    grid-template-columns: 1fr {{ section.settings.card_width }}px;
-    gap: {{ section.settings.grid_gap }}px;
-    align-items: start;
-  }
-
-  /* Main Image with Hotspots */
-  .stl-image-wrapper-{{ section.id }} {
+  /* Image Wrapper with Hotspots */
+  #sek-shop-the-look-{{ section_id }} .sek-stl__image-wrapper {
     position: relative;
+    width: 100%;
     border-radius: {{ section.settings.image_border_radius }}px;
     overflow: hidden;
   }
 
-  .stl-main-image-{{ section.id }} {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__image {
     width: 100%;
     height: auto;
     display: block;
   }
 
-  /* Hotspot Dots - Small circles */
-  .stl-hotspot-{{ section.id }} {
-    position: absolute;
-    width: {{ section.settings.hotspot_size }}px;
-    height: {{ section.settings.hotspot_size }}px;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-    z-index: 10;
-  }
-
-  .stl-hotspot-dot-{{ section.id }} {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__image-placeholder {
     width: 100%;
-    height: 100%;
-    background: var(--stl-dot-bg);
-    border: 2px solid rgba(255, 255, 255, 0.9);
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(135deg, #e8e4df 0%, #d4cfc7 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #sek-shop-the-look-{{ section_id }} .sek-stl__image-placeholder svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+  }
+
+  /* Hotspot Markers */
+  #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    cursor: pointer;
+  }
+
+  #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot-dot {
+    width: 28px;
+    height: 28px;
+    background: {{ section.settings.hotspot_background }};
+    border: 3px solid {{ section.settings.hotspot_border_color }};
     border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .stl-hotspot-{{ section.id }}:hover .stl-hotspot-dot-{{ section.id }},
-  .stl-hotspot-{{ section.id }}.active .stl-hotspot-dot-{{ section.id }} {
-    transform: scale(1.15);
-    background: var(--stl-dot-active);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot:hover .sek-stl__hotspot-dot {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
-  /* Product Card Area */
-  .stl-products-{{ section.id }} {
-    position: relative;
-  }
-
-  /* Product Card Wrapper - For stacking cards */
-  .stl-product-cards-wrapper-{{ section.id }} {
-    position: relative;
-    min-height: 400px;
+  #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot.is-active .sek-stl__hotspot-dot {
+    background: {{ section.settings.hotspot_active_background }};
+    border-color: {{ section.settings.hotspot_active_border }};
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
   /* Product Card */
-  .stl-product-card-{{ section.id }} {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-area {
+    width: 100%;
+  }
+
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-cards {
+    position: relative;
+    min-height: 320px;
+  }
+
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-card {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    background: var(--stl-card-bg);
-    border: 1px solid var(--stl-card-border);
+    background: {{ section.settings.card_background }};
+    border: 1px solid {{ section.settings.card_border_color }};
     border-radius: {{ section.settings.card_border_radius }}px;
     overflow: hidden;
     opacity: 0;
@@ -127,409 +131,510 @@
     transition: opacity 0.3s ease, visibility 0.3s ease;
   }
 
-  .stl-product-card-{{ section.id }}.active {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-card.is-active {
     position: relative;
     opacity: 1;
     visibility: visible;
   }
 
-  .stl-product-image-wrapper-{{ section.id }} {
-    position: relative;
-    overflow: hidden;
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-link {
     display: block;
     text-decoration: none;
+    overflow: hidden;
   }
 
-  .stl-product-image-{{ section.id }} {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-image {
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     display: block;
     transition: transform 0.3s ease;
   }
 
-  .stl-product-card-{{ section.id }}:hover .stl-product-image-{{ section.id }} {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-card:hover .sek-stl__product-image {
     transform: scale(1.03);
   }
 
-  .stl-product-image-wrapper-{{ section.id }} svg,
-  .stl-product-image-placeholder {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-image-placeholder {
     width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    display: block;
-    background: #f5f5f5;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .stl-product-info-{{ section.id }} {
-    padding: 16px 20px 20px;
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-image-placeholder svg {
+    width: 50px;
+    height: 50px;
+    opacity: 0.3;
   }
 
-  .stl-product-title-{{ section.id }} {
-    font-size: 15px;
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-info {
+    padding: 14px 16px 18px;
+  }
+
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-title {
+    font-size: 14px;
     font-weight: 600;
-    color: var(--stl-heading);
+    color: {{ section.settings.heading_color }};
     margin: 0 0 8px 0;
     line-height: 1.4;
   }
 
-  .stl-product-title-{{ section.id }} a {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-title a {
     color: inherit;
     text-decoration: none;
   }
 
-  .stl-product-title-{{ section.id }} a:hover {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-title a:hover {
     text-decoration: underline;
   }
 
-  .stl-product-price-{{ section.id }} {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__product-price {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 15px;
+    font-size: 14px;
   }
 
-  .stl-price-current-{{ section.id }} {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__price-current {
     font-weight: 600;
-    color: var(--stl-heading);
+    color: {{ section.settings.heading_color }};
   }
 
-  .stl-price-compare-{{ section.id }} {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__price-compare {
     text-decoration: line-through;
     color: #999;
     font-size: 13px;
   }
 
-  .stl-price-badge-{{ section.id }} {
+  #sek-shop-the-look-{{ section_id }} .sek-stl__price-badge {
     font-size: 11px;
     font-weight: 600;
-    color: var(--stl-sale);
+    color: {{ section.settings.sale_color }};
     background: rgba(248, 58, 58, 0.1);
     padding: 3px 8px;
     border-radius: 4px;
   }
 
-  /* Navigation Arrows - Below card */
-  .stl-nav-{{ section.id }} {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 20px;
-  }
+  /* ========================================
+     RESPONSIVE BREAKPOINTS
+     ======================================== */
 
-  .stl-nav-btn-{{ section.id }} {
-    width: 44px;
-    height: 44px;
-    border: 1px solid var(--stl-card-border);
-    background: var(--stl-card-bg);
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-  }
-
-  .stl-nav-btn-{{ section.id }}:hover {
-    background: var(--stl-btn-bg);
-    border-color: var(--stl-btn-bg);
-  }
-
-  .stl-nav-btn-{{ section.id }} svg {
-    width: 18px;
-    height: 18px;
-    stroke: var(--stl-heading);
-    transition: stroke 0.2s ease;
-  }
-
-  .stl-nav-btn-{{ section.id }}:hover svg {
-    stroke: var(--stl-btn-text);
-  }
-
-  /* Mobile Layout */
-  .stl-mobile-{{ section.id }} {
-    display: block;
-  }
-
-  .stl-mobile-image-wrapper-{{ section.id }} {
-    position: relative;
-    border-radius: {{ section.settings.image_border_radius }}px;
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-
-  .stl-mobile-image-{{ section.id }} {
-    width: 100%;
-    display: block;
-  }
-
-  .stl-mobile-scroll-{{ section.id }} {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 10px 0 20px;
-    margin: 0 -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .stl-mobile-scroll-{{ section.id }}::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  .stl-mobile-scroll-{{ section.id }}::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 2px;
-  }
-
-  .stl-mobile-scroll-{{ section.id }}::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 2px;
-  }
-
-  .stl-mobile-card-{{ section.id }} {
-    flex: 0 0 70vw;
-    max-width: 280px;
-    background: var(--stl-card-bg);
-    border: 1px solid var(--stl-card-border);
-    border-radius: {{ section.settings.card_border_radius }}px;
-    overflow: hidden;
-    scroll-snap-align: start;
-  }
-
-  .stl-mobile-card-image-{{ section.id }} {
-    width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-  }
-
-  .stl-mobile-card-{{ section.id }} svg,
-  .stl-mobile-card-image-placeholder {
-    width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    display: block;
-    background: #f5f5f5;
-  }
-
-  .stl-mobile-card-info-{{ section.id }} {
-    padding: 15px;
-  }
-
-  .stl-mobile-card-title-{{ section.id }} {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--stl-heading);
-    margin: 0 0 8px 0;
-  }
-
-  .stl-mobile-card-title-{{ section.id }} a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .stl-mobile-card-price-{{ section.id }} {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-  }
-
-  /* Responsive */
-  @media (min-width: 750px) {
-    .stl-mobile-{{ section.id }} {
-      display: none;
+  /* Small Mobile (< 400px) */
+  @media (max-width: 399px) {
+    #sek-shop-the-look-{{ section_id }} .sek-stl__container {
+      padding: 0 10px;
     }
 
-    .stl-desktop-{{ section.id }} {
-      display: block;
+    #sek-shop-the-look-{{ section_id }} .sek-stl__header {
+      margin-bottom: 16px;
     }
 
-    .stl-heading-{{ section.id }} {
+    #sek-shop-the-look-{{ section_id }} .sek-stl__heading {
+      font-size: 20px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__grid {
+      gap: 16px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot-dot {
+      width: 24px;
+      height: 24px;
+      border-width: 2px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-cards {
+      min-height: 280px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-info {
+      padding: 12px 14px 16px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-title {
+      font-size: 13px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-price {
+      font-size: 13px;
+    }
+  }
+
+  /* Medium Mobile (400px - 549px) */
+  @media (min-width: 400px) and (max-width: 549px) {
+    #sek-shop-the-look-{{ section_id }} .sek-stl__container {
+      padding: 0 14px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__header {
+      margin-bottom: 18px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__heading {
+      font-size: 24px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot-dot {
+      width: 28px;
+      height: 28px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-cards {
+      min-height: 320px;
+    }
+  }
+
+  /* Large Mobile (550px - 767px) */
+  @media (min-width: 550px) and (max-width: 767px) {
+    #sek-shop-the-look-{{ section_id }} .sek-stl__container {
+      padding: 0 18px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__header {
+      margin-bottom: 22px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__heading {
+      font-size: 28px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__grid {
+      gap: 24px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot-dot {
+      width: 32px;
+      height: 32px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-cards {
+      min-height: 380px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-info {
+      padding: 16px 18px 20px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-title {
+      font-size: 15px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-price {
+      font-size: 15px;
+    }
+  }
+
+  /* Tablet (768px+) - Switch to side-by-side layout */
+  @media (min-width: 768px) {
+    #sek-shop-the-look-{{ section_id }} {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__container {
+      padding: 0 28px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__header {
+      margin-bottom: 28px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__heading {
+      font-size: 32px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__grid {
+      flex-direction: row;
+      gap: {{ section.settings.grid_gap }}px;
+      align-items: flex-start;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__image-wrapper {
+      flex: 1;
+      min-width: 0;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-area {
+      width: 300px;
+      flex-shrink: 0;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot-dot {
+      width: 32px;
+      height: 32px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-cards {
+      min-height: 400px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-info {
+      padding: 18px 20px 22px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-title {
+      font-size: 16px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-price {
+      font-size: 16px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    #sek-shop-the-look-{{ section_id }} .sek-stl__container {
+      padding: 0 40px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__header {
+      margin-bottom: 36px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__heading {
       font-size: {{ section.settings.heading_size_desktop }}px;
     }
 
-    .stl-container-{{ section.id }} {
-      padding: 0 40px;
+    #sek-shop-the-look-{{ section_id }} .sek-stl__grid {
+      gap: {{ section.settings.grid_gap | plus: 20 }}px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-area {
+      width: {{ section.settings.card_width }}px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot-dot {
+      width: 36px;
+      height: 36px;
+      border-width: 4px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-cards {
+      min-height: 450px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-info {
+      padding: 20px 24px 26px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-title {
+      font-size: 17px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-price {
+      font-size: 17px;
     }
   }
 
-  @media (min-width: 1024px) {
-    .stl-container-{{ section.id }} {
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    #sek-shop-the-look-{{ section_id }} .sek-stl__container {
       padding: 0 60px;
     }
 
-    .stl-grid-{{ section.id }} {
-      gap: {{ section.settings.grid_gap | plus: 20 }}px;
+    #sek-shop-the-look-{{ section_id }} .sek-stl__header {
+      margin-bottom: 44px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__heading {
+      font-size: {{ section.settings.heading_size_desktop | plus: 6 }}px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__grid {
+      gap: {{ section.settings.grid_gap | plus: 40 }}px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot-dot {
+      width: 40px;
+      height: 40px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-cards {
+      min-height: 500px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-info {
+      padding: 22px 26px 28px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-title {
+      font-size: 18px;
+    }
+
+    #sek-shop-the-look-{{ section_id }} .sek-stl__product-price {
+      font-size: 18px;
     }
   }
 {% endstyle %}
 
-<section class="shop-the-look-section-{{ section.id }}" data-section-id="{{ section.id }}">
-  <div class="stl-container-{{ section.id }}">
-    <!-- Header - Above image -->
+<section id="sek-shop-the-look-{{ section_id }}" class="sek-shop-the-look">
+  <div class="sek-stl__container">
+    <!-- Header -->
     {%- if section.settings.heading != blank -%}
-      <div class="stl-header-{{ section.id }}">
-        <h2 class="stl-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+      <div class="sek-stl__header">
+        <h2 class="sek-stl__heading">{{ section.settings.heading }}</h2>
       </div>
     {%- endif -%}
 
-    <!-- Desktop Layout -->
-    <div class="stl-desktop-{{ section.id }}" data-desktop>
-      <div class="stl-grid-{{ section.id }}">
-        <!-- Main Image with Hotspots -->
-        <div class="stl-image-wrapper-{{ section.id }}">
-          {%- if section.settings.main_image != blank -%}
-            <img
-              class="stl-main-image-{{ section.id }}"
-              src="{{ section.settings.main_image | image_url: width: 1200 }}"
-              alt="{{ section.settings.heading | default: 'Shop the Look' | escape }}"
-              loading="lazy"
-            >
-          {%- else -%}
-            {{ 'collection-1' | placeholder_svg_tag: 'stl-main-image-' | append: section.id }}
-          {%- endif -%}
-
-          {%- assign product_blocks = section.blocks | where: 'type', 'product' -%}
-          {%- for block in product_blocks -%}
-            <div
-              class="stl-hotspot-{{ section.id }}{% if forloop.first %} active{% endif %}"
-              style="left: {{ block.settings.hotspot_x }}%; top: {{ block.settings.hotspot_y }}%;"
-              data-hotspot="{{ forloop.index0 }}"
-              aria-label="View product {{ forloop.index }}"
-              {{ block.shopify_attributes }}
-            >
-              <div class="stl-hotspot-dot-{{ section.id }}"></div>
-            </div>
-          {%- endfor -%}
-        </div>
-
-        <!-- Product Cards + Navigation -->
-        <div class="stl-products-{{ section.id }}">
-          <div class="stl-product-cards-wrapper-{{ section.id }}">
-            {%- for block in product_blocks -%}
-              {%- assign product = block.settings.product -%}
-              <div
-                class="stl-product-card-{{ section.id }}{% if forloop.first %} active{% endif %}"
-                data-product-card="{{ forloop.index0 }}"
-              >
-                {%- if product != blank -%}
-                  <a href="{{ product.url }}" class="stl-product-image-wrapper-{{ section.id }}">
-                    <img
-                      class="stl-product-image-{{ section.id }}"
-                      src="{{ product.featured_image | image_url: width: 600 }}"
-                      alt="{{ product.title | escape }}"
-                      loading="lazy"
-                    >
-                  </a>
-                  <div class="stl-product-info-{{ section.id }}">
-                    <h3 class="stl-product-title-{{ section.id }}">
-                      <a href="{{ product.url }}">{{ product.title }}</a>
-                    </h3>
-                    <div class="stl-product-price-{{ section.id }}">
-                      <span class="stl-price-current-{{ section.id }}">{{ product.price | money }}</span>
-                      {%- if product.compare_at_price > product.price -%}
-                        <span class="stl-price-compare-{{ section.id }}">{{ product.compare_at_price | money }}</span>
-                      {%- endif -%}
-                    </div>
-                  </div>
-                {%- else -%}
-                  <div class="stl-product-image-wrapper-{{ section.id }}">
-                    {{ 'product-1' | placeholder_svg_tag: 'stl-product-image-placeholder' }}
-                  </div>
-                  <div class="stl-product-info-{{ section.id }}">
-                    <h3 class="stl-product-title-{{ section.id }}">Product Title</h3>
-                    <div class="stl-product-price-{{ section.id }}">
-                      <span class="stl-price-current-{{ section.id }}">$99.00</span>
-                    </div>
-                  </div>
-                {%- endif -%}
-              </div>
-            {%- endfor -%}
-          </div>
-
-          <!-- Navigation Arrows - Below card -->
-          {%- if product_blocks.size > 1 -%}
-            <div class="stl-nav-{{ section.id }}">
-              <button class="stl-nav-btn-{{ section.id }}" data-prev aria-label="Previous product">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              <button class="stl-nav-btn-{{ section.id }}" data-next aria-label="Next product">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="9 6 15 12 9 18"></polyline>
-                </svg>
-              </button>
-            </div>
-          {%- endif -%}
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Layout -->
-    <div class="stl-mobile-{{ section.id }}" data-mobile>
-      <div class="stl-mobile-image-wrapper-{{ section.id }}">
+    <!-- Main Layout -->
+    <div class="sek-stl__grid">
+      <!-- Image with Hotspots -->
+      <div class="sek-stl__image-wrapper">
         {%- if section.settings.main_image != blank -%}
           <img
-            class="stl-mobile-image-{{ section.id }}"
-            src="{{ section.settings.main_image | image_url: width: 800 }}"
+            class="sek-stl__image"
+            src="{{ section.settings.main_image | image_url: width: 1200 }}"
             alt="{{ section.settings.heading | default: 'Shop the Look' | escape }}"
             loading="lazy"
+            width="{{ section.settings.main_image.width }}"
+            height="{{ section.settings.main_image.height }}"
           >
         {%- else -%}
-          {{ 'collection-1' | placeholder_svg_tag: 'stl-mobile-image-' | append: section.id }}
+          <div class="sek-stl__image-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+          </div>
         {%- endif -%}
 
+        <!-- Hotspots -->
+        {%- assign product_blocks = section.blocks | where: 'type', 'product' -%}
         {%- for block in product_blocks -%}
           <div
-            class="stl-hotspot-{{ section.id }}{% if forloop.first %} active{% endif %}"
+            class="sek-stl__hotspot{% if forloop.first %} is-active{% endif %}"
             style="left: {{ block.settings.hotspot_x }}%; top: {{ block.settings.hotspot_y }}%;"
-            data-mobile-hotspot="{{ forloop.index0 }}"
+            data-hotspot-index="{{ forloop.index0 }}"
             aria-label="View product {{ forloop.index }}"
+            role="button"
+            tabindex="0"
+            {{ block.shopify_attributes }}
           >
-            <div class="stl-hotspot-dot-{{ section.id }}"></div>
+            <div class="sek-stl__hotspot-dot"></div>
           </div>
         {%- endfor -%}
+
+        {%- if section.blocks.size == 0 -%}
+          <!-- Default placeholder hotspots -->
+          <div class="sek-stl__hotspot is-active" style="left: 35%; top: 25%;" data-hotspot-index="0" role="button" tabindex="0">
+            <div class="sek-stl__hotspot-dot"></div>
+          </div>
+          <div class="sek-stl__hotspot" style="left: 30%; top: 50%;" data-hotspot-index="1" role="button" tabindex="0">
+            <div class="sek-stl__hotspot-dot"></div>
+          </div>
+          <div class="sek-stl__hotspot" style="left: 45%; top: 80%;" data-hotspot-index="2" role="button" tabindex="0">
+            <div class="sek-stl__hotspot-dot"></div>
+          </div>
+        {%- endif -%}
       </div>
 
-      <div class="stl-mobile-scroll-{{ section.id }}" data-mobile-scroll>
-        {%- for block in product_blocks -%}
-          {%- assign product = block.settings.product -%}
-          <div class="stl-mobile-card-{{ section.id }}" data-mobile-card="{{ forloop.index0 }}">
-            {%- if product != blank -%}
-              <a href="{{ product.url }}">
-                <img
-                  class="stl-mobile-card-image-{{ section.id }}"
-                  src="{{ product.featured_image | image_url: width: 400 }}"
-                  alt="{{ product.title | escape }}"
-                  loading="lazy"
-                >
-              </a>
-              <div class="stl-mobile-card-info-{{ section.id }}">
-                <h3 class="stl-mobile-card-title-{{ section.id }}">
-                  <a href="{{ product.url }}">{{ product.title }}</a>
-                </h3>
-                <div class="stl-mobile-card-price-{{ section.id }}">
-                  <span class="stl-price-current-{{ section.id }}">{{ product.price | money }}</span>
-                  {%- if product.compare_at_price > product.price -%}
-                    <span class="stl-price-compare-{{ section.id }}">{{ product.compare_at_price | money }}</span>
-                  {%- endif -%}
+      <!-- Product Card Area -->
+      <div class="sek-stl__product-area">
+        <div class="sek-stl__product-cards">
+          {%- for block in product_blocks -%}
+            {%- assign product = block.settings.product -%}
+            <div
+              class="sek-stl__product-card{% if forloop.first %} is-active{% endif %}"
+              data-product-index="{{ forloop.index0 }}"
+            >
+              {%- if product != blank -%}
+                <a href="{{ product.url }}" class="sek-stl__product-link">
+                  <img
+                    class="sek-stl__product-image"
+                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    alt="{{ product.title | escape }}"
+                    loading="lazy"
+                  >
+                </a>
+                <div class="sek-stl__product-info">
+                  <h3 class="sek-stl__product-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
+                  <div class="sek-stl__product-price">
+                    <span class="sek-stl__price-current">{{ product.price | money }}</span>
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="sek-stl__price-compare">{{ product.compare_at_price | money }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- else -%}
+                <div class="sek-stl__product-link">
+                  <div class="sek-stl__product-image-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <div class="sek-stl__product-info">
+                  <h3 class="sek-stl__product-title">Product Title</h3>
+                  <div class="sek-stl__product-price">
+                    <span class="sek-stl__price-current">$99.00</span>
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+
+          {%- if section.blocks.size == 0 -%}
+            <!-- Default placeholder cards -->
+            <div class="sek-stl__product-card is-active" data-product-index="0">
+              <div class="sek-stl__product-link">
+                <div class="sek-stl__product-image-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
                 </div>
               </div>
-            {%- else -%}
-              {{ 'product-1' | placeholder_svg_tag: 'stl-mobile-card-image-placeholder' }}
-              <div class="stl-mobile-card-info-{{ section.id }}">
-                <h3 class="stl-mobile-card-title-{{ section.id }}">Product Title</h3>
-                <div class="stl-mobile-card-price-{{ section.id }}">
-                  <span class="stl-price-current-{{ section.id }}">$99.00</span>
+              <div class="sek-stl__product-info">
+                <h3 class="sek-stl__product-title">Sweater</h3>
+                <div class="sek-stl__product-price">
+                  <span class="sek-stl__price-current">$89.00</span>
                 </div>
               </div>
-            {%- endif -%}
-          </div>
-        {%- endfor -%}
+            </div>
+            <div class="sek-stl__product-card" data-product-index="1">
+              <div class="sek-stl__product-link">
+                <div class="sek-stl__product-image-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                </div>
+              </div>
+              <div class="sek-stl__product-info">
+                <h3 class="sek-stl__product-title">Cardigan</h3>
+                <div class="sek-stl__product-price">
+                  <span class="sek-stl__price-current">$108.00</span>
+                </div>
+              </div>
+            </div>
+            <div class="sek-stl__product-card" data-product-index="2">
+              <div class="sek-stl__product-link">
+                <div class="sek-stl__product-image-placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                </div>
+              </div>
+              <div class="sek-stl__product-info">
+                <h3 class="sek-stl__product-title">Pants</h3>
+                <div class="sek-stl__product-price">
+                  <span class="sek-stl__price-current">$75.00</span>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
       </div>
     </div>
   </div>
@@ -538,102 +643,63 @@
 <script>
   (function() {
     function initShopTheLook() {
-      const section = document.querySelector('[data-section-id="{{ section.id }}"]');
-      if (!section || section.dataset.initialized) return;
+      const sectionId = '{{ section_id }}';
+      const section = document.getElementById('sek-shop-the-look-' + sectionId);
+      if (!section || section.dataset.initialized === 'true') return;
       section.dataset.initialized = 'true';
 
-      const hotspots = section.querySelectorAll('[data-hotspot]');
-      const mobileHotspots = section.querySelectorAll('[data-mobile-hotspot]');
-      const productCards = section.querySelectorAll('[data-product-card]');
-      const prevBtn = section.querySelector('[data-prev]');
-      const nextBtn = section.querySelector('[data-next]');
-      const mobileScroll = section.querySelector('[data-mobile-scroll]');
-      const mobileCards = section.querySelectorAll('[data-mobile-card]');
+      const hotspots = section.querySelectorAll('[data-hotspot-index]');
+      const productCards = section.querySelectorAll('[data-product-index]');
+
+      if (hotspots.length === 0 || productCards.length === 0) return;
 
       let currentIndex = 0;
-      const totalProducts = productCards.length;
-
-      if (totalProducts === 0) return;
 
       function switchProduct(index) {
-        if (index < 0) index = totalProducts - 1;
-        if (index >= totalProducts) index = 0;
+        if (index < 0 || index >= productCards.length) return;
 
         // Update hotspots
         hotspots.forEach((hotspot, i) => {
-          hotspot.classList.toggle('active', i === index);
-        });
-
-        mobileHotspots.forEach((hotspot, i) => {
-          hotspot.classList.toggle('active', i === index);
+          hotspot.classList.toggle('is-active', i === index);
         });
 
         // Update product cards
         productCards.forEach((card, i) => {
-          card.classList.toggle('active', i === index);
+          card.classList.toggle('is-active', i === index);
         });
-
-        // Scroll mobile cards
-        if (mobileScroll && mobileCards[index]) {
-          mobileCards[index].scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'start'
-          });
-        }
 
         currentIndex = index;
       }
 
-      // Hotspot clicks
-      hotspots.forEach((hotspot, index) => {
-        hotspot.addEventListener('click', () => switchProduct(index));
-      });
+      // Hotspot click handlers
+      hotspots.forEach((hotspot) => {
+        const index = parseInt(hotspot.dataset.hotspotIndex);
 
-      mobileHotspots.forEach((hotspot, index) => {
-        hotspot.addEventListener('click', () => {
+        hotspot.addEventListener('click', (e) => {
+          e.preventDefault();
           switchProduct(index);
         });
+
+        // Keyboard support
+        hotspot.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            switchProduct(index);
+          }
+        });
       });
 
-      // Navigation buttons
-      if (prevBtn) {
-        prevBtn.addEventListener('click', () => switchProduct(currentIndex - 1));
-      }
-
-      if (nextBtn) {
-        nextBtn.addEventListener('click', () => switchProduct(currentIndex + 1));
-      }
-
-      // Mobile scroll sync
-      if (mobileScroll) {
-        let scrollTimeout;
-        mobileScroll.addEventListener('scroll', () => {
-          clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => {
-            const scrollLeft = mobileScroll.scrollLeft;
-            const cardWidth = mobileCards[0]?.offsetWidth + 16 || 280;
-            const newIndex = Math.round(scrollLeft / cardWidth);
-            if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalProducts) {
-              currentIndex = newIndex;
-              hotspots.forEach((h, i) => h.classList.toggle('active', i === currentIndex));
-              mobileHotspots.forEach((h, i) => h.classList.toggle('active', i === currentIndex));
-              productCards.forEach((c, i) => c.classList.toggle('active', i === currentIndex));
-            }
-          }, 100);
-        });
-      }
-
-      // Keyboard navigation
-      section.setAttribute('tabindex', '0');
+      // Keyboard navigation for the section
       section.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') {
           e.preventDefault();
-          switchProduct(currentIndex - 1);
+          const newIndex = currentIndex > 0 ? currentIndex - 1 : productCards.length - 1;
+          switchProduct(newIndex);
         }
         if (e.key === 'ArrowRight') {
           e.preventDefault();
-          switchProduct(currentIndex + 1);
+          const newIndex = currentIndex < productCards.length - 1 ? currentIndex + 1 : 0;
+          switchProduct(newIndex);
         }
       });
     }
@@ -647,9 +713,9 @@
 
     // Shopify theme editor support
     document.addEventListener('shopify:section:load', function(e) {
-      if (e.target.querySelector('[data-section-id="{{ section.id }}"]')) {
-        const section = e.target.querySelector('[data-section-id="{{ section.id }}"]');
-        if (section) section.removeAttribute('data-initialized');
+      const section = e.target.querySelector('[id^="sek-shop-the-look-"]');
+      if (section) {
+        section.removeAttribute('data-initialized');
         initShopTheLook();
       }
     });
@@ -659,12 +725,18 @@
 {% schema %}
 {
   "name": "SEK Shop the Look",
-  "class": "shop-the-look-section",
+  "tag": "section",
+  "class": "sek-shop-the-look-section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
     {
       "type": "image_picker",
       "id": "main_image",
-      "label": "Main image"
+      "label": "Main image",
+      "info": "Recommended: Portrait image with model wearing products"
     },
     {
       "type": "text",
@@ -710,7 +782,7 @@
     {
       "type": "range",
       "id": "card_width",
-      "label": "Product card width",
+      "label": "Product card width (desktop)",
       "min": 280,
       "max": 450,
       "step": 10,
@@ -738,37 +810,47 @@
       "unit": "px"
     },
     {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
       "type": "range",
       "id": "padding_top",
-      "label": "Padding top",
-      "min": 20,
-      "max": 100,
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 120,
       "step": 5,
-      "default": 50,
+      "default": 60,
       "unit": "px"
     },
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "Padding bottom",
-      "min": 20,
-      "max": 100,
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 120,
       "step": 5,
-      "default": 50,
+      "default": 60,
       "unit": "px"
     },
     {
-      "type": "header",
-      "content": "Hotspots"
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 40,
+      "unit": "px"
     },
     {
       "type": "range",
-      "id": "hotspot_size",
-      "label": "Hotspot size",
-      "min": 12,
-      "max": 28,
-      "step": 2,
-      "default": 16,
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 40,
       "unit": "px"
     },
     {
@@ -782,17 +864,7 @@
       "min": 20,
       "max": 48,
       "step": 2,
-      "default": 28,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "heading_size_mobile",
-      "label": "Heading size (mobile)",
-      "min": 18,
-      "max": 36,
-      "step": 2,
-      "default": 22,
+      "default": 36,
       "unit": "px"
     },
     {
@@ -807,15 +879,9 @@
     },
     {
       "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#666666"
-    },
-    {
-      "type": "color",
       "id": "heading_color",
       "label": "Heading color",
-      "default": "#000000"
+      "default": "#1a1a1a"
     },
     {
       "type": "color",
@@ -831,33 +897,37 @@
     },
     {
       "type": "color",
-      "id": "dot_background",
-      "label": "Hotspot color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "dot_active_color",
-      "label": "Hotspot active color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "button_background",
-      "label": "Arrow hover background",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "button_text_color",
-      "label": "Arrow hover icon color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
       "id": "sale_color",
       "label": "Sale badge color",
       "default": "#f83a3a"
+    },
+    {
+      "type": "header",
+      "content": "Hotspot Colors"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_background",
+      "label": "Hotspot background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_border_color",
+      "label": "Hotspot border color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_active_background",
+      "label": "Hotspot active background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_active_border",
+      "label": "Hotspot active border",
+      "default": "#ffffff"
     }
   ],
   "blocks": [
@@ -904,22 +974,22 @@
         {
           "type": "product",
           "settings": {
-            "hotspot_x": 30,
-            "hotspot_y": 35
-          }
-        },
-        {
-          "type": "product",
-          "settings": {
-            "hotspot_x": 55,
-            "hotspot_y": 60
-          }
-        },
-        {
-          "type": "product",
-          "settings": {
-            "hotspot_x": 70,
+            "hotspot_x": 35,
             "hotspot_y": 25
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "hotspot_x": 30,
+            "hotspot_y": 50
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "hotspot_x": 45,
+            "hotspot_y": 80
           }
         }
       ]
