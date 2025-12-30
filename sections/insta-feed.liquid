@@ -1,12 +1,20 @@
 {% comment %}
   SEK Instafeed Grid - Instagram-style masonry grid with header
+  Features: Responsive grid, video support, hover effects
 {% endcomment %}
 
 {%- assign section_id = section.id -%}
 
 {% style %}
+  #sek-ig-{{ section_id }},
+  #sek-ig-{{ section_id }} * {
+    box-sizing: border-box;
+  }
+
   #sek-ig-{{ section_id }} {
     background: {{ section.settings.background_color }};
+    overflow: hidden;
+    width: 100%;
   }
 
   #sek-ig-{{ section_id }} .sek-ig__container {
@@ -15,27 +23,9 @@
     padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
     {%- else -%}
     max-width: {{ section.settings.max_width }}px;
-    padding: {{ section.settings.padding_top_mobile }}px 16px {{ section.settings.padding_bottom_mobile }}px;
+    padding: {{ section.settings.padding_top_mobile }}px 12px {{ section.settings.padding_bottom_mobile }}px;
     margin: 0 auto;
     {%- endif -%}
-  }
-
-  @media (min-width: 750px) {
-    #sek-ig-{{ section_id }} .sek-ig__container {
-      {%- if section.settings.full_width -%}
-      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
-      {%- else -%}
-      padding: {{ section.settings.padding_top }}px 40px {{ section.settings.padding_bottom }}px;
-      {%- endif -%}
-    }
-  }
-
-  @media (min-width: 1200px) {
-    #sek-ig-{{ section_id }} .sek-ig__container {
-      {%- unless section.settings.full_width -%}
-      padding: {{ section.settings.padding_top }}px 60px {{ section.settings.padding_bottom }}px;
-      {%- endunless -%}
-    }
   }
 
   /* Header */
@@ -43,41 +33,21 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     {%- if section.settings.full_width -%}
-    padding: 0 16px;
+    padding: 0 12px;
     {%- endif -%}
-  }
-
-  @media (min-width: 750px) {
-    #sek-ig-{{ section_id }} .sek-ig__header {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 32px;
-      {%- if section.settings.full_width -%}
-      padding: 0 40px;
-      {%- endif -%}
-    }
-  }
-
-  @media (min-width: 1200px) {
-    #sek-ig-{{ section_id }} .sek-ig__header {
-      {%- if section.settings.full_width -%}
-      padding: 0 60px;
-      {%- endif -%}
-    }
   }
 
   #sek-ig-{{ section_id }} .sek-ig__header-content {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   #sek-ig-{{ section_id }} .sek-ig__label {
-    font-size: 12px;
-    font-weight: 400;
+    font-size: 10px;
+    font-weight: 500;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: {{ section.settings.label_color }};
@@ -85,36 +55,18 @@
   }
 
   #sek-ig-{{ section_id }} .sek-ig__heading {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1.1;
     color: {{ section.settings.heading_color }};
     margin: 0;
   }
 
-  @media (min-width: 750px) {
-    #sek-ig-{{ section_id }} .sek-ig__heading {
-      font-size: 48px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-ig-{{ section_id }} .sek-ig__heading {
-      font-size: 56px;
-    }
-  }
-
   #sek-ig-{{ section_id }} .sek-ig__description {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.5;
     color: {{ section.settings.text_color }};
     margin: 0;
-  }
-
-  @media (min-width: 750px) {
-    #sek-ig-{{ section_id }} .sek-ig__description {
-      font-size: 18px;
-    }
   }
 
   #sek-ig-{{ section_id }} .sek-ig__button {
@@ -123,21 +75,15 @@
     justify-content: center;
     background: {{ section.settings.button_bg }};
     color: {{ section.settings.button_text_color }};
-    padding: 14px 48px;
-    font-size: 14px;
-    font-weight: 400;
+    padding: 12px 32px;
+    font-size: 13px;
+    font-weight: 500;
     text-decoration: none;
     border-radius: 100px;
     transition: background 0.3s ease;
     white-space: nowrap;
     margin-top: 8px;
-  }
-
-  @media (min-width: 750px) {
-    #sek-ig-{{ section_id }} .sek-ig__button {
-      padding: 18px 72px;
-      margin-top: 0;
-    }
+    align-self: flex-start;
   }
 
   #sek-ig-{{ section_id }} .sek-ig__button:hover {
@@ -149,18 +95,6 @@
     display: grid;
     grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
     gap: {{ section.settings.gap }}px;
-  }
-
-  @media (min-width: 750px) {
-    #sek-ig-{{ section_id }} .sek-ig__grid {
-      grid-template-columns: repeat({{ section.settings.columns_tablet }}, 1fr);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-ig-{{ section_id }} .sek-ig__grid {
-      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
-    }
   }
 
   /* Grid Items */
@@ -192,10 +126,10 @@
   /* Video Icon */
   #sek-ig-{{ section_id }} .sek-ig__video-icon {
     position: absolute;
-    bottom: 12px;
-    left: 12px;
-    width: 32px;
-    height: 32px;
+    bottom: 8px;
+    left: 8px;
+    width: 28px;
+    height: 28px;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 50%;
     display: flex;
@@ -206,8 +140,8 @@
   }
 
   #sek-ig-{{ section_id }} .sek-ig__video-icon svg {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     fill: #ffffff;
   }
 
@@ -250,8 +184,8 @@
   }
 
   #sek-ig-{{ section_id }} .sek-ig__overlay-icon svg {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     fill: #ffffff;
   }
 
@@ -271,10 +205,10 @@
   /* Play/Pause Button */
   #sek-ig-{{ section_id }} .sek-ig__play-btn {
     position: absolute;
-    bottom: 12px;
-    left: 12px;
-    width: 36px;
-    height: 36px;
+    bottom: 8px;
+    left: 8px;
+    width: 32px;
+    height: 32px;
     background: rgba(0, 0, 0, 0.4);
     border: none;
     border-radius: 50%;
@@ -293,8 +227,8 @@
   }
 
   #sek-ig-{{ section_id }} .sek-ig__play-btn svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     fill: #ffffff;
   }
 
@@ -314,6 +248,278 @@
     display: block;
   }
 
+  /* ========================================
+     RESPONSIVE BREAKPOINTS
+     ======================================== */
+
+  /* Small Mobile (< 400px) */
+  @media (max-width: 399px) {
+    #sek-ig-{{ section_id }} .sek-ig__container {
+      {%- unless section.settings.full_width -%}
+      padding-left: 10px;
+      padding-right: 10px;
+      {%- endunless -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__header {
+      margin-bottom: 16px;
+      {%- if section.settings.full_width -%}
+      padding: 0 10px;
+      {%- endif -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__heading {
+      font-size: 20px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__description {
+      font-size: 12px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__button {
+      padding: 10px 24px;
+      font-size: 12px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__overlay-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__play-btn {
+      width: 28px;
+      height: 28px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__play-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  /* Medium Mobile (400px - 549px) */
+  @media (min-width: 400px) and (max-width: 549px) {
+    #sek-ig-{{ section_id }} .sek-ig__container {
+      {%- unless section.settings.full_width -%}
+      padding-left: 14px;
+      padding-right: 14px;
+      {%- endunless -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__header {
+      margin-bottom: 20px;
+      gap: 14px;
+      {%- if section.settings.full_width -%}
+      padding: 0 14px;
+      {%- endif -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__heading {
+      font-size: 26px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__description {
+      font-size: 13px;
+    }
+  }
+
+  /* Large Mobile (550px - 767px) */
+  @media (min-width: 550px) and (max-width: 767px) {
+    #sek-ig-{{ section_id }} .sek-ig__container {
+      {%- unless section.settings.full_width -%}
+      padding-left: 18px;
+      padding-right: 18px;
+      {%- endunless -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__header {
+      margin-bottom: 24px;
+      {%- if section.settings.full_width -%}
+      padding: 0 18px;
+      {%- endif -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__label {
+      font-size: 11px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__heading {
+      font-size: 32px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__description {
+      font-size: 14px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__button {
+      padding: 14px 40px;
+      font-size: 14px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__overlay-icon svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__play-btn {
+      width: 34px;
+      height: 34px;
+      bottom: 10px;
+      left: 10px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__play-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    #sek-ig-{{ section_id }} .sek-ig__container {
+      {%- if section.settings.full_width -%}
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+      {%- else -%}
+      padding: {{ section.settings.padding_top }}px 28px {{ section.settings.padding_bottom }}px;
+      {%- endif -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 28px;
+      {%- if section.settings.full_width -%}
+      padding: 0 28px;
+      {%- endif -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__header-content {
+      gap: 8px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__label {
+      font-size: 12px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__heading {
+      font-size: 40px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__description {
+      font-size: 16px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__button {
+      padding: 16px 56px;
+      font-size: 14px;
+      margin-top: 0;
+      align-self: auto;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__grid {
+      grid-template-columns: repeat({{ section.settings.columns_tablet }}, 1fr);
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__overlay-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__play-btn {
+      width: 36px;
+      height: 36px;
+      bottom: 12px;
+      left: 12px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__play-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    #sek-ig-{{ section_id }} .sek-ig__container {
+      {%- unless section.settings.full_width -%}
+      padding-left: 40px;
+      padding-right: 40px;
+      {%- endunless -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__header {
+      margin-bottom: 32px;
+      {%- if section.settings.full_width -%}
+      padding: 0 40px;
+      {%- endif -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__heading {
+      font-size: 48px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__description {
+      font-size: 17px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__button {
+      padding: 18px 64px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    #sek-ig-{{ section_id }} .sek-ig__container {
+      {%- unless section.settings.full_width -%}
+      padding-left: 60px;
+      padding-right: 60px;
+      {%- endunless -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__header {
+      margin-bottom: 40px;
+      {%- if section.settings.full_width -%}
+      padding: 0 60px;
+      {%- endif -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__heading {
+      font-size: 56px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__description {
+      font-size: 18px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__button {
+      padding: 18px 72px;
+      font-size: 15px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__overlay-icon svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__play-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__play-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
 {% endstyle %}
 
 <div id="sek-ig-{{ section_id }}" class="sek-ig">
@@ -375,7 +581,7 @@
             srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
                     {{ block.settings.image | image_url: width: 600 }} 600w,
                     {{ block.settings.image | image_url: width: 800 }} 800w"
-            sizes="{% if is_large %}(max-width: 749px) 100vw, 30vw{% else %}(max-width: 749px) 50vw, 15vw{% endif %}"
+            sizes="(max-width: 549px) 50vw, (max-width: 767px) 33vw, (max-width: 1023px) 25vw, 16vw"
             alt="{{ block.settings.image.alt | default: 'Instagram post' }}"
             loading="lazy"
           >
