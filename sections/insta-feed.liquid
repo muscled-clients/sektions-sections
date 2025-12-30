@@ -1,9 +1,12 @@
 {% comment %}
-  SEK Instafeed Grid - Instagram-style masonry grid with header
-  Features: Responsive grid, video support, hover effects
+  SEK Instafeed Grid - Instagram-style feed with slider on mobile/tablet, grid on desktop
+  Features: Responsive slider/grid, video support, hover effects
 {% endcomment %}
 
 {%- assign section_id = section.id -%}
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 {% style %}
   #sek-ig-{{ section_id }},
@@ -90,10 +93,29 @@
     background: {{ section.settings.button_hover_bg }};
   }
 
-  /* Grid */
+  /* ========================================
+     SLIDER (Mobile/Tablet - shown below 1024px)
+     ======================================== */
+  #sek-ig-{{ section_id }} .sek-ig__slider-wrapper {
+    display: block;
+    position: relative;
+  }
+
+  #sek-ig-{{ section_id }} .sek-ig__slider {
+    overflow: hidden;
+  }
+
+  #sek-ig-{{ section_id }} .sek-ig__slider .swiper-slide {
+    width: 140px;
+    height: auto;
+  }
+
+  /* ========================================
+     GRID (Desktop - shown at 1024px+)
+     ======================================== */
   #sek-ig-{{ section_id }} .sek-ig__grid {
-    display: grid;
-    grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+    display: none;
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
     gap: {{ section.settings.gap }}px;
   }
 
@@ -281,6 +303,10 @@
       font-size: 12px;
     }
 
+    #sek-ig-{{ section_id }} .sek-ig__slider .swiper-slide {
+      width: 120px;
+    }
+
     #sek-ig-{{ section_id }} .sek-ig__overlay-icon svg {
       width: 24px;
       height: 24px;
@@ -321,6 +347,10 @@
     #sek-ig-{{ section_id }} .sek-ig__description {
       font-size: 13px;
     }
+
+    #sek-ig-{{ section_id }} .sek-ig__slider .swiper-slide {
+      width: 150px;
+    }
   }
 
   /* Large Mobile (550px - 767px) */
@@ -356,8 +386,8 @@
       font-size: 14px;
     }
 
-    #sek-ig-{{ section_id }} .sek-ig__grid {
-      grid-template-columns: repeat(3, 1fr);
+    #sek-ig-{{ section_id }} .sek-ig__slider .swiper-slide {
+      width: 170px;
     }
 
     #sek-ig-{{ section_id }} .sek-ig__overlay-icon svg {
@@ -378,8 +408,8 @@
     }
   }
 
-  /* Tablet (768px+) */
-  @media (min-width: 768px) {
+  /* Tablet (768px - 1023px) */
+  @media (min-width: 768px) and (max-width: 1023px) {
     #sek-ig-{{ section_id }} .sek-ig__container {
       {%- if section.settings.full_width -%}
       padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
@@ -421,8 +451,8 @@
       align-self: auto;
     }
 
-    #sek-ig-{{ section_id }} .sek-ig__grid {
-      grid-template-columns: repeat({{ section.settings.columns_tablet }}, 1fr);
+    #sek-ig-{{ section_id }} .sek-ig__slider .swiper-slide {
+      width: 200px;
     }
 
     #sek-ig-{{ section_id }} .sek-ig__overlay-icon svg {
@@ -443,20 +473,32 @@
     }
   }
 
-  /* Desktop (1024px+) */
+  /* Desktop (1024px+) - Switch to Grid */
   @media (min-width: 1024px) {
     #sek-ig-{{ section_id }} .sek-ig__container {
-      {%- unless section.settings.full_width -%}
-      padding-left: 40px;
-      padding-right: 40px;
-      {%- endunless -%}
+      {%- if section.settings.full_width -%}
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+      {%- else -%}
+      padding: {{ section.settings.padding_top }}px 40px {{ section.settings.padding_bottom }}px;
+      {%- endif -%}
     }
 
     #sek-ig-{{ section_id }} .sek-ig__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
       margin-bottom: 32px;
       {%- if section.settings.full_width -%}
       padding: 0 40px;
       {%- endif -%}
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__header-content {
+      gap: 8px;
+    }
+
+    #sek-ig-{{ section_id }} .sek-ig__label {
+      font-size: 12px;
     }
 
     #sek-ig-{{ section_id }} .sek-ig__heading {
@@ -469,10 +511,18 @@
 
     #sek-ig-{{ section_id }} .sek-ig__button {
       padding: 18px 64px;
+      font-size: 14px;
+      margin-top: 0;
+      align-self: auto;
+    }
+
+    /* Hide slider, show grid */
+    #sek-ig-{{ section_id }} .sek-ig__slider-wrapper {
+      display: none;
     }
 
     #sek-ig-{{ section_id }} .sek-ig__grid {
-      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+      display: grid;
     }
   }
 
@@ -524,150 +574,252 @@
 
 <div id="sek-ig-{{ section_id }}" class="sek-ig">
   <div class="sek-ig__container">
-  <!-- Header -->
-  {%- if section.settings.show_header -%}
-  <div class="sek-ig__header">
-    <div class="sek-ig__header-content">
-      {%- if section.settings.label != blank -%}
-        <p class="sek-ig__label">{{ section.settings.label }}</p>
-      {%- endif -%}
-
-      {%- if section.settings.heading != blank -%}
-        <h2 class="sek-ig__heading">{{ section.settings.heading }}</h2>
-      {%- endif -%}
-
-      {%- if section.settings.description != blank -%}
-        <p class="sek-ig__description">{{ section.settings.description }}</p>
-      {%- endif -%}
-    </div>
-
-    {%- if section.settings.button_text != blank -%}
-      <a href="{{ section.settings.button_link | default: '#' }}" class="sek-ig__button" {% if section.settings.button_link contains 'instagram' or section.settings.button_link contains 'tiktok' %}target="_blank" rel="noopener"{% endif %}>
-        {{ section.settings.button_text }}
-      </a>
-    {%- endif -%}
-  </div>
-  {%- endif -%}
-
-  <!-- Grid -->
-  <div class="sek-ig__grid">
-    {%- for block in section.blocks -%}
-      <div class="sek-ig__item{% if block.settings.video %} sek-ig__item--video{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
-        {%- if block.settings.video -%}
-          <!-- Video -->
-          <video
-            class="sek-ig__video"
-            src="{{ block.settings.video.sources[1].url }}"
-            poster="{%- if block.settings.image -%}{{ block.settings.image | image_url: width: 800 }}{%- endif -%}"
-            loop
-            muted
-            playsinline
-            preload="metadata"
-          ></video>
-
-          <!-- Play/Pause Button -->
-          <button class="sek-ig__play-btn" aria-label="Play video" data-playing="false">
-            <svg class="sek-ig__icon-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-            <svg class="sek-ig__icon-pause" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-            </svg>
-          </button>
-        {%- elsif block.settings.image -%}
-          <!-- Image -->
-          <img
-            src="{{ block.settings.image | image_url: width: 800 }}"
-            srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
-                    {{ block.settings.image | image_url: width: 600 }} 600w,
-                    {{ block.settings.image | image_url: width: 800 }} 800w"
-            sizes="(max-width: 549px) 50vw, (max-width: 767px) 33vw, (max-width: 1023px) 25vw, 16vw"
-            alt="{{ block.settings.image.alt | default: 'Instagram post' }}"
-            loading="lazy"
-          >
-
-          <div class="sek-ig__overlay">
-            <div class="sek-ig__overlay-icon">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </div>
-          </div>
-        {%- else -%}
-          <!-- Placeholder -->
-          {%- assign placeholder_num = forloop.index0 | modulo: 6 | plus: 1 -%}
-          {{ 'collection-' | append: placeholder_num | placeholder_svg_tag }}
+    <!-- Header -->
+    {%- if section.settings.show_header -%}
+    <div class="sek-ig__header">
+      <div class="sek-ig__header-content">
+        {%- if section.settings.label != blank -%}
+          <p class="sek-ig__label">{{ section.settings.label }}</p>
         {%- endif -%}
 
-        {%- if block.settings.link != blank and block.settings.video == blank -%}
-          <a href="{{ block.settings.link }}" class="sek-ig__link" target="_blank" rel="noopener" aria-label="View on Instagram"></a>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="sek-ig__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <p class="sek-ig__description">{{ section.settings.description }}</p>
         {%- endif -%}
       </div>
-    {%- endfor -%}
-  </div>
+
+      {%- if section.settings.button_text != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="sek-ig__button" {% if section.settings.button_link contains 'instagram' or section.settings.button_link contains 'tiktok' %}target="_blank" rel="noopener"{% endif %}>
+          {{ section.settings.button_text }}
+        </a>
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+
+    <!-- Slider (Mobile/Tablet) -->
+    <div class="sek-ig__slider-wrapper">
+      <div class="sek-ig__slider swiper" data-slider>
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="swiper-slide">
+              <div class="sek-ig__item{% if block.settings.video %} sek-ig__item--video{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+                {%- if block.settings.video -%}
+                  <!-- Video -->
+                  <video
+                    class="sek-ig__video"
+                    src="{{ block.settings.video.sources[1].url }}"
+                    poster="{%- if block.settings.image -%}{{ block.settings.image | image_url: width: 800 }}{%- endif -%}"
+                    loop
+                    muted
+                    playsinline
+                    preload="metadata"
+                  ></video>
+
+                  <!-- Play/Pause Button -->
+                  <button class="sek-ig__play-btn" aria-label="Play video" data-playing="false">
+                    <svg class="sek-ig__icon-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg class="sek-ig__icon-pause" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                    </svg>
+                  </button>
+                {%- elsif block.settings.image -%}
+                  <!-- Image -->
+                  <img
+                    src="{{ block.settings.image | image_url: width: 800 }}"
+                    srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
+                            {{ block.settings.image | image_url: width: 600 }} 600w,
+                            {{ block.settings.image | image_url: width: 800 }} 800w"
+                    sizes="200px"
+                    alt="{{ block.settings.image.alt | default: 'Instagram post' }}"
+                    loading="lazy"
+                  >
+
+                  <div class="sek-ig__overlay">
+                    <div class="sek-ig__overlay-icon">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                      </svg>
+                    </div>
+                  </div>
+                {%- else -%}
+                  <!-- Placeholder -->
+                  {%- assign placeholder_num = forloop.index0 | modulo: 6 | plus: 1 -%}
+                  {{ 'collection-' | append: placeholder_num | placeholder_svg_tag }}
+                {%- endif -%}
+
+                {%- if block.settings.link != blank and block.settings.video == blank -%}
+                  <a href="{{ block.settings.link }}" class="sek-ig__link" target="_blank" rel="noopener" aria-label="View on Instagram"></a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid (Desktop) -->
+    <div class="sek-ig__grid">
+      {%- for block in section.blocks -%}
+        <div class="sek-ig__item{% if block.settings.video %} sek-ig__item--video{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.video -%}
+            <!-- Video -->
+            <video
+              class="sek-ig__video"
+              src="{{ block.settings.video.sources[1].url }}"
+              poster="{%- if block.settings.image -%}{{ block.settings.image | image_url: width: 800 }}{%- endif -%}"
+              loop
+              muted
+              playsinline
+              preload="metadata"
+            ></video>
+
+            <!-- Play/Pause Button -->
+            <button class="sek-ig__play-btn" aria-label="Play video" data-playing="false">
+              <svg class="sek-ig__icon-play" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <svg class="sek-ig__icon-pause" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+              </svg>
+            </button>
+          {%- elsif block.settings.image -%}
+            <!-- Image -->
+            <img
+              src="{{ block.settings.image | image_url: width: 800 }}"
+              srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
+                      {{ block.settings.image | image_url: width: 600 }} 600w,
+                      {{ block.settings.image | image_url: width: 800 }} 800w"
+              sizes="(max-width: 1023px) 200px, (max-width: 1399px) 16vw, 14vw"
+              alt="{{ block.settings.image.alt | default: 'Instagram post' }}"
+              loading="lazy"
+            >
+
+            <div class="sek-ig__overlay">
+              <div class="sek-ig__overlay-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </div>
+            </div>
+          {%- else -%}
+            <!-- Placeholder -->
+            {%- assign placeholder_num = forloop.index0 | modulo: 6 | plus: 1 -%}
+            {{ 'collection-' | append: placeholder_num | placeholder_svg_tag }}
+          {%- endif -%}
+
+          {%- if block.settings.link != blank and block.settings.video == blank -%}
+            <a href="{{ block.settings.link }}" class="sek-ig__link" target="_blank" rel="noopener" aria-label="View on Instagram"></a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
   </div>
 </div>
 
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const section = document.getElementById('sek-ig-{{ section_id }}');
-    if (!section) return;
+  (function() {
+    function initInstafeed() {
+      const section = document.getElementById('sek-ig-{{ section_id }}');
+      if (!section) return;
 
-    const playButtons = section.querySelectorAll('.sek-ig__play-btn');
+      // Initialize Swiper for mobile/tablet
+      const sliderEl = section.querySelector('[data-slider]');
+      if (sliderEl && typeof Swiper !== 'undefined') {
+        new Swiper(sliderEl, {
+          slidesPerView: 'auto',
+          spaceBetween: {{ section.settings.gap }},
+          freeMode: true,
+          grabCursor: true
+        });
+      }
 
-    playButtons.forEach(btn => {
-      const item = btn.closest('.sek-ig__item');
-      const video = item.querySelector('.sek-ig__video');
+      // Video play/pause functionality
+      const playButtons = section.querySelectorAll('.sek-ig__play-btn');
 
-      if (!video) return;
+      playButtons.forEach(btn => {
+        const item = btn.closest('.sek-ig__item');
+        const video = item.querySelector('.sek-ig__video');
 
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+        if (!video) return;
 
-        const isPlaying = btn.getAttribute('data-playing') === 'true';
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
 
-        if (isPlaying) {
-          video.pause();
+          const isPlaying = btn.getAttribute('data-playing') === 'true';
+
+          if (isPlaying) {
+            video.pause();
+            btn.setAttribute('data-playing', 'false');
+            btn.setAttribute('aria-label', 'Play video');
+          } else {
+            // Pause all other videos first
+            section.querySelectorAll('.sek-ig__video').forEach(v => {
+              if (v !== video) {
+                v.pause();
+                const otherBtn = v.closest('.sek-ig__item').querySelector('.sek-ig__play-btn');
+                if (otherBtn) {
+                  otherBtn.setAttribute('data-playing', 'false');
+                  otherBtn.setAttribute('aria-label', 'Play video');
+                }
+              }
+            });
+
+            video.play();
+            btn.setAttribute('data-playing', 'true');
+            btn.setAttribute('aria-label', 'Pause video');
+          }
+        });
+
+        // Update button state when video ends
+        video.addEventListener('ended', function() {
           btn.setAttribute('data-playing', 'false');
           btn.setAttribute('aria-label', 'Play video');
-        } else {
-          // Pause all other videos first
-          section.querySelectorAll('.sek-ig__video').forEach(v => {
-            if (v !== video) {
-              v.pause();
-              const otherBtn = v.closest('.sek-ig__item').querySelector('.sek-ig__play-btn');
-              if (otherBtn) {
-                otherBtn.setAttribute('data-playing', 'false');
-                otherBtn.setAttribute('aria-label', 'Play video');
-              }
-            }
-          });
+        });
 
-          video.play();
+        // Handle video pause from other sources
+        video.addEventListener('pause', function() {
+          btn.setAttribute('data-playing', 'false');
+          btn.setAttribute('aria-label', 'Play video');
+        });
+
+        video.addEventListener('play', function() {
           btn.setAttribute('data-playing', 'true');
           btn.setAttribute('aria-label', 'Pause video');
+        });
+      });
+    }
+
+    // Wait for Swiper to load
+    function waitForSwiper(callback, maxAttempts = 50) {
+      let attempts = 0;
+      const check = setInterval(() => {
+        attempts++;
+        if (typeof Swiper !== 'undefined') {
+          clearInterval(check);
+          callback();
+        } else if (attempts >= maxAttempts) {
+          clearInterval(check);
+          console.warn('Swiper failed to load');
+          callback();
         }
-      });
+      }, 100);
+    }
 
-      // Update button state when video ends
-      video.addEventListener('ended', function() {
-        btn.setAttribute('data-playing', 'false');
-        btn.setAttribute('aria-label', 'Play video');
-      });
-
-      // Handle video pause from other sources
-      video.addEventListener('pause', function() {
-        btn.setAttribute('data-playing', 'false');
-        btn.setAttribute('aria-label', 'Play video');
-      });
-
-      video.addEventListener('play', function() {
-        btn.setAttribute('data-playing', 'true');
-        btn.setAttribute('aria-label', 'Pause video');
-      });
-    });
-  });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => waitForSwiper(initInstafeed));
+    } else {
+      waitForSwiper(initInstafeed);
+    }
+  })();
 </script>
 
 {% schema %}
@@ -729,25 +881,7 @@
     },
     {
       "type": "header",
-      "content": "Grid"
-    },
-    {
-      "type": "range",
-      "id": "columns_mobile",
-      "label": "Columns (mobile)",
-      "min": 2,
-      "max": 4,
-      "step": 1,
-      "default": 2
-    },
-    {
-      "type": "range",
-      "id": "columns_tablet",
-      "label": "Columns (tablet)",
-      "min": 3,
-      "max": 6,
-      "step": 1,
-      "default": 4
+      "content": "Grid (Desktop)"
     },
     {
       "type": "range",
@@ -756,7 +890,8 @@
       "min": 4,
       "max": 8,
       "step": 1,
-      "default": 6
+      "default": 6,
+      "info": "Grid only shown on desktop (1024px+)"
     },
     {
       "type": "range",
