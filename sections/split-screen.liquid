@@ -1,5 +1,6 @@
 {% comment %}
   SEK Split Screen Video - Slider with multiple layout options per slide
+  Features: 3-col layout with images on top, content below
 {% endcomment %}
 
 {%- assign section_id = section.id -%}
@@ -18,9 +19,9 @@
 
   #sek-ssv-{{ section_id }} .sek-ssv__title {
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
-    margin: 0 0 16px 0;
+    margin: 0 0 12px 0;
     color: {{ section.settings.title_color }};
   }
 
@@ -39,29 +40,34 @@
   #sek-ssv-{{ section_id }} .sek-ssv__slide {
     flex: 0 0 100%;
     width: 100%;
-    min-height: 320px;
   }
 
-  /* Slide layouts */
-  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner {
+  /* ========================================
+     THREE COLUMN LAYOUT (Images Top, Content Below)
+     ======================================== */
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    height: 100%;
+    flex-wrap: wrap;
+    gap: 4px;
   }
 
-  /* Media column */
-  #sek-ssv-{{ section_id }} .sek-ssv__media {
-    flex: 1 1 100%;
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media {
+    flex: 0 0 calc(50% - 2px);
+    width: calc(50% - 2px);
     position: relative;
-    min-height: 180px;
     overflow: hidden;
+    border-radius: {{ section.settings.image_border_radius }}px;
   }
 
-  #sek-ssv-{{ section_id }} .sek-ssv__media img,
-  #sek-ssv-{{ section_id }} .sek-ssv__media video,
-  #sek-ssv-{{ section_id }} .sek-ssv__media iframe,
-  #sek-ssv-{{ section_id }} .sek-ssv__media svg {
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media::before {
+    content: '';
+    display: block;
+    padding-top: 120%;
+  }
+
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media img,
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media video,
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media svg {
     position: absolute;
     top: 0;
     left: 0;
@@ -70,22 +76,68 @@
     object-fit: cover;
   }
 
-  /* Content column */
-  #sek-ssv-{{ section_id }} .sek-ssv__content {
-    flex: 1 1 100%;
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__content {
+    flex: 0 0 100%;
+    width: 100%;
+    order: 3;
     background: {{ section.settings.content_bg }};
     border: 2px solid {{ section.settings.border_color }};
+    border-radius: {{ section.settings.content_border_radius }}px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 24px 16px;
-    min-height: 180px;
+    margin-top: 4px;
   }
 
+  /* ========================================
+     TWO COLUMN LAYOUT (Side by Side)
+     ======================================== */
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 100%;
+  }
+
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner .sek-ssv__media {
+    flex: 1 1 auto;
+    position: relative;
+    min-height: 200px;
+    overflow: hidden;
+    border-radius: {{ section.settings.image_border_radius }}px;
+  }
+
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner .sek-ssv__media img,
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner .sek-ssv__media video,
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner .sek-ssv__media iframe,
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner .sek-ssv__media svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #sek-ssv-{{ section_id }} .sek-ssv__slide-inner .sek-ssv__content {
+    flex: 0 0 auto;
+    background: {{ section.settings.content_bg }};
+    border: 2px solid {{ section.settings.border_color }};
+    border-radius: {{ section.settings.content_border_radius }}px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px 16px;
+  }
+
+  /* Content Styles */
   #sek-ssv-{{ section_id }} .sek-ssv__heading {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
     line-height: 1.2;
     margin: 0 0 6px 0;
@@ -93,31 +145,27 @@
   }
 
   #sek-ssv-{{ section_id }} .sek-ssv__subheading {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     line-height: 1.4;
-    margin: 0 0 4px 0;
+    margin: 0 0 12px 0;
     color: {{ section.settings.text_color }};
   }
 
   #sek-ssv-{{ section_id }} .sek-ssv__text {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.5;
     margin: 0 0 12px 0;
     color: {{ section.settings.text_color }};
     opacity: 0.8;
-    -webkit-line-clamp: 3;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   }
 
   #sek-ssv-{{ section_id }} .sek-ssv__button {
     display: inline-block;
     background: {{ section.settings.button_bg }};
     color: {{ section.settings.button_text_color }};
-    padding: 8px 20px;
-    font-size: 12px;
+    padding: 10px 24px;
+    font-size: 13px;
     font-weight: 600;
     text-decoration: none;
     border-radius: 0;
@@ -160,140 +208,33 @@
     background: #ffffff;
   }
 
-  /* ========================================
+  /* ==========================================
      RESPONSIVE BREAKPOINTS
-     ======================================== */
+     ========================================== */
 
-  /* Small Mobile (< 400px) */
-  @media (max-width: 399px) {
-    #sek-ssv-{{ section_id }} {
-      padding: 0 10px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__title {
-      font-size: 20px;
-      margin-bottom: 14px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__slide {
-      min-height: 300px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner {
-      gap: 6px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__media {
-      min-height: 160px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__content {
-      padding: 20px 12px;
-      min-height: 160px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__heading {
-      font-size: 18px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__subheading {
-      font-size: 12px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__text {
-      font-size: 11px;
-      margin-bottom: 10px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__button {
-      padding: 7px 16px;
-      font-size: 11px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__pagination {
-      gap: 5px;
-      padding: 4px 8px;
-      margin-top: 10px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__dot {
-      width: 7px;
-      height: 7px;
-    }
-  }
-
-  /* Medium Mobile (400px - 549px) */
-  @media (min-width: 400px) and (max-width: 549px) {
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
     #sek-ssv-{{ section_id }} {
       padding: 0 14px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__title {
-      font-size: 24px;
-      margin-bottom: 18px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__slide {
-      min-height: 340px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner {
-      gap: 10px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__media {
-      min-height: 200px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__content {
-      padding: 28px 18px;
-      min-height: 200px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__heading {
       font-size: 22px;
+      margin-bottom: 14px;
     }
 
-    #sek-ssv-{{ section_id }} .sek-ssv__subheading {
-      font-size: 14px;
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col {
+      gap: 6px;
     }
 
-    #sek-ssv-{{ section_id }} .sek-ssv__text {
-      font-size: 13px;
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media {
+      flex: 0 0 calc(50% - 3px);
+      width: calc(50% - 3px);
     }
 
-    #sek-ssv-{{ section_id }} .sek-ssv__button {
-      padding: 9px 22px;
-      font-size: 13px;
-    }
-  }
-
-  /* Large Mobile (550px - 767px) */
-  @media (min-width: 550px) and (max-width: 767px) {
-    #sek-ssv-{{ section_id }} {
-      padding: 0 16px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__title {
-      font-size: 26px;
-      margin-bottom: 20px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__slide {
-      min-height: 380px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner {
-      gap: 12px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__media {
-      min-height: 220px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__content {
-      padding: 32px 20px;
-      min-height: 220px;
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__content {
+      margin-top: 6px;
+      padding: 28px 20px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__heading {
@@ -305,14 +246,58 @@
       font-size: 15px;
     }
 
+    #sek-ssv-{{ section_id }} .sek-ssv__button {
+      padding: 11px 28px;
+      font-size: 14px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    #sek-ssv-{{ section_id }} {
+      padding: 0 18px;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__title {
+      font-size: 26px;
+      margin-bottom: 16px;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col {
+      gap: 8px;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media {
+      flex: 0 0 calc(50% - 4px);
+      width: calc(50% - 4px);
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media::before {
+      padding-top: 110%;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__content {
+      margin-top: 8px;
+      padding: 32px 24px;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__heading {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__subheading {
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+
     #sek-ssv-{{ section_id }} .sek-ssv__text {
       font-size: 14px;
-      -webkit-line-clamp: unset;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__button {
-      padding: 10px 24px;
-      font-size: 13px;
+      padding: 12px 32px;
+      font-size: 14px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__dot {
@@ -321,22 +306,37 @@
     }
   }
 
-  /* Tablet (768px - 1023px) - Switch to side-by-side layout */
-  @media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
     #sek-ssv-{{ section_id }} {
       padding: 0 24px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__title {
       font-size: 30px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
-    #sek-ssv-{{ section_id }} .sek-ssv__slide {
-      min-height: 420px;
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col {
+      gap: 10px;
     }
 
-    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner {
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media {
+      flex: 0 0 calc(50% - 5px);
+      width: calc(50% - 5px);
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media::before {
+      padding-top: 100%;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__content {
+      margin-top: 10px;
+      padding: 40px 32px;
+    }
+
+    /* 2-column layouts become side-by-side on tablet */
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner:not(.sek-ssv__slide-inner--three-col) {
       flex-direction: row;
       gap: 0;
     }
@@ -345,46 +345,37 @@
       flex-direction: row-reverse;
     }
 
-    #sek-ssv-{{ section_id }} .sek-ssv__media {
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner:not(.sek-ssv__slide-inner--three-col) .sek-ssv__media {
       flex: 1 1 50%;
-      min-height: 420px;
+      min-height: 400px;
+      border-radius: 0;
     }
 
-    /* For 3-column layout on tablet */
-    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media {
-      flex: 1 1 30%;
-      min-height: 420px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__content {
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner:not(.sek-ssv__slide-inner--three-col) .sek-ssv__content {
       flex: 1 1 50%;
+      min-height: 400px;
+      border-radius: 0;
       padding: 36px 28px;
-      min-height: 420px;
-    }
-
-    /* For 3-column layout on tablet */
-    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__content {
-      flex: 1 1 40%;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__heading {
-      font-size: 30px;
-      margin-bottom: 8px;
+      font-size: 34px;
+      margin-bottom: 12px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__subheading {
-      font-size: 16px;
+      font-size: 17px;
+      margin-bottom: 16px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__text {
       font-size: 15px;
-      margin-bottom: 16px;
-      -webkit-line-clamp: unset;
+      margin-bottom: 18px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__button {
-      padding: 10px 26px;
-      font-size: 14px;
+      padding: 12px 36px;
+      font-size: 15px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__pagination {
@@ -407,66 +398,56 @@
 
     #sek-ssv-{{ section_id }} .sek-ssv__title {
       font-size: 34px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
-    #sek-ssv-{{ section_id }} .sek-ssv__slide {
-      min-height: 480px;
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col {
+      gap: 12px;
     }
 
-    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner {
-      flex-direction: row;
-      gap: 0;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--reversed {
-      flex-direction: row-reverse;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__media {
-      flex: 1 1 50%;
-      min-height: 480px;
-    }
-
-    /* For 3-column layout */
     #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media {
-      flex: 1 1 33.333%;
+      flex: 0 0 calc(50% - 6px);
+      width: calc(50% - 6px);
     }
 
-    #sek-ssv-{{ section_id }} .sek-ssv__content {
-      flex: 1 1 50%;
-      padding: 40px 36px;
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media::before {
+      padding-top: 90%;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__content {
+      margin-top: 12px;
+      padding: 48px 40px;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner:not(.sek-ssv__slide-inner--three-col) .sek-ssv__media {
       min-height: 480px;
     }
 
-    /* For 3-column layout */
-    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__content {
-      flex: 1 1 33.333%;
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner:not(.sek-ssv__slide-inner--three-col) .sek-ssv__content {
+      min-height: 480px;
+      padding: 48px 40px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__heading {
-      font-size: 34px;
-      margin-bottom: 10px;
+      font-size: 40px;
+      margin-bottom: 14px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__subheading {
-      font-size: 17px;
+      font-size: 18px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__text {
-      font-size: 15px;
-      margin-bottom: 18px;
-      -webkit-line-clamp: unset;
+      font-size: 16px;
+      margin-bottom: 20px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__button {
-      padding: 11px 28px;
-      font-size: 14px;
+      padding: 14px 40px;
+      font-size: 15px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__pagination {
-      gap: 8px;
-      padding: 6px 14px;
       margin-top: 20px;
     }
 
@@ -484,39 +465,51 @@
 
     #sek-ssv-{{ section_id }} .sek-ssv__title {
       font-size: 38px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
-    #sek-ssv-{{ section_id }} .sek-ssv__slide {
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col {
+      gap: 16px;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media {
+      flex: 0 0 calc(50% - 8px);
+      width: calc(50% - 8px);
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__media::before {
+      padding-top: 85%;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner--three-col .sek-ssv__content {
+      margin-top: 16px;
+      padding: 56px 48px;
+    }
+
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner:not(.sek-ssv__slide-inner--three-col) .sek-ssv__media {
       min-height: 540px;
     }
 
-    #sek-ssv-{{ section_id }} .sek-ssv__media {
+    #sek-ssv-{{ section_id }} .sek-ssv__slide-inner:not(.sek-ssv__slide-inner--three-col) .sek-ssv__content {
       min-height: 540px;
-    }
-
-    #sek-ssv-{{ section_id }} .sek-ssv__content {
-      padding: 48px 44px;
-      min-height: 540px;
+      padding: 56px 48px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__heading {
-      font-size: 40px;
-      margin-bottom: 12px;
+      font-size: 46px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__subheading {
-      font-size: 18px;
+      font-size: 20px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__text {
-      font-size: 16px;
-      margin-bottom: 20px;
+      font-size: 17px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__button {
-      padding: 12px 32px;
-      font-size: 15px;
+      padding: 14px 44px;
+      font-size: 16px;
     }
 
     #sek-ssv-{{ section_id }} .sek-ssv__dot {
@@ -539,7 +532,7 @@
           <div class="sek-ssv__slide-inner{% if layout == 'three_col' %} sek-ssv__slide-inner--three-col{% elsif layout == 'content_left' %} sek-ssv__slide-inner--reversed{% endif %}">
 
             {%- if layout == 'three_col' -%}
-              <!-- 3-column: Image | Content | Image -->
+              <!-- 3-column: Two images side by side on top, content below -->
               <div class="sek-ssv__media">
                 {%- if block.settings.image_left != blank -%}
                   <img
@@ -547,12 +540,29 @@
                     srcset="{{ block.settings.image_left | image_url: width: 400 }} 400w,
                             {{ block.settings.image_left | image_url: width: 600 }} 600w,
                             {{ block.settings.image_left | image_url: width: 800 }} 800w"
-                    sizes="(max-width: 749px) 100vw, 33vw"
+                    sizes="50vw"
                     alt="{{ block.settings.image_left.alt | default: block.settings.heading }}"
                     loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
                   >
                 {%- else -%}
                   {%- assign placeholder_num = forloop.index0 | modulo: 6 | plus: 1 -%}
+                  {{ 'collection-' | append: placeholder_num | placeholder_svg_tag }}
+                {%- endif -%}
+              </div>
+
+              <div class="sek-ssv__media">
+                {%- if block.settings.image_right != blank -%}
+                  <img
+                    src="{{ block.settings.image_right | image_url: width: 800 }}"
+                    srcset="{{ block.settings.image_right | image_url: width: 400 }} 400w,
+                            {{ block.settings.image_right | image_url: width: 600 }} 600w,
+                            {{ block.settings.image_right | image_url: width: 800 }} 800w"
+                    sizes="50vw"
+                    alt="{{ block.settings.image_right.alt | default: block.settings.heading }}"
+                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  >
+                {%- else -%}
+                  {%- assign placeholder_num = forloop.index0 | plus: 1 | modulo: 6 | plus: 1 -%}
                   {{ 'collection-' | append: placeholder_num | placeholder_svg_tag }}
                 {%- endif -%}
               </div>
@@ -567,27 +577,10 @@
                 {%- if block.settings.text != blank -%}
                   <p class="sek-ssv__text">{{ block.settings.text }}</p>
                 {%- endif -%}
-                {%- if block.settings.button_text != blank and block.settings.button_link != blank -%}
-                  <a href="{{ block.settings.button_link }}" class="sek-ssv__button">
+                {%- if block.settings.button_text != blank -%}
+                  <a href="{{ block.settings.button_link | default: '#' }}" class="sek-ssv__button">
                     {{ block.settings.button_text }}
                   </a>
-                {%- endif -%}
-              </div>
-
-              <div class="sek-ssv__media">
-                {%- if block.settings.image_right != blank -%}
-                  <img
-                    src="{{ block.settings.image_right | image_url: width: 800 }}"
-                    srcset="{{ block.settings.image_right | image_url: width: 400 }} 400w,
-                            {{ block.settings.image_right | image_url: width: 600 }} 600w,
-                            {{ block.settings.image_right | image_url: width: 800 }} 800w"
-                    sizes="(max-width: 749px) 100vw, 33vw"
-                    alt="{{ block.settings.image_right.alt | default: block.settings.heading }}"
-                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                  >
-                {%- else -%}
-                  {%- assign placeholder_num = forloop.index0 | plus: 1 | modulo: 6 | plus: 1 -%}
-                  {{ 'collection-' | append: placeholder_num | placeholder_svg_tag }}
                 {%- endif -%}
               </div>
 
@@ -622,7 +615,7 @@
                     srcset="{{ block.settings.image | image_url: width: 600 }} 600w,
                             {{ block.settings.image | image_url: width: 800 }} 800w,
                             {{ block.settings.image | image_url: width: 1000 }} 1000w"
-                    sizes="(max-width: 749px) 100vw, 50vw"
+                    sizes="(max-width: 767px) 100vw, 50vw"
                     alt="{{ block.settings.image.alt | default: block.settings.heading }}"
                     loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
                   >
@@ -642,8 +635,8 @@
                 {%- if block.settings.text != blank -%}
                   <p class="sek-ssv__text">{{ block.settings.text }}</p>
                 {%- endif -%}
-                {%- if block.settings.button_text != blank and block.settings.button_link != blank -%}
-                  <a href="{{ block.settings.button_link }}" class="sek-ssv__button">
+                {%- if block.settings.button_text != blank -%}
+                  <a href="{{ block.settings.button_link | default: '#' }}" class="sek-ssv__button">
                     {{ block.settings.button_text }}
                   </a>
                 {%- endif -%}
@@ -753,13 +746,37 @@
     },
     {
       "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "content_border_radius",
+      "label": "Content border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "header",
       "content": "Colors"
     },
     {
       "type": "color",
       "id": "content_bg",
       "label": "Content background",
-      "default": "#dcdcdc"
+      "default": "#f5f5f5"
     },
     {
       "type": "color",
@@ -819,9 +836,9 @@
           "options": [
             { "value": "media_left", "label": "Media left, Content right" },
             { "value": "content_left", "label": "Content left, Media right" },
-            { "value": "three_col", "label": "Image | Content | Image" }
+            { "value": "three_col", "label": "Two images + Content below" }
           ],
-          "default": "media_left"
+          "default": "three_col"
         },
         {
           "type": "header",
@@ -831,25 +848,24 @@
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Heading"
+          "default": "Women sale"
         },
         {
           "type": "text",
           "id": "subheading",
           "label": "Sub-Heading",
-          "default": "Sub-Heading"
+          "default": "30% off summer items"
         },
         {
           "type": "text",
           "id": "text",
-          "label": "Text",
-          "default": "Text"
+          "label": "Text"
         },
         {
           "type": "text",
           "id": "button_text",
           "label": "Button text",
-          "default": "Link"
+          "default": "Shop now"
         },
         {
           "type": "url",
@@ -877,7 +893,7 @@
         },
         {
           "type": "header",
-          "content": "Media (3-column layout)"
+          "content": "Media (Two images layout)"
         },
         {
           "type": "image_picker",
@@ -903,26 +919,6 @@
             "heading": "Women sale",
             "subheading": "30% off summer items",
             "button_text": "Shop now"
-          }
-        },
-        {
-          "type": "slide",
-          "settings": {
-            "layout": "media_left",
-            "heading": "Heading",
-            "subheading": "Sub-Heading",
-            "text": "Text",
-            "button_text": "Link"
-          }
-        },
-        {
-          "type": "slide",
-          "settings": {
-            "layout": "content_left",
-            "heading": "Heading",
-            "subheading": "Sub-Heading",
-            "text": "Text",
-            "button_text": "Link"
           }
         }
       ]
