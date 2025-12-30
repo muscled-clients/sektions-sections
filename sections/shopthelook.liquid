@@ -88,7 +88,7 @@
     background: {{ section.settings.hotspot_background }};
     border: 3px solid {{ section.settings.hotspot_border_color }};
     border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     align-items: center;
@@ -97,14 +97,14 @@
 
   #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot:hover .sek-stl__hotspot-dot {
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 
   #sek-shop-the-look-{{ section_id }} .sek-stl__hotspot.is-active .sek-stl__hotspot-dot {
     background: {{ section.settings.hotspot_active_background }};
     border-color: {{ section.settings.hotspot_active_border }};
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 
   /* Product Card */
@@ -908,8 +908,9 @@
     {
       "type": "color",
       "id": "hotspot_background",
-      "label": "Hotspot background",
-      "default": "#ffffff"
+      "label": "Hotspot background (inactive)",
+      "default": "#4a4a4a",
+      "info": "Dark color for inactive hotspots"
     },
     {
       "type": "color",
@@ -920,8 +921,9 @@
     {
       "type": "color",
       "id": "hotspot_active_background",
-      "label": "Hotspot active background",
-      "default": "#333333"
+      "label": "Hotspot background (active)",
+      "default": "#ffffff",
+      "info": "White for active/selected hotspot"
     },
     {
       "type": "color",
