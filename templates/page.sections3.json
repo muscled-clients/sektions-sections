@@ -792,15 +792,7 @@
           "type": "product",
           "settings": {
             "product": "the-multi-location-snowboard",
-            "hotspot_x": 50,
-            "hotspot_y": 50
-          }
-        },
-        "product_fbh3JF": {
-          "type": "product",
-          "settings": {
-            "product": "cleansing-body-gel",
-            "hotspot_x": 50,
+            "hotspot_x": 35,
             "hotspot_y": 50
           }
         },
@@ -808,8 +800,8 @@
           "type": "product",
           "settings": {
             "product": "renewal-face-cream",
-            "hotspot_x": 30,
-            "hotspot_y": 35
+            "hotspot_x": 52,
+            "hotspot_y": 32
           }
         },
         "product_q8EUh8": {
@@ -817,24 +809,14 @@
           "settings": {
             "product": "nourishing-hair-repair-mask",
             "hotspot_x": 55,
-            "hotspot_y": 60
-          }
-        },
-        "product_WHAHbF": {
-          "type": "product",
-          "settings": {
-            "product": "the-inventory-not-tracked-snowboard",
-            "hotspot_x": 70,
-            "hotspot_y": 25
+            "hotspot_y": 89
           }
         }
       },
       "block_order": [
         "product_8nn4FX",
-        "product_fbh3JF",
         "product_Ngw6UV",
-        "product_q8EUh8",
-        "product_WHAHbF"
+        "product_q8EUh8"
       ],
       "name": "SEK Shop the Look",
       "settings": {
@@ -848,19 +830,18 @@
         "card_border_radius": 8,
         "padding_top": 50,
         "padding_bottom": 50,
-        "hotspot_size": 16,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
         "heading_size_desktop": 28,
-        "heading_size_mobile": 22,
         "background_color": "#ffffff",
-        "text_color": "#666666",
         "heading_color": "#000000",
         "card_background": "#ffffff",
         "card_border_color": "#e5e5e5",
-        "dot_background": "#ffffff",
-        "dot_active_color": "#000000",
-        "button_background": "#000000",
-        "button_text_color": "#ffffff",
-        "sale_color": "#f83a3a"
+        "sale_color": "#f83a3a",
+        "hotspot_background": "#ffffff",
+        "hotspot_border_color": "#ffffff",
+        "hotspot_active_background": "#333333",
+        "hotspot_active_border": "#ffffff"
       }
     },
     "testimonials_slider2_CTtQNU": {
