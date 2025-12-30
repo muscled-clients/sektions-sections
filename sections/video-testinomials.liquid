@@ -621,6 +621,9 @@
       const prevBtn = container.querySelector('.sek-vs__nav--prev');
       const nextBtn = container.querySelector('.sek-vs__nav--next');
 
+      // Count slides for loop
+      const slideCount = swiperEl.querySelectorAll('.swiper-slide').length;
+
       // Initialize Swiper with coverflow effect and infinite loop
       const swiper = new Swiper(swiperEl, {
         effect: 'coverflow',
@@ -628,6 +631,7 @@
         centeredSlides: true,
         slidesPerView: 'auto',
         loop: true,
+        loopedSlides: slideCount,
         speed: 500,
         coverflowEffect: {
           rotate: 0,
