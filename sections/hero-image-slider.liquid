@@ -197,7 +197,7 @@
     }
 
     #hero-slider-{{ section.id }} .slide-heading {
-      font-size: 32px;
+      font-size: {{ section.settings.mobile_heading_font_size }}px;
       font-style: italic;
       text-align: center;
       margin-bottom: 20px;
@@ -205,7 +205,7 @@
     }
 
     #hero-slider-{{ section.id }} .slide-description {
-      font-size: 16px;
+      font-size: {{ section.settings.mobile_description_font_size }}px;
       text-align: center;
       margin-bottom: 40px;
       line-height: 1.6;
