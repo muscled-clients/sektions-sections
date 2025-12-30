@@ -605,14 +605,21 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   (function() {
-    function initVideoSlider() {
+    function initVideoSlider{{ section_id | replace: '-', '' }}() {
       const sectionId = '{{ section_id }}';
       const container = document.getElementById('sek-video-slider-' + sectionId);
-      if (!container || container.dataset.initialized === 'true') return;
-      container.dataset.initialized = 'true';
+      if (!container) return;
+
+      // Check if already initialized
+      if (container.swiperInstance) {
+        container.swiperInstance.destroy(true, true);
+      }
 
       const swiperEl = container.querySelector('.sek-vs__slider');
       if (!swiperEl) return;
+
+      const prevBtn = container.querySelector('.sek-vs__nav--prev');
+      const nextBtn = container.querySelector('.sek-vs__nav--next');
 
       // Initialize Swiper with coverflow effect and infinite loop
       const swiper = new Swiper(swiperEl, {
@@ -621,67 +628,23 @@
         centeredSlides: true,
         slidesPerView: 'auto',
         loop: true,
-        loopAdditionalSlides: 3,
         speed: 500,
         coverflowEffect: {
           rotate: 0,
-          stretch: 60,
+          stretch: 50,
           depth: 100,
           modifier: 1,
           scale: 0.85,
           slideShadows: false
         },
-        breakpoints: {
-          320: {
-            coverflowEffect: {
-              stretch: 40,
-              depth: 80,
-              scale: 0.82
-            }
-          },
-          550: {
-            coverflowEffect: {
-              stretch: 50,
-              depth: 90,
-              scale: 0.84
-            }
-          },
-          768: {
-            coverflowEffect: {
-              stretch: 60,
-              depth: 100,
-              scale: 0.85
-            }
-          },
-          1024: {
-            coverflowEffect: {
-              stretch: 70,
-              depth: 120,
-              scale: 0.86
-            }
-          },
-          1400: {
-            coverflowEffect: {
-              stretch: 80,
-              depth: 140,
-              scale: 0.87
-            }
-          }
-        },
         navigation: {
-          prevEl: container.querySelector('.sek-vs__nav--prev'),
-          nextEl: container.querySelector('.sek-vs__nav--next')
-        },
-        on: {
-          init: function() {
-            // Remove disabled state for infinite loop
-            const prevBtn = container.querySelector('.sek-vs__nav--prev');
-            const nextBtn = container.querySelector('.sek-vs__nav--next');
-            if (prevBtn) prevBtn.classList.remove('swiper-button-disabled');
-            if (nextBtn) nextBtn.classList.remove('swiper-button-disabled');
-          }
+          prevEl: prevBtn,
+          nextEl: nextBtn
         }
       });
+
+      // Store reference
+      container.swiperInstance = swiper;
 
       // Video play/pause functionality
       const cards = container.querySelectorAll('[data-video-card]');
@@ -730,7 +693,7 @@
 
       // Pause video when slide changes
       swiper.on('slideChange', function() {
-        cards.forEach(card => {
+        container.querySelectorAll('[data-video-card]').forEach(card => {
           const video = card.querySelector('.sek-vs__video');
           if (video) {
             video.pause();
@@ -740,19 +703,26 @@
       });
     }
 
+    // Wait for Swiper to load then initialize
+    function waitForSwiper() {
+      if (typeof Swiper !== 'undefined') {
+        initVideoSlider{{ section_id | replace: '-', '' }}();
+      } else {
+        setTimeout(waitForSwiper, 100);
+      }
+    }
+
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initVideoSlider);
+      document.addEventListener('DOMContentLoaded', waitForSwiper);
     } else {
-      initVideoSlider();
+      waitForSwiper();
     }
 
     // Shopify theme editor support
     document.addEventListener('shopify:section:load', function(e) {
-      const section = e.target.querySelector('[id^="sek-video-slider-"]');
-      if (section) {
-        section.removeAttribute('data-initialized');
-        initVideoSlider();
+      if (e.target.querySelector('#sek-video-slider-{{ section_id }}')) {
+        waitForSwiper();
       }
     });
   })();
