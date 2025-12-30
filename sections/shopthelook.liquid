@@ -45,12 +45,15 @@
     gap: 20px;
   }
 
-  /* Image Wrapper with Hotspots */
+  /* Image Wrapper with Hotspots - clip hotspots to image bounds */
   #sek-shop-the-look-{{ section_id }} .sek-stl__image-wrapper {
     position: relative;
     width: 100%;
     border-radius: {{ section.settings.image_border_radius }}px;
     overflow: hidden;
+    -webkit-overflow: hidden;
+    clip-path: inset(0 round {{ section.settings.image_border_radius }}px);
+    -webkit-clip-path: inset(0 round {{ section.settings.image_border_radius }}px);
   }
 
   #sek-shop-the-look-{{ section_id }} .sek-stl__image {
