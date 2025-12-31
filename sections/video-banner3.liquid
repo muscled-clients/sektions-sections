@@ -5,6 +5,12 @@
 {%- assign section_id = section.id -%}
 
 {% style %}
+  /* Base styles and box-sizing */
+  #sek-vb3-{{ section_id }},
+  #sek-vb3-{{ section_id }} * {
+    box-sizing: border-box;
+  }
+
   #sek-vb3-{{ section_id }} {
     position: relative;
     width: 100%;
@@ -12,31 +18,6 @@
     overflow: hidden;
     margin-top: {{ section.settings.padding_top }}px;
     margin-bottom: {{ section.settings.padding_bottom }}px;
-  }
-
-  /* Responsive heights */
-  @media (min-width: 480px) {
-    #sek-vb3-{{ section_id }} {
-      height: {{ section.settings.height_mobile | plus: 50 }}px;
-    }
-  }
-
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} {
-      height: {{ section.settings.height_tablet }}px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-vb3-{{ section_id }} {
-      height: {{ section.settings.height_desktop }}px;
-    }
-  }
-
-  @media (min-width: 1440px) {
-    #sek-vb3-{{ section_id }} {
-      height: {{ section.settings.height_large }}px;
-    }
   }
 
   #sek-vb3-{{ section_id }} .sek-vb3__background {
@@ -62,16 +43,6 @@
     display: none;
   }
 
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__image--mobile {
-      display: none;
-    }
-
-    #sek-vb3-{{ section_id }} .sek-vb3__image--desktop {
-      display: block;
-    }
-  }
-
   #sek-vb3-{{ section_id }} .sek-vb3__overlay {
     position: absolute;
     top: 0;
@@ -90,118 +61,41 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 24px 16px;
+    padding: 20px 14px;
     max-width: 100%;
-  }
-
-  @media (min-width: 480px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__content {
-      padding: 32px 24px;
-    }
-  }
-
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__content {
-      padding: 40px 40px;
-      max-width: 70%;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__content {
-      padding: 48px 60px;
-      max-width: 60%;
-    }
-  }
-
-  @media (min-width: 1440px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__content {
-      padding: 60px 80px;
-      max-width: 50%;
-    }
   }
 
   #sek-vb3-{{ section_id }} .sek-vb3__heading {
     font-family: {{ section.settings.heading_font }}, sans-serif;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 400;
     line-height: 130%;
     color: {{ section.settings.text_color }};
-    margin: 0 0 12px 0;
-  }
-
-  @media (min-width: 480px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__heading {
-      font-size: 28px;
-      margin-bottom: 14px;
-    }
-  }
-
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__heading {
-      font-size: 32px;
-      margin-bottom: 16px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__heading {
-      font-size: 40px;
-    }
-  }
-
-  @media (min-width: 1440px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__heading {
-      font-size: 48px;
-    }
+    margin: 0 0 10px 0;
   }
 
   #sek-vb3-{{ section_id }} .sek-vb3__description {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 150%;
     color: {{ section.settings.text_color }};
-    margin: 0 0 20px 0;
+    margin: 0 0 16px 0;
     opacity: 0.9;
-  }
-
-  @media (min-width: 480px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__description {
-      font-size: 15px;
-    }
-  }
-
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__description {
-      font-size: 16px;
-      margin-bottom: 24px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__description {
-      font-size: 18px;
-    }
+    max-width: 90%;
   }
 
   #sek-vb3-{{ section_id }} .sek-vb3__play-btn {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
   }
 
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__play-btn {
-      gap: 12px;
-    }
-  }
-
   #sek-vb3-{{ section_id }} .sek-vb3__play-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: {{ section.settings.play_btn_bg }};
     display: flex;
@@ -209,20 +103,6 @@
     justify-content: center;
     transition: transform 0.3s ease;
     flex-shrink: 0;
-  }
-
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__play-icon {
-      width: 44px;
-      height: 44px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__play-icon {
-      width: 48px;
-      height: 48px;
-    }
   }
 
   #sek-vb3-{{ section_id }} .sek-vb3__play-btn:hover .sek-vb3__play-icon {
@@ -236,32 +116,18 @@
   }
 
   #sek-vb3-{{ section_id }} .sek-vb3__play-icon svg {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     fill: {{ section.settings.play_icon_color }};
     margin-left: 2px;
   }
 
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__play-icon svg {
-      width: 16px;
-      height: 16px;
-      margin-left: 3px;
-    }
-  }
-
   #sek-vb3-{{ section_id }} .sek-vb3__play-text {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: {{ section.settings.text_color }};
-  }
-
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__play-text {
-      font-size: 14px;
-    }
   }
 
   /* Modal Styles - Backdrop Blur */
@@ -278,22 +144,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: 12px;
     opacity: 0;
     visibility: hidden;
     transition: all 300ms ease;
-  }
-
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__modal {
-      padding: 24px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__modal {
-      padding: 32px;
-    }
   }
 
   #sek-vb3-{{ section_id }} .sek-vb3__modal.is-active {
@@ -303,10 +157,10 @@
 
   #sek-vb3-{{ section_id }} .sek-vb3__modal-close {
     position: fixed;
-    top: 16px;
-    right: 16px;
-    width: 36px;
-    height: 36px;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -318,63 +172,24 @@
     transition: transform 0.2s ease;
   }
 
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__modal-close {
-      top: 20px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__modal-close {
-      top: 24px;
-      right: 24px;
-    }
-  }
-
   #sek-vb3-{{ section_id }} .sek-vb3__modal-close:hover {
     transform: scale(1.1);
   }
 
   #sek-vb3-{{ section_id }} .sek-vb3__modal-close svg {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     stroke: #000000;
     stroke-width: 2;
-  }
-
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__modal-close svg {
-      width: 32px;
-      height: 32px;
-    }
   }
 
   #sek-vb3-{{ section_id }} .sek-vb3__modal-video {
     width: 100%;
     max-width: 900px;
     aspect-ratio: 16 / 9;
-    border-radius: 8px;
+    border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  }
-
-  @media (min-width: 750px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__modal-video {
-      width: 85%;
-      max-width: 1100px;
-      border-radius: 12px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-vb3-{{ section_id }} .sek-vb3__modal-video {
-      width: 80%;
-      max-width: 1200px;
-      border-radius: 16px;
-    }
   }
 
   #sek-vb3-{{ section_id }} .sek-vb3__modal-video iframe,
@@ -384,11 +199,281 @@
     border: none;
     display: block;
   }
+
+  /* ==========================================
+     RESPONSIVE BREAKPOINTS
+     ========================================== */
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    #sek-vb3-{{ section_id }} {
+      height: {{ section.settings.height_mobile | plus: 30 }}px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__content {
+      padding: 24px 16px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__heading {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__description {
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-btn {
+      gap: 10px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-text {
+      font-size: 12px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal {
+      padding: 16px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-close {
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-close svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-video {
+      border-radius: 8px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    #sek-vb3-{{ section_id }} {
+      height: {{ section.settings.height_mobile | plus: 60 }}px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__content {
+      padding: 28px 20px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__heading {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__description {
+      font-size: 15px;
+      margin-bottom: 20px;
+      max-width: 85%;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon {
+      width: 42px;
+      height: 42px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-text {
+      font-size: 13px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    #sek-vb3-{{ section_id }} {
+      height: {{ section.settings.height_tablet }}px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__image--mobile {
+      display: none;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__image--desktop {
+      display: block;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__content {
+      padding: 36px 36px;
+      max-width: 70%;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__heading {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__description {
+      font-size: 16px;
+      margin-bottom: 24px;
+      max-width: 100%;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-btn {
+      gap: 12px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon svg {
+      width: 16px;
+      height: 16px;
+      margin-left: 3px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-text {
+      font-size: 14px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal {
+      padding: 24px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-close {
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-close svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-video {
+      width: 85%;
+      max-width: 1000px;
+      border-radius: 10px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    #sek-vb3-{{ section_id }} {
+      height: {{ section.settings.height_desktop }}px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__content {
+      padding: 48px 56px;
+      max-width: 60%;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__heading {
+      font-size: 40px;
+      margin-bottom: 18px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__description {
+      font-size: 17px;
+      margin-bottom: 28px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-text {
+      font-size: 14px;
+      letter-spacing: 1.5px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal {
+      padding: 32px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-close {
+      top: 24px;
+      right: 24px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-video {
+      width: 80%;
+      max-width: 1100px;
+      border-radius: 12px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    #sek-vb3-{{ section_id }} {
+      height: {{ section.settings.height_large }}px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__content {
+      padding: 60px 80px;
+      max-width: 50%;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__heading {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__description {
+      font-size: 18px;
+      margin-bottom: 32px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-btn {
+      gap: 14px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon {
+      width: 52px;
+      height: 52px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__play-text {
+      font-size: 15px;
+    }
+
+    #sek-vb3-{{ section_id }} .sek-vb3__modal-video {
+      width: 75%;
+      max-width: 1200px;
+      border-radius: 16px;
+    }
+  }
 {% endstyle %}
 
 <div id="sek-vb3-{{ section_id }}" class="sek-vb3">
   <!-- Background Image -->
   <div class="sek-vb3__background">
+    {%- comment -%} Mobile Image - Falls back to desktop image if mobile not set {%- endcomment -%}
     {%- if section.settings.image_mobile != blank -%}
       <img
         src="{{ section.settings.image_mobile | image_url: width: 800 }}"
@@ -400,10 +485,22 @@
         class="sek-vb3__image sek-vb3__image--mobile"
         loading="lazy"
       >
+    {%- elsif section.settings.image_desktop != blank -%}
+      <img
+        src="{{ section.settings.image_desktop | image_url: width: 800 }}"
+        srcset="{{ section.settings.image_desktop | image_url: width: 400 }} 400w,
+                {{ section.settings.image_desktop | image_url: width: 600 }} 600w,
+                {{ section.settings.image_desktop | image_url: width: 800 }} 800w"
+        sizes="100vw"
+        alt="{{ section.settings.image_desktop.alt | default: section.settings.heading }}"
+        class="sek-vb3__image sek-vb3__image--mobile"
+        loading="lazy"
+      >
     {%- else -%}
       {{ 'collection-1' | placeholder_svg_tag: 'sek-vb3__image sek-vb3__image--mobile' }}
     {%- endif -%}
 
+    {%- comment -%} Desktop Image - Falls back to mobile image if desktop not set {%- endcomment -%}
     {%- if section.settings.image_desktop != blank -%}
       <img
         src="{{ section.settings.image_desktop | image_url: width: 1920 }}"
