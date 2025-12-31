@@ -6,42 +6,30 @@
 {%- assign section_id = section.id -%}
 
 {% style %}
+  /* Base styles and box-sizing */
+  #sek-glow-testimonial-{{ section_id }},
+  #sek-glow-testimonial-{{ section_id }} * {
+    box-sizing: border-box;
+  }
+
   #sek-glow-testimonial-{{ section_id }} {
     padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
     background: {{ section.settings.background_color }};
     overflow: hidden;
   }
 
-  @media (min-width: 750px) {
-    #sek-glow-testimonial-{{ section_id }} {
-      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
-    }
-  }
-
   #sek-glow-testimonial-{{ section_id }} .sek-gt__header {
     text-align: center;
-    padding: 0 20px;
-    margin-bottom: 40px;
-  }
-
-  @media (min-width: 750px) {
-    #sek-glow-testimonial-{{ section_id }} .sek-gt__header {
-      margin-bottom: 50px;
-    }
+    padding: 0 16px;
+    margin-bottom: 28px;
   }
 
   #sek-glow-testimonial-{{ section_id }} .sek-gt__heading {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 600;
     line-height: 1.3;
     color: {{ section.settings.heading_color }};
     margin: 0;
-  }
-
-  @media (min-width: 750px) {
-    #sek-glow-testimonial-{{ section_id }} .sek-gt__heading {
-      font-size: 40px;
-    }
   }
 
   #sek-glow-testimonial-{{ section_id }} .sek-gt__highlight {
@@ -56,13 +44,7 @@
   #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-  }
-
-  @media (min-width: 750px) {
-    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-wrapper {
-      gap: 26px;
-    }
+    gap: 14px;
   }
 
   #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee {
@@ -73,15 +55,9 @@
 
   #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-track {
     display: flex;
-    gap: 20px;
+    gap: 14px;
     animation: sekGtMarquee var(--marquee-duration, 40s) linear infinite;
     will-change: transform;
-  }
-
-  @media (min-width: 750px) {
-    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-track {
-      gap: 26px;
-    }
   }
 
   #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee--reverse .sek-gt__marquee-track {
@@ -105,20 +81,13 @@
   #sek-glow-testimonial-{{ section_id }} .sek-gt__card {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 10px;
     background: {{ section.settings.card_background }};
-    padding: 12px 20px 12px 12px;
+    padding: 8px 14px 8px 8px;
     border-radius: 100px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     flex-shrink: 0;
     min-width: max-content;
-  }
-
-  @media (min-width: 750px) {
-    #sek-glow-testimonial-{{ section_id }} .sek-gt__card {
-      padding: 14px 24px 14px 14px;
-      gap: 18px;
-    }
   }
 
   /* Avatar with Rating Badge */
@@ -128,22 +97,15 @@
   }
 
   #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar {
-    width: 52px;
-    height: 52px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
   }
 
-  @media (min-width: 750px) {
-    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar {
-      width: 56px;
-      height: 56px;
-    }
-  }
-
   #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder {
-    width: 52px;
-    height: 52px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
     display: flex;
@@ -151,26 +113,19 @@
     justify-content: center;
   }
 
-  @media (min-width: 750px) {
-    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder {
-      width: 56px;
-      height: 56px;
-    }
-  }
-
   #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder svg {
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
     fill: #fff;
     opacity: 0.7;
   }
 
   #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge {
     position: absolute;
-    bottom: -4px;
-    right: -4px;
-    width: 24px;
-    height: 24px;
+    bottom: -3px;
+    right: -3px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: linear-gradient(135deg, {{ section.settings.badge_color_1 }}, {{ section.settings.badge_color_2 }});
     display: flex;
@@ -180,30 +135,306 @@
   }
 
   #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge span {
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 700;
     color: #ffffff;
     line-height: 1;
   }
 
   #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge svg {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     fill: #ffffff;
   }
 
   /* Testimonial Text */
   #sek-glow-testimonial-{{ section_id }} .sek-gt__text {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.5;
     color: {{ section.settings.text_color }};
     margin: 0;
     white-space: nowrap;
   }
 
-  @media (min-width: 750px) {
+  /* ==========================================
+     RESPONSIVE BREAKPOINTS
+     ========================================== */
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__header {
+      padding: 0 18px;
+      margin-bottom: 32px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__heading {
+      font-size: 26px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-wrapper {
+      gap: 16px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-track {
+      gap: 16px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__card {
+      gap: 12px;
+      padding: 10px 16px 10px 10px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar,
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder {
+      width: 44px;
+      height: 44px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge {
+      width: 21px;
+      height: 21px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge span {
+      font-size: 9px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge svg {
+      width: 9px;
+      height: 9px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__text {
+      font-size: 13px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__header {
+      padding: 0 20px;
+      margin-bottom: 36px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__heading {
+      font-size: 30px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-wrapper {
+      gap: 18px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-track {
+      gap: 18px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__card {
+      gap: 14px;
+      padding: 11px 18px 11px 11px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar,
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder {
+      width: 48px;
+      height: 48px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge {
+      width: 22px;
+      height: 22px;
+      bottom: -3px;
+      right: -3px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge span {
+      font-size: 9px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge svg {
+      width: 9px;
+      height: 9px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__text {
+      font-size: 14px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    #sek-glow-testimonial-{{ section_id }} {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__header {
+      padding: 0 24px;
+      margin-bottom: 42px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__heading {
+      font-size: 34px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-wrapper {
+      gap: 22px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-track {
+      gap: 22px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__card {
+      gap: 16px;
+      padding: 12px 20px 12px 12px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar,
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder {
+      width: 52px;
+      height: 52px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge {
+      width: 24px;
+      height: 24px;
+      bottom: -4px;
+      right: -4px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge span {
+      font-size: 10px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__text {
+      font-size: 15px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__header {
+      padding: 0 32px;
+      margin-bottom: 48px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__heading {
+      font-size: 38px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-wrapper {
+      gap: 26px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-track {
+      gap: 26px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__card {
+      gap: 18px;
+      padding: 14px 24px 14px 14px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar,
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder {
+      width: 56px;
+      height: 56px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge {
+      width: 26px;
+      height: 26px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge span {
+      font-size: 10px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge svg {
+      width: 10px;
+      height: 10px;
+    }
+
     #sek-glow-testimonial-{{ section_id }} .sek-gt__text {
       font-size: 16px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__header {
+      padding: 0 40px;
+      margin-bottom: 54px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__heading {
+      font-size: 42px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-wrapper {
+      gap: 30px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__marquee-track {
+      gap: 30px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__card {
+      gap: 20px;
+      padding: 16px 28px 16px 16px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar,
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder {
+      width: 60px;
+      height: 60px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__avatar-placeholder svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge {
+      width: 28px;
+      height: 28px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge span {
+      font-size: 11px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__rating-badge svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    #sek-glow-testimonial-{{ section_id }} .sek-gt__text {
+      font-size: 17px;
     }
   }
 {% endstyle %}
