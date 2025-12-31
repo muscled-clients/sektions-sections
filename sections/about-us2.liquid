@@ -7,23 +7,23 @@
 {%- assign half_blocks = total_blocks | divided_by: 2 -%}
 
 {% style %}
+  /* Base styles and box-sizing */
+  #sek-about-{{ section_id }},
+  #sek-about-{{ section_id }} * {
+    box-sizing: border-box;
+  }
+
   #sek-about-{{ section_id }} {
     padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
     background: {{ section.settings.background_color }};
     overflow: hidden;
   }
 
-  @media (min-width: 750px) {
-    #sek-about-{{ section_id }} {
-      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
-    }
-  }
-
   /* Header */
   #sek-about-{{ section_id }} .sek-about__header {
     text-align: {{ section.settings.header_alignment }};
-    padding: 0 16px;
-    margin-bottom: 32px;
+    padding: 0 14px;
+    margin-bottom: 24px;
     max-width: 800px;
     {% if section.settings.header_alignment == 'center' %}
     margin-left: auto;
@@ -34,60 +34,28 @@
     {% endif %}
   }
 
-  @media (min-width: 750px) {
-    #sek-about-{{ section_id }} .sek-about__header {
-      padding: 0 40px;
-      margin-bottom: 48px;
-    }
-  }
-
   #sek-about-{{ section_id }} .sek-about__subheading {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     color: {{ section.settings.accent_color }};
-    margin: 0 0 16px 0;
-  }
-
-  @media (min-width: 750px) {
-    #sek-about-{{ section_id }} .sek-about__subheading {
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
+    margin: 0 0 12px 0;
   }
 
   #sek-about-{{ section_id }} .sek-about__heading {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 700;
     line-height: 1.2;
     color: {{ section.settings.heading_color }};
     margin: 0;
   }
 
-  @media (min-width: 750px) {
-    #sek-about-{{ section_id }} .sek-about__heading {
-      font-size: 36px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-about-{{ section_id }} .sek-about__heading {
-      font-size: 42px;
-    }
-  }
-
   #sek-about-{{ section_id }} .sek-about__description {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.6;
     color: {{ section.settings.text_color }};
-    margin: 16px 0 0 0;
-  }
-
-  @media (min-width: 750px) {
-    #sek-about-{{ section_id }} .sek-about__description {
-      font-size: 16px;
-    }
+    margin: 12px 0 0 0;
   }
 
   /* Marquee Rows Container */
@@ -140,24 +108,12 @@
   /* Cards */
   #sek-about-{{ section_id }} .sek-about__card {
     position: relative;
-    width: 140px;
+    width: 110px;
     flex-shrink: 0;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  @media (min-width: 750px) {
-    #sek-about-{{ section_id }} .sek-about__card {
-      width: 160px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    #sek-about-{{ section_id }} .sek-about__card {
-      width: 180px;
-    }
   }
 
   /* Card Image Wrapper */
@@ -184,36 +140,226 @@
 
   /* Card Content - Below image */
   #sek-about-{{ section_id }} .sek-about__card-content {
-    padding: 12px 4px 0;
+    padding: 10px 4px 0;
     text-align: center;
     width: 100%;
   }
 
   #sek-about-{{ section_id }} .sek-about__card-name {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 600;
     color: {{ section.settings.heading_color }};
     margin: 0 0 2px 0;
     line-height: 1.3;
   }
 
-  @media (min-width: 750px) {
-    #sek-about-{{ section_id }} .sek-about__card-name {
-      font-size: 14px;
-    }
-  }
-
   #sek-about-{{ section_id }} .sek-about__card-title {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 400;
     color: {{ section.settings.text_color }};
     margin: 0;
     opacity: 0.8;
   }
 
-  @media (min-width: 750px) {
+  /* ==========================================
+     RESPONSIVE BREAKPOINTS
+     ========================================== */
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    #sek-about-{{ section_id }} .sek-about__header {
+      padding: 0 16px;
+      margin-bottom: 28px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__subheading {
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      margin-bottom: 14px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__heading {
+      font-size: 24px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__description {
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card {
+      width: 120px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-content {
+      padding: 10px 4px 0;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-name {
+      font-size: 12px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-title {
+      font-size: 10px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    #sek-about-{{ section_id }} .sek-about__header {
+      padding: 0 20px;
+      margin-bottom: 32px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__subheading {
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__heading {
+      font-size: 28px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__description {
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card {
+      width: 135px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-content {
+      padding: 11px 4px 0;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-name {
+      font-size: 13px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-title {
+      font-size: 11px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    #sek-about-{{ section_id }} {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__header {
+      padding: 0 32px;
+      margin-bottom: 40px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__subheading {
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__heading {
+      font-size: 34px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__description {
+      font-size: 15px;
+      margin-top: 18px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card {
+      width: 155px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-content {
+      padding: 12px 4px 0;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-name {
+      font-size: 14px;
+    }
+
     #sek-about-{{ section_id }} .sek-about__card-title {
       font-size: 12px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    #sek-about-{{ section_id }} .sek-about__header {
+      padding: 0 40px;
+      margin-bottom: 48px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__subheading {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__heading {
+      font-size: 40px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__description {
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card {
+      width: 175px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-content {
+      padding: 14px 4px 0;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-name {
+      font-size: 15px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-title {
+      font-size: 13px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    #sek-about-{{ section_id }} .sek-about__header {
+      padding: 0 48px;
+      margin-bottom: 56px;
+      max-width: 900px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__subheading {
+      font-size: 14px;
+      letter-spacing: 2.5px;
+      margin-bottom: 22px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__heading {
+      font-size: 46px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__description {
+      font-size: 17px;
+      margin-top: 22px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card {
+      width: 195px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-content {
+      padding: 16px 4px 0;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-name {
+      font-size: 16px;
+    }
+
+    #sek-about-{{ section_id }} .sek-about__card-title {
+      font-size: 14px;
     }
   }
 
