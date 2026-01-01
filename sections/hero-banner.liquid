@@ -6,6 +6,7 @@
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
+    overflow: hidden;
   }
 
   .hero-banner-section-{{ section.id }} {
@@ -22,9 +23,12 @@
     width: 100%;
     height: {{ section.settings.height_mobile }}vh;
     overflow: hidden;
+    box-sizing: border-box;
   }
 
-  .hero-banner-section-{{ section.id }} * {
+  .hero-banner-section-{{ section.id }} *,
+  .hero-banner-section-{{ section.id }} *::before,
+  .hero-banner-section-{{ section.id }} *::after {
     box-sizing: border-box;
   }
 
@@ -94,40 +98,41 @@
     justify-content: {{ section.settings.content_vertical_align }};
     align-items: {{ section.settings.content_horizontal_align }};
     text-align: {{ section.settings.text_align }};
-    padding: 27px 20px;
+    padding: 20px 15px;
     z-index: 4;
   }
 
   .hero-content-inner-{{ section.id }} {
-    max-width: {{ section.settings.content_max_width }}px;
+    max-width: 100%;
+    width: 100%;
   }
 
   .hero-subheading-{{ section.id }} {
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 300;
     color: var(--hero-text-color);
-    margin: 0 0 15px 0;
+    margin: 0 0 8px 0;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     opacity: 0.9;
   }
 
   .hero-heading-{{ section.id }} {
-    font-size: {{ section.settings.heading_size_mobile }}px;
+    font-size: 26px;
     font-weight: {{ section.settings.heading_weight }};
     font-style: {{ section.settings.heading_style }};
     color: var(--hero-heading-color);
-    margin: 0 0 20px 0;
-    line-height: 1.1;
+    margin: 0 0 12px 0;
+    line-height: 1.15;
     letter-spacing: -0.02em;
   }
 
   .hero-description-{{ section.id }} {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 300;
     color: var(--hero-text-color);
-    margin: 0 0 30px 0;
-    line-height: 1.6;
+    margin: 0 0 18px 0;
+    line-height: 1.5;
     opacity: 0.9;
   }
 
@@ -135,14 +140,14 @@
   .hero-buttons-{{ section.id }} {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 10px;
     justify-content: {{ section.settings.text_align }};
   }
 
   .hero-btn-{{ section.id }} {
     display: inline-block;
-    padding: 14px 32px;
-    font-size: 15px;
+    padding: 10px 20px;
+    font-size: 12px;
     font-weight: 400;
     text-decoration: none;
     border-radius: {{ section.settings.button_border_radius }}px;
@@ -175,17 +180,17 @@
   /* Navigation Dots */
   .hero-dots-{{ section.id }} {
     position: absolute;
-    bottom: 25px;
+    bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    gap: 8px;
     z-index: 5;
   }
 
   .hero-dot-{{ section.id }} {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.4);
     border: none;
@@ -209,14 +214,14 @@
     transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
-    padding: 0 15px;
+    padding: 0 10px;
     z-index: 5;
     pointer-events: none;
   }
 
   .hero-arrow-{{ section.id }} {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
     border: none;
@@ -234,13 +239,123 @@
   }
 
   .hero-arrow-{{ section.id }} svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     stroke: white;
   }
 
-  /* Responsive - Desktop */
-  @media (min-width: 769px) {
+  /* Medium Mobile - 400px */
+  @media (min-width: 400px) {
+    .hero-content-{{ section.id }} {
+      padding: 25px 18px;
+    }
+
+    .hero-subheading-{{ section.id }} {
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      margin-bottom: 10px;
+    }
+
+    .hero-heading-{{ section.id }} {
+      font-size: 30px;
+      margin-bottom: 14px;
+    }
+
+    .hero-description-{{ section.id }} {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .hero-buttons-{{ section.id }} {
+      gap: 12px;
+    }
+
+    .hero-btn-{{ section.id }} {
+      padding: 11px 24px;
+      font-size: 13px;
+    }
+
+    .hero-dots-{{ section.id }} {
+      bottom: 18px;
+      gap: 9px;
+    }
+
+    .hero-dot-{{ section.id }} {
+      width: 9px;
+      height: 9px;
+    }
+
+    .hero-arrows-{{ section.id }} {
+      padding: 0 12px;
+    }
+
+    .hero-arrow-{{ section.id }} {
+      width: 38px;
+      height: 38px;
+    }
+
+    .hero-arrow-{{ section.id }} svg {
+      width: 17px;
+      height: 17px;
+    }
+  }
+
+  /* Large Mobile - 550px */
+  @media (min-width: 550px) {
+    .hero-content-{{ section.id }} {
+      padding: 28px 25px;
+    }
+
+    .hero-content-inner-{{ section.id }} {
+      max-width: 450px;
+    }
+
+    .hero-subheading-{{ section.id }} {
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .hero-heading-{{ section.id }} {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+      margin-bottom: 16px;
+    }
+
+    .hero-description-{{ section.id }} {
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .hero-btn-{{ section.id }} {
+      padding: 12px 28px;
+      font-size: 14px;
+    }
+
+    .hero-dots-{{ section.id }} {
+      bottom: 20px;
+    }
+
+    .hero-dot-{{ section.id }} {
+      width: 10px;
+      height: 10px;
+    }
+
+    .hero-arrows-{{ section.id }} {
+      padding: 0 15px;
+    }
+
+    .hero-arrow-{{ section.id }} {
+      width: 42px;
+      height: 42px;
+    }
+
+    .hero-arrow-{{ section.id }} svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  /* Tablet - 768px */
+  @media (min-width: 768px) {
     .hero-banner-section-{{ section.id }} {
       height: {{ section.settings.height_desktop }}vh;
     }
@@ -254,27 +369,90 @@
     }
 
     .hero-content-{{ section.id }} {
-      padding: 36px 60px;
+      padding: 35px 40px;
     }
 
-    .hero-heading-{{ section.id }} {
-      font-size: {{ section.settings.heading_size_desktop }}px;
-    }
-
-    .hero-description-{{ section.id }} {
-      font-size: 20px;
+    .hero-content-inner-{{ section.id }} {
+      max-width: 550px;
     }
 
     .hero-subheading-{{ section.id }} {
-      font-size: 16px;
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .hero-heading-{{ section.id }} {
+      font-size: 48px;
+      margin-bottom: 18px;
+    }
+
+    .hero-description-{{ section.id }} {
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 28px;
     }
 
     .hero-buttons-{{ section.id }} {
-      gap: 20px;
+      gap: 16px;
     }
 
     .hero-btn-{{ section.id }} {
-      padding: 16px 40px;
+      padding: 14px 34px;
+      font-size: 15px;
+    }
+
+    .hero-dots-{{ section.id }} {
+      bottom: 25px;
+      gap: 10px;
+    }
+
+    .hero-arrows-{{ section.id }} {
+      padding: 0 25px;
+    }
+
+    .hero-arrow-{{ section.id }} {
+      width: 46px;
+      height: 46px;
+    }
+
+    .hero-arrow-{{ section.id }} svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* Small Desktop - 1024px */
+  @media (min-width: 1024px) {
+    .hero-content-{{ section.id }} {
+      padding: 40px 60px;
+    }
+
+    .hero-content-inner-{{ section.id }} {
+      max-width: 650px;
+    }
+
+    .hero-subheading-{{ section.id }} {
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+
+    .hero-heading-{{ section.id }} {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+
+    .hero-description-{{ section.id }} {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons-{{ section.id }} {
+      gap: 18px;
+    }
+
+    .hero-btn-{{ section.id }} {
+      padding: 15px 38px;
       font-size: 16px;
     }
 
@@ -288,9 +466,52 @@
     }
   }
 
-  @media (min-width: 1200px) {
+  /* Large Desktop - 1400px */
+  @media (min-width: 1400px) {
     .hero-content-{{ section.id }} {
       padding: 50px 100px;
+    }
+
+    .hero-content-inner-{{ section.id }} {
+      max-width: {{ section.settings.content_max_width }}px;
+    }
+
+    .hero-subheading-{{ section.id }} {
+      font-size: 16px;
+    }
+
+    .hero-heading-{{ section.id }} {
+      font-size: {{ section.settings.heading_size_desktop }}px;
+    }
+
+    .hero-description-{{ section.id }} {
+      font-size: 20px;
+    }
+
+    .hero-buttons-{{ section.id }} {
+      gap: 20px;
+    }
+
+    .hero-btn-{{ section.id }} {
+      padding: 16px 40px;
+    }
+
+    .hero-dots-{{ section.id }} {
+      bottom: 30px;
+    }
+
+    .hero-arrows-{{ section.id }} {
+      padding: 0 40px;
+    }
+
+    .hero-arrow-{{ section.id }} {
+      width: 54px;
+      height: 54px;
+    }
+
+    .hero-arrow-{{ section.id }} svg {
+      width: 22px;
+      height: 22px;
     }
   }
 
