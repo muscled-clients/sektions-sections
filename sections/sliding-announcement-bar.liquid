@@ -6,7 +6,7 @@
     overflow: hidden;
     font-family: {{ section.settings.font_family }};
     z-index: {{ section.settings.z_index }};
-    min-height: 60px;
+    min-height: {{ section.settings.bar_height }}px;
     display: flex;
     align-items: stretch;
   }
@@ -37,7 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px 20px;
+    padding: {{ section.settings.padding_vertical }}px {{ section.settings.padding_horizontal }}px;
     text-align: center;
     position: relative;
     box-sizing: border-box;
@@ -55,11 +55,11 @@
     align-items: center;
     justify-content: center;
     flex-wrap: nowrap;
-    gap: 6px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: 0;
+    gap: {{ section.settings.content_gap }}px;
+    font-size: {{ section.settings.text_size }}px;
+    font-weight: {{ section.settings.text_weight }};
+    line-height: {{ section.settings.line_height }};
+    letter-spacing: {{ section.settings.letter_spacing }}px;
     position: relative;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     width: 100%;
@@ -71,19 +71,19 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    color: #333;
+    background: {{ section.settings.arrow_background }};
+    color: {{ section.settings.arrow_color }};
     border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    width: {{ section.settings.arrow_size }}px;
+    height: {{ section.settings.arrow_size }}px;
+    border-radius: {{ section.settings.arrow_border_radius }}%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: {{ section.settings.arrow_icon_size }}px;
     font-weight: bold;
-    opacity: 0.8;
+    opacity: {{ section.settings.arrow_opacity }};
     transition: all 0.3s ease;
     z-index: 1000;
     padding: 0;
@@ -94,19 +94,18 @@
   }
 
   #announcement-bar-{{ section.id }} .nav-arrow:hover {
-    opacity: 1;
+    opacity: {{ section.settings.arrow_hover_opacity }};
     transform: translateY(-50%) scale(1.1);
-    background: rgba(255, 255, 255, 1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
   #announcement-bar-{{ section.id }} .nav-arrow.prev {
-    left: 16px;
+    left: {{ section.settings.arrow_offset }}px;
     display: none;
   }
 
   #announcement-bar-{{ section.id }} .nav-arrow.next {
-    right: 16px;
+    right: {{ section.settings.arrow_offset }}px;
   }
 
   /* Hide arrows when not needed */
@@ -129,7 +128,7 @@
   #announcement-bar-{{ section.id }} .inline-icon {
     display: inline-flex;
     align-items: center;
-    font-size: 16px;
+    font-size: {{ section.settings.icon_size }}px;
     flex-shrink: 0;
   }
 
@@ -154,14 +153,14 @@
   /* Links */
   #announcement-bar-{{ section.id }} .announcement-link {
     color: inherit;
-    text-decoration: underline;
-    font-weight: 400;
+    text-decoration: {{ section.settings.link_underline }};
+    font-weight: {{ section.settings.link_weight }};
     transition: opacity 0.3s ease;
     margin-left: 4px;
   }
 
   #announcement-bar-{{ section.id }} .announcement-link:hover {
-    opacity: 0.8;
+    opacity: {{ section.settings.link_hover_opacity }};
   }
 
   /* Info Icon and Tooltip */
@@ -236,6 +235,7 @@
   @media screen and (max-width: 768px) {
     #announcement-bar-{{ section.id }} {
       overflow: hidden;
+      min-height: {{ section.settings.mobile_bar_height }}px;
     }
 
     #announcement-bar-{{ section.id }} .announcement-slider {
@@ -256,14 +256,14 @@
       min-width: calc(100vw - 40px);
       width: calc(100vw - 40px);
       min-height: 50px;
-      padding: 12px 16px;
+      padding: {{ section.settings.mobile_padding_vertical }}px {{ section.settings.mobile_padding_horizontal }}px;
       height: auto;
       border-radius: 8px;
       flex-shrink: 0;
     }
 
     #announcement-bar-{{ section.id }} .card-content {
-      font-size: 13px;
+      font-size: {{ section.settings.mobile_text_size }}px;
       flex-wrap: nowrap;
       white-space: nowrap;
       overflow: hidden;
@@ -290,12 +290,12 @@
   /* Small Mobile */
   @media screen and (max-width: 480px) {
     #announcement-bar-{{ section.id }} .card-content {
-      font-size: 12px;
+      font-size: {{ section.settings.small_mobile_text_size }}px;
       gap: 4px;
     }
 
     #announcement-bar-{{ section.id }} .inline-icon {
-      font-size: 14px;
+      font-size: {{ section.settings.mobile_icon_size }}px;
     }
   }
 
