@@ -319,11 +319,12 @@
                   <a
                     href="{{ block.settings.button_link }}"
                     class="slide-card-button"
-                    style="background-color: {{ block.settings.button_color }}; color: #ffffff;"
+                    style="background-color: {{ block.settings.button_color }}; color: {{ block.settings.button_text_color }};"
                     data-title-color="{{ block.settings.title_color }}"
                     data-button-color="{{ block.settings.button_color }}"
+                    data-button-text-color="{{ block.settings.button_text_color }}"
                     onmouseover="this.style.backgroundColor=this.dataset.titleColor; this.style.color='#000000'; this.style.transform='translateY(-2px)';"
-                    onmouseout="this.style.backgroundColor=this.dataset.buttonColor; this.style.color='#ffffff'; this.style.transform='translateY(0)';"
+                    onmouseout="this.style.backgroundColor=this.dataset.buttonColor; this.style.color=this.dataset.buttonTextColor; this.style.transform='translateY(0)';"
                   >
                     {{ block.settings.button_text }}
                   </a>
