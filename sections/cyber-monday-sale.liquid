@@ -54,13 +54,15 @@
   #cyber-monday-sale-{{ section.id }} .countdown-timer {
     background: {{ section.settings.timer_background }};
     padding: {{ section.settings.timer_padding_vertical }}px {{ section.settings.timer_padding_horizontal }}px;
-    margin: 0;
+    margin: 0 {{ section.settings.timer_margin_horizontal }}px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
-    width: 100%;
+    width: calc(100% - {{ section.settings.timer_margin_horizontal | times: 2 }}px);
     position: relative;
+    border-radius: {{ section.settings.timer_border_radius }}px;
+    box-shadow: inset 0 0 0 {{ section.settings.timer_inner_border_width }}px {{ section.settings.timer_inner_border_color }};
   }
 
   #cyber-monday-sale-{{ section.id }} .time-unit {
