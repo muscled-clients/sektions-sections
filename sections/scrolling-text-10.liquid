@@ -1,8 +1,21 @@
 {% style %}
+  /* Shopify Section Wrapper */
   #shopify-section-{{ section.id }} {
     --scrolling-text-section-bg: {{ section.settings.section_background }};
-    margin-top: {{ section.settings.section_margin_top }}px;
-    margin-bottom: {{ section.settings.section_margin_bottom }}px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-top: {{ section.settings.section_margin_top | times: 0.7 }}px;
+    margin-bottom: {{ section.settings.section_margin_bottom | times: 0.7 }}px;
+  }
+
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom }}px;
+    }
   }
 {% endstyle %}
 
@@ -15,12 +28,19 @@
     display: flex;
     flex-direction: column;
     gap: 0;
+    box-sizing: border-box;
+  }
+
+  .scrolling-text-10 *,
+  .scrolling-text-10 *::before,
+  .scrolling-text-10 *::after {
+    box-sizing: border-box;
   }
 
   .scrolling-text-10__row {
     position: relative;
     overflow: hidden;
-    padding: 12px 0;
+    padding: 8px 0;
     transform-origin: center;
   }
 
@@ -30,7 +50,7 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 8%;
+    width: 5%;
     z-index: 2;
     pointer-events: none;
   }
@@ -92,17 +112,17 @@
   .scrolling-text-10__item {
     display: flex;
     align-items: center;
-    gap: 30px;
-    padding: 0 30px;
+    gap: 16px;
+    padding: 0 16px;
     flex-shrink: 0;
   }
 
   .scrolling-text-10__text {
     font-family: 'Anton', sans-serif;
-    font-size: 40px;
+    font-size: 24px;
     font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     line-height: 1.1;
     white-space: nowrap;
     margin: 0;
@@ -114,8 +134,8 @@
 
   .scrolling-text-10__text--outline {
     color: transparent;
-    -webkit-text-stroke: 2px var(--text-color, #ffffff);
-    text-stroke: 2px var(--text-color, #ffffff);
+    -webkit-text-stroke: 1px var(--text-color, #ffffff);
+    text-stroke: 1px var(--text-color, #ffffff);
   }
 
   .scrolling-text-10__icon {
@@ -126,38 +146,153 @@
   }
 
   .scrolling-text-10__icon svg {
-    width: 40px;
-    height: 40px;
+    width: 24px;
+    height: 24px;
   }
 
   .scrolling-text-10__icon img {
-    width: 40px;
-    height: 40px;
+    width: 24px;
+    height: 24px;
     object-fit: contain;
   }
 
   .scrolling-text-10__separator {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background-color: var(--text-color, #ffffff);
     flex-shrink: 0;
   }
 
-  /* Desktop Styles */
+  /* ============================================
+     RESPONSIVE BREAKPOINTS
+     ============================================ */
+
+  /* Medium Mobile - 400px */
+  @media (min-width: 400px) {
+    .scrolling-text-10__row {
+      padding: 10px 0;
+    }
+
+    .scrolling-text-10__row::before,
+    .scrolling-text-10__row::after {
+      width: 6%;
+    }
+
+    .scrolling-text-10__item {
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .scrolling-text-10__text {
+      font-size: 28px;
+      letter-spacing: 1.5px;
+    }
+
+    .scrolling-text-10__text--outline {
+      -webkit-text-stroke-width: 1.5px;
+    }
+
+    .scrolling-text-10__icon svg,
+    .scrolling-text-10__icon img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .scrolling-text-10__separator {
+      width: 9px;
+      height: 9px;
+    }
+  }
+
+  /* Large Mobile - 550px */
+  @media (min-width: 550px) {
+    .scrolling-text-10__row {
+      padding: 12px 0;
+    }
+
+    .scrolling-text-10__row::before,
+    .scrolling-text-10__row::after {
+      width: 7%;
+    }
+
+    .scrolling-text-10__item {
+      gap: 26px;
+      padding: 0 26px;
+    }
+
+    .scrolling-text-10__text {
+      font-size: 36px;
+      letter-spacing: 2px;
+    }
+
+    .scrolling-text-10__text--outline {
+      -webkit-text-stroke-width: 2px;
+    }
+
+    .scrolling-text-10__icon svg,
+    .scrolling-text-10__icon img {
+      width: 36px;
+      height: 36px;
+    }
+
+    .scrolling-text-10__separator {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  /* Tablet - 768px */
   @media (min-width: 768px) {
+    .scrolling-text-10__row {
+      padding: 14px 0;
+    }
+
+    .scrolling-text-10__row::before,
+    .scrolling-text-10__row::after {
+      width: 8%;
+    }
+
+    .scrolling-text-10__item {
+      gap: 36px;
+      padding: 0 36px;
+    }
+
+    .scrolling-text-10__text {
+      font-size: 50px;
+      letter-spacing: 3px;
+    }
+
+    .scrolling-text-10__text--outline {
+      -webkit-text-stroke-width: 2px;
+    }
+
+    .scrolling-text-10__icon svg,
+    .scrolling-text-10__icon img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .scrolling-text-10__separator {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  /* Small Desktop - 1024px */
+  @media (min-width: 1024px) {
     .scrolling-text-10__row {
       padding: 16px 0;
     }
 
     .scrolling-text-10__item {
-      gap: 50px;
-      padding: 0 50px;
+      gap: 45px;
+      padding: 0 45px;
     }
 
     .scrolling-text-10__text {
-      font-size: 80px;
-      letter-spacing: 4px;
+      font-size: 70px;
+      letter-spacing: 3.5px;
     }
 
     .scrolling-text-10__text--outline {
@@ -171,20 +306,40 @@
     }
 
     .scrolling-text-10__separator {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
     }
   }
 
-  @media (min-width: 1200px) {
+  /* Large Desktop - 1400px */
+  @media (min-width: 1400px) {
+    .scrolling-text-10__row {
+      padding: 18px 0;
+    }
+
+    .scrolling-text-10__item {
+      gap: 50px;
+      padding: 0 50px;
+    }
+
     .scrolling-text-10__text {
       font-size: 100px;
+      letter-spacing: 4px;
+    }
+
+    .scrolling-text-10__text--outline {
+      -webkit-text-stroke-width: 3px;
     }
 
     .scrolling-text-10__icon svg,
     .scrolling-text-10__icon img {
       width: 90px;
       height: 90px;
+    }
+
+    .scrolling-text-10__separator {
+      width: 16px;
+      height: 16px;
     }
   }
 </style>
