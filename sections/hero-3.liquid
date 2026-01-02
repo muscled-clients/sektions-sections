@@ -8,22 +8,30 @@
 {% style %}
   @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap');
 
+  /* Shopify Section Wrapper */
+  #shopify-section-{{ section_id }} {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
   /* Hero Container */
   #sek-hero3-{{ section_id }} {
     position: relative;
     width: 100%;
-    min-height: {{ section.settings.min_height_mobile }}px;
+    min-height: {{ section.settings.min_height_mobile | times: 0.85 }}px;
     overflow: hidden;
-    margin-top: {{ section.settings.section_padding_top_mobile }}px;
-    margin-bottom: {{ section.settings.section_padding_bottom_mobile }}px;
+    margin-top: {{ section.settings.section_padding_top_mobile | times: 0.7 }}px;
+    margin-bottom: {{ section.settings.section_padding_bottom_mobile | times: 0.7 }}px;
+    box-sizing: border-box;
   }
 
-  @media (min-width: 1024px) {
-    #sek-hero3-{{ section_id }} {
-      min-height: {{ section.settings.min_height_desktop }}px;
-      margin-top: {{ section.settings.section_padding_top_desktop }}px;
-      margin-bottom: {{ section.settings.section_padding_bottom_desktop }}px;
-    }
+  #sek-hero3-{{ section_id }} *,
+  #sek-hero3-{{ section_id }} *::before,
+  #sek-hero3-{{ section_id }} *::after {
+    box-sizing: border-box;
   }
 
   /* Background Video/Image */
@@ -61,37 +69,19 @@
     z-index: 3;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 30px 20px;
-    min-height: {{ section.settings.min_height_mobile }}px;
+    gap: 12px;
+    padding: 20px 15px;
+    min-height: {{ section.settings.min_height_mobile | times: 0.85 }}px;
     align-items: center;
     justify-content: center;
   }
 
-  @media (min-width: 1024px) {
-    #sek-hero3-{{ section_id }} .sek-h3__cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 20px;
-      padding: 60px 80px;
-      min-height: {{ section.settings.min_height_desktop }}px;
-      align-items: stretch;
-    }
-  }
-
-  /* Image Cards */
+  /* Image Cards - Hidden on mobile, shown on tablet+ */
   #sek-hero3-{{ section_id }} .sek-h3__image-card {
     display: none;
     background: {{ section.settings.card_bg }};
     border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
     overflow: hidden;
-  }
-
-  @media (min-width: 1024px) {
-    #sek-hero3-{{ section_id }} .sek-h3__image-card {
-      display: block;
-      height: {{ section.settings.card_height }}px;
-    }
   }
 
   #sek-hero3-{{ section_id }} .sek-h3__image-card img {
@@ -104,63 +94,41 @@
   #sek-hero3-{{ section_id }} .sek-h3__content-card {
     background: {{ section.settings.card_bg }};
     border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
-    padding: 32px 24px;
+    padding: 24px 18px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    max-width: 400px;
-  }
-
-  @media (min-width: 1024px) {
-    #sek-hero3-{{ section_id }} .sek-h3__content-card {
-      padding: 40px 32px;
-      height: {{ section.settings.card_height }}px;
-      max-width: none;
-    }
+    max-width: 340px;
   }
 
   /* Heading */
   #sek-hero3-{{ section_id }} .sek-h3__heading {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: {{ section.settings.heading_size_mobile }}px;
+    font-size: 20px;
     font-weight: {{ section.settings.heading_weight }};
-    line-height: 1.3;
+    line-height: 1.25;
     color: {{ section.settings.heading_color }};
-    margin: 0 0 12px;
-  }
-
-  @media (min-width: 750px) {
-    #sek-hero3-{{ section_id }} .sek-h3__heading {
-      font-size: {{ section.settings.heading_size_desktop }}px;
-      margin-bottom: 16px;
-    }
+    margin: 0 0 10px;
   }
 
   /* Description */
   #sek-hero3-{{ section_id }} .sek-h3__text {
     font-family: 'Montserrat', sans-serif;
-    font-size: {{ section.settings.text_size_mobile }}px;
+    font-size: 13px;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.5;
     color: {{ section.settings.text_color }};
-    margin: 0 0 20px;
-  }
-
-  @media (min-width: 750px) {
-    #sek-hero3-{{ section_id }} .sek-h3__text {
-      font-size: {{ section.settings.text_size_desktop }}px;
-      margin-bottom: 24px;
-    }
+    margin: 0 0 16px;
   }
 
   /* Button */
   #sek-hero3-{{ section_id }} .sek-h3__btn {
     display: inline-block;
-    padding: 14px 40px;
+    padding: 10px 24px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -180,8 +148,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
+    gap: 6px;
+    margin-top: 14px;
   }
 
   #sek-hero3-{{ section_id }} .sek-h3__stars {
@@ -190,14 +158,14 @@
   }
 
   #sek-hero3-{{ section_id }} .sek-h3__star {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     fill: {{ section.settings.star_color }};
   }
 
   #sek-hero3-{{ section_id }} .sek-h3__rating-text {
     font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
+    font-size: 11px;
     color: {{ section.settings.text_color }};
   }
 
@@ -205,22 +173,267 @@
   #sek-hero3-{{ section_id }} .sek-h3__mobile-images {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
-    max-width: 400px;
+    max-width: 340px;
   }
 
-  @media (min-width: 1024px) {
+  #sek-hero3-{{ section_id }} .sek-h3__mobile-images img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+  }
+
+  /* Medium Mobile - 400px */
+  @media (min-width: 400px) {
+    #sek-hero3-{{ section_id }} {
+      min-height: {{ section.settings.min_height_mobile | times: 0.9 }}px;
+      margin-top: {{ section.settings.section_padding_top_mobile | times: 0.8 }}px;
+      margin-bottom: {{ section.settings.section_padding_bottom_mobile | times: 0.8 }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__cards {
+      gap: 14px;
+      padding: 25px 18px;
+      min-height: {{ section.settings.min_height_mobile | times: 0.9 }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__content-card {
+      padding: 28px 20px;
+      max-width: 360px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__heading {
+      font-size: 22px;
+      margin-bottom: 11px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__text {
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__btn {
+      padding: 11px 28px;
+      font-size: 12px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__rating {
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__star {
+      width: 13px;
+      height: 13px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__rating-text {
+      font-size: 12px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__mobile-images {
+      gap: 12px;
+      max-width: 360px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__mobile-images img {
+      height: 160px;
+    }
+  }
+
+  /* Large Mobile - 550px */
+  @media (min-width: 550px) {
+    #sek-hero3-{{ section_id }} {
+      min-height: {{ section.settings.min_height_mobile }}px;
+      margin-top: {{ section.settings.section_padding_top_mobile }}px;
+      margin-bottom: {{ section.settings.section_padding_bottom_mobile }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__cards {
+      gap: 16px;
+      padding: 30px 25px;
+      min-height: {{ section.settings.min_height_mobile }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__content-card {
+      padding: 32px 24px;
+      max-width: 400px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__heading {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__text {
+      font-size: {{ section.settings.text_size_mobile }}px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__btn {
+      padding: 12px 32px;
+      font-size: 12px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__rating {
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__star {
+      width: 14px;
+      height: 14px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__rating-text {
+      font-size: 13px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__mobile-images {
+      max-width: 400px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__mobile-images img {
+      height: 180px;
+    }
+  }
+
+  /* Tablet - 768px (2-column layout) */
+  @media (min-width: 768px) {
+    #sek-hero3-{{ section_id }} {
+      min-height: {{ section.settings.min_height_mobile | plus: 50 }}px;
+      margin-top: {{ section.settings.section_padding_top_desktop | times: 0.7 }}px;
+      margin-bottom: {{ section.settings.section_padding_bottom_desktop | times: 0.7 }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 40px 35px;
+      min-height: {{ section.settings.min_height_mobile | plus: 50 }}px;
+      align-items: stretch;
+    }
+
+    /* Show one image card on tablet */
+    #sek-hero3-{{ section_id }} .sek-h3__image-card:first-child {
+      display: block;
+      height: {{ section.settings.card_height | times: 0.8 }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__content-card {
+      padding: 35px 28px;
+      height: {{ section.settings.card_height | times: 0.8 }}px;
+      max-width: none;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__heading {
+      font-size: 26px;
+      margin-bottom: 14px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__text {
+      font-size: 15px;
+      margin-bottom: 22px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__btn {
+      padding: 13px 36px;
+      font-size: 13px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__rating {
+      margin-top: 20px;
+    }
+
+    /* Hide mobile images on tablet+ */
     #sek-hero3-{{ section_id }} .sek-h3__mobile-images {
       display: none;
     }
   }
 
-  #sek-hero3-{{ section_id }} .sek-h3__mobile-images img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+  /* Small Desktop - 1024px (3-column layout) */
+  @media (min-width: 1024px) {
+    #sek-hero3-{{ section_id }} {
+      min-height: {{ section.settings.min_height_desktop | times: 0.9 }}px;
+      margin-top: {{ section.settings.section_padding_top_desktop | times: 0.85 }}px;
+      margin-bottom: {{ section.settings.section_padding_bottom_desktop | times: 0.85 }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__cards {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+      padding: 50px 60px;
+      min-height: {{ section.settings.min_height_desktop | times: 0.9 }}px;
+    }
+
+    /* Show both image cards */
+    #sek-hero3-{{ section_id }} .sek-h3__image-card {
+      display: block;
+      height: {{ section.settings.card_height | times: 0.9 }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__content-card {
+      padding: 38px 30px;
+      height: {{ section.settings.card_height | times: 0.9 }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__heading {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__text {
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__btn {
+      padding: 14px 38px;
+      font-size: 13px;
+    }
+  }
+
+  /* Large Desktop - 1400px */
+  @media (min-width: 1400px) {
+    #sek-hero3-{{ section_id }} {
+      min-height: {{ section.settings.min_height_desktop }}px;
+      margin-top: {{ section.settings.section_padding_top_desktop }}px;
+      margin-bottom: {{ section.settings.section_padding_bottom_desktop }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__cards {
+      gap: 20px;
+      padding: 60px 80px;
+      min-height: {{ section.settings.min_height_desktop }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__image-card {
+      height: {{ section.settings.card_height }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__content-card {
+      padding: 40px 32px;
+      height: {{ section.settings.card_height }}px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__heading {
+      font-size: {{ section.settings.heading_size_desktop }}px;
+      margin-bottom: 16px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__text {
+      font-size: {{ section.settings.text_size_desktop }}px;
+      margin-bottom: 24px;
+    }
+
+    #sek-hero3-{{ section_id }} .sek-h3__btn {
+      padding: 14px 40px;
+    }
   }
 {% endstyle %}
 
