@@ -1,4 +1,5 @@
 {% style %}
+  /* Shopify Section Wrapper */
   #shopify-section-{{ section.id }} {
     --ba12-bg: {{ section.settings.background_color }};
     --ba12-text: {{ section.settings.text_color }};
@@ -9,8 +10,20 @@
     --ba12-tag-text: {{ section.settings.tag_text_color }};
     --ba12-accent: {{ section.settings.accent_color }};
     --ba12-progress-ring: {{ section.settings.progress_ring_color }};
-    margin-top: {{ section.settings.section_margin_top }}px;
-    margin-bottom: {{ section.settings.section_margin_bottom }}px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-top: {{ section.settings.section_margin_top | times: 0.7 }}px;
+    margin-bottom: {{ section.settings.section_margin_bottom | times: 0.7 }}px;
+  }
+
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom }}px;
+    }
   }
 {% endstyle %}
 
@@ -19,8 +32,15 @@
 
   .before-after-12 {
     background-color: var(--ba12-bg);
-    padding: 40px 20px;
+    padding: 24px 12px;
     font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+  }
+
+  .before-after-12 *,
+  .before-after-12 *::before,
+  .before-after-12 *::after {
+    box-sizing: border-box;
   }
 
   .before-after-12__container {
@@ -30,18 +50,18 @@
 
   .before-after-12__header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .before-after-12__title {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 700;
     color: var(--ba12-heading);
-    margin: 0 0 10px;
+    margin: 0 0 8px;
   }
 
   .before-after-12__subtitle {
-    font-size: 14px;
+    font-size: 12px;
     color: var(--ba12-text);
     opacity: 0.8;
     margin: 0;
@@ -51,19 +71,22 @@
   .before-after-12__thumbnails {
     display: flex;
     justify-content: center;
-    gap: 16px;
-    margin-bottom: 30px;
+    gap: 10px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
   }
 
   .before-after-12__thumb {
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.3s ease, opacity 0.3s ease;
     opacity: 0.5;
+    border: none;
+    padding: 0;
+    background: transparent;
   }
 
   .before-after-12__thumb:hover {
@@ -84,10 +107,10 @@
 
   .before-after-12__thumb-progress {
     position: absolute;
-    top: -4px;
-    left: -4px;
-    width: calc(100% + 8px);
-    height: calc(100% + 8px);
+    top: -3px;
+    left: -3px;
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
     transform: rotate(-90deg);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -142,19 +165,19 @@
   .before-after-12__slide-inner {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
   }
 
   /* Image Grid */
   .before-after-12__images {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 8px;
   }
 
   .before-after-12__image-wrap {
     position: relative;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     aspect-ratio: 3 / 4;
   }
@@ -167,12 +190,12 @@
 
   .before-after-12__label {
     position: absolute;
-    bottom: 12px;
-    left: 12px;
+    bottom: 8px;
+    left: 8px;
     background: var(--ba12-label-bg);
     color: var(--ba12-label-text);
-    padding: 6px 14px;
-    font-size: 11px;
+    padding: 4px 10px;
+    font-size: 9px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -184,19 +207,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 16px;
-    padding: 20px 0;
+    gap: 12px;
+    padding: 12px 0;
   }
 
   .before-after-12__name {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--ba12-heading);
     margin: 0;
   }
 
   .before-after-12__quote {
-    font-size: 15px;
+    font-size: 13px;
     line-height: 1.6;
     color: var(--ba12-text);
     margin: 0;
@@ -206,54 +229,54 @@
   .before-after-12__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
   }
 
   .before-after-12__tag {
     background: var(--ba12-tag-bg);
     color: var(--ba12-tag-text);
-    padding: 6px 12px;
-    font-size: 10px;
+    padding: 4px 8px;
+    font-size: 8px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 4px;
+    letter-spacing: 0.5px;
+    border-radius: 3px;
   }
 
   .before-after-12__link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     color: var(--ba12-accent);
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 600;
     text-decoration: none;
     transition: gap 0.3s ease;
   }
 
   .before-after-12__link:hover {
-    gap: 12px;
+    gap: 10px;
   }
 
   .before-after-12__link svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
 
   /* Navigation Arrows */
   .before-after-12__nav {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin-top: 24px;
+    gap: 10px;
+    margin-top: 18px;
   }
 
   .before-after-12__nav-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     border: 1px solid var(--ba12-text);
     background: transparent;
@@ -273,18 +296,299 @@
   }
 
   .before-after-12__nav-btn svg {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
   }
 
-  /* Desktop Styles */
-  @media (min-width: 768px) {
+  /* ============================================
+     RESPONSIVE BREAKPOINTS
+     ============================================ */
+
+  /* Medium Mobile - 400px */
+  @media (min-width: 400px) {
     .before-after-12 {
-      padding: 60px 40px;
+      padding: 30px 15px;
+    }
+
+    .before-after-12__header {
+      margin-bottom: 24px;
     }
 
     .before-after-12__title {
-      font-size: 36px;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .before-after-12__subtitle {
+      font-size: 13px;
+    }
+
+    .before-after-12__thumbnails {
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .before-after-12__thumb {
+      width: 50px;
+      height: 50px;
+    }
+
+    .before-after-12__slide-inner {
+      gap: 18px;
+    }
+
+    .before-after-12__images {
+      gap: 10px;
+    }
+
+    .before-after-12__image-wrap {
+      border-radius: 10px;
+    }
+
+    .before-after-12__label {
+      bottom: 10px;
+      left: 10px;
+      padding: 5px 12px;
+      font-size: 10px;
+    }
+
+    .before-after-12__content {
+      gap: 14px;
+      padding: 16px 0;
+    }
+
+    .before-after-12__name {
+      font-size: 18px;
+    }
+
+    .before-after-12__quote {
+      font-size: 14px;
+    }
+
+    .before-after-12__tags {
+      gap: 7px;
+    }
+
+    .before-after-12__tag {
+      padding: 5px 10px;
+      font-size: 9px;
+    }
+
+    .before-after-12__link {
+      font-size: 12px;
+      gap: 7px;
+    }
+
+    .before-after-12__link svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .before-after-12__nav {
+      gap: 11px;
+      margin-top: 20px;
+    }
+
+    .before-after-12__nav-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    .before-after-12__nav-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  /* Large Mobile - 550px */
+  @media (min-width: 550px) {
+    .before-after-12 {
+      padding: 36px 18px;
+    }
+
+    .before-after-12__header {
+      margin-bottom: 28px;
+    }
+
+    .before-after-12__title {
+      font-size: 26px;
+    }
+
+    .before-after-12__subtitle {
+      font-size: 14px;
+    }
+
+    .before-after-12__thumbnails {
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .before-after-12__thumb {
+      width: 56px;
+      height: 56px;
+    }
+
+    .before-after-12__thumb-progress {
+      top: -4px;
+      left: -4px;
+      width: calc(100% + 8px);
+      height: calc(100% + 8px);
+    }
+
+    .before-after-12__slide-inner {
+      gap: 20px;
+    }
+
+    .before-after-12__images {
+      gap: 12px;
+    }
+
+    .before-after-12__image-wrap {
+      border-radius: 12px;
+    }
+
+    .before-after-12__label {
+      bottom: 12px;
+      left: 12px;
+      padding: 6px 14px;
+      font-size: 11px;
+    }
+
+    .before-after-12__content {
+      gap: 16px;
+      padding: 20px 0;
+    }
+
+    .before-after-12__name {
+      font-size: 20px;
+    }
+
+    .before-after-12__quote {
+      font-size: 15px;
+    }
+
+    .before-after-12__tags {
+      gap: 8px;
+    }
+
+    .before-after-12__tag {
+      padding: 6px 12px;
+      font-size: 10px;
+      letter-spacing: 1px;
+      border-radius: 4px;
+    }
+
+    .before-after-12__link {
+      font-size: 13px;
+      gap: 8px;
+    }
+
+    .before-after-12__link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .before-after-12__nav {
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .before-after-12__nav-btn {
+      width: 44px;
+      height: 44px;
+    }
+
+    .before-after-12__nav-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  /* Tablet - 768px */
+  @media (min-width: 768px) {
+    .before-after-12 {
+      padding: 50px 30px;
+    }
+
+    .before-after-12__header {
+      margin-bottom: 32px;
+    }
+
+    .before-after-12__title {
+      font-size: 32px;
+    }
+
+    .before-after-12__subtitle {
+      font-size: 15px;
+    }
+
+    .before-after-12__thumbnails {
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+
+    .before-after-12__thumb {
+      width: 65px;
+      height: 65px;
+    }
+
+    .before-after-12__slide-inner {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .before-after-12__images {
+      gap: 16px;
+    }
+
+    .before-after-12__image-wrap {
+      border-radius: 14px;
+    }
+
+    .before-after-12__label {
+      bottom: 14px;
+      left: 14px;
+      padding: 7px 16px;
+      font-size: 11px;
+    }
+
+    .before-after-12__content {
+      gap: 18px;
+      padding: 0 16px;
+    }
+
+    .before-after-12__name {
+      font-size: 24px;
+    }
+
+    .before-after-12__quote {
+      font-size: 16px;
+    }
+
+    .before-after-12__tag {
+      padding: 7px 14px;
+      font-size: 10px;
+    }
+
+    .before-after-12__nav-btn {
+      width: 46px;
+      height: 46px;
+    }
+  }
+
+  /* Small Desktop - 1024px */
+  @media (min-width: 1024px) {
+    .before-after-12 {
+      padding: 60px 50px;
+    }
+
+    .before-after-12__header {
+      margin-bottom: 36px;
+    }
+
+    .before-after-12__title {
+      font-size: 38px;
     }
 
     .before-after-12__subtitle {
@@ -297,18 +601,16 @@
     }
 
     .before-after-12__thumb {
-      width: 70px;
-      height: 70px;
+      width: 72px;
+      height: 72px;
     }
 
     .before-after-12__slide-inner {
-      grid-template-columns: 1.2fr 1fr;
-      gap: 40px;
-      align-items: center;
+      gap: 45px;
     }
 
     .before-after-12__images {
-      gap: 20px;
+      gap: 18px;
     }
 
     .before-after-12__image-wrap {
@@ -316,10 +618,10 @@
     }
 
     .before-after-12__label {
-      padding: 8px 18px;
-      font-size: 12px;
       bottom: 16px;
       left: 16px;
+      padding: 8px 18px;
+      font-size: 12px;
     }
 
     .before-after-12__content {
@@ -328,7 +630,7 @@
     }
 
     .before-after-12__name {
-      font-size: 26px;
+      font-size: 28px;
     }
 
     .before-after-12__quote {
@@ -339,15 +641,34 @@
       padding: 8px 16px;
       font-size: 11px;
     }
+
+    .before-after-12__nav-btn {
+      width: 48px;
+      height: 48px;
+    }
   }
 
-  @media (min-width: 1200px) {
+  /* Large Desktop - 1400px */
+  @media (min-width: 1400px) {
     .before-after-12 {
       padding: 80px 80px;
     }
 
+    .before-after-12__header {
+      margin-bottom: 40px;
+    }
+
     .before-after-12__title {
       font-size: 42px;
+    }
+
+    .before-after-12__subtitle {
+      font-size: 16px;
+    }
+
+    .before-after-12__thumbnails {
+      gap: 22px;
+      margin-bottom: 44px;
     }
 
     .before-after-12__thumb {
@@ -359,8 +680,30 @@
       gap: 60px;
     }
 
+    .before-after-12__images {
+      gap: 20px;
+    }
+
+    .before-after-12__content {
+      gap: 22px;
+    }
+
     .before-after-12__name {
       font-size: 32px;
+    }
+
+    .before-after-12__quote {
+      font-size: 18px;
+    }
+
+    .before-after-12__nav-btn {
+      width: 50px;
+      height: 50px;
+    }
+
+    .before-after-12__nav-btn svg {
+      width: 20px;
+      height: 20px;
     }
   }
 </style>
