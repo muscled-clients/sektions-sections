@@ -140,7 +140,7 @@
 
   /* Card Section */
   .hero-46__card {
-    background: var(--h46-card-bg, #f5f3f0);
+    background: var(--h46-card-bg, #e5eeef);
     border-radius: 16px;
     padding: 24px;
     display: flex;
@@ -251,9 +251,22 @@
     left: 50%;
     transform: translateX(-50%);
     width: 2px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     z-index: 10;
     cursor: ew-resize;
+  }
+
+  /* Horizontal dashed line across image */
+  .hero-46__slider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300%;
+    height: 1px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.6);
+    pointer-events: none;
   }
 
   .hero-46__slider-handle {
@@ -261,36 +274,26 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 36px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(7px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 6px;
     cursor: ew-resize;
   }
 
-  .hero-46__slider-handle::before,
-  .hero-46__slider-handle::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    border-top: 1.5px solid rgba(255, 255, 255, 0.9);
-    border-left: 1.5px solid rgba(255, 255, 255, 0.9);
-  }
-
-  .hero-46__slider-handle::before {
-    left: 8px;
-    transform: rotate(-45deg);
-  }
-
-  .hero-46__slider-handle::after {
-    right: 8px;
-    transform: rotate(135deg);
+  .hero-46__slider-arrow {
+    width: 8px;
+    height: 8px;
+    stroke: rgba(255, 255, 255, 0.9);
+    stroke-width: 2;
+    fill: none;
   }
 
   /* Medium Mobile (400px+) */
@@ -352,8 +355,14 @@
     }
 
     .hero-46__slider-handle {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
+      gap: 8px;
+    }
+
+    .hero-46__slider-arrow {
+      width: 9px;
+      height: 9px;
     }
   }
 
@@ -413,8 +422,14 @@
     }
 
     .hero-46__slider-handle {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
+      gap: 10px;
+    }
+
+    .hero-46__slider-arrow {
+      width: 10px;
+      height: 10px;
     }
   }
 
@@ -483,14 +498,14 @@
     }
 
     .hero-46__slider-handle {
-      width: 46px;
-      height: 46px;
+      width: 52px;
+      height: 52px;
+      gap: 12px;
     }
 
-    .hero-46__slider-handle::before,
-    .hero-46__slider-handle::after {
-      width: 7px;
-      height: 7px;
+    .hero-46__slider-arrow {
+      width: 11px;
+      height: 11px;
     }
   }
 
@@ -567,23 +582,14 @@
     }
 
     .hero-46__slider-handle {
-      width: 50px;
-      height: 50px;
+      width: 56px;
+      height: 56px;
+      gap: 14px;
     }
 
-    .hero-46__slider-handle::before,
-    .hero-46__slider-handle::after {
-      width: 8px;
-      height: 8px;
-      border-width: 2px;
-    }
-
-    .hero-46__slider-handle::before {
-      left: 10px;
-    }
-
-    .hero-46__slider-handle::after {
-      right: 10px;
+    .hero-46__slider-arrow {
+      width: 12px;
+      height: 12px;
     }
   }
 
@@ -631,8 +637,14 @@
     }
 
     .hero-46__slider-handle {
-      width: 54px;
-      height: 54px;
+      width: 60px;
+      height: 60px;
+      gap: 16px;
+    }
+
+    .hero-46__slider-arrow {
+      width: 14px;
+      height: 14px;
     }
   }
 </style>
@@ -709,7 +721,14 @@
 
               <!-- Slider -->
               <div class="hero-46__slider">
-                <div class="hero-46__slider-handle"></div>
+                <div class="hero-46__slider-handle">
+                  <svg class="hero-46__slider-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="15 18 9 12 15 6"/>
+                  </svg>
+                  <svg class="hero-46__slider-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </div>
               </div>
             </div>
             {%- assign comparison_index = comparison_index | plus: 1 -%}
@@ -899,7 +918,7 @@
       "type": "color",
       "id": "card_bg_color",
       "label": "Card background",
-      "default": "#f5f3f0"
+      "default": "#e5eeef"
     },
     {
       "type": "color",
