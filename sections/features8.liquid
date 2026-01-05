@@ -10,28 +10,61 @@
     --f8-card-bg: {{ section.settings.card_background }};
     --f8-card-border: {{ section.settings.card_border_color }};
     --f8-icon-color: {{ section.settings.icon_color }};
-    margin-top: {{ section.settings.margin_top }}px;
-    margin-bottom: {{ section.settings.margin_bottom }}px;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin-top: {{ section.settings.margin_top | times: 0.7 }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 }}px;
+  }
+
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 }}px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 }}px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
   }
 {% endstyle %}
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Josefin+Sans:wght@400;500;600;700&display=swap');
 
+  .features-8 *,
+  .features-8 *::before,
+  .features-8 *::after {
+    box-sizing: border-box;
+  }
+
   .features-8 {
+    display: block;
+    width: 100%;
     background: var(--f8-bg, #ffffff);
     font-family: 'Montserrat', sans-serif;
   }
 
-  /* Main Content Area */
+  /* Main Content Area - Mobile First */
   .features-8__main {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    padding: 40px 20px;
+    gap: 20px;
+    padding: 28px 12px;
   }
 
-  /* Left Content */
+  /* Left Content - Mobile First */
   .features-8__content {
     display: flex;
     flex-direction: column;
@@ -40,34 +73,34 @@
 
   .features-8__heading {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--f8-heading-color, #41441c);
-    margin: 0 0 20px;
-    line-height: 1.15;
+    margin: 0 0 14px;
+    line-height: 1.2;
     text-transform: uppercase;
   }
 
   .features-8__description {
-    font-size: 14px;
+    font-size: 12px;
     color: var(--f8-text-color, #5a5a5a);
-    line-height: 1.7;
-    margin: 0 0 24px;
+    line-height: 1.6;
+    margin: 0 0 18px;
   }
 
   .features-8__button {
     display: inline-block;
     background: var(--f8-btn-bg, #41441c);
     color: var(--f8-btn-text, #ffffff);
-    padding: 14px 32px;
-    font-size: 12px;
+    padding: 10px 20px;
+    font-size: 10px;
     font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
     border-radius: 4px;
     transition: all 0.3s ease;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     text-align: center;
   }
 
@@ -79,27 +112,28 @@
   .features-8__guarantee {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 13px;
+    gap: 6px;
+    font-size: 11px;
     color: var(--f8-heading-color, #41441c);
   }
 
   .features-8__guarantee svg {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
     color: var(--f8-heading-color, #41441c);
   }
 
-  /* Image Collage */
+  /* Image Collage - Mobile First */
   .features-8__collage {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 100px);
-    gap: 8px;
+    grid-template-rows: repeat(3, 70px);
+    gap: 6px;
   }
 
   .features-8__collage-item {
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
   }
 
@@ -149,23 +183,23 @@
   }
 
   .features-8__collage-placeholder svg {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     color: #fff;
     opacity: 0.5;
   }
 
-  /* Features Bar */
+  /* Features Bar - Mobile First */
   .features-8__bar {
     background: var(--f8-bar-bg, #ffffff);
-    padding: 24px 20px;
+    padding: 18px 12px;
     border-top: 1px solid #e5e5e5;
   }
 
   .features-8__bar-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 8px;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -175,72 +209,324 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 12px;
-    padding: 20px 16px;
+    gap: 8px;
+    padding: 14px 10px;
     background: var(--f8-card-bg, #ffffff);
     border: 1px solid var(--f8-card-border, #e0e0e0);
-    border-radius: 8px;
+    border-radius: 6px;
   }
 
   .features-8__feature-icon {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .features-8__feature-icon img {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
   }
 
   .features-8__feature-icon svg {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     color: var(--f8-icon-color, #41441c);
   }
 
   .features-8__feature-title {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 600;
     color: var(--f8-bar-text, #41441c);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     margin: 0;
   }
 
-  /* Tablet styles */
+  /* ============================================
+     RESPONSIVE BREAKPOINTS
+     ============================================ */
+
+  /* 400px - Small mobile */
+  @media (min-width: 400px) {
+    .features-8__main {
+      gap: 24px;
+      padding: 32px 14px;
+    }
+
+    .features-8__heading {
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .features-8__description {
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .features-8__button {
+      padding: 11px 24px;
+      font-size: 11px;
+      margin-bottom: 16px;
+    }
+
+    .features-8__guarantee {
+      font-size: 12px;
+      gap: 7px;
+    }
+
+    .features-8__guarantee svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .features-8__collage {
+      grid-template-rows: repeat(3, 80px);
+      gap: 8px;
+    }
+
+    .features-8__collage-item {
+      border-radius: 10px;
+    }
+
+    .features-8__collage-placeholder svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .features-8__bar {
+      padding: 20px 14px;
+    }
+
+    .features-8__bar-grid {
+      gap: 10px;
+    }
+
+    .features-8__feature {
+      gap: 10px;
+      padding: 16px 12px;
+    }
+
+    .features-8__feature-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .features-8__feature-icon img,
+    .features-8__feature-icon svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    .features-8__feature-title {
+      font-size: 10px;
+      letter-spacing: 1.2px;
+    }
+  }
+
+  /* 550px - Large mobile */
+  @media (min-width: 550px) {
+    .features-8__main {
+      gap: 28px;
+      padding: 36px 18px;
+    }
+
+    .features-8__heading {
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+
+    .features-8__description {
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .features-8__button {
+      padding: 12px 28px;
+      font-size: 11px;
+      margin-bottom: 18px;
+    }
+
+    .features-8__guarantee {
+      font-size: 12px;
+    }
+
+    .features-8__collage {
+      grid-template-rows: repeat(3, 95px);
+      gap: 10px;
+    }
+
+    .features-8__collage-item {
+      border-radius: 10px;
+    }
+
+    .features-8__collage-placeholder svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .features-8__bar {
+      padding: 22px 18px;
+    }
+
+    .features-8__bar-grid {
+      gap: 12px;
+    }
+
+    .features-8__feature {
+      gap: 10px;
+      padding: 18px 14px;
+      border-radius: 8px;
+    }
+
+    .features-8__feature-icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    .features-8__feature-icon img,
+    .features-8__feature-icon svg {
+      width: 38px;
+      height: 38px;
+    }
+
+    .features-8__feature-title {
+      font-size: 10px;
+      letter-spacing: 1.3px;
+    }
+  }
+
+  /* 768px - Tablet - Switch to side-by-side layout */
   @media (min-width: 768px) {
     .features-8__main {
       flex-direction: row;
-      padding: 50px 30px;
-      gap: 40px;
+      padding: 44px 28px;
+      gap: 36px;
     }
 
     .features-8__content {
-      flex: 0 0 40%;
+      flex: 0 0 42%;
+    }
+
+    .features-8__heading {
+      font-size: 30px;
+    }
+
+    .features-8__description {
+      font-size: 14px;
+    }
+
+    .features-8__button {
+      padding: 13px 30px;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .features-8__guarantee {
+      font-size: 13px;
+      gap: 8px;
+    }
+
+    .features-8__guarantee svg {
+      width: 18px;
+      height: 18px;
     }
 
     .features-8__collage {
       flex: 1;
-      grid-template-rows: repeat(3, 120px);
+      grid-template-rows: repeat(3, 110px);
       gap: 12px;
     }
 
-    .features-8__heading {
-      font-size: 32px;
+    .features-8__collage-item {
+      border-radius: 12px;
+    }
+
+    .features-8__collage-placeholder svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .features-8__bar {
+      padding: 26px 28px;
     }
 
     .features-8__bar-grid {
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+      gap: 14px;
     }
 
     .features-8__feature {
-      padding: 24px 16px;
+      gap: 12px;
+      padding: 22px 14px;
+    }
+
+    .features-8__feature-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .features-8__feature-icon img,
+    .features-8__feature-icon svg {
+      width: 42px;
+      height: 42px;
+    }
+
+    .features-8__feature-title {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+    }
+  }
+
+  /* 1024px - Desktop */
+  @media (min-width: 1024px) {
+    .features-8__main {
+      padding: 56px 50px;
+      gap: 50px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .features-8__content {
+      flex: 0 0 38%;
+    }
+
+    .features-8__heading {
+      font-size: 34px;
+      margin-bottom: 20px;
+    }
+
+    .features-8__description {
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .features-8__button {
+      padding: 14px 32px;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .features-8__collage {
+      grid-template-rows: repeat(3, 130px);
+      gap: 14px;
+    }
+
+    .features-8__bar {
+      padding: 28px 50px;
+    }
+
+    .features-8__bar-grid {
+      gap: 18px;
+    }
+
+    .features-8__feature {
+      gap: 12px;
+      padding: 26px 18px;
     }
 
     .features-8__feature-icon {
@@ -248,62 +534,68 @@
       height: 52px;
     }
 
+    .features-8__feature-icon img,
     .features-8__feature-icon svg {
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
     }
 
     .features-8__feature-title {
       font-size: 12px;
+      letter-spacing: 1.8px;
     }
   }
 
-  /* Desktop styles */
-  @media (min-width: 1024px) {
+  /* 1400px - Large desktop */
+  @media (min-width: 1400px) {
     .features-8__main {
-      padding: 60px 60px;
+      padding: 70px 60px;
       gap: 60px;
-      max-width: 1400px;
-      margin: 0 auto;
     }
 
     .features-8__content {
       flex: 0 0 35%;
     }
 
-    .features-8__collage {
-      grid-template-rows: repeat(3, 140px);
-      gap: 16px;
-    }
-
     .features-8__heading {
-      font-size: 36px;
+      font-size: 38px;
     }
 
     .features-8__description {
       font-size: 15px;
     }
 
+    .features-8__button {
+      padding: 15px 36px;
+      font-size: 13px;
+    }
+
+    .features-8__collage {
+      grid-template-rows: repeat(3, 150px);
+      gap: 16px;
+    }
+
     .features-8__bar {
-      padding: 30px 60px;
+      padding: 32px 60px;
     }
 
     .features-8__bar-grid {
-      gap: 20px;
+      gap: 22px;
     }
 
     .features-8__feature {
-      padding: 28px 20px;
+      padding: 30px 20px;
     }
 
     .features-8__feature-icon {
-      width: 56px;
-      height: 56px;
+      width: 58px;
+      height: 58px;
     }
 
+    .features-8__feature-icon img,
     .features-8__feature-icon svg {
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
     }
 
     .features-8__feature-title {
