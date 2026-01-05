@@ -9,42 +9,74 @@
     --ct16-card-text: {{ section.settings.card_text_color }};
     --ct16-border: {{ section.settings.border_color }};
     --ct16-accent: {{ section.settings.accent_color }};
-    margin-top: {{ section.settings.margin_top }}px;
-    margin-bottom: {{ section.settings.margin_bottom }}px;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin-top: {{ section.settings.margin_top | times: 0.7 | round }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 | round }}px;
+  }
+
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 | round }}px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 | round }}px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
   }
 {% endstyle %}
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Assistant:wght@400;500;600&display=swap');
 
+  .comparison-table-16,
+  .comparison-table-16 *,
+  .comparison-table-16 *::before,
+  .comparison-table-16 *::after {
+    box-sizing: border-box;
+  }
+
   .comparison-table-16 {
     background: var(--ct16-bg, #ffffff);
-    padding: 40px 0;
+    padding: 24px 0;
     font-family: 'Assistant', sans-serif;
   }
 
   .comparison-table-16__container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 12px;
   }
 
   .comparison-table-16__header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   .comparison-table-16__title {
     font-family: 'Montserrat', sans-serif;
-    font-size: 32px;
+    font-size: 20px;
     font-weight: 800;
     color: var(--ct16-heading, #1a1b18);
-    margin: 0 0 12px;
+    margin: 0 0 8px;
     line-height: 1.2;
   }
 
   .comparison-table-16__subtitle {
-    font-size: 16px;
+    font-size: 13px;
     color: var(--ct16-text, #666666);
     margin: 0;
     line-height: 1.5;
@@ -56,13 +88,13 @@
     gap: 0;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
   }
 
   /* Column Card */
   .comparison-table-16__column {
     flex: 1;
-    min-width: 180px;
+    min-width: 120px;
     border: 1px solid var(--ct16-border, #e5e5e5);
     border-right: none;
     display: flex;
@@ -74,15 +106,15 @@
   }
 
   .comparison-table-16__column:first-child {
-    min-width: 220px;
-    max-width: 250px;
+    min-width: 140px;
+    max-width: 160px;
   }
 
   /* Column Header */
   .comparison-table-16__column-header {
-    padding: 16px 20px;
+    padding: 10px 8px;
     text-align: center;
-    min-height: 56px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,7 +127,7 @@
 
   .comparison-table-16__column-title {
     font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--ct16-heading, #1a1b18);
     margin: 0;
@@ -104,9 +136,9 @@
   .comparison-table-16__column-title--badge {
     background: var(--ct16-accent, #f97316);
     color: #ffffff;
-    padding: 8px 24px;
-    border-radius: 20px;
-    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-size: 10px;
     font-weight: 600;
   }
 
@@ -120,7 +152,7 @@
   /* Product Cell */
   .comparison-table-16__product-cell {
     flex: 1;
-    padding: 20px 16px;
+    padding: 12px 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -134,9 +166,9 @@
   }
 
   .comparison-table-16__product-image {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 12px;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -149,28 +181,28 @@
   }
 
   .comparison-table-16__product-image-placeholder {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     background: var(--ct16-card-bg, #f97316);
-    border-radius: 12px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .comparison-table-16__product-image-placeholder svg {
-    width: 40px;
-    height: 40px;
+    width: 26px;
+    height: 26px;
     color: #ffffff;
   }
 
   .comparison-table-16__product-title {
     font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
+    font-size: 9px;
     font-weight: 700;
     color: var(--ct16-heading, #1a1b18);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     line-height: 1.4;
     margin: 0;
   }
@@ -178,14 +210,14 @@
   /* Value Cell */
   .comparison-table-16__value-cell {
     flex: 1;
-    padding: 24px 16px;
+    padding: 12px 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     border-bottom: 1px solid var(--ct16-border, #e5e5e5);
-    min-height: 140px;
+    min-height: 100px;
   }
 
   .comparison-table-16__value-cell:last-child {
@@ -193,9 +225,9 @@
   }
 
   .comparison-table-16__icon {
-    font-size: 28px;
+    font-size: 20px;
     line-height: 1;
-    margin-bottom: 12px;
+    margin-bottom: 6px;
   }
 
   .comparison-table-16__icon--check {
@@ -207,16 +239,276 @@
   }
 
   .comparison-table-16__cell-text {
-    font-size: 13px;
+    font-size: 10px;
     color: var(--ct16-text, #666666);
-    line-height: 1.5;
-    max-width: 160px;
+    line-height: 1.4;
+    max-width: 100px;
   }
 
-  /* Responsive */
+  /* Small Mobile (400px+) */
+  @media (min-width: 400px) {
+    .comparison-table-16 {
+      padding: 28px 0;
+    }
+
+    .comparison-table-16__container {
+      padding: 0 14px;
+    }
+
+    .comparison-table-16__header {
+      margin-bottom: 24px;
+    }
+
+    .comparison-table-16__title {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .comparison-table-16__subtitle {
+      font-size: 14px;
+    }
+
+    .comparison-table-16__column {
+      min-width: 130px;
+    }
+
+    .comparison-table-16__column:first-child {
+      min-width: 150px;
+      max-width: 170px;
+    }
+
+    .comparison-table-16__column-header {
+      padding: 12px 10px;
+      min-height: 48px;
+    }
+
+    .comparison-table-16__column-title {
+      font-size: 12px;
+    }
+
+    .comparison-table-16__column-title--badge {
+      padding: 7px 16px;
+      font-size: 11px;
+    }
+
+    .comparison-table-16__product-cell {
+      padding: 14px 10px;
+    }
+
+    .comparison-table-16__product-image,
+    .comparison-table-16__product-image-placeholder {
+      width: 56px;
+      height: 56px;
+    }
+
+    .comparison-table-16__product-image-placeholder svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .comparison-table-16__product-title {
+      font-size: 10px;
+    }
+
+    .comparison-table-16__value-cell {
+      padding: 14px 8px;
+      min-height: 110px;
+    }
+
+    .comparison-table-16__icon {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .comparison-table-16__cell-text {
+      font-size: 11px;
+      max-width: 110px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .comparison-table-16 {
+      padding: 32px 0;
+    }
+
+    .comparison-table-16__container {
+      padding: 0 16px;
+    }
+
+    .comparison-table-16__header {
+      margin-bottom: 28px;
+    }
+
+    .comparison-table-16__title {
+      font-size: 28px;
+    }
+
+    .comparison-table-16__subtitle {
+      font-size: 15px;
+    }
+
+    .comparison-table-16__column {
+      min-width: 145px;
+    }
+
+    .comparison-table-16__column:first-child {
+      min-width: 170px;
+      max-width: 200px;
+    }
+
+    .comparison-table-16__column-header {
+      padding: 14px 12px;
+      min-height: 52px;
+    }
+
+    .comparison-table-16__column-title {
+      font-size: 13px;
+    }
+
+    .comparison-table-16__column-title--badge {
+      padding: 8px 20px;
+      font-size: 12px;
+    }
+
+    .comparison-table-16__product-cell {
+      padding: 16px 12px;
+    }
+
+    .comparison-table-16__product-image,
+    .comparison-table-16__product-image-placeholder {
+      width: 65px;
+      height: 65px;
+      margin-bottom: 10px;
+    }
+
+    .comparison-table-16__product-image-placeholder {
+      border-radius: 10px;
+    }
+
+    .comparison-table-16__product-image-placeholder svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .comparison-table-16__product-title {
+      font-size: 10px;
+      letter-spacing: 0.4px;
+    }
+
+    .comparison-table-16__value-cell {
+      padding: 18px 10px;
+      min-height: 120px;
+    }
+
+    .comparison-table-16__icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .comparison-table-16__cell-text {
+      font-size: 12px;
+      max-width: 130px;
+    }
+  }
+
+  /* Tablet (768px+) */
   @media (min-width: 768px) {
     .comparison-table-16 {
+      padding: 45px 0;
+    }
+
+    .comparison-table-16__container {
+      padding: 0 20px;
+    }
+
+    .comparison-table-16__header {
+      margin-bottom: 36px;
+    }
+
+    .comparison-table-16__title {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .comparison-table-16__subtitle {
+      font-size: 17px;
+    }
+
+    .comparison-table-16__column {
+      min-width: 160px;
+    }
+
+    .comparison-table-16__column:first-child {
+      min-width: 200px;
+      max-width: 230px;
+    }
+
+    .comparison-table-16__column-header {
+      padding: 16px 16px;
+      min-height: 56px;
+    }
+
+    .comparison-table-16__column-title {
+      font-size: 14px;
+    }
+
+    .comparison-table-16__column-title--badge {
+      padding: 8px 24px;
+      font-size: 13px;
+      border-radius: 20px;
+    }
+
+    .comparison-table-16__product-cell {
+      padding: 20px 16px;
+    }
+
+    .comparison-table-16__product-image,
+    .comparison-table-16__product-image-placeholder {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 12px;
+    }
+
+    .comparison-table-16__product-image-placeholder {
+      border-radius: 12px;
+    }
+
+    .comparison-table-16__product-image-placeholder svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    .comparison-table-16__product-title {
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+
+    .comparison-table-16__value-cell {
+      padding: 24px 14px;
+      min-height: 140px;
+    }
+
+    .comparison-table-16__icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .comparison-table-16__cell-text {
+      font-size: 13px;
+      max-width: 150px;
+      line-height: 1.5;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .comparison-table-16 {
       padding: 60px 0;
+    }
+
+    .comparison-table-16__header {
+      margin-bottom: 40px;
     }
 
     .comparison-table-16__title {
@@ -227,12 +519,9 @@
       font-size: 18px;
     }
 
-    .comparison-table-16__column {
-      min-width: 160px;
-    }
-
     .comparison-table-16__column:first-child {
-      min-width: 200px;
+      min-width: 220px;
+      max-width: 260px;
     }
 
     .comparison-table-16__product-image,
@@ -242,32 +531,29 @@
     }
 
     .comparison-table-16__product-title {
-      font-size: 11px;
+      font-size: 12px;
+    }
+
+    .comparison-table-16__value-cell {
+      padding: 28px 18px;
     }
 
     .comparison-table-16__cell-text {
       font-size: 14px;
+      max-width: 160px;
     }
   }
 
-  @media (min-width: 992px) {
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
     .comparison-table-16 {
       padding: 80px 0;
-    }
-
-    .comparison-table-16__column:first-child {
-      min-width: 220px;
-      max-width: 260px;
     }
 
     .comparison-table-16__product-image,
     .comparison-table-16__product-image-placeholder {
       width: 100px;
       height: 100px;
-    }
-
-    .comparison-table-16__product-title {
-      font-size: 12px;
     }
 
     .comparison-table-16__value-cell {
