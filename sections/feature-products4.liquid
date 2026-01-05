@@ -1,0 +1,912 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --fp4-bg: {{ section.settings.background_color }};
+    --fp4-text: {{ section.settings.text_color }};
+    --fp4-title-active: {{ section.settings.title_active_color }};
+    --fp4-title-inactive: {{ section.settings.title_inactive_color }};
+    --fp4-border: {{ section.settings.border_color }};
+    --fp4-btn-bg: {{ section.settings.button_bg_color }};
+    --fp4-btn-text: {{ section.settings.button_text_color }};
+    --fp4-btn-hover: {{ section.settings.button_hover_color }};
+    --fp4-btn-outline: {{ section.settings.button_outline_color }};
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin-top: {{ section.settings.margin_top | times: 0.7 | round }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 | round }}px;
+  }
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 | round }}px;
+    }
+  }
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 | round }}px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap');
+
+  /* Box-sizing */
+  .featured-products-4,
+  .featured-products-4 *,
+  .featured-products-4 *::before,
+  .featured-products-4 *::after {
+    box-sizing: border-box;
+  }
+
+  /* Base - Small Mobile (< 400px) */
+  .featured-products-4 {
+    background: var(--fp4-bg, #f1f0ed);
+    padding: 40px 15px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .featured-products-4__container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  /* Left Content */
+  .featured-products-4__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Thumbnails */
+  .featured-products-4__thumbnails {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .featured-products-4__thumbnail {
+    width: 70px;
+    height: 70px;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.25s ease;
+    background: #e0e0e0;
+  }
+
+  .featured-products-4__thumbnail.is-active {
+    border-color: var(--fp4-border, #121212);
+  }
+
+  .featured-products-4__thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Description */
+  .featured-products-4__description {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--fp4-text, #121212);
+    margin: 0 0 24px;
+  }
+
+  /* Product Titles */
+  .featured-products-4__titles {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .featured-products-4__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--fp4-title-inactive, #807e7a);
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .featured-products-4__title.is-active {
+    font-weight: 700;
+    color: var(--fp4-title-active, #121212);
+  }
+
+  .featured-products-4__title:hover {
+    color: var(--fp4-title-active, #121212);
+  }
+
+  /* Buttons */
+  .featured-products-4__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .featured-products-4__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.25s ease;
+  }
+
+  .featured-products-4__btn--filled {
+    background: var(--fp4-btn-bg, #121212);
+    color: var(--fp4-btn-text, #ffffff);
+    border: 2px solid var(--fp4-btn-bg, #121212);
+  }
+
+  .featured-products-4__btn--filled:hover {
+    background: var(--fp4-btn-hover, #333333);
+    border-color: var(--fp4-btn-hover, #333333);
+  }
+
+  .featured-products-4__btn--outline {
+    background: transparent;
+    color: var(--fp4-btn-outline, #121212);
+    border: 2px solid var(--fp4-btn-outline, #121212);
+  }
+
+  .featured-products-4__btn--outline:hover {
+    background: var(--fp4-btn-outline, #121212);
+    color: var(--fp4-btn-text, #ffffff);
+  }
+
+  /* Right Image Slider */
+  .featured-products-4__slider-wrapper {
+    position: relative;
+  }
+
+  .featured-products-4__swiper {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .featured-products-4__slide {
+    position: relative;
+  }
+
+  .featured-products-4__image-wrapper {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .featured-products-4__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .featured-products-4__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #d4cfc7 0%, #a89f94 100%);
+  }
+
+  /* Slide Footer */
+  .featured-products-4__slide-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 16px;
+  }
+
+  .featured-products-4__slide-text {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--fp4-text, #121212);
+    margin: 0;
+    flex: 1;
+  }
+
+  /* Pagination & Navigation */
+  .featured-products-4__controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .featured-products-4__pagination {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fp4-text, #121212);
+  }
+
+  .featured-products-4__nav {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--fp4-btn-bg, #121212);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .featured-products-4__nav:hover {
+    background: var(--fp4-btn-hover, #333333);
+    transform: scale(1.05);
+  }
+
+  .featured-products-4__nav:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .featured-products-4__nav svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--fp4-btn-text, #ffffff);
+    stroke-width: 2;
+    fill: none;
+  }
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    .featured-products-4 {
+      padding: 50px 20px;
+    }
+
+    .featured-products-4__container {
+      gap: 36px;
+    }
+
+    .featured-products-4__thumbnails {
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .featured-products-4__thumbnail {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+    }
+
+    .featured-products-4__description {
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+
+    .featured-products-4__titles {
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .featured-products-4__title {
+      font-size: 24px;
+    }
+
+    .featured-products-4__btn {
+      padding: 14px 24px;
+      font-size: 12px;
+    }
+
+    .featured-products-4__image-wrapper {
+      border-radius: 14px;
+    }
+
+    .featured-products-4__slide-text {
+      font-size: 14px;
+    }
+
+    .featured-products-4__nav {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .featured-products-4 {
+      padding: 60px 24px;
+    }
+
+    .featured-products-4__thumbnails {
+      gap: 14px;
+    }
+
+    .featured-products-4__thumbnail {
+      width: 90px;
+      height: 90px;
+    }
+
+    .featured-products-4__description {
+      font-size: 17px;
+    }
+
+    .featured-products-4__title {
+      font-size: 26px;
+    }
+
+    .featured-products-4__image-wrapper {
+      aspect-ratio: 16 / 10;
+      border-radius: 16px;
+    }
+
+    .featured-products-4__slide-footer {
+      padding-top: 18px;
+    }
+
+    .featured-products-4__slide-text {
+      font-size: 15px;
+    }
+
+    .featured-products-4__nav {
+      width: 42px;
+      height: 42px;
+    }
+
+    .featured-products-4__nav svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .featured-products-4 {
+      padding: 70px 30px;
+    }
+
+    .featured-products-4__container {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .featured-products-4__thumbnails {
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .featured-products-4__thumbnail {
+      width: 75px;
+      height: 75px;
+    }
+
+    .featured-products-4__description {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .featured-products-4__titles {
+      gap: 8px;
+      margin-bottom: 30px;
+    }
+
+    .featured-products-4__title {
+      font-size: 24px;
+    }
+
+    .featured-products-4__image-wrapper {
+      aspect-ratio: 4 / 5;
+    }
+
+    .featured-products-4__slide-footer {
+      padding-top: 16px;
+    }
+
+    .featured-products-4__slide-text {
+      font-size: 14px;
+      max-width: 340px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .featured-products-4 {
+      padding: 80px 40px;
+    }
+
+    .featured-products-4__container {
+      grid-template-columns: 45% 1fr;
+      gap: 60px;
+    }
+
+    .featured-products-4__thumbnails {
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .featured-products-4__thumbnail {
+      width: 85px;
+      height: 85px;
+      border-radius: 10px;
+    }
+
+    .featured-products-4__description {
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .featured-products-4__titles {
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+
+    .featured-products-4__title {
+      font-size: 28px;
+    }
+
+    .featured-products-4__btn {
+      padding: 14px 28px;
+      font-size: 12px;
+      letter-spacing: 0.8px;
+    }
+
+    .featured-products-4__image-wrapper {
+      aspect-ratio: 4 / 5;
+      border-radius: 18px;
+    }
+
+    .featured-products-4__slide-footer {
+      padding-top: 20px;
+    }
+
+    .featured-products-4__slide-text {
+      font-size: 15px;
+      max-width: 380px;
+    }
+
+    .featured-products-4__nav {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .featured-products-4 {
+      padding: 100px 50px;
+    }
+
+    .featured-products-4__container {
+      max-width: 1400px;
+      gap: 80px;
+    }
+
+    .featured-products-4__thumbnails {
+      gap: 16px;
+    }
+
+    .featured-products-4__thumbnail {
+      width: 95px;
+      height: 95px;
+    }
+
+    .featured-products-4__description {
+      font-size: 18px;
+    }
+
+    .featured-products-4__title {
+      font-size: 32px;
+    }
+
+    .featured-products-4__btn {
+      padding: 16px 32px;
+      font-size: 13px;
+    }
+
+    .featured-products-4__image-wrapper {
+      border-radius: 20px;
+    }
+
+    .featured-products-4__slide-text {
+      font-size: 16px;
+      max-width: 420px;
+    }
+
+    .featured-products-4__pagination {
+      font-size: 14px;
+    }
+
+    .featured-products-4__nav {
+      width: 48px;
+      height: 48px;
+    }
+
+    .featured-products-4__nav svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+</style>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<section class="featured-products-4" data-section-id="{{ section.id }}">
+  <div class="featured-products-4__container">
+    <!-- Left Content -->
+    <div class="featured-products-4__content">
+      <!-- Thumbnails -->
+      <div class="featured-products-4__thumbnails">
+        {%- for block in section.blocks -%}
+          <div class="featured-products-4__thumbnail{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.thumbnail != blank -%}
+              {{ block.settings.thumbnail | image_url: width: 200 | image_tag: loading: 'lazy' }}
+            {%- else -%}
+              <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #c8d6b9 0%, #8fa376 100%);"></div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <!-- Description -->
+      {%- if section.settings.description != blank -%}
+        <p class="featured-products-4__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+
+      <!-- Product Titles -->
+      <div class="featured-products-4__titles">
+        {%- for block in section.blocks -%}
+          <h3 class="featured-products-4__title{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}">
+            {{ block.settings.title | default: 'Product Title' }}
+          </h3>
+        {%- endfor -%}
+      </div>
+
+      <!-- Buttons -->
+      <div class="featured-products-4__buttons">
+        {%- if section.settings.button_text != blank -%}
+          <a href="{{ section.settings.button_link }}" class="featured-products-4__btn featured-products-4__btn--filled" data-shop-btn>
+            {{ section.settings.button_text }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.secondary_button_text != blank -%}
+          <a href="{{ section.settings.secondary_button_link }}" class="featured-products-4__btn featured-products-4__btn--outline">
+            {{ section.settings.secondary_button_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Right Slider -->
+    <div class="featured-products-4__slider-wrapper">
+      <div class="featured-products-4__swiper swiper">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="featured-products-4__slide swiper-slide">
+              <div class="featured-products-4__image-wrapper">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 1200 | image_tag: class: 'featured-products-4__image', loading: 'lazy' }}
+                {%- else -%}
+                  <div class="featured-products-4__placeholder"></div>
+                {%- endif -%}
+              </div>
+              <div class="featured-products-4__slide-footer">
+                {%- if block.settings.slide_text != blank -%}
+                  <p class="featured-products-4__slide-text">{{ block.settings.slide_text }}</p>
+                {%- endif -%}
+                <div class="featured-products-4__controls">
+                  <span class="featured-products-4__pagination">
+                    <span data-current>{{ forloop.index }}</span>/{{ section.blocks.size }}
+                  </span>
+                  <button class="featured-products-4__nav featured-products-4__nav--next" aria-label="Next slide">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
+
+    const swiperEl = section.querySelector('.featured-products-4__swiper');
+    const thumbnails = section.querySelectorAll('.featured-products-4__thumbnail');
+    const titles = section.querySelectorAll('.featured-products-4__title');
+    const nextBtn = section.querySelector('.featured-products-4__nav--next');
+    const paginationCurrent = section.querySelector('[data-current]');
+    const shopBtn = section.querySelector('[data-shop-btn]');
+
+    // Store product links for button updates
+    const productLinks = [
+      {%- for block in section.blocks -%}
+        "{{ block.settings.product_link | default: section.settings.button_link }}"{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ];
+
+    // Initialize Swiper
+    const swiper = new Swiper(swiperEl, {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop: false,
+      speed: 400,
+      allowTouchMove: true,
+      on: {
+        slideChange: function() {
+          updateActiveStates(this.activeIndex);
+        }
+      }
+    });
+
+    // Update active states
+    function updateActiveStates(index) {
+      // Update thumbnails
+      thumbnails.forEach((thumb, i) => {
+        thumb.classList.toggle('is-active', i === index);
+      });
+
+      // Update titles
+      titles.forEach((title, i) => {
+        title.classList.toggle('is-active', i === index);
+      });
+
+      // Update pagination
+      if (paginationCurrent) {
+        paginationCurrent.textContent = index + 1;
+      }
+
+      // Update shop button link
+      if (shopBtn && productLinks[index]) {
+        shopBtn.href = productLinks[index];
+      }
+    }
+
+    // Thumbnail click
+    thumbnails.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => {
+        swiper.slideTo(index);
+      });
+    });
+
+    // Title click
+    titles.forEach((title, index) => {
+      title.addEventListener('click', () => {
+        swiper.slideTo(index);
+      });
+    });
+
+    // Next button
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (swiper.activeIndex < swiper.slides.length - 1) {
+          swiper.slideNext();
+        } else {
+          swiper.slideTo(0); // Loop back to first
+        }
+      });
+    }
+
+    // Initialize first state
+    updateActiveStates(0);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Featured Products 4",
+  "tag": "section",
+  "class": "section-featured-products-4",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover matcha and its benefits in a way you have never experienced before—tasty, easy, and fun."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Primary button text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary button text",
+      "default": "EXPLORE THE FULL RANGE"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f1f0ed"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "title_active_color",
+      "label": "Active title color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "title_inactive_color",
+      "label": "Inactive title color",
+      "default": "#807e7a"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Active thumbnail border",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Filled button background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Filled button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_outline_color",
+      "label": "Outline button color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product title",
+          "default": "Lion's Mane Matcha"
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Thumbnail image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Main image"
+        },
+        {
+          "type": "textarea",
+          "id": "slide_text",
+          "label": "Slide description",
+          "default": "The Lion's Mane mushroom is known for its brain-enhancing properties, helping with mental clarity, concentration and memory."
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Featured Products 4",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "title": "Lion's Mane Matcha",
+            "slide_text": "The Lion's Mane mushroom is known for its brain-enhancing properties, helping with mental clarity, concentration and memory."
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Vanilla Matcha",
+            "slide_text": "A smooth blend of premium matcha with natural vanilla, perfect for a creamy and delicious daily ritual."
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Turmeric Matcha",
+            "slide_text": "Golden turmeric meets ceremonial matcha for a powerful antioxidant boost and natural anti-inflammatory benefits."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
