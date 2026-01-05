@@ -8,17 +8,50 @@
     --f24-progress: {{ section.settings.progress_color }};
     --f24-btn-bg: {{ section.settings.button_background }};
     --f24-btn-text: {{ section.settings.button_text_color }};
-    margin-top: {{ section.settings.margin_top }}px;
-    margin-bottom: {{ section.settings.margin_bottom }}px;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin-top: {{ section.settings.margin_top | times: 0.7 }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 }}px;
+  }
+
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 }}px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 }}px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
   }
 {% endstyle %}
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+  .feature-24 *,
+  .feature-24 *::before,
+  .feature-24 *::after {
+    box-sizing: border-box;
+  }
+
   .feature-24 {
+    display: block;
+    width: 100%;
     background: var(--f24-bg, #ffffff);
-    padding: 50px 20px;
+    padding: 32px 12px;
     font-family: 'Inter', sans-serif;
   }
 
@@ -30,46 +63,46 @@
   .feature-24__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 28px;
     align-items: center;
   }
 
-  /* Content Side */
+  /* Content Side - Mobile First */
   .feature-24__content {
     text-align: center;
   }
 
   .feature-24__label {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     color: var(--f24-progress, #ff6a1b);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 12px;
+    letter-spacing: 1.2px;
+    margin-bottom: 8px;
   }
 
   .feature-24__title {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 700;
     color: var(--f24-heading, #1a1a1a);
-    margin: 0 0 16px;
+    margin: 0 0 12px;
     line-height: 1.2;
   }
 
   .feature-24__subtitle {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 400;
     color: var(--f24-text, #666666);
-    margin: 0 0 32px;
-    line-height: 1.6;
+    margin: 0 0 24px;
+    line-height: 1.55;
   }
 
-  /* Tabs */
+  /* Tabs - Mobile First */
   .feature-24__tabs {
     display: flex;
     justify-content: center;
-    gap: 16px;
-    margin-bottom: 32px;
+    gap: 10px;
+    margin-bottom: 24px;
     flex-wrap: wrap;
   }
 
@@ -77,13 +110,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 5px;
   }
 
   .feature-24__tab {
     position: relative;
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     background: var(--f24-tab-bg, #f5f5f5);
     border: none;
     border-radius: 50%;
@@ -104,16 +137,16 @@
   }
 
   .feature-24__tab-label {
-    font-size: 11px;
+    font-size: 8px;
     font-weight: 600;
     color: var(--f24-text, #666666);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
   }
 
   .feature-24__tab-icon {
-    width: 28px;
-    height: 28px;
+    width: 22px;
+    height: 22px;
     color: var(--f24-heading, #1a1a1a);
   }
 
@@ -124,13 +157,13 @@
     object-fit: contain;
   }
 
-  /* Progress Circle */
+  /* Progress Circle - Mobile First */
   .feature-24__progress {
     position: absolute;
     top: -3px;
     left: -3px;
-    width: 70px;
-    height: 70px;
+    width: 54px;
+    height: 54px;
     transform: rotate(-90deg);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -145,8 +178,8 @@
     stroke: var(--f24-progress, #ff6a1b);
     stroke-width: 2;
     stroke-linecap: round;
-    stroke-dasharray: 204;
-    stroke-dashoffset: 204;
+    stroke-dasharray: 151;
+    stroke-dashoffset: 151;
   }
 
   .feature-24__tab.active .feature-24__progress-circle {
@@ -159,7 +192,7 @@
     }
   }
 
-  /* Tab Content */
+  /* Tab Content - Mobile First */
   .feature-24__tab-content {
     display: none;
     animation: fadeIn 0.4s ease;
@@ -181,30 +214,30 @@
   }
 
   .feature-24__tab-title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--f24-heading, #1a1a1a);
-    margin: 0 0 12px;
+    margin: 0 0 10px;
   }
 
   .feature-24__tab-description {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     color: var(--f24-text, #666666);
-    margin: 0 0 24px;
-    line-height: 1.6;
+    margin: 0 0 18px;
+    line-height: 1.55;
   }
 
-  /* Button */
+  /* Button - Mobile First */
   .feature-24__button {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     background: var(--f24-btn-bg, #1a1a1a);
     color: var(--f24-btn-text, #ffffff);
-    padding: 14px 28px;
+    padding: 10px 20px;
     border-radius: 100px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.25s ease;
@@ -216,11 +249,11 @@
   }
 
   .feature-24__button-icon {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
 
-  /* Image Side */
+  /* Image Side - Mobile First */
   .feature-24__image-container {
     position: relative;
     order: -1;
@@ -228,7 +261,7 @@
 
   .feature-24__image-wrapper {
     position: relative;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     aspect-ratio: 4 / 3;
   }
@@ -261,44 +294,285 @@
     align-items: center;
     justify-content: center;
     color: #999;
-    font-size: 14px;
+    font-size: 13px;
   }
 
-  /* Tablet */
-  @media (min-width: 768px) {
+  /* Icon Fallback for Main Image */
+  .feature-24__image-icon-fallback {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20%;
+  }
+
+  .feature-24__image-icon-fallback img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* ============================================
+     RESPONSIVE BREAKPOINTS
+     ============================================ */
+
+  /* 400px - Small mobile */
+  @media (min-width: 400px) {
     .feature-24 {
-      padding: 60px 30px;
+      padding: 36px 14px;
+    }
+
+    .feature-24__grid {
+      gap: 30px;
+    }
+
+    .feature-24__label {
+      font-size: 11px;
+      letter-spacing: 1.3px;
+      margin-bottom: 10px;
     }
 
     .feature-24__title {
-      font-size: 32px;
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+
+    .feature-24__subtitle {
+      font-size: 14px;
+      margin-bottom: 26px;
+    }
+
+    .feature-24__tabs {
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .feature-24__tab-wrapper {
+      gap: 6px;
     }
 
     .feature-24__tab {
-      width: 72px;
-      height: 72px;
+      width: 54px;
+      height: 54px;
     }
 
-    .feature-24__progress {
-      width: 78px;
-      height: 78px;
+    .feature-24__tab-label {
+      font-size: 9px;
     }
 
     .feature-24__tab-icon {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
+    }
+
+    .feature-24__progress {
+      width: 60px;
+      height: 60px;
+    }
+
+    .feature-24__progress-circle {
+      stroke-dasharray: 170;
+      stroke-dashoffset: 170;
+    }
+
+    .feature-24__tab-title {
+      font-size: 17px;
+    }
+
+    .feature-24__tab-description {
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .feature-24__button {
+      padding: 11px 22px;
+      font-size: 12px;
+    }
+
+    .feature-24__image-wrapper {
+      border-radius: 14px;
     }
   }
 
-  /* Desktop */
+  /* 550px - Large mobile */
+  @media (min-width: 550px) {
+    .feature-24 {
+      padding: 42px 18px;
+    }
+
+    .feature-24__grid {
+      gap: 34px;
+    }
+
+    .feature-24__label {
+      font-size: 11px;
+      letter-spacing: 1.4px;
+    }
+
+    .feature-24__title {
+      font-size: 26px;
+    }
+
+    .feature-24__subtitle {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .feature-24__tabs {
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .feature-24__tab-wrapper {
+      gap: 7px;
+    }
+
+    .feature-24__tab {
+      width: 58px;
+      height: 58px;
+    }
+
+    .feature-24__tab-label {
+      font-size: 9px;
+      letter-spacing: 0.4px;
+    }
+
+    .feature-24__tab-icon {
+      width: 26px;
+      height: 26px;
+    }
+
+    .feature-24__progress {
+      width: 64px;
+      height: 64px;
+    }
+
+    .feature-24__progress-circle {
+      stroke-dasharray: 182;
+      stroke-dashoffset: 182;
+    }
+
+    .feature-24__tab-title {
+      font-size: 18px;
+      margin-bottom: 11px;
+    }
+
+    .feature-24__tab-description {
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .feature-24__button {
+      gap: 7px;
+      padding: 12px 24px;
+      font-size: 13px;
+    }
+
+    .feature-24__button-icon {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  /* 768px - Tablet */
+  @media (min-width: 768px) {
+    .feature-24 {
+      padding: 50px 28px;
+    }
+
+    .feature-24__grid {
+      gap: 38px;
+    }
+
+    .feature-24__label {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .feature-24__title {
+      font-size: 30px;
+      margin-bottom: 16px;
+    }
+
+    .feature-24__subtitle {
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+
+    .feature-24__tabs {
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .feature-24__tab-wrapper {
+      gap: 8px;
+    }
+
+    .feature-24__tab {
+      width: 64px;
+      height: 64px;
+    }
+
+    .feature-24__tab-label {
+      font-size: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .feature-24__tab-icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .feature-24__progress {
+      width: 70px;
+      height: 70px;
+    }
+
+    .feature-24__progress-circle {
+      stroke-dasharray: 204;
+      stroke-dashoffset: 204;
+    }
+
+    .feature-24__tab-title {
+      font-size: 19px;
+      margin-bottom: 12px;
+    }
+
+    .feature-24__tab-description {
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .feature-24__button {
+      gap: 8px;
+      padding: 13px 26px;
+      font-size: 13px;
+    }
+
+    .feature-24__button-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .feature-24__image-wrapper {
+      border-radius: 16px;
+    }
+  }
+
+  /* 1024px - Desktop */
   @media (min-width: 1024px) {
     .feature-24 {
-      padding: 80px 40px;
+      padding: 70px 40px;
     }
 
     .feature-24__grid {
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      gap: 50px;
     }
 
     .feature-24__content {
@@ -311,11 +585,54 @@
     }
 
     .feature-24__title {
-      font-size: 36px;
+      font-size: 34px;
+    }
+
+    .feature-24__subtitle {
+      font-size: 15px;
+      margin-bottom: 32px;
     }
 
     .feature-24__tabs {
       justify-content: flex-start;
+      margin-bottom: 32px;
+    }
+
+    .feature-24__tab {
+      width: 68px;
+      height: 68px;
+    }
+
+    .feature-24__tab-label {
+      font-size: 11px;
+    }
+
+    .feature-24__tab-icon {
+      width: 30px;
+      height: 30px;
+    }
+
+    .feature-24__progress {
+      width: 74px;
+      height: 74px;
+    }
+
+    .feature-24__progress-circle {
+      stroke-dasharray: 214;
+      stroke-dashoffset: 214;
+    }
+
+    .feature-24__tab-title {
+      font-size: 20px;
+    }
+
+    .feature-24__tab-description {
+      font-size: 14px;
+    }
+
+    .feature-24__button {
+      padding: 14px 28px;
+      font-size: 14px;
     }
 
     .feature-24__image-wrapper {
@@ -323,18 +640,50 @@
     }
   }
 
-  /* Large Desktop */
+  /* 1400px - Large Desktop */
   @media (min-width: 1400px) {
     .feature-24 {
-      padding: 100px 60px;
+      padding: 90px 60px;
     }
 
     .feature-24__grid {
-      gap: 80px;
+      gap: 70px;
     }
 
     .feature-24__title {
-      font-size: 42px;
+      font-size: 40px;
+    }
+
+    .feature-24__subtitle {
+      font-size: 16px;
+    }
+
+    .feature-24__tab {
+      width: 72px;
+      height: 72px;
+    }
+
+    .feature-24__tab-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .feature-24__progress {
+      width: 78px;
+      height: 78px;
+    }
+
+    .feature-24__progress-circle {
+      stroke-dasharray: 226;
+      stroke-dashoffset: 226;
+    }
+
+    .feature-24__tab-title {
+      font-size: 22px;
+    }
+
+    .feature-24__tab-description {
+      font-size: 15px;
     }
   }
 </style>
@@ -415,6 +764,10 @@
             <div class="feature-24__image {% if forloop.first %}active{% endif %}" data-image-index="{{ forloop.index0 }}">
               {%- if block.settings.image != blank -%}
                 {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.tab_title }}
+              {%- elsif block.settings.icon != blank -%}
+                <div class="feature-24__image-icon-fallback">
+                  {{ block.settings.icon | image_url: width: 400 | image_tag: loading: 'lazy', alt: block.settings.tab_title }}
+                </div>
               {%- else -%}
                 <div class="feature-24__image-placeholder">
                   <span>Add image</span>
