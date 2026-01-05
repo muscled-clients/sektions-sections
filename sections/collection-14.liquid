@@ -14,17 +14,28 @@
     --col14-btn-hover-bg: {{ section.settings.button_hover_background }};
     --col14-btn-hover-text: {{ section.settings.button_hover_text_color }};
     --col14-section-bg: {{ section.settings.section_background }};
-    margin-top: {{ section.settings.section_margin_top }}px;
-    margin-bottom: {{ section.settings.section_margin_bottom }}px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-top: {{ section.settings.section_margin_top | times: 0.7 }}px;
+    margin-bottom: {{ section.settings.section_margin_bottom | times: 0.7 }}px;
   }
 {% endstyle %}
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
+  .collection-14 *,
+  .collection-14 *::before,
+  .collection-14 *::after {
+    box-sizing: border-box;
+  }
+
   .collection-14 {
     background: var(--col14-section-bg, #fff);
-    padding: 40px 20px;
+    padding: 24px 12px;
     font-family: 'Inter', sans-serif;
   }
 
@@ -36,13 +47,13 @@
   .collection-14__grid {
     display: flex;
     flex-direction: column;
-    gap: var(--col14-gap-mobile, 16px);
+    gap: 12px;
   }
 
   .collection-14__card {
     position: relative;
-    height: var(--col14-card-height-mobile, 400px);
-    border-radius: 12px;
+    height: 280px;
+    border-radius: 10px;
     overflow: hidden;
     flex: 1 1 0;
     transition: flex 0.5s ease;
@@ -70,7 +81,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 24px;
+    padding: 16px;
     z-index: 2;
   }
 
@@ -91,30 +102,30 @@
   }
 
   .collection-14__subtitle {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     color: var(--col14-subtitle, #fff);
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin: 0 0 8px;
+    letter-spacing: 1.5px;
+    margin: 0 0 6px;
     opacity: 0.9;
   }
 
   .collection-14__title {
     font-family: 'Montserrat', sans-serif;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--col14-title, #fff);
-    margin: 0 0 12px;
+    margin: 0 0 8px;
     line-height: 1.2;
   }
 
   .collection-14__text {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 12px;
+    line-height: 1.5;
     color: var(--col14-text, rgba(255, 255, 255, 0.9));
-    margin: 0 0 20px;
-    max-width: 320px;
+    margin: 0 0 14px;
+    max-width: 280px;
   }
 
   /* Button base styles */
@@ -122,15 +133,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    font-size: 13px;
+    gap: 6px;
+    font-size: 11px;
     font-weight: 600;
     font-family: inherit;
     text-decoration: none;
     border-radius: 100px;
     cursor: pointer;
     transition: all 0.3s ease;
-    padding: 12px 24px;
+    padding: 10px 18px;
   }
 
   /* Button style: solid */
@@ -163,9 +174,9 @@
     background: transparent;
     color: var(--col14-btn-text, #fff);
     border: none;
-    padding: 8px 0;
+    padding: 6px 0;
     text-decoration: underline;
-    text-underline-offset: 4px;
+    text-underline-offset: 3px;
   }
 
   .collection-14__button--link:hover {
@@ -173,8 +184,8 @@
   }
 
   .collection-14__button svg {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     transition: transform 0.3s ease;
   }
 
@@ -182,10 +193,120 @@
     transform: translateX(4px);
   }
 
-  /* Desktop styles */
-  @media (min-width: 768px) {
+  /* 400px breakpoint */
+  @media (min-width: 400px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top | times: 0.75 }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom | times: 0.75 }}px;
+    }
+
     .collection-14 {
-      padding: 60px 40px;
+      padding: 28px 14px;
+    }
+
+    .collection-14__grid {
+      gap: 14px;
+    }
+
+    .collection-14__card {
+      height: 320px;
+      border-radius: 11px;
+    }
+
+    .collection-14__card-content {
+      padding: 18px;
+    }
+
+    .collection-14__subtitle {
+      font-size: 10px;
+      letter-spacing: 1.8px;
+    }
+
+    .collection-14__title {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .collection-14__text {
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+
+    .collection-14__button {
+      font-size: 11px;
+      padding: 10px 20px;
+    }
+
+    .collection-14__button svg {
+      width: 13px;
+      height: 13px;
+    }
+  }
+
+  /* 550px breakpoint */
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top | times: 0.8 }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom | times: 0.8 }}px;
+    }
+
+    .collection-14 {
+      padding: 32px 18px;
+    }
+
+    .collection-14__grid {
+      gap: var(--col14-gap-mobile, 16px);
+    }
+
+    .collection-14__card {
+      height: calc(var(--col14-card-height-mobile, 400px) * 0.9);
+      border-radius: 12px;
+    }
+
+    .collection-14__card-content {
+      padding: 20px;
+    }
+
+    .collection-14__subtitle {
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-bottom: 7px;
+    }
+
+    .collection-14__title {
+      font-size: 26px;
+    }
+
+    .collection-14__text {
+      font-size: 13px;
+      max-width: 300px;
+    }
+
+    .collection-14__button {
+      font-size: 12px;
+      padding: 11px 22px;
+      gap: 7px;
+    }
+
+    .collection-14__button svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .collection-14__button--link {
+      padding: 7px 0;
+    }
+  }
+
+  /* 768px breakpoint - tablet */
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top | times: 0.85 }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom | times: 0.85 }}px;
+    }
+
+    .collection-14 {
+      padding: 40px 24px;
     }
 
     .collection-14__grid {
@@ -194,32 +315,40 @@
     }
 
     .collection-14__card {
-      height: var(--col14-card-height-desktop, 500px);
+      height: calc(var(--col14-card-height-desktop, 500px) * 0.85);
     }
 
     .collection-14__card-content {
-      padding: 32px;
+      padding: 26px;
     }
 
     .collection-14__subtitle {
-      font-size: 13px;
+      font-size: 12px;
     }
 
     .collection-14__title {
-      font-size: 36px;
+      font-size: 30px;
     }
 
     .collection-14__text {
-      font-size: 14px;
+      font-size: 13px;
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.4s ease;
+      max-width: 320px;
     }
 
     .collection-14__button {
+      font-size: 12px;
+      padding: 12px 24px;
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.4s ease 0.1s;
+    }
+
+    .collection-14__button svg {
+      width: 15px;
+      height: 15px;
     }
 
     .collection-14__card:hover {
@@ -241,9 +370,78 @@
     }
   }
 
+  /* 1024px breakpoint - desktop */
   @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top | times: 0.9 }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom | times: 0.9 }}px;
+    }
+
+    .collection-14 {
+      padding: 50px 36px;
+    }
+
+    .collection-14__card {
+      height: calc(var(--col14-card-height-desktop, 500px) * 0.92);
+    }
+
+    .collection-14__card-content {
+      padding: 32px;
+    }
+
+    .collection-14__subtitle {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .collection-14__title {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .collection-14__text {
+      font-size: 14px;
+      max-width: 350px;
+      margin-bottom: 18px;
+    }
+
+    .collection-14__button {
+      font-size: 13px;
+      padding: 13px 26px;
+    }
+
+    .collection-14__button svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .collection-14__button--link {
+      padding: 8px 0;
+      text-underline-offset: 4px;
+    }
+  }
+
+  /* 1400px breakpoint - large desktop */
+  @media (min-width: 1400px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom }}px;
+    }
+
+    .collection-14 {
+      padding: 60px 40px;
+    }
+
+    .collection-14__card {
+      height: var(--col14-card-height-desktop, 500px);
+    }
+
     .collection-14__card-content {
       padding: 40px;
+    }
+
+    .collection-14__subtitle {
+      font-size: 13px;
     }
 
     .collection-14__title {
@@ -253,11 +451,13 @@
     .collection-14__text {
       font-size: 15px;
       max-width: 380px;
+      margin-bottom: 20px;
     }
 
     .collection-14__button {
       font-size: 14px;
       padding: 14px 28px;
+      gap: 8px;
     }
   }
 
