@@ -798,85 +798,6 @@
         "margin_bottom": 0
       }
     },
-    "blog_3_ke4UeQ": {
-      "type": "blog-3",
-      "blocks": {
-        "article_PTjpkw": {
-          "type": "article",
-          "settings": {
-            "image": "shopify://shop_images/jakob-owens-TMxUnMAAwFA-unsplash.webp",
-            "title": "How to add a Instafeed section to Shopify",
-            "excerpt": "Some description text",
-            "link": ""
-          }
-        },
-        "article_jzAWdD": {
-          "type": "article",
-          "settings": {
-            "image": "shopify://shop_images/featured-image-5a6e62ba-39bd-43f6-85d9-36e5b80e2c72.webp",
-            "title": "How to add trust badges below add to cart",
-            "excerpt": "Some description text",
-            "link": ""
-          }
-        },
-        "article_JCJePE": {
-          "type": "article",
-          "settings": {
-            "image": "shopify://shop_images/dmitry-chernyshov-mP7aPSUm7aE-unsplash.webp",
-            "title": "How to add a FAQ section to Shopify",
-            "excerpt": "Some description text",
-            "link": ""
-          }
-        },
-        "article_3qqAXC": {
-          "type": "article",
-          "settings": {
-            "image": "shopify://shop_images/luca-micheli-ruWkmt3nU58-unsplash.webp",
-            "title": "Shopify Landing Page: Boost Sales & Conversions",
-            "excerpt": "Some description text",
-            "link": ""
-          }
-        },
-        "article_yXJ9kD": {
-          "type": "article",
-          "settings": {
-            "image": "shopify://shop_images/perfect-snacks-g4mEt-XO7xM-unsplash.webp",
-            "title": "Creative Shop Name Ideas: Get Inspired Now",
-            "excerpt": "Some description text",
-            "link": ""
-          }
-        },
-        "article_wHg8tT": {
-          "type": "article",
-          "settings": {
-            "image": "shopify://shop_images/jakob-owens-TMxUnMAAwFA-unsplash.webp",
-            "title": "10 Tips for Better Product Photography",
-            "excerpt": "Some description text",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "article_PTjpkw",
-        "article_jzAWdD",
-        "article_JCJePE",
-        "article_3qqAXC",
-        "article_yXJ9kD",
-        "article_wHg8tT"
-      ],
-      "name": "SEK Blog 3",
-      "settings": {
-        "title": "Articles",
-        "blog": "",
-        "articles_count": 6,
-        "background_color": "#ffffff",
-        "heading_color": "#1a1b18",
-        "text_color": "#666666",
-        "card_background": "#ffffff",
-        "margin_top": 0,
-        "margin_bottom": 0
-      }
-    },
     "comparison_table_16_Ahxgxc": {
       "type": "comparison-table-16",
       "blocks": {
@@ -1602,16 +1523,75 @@
         "background_color": "#ffffff",
         "text_color": "#000000",
         "heading_accent_color": "#6b8a8e",
-        "badge_bg_color": "#2D4D51",
+        "badge_bg_color": "#2d4d51",
         "badge_text_color": "#ffffff",
-        "button_bg_color": "#2D4D51",
+        "button_bg_color": "#2d4d51",
         "button_text_color": "#ffffff",
         "button_hover_color": "#1e3538",
         "card_bg_color": "#f5f3f0",
         "card_text_color": "#000000",
         "number_color": "#999999",
-        "border_color": "rgba(0, 0, 0, 0.1)",
-        "label_color": "#2D4D51",
+        "border_color": "#0000001a",
+        "label_color": "#2d4d51",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "feature_products4_3FXDCt": {
+      "type": "feature-products4",
+      "blocks": {
+        "product_7RNrPG": {
+          "type": "product",
+          "settings": {
+            "title": "Lion's Mane Matcha",
+            "thumbnail": "shopify://shop_images/matcha-lions-mane.webp",
+            "image": "shopify://shop_images/matcha-lions-mane.webp",
+            "slide_text": "The Lion's Mane mushroom is known for its brain-enhancing properties, helping with mental clarity, concentration and memory.",
+            "product_link": ""
+          }
+        },
+        "product_fNeaJN": {
+          "type": "product",
+          "settings": {
+            "title": "Vanilla Matcha",
+            "thumbnail": "shopify://shop_images/matcha-vanilla.webp",
+            "image": "shopify://shop_images/matcha-vanilla.webp",
+            "slide_text": "A smooth blend of premium matcha with natural vanilla, perfect for a creamy and delicious daily ritual.",
+            "product_link": ""
+          }
+        },
+        "product_Y7ywhY": {
+          "type": "product",
+          "settings": {
+            "title": "Turmeric Matcha",
+            "thumbnail": "shopify://shop_images/matcha-turmeric.webp",
+            "image": "shopify://shop_images/matcha-turmeric.webp",
+            "slide_text": "Golden turmeric meets ceremonial matcha for a powerful antioxidant boost and natural anti-inflammatory benefits.",
+            "product_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_7RNrPG",
+        "product_fNeaJN",
+        "product_Y7ywhY"
+      ],
+      "name": "SEK Featured Products 4",
+      "settings": {
+        "description": "Discover matcha and its benefits in a way you have never experienced before—tasty, easy, and fun.",
+        "button_text": "SHOP NOW",
+        "button_link": "",
+        "secondary_button_text": "EXPLORE THE FULL RANGE",
+        "secondary_button_link": "",
+        "background_color": "#f1f0ed",
+        "text_color": "#121212",
+        "title_active_color": "#121212",
+        "title_inactive_color": "#807e7a",
+        "border_color": "#121212",
+        "button_bg_color": "#121212",
+        "button_text_color": "#ffffff",
+        "button_hover_color": "#333333",
+        "button_outline_color": "#121212",
         "margin_top": 0,
         "margin_bottom": 0
       }
@@ -1630,7 +1610,6 @@
     "hotspt_10_4TeqXx",
     "video_with_text9_nzrdN4",
     "features_9_YNGwek",
-    "blog_3_ke4UeQ",
     "comparison_table_16_Ahxgxc",
     "hero_pro_4QkzY4",
     "feature_product_4_h3pWya",
@@ -1642,6 +1621,7 @@
     "countdown_timer4_UixKME",
     "multi_columnvideo2_rXBM6J",
     "map_4DqMCL",
-    "hero46_Ux9Cb6"
+    "hero46_Ux9Cb6",
+    "feature_products4_3FXDCt"
   ]
 }
