@@ -1,796 +1,881 @@
-{% comment %}
-  SEK Hotspots Simple - Interactive image with text-only tooltips
-  Features: Full-width image, positioned hotspots with pulse animation, simple text tooltips (title + description)
-{% endcomment %}
-
-{%- assign section_id = section.id -%}
-
 {% style %}
-  #sek-hotspots-simple-{{ section_id }},
-  #sek-hotspots-simple-{{ section_id }} * {
+  #shopify-section-{{ section.id }} {
+    --h10-bg: {{ section.settings.background_color }};
+    --h10-text: {{ section.settings.text_color }};
+    --h10-heading: {{ section.settings.heading_color }};
+    --h10-hotspot-bg: {{ section.settings.hotspot_background }};
+    --h10-hotspot-text: {{ section.settings.hotspot_text_color }};
+    --h10-popup-bg: {{ section.settings.popup_background }};
+    --h10-btn-bg: {{ section.settings.button_background }};
+    --h10-btn-text: {{ section.settings.button_text_color }};
+    --h10-border-radius: {{ section.settings.image_border_radius }}px;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin-top: {{ section.settings.margin_top | times: 0.7 }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 }}px;
+  }
+
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 }}px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 }}px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap');
+
+  .hotspots-10 *,
+  .hotspots-10 *::before,
+  .hotspots-10 *::after {
     box-sizing: border-box;
   }
 
-  #sek-hotspots-simple-{{ section_id }} {
-    padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
-    background: {{ section.settings.background_color }};
-    overflow: hidden;
+  .hotspots-10 {
+    display: block;
     width: 100%;
+    background: var(--h10-bg, #ffffff);
+    padding: 28px 12px;
+    font-family: 'Open Sans', sans-serif;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
-    max-width: {{ section.settings.max_width }}px;
+  .hotspots-10__container {
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 12px;
   }
 
-  /* Header */
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
-    text-align: center;
-    margin-bottom: 20px;
+  .hotspots-10__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: center;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
+  /* Content - Mobile First */
+  .hotspots-10__content {
+    order: 2;
+  }
+
+  .hotspots-10__title {
+    font-family: 'Montserrat', sans-serif;
     font-size: 22px;
     font-weight: 700;
+    color: var(--h10-heading, #121212);
+    margin: 0 0 14px;
     line-height: 1.2;
-    color: {{ section.settings.heading_color }};
-    margin: 0;
   }
 
-  /* Image Container */
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__image-wrapper {
+  .hotspots-10__features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .hotspots-10__feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--h10-text, #121212);
+  }
+
+  .hotspots-10__feature-icon {
+    width: 16px;
+    height: 16px;
+    color: #00b280;
+    flex-shrink: 0;
+  }
+
+  .hotspots-10__description {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--h10-text, #121212);
+    line-height: 1.6;
+    margin: 0 0 20px;
+  }
+
+  .hotspots-10__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--h10-btn-bg, #cbe514);
+    color: var(--h10-btn-text, #121212);
+    padding: 11px 24px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.25s ease;
+  }
+
+  .hotspots-10__button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+
+  .hotspots-10__button-arrow {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Image Container - Mobile First */
+  .hotspots-10__image-container {
+    position: relative;
+    order: 1;
+  }
+
+  .hotspots-10__image-wrapper {
     position: relative;
     width: 100%;
+    padding-bottom: 100%;
     overflow: hidden;
+    border-radius: var(--h10-border-radius, 20px);
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__image {
+  .hotspots-10__image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__image-placeholder {
+  .hotspots-10__image img {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    background: linear-gradient(135deg, #e8e4df 0%, #d4cfc7 100%);
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hotspots-10__image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #999;
+    font-size: 13px;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__image-placeholder svg {
-    width: 50px;
-    height: 50px;
-    opacity: 0.3;
-  }
-
-  /* Hotspot Marker */
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot {
+  /* Hotspots - Mobile First */
+  .hotspots-10__hotspot {
     position: absolute;
     z-index: 10;
-    transform: translate(-50%, -50%);
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
-    width: 32px;
-    height: 32px;
-    background: {{ section.settings.marker_background }};
-    border: 3px solid {{ section.settings.marker_border_color }};
+  .hotspots-10__hotspot-dot {
+    width: 28px;
+    height: 28px;
+    background: var(--h10-hotspot-bg, #cbe514);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    position: relative;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    outline: none;
-    -webkit-appearance: none;
-    appearance: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__marker:hover {
-    transform: scale(1.15);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  .hotspots-10__hotspot-dot:hover {
+    background: #c3dc0b;
+    transform: scale(1.1);
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__marker:focus {
-    outline: none;
+  .hotspots-10__hotspot-icon {
+    width: 14px;
+    height: 14px;
+    color: var(--h10-hotspot-text, #121212);
+    stroke-width: 2.5;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__hotspot.is-active .sek-hss__marker {
-    transform: scale(1.15);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  }
-
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 1;
-    color: {{ section.settings.marker_icon_color }};
-    font-family: Arial, sans-serif;
-  }
-
-  /* Product Panel - Slide in from right */
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel {
+  /* Popup - Mobile First */
+  .hotspots-10__popup {
     position: absolute;
-    top: 20px;
-    right: -100%;
-    width: 280px;
-    max-width: calc(100% - 40px);
-    background: {{ section.settings.panel_background }};
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    padding: 16px;
-    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--h10-popup-bg, #ffffff);
+    border-radius: 10px;
+    padding: 12px;
+    min-width: 200px;
+    max-width: 240px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     opacity: 0;
     visibility: hidden;
-    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 20;
     pointer-events: none;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel.is-visible {
-    right: 20px;
+  .hotspots-10__hotspot.active .hotspots-10__popup {
     opacity: 1;
     visibility: visible;
-    pointer-events: all;
+    pointer-events: auto;
   }
 
-  /* Panel Close Button */
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 28px;
-    height: 28px;
-    background: {{ section.settings.panel_close_bg }};
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
+  .hotspots-10__popup-content {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s ease;
-    padding: 0;
+    gap: 10px;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-close:hover {
-    background: {{ section.settings.panel_close_hover_bg }};
+  .hotspots-10__popup-image {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    overflow: hidden;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-close svg {
-    width: 14px;
-    height: 14px;
-    stroke: {{ section.settings.panel_close_color }};
-  }
-
-  /* Panel Product Image */
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-image {
+  .hotspots-10__popup-image img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    height: 100%;
     object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    background: #f5f5f5;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-image-placeholder {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
-    border-radius: 8px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .hotspots-10__popup-info {
+    flex: 1;
+    min-width: 0;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-image-placeholder svg {
-    width: 40px;
-    height: 40px;
-    opacity: 0.3;
-  }
-
-  /* Panel Content */
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-title {
-    font-size: 16px;
+  .hotspots-10__popup-title {
+    font-size: 12px;
     font-weight: 700;
-    color: {{ section.settings.panel_title_color }};
-    margin: 0 0 6px 0;
+    color: #121212;
+    margin: 0 0 3px;
     line-height: 1.3;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-price {
-    font-size: 15px;
-    font-weight: 600;
-    color: {{ section.settings.panel_price_color }};
-    margin: 0 0 10px 0;
+  .hotspots-10__popup-description {
+    font-size: 10px;
+    font-weight: 400;
+    color: #666;
+    margin: 0 0 6px;
+    line-height: 1.4;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-description {
+  .hotspots-10__popup-price {
     font-size: 13px;
-    line-height: 1.5;
-    color: {{ section.settings.panel_text_color }};
-    margin: 0 0 14px 0;
+    font-weight: 700;
+    color: #121212;
+    margin: 0 0 8px;
   }
 
-  /* Panel CTA Button */
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-btn {
+  .hotspots-10__popup-link {
     display: inline-block;
-    width: 100%;
-    padding: 12px 20px;
-    background: {{ section.settings.panel_btn_bg }};
-    color: {{ section.settings.panel_btn_text }};
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
+    background: #121212;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
     text-decoration: none;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
+    letter-spacing: 0.5px;
+    transition: all 0.25s ease;
   }
 
-  #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-btn:hover {
-    background: {{ section.settings.panel_btn_hover_bg }};
-    transform: translateY(-1px);
+  .hotspots-10__popup-link:hover {
+    background: #2d2d2d;
   }
 
-  /* ========================================
+  /* ============================================
      RESPONSIVE BREAKPOINTS
-     ======================================== */
+     ============================================ */
 
-  /* Small Mobile (< 400px) */
-  @media (max-width: 399px) {
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
-      padding: 0 10px;
+  /* 400px - Small mobile */
+  @media (min-width: 400px) {
+    .hotspots-10 {
+      padding: 32px 14px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
+    .hotspots-10__grid {
+      gap: 30px;
+    }
+
+    .hotspots-10__title {
+      font-size: 24px;
       margin-bottom: 16px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
-      font-size: 20px;
+    .hotspots-10__features {
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
-      width: 24px;
-      height: 24px;
-      border-width: 2px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
+    .hotspots-10__feature {
+      gap: 9px;
       font-size: 14px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel {
-      width: 220px;
-      padding: 12px;
-      top: 12px;
+    .hotspots-10__feature-icon {
+      width: 17px;
+      height: 17px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel.is-visible {
-      right: 12px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-title {
+    .hotspots-10__description {
       font-size: 14px;
+      margin-bottom: 22px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-price {
-      font-size: 13px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-description {
+    .hotspots-10__button {
+      gap: 11px;
+      padding: 12px 26px;
       font-size: 12px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-btn {
-      padding: 10px 16px;
+    .hotspots-10__button-arrow {
+      width: 15px;
+      height: 15px;
+    }
+
+    .hotspots-10__hotspot-dot {
+      width: 30px;
+      height: 30px;
+    }
+
+    .hotspots-10__hotspot-icon {
+      width: 15px;
+      height: 15px;
+    }
+
+    .hotspots-10__popup {
+      padding: 13px;
+      min-width: 220px;
+      max-width: 260px;
+    }
+
+    .hotspots-10__popup-image {
+      width: 65px;
+      height: 65px;
+    }
+
+    .hotspots-10__popup-title {
       font-size: 13px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__image-placeholder svg {
-      width: 40px;
-      height: 40px;
+    .hotspots-10__popup-description {
+      font-size: 11px;
+    }
+
+    .hotspots-10__popup-price {
+      font-size: 14px;
+    }
+
+    .hotspots-10__popup-link {
+      padding: 7px 14px;
+      font-size: 10px;
     }
   }
 
-  /* Medium Mobile (400px - 549px) */
-  @media (min-width: 400px) and (max-width: 549px) {
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
-      padding: 0 14px;
+  /* 550px - Large mobile */
+  @media (min-width: 550px) {
+    .hotspots-10 {
+      padding: 36px 18px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
+    .hotspots-10__grid {
+      gap: 34px;
+    }
+
+    .hotspots-10__title {
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+
+    .hotspots-10__features {
+      gap: 11px;
       margin-bottom: 20px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
-      font-size: 24px;
+    .hotspots-10__feature {
+      font-size: 14px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
-      width: 28px;
-      height: 28px;
-      border-width: 2px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
-      font-size: 16px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel {
-      width: 240px;
-      padding: 14px;
-      top: 14px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel.is-visible {
-      right: 14px;
-    }
-  }
-
-  /* Large Mobile (550px - 767px) */
-  @media (min-width: 550px) and (max-width: 767px) {
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
-      padding: 0 18px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
+    .hotspots-10__description {
+      font-size: 14px;
+      line-height: 1.65;
       margin-bottom: 24px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
-      font-size: 28px;
+    .hotspots-10__button {
+      padding: 13px 28px;
+      font-size: 12px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
+    .hotspots-10__hotspot-dot {
       width: 32px;
       height: 32px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
-      font-size: 18px;
+    .hotspots-10__hotspot-icon {
+      width: 16px;
+      height: 16px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel {
-      width: 260px;
-      top: 16px;
+    .hotspots-10__popup {
+      padding: 14px;
+      min-width: 250px;
+      max-width: 280px;
+      border-radius: 11px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel.is-visible {
-      right: 16px;
+    .hotspots-10__popup-content {
+      gap: 11px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__image-placeholder svg {
-      width: 60px;
-      height: 60px;
+    .hotspots-10__popup-image {
+      width: 70px;
+      height: 70px;
+      border-radius: 7px;
+    }
+
+    .hotspots-10__popup-title {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .hotspots-10__popup-description {
+      font-size: 11px;
+      margin-bottom: 7px;
+    }
+
+    .hotspots-10__popup-price {
+      font-size: 15px;
+      margin-bottom: 10px;
     }
   }
 
-  /* Tablet (768px - 1023px) */
-  @media (min-width: 768px) and (max-width: 1023px) {
-    #sek-hotspots-simple-{{ section_id }} {
-      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  /* 768px - Tablet */
+  @media (min-width: 768px) {
+    .hotspots-10 {
+      padding: 50px 28px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
-      padding: 0 28px;
+    .hotspots-10__grid {
+      gap: 38px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
-      text-align: left;
-      margin-bottom: 32px;
+    .hotspots-10__title {
+      font-size: 30px;
+      margin-bottom: 20px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
-      font-size: 34px;
+    .hotspots-10__features {
+      gap: 12px;
+      margin-bottom: 22px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
+    .hotspots-10__feature {
+      gap: 10px;
+      font-size: 15px;
+    }
+
+    .hotspots-10__feature-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .hotspots-10__description {
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .hotspots-10__button {
+      gap: 12px;
+      padding: 14px 30px;
+      font-size: 13px;
+    }
+
+    .hotspots-10__button-arrow {
+      width: 16px;
+      height: 16px;
+    }
+
+    .hotspots-10__image-wrapper {
+      padding-bottom: 90%;
+    }
+
+    .hotspots-10__hotspot-dot {
+      width: 34px;
+      height: 34px;
+    }
+
+    .hotspots-10__hotspot-icon {
+      width: 17px;
+      height: 17px;
+    }
+
+    .hotspots-10__popup {
+      padding: 15px;
+      min-width: 270px;
+      max-width: 300px;
+      border-radius: 12px;
+    }
+
+    .hotspots-10__popup-content {
+      gap: 12px;
+    }
+
+    .hotspots-10__popup-image {
+      width: 75px;
+      height: 75px;
+      border-radius: 8px;
+    }
+
+    .hotspots-10__popup-title {
+      font-size: 14px;
+    }
+
+    .hotspots-10__popup-description {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .hotspots-10__popup-price {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .hotspots-10__popup-link {
+      padding: 8px 16px;
+      font-size: 11px;
+    }
+  }
+
+  /* 1024px - Desktop */
+  @media (min-width: 1024px) {
+    .hotspots-10 {
+      padding: 70px 40px;
+    }
+
+    .hotspots-10__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .hotspots-10__content {
+      order: {% if section.settings.image_position == 'right' %}1{% else %}2{% endif %};
+    }
+
+    .hotspots-10__image-container {
+      order: {% if section.settings.image_position == 'right' %}2{% else %}1{% endif %};
+    }
+
+    .hotspots-10__title {
+      font-size: 36px;
+    }
+
+    .hotspots-10__feature {
+      font-size: 16px;
+    }
+
+    .hotspots-10__description {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .hotspots-10__button {
+      padding: 14px 32px;
+      font-size: 13px;
+    }
+
+    .hotspots-10__image-wrapper {
+      padding-bottom: 100%;
+    }
+
+    .hotspots-10__hotspot-dot {
       width: 36px;
       height: 36px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
-      font-size: 20px;
+    .hotspots-10__hotspot-icon {
+      width: 18px;
+      height: 18px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel {
-      width: 300px;
-      top: 20px;
+    .hotspots-10__popup {
+      top: auto;
+      left: auto;
+      transform: none;
+      padding: 16px;
+      min-width: 280px;
+      max-width: 320px;
+      {% if section.settings.image_position == 'right' %}
+      right: calc(100% + 20px);
+      top: 50%;
+      transform: translateY(-50%);
+      {% else %}
+      left: calc(100% + 20px);
+      top: 50%;
+      transform: translateY(-50%);
+      {% endif %}
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel.is-visible {
-      right: 20px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__image-placeholder svg {
-      width: 70px;
-      height: 70px;
-    }
-  }
-
-  /* Desktop (1024px+) */
-  @media (min-width: 1024px) {
-    #sek-hotspots-simple-{{ section_id }} {
-      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
-      padding: 0 40px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
-      text-align: left;
-      margin-bottom: 40px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
-      font-size: 38px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
-      width: 40px;
-      height: 40px;
-      border-width: 4px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
-      font-size: 22px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel {
-      width: 320px;
-      padding: 18px;
-      top: 24px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel.is-visible {
-      right: 24px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-title {
-      font-size: 18px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel-price {
-      font-size: 16px;
-    }
-
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__image-placeholder svg {
+    .hotspots-10__popup-image {
       width: 80px;
       height: 80px;
     }
   }
 
-  /* Large Desktop (1400px+) */
+  /* 1400px - Large Desktop */
   @media (min-width: 1400px) {
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__container {
-      padding: 0 60px;
+    .hotspots-10 {
+      padding: 90px 60px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__header {
-      margin-bottom: 48px;
+    .hotspots-10__grid {
+      gap: 70px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__heading {
-      font-size: 44px;
+    .hotspots-10__title {
+      font-size: 40px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__marker {
-      width: 44px;
-      height: 44px;
+    .hotspots-10__features {
+      margin-bottom: 24px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__icon {
-      font-size: 24px;
+    .hotspots-10__feature {
+      font-size: 16px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel {
-      width: 340px;
-      padding: 20px;
-      top: 28px;
+    .hotspots-10__hotspot-dot {
+      width: 38px;
+      height: 38px;
     }
 
-    #sek-hotspots-simple-{{ section_id }} .sek-hss__panel.is-visible {
-      right: 28px;
+    .hotspots-10__popup {
+      min-width: 300px;
+      max-width: 340px;
     }
   }
-{% endstyle %}
+</style>
 
-<section id="sek-hotspots-simple-{{ section_id }}" class="sek-hotspots-simple">
-  <div class="sek-hss__container">
-    <!-- Header -->
-    {%- if section.settings.heading != blank -%}
-      <div class="sek-hss__header">
-        <h2 class="sek-hss__heading">{{ section.settings.heading }}</h2>
-      </div>
-    {%- endif -%}
+<section class="hotspots-10" data-section-id="{{ section.id }}">
+  <div class="hotspots-10__container">
+    <div class="hotspots-10__grid">
+      <!-- Content -->
+      <div class="hotspots-10__content">
+        {%- if section.settings.title != blank -%}
+          <h2 class="hotspots-10__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
 
-    <!-- Image with Hotspots -->
-    <div class="sek-hss__image-wrapper">
-      {%- if section.settings.image != blank -%}
-        <img
-          class="sek-hss__image"
-          src="{{ section.settings.image | image_url: width: 1920 }}"
-          alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
-          loading="lazy"
-          width="{{ section.settings.image.width }}"
-          height="{{ section.settings.image.height }}"
-        >
-      {%- else -%}
-        <div class="sek-hss__image-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-            <polyline points="21 15 16 10 5 21"></polyline>
-          </svg>
-        </div>
-      {%- endif -%}
-
-      <!-- Hotspots -->
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'hotspot' -%}
-          {%- assign hotspot_product = block.settings.product -%}
-          <div
-            class="sek-hss__hotspot"
-            style="left: {{ block.settings.position_x }}%; top: {{ block.settings.position_y }}%;"
-            data-hotspot-id="{{ block.id }}"
-            data-title="{{ block.settings.title | escape }}"
-            data-description="{{ block.settings.description | escape }}"
-            data-price="{%- if hotspot_product != blank -%}{{ hotspot_product.price | money }}{%- else -%}{{ block.settings.price }}{%- endif -%}"
-            data-image="{%- if hotspot_product != blank and hotspot_product.featured_image != blank -%}{{ hotspot_product.featured_image | image_url: width: 400 }}{%- elsif block.settings.product_image != blank -%}{{ block.settings.product_image | image_url: width: 400 }}{%- endif -%}"
-            data-link="{%- if hotspot_product != blank -%}{{ hotspot_product.url }}{%- else -%}{{ block.settings.button_link }}{%- endif -%}"
-            data-button-text="{{ block.settings.button_text | default: 'View Product' | escape }}"
-            {{ block.shopify_attributes }}
-          >
-            <button class="sek-hss__marker" type="button" aria-label="View {{ block.settings.title | default: 'product' | escape }}">
-              <span class="sek-hss__icon">+</span>
-            </button>
+        {%- assign feature_blocks = section.blocks | where: "type", "feature" -%}
+        {%- if feature_blocks.size > 0 -%}
+          <div class="hotspots-10__features">
+            {%- for block in feature_blocks -%}
+              <div class="hotspots-10__feature" {{ block.shopify_attributes }}>
+                <svg class="hotspots-10__feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span>{{ block.settings.text }}</span>
+              </div>
+            {%- endfor -%}
           </div>
         {%- endif -%}
-      {%- endfor -%}
 
-      {%- if section.blocks.size == 0 -%}
-        <!-- Default placeholder hotspots -->
-        <div class="sek-hss__hotspot" style="left: 12%; top: 65%;" data-hotspot-id="placeholder-1" data-title="Pillow Case" data-description="Premium cotton pillow case with soft, breathable fabric for ultimate comfort." data-price="$49.00" data-image="" data-link="#" data-button-text="View Product">
-          <button class="sek-hss__marker" type="button" aria-label="View Pillow Case">
-            <span class="sek-hss__icon">+</span>
-          </button>
-        </div>
+        {%- if section.settings.description != blank -%}
+          <div class="hotspots-10__description">{{ section.settings.description }}</div>
+        {%- endif -%}
 
-        <div class="sek-hss__hotspot" style="left: 52%; top: 32%;" data-hotspot-id="placeholder-2" data-title="Bed Frame" data-description="Sturdy, modern wood bedframe with natural finish and sleek design." data-price="$599.00" data-image="" data-link="#" data-button-text="View Product">
-          <button class="sek-hss__marker" type="button" aria-label="View Bed Frame">
-            <span class="sek-hss__icon">+</span>
-          </button>
-        </div>
+        {%- if section.settings.button_text != blank -%}
+          <a href="{{ section.settings.button_link }}" class="hotspots-10__button">
+            <span>{{ section.settings.button_text }}</span>
+            <svg class="hotspots-10__button-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        {%- endif -%}
+      </div>
 
-        <div class="sek-hss__hotspot" style="left: 36%; top: 58%;" data-hotspot-id="placeholder-3" data-title="Duvet Case" data-description="Luxurious, hypoallergenic duvet case with button closure, patterned design." data-price="$129.00" data-image="" data-link="#" data-button-text="View Product">
-          <button class="sek-hss__marker" type="button" aria-label="View Duvet Case">
-            <span class="sek-hss__icon">+</span>
-          </button>
-        </div>
+      <!-- Image with Hotspots -->
+      <div class="hotspots-10__image-container">
+        <div class="hotspots-10__image-wrapper">
+          <div class="hotspots-10__image">
+            {%- if section.settings.image != blank -%}
+              {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.title }}
+            {%- else -%}
+              <div class="hotspots-10__image-placeholder">
+                <span>Add image</span>
+              </div>
+            {%- endif -%}
+          </div>
 
-        <div class="sek-hss__hotspot" style="left: 78%; top: 55%;" data-hotspot-id="placeholder-4" data-title="Side Table" data-description="Modern metal side table with minimalist design and dual-tier storage." data-price="$149.00" data-image="" data-link="#" data-button-text="View Product">
-          <button class="sek-hss__marker" type="button" aria-label="View Side Table">
-            <span class="sek-hss__icon">+</span>
-          </button>
-        </div>
-      {%- endif -%}
+          <!-- Hotspots -->
+          {%- assign hotspot_blocks = section.blocks | where: "type", "hotspot" -%}
+          {%- for block in hotspot_blocks -%}
+            <div class="hotspots-10__hotspot"
+                 style="top: {{ block.settings.position_top }}%; left: {{ block.settings.position_left }}%;"
+                 data-hotspot-id="{{ block.id }}"
+                 {{ block.shopify_attributes }}>
+              <div class="hotspots-10__hotspot-dot">
+                <svg class="hotspots-10__hotspot-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </div>
 
-      <!-- Product Panel - Slides in from right -->
-      <div class="sek-hss__panel" id="sek-hss-panel-{{ section_id }}">
-        <button type="button" class="sek-hss__panel-close" aria-label="Close panel">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-        <div class="sek-hss__panel-image-placeholder" id="sek-hss-panel-image-{{ section_id }}">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-            <polyline points="21 15 16 10 5 21"></polyline>
-          </svg>
+              {%- if block.settings.product_title != blank -%}
+                <div class="hotspots-10__popup">
+                  <div class="hotspots-10__popup-content">
+                    {%- if block.settings.product_image != blank -%}
+                      <div class="hotspots-10__popup-image">
+                        {{ block.settings.product_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: block.settings.product_title }}
+                      </div>
+                    {%- endif -%}
+
+                    <div class="hotspots-10__popup-info">
+                      <h3 class="hotspots-10__popup-title">{{ block.settings.product_title }}</h3>
+
+                      {%- if block.settings.product_description != blank -%}
+                        <p class="hotspots-10__popup-description">{{ block.settings.product_description }}</p>
+                      {%- endif -%}
+
+                      {%- if block.settings.product_price != blank -%}
+                        <div class="hotspots-10__popup-price">{{ block.settings.product_price }}</div>
+                      {%- endif -%}
+
+                      {%- if block.settings.product_link != blank -%}
+                        <a href="{{ block.settings.product_link }}" class="hotspots-10__popup-link">View</a>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
         </div>
-        <h3 class="sek-hss__panel-title" id="sek-hss-panel-title-{{ section_id }}">Product Name</h3>
-        <p class="sek-hss__panel-price" id="sek-hss-panel-price-{{ section_id }}">$0.00</p>
-        <p class="sek-hss__panel-description" id="sek-hss-panel-desc-{{ section_id }}">Product description</p>
-        <a href="#" class="sek-hss__panel-btn" id="sek-hss-panel-btn-{{ section_id }}">View Product</a>
       </div>
     </div>
   </div>
 </section>
 
 <script>
-  (function() {
-    function initHotspotsSimple() {
-      const sectionId = '{{ section_id }}';
-      const section = document.getElementById('sek-hotspots-simple-' + sectionId);
-      if (!section) return;
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
 
-      const hotspots = section.querySelectorAll('.sek-hss__hotspot');
-      const markers = section.querySelectorAll('.sek-hss__marker');
-      const panel = document.getElementById('sek-hss-panel-' + sectionId);
-      const panelClose = panel.querySelector('.sek-hss__panel-close');
-      const panelImageContainer = document.getElementById('sek-hss-panel-image-' + sectionId);
-      const panelTitle = document.getElementById('sek-hss-panel-title-' + sectionId);
-      const panelPrice = document.getElementById('sek-hss-panel-price-' + sectionId);
-      const panelDesc = document.getElementById('sek-hss-panel-desc-' + sectionId);
-      const panelBtn = document.getElementById('sek-hss-panel-btn-' + sectionId);
+    const hotspots = section.querySelectorAll('.hotspots-10__hotspot');
 
-      let activeHotspot = null;
+    hotspots.forEach(hotspot => {
+      const dot = hotspot.querySelector('.hotspots-10__hotspot-dot');
 
-      function updatePanel(hotspot) {
-        const title = hotspot.dataset.title || 'Product';
-        const description = hotspot.dataset.description || '';
-        const price = hotspot.dataset.price || '';
-        const image = hotspot.dataset.image || '';
-        const link = hotspot.dataset.link || '#';
-        const buttonText = hotspot.dataset.buttonText || 'View Product';
-
-        panelTitle.textContent = title;
-        panelDesc.textContent = description;
-        panelPrice.textContent = price;
-        panelBtn.href = link;
-        panelBtn.textContent = buttonText;
-
-        // Update image
-        if (image) {
-          panelImageContainer.innerHTML = '<img src="' + image + '" alt="' + title + '" class="sek-hss__panel-image">';
-        } else {
-          panelImageContainer.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>';
-          panelImageContainer.className = 'sek-hss__panel-image-placeholder';
-        }
-      }
-
-      function showPanel(hotspot) {
-        if (activeHotspot === hotspot && panel.classList.contains('is-visible')) {
-          closePanel();
-          return;
-        }
-
-        // Remove active state from all hotspots
-        hotspots.forEach(h => h.classList.remove('is-active'));
-
-        // Set active hotspot
-        activeHotspot = hotspot;
-        hotspot.classList.add('is-active');
-
-        // Update and show panel
-        updatePanel(hotspot);
-        panel.classList.add('is-visible');
-      }
-
-      function closePanel() {
-        panel.classList.remove('is-visible');
-        hotspots.forEach(h => h.classList.remove('is-active'));
-        activeHotspot = null;
-      }
-
-      // Click handler for hotspot markers
-      markers.forEach(marker => {
-        marker.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          const hotspot = this.closest('.sek-hss__hotspot');
-          showPanel(hotspot);
-        });
-      });
-
-      // Close button handler
-      panelClose.addEventListener('click', function(e) {
-        e.preventDefault();
+      dot.addEventListener('click', function(e) {
         e.stopPropagation();
-        closePanel();
-      });
 
-      // Close panel when clicking outside
-      document.addEventListener('click', function(e) {
-        if (!e.target.closest('.sek-hss__hotspot') && !e.target.closest('.sek-hss__panel')) {
-          closePanel();
-        }
-      });
+        // Close all other hotspots
+        hotspots.forEach(h => {
+          if (h !== hotspot) {
+            h.classList.remove('active');
+          }
+        });
 
-      // Close panel on escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          closePanel();
-        }
+        // Toggle current hotspot
+        hotspot.classList.toggle('active');
       });
-    }
+    });
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initHotspotsSimple);
-    } else {
-      initHotspotsSimple();
-    }
-  })();
+    // Close hotspots when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.hotspots-10__hotspot')) {
+        hotspots.forEach(h => h.classList.remove('active'));
+      }
+    });
+  });
 </script>
 
 {% schema %}
 {
-  "name": "SEK Hotspots Simple",
+  "name": "SEK Hotspots 10",
   "tag": "section",
-  "class": "sek-hotspots-simple-section",
+  "class": "section-hotspots-10",
   "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
     {
       "type": "header",
       "content": "Content"
     },
     {
       "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Hotspots"
+      "id": "title",
+      "label": "Title",
+      "default": "Essentials Nutrition Shake"
     },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Background image"
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Achieving optimal health does not necessitate a plethora of supplements. Enhance nutrition in its natural form by closing nutrient gaps with a balanced, simple, and delicious fix for the myriad health benefits that only real, whole foods can offer."
     },
     {
-      "type": "header",
-      "content": "Layout"
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "SHOP NOW"
     },
     {
-      "type": "range",
-      "id": "max_width",
-      "label": "Max width",
-      "min": 1000,
-      "max": 1800,
-      "step": 50,
-      "default": 1600,
-      "unit": "px"
-    },
-    {
-      "type": "header",
-      "content": "Section Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Padding top (desktop)",
-      "min": 0,
-      "max": 120,
-      "step": 5,
-      "default": 60,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Padding bottom (desktop)",
-      "min": 0,
-      "max": 120,
-      "step": 5,
-      "default": 60,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "padding_top_mobile",
-      "label": "Padding top (mobile)",
-      "min": 0,
-      "max": 80,
-      "step": 5,
-      "default": 40,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom_mobile",
-      "label": "Padding bottom (mobile)",
-      "min": 0,
-      "max": 80,
-      "step": 5,
-      "default": 40,
-      "unit": "px"
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
     },
     {
       "type": "header",
@@ -800,102 +885,88 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "#ffffff"
+      "default": "#f5f5f0"
     },
     {
       "type": "color",
       "id": "heading_color",
       "label": "Heading color",
-      "default": "#1a1a1a"
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_background",
+      "label": "Hotspot background",
+      "default": "#cbe514"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_text_color",
+      "label": "Hotspot text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "popup_background",
+      "label": "Popup background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#cbe514"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#121212"
     },
     {
       "type": "header",
-      "content": "Marker Colors"
+      "content": "Section spacing"
     },
     {
-      "type": "color",
-      "id": "marker_background",
-      "label": "Marker background",
-      "default": "#000000"
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
     },
     {
-      "type": "color",
-      "id": "marker_icon_color",
-      "label": "Marker icon color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "marker_border_color",
-      "label": "Marker border color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "header",
-      "content": "Product Panel Colors"
-    },
-    {
-      "type": "color",
-      "id": "panel_background",
-      "label": "Panel background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "panel_title_color",
-      "label": "Panel title color",
-      "default": "#1a1a1a"
-    },
-    {
-      "type": "color",
-      "id": "panel_price_color",
-      "label": "Panel price color",
-      "default": "#2a7d4f"
-    },
-    {
-      "type": "color",
-      "id": "panel_text_color",
-      "label": "Panel text color",
-      "default": "#666666"
-    },
-    {
-      "type": "color",
-      "id": "panel_btn_bg",
-      "label": "Panel button background",
-      "default": "#1a1a1a"
-    },
-    {
-      "type": "color",
-      "id": "panel_btn_text",
-      "label": "Panel button text",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "panel_btn_hover_bg",
-      "label": "Panel button hover background",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "panel_close_bg",
-      "label": "Panel close button background",
-      "default": "#f0f0f0"
-    },
-    {
-      "type": "color",
-      "id": "panel_close_hover_bg",
-      "label": "Panel close button hover",
-      "default": "#e0e0e0"
-    },
-    {
-      "type": "color",
-      "id": "panel_close_color",
-      "label": "Panel close icon color",
-      "default": "#333333"
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
     }
   ],
   "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Clean Ingredients"
+        }
+      ]
+    },
     {
       "type": "hotspot",
       "name": "Hotspot",
@@ -906,55 +977,27 @@
         },
         {
           "type": "range",
-          "id": "position_x",
-          "label": "Horizontal position (%)",
+          "id": "position_top",
+          "label": "Position from top",
           "min": 0,
           "max": 100,
           "step": 1,
-          "default": 50,
-          "unit": "%"
+          "unit": "%",
+          "default": 30
         },
         {
           "type": "range",
-          "id": "position_y",
-          "label": "Vertical position (%)",
+          "id": "position_left",
+          "label": "Position from left",
           "min": 0,
           "max": 100,
           "step": 1,
-          "default": 50,
-          "unit": "%"
+          "unit": "%",
+          "default": 50
         },
         {
           "type": "header",
-          "content": "Product"
-        },
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Select product",
-          "info": "Selecting a product will auto-populate title, price, image, and link"
-        },
-        {
-          "type": "header",
-          "content": "Manual Content (used if no product selected)"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Product Name"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Description",
-          "default": "Brief description of the product or feature."
-        },
-        {
-          "type": "text",
-          "id": "price",
-          "label": "Price",
-          "default": "$49.00"
+          "content": "Product Info"
         },
         {
           "type": "image_picker",
@@ -962,65 +1005,83 @@
           "label": "Product image"
         },
         {
-          "type": "url",
-          "id": "button_link",
-          "label": "Button link"
+          "type": "text",
+          "id": "product_title",
+          "label": "Product title",
+          "default": "Nutrition Shake"
         },
         {
           "type": "text",
-          "id": "button_text",
-          "label": "Button text",
-          "default": "View Product"
+          "id": "product_description",
+          "label": "Product description",
+          "default": "25g protein"
+        },
+        {
+          "type": "text",
+          "id": "product_price",
+          "label": "Product price",
+          "default": "$24.00"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product link"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "SEK Hotspots Simple",
+      "name": "SEK Hotspots 10",
+      "settings": {
+        "title": "Essentials Nutrition Shake",
+        "description": "Achieving optimal health does not necessitate a plethora of supplements. Enhance nutrition in its natural form by closing nutrient gaps with a balanced, simple, and delicious fix for the myriad health benefits that only real, whole foods can offer.",
+        "button_text": "SHOP NOW",
+        "image_position": "left"
+      },
       "blocks": [
         {
-          "type": "hotspot",
+          "type": "feature",
           "settings": {
-            "position_x": 12,
-            "position_y": 65,
-            "title": "Pillow Case",
-            "description": "Premium cotton pillow case with soft, breathable fabric for ultimate comfort.",
-            "price": "$49.00",
-            "button_text": "View Product"
+            "text": "Clean Ingredients"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Naturally Derived"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "No Sketchy Additives"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Happiness Guarantee"
           }
         },
         {
           "type": "hotspot",
           "settings": {
-            "position_x": 52,
-            "position_y": 32,
-            "title": "Bed Frame",
-            "description": "Sturdy, modern wood bedframe with natural finish and sleek design.",
-            "price": "$599.00",
-            "button_text": "View Product"
+            "position_top": 52,
+            "position_left": 38,
+            "product_title": "Sports Bottle",
+            "product_description": "32oz insulated",
+            "product_price": "$28.00"
           }
         },
         {
           "type": "hotspot",
           "settings": {
-            "position_x": 36,
-            "position_y": 58,
-            "title": "Duvet Case",
-            "description": "Luxurious, hypoallergenic duvet case with button closure, patterned design.",
-            "price": "$129.00",
-            "button_text": "View Product"
-          }
-        },
-        {
-          "type": "hotspot",
-          "settings": {
-            "position_x": 78,
-            "position_y": 55,
-            "title": "Side Table",
-            "description": "Modern metal side table with minimalist design and dual-tier storage.",
-            "price": "$149.00",
-            "button_text": "View Product"
+            "position_top": 38,
+            "position_left": 58,
+            "product_title": "Recovery Shake",
+            "product_description": "Plant-based protein blend",
+            "product_price": "$34.00"
           }
         }
       ]
