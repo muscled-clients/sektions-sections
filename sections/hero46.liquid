@@ -1,0 +1,1021 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --h46-bg: {{ section.settings.background_color }};
+    --h46-text: {{ section.settings.text_color }};
+    --h46-heading-accent: {{ section.settings.heading_accent_color }};
+    --h46-badge-bg: {{ section.settings.badge_bg_color }};
+    --h46-badge-text: {{ section.settings.badge_text_color }};
+    --h46-btn-bg: {{ section.settings.button_bg_color }};
+    --h46-btn-text: {{ section.settings.button_text_color }};
+    --h46-btn-hover: {{ section.settings.button_hover_color }};
+    --h46-card-bg: {{ section.settings.card_bg_color }};
+    --h46-card-text: {{ section.settings.card_text_color }};
+    --h46-number: {{ section.settings.number_color }};
+    --h46-border: {{ section.settings.border_color }};
+    --h46-label: {{ section.settings.label_color }};
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin-top: {{ section.settings.margin_top | times: 0.7 | round }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 | round }}px;
+  }
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 | round }}px;
+    }
+  }
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 | round }}px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&display=swap');
+
+  /* Box-sizing */
+  .hero-46,
+  .hero-46 *,
+  .hero-46 *::before,
+  .hero-46 *::after {
+    box-sizing: border-box;
+  }
+
+  /* Base - Small Mobile (< 400px) */
+  .hero-46 {
+    background: var(--h46-bg, #ffffff);
+    padding: 40px 15px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .hero-46__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Hero Header */
+  .hero-46__header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .hero-46__badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--h46-badge-bg, #2D4D51);
+    color: var(--h46-badge-text, #ffffff);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+
+  .hero-46__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--h46-text, #000000);
+    margin: 0 0 14px;
+  }
+
+  .hero-46__heading-accent {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--h46-heading-accent, #6b8a8e);
+  }
+
+  .hero-46__description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--h46-text, #000000);
+    opacity: 0.85;
+    margin: 0 0 20px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-46__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--h46-btn-bg, #2D4D51);
+    color: var(--h46-btn-text, #ffffff);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 100px;
+    transition: all 0.3s ease;
+  }
+
+  .hero-46__btn:hover {
+    background: var(--h46-btn-hover, #1e3538);
+    transform: translateY(-2px);
+  }
+
+  .hero-46__btn svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  /* Card Section */
+  .hero-46__card {
+    background: var(--h46-card-bg, #f5f3f0);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Features List */
+  .hero-46__features {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-46__feature {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--h46-border, rgba(0, 0, 0, 0.1));
+  }
+
+  .hero-46__feature:first-child {
+    padding-top: 0;
+  }
+
+  .hero-46__feature:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .hero-46__feature-number {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--h46-number, #999999);
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .hero-46__feature-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--h46-card-text, #000000);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* Comparison Images */
+  .hero-46__comparisons {
+    display: flex;
+    gap: 12px;
+  }
+
+  .hero-46__comparison {
+    flex: 1;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background: #e0e0e0;
+    touch-action: none;
+    user-select: none;
+  }
+
+  .hero-46__comparison-before,
+  .hero-46__comparison-after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-46__comparison-before {
+    z-index: 2;
+    clip-path: inset(0 50% 0 0);
+  }
+
+  .hero-46__comparison-after {
+    z-index: 1;
+  }
+
+  /* Labels */
+  .hero-46__comparison-label {
+    position: absolute;
+    top: 10px;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--h46-label, #2D4D51);
+    z-index: 5;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 3px;
+  }
+
+  .hero-46__comparison-label--before {
+    left: 10px;
+  }
+
+  .hero-46__comparison-label--after {
+    right: 10px;
+  }
+
+  /* Slider Handle */
+  .hero-46__slider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+    cursor: ew-resize;
+  }
+
+  .hero-46__slider-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(7px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: ew-resize;
+  }
+
+  .hero-46__slider-handle::before,
+  .hero-46__slider-handle::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.9);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.9);
+  }
+
+  .hero-46__slider-handle::before {
+    left: 8px;
+    transform: rotate(-45deg);
+  }
+
+  .hero-46__slider-handle::after {
+    right: 8px;
+    transform: rotate(135deg);
+  }
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    .hero-46 {
+      padding: 50px 20px;
+    }
+
+    .hero-46__header {
+      margin-bottom: 36px;
+    }
+
+    .hero-46__badge {
+      font-size: 11px;
+      padding: 9px 18px;
+    }
+
+    .hero-46__heading {
+      font-size: 38px;
+    }
+
+    .hero-46__description {
+      font-size: 17px;
+    }
+
+    .hero-46__btn {
+      padding: 14px 28px;
+      font-size: 14px;
+    }
+
+    .hero-46__card {
+      padding: 28px;
+      border-radius: 18px;
+      gap: 28px;
+    }
+
+    .hero-46__feature {
+      padding: 16px 0;
+    }
+
+    .hero-46__feature-number {
+      font-size: 11px;
+    }
+
+    .hero-46__feature-text {
+      font-size: 14px;
+    }
+
+    .hero-46__comparisons {
+      gap: 14px;
+    }
+
+    .hero-46__comparison {
+      border-radius: 14px;
+    }
+
+    .hero-46__comparison-label {
+      font-size: 9px;
+    }
+
+    .hero-46__slider-handle {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .hero-46 {
+      padding: 60px 24px;
+    }
+
+    .hero-46__header {
+      margin-bottom: 44px;
+    }
+
+    .hero-46__badge {
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .hero-46__heading {
+      font-size: 44px;
+      margin-bottom: 16px;
+    }
+
+    .hero-46__description {
+      font-size: 18px;
+      margin-bottom: 24px;
+      max-width: 500px;
+    }
+
+    .hero-46__card {
+      padding: 32px;
+      border-radius: 20px;
+      gap: 32px;
+    }
+
+    .hero-46__feature-text {
+      font-size: 15px;
+    }
+
+    .hero-46__comparisons {
+      gap: 16px;
+    }
+
+    .hero-46__comparison-label {
+      font-size: 10px;
+      top: 12px;
+      padding: 5px 10px;
+    }
+
+    .hero-46__comparison-label--before {
+      left: 12px;
+    }
+
+    .hero-46__comparison-label--after {
+      right: 12px;
+    }
+
+    .hero-46__slider-handle {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .hero-46 {
+      padding: 70px 30px;
+    }
+
+    .hero-46__header {
+      margin-bottom: 50px;
+    }
+
+    .hero-46__heading {
+      font-size: 50px;
+    }
+
+    .hero-46__description {
+      font-size: 19px;
+      max-width: 550px;
+    }
+
+    .hero-46__btn {
+      padding: 15px 32px;
+      font-size: 15px;
+      gap: 10px;
+    }
+
+    .hero-46__btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .hero-46__card {
+      flex-direction: row;
+      padding: 36px;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .hero-46__features {
+      flex: 0 0 35%;
+      max-width: 280px;
+    }
+
+    .hero-46__feature {
+      padding: 18px 0;
+    }
+
+    .hero-46__feature-number {
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    .hero-46__feature-text {
+      font-size: 15px;
+    }
+
+    .hero-46__comparisons {
+      flex: 1;
+      gap: 18px;
+    }
+
+    .hero-46__comparison {
+      aspect-ratio: 3 / 4;
+    }
+
+    .hero-46__slider-handle {
+      width: 46px;
+      height: 46px;
+    }
+
+    .hero-46__slider-handle::before,
+    .hero-46__slider-handle::after {
+      width: 7px;
+      height: 7px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .hero-46 {
+      padding: 80px 40px;
+    }
+
+    .hero-46__container {
+      max-width: 1300px;
+    }
+
+    .hero-46__header {
+      margin-bottom: 60px;
+    }
+
+    .hero-46__badge {
+      font-size: 12px;
+      padding: 10px 20px;
+    }
+
+    .hero-46__heading {
+      font-size: 56px;
+      margin-bottom: 18px;
+    }
+
+    .hero-46__description {
+      font-size: 20px;
+      max-width: 600px;
+      margin-bottom: 28px;
+    }
+
+    .hero-46__btn {
+      padding: 16px 36px;
+      font-size: 15px;
+    }
+
+    .hero-46__card {
+      padding: 44px;
+      border-radius: 24px;
+      gap: 50px;
+    }
+
+    .hero-46__features {
+      flex: 0 0 30%;
+      max-width: 320px;
+    }
+
+    .hero-46__feature {
+      padding: 20px 0;
+    }
+
+    .hero-46__feature-number {
+      font-size: 12px;
+    }
+
+    .hero-46__feature-text {
+      font-size: 16px;
+    }
+
+    .hero-46__comparisons {
+      gap: 20px;
+    }
+
+    .hero-46__comparison {
+      border-radius: 16px;
+    }
+
+    .hero-46__comparison-label {
+      font-size: 11px;
+      top: 14px;
+      padding: 6px 12px;
+    }
+
+    .hero-46__slider-handle {
+      width: 50px;
+      height: 50px;
+    }
+
+    .hero-46__slider-handle::before,
+    .hero-46__slider-handle::after {
+      width: 8px;
+      height: 8px;
+      border-width: 2px;
+    }
+
+    .hero-46__slider-handle::before {
+      left: 10px;
+    }
+
+    .hero-46__slider-handle::after {
+      right: 10px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .hero-46 {
+      padding: 100px 50px;
+    }
+
+    .hero-46__container {
+      max-width: 1400px;
+    }
+
+    .hero-46__heading {
+      font-size: 62px;
+    }
+
+    .hero-46__description {
+      font-size: 21px;
+    }
+
+    .hero-46__card {
+      padding: 50px;
+      gap: 60px;
+    }
+
+    .hero-46__features {
+      max-width: 360px;
+    }
+
+    .hero-46__feature-text {
+      font-size: 17px;
+    }
+
+    .hero-46__comparisons {
+      gap: 24px;
+    }
+
+    .hero-46__comparison {
+      border-radius: 18px;
+    }
+
+    .hero-46__comparison-label {
+      font-size: 12px;
+    }
+
+    .hero-46__slider-handle {
+      width: 54px;
+      height: 54px;
+    }
+  }
+</style>
+
+<section class="hero-46" data-section-id="{{ section.id }}">
+  <div class="hero-46__container">
+    <!-- Hero Header -->
+    <div class="hero-46__header">
+      {%- if section.settings.badge != blank -%}
+        <span class="hero-46__badge">{{ section.settings.badge }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank or section.settings.heading_accent != blank -%}
+        <h2 class="hero-46__heading">
+          {{ section.settings.heading }}
+          {%- if section.settings.heading_accent != blank -%}
+            <span class="hero-46__heading-accent">{{ section.settings.heading_accent }}</span>
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <p class="hero-46__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.button_text != blank -%}
+        <a href="{{ section.settings.button_link }}" class="hero-46__btn">
+          {{ section.settings.button_text }}
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <!-- Card with Features and Comparisons -->
+    <div class="hero-46__card">
+      <!-- Features List -->
+      <div class="hero-46__features">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'feature' -%}
+            <div class="hero-46__feature" {{ block.shopify_attributes }}>
+              <span class="hero-46__feature-number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <p class="hero-46__feature-text">{{ block.settings.text }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <!-- Comparison Images -->
+      <div class="hero-46__comparisons">
+        {%- assign comparison_index = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'comparison' -%}
+            <div class="hero-46__comparison" data-comparison="{{ comparison_index }}" {{ block.shopify_attributes }}>
+              <!-- After Image (background) -->
+              {%- if block.settings.after_image != blank -%}
+                {{ block.settings.after_image | image_url: width: 800 | image_tag: class: 'hero-46__comparison-after', loading: 'lazy', draggable: 'false' }}
+              {%- else -%}
+                <div class="hero-46__comparison-after" style="background: linear-gradient(135deg, #a8c0c5 0%, #6b8a8e 100%);"></div>
+              {%- endif -%}
+
+              <!-- Before Image (clipped) -->
+              {%- if block.settings.before_image != blank -%}
+                {{ block.settings.before_image | image_url: width: 800 | image_tag: class: 'hero-46__comparison-before', loading: 'lazy', draggable: 'false' }}
+              {%- else -%}
+                <div class="hero-46__comparison-before" style="background: linear-gradient(135deg, #d4b896 0%, #a89078 100%);"></div>
+              {%- endif -%}
+
+              <!-- Labels -->
+              <span class="hero-46__comparison-label hero-46__comparison-label--before">BEFORE</span>
+              <span class="hero-46__comparison-label hero-46__comparison-label--after">AFTER</span>
+
+              <!-- Slider -->
+              <div class="hero-46__slider">
+                <div class="hero-46__slider-handle"></div>
+              </div>
+            </div>
+            {%- assign comparison_index = comparison_index | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
+
+    const comparisons = section.querySelectorAll('.hero-46__comparison');
+
+    comparisons.forEach((comparison) => {
+      const slider = comparison.querySelector('.hero-46__slider');
+      const beforeImage = comparison.querySelector('.hero-46__comparison-before');
+      if (!slider || !beforeImage) return;
+
+      let isDragging = false;
+      let startX = 0;
+      let startPosition = 50;
+
+      function updateSliderPosition(percentage) {
+        // Clamp between 0 and 100
+        percentage = Math.max(0, Math.min(100, percentage));
+        slider.style.left = percentage + '%';
+        beforeImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+      }
+
+      function getPercentage(clientX) {
+        const rect = comparison.getBoundingClientRect();
+        const x = clientX - rect.left;
+        return (x / rect.width) * 100;
+      }
+
+      function dragStart(e) {
+        e.preventDefault();
+        isDragging = true;
+        startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        startPosition = parseFloat(slider.style.left) || 50;
+        comparison.style.cursor = 'ew-resize';
+      }
+
+      function dragMove(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const percentage = getPercentage(clientX);
+        updateSliderPosition(percentage);
+      }
+
+      function dragEnd() {
+        isDragging = false;
+        comparison.style.cursor = '';
+      }
+
+      // Mouse events
+      slider.addEventListener('mousedown', dragStart);
+      document.addEventListener('mousemove', dragMove);
+      document.addEventListener('mouseup', dragEnd);
+
+      // Touch events
+      slider.addEventListener('touchstart', dragStart, { passive: false });
+      document.addEventListener('touchmove', dragMove, { passive: false });
+      document.addEventListener('touchend', dragEnd);
+
+      // Click anywhere on comparison to move slider
+      comparison.addEventListener('click', function(e) {
+        if (e.target === slider || slider.contains(e.target)) return;
+        const percentage = getPercentage(e.clientX);
+        updateSliderPosition(percentage);
+      });
+
+      // Initialize at 50%
+      updateSliderPosition(50);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Hero 46",
+  "tag": "section",
+  "class": "section-hero-46",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Header"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge text",
+      "default": "TEAM FAVOURITE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Glow-Up"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading accent (italic)",
+      "default": "Without Surgery"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "A second-generation hyaluronic acid serum formulated to deliver instant and long-lasting hydration."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Header"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "heading_accent_color",
+      "label": "Heading accent color",
+      "default": "#6b8a8e"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge background",
+      "default": "#2D4D51"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#2D4D51"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover color",
+      "default": "#1e3538"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Card"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background",
+      "default": "#f5f3f0"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Feature number color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Feature border color",
+      "default": "rgba(0, 0, 0, 0.1)"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Before/After label color",
+      "default": "#2D4D51"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature text",
+          "default": "Advanced, multi-layer hydration"
+        }
+      ]
+    },
+    {
+      "type": "comparison",
+      "name": "Comparison Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before image"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Hero 46",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Advanced, multi-layer hydration"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Barrier support with ceramides"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Pro-vitamin B5 (panthenol)"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Lightweight, non-tacky texture"
+          }
+        },
+        {
+          "type": "comparison"
+        },
+        {
+          "type": "comparison"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
