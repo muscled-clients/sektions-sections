@@ -6,15 +6,48 @@
     --hero18-accent: {{ section.settings.accent_color }};
     --hero18-sticker-bg: {{ section.settings.sticker_background }};
     --hero18-sticker-text: {{ section.settings.sticker_text_color }};
-    margin-top: {{ section.settings.margin_top }}px;
-    margin-bottom: {{ section.settings.margin_bottom }}px;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin-top: {{ section.settings.margin_top | times: 0.7 }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 }}px;
+  }
+
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 }}px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 }}px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
   }
 {% endstyle %}
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Bebas+Neue&display=swap');
 
+  .hero-18 *,
+  .hero-18 *::before,
+  .hero-18 *::after {
+    box-sizing: border-box;
+  }
+
   .hero-18 {
+    display: block;
+    width: 100%;
     background: var(--hero18-bg, #fff);
     font-family: 'Montserrat', sans-serif;
     overflow: hidden;
@@ -27,9 +60,9 @@
     text-align: center;
   }
 
-  /* Logo/Heading at top */
+  /* Logo/Heading at top - Mobile First */
   .hero-18__header {
-    padding: 30px 20px 0;
+    padding: 20px 12px 0;
   }
 
   .hero-18__logo {
@@ -37,19 +70,19 @@
   }
 
   .hero-18__logo-image {
-    max-width: 280px;
+    max-width: 180px;
     height: auto;
   }
 
-  /* Heading */
+  /* Heading - Mobile First */
   .hero-18__heading {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 80px;
+    font-size: 48px;
     font-weight: 400;
     color: var(--hero18-heading-color, #000);
     margin: 0;
     line-height: 0.9;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-transform: uppercase;
   }
 
@@ -57,22 +90,22 @@
     color: var(--hero18-accent, #ff6c1c);
   }
 
-  /* Subtitle */
+  /* Subtitle - Mobile First */
   .hero-18__subtitle {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     color: var(--hero18-text-color, #666);
-    margin: 16px auto 0;
+    margin: 10px auto 0;
     max-width: 500px;
-    line-height: 1.6;
-    padding: 0 20px;
+    line-height: 1.5;
+    padding: 0 12px;
   }
 
-  /* Image Container - Full width */
+  /* Image Container - Mobile First */
   .hero-18__image-wrapper {
     position: relative;
     width: 100%;
-    margin-top: -30px;
+    margin-top: -15px;
   }
 
   .hero-18__image {
@@ -83,21 +116,21 @@
     object-fit: cover;
   }
 
-  /* Button */
+  /* Button - Mobile First */
   .hero-18__button {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     background: var(--hero18-heading-color, #000);
     color: var(--hero18-bg, #fff);
-    padding: 14px 28px;
-    font-size: 13px;
+    padding: 10px 18px;
+    font-size: 11px;
     font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-radius: 8px;
-    margin-top: 24px;
+    border-radius: 6px;
+    margin-top: 16px;
     transition: all 0.25s ease;
   }
 
@@ -106,39 +139,49 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
-  /* Stickers - Organic blob shapes */
+  .hero-18__button svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Button wrapper - Mobile First */
+  .hero-18__button-wrapper {
+    padding: 16px 12px 28px;
+    text-align: center;
+  }
+
+  /* Stickers - Mobile First (hidden by default on smallest screens) */
   .hero-18__sticker {
     position: absolute;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
-    padding: 16px 20px;
+    padding: 10px 12px;
     background: var(--hero18-sticker-bg, #fff8eb);
     color: var(--hero18-sticker-text, #000);
-    font-size: 13px;
+    font-size: 9px;
     font-weight: 600;
     text-align: center;
     line-height: 1.3;
     z-index: 10;
     transition: transform 0.1s ease-out;
+    max-width: 70px;
   }
 
   /* Speech bubble shape - left side */
   .hero-18__sticker--1 {
-    top: 30%;
-    left: 3%;
+    top: 25%;
+    left: 2%;
     border-radius: 50% 50% 50% 20%;
     transform: rotate(-8deg);
-    max-width: 100px;
   }
 
   /* Cloud/blob shape - right bottom */
   .hero-18__sticker--2 {
-    bottom: 8%;
-    right: 5%;
+    bottom: 5%;
+    right: 2%;
     border-radius: 60% 40% 50% 40% / 50% 50% 40% 50%;
     transform: rotate(5deg);
-    max-width: 90px;
   }
 
   /* Rounded blob - left bottom */
@@ -147,7 +190,6 @@
     left: 5%;
     border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
     transform: rotate(-5deg);
-    max-width: 100px;
   }
 
   /* Pill shape - right top */
@@ -156,12 +198,11 @@
     right: 3%;
     border-radius: 50% 50% 50% 50%;
     transform: rotate(10deg);
-    max-width: 90px;
   }
 
   .hero-18__sticker-image {
-    width: 70px;
-    height: 70px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
   }
 
@@ -174,14 +215,219 @@
   .hero-18__sticker[data-bg="pink"] { background: #ffd4e5; }
   .hero-18__sticker[data-bg="white"] { background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
-  /* Desktop styles */
+  /* ============================================
+     RESPONSIVE BREAKPOINTS
+     ============================================ */
+
+  /* 400px - Small mobile - Show 2 stickers */
+  @media (min-width: 400px) {
+    .hero-18__header {
+      padding: 24px 14px 0;
+    }
+
+    .hero-18__heading {
+      font-size: 56px;
+      letter-spacing: 1px;
+    }
+
+    .hero-18__logo-image {
+      max-width: 200px;
+    }
+
+    .hero-18__subtitle {
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    .hero-18__image-wrapper {
+      margin-top: -20px;
+    }
+
+    .hero-18__button {
+      padding: 11px 20px;
+      font-size: 11px;
+    }
+
+    .hero-18__button-wrapper {
+      padding: 18px 14px 30px;
+    }
+
+    .hero-18__sticker--1,
+    .hero-18__sticker--2 {
+      display: flex;
+    }
+
+    .hero-18__sticker {
+      font-size: 10px;
+      padding: 11px 13px;
+      max-width: 75px;
+    }
+
+    .hero-18__sticker-image {
+      width: 45px;
+      height: 45px;
+    }
+  }
+
+  /* 550px - Large mobile */
+  @media (min-width: 550px) {
+    .hero-18__header {
+      padding: 28px 20px 0;
+    }
+
+    .hero-18__heading {
+      font-size: 68px;
+      letter-spacing: 2px;
+    }
+
+    .hero-18__logo-image {
+      max-width: 230px;
+    }
+
+    .hero-18__subtitle {
+      font-size: 13px;
+      margin-top: 14px;
+      padding: 0 16px;
+    }
+
+    .hero-18__image-wrapper {
+      margin-top: -25px;
+    }
+
+    .hero-18__button {
+      padding: 12px 22px;
+      font-size: 12px;
+      gap: 7px;
+    }
+
+    .hero-18__button svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .hero-18__button-wrapper {
+      padding: 20px 16px 32px;
+    }
+
+    .hero-18__sticker {
+      font-size: 11px;
+      padding: 12px 14px;
+      max-width: 85px;
+    }
+
+    .hero-18__sticker--1 {
+      top: 28%;
+      left: 3%;
+    }
+
+    .hero-18__sticker--2 {
+      bottom: 6%;
+      right: 3%;
+    }
+
+    .hero-18__sticker-image {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  /* 768px - Tablet - Show all 4 stickers */
   @media (min-width: 768px) {
+    .hero-18__header {
+      padding: 40px 32px 0;
+    }
+
+    .hero-18__heading {
+      font-size: 100px;
+      letter-spacing: 2px;
+    }
+
+    .hero-18__logo-image {
+      max-width: 280px;
+    }
+
+    .hero-18__subtitle {
+      font-size: 14px;
+      margin-top: 16px;
+      padding: 0 20px;
+    }
+
+    .hero-18__image-wrapper {
+      margin-top: -40px;
+    }
+
+    .hero-18__image {
+      aspect-ratio: 16 / 10;
+    }
+
+    .hero-18__button {
+      padding: 13px 26px;
+      font-size: 12px;
+      gap: 8px;
+      border-radius: 7px;
+    }
+
+    .hero-18__button svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .hero-18__button-wrapper {
+      padding: 22px 20px 36px;
+    }
+
+    .hero-18__sticker--1,
+    .hero-18__sticker--2,
+    .hero-18__sticker--3,
+    .hero-18__sticker--4 {
+      display: flex;
+    }
+
+    .hero-18__sticker {
+      font-size: 13px;
+      padding: 15px 18px;
+      max-width: 100px;
+    }
+
+    .hero-18__sticker--1 {
+      top: 32%;
+      left: 4%;
+    }
+
+    .hero-18__sticker--2 {
+      bottom: 8%;
+      right: 6%;
+    }
+
+    .hero-18__sticker--3 {
+      bottom: 18%;
+      left: 6%;
+    }
+
+    .hero-18__sticker--4 {
+      top: 28%;
+      right: 4%;
+    }
+
+    .hero-18__sticker-image {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  /* 1024px - Desktop */
+  @media (min-width: 1024px) {
     .hero-18__header {
       padding: 50px 40px 0;
     }
 
     .hero-18__heading {
-      font-size: 120px;
+      font-size: 130px;
+      letter-spacing: 3px;
+    }
+
+    .hero-18__logo-image {
+      max-width: 320px;
     }
 
     .hero-18__subtitle {
@@ -189,42 +435,53 @@
     }
 
     .hero-18__image-wrapper {
-      margin-top: -50px;
+      margin-top: -60px;
     }
 
-    .hero-18__image {
-      aspect-ratio: 16 / 10;
+    .hero-18__button {
+      padding: 14px 28px;
+      font-size: 13px;
+      border-radius: 8px;
+    }
+
+    .hero-18__button-wrapper {
+      padding: 24px 20px 40px;
     }
 
     .hero-18__sticker {
-      font-size: 15px;
-      padding: 18px 24px;
+      font-size: 14px;
+      padding: 17px 22px;
+      max-width: 115px;
     }
 
     .hero-18__sticker--1 {
-      top: 35%;
-      left: 5%;
-      max-width: 120px;
+      top: 30%;
+      left: 6%;
     }
 
     .hero-18__sticker--2 {
       bottom: 10%;
       right: 8%;
-      max-width: 110px;
     }
 
     .hero-18__sticker--3 {
-      bottom: 20%;
+      bottom: 22%;
       left: 8%;
     }
 
     .hero-18__sticker--4 {
-      top: 30%;
-      right: 5%;
+      top: 26%;
+      right: 6%;
+    }
+
+    .hero-18__sticker-image {
+      width: 75px;
+      height: 75px;
     }
   }
 
-  @media (min-width: 1024px) {
+  /* 1400px - Large desktop */
+  @media (min-width: 1400px) {
     .hero-18__header {
       padding: 60px 60px 0;
     }
@@ -242,15 +499,20 @@
       margin-top: -80px;
     }
 
+    .hero-18__button {
+      padding: 15px 30px;
+      font-size: 14px;
+    }
+
     .hero-18__sticker {
       font-size: 16px;
       padding: 20px 28px;
+      max-width: 130px;
     }
 
     .hero-18__sticker--1 {
       top: 30%;
       left: 8%;
-      max-width: 130px;
     }
 
     .hero-18__sticker--2 {
@@ -268,41 +530,12 @@
     .hero-18__sticker--4 {
       top: 25%;
       right: 8%;
-      max-width: 110px;
+      max-width: 115px;
     }
 
     .hero-18__sticker-image {
       width: 90px;
       height: 90px;
-    }
-  }
-
-  /* Mobile adjustments */
-  @media (max-width: 767px) {
-    .hero-18__sticker--3,
-    .hero-18__sticker--4 {
-      display: none;
-    }
-
-    .hero-18__sticker {
-      font-size: 11px;
-      padding: 12px 14px;
-      max-width: 85px;
-    }
-
-    .hero-18__sticker--1 {
-      top: 25%;
-      left: 2%;
-    }
-
-    .hero-18__sticker--2 {
-      bottom: 5%;
-      right: 3%;
-    }
-
-    .hero-18__sticker-image {
-      width: 50px;
-      height: 50px;
     }
   }
 </style>
@@ -374,7 +607,7 @@
     </div>
 
     {%- if section.settings.button_text != blank -%}
-      <div style="padding: 24px 20px 40px; text-align: center;">
+      <div class="hero-18__button-wrapper">
         <a href="{{ section.settings.button_link }}" class="hero-18__button">
           {{ section.settings.button_text }}
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
