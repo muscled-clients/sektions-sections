@@ -76,7 +76,7 @@
   .countdown-timer-9__header {
     padding: 20px 16px 16px;
     text-align: center;
-    background: rgba(60, 60, 60, 0.45);
+    background: rgba(60, 60, 60, 0.35);
   }
 
   .countdown-timer-9__heading {
@@ -97,7 +97,7 @@
 
   /* Timer Section - Light gray band */
   .countdown-timer-9__timer-section {
-    background: rgba(240, 240, 240, 0.92);
+    background: rgba(240, 240, 240, 0.65);
     padding: 16px 12px;
   }
 
@@ -145,7 +145,7 @@
   .countdown-timer-9__footer {
     padding: 16px 16px 20px;
     text-align: center;
-    background: rgba(100, 100, 100, 0.3);
+    background: rgba(100, 100, 100, 0.25);
   }
 
   .countdown-timer-9__description {
@@ -166,7 +166,7 @@
     color: #333;
     padding: 16px 16px;
     text-align: center;
-    background: rgba(230, 230, 230, 0.6);
+    background: rgba(230, 230, 230, 0.5);
   }
 
   .countdown-timer-9.expired .countdown-timer-9__timer-section {
@@ -676,6 +676,15 @@
   const secondsEl = section.querySelector('[data-seconds]');
 
   function updateCountdown() {
+    // Handle invalid date
+    if (isNaN(targetDate)) {
+      daysEl.textContent = '00';
+      hoursEl.textContent = '00';
+      minutesEl.textContent = '00';
+      secondsEl.textContent = '00';
+      return;
+    }
+
     const now = new Date().getTime();
     const distance = targetDate - now;
 
