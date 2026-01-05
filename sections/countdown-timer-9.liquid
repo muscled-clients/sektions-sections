@@ -12,21 +12,32 @@
     --ct9-btn-hover-bg: {{ section.settings.button_hover_background }};
     --ct9-btn-hover-text: {{ section.settings.button_hover_text_color }};
     --ct9-card-border: {{ section.settings.card_border_color }};
-    margin-top: {{ section.settings.section_margin_top }}px;
-    margin-bottom: {{ section.settings.section_margin_bottom }}px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-top: {{ section.settings.section_margin_top | times: 0.7 }}px;
+    margin-bottom: {{ section.settings.section_margin_bottom | times: 0.7 }}px;
   }
 {% endstyle %}
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Archivo+Narrow:wght@400;500;600;700&display=swap');
 
+  .countdown-timer-9 *,
+  .countdown-timer-9 *::before,
+  .countdown-timer-9 *::after {
+    box-sizing: border-box;
+  }
+
   .countdown-timer-9 {
     position: relative;
-    min-height: 500px;
+    min-height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px 24px;
+    padding: 30px 12px;
     font-family: 'Inter', sans-serif;
     overflow: hidden;
   }
@@ -57,29 +68,29 @@
     max-width: 680px;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
   }
 
   /* Top Section - Heading (dark overlay) */
   .countdown-timer-9__header {
-    padding: 32px 32px 24px;
+    padding: 20px 16px 16px;
     text-align: center;
     background: rgba(60, 60, 60, 0.45);
   }
 
   .countdown-timer-9__heading {
     font-family: 'Archivo Narrow', sans-serif;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--ct9-heading, #fff);
-    margin: 0 0 8px;
+    margin: 0 0 6px;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
   }
 
   .countdown-timer-9__subtext {
-    font-size: 14px;
+    font-size: 12px;
     color: var(--ct9-subtext, rgba(255, 255, 255, 0.85));
     margin: 0;
   }
@@ -87,61 +98,61 @@
   /* Timer Section - Light gray band */
   .countdown-timer-9__timer-section {
     background: rgba(240, 240, 240, 0.92);
-    padding: 24px 32px;
+    padding: 16px 12px;
   }
 
   .countdown-timer-9__timer {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 8px;
+    gap: 4px;
   }
 
   .countdown-timer-9__timer-block {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 60px;
+    min-width: 42px;
   }
 
   .countdown-timer-9__timer-value {
     font-family: 'Inter', sans-serif;
-    font-size: 56px;
+    font-size: 32px;
     font-weight: 300;
     color: var(--ct9-timer-text, #000);
     line-height: 1;
-    letter-spacing: -2px;
+    letter-spacing: -1px;
   }
 
   .countdown-timer-9__timer-label {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 500;
     color: var(--ct9-timer-label, #666);
     text-transform: capitalize;
-    margin-top: 8px;
+    margin-top: 5px;
   }
 
   .countdown-timer-9__separator {
-    font-size: 48px;
+    font-size: 28px;
     font-weight: 300;
     color: var(--ct9-timer-text, #000);
     line-height: 1;
-    padding: 0 4px;
+    padding: 0 2px;
     opacity: 0.5;
   }
 
   /* Bottom Section - Description & Button */
   .countdown-timer-9__footer {
-    padding: 24px 32px 32px;
+    padding: 16px 16px 20px;
     text-align: center;
     background: rgba(100, 100, 100, 0.3);
   }
 
   .countdown-timer-9__description {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 12px;
+    line-height: 1.5;
     color: var(--ct9-description, #fff);
-    margin: 0 0 24px;
+    margin: 0 0 16px;
     max-width: 480px;
     margin-left: auto;
     margin-right: auto;
@@ -150,10 +161,10 @@
   /* Expired Message */
   .countdown-timer-9__expired {
     display: none;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 600;
     color: #333;
-    padding: 24px 32px;
+    padding: 16px 16px;
     text-align: center;
     background: rgba(230, 230, 230, 0.6);
   }
@@ -171,11 +182,11 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     background: var(--ct9-btn-bg, #fff);
     color: var(--ct9-btn-text, #000);
-    padding: 14px 32px;
-    font-size: 14px;
+    padding: 10px 20px;
+    font-size: 11px;
     font-weight: 600;
     font-family: inherit;
     text-decoration: none;
@@ -191,8 +202,8 @@
   }
 
   .countdown-timer-9__button svg {
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     transition: transform 0.3s ease;
   }
 
@@ -200,10 +211,262 @@
     transform: translateX(4px);
   }
 
-  /* Desktop Styles */
-  @media (min-width: 768px) {
+  /* 400px breakpoint */
+  @media (min-width: 400px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top | times: 0.75 }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom | times: 0.75 }}px;
+    }
+
     .countdown-timer-9 {
-      min-height: 550px;
+      min-height: 420px;
+      padding: 35px 16px;
+    }
+
+    .countdown-timer-9__card {
+      border-radius: 14px;
+    }
+
+    .countdown-timer-9__header {
+      padding: 22px 20px 18px;
+    }
+
+    .countdown-timer-9__heading {
+      font-size: 18px;
+      letter-spacing: 2.5px;
+    }
+
+    .countdown-timer-9__subtext {
+      font-size: 12px;
+    }
+
+    .countdown-timer-9__timer-section {
+      padding: 18px 16px;
+    }
+
+    .countdown-timer-9__timer {
+      gap: 5px;
+    }
+
+    .countdown-timer-9__timer-block {
+      min-width: 48px;
+    }
+
+    .countdown-timer-9__timer-value {
+      font-size: 38px;
+    }
+
+    .countdown-timer-9__timer-label {
+      font-size: 9px;
+      margin-top: 6px;
+    }
+
+    .countdown-timer-9__separator {
+      font-size: 32px;
+    }
+
+    .countdown-timer-9__footer {
+      padding: 18px 20px 22px;
+    }
+
+    .countdown-timer-9__description {
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .countdown-timer-9__expired {
+      font-size: 15px;
+      padding: 18px 20px;
+    }
+
+    .countdown-timer-9__button {
+      padding: 11px 22px;
+      font-size: 12px;
+    }
+
+    .countdown-timer-9__button svg {
+      width: 13px;
+      height: 13px;
+    }
+  }
+
+  /* 550px breakpoint */
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top | times: 0.8 }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom | times: 0.8 }}px;
+    }
+
+    .countdown-timer-9 {
+      min-height: 460px;
+      padding: 40px 20px;
+    }
+
+    .countdown-timer-9__card {
+      border-radius: 16px;
+    }
+
+    .countdown-timer-9__header {
+      padding: 26px 24px 20px;
+    }
+
+    .countdown-timer-9__heading {
+      font-size: 20px;
+      letter-spacing: 3px;
+      margin-bottom: 7px;
+    }
+
+    .countdown-timer-9__subtext {
+      font-size: 13px;
+    }
+
+    .countdown-timer-9__timer-section {
+      padding: 20px 24px;
+    }
+
+    .countdown-timer-9__timer {
+      gap: 6px;
+    }
+
+    .countdown-timer-9__timer-block {
+      min-width: 56px;
+    }
+
+    .countdown-timer-9__timer-value {
+      font-size: 46px;
+      letter-spacing: -1.5px;
+    }
+
+    .countdown-timer-9__timer-label {
+      font-size: 10px;
+      margin-top: 7px;
+    }
+
+    .countdown-timer-9__separator {
+      font-size: 40px;
+      padding: 0 3px;
+    }
+
+    .countdown-timer-9__footer {
+      padding: 20px 24px 26px;
+    }
+
+    .countdown-timer-9__description {
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .countdown-timer-9__expired {
+      font-size: 16px;
+      padding: 20px 24px;
+    }
+
+    .countdown-timer-9__button {
+      padding: 12px 26px;
+      font-size: 13px;
+      gap: 7px;
+    }
+
+    .countdown-timer-9__button svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  /* 768px breakpoint - tablet */
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top | times: 0.85 }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom | times: 0.85 }}px;
+    }
+
+    .countdown-timer-9 {
+      min-height: 520px;
+      padding: 50px 30px;
+    }
+
+    .countdown-timer-9__card {
+      max-width: 680px;
+      border-radius: 18px;
+    }
+
+    .countdown-timer-9__header {
+      padding: 32px 36px 24px;
+    }
+
+    .countdown-timer-9__heading {
+      font-size: 24px;
+      letter-spacing: 3.5px;
+      margin-bottom: 8px;
+    }
+
+    .countdown-timer-9__subtext {
+      font-size: 14px;
+    }
+
+    .countdown-timer-9__timer-section {
+      padding: 24px 36px;
+    }
+
+    .countdown-timer-9__timer {
+      gap: 8px;
+    }
+
+    .countdown-timer-9__timer-block {
+      min-width: 68px;
+    }
+
+    .countdown-timer-9__timer-value {
+      font-size: 58px;
+      letter-spacing: -2px;
+    }
+
+    .countdown-timer-9__timer-label {
+      font-size: 11px;
+      margin-top: 8px;
+    }
+
+    .countdown-timer-9__separator {
+      font-size: 50px;
+      padding: 0 4px;
+    }
+
+    .countdown-timer-9__footer {
+      padding: 24px 36px 32px;
+    }
+
+    .countdown-timer-9__description {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .countdown-timer-9__expired {
+      font-size: 17px;
+      padding: 24px 36px;
+    }
+
+    .countdown-timer-9__button {
+      padding: 14px 30px;
+      font-size: 14px;
+      gap: 8px;
+    }
+
+    .countdown-timer-9__button svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  /* 1024px breakpoint - desktop */
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top | times: 0.9 }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom | times: 0.9 }}px;
+    }
+
+    .countdown-timer-9 {
+      min-height: 560px;
       padding: 60px 40px;
     }
 
@@ -213,7 +476,7 @@
     }
 
     .countdown-timer-9__header {
-      padding: 40px 48px 28px;
+      padding: 38px 44px 28px;
     }
 
     .countdown-timer-9__heading {
@@ -226,19 +489,19 @@
     }
 
     .countdown-timer-9__timer-section {
-      padding: 28px 48px;
+      padding: 28px 44px;
     }
 
     .countdown-timer-9__timer {
-      gap: 12px;
+      gap: 10px;
     }
 
     .countdown-timer-9__timer-block {
-      min-width: 80px;
+      min-width: 78px;
     }
 
     .countdown-timer-9__timer-value {
-      font-size: 72px;
+      font-size: 70px;
     }
 
     .countdown-timer-9__timer-label {
@@ -247,34 +510,68 @@
     }
 
     .countdown-timer-9__separator {
-      font-size: 60px;
+      font-size: 58px;
     }
 
     .countdown-timer-9__footer {
-      padding: 28px 48px 40px;
+      padding: 28px 44px 38px;
     }
 
     .countdown-timer-9__description {
       font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .countdown-timer-9__expired {
+      font-size: 18px;
+      padding: 28px 44px;
     }
 
     .countdown-timer-9__button {
-      padding: 16px 36px;
+      padding: 15px 34px;
       font-size: 15px;
+    }
+
+    .countdown-timer-9__button svg {
+      width: 16px;
+      height: 16px;
     }
   }
 
-  @media (min-width: 1024px) {
+  /* 1400px breakpoint - large desktop */
+  @media (min-width: 1400px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.section_margin_top }}px;
+      margin-bottom: {{ section.settings.section_margin_bottom }}px;
+    }
+
     .countdown-timer-9 {
       min-height: 600px;
+      padding: 70px 50px;
     }
 
     .countdown-timer-9__card {
       max-width: 780px;
     }
 
+    .countdown-timer-9__header {
+      padding: 42px 48px 30px;
+    }
+
     .countdown-timer-9__heading {
       font-size: 32px;
+    }
+
+    .countdown-timer-9__timer-section {
+      padding: 30px 48px;
+    }
+
+    .countdown-timer-9__timer {
+      gap: 12px;
+    }
+
+    .countdown-timer-9__timer-block {
+      min-width: 88px;
     }
 
     .countdown-timer-9__timer-value {
@@ -283,6 +580,14 @@
 
     .countdown-timer-9__separator {
       font-size: 70px;
+    }
+
+    .countdown-timer-9__footer {
+      padding: 30px 48px 42px;
+    }
+
+    .countdown-timer-9__button {
+      padding: 16px 36px;
     }
   }
 </style>
