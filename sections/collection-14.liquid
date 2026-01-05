@@ -14,11 +14,12 @@
     --col14-btn-hover-bg: {{ section.settings.button_hover_background }};
     --col14-btn-hover-text: {{ section.settings.button_hover_text_color }};
     --col14-section-bg: {{ section.settings.section_background }};
-    width: 100%;
-    max-width: 100%;
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
     margin-top: {{ section.settings.section_margin_top | times: 0.7 }}px;
     margin-bottom: {{ section.settings.section_margin_bottom | times: 0.7 }}px;
   }
@@ -34,12 +35,16 @@
   }
 
   .collection-14 {
+    display: block;
+    width: 100%;
     background: var(--col14-section-bg, #fff);
     padding: 24px 12px;
     font-family: 'Inter', sans-serif;
   }
 
   .collection-14__container {
+    display: block;
+    width: 100%;
     max-width: 1400px;
     margin: 0 auto;
   }
@@ -48,14 +53,17 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    width: 100%;
   }
 
   .collection-14__card {
     position: relative;
+    width: 100%;
+    min-height: 200px;
     height: 280px;
     border-radius: 10px;
     overflow: hidden;
-    flex: 1 1 0;
+    flex: 1 1 auto;
     transition: flex 0.5s ease;
   }
 
@@ -316,6 +324,8 @@
 
     .collection-14__card {
       height: calc(var(--col14-card-height-desktop, 500px) * 0.85);
+      min-height: auto;
+      flex: 1 1 0;
     }
 
     .collection-14__card-content {
