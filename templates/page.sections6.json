@@ -222,12 +222,89 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "video_with_text10_4KTkYp": {
+      "type": "video-with-text10",
+      "blocks": {
+        "video_slide_cGYHXF": {
+          "type": "video_slide",
+          "settings": {
+            "video": "shopify://files/videos/f0fff712698c41da971eb6aed4651ea2.HD-1080p-2.5Mbps-61218436 (1).mp4",
+            "image": "shopify://shop_images/ntl_8_ee0c7d98-2d3b-43bc-a438-bf18eb34b49b.webp",
+            "overlay_text": "Sunset Mocha",
+            "title": "Sunset Mocha blanket",
+            "text": "Our blankets offer comfort and warmth wherever it's needed - draped over your bed, tossed on the couch, wrapped around you, or taken along for outdoor adventures.",
+            "button_text": "Shop Sunset Mocha",
+            "button_link": ""
+          }
+        },
+        "video_slide_iGdktM": {
+          "type": "video_slide",
+          "settings": {
+            "video": "shopify://files/videos/66acbd4a16004251930a8505cb34d3b5.HD-1080p-2.5Mbps-60772760 (1).mp4",
+            "image": "shopify://shop_images/ntl_3_74a3dd68-9410-4e13-93d4-1a589e052877.webp",
+            "overlay_text": "Solar Dusk",
+            "title": "Solar Dusk blanket",
+            "text": "Our blankets offer comfort and warmth wherever it's needed - draped over your bed, tossed on the couch, wrapped around you, or taken along for outdoor adventures.",
+            "button_text": "Shop Solar Dusk",
+            "button_link": ""
+          }
+        },
+        "video_slide_7rTGzK": {
+          "type": "video_slide",
+          "settings": {
+            "video": "shopify://files/videos/f0fff712698c41da971eb6aed4651ea2.HD-1080p-2.5Mbps-61218436 (1).mp4",
+            "image": "shopify://shop_images/ntl_7_ced096f3-49b3-4156-aaa5-3827e2d93c3f.webp",
+            "overlay_text": "Solar Dawn",
+            "title": "Solar Dawn blanket",
+            "text": "Our blankets offer comfort and warmth wherever it's needed - draped over your bed, tossed on the couch, wrapped around you, or taken along for outdoor adventures.",
+            "button_text": "Shop Solar Dawn",
+            "button_link": ""
+          }
+        },
+        "video_slide_J6Me9B": {
+          "type": "video_slide",
+          "settings": {
+            "video": "shopify://files/videos/b70caed7a9e84f8f9c88f16c1b02b477.HD-1080p-2.5Mbps-61218151 (1).mp4",
+            "image": "shopify://shop_images/ntl_6_f9fdc7ee-b4f2-4954-9f11-a0110fc55d96.webp",
+            "overlay_text": "Product Name",
+            "title": "Product Name blanket",
+            "text": "Our blankets offer comfort and warmth wherever it's needed - draped over your bed, tossed on the couch, wrapped around you, or taken along for outdoor adventures.",
+            "button_text": "Shop Product",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_slide_cGYHXF",
+        "video_slide_iGdktM",
+        "video_slide_7rTGzK",
+        "video_slide_J6Me9B"
+      ],
+      "name": "SEK Video with Text 10",
+      "settings": {
+        "label": "OUR PROCESS",
+        "heading": "Crafted with Intention",
+        "description": "We make blankets to elevate everyday life. Crafted for longevity. Designed for timeless appeal. Inspired by the world.",
+        "background_color": "#ffffff",
+        "text_color": "#666666",
+        "label_color": "#666666",
+        "heading_color": "#000000",
+        "overlay_text_color": "#ffffff",
+        "button_bg": "#000000",
+        "button_text": "#ffffff",
+        "nav_border_color": "#e0e0e0",
+        "nav_icon_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
     "main",
     "feature_products4_LCfNrz",
     "hero46_GCTrTt",
-    "video_slider5_WcfRxX"
+    "video_slider5_WcfRxX",
+    "video_with_text10_4KTkYp"
   ]
 }
