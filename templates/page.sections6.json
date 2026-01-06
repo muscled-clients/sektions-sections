@@ -302,8 +302,21 @@
     "hero45_NWmF3e": {
       "type": "hero45",
       "blocks": {
+        "image_HGWzhd": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/device-3_1.webp"
+          }
+        },
+        "image_XngwGN": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/device-1.webp"
+          }
+        },
         "testimonial_QkjwhT": {
           "type": "testimonial",
+          "disabled": true,
           "settings": {
             "quote": "Since I started using it, I feel calmer and more relaxed. It has improved my well-being. It is amazing!",
             "author": "Nicole Johnson, PTSD Specialist"
@@ -311,6 +324,7 @@
         },
         "testimonial_Mtx7T6": {
           "type": "testimonial",
+          "disabled": true,
           "settings": {
             "quote": "I feel much more balanced throughout the day. It gives me the boost I need to stay focused and carry on. It is life-changing!",
             "author": "Paul Wilson, Media Personality"
@@ -318,6 +332,7 @@
         },
         "testimonial_7URi7H": {
           "type": "testimonial",
+          "disabled": true,
           "settings": {
             "quote": "This product has transformed my sleep routine. I wake up feeling refreshed and energized every morning.",
             "author": "Sarah Chen, Wellness Coach"
@@ -325,6 +340,8 @@
         }
       },
       "block_order": [
+        "image_HGWzhd",
+        "image_XngwGN",
         "testimonial_QkjwhT",
         "testimonial_Mtx7T6",
         "testimonial_7URi7H"
