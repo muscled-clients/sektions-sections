@@ -1,0 +1,1025 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --vs5-bg: {{ section.settings.background_color }};
+    --vs5-text: {{ section.settings.text_color }};
+    --vs5-label: {{ section.settings.label_color }};
+    --vs5-subtitle: {{ section.settings.subtitle_color }};
+    --vs5-card-text: {{ section.settings.card_text_color }};
+    --vs5-star: {{ section.settings.star_color }};
+    --vs5-btn-bg: {{ section.settings.nav_button_bg }};
+    --vs5-btn-icon: {{ section.settings.nav_button_icon }};
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin-top: {{ section.settings.margin_top | times: 0.7 | round }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 | round }}px;
+  }
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 | round }}px;
+    }
+  }
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 | round }}px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+  /* Box-sizing */
+  .video-slider-5,
+  .video-slider-5 *,
+  .video-slider-5 *::before,
+  .video-slider-5 *::after {
+    box-sizing: border-box;
+  }
+
+  /* Base - Small Mobile (< 400px) */
+  .video-slider-5 {
+    background: var(--vs5-bg, #ffffff);
+    padding: 40px 0;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+  }
+
+  .video-slider-5__header {
+    text-align: center;
+    padding: 0 20px;
+    margin-bottom: 30px;
+  }
+
+  .video-slider-5__label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--vs5-label, #666666);
+    margin: 0 0 12px;
+  }
+
+  .video-slider-5__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--vs5-text, #000000);
+    margin: 0 0 12px;
+  }
+
+  .video-slider-5__subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--vs5-subtitle, #666666);
+    margin: 0;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Slider Container */
+  .video-slider-5__slider-wrapper {
+    position: relative;
+    padding: 0 10px;
+  }
+
+  .video-slider-5__swiper {
+    overflow: visible;
+    padding: 20px 0;
+  }
+
+  .video-slider-5__swiper .swiper-wrapper {
+    align-items: center;
+  }
+
+  .video-slider-5__slide {
+    width: 200px;
+    transition: all 0.3s ease;
+  }
+
+  /* Card */
+  .video-slider-5__card {
+    position: relative;
+    aspect-ratio: 9 / 12;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f0f0f0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .video-slider-5__media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-slider-5__poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .video-slider-5__card.is-playing .video-slider-5__poster {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Play Button */
+  .video-slider-5__play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .video-slider-5__play-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+
+  .video-slider-5__play-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: #ffffff;
+    margin-left: 3px;
+  }
+
+  .video-slider-5__card.is-playing .video-slider-5__play-btn {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Content Overlay */
+  .video-slider-5__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 60px 16px 16px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+    z-index: 3;
+  }
+
+  .video-slider-5__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vs5-card-text, #ffffff);
+    margin: 0 0 4px;
+  }
+
+  .video-slider-5__product {
+    font-size: 12px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--vs5-card-text, #ffffff);
+    opacity: 0.9;
+    margin: 0 0 8px;
+  }
+
+  .video-slider-5__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .video-slider-5__star {
+    width: 14px;
+    height: 14px;
+    fill: var(--vs5-star, #f5a623);
+  }
+
+  /* Navigation Arrows */
+  .video-slider-5__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    background: var(--vs5-btn-bg, #ffffff);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .video-slider-5__nav:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .video-slider-5__nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .video-slider-5__nav--prev {
+    left: 10px;
+  }
+
+  .video-slider-5__nav--next {
+    right: 10px;
+  }
+
+  .video-slider-5__nav svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--vs5-btn-icon, #000000);
+    stroke-width: 2;
+    fill: none;
+  }
+
+  /* Swiper slide active state - handled by coverflow */
+  .video-slider-5__swiper .swiper-slide-active .video-slider-5__card {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    .video-slider-5 {
+      padding: 50px 0;
+    }
+
+    .video-slider-5__header {
+      margin-bottom: 36px;
+    }
+
+    .video-slider-5__label {
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    .video-slider-5__heading {
+      font-size: 32px;
+    }
+
+    .video-slider-5__subtitle {
+      font-size: 15px;
+    }
+
+    .video-slider-5__slide {
+      width: 220px;
+    }
+
+    .video-slider-5__card {
+      border-radius: 14px;
+    }
+
+    .video-slider-5__play-btn {
+      width: 54px;
+      height: 54px;
+    }
+
+    .video-slider-5__play-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .video-slider-5__content {
+      padding: 70px 18px 18px;
+    }
+
+    .video-slider-5__name {
+      font-size: 15px;
+    }
+
+    .video-slider-5__product {
+      font-size: 13px;
+    }
+
+    .video-slider-5__star {
+      width: 15px;
+      height: 15px;
+    }
+
+    .video-slider-5__nav {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .video-slider-5 {
+      padding: 60px 0;
+    }
+
+    .video-slider-5__header {
+      margin-bottom: 40px;
+    }
+
+    .video-slider-5__label {
+      font-size: 12px;
+      letter-spacing: 2.5px;
+    }
+
+    .video-slider-5__heading {
+      font-size: 38px;
+    }
+
+    .video-slider-5__subtitle {
+      font-size: 16px;
+    }
+
+    .video-slider-5__slider-wrapper {
+      padding: 0 20px;
+    }
+
+    .video-slider-5__slide {
+      width: 240px;
+    }
+
+    .video-slider-5__card {
+      border-radius: 16px;
+    }
+
+    .video-slider-5__play-btn {
+      width: 58px;
+      height: 58px;
+    }
+
+    .video-slider-5__nav--prev {
+      left: 15px;
+    }
+
+    .video-slider-5__nav--next {
+      right: 15px;
+    }
+
+    .video-slider-5__nav {
+      width: 46px;
+      height: 46px;
+    }
+
+    .video-slider-5__nav svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .video-slider-5 {
+      padding: 70px 0;
+    }
+
+    .video-slider-5__header {
+      margin-bottom: 50px;
+    }
+
+    .video-slider-5__label {
+      font-size: 13px;
+      letter-spacing: 3px;
+    }
+
+    .video-slider-5__heading {
+      font-size: 44px;
+    }
+
+    .video-slider-5__subtitle {
+      font-size: 17px;
+      max-width: 550px;
+    }
+
+    .video-slider-5__slider-wrapper {
+      padding: 0 30px;
+    }
+
+    .video-slider-5__slide {
+      width: 280px;
+    }
+
+    .video-slider-5__play-btn {
+      width: 62px;
+      height: 62px;
+    }
+
+    .video-slider-5__play-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .video-slider-5__content {
+      padding: 80px 20px 20px;
+    }
+
+    .video-slider-5__name {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .video-slider-5__product {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .video-slider-5__stars {
+      gap: 3px;
+    }
+
+    .video-slider-5__star {
+      width: 16px;
+      height: 16px;
+    }
+
+    .video-slider-5__nav {
+      width: 48px;
+      height: 48px;
+    }
+
+    .video-slider-5__nav--prev {
+      left: 20px;
+    }
+
+    .video-slider-5__nav--next {
+      right: 20px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .video-slider-5 {
+      padding: 80px 0;
+    }
+
+    .video-slider-5__header {
+      margin-bottom: 60px;
+    }
+
+    .video-slider-5__label {
+      font-size: 14px;
+    }
+
+    .video-slider-5__heading {
+      font-size: 50px;
+    }
+
+    .video-slider-5__subtitle {
+      font-size: 18px;
+      max-width: 600px;
+    }
+
+    .video-slider-5__slider-wrapper {
+      padding: 0 50px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .video-slider-5__swiper {
+      padding: 30px 0;
+    }
+
+    .video-slider-5__slide {
+      width: 320px;
+    }
+
+    .video-slider-5__card {
+      border-radius: 18px;
+    }
+
+    .video-slider-5__play-btn {
+      width: 68px;
+      height: 68px;
+    }
+
+    .video-slider-5__play-btn svg {
+      width: 24px;
+      height: 24px;
+      margin-left: 4px;
+    }
+
+    .video-slider-5__content {
+      padding: 100px 24px 24px;
+    }
+
+    .video-slider-5__name {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .video-slider-5__product {
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .video-slider-5__star {
+      width: 18px;
+      height: 18px;
+    }
+
+    .video-slider-5__nav {
+      width: 50px;
+      height: 50px;
+    }
+
+    .video-slider-5__nav svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .video-slider-5__nav--prev {
+      left: 5%;
+    }
+
+    .video-slider-5__nav--next {
+      right: 5%;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .video-slider-5 {
+      padding: 100px 0;
+    }
+
+    .video-slider-5__header {
+      margin-bottom: 70px;
+    }
+
+    .video-slider-5__heading {
+      font-size: 56px;
+    }
+
+    .video-slider-5__subtitle {
+      font-size: 19px;
+    }
+
+    .video-slider-5__slider-wrapper {
+      max-width: 1600px;
+    }
+
+    .video-slider-5__slide {
+      width: 360px;
+    }
+
+    .video-slider-5__card {
+      border-radius: 20px;
+    }
+
+    .video-slider-5__play-btn {
+      width: 72px;
+      height: 72px;
+    }
+
+    .video-slider-5__play-btn svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .video-slider-5__name {
+      font-size: 20px;
+    }
+
+    .video-slider-5__product {
+      font-size: 16px;
+    }
+
+    .video-slider-5__star {
+      width: 20px;
+      height: 20px;
+    }
+
+    .video-slider-5__nav {
+      width: 54px;
+      height: 54px;
+    }
+
+    .video-slider-5__nav svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<section class="video-slider-5" data-section-id="{{ section.id }}">
+  <!-- Header -->
+  <div class="video-slider-5__header">
+    {%- if section.settings.label != blank -%}
+      <p class="video-slider-5__label">{{ section.settings.label }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="video-slider-5__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="video-slider-5__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  <!-- Slider -->
+  <div class="video-slider-5__slider-wrapper">
+    <div class="video-slider-5__swiper swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="video-slider-5__slide swiper-slide" {{ block.shopify_attributes }}>
+            <div class="video-slider-5__card" data-card-index="{{ forloop.index0 }}">
+              <!-- Video -->
+              {%- if block.settings.video != blank -%}
+                {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: false, controls: false, class: 'video-slider-5__media', playsinline: true }}
+              {%- endif -%}
+
+              <!-- Poster/Thumbnail -->
+              {%- if block.settings.poster != blank -%}
+                {{ block.settings.poster | image_url: width: 800 | image_tag: class: 'video-slider-5__poster', loading: 'lazy' }}
+              {%- else -%}
+                <div class="video-slider-5__poster" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+              {%- endif -%}
+
+              <!-- Play Button -->
+              <button class="video-slider-5__play-btn" aria-label="Play video">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </button>
+
+              <!-- Content Overlay -->
+              <div class="video-slider-5__content">
+                {%- if block.settings.name != blank -%}
+                  <p class="video-slider-5__name">{{ block.settings.name }}</p>
+                {%- endif -%}
+                {%- if block.settings.product_name != blank -%}
+                  <p class="video-slider-5__product">{{ block.settings.product_name }}</p>
+                {%- endif -%}
+                {%- if block.settings.show_stars -%}
+                  <div class="video-slider-5__stars">
+                    {%- for i in (1..5) -%}
+                      <svg class="video-slider-5__star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button class="video-slider-5__nav video-slider-5__nav--prev" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <button class="video-slider-5__nav video-slider-5__nav--next" aria-label="Next slide">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
+
+    const swiperEl = section.querySelector('.video-slider-5__swiper');
+    const prevBtn = section.querySelector('.video-slider-5__nav--prev');
+    const nextBtn = section.querySelector('.video-slider-5__nav--next');
+
+    // Initialize Swiper with coverflow effect
+    const swiper = new Swiper(swiperEl, {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      loop: true,
+      speed: 400,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 200,
+        modifier: 1,
+        slideShadows: false,
+      },
+      breakpoints: {
+        550: {
+          coverflowEffect: {
+            depth: 250,
+          }
+        },
+        768: {
+          coverflowEffect: {
+            depth: 300,
+          }
+        },
+        1024: {
+          coverflowEffect: {
+            depth: 350,
+          }
+        },
+        1400: {
+          coverflowEffect: {
+            depth: 400,
+          }
+        }
+      }
+    });
+
+    // Navigation buttons
+    prevBtn.addEventListener('click', () => swiper.slidePrev());
+    nextBtn.addEventListener('click', () => swiper.slideNext());
+
+    // Video playback management
+    const cards = section.querySelectorAll('.video-slider-5__card');
+    let currentlyPlaying = null;
+
+    cards.forEach((card) => {
+      const playBtn = card.querySelector('.video-slider-5__play-btn');
+      const video = card.querySelector('video');
+      const poster = card.querySelector('.video-slider-5__poster');
+
+      if (!playBtn || !video) return;
+
+      playBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+
+        // Pause any currently playing video
+        if (currentlyPlaying && currentlyPlaying !== card) {
+          const prevVideo = currentlyPlaying.querySelector('video');
+          if (prevVideo) {
+            prevVideo.pause();
+            prevVideo.currentTime = 0;
+          }
+          currentlyPlaying.classList.remove('is-playing');
+        }
+
+        // Toggle current video
+        if (card.classList.contains('is-playing')) {
+          video.pause();
+          card.classList.remove('is-playing');
+          currentlyPlaying = null;
+        } else {
+          video.play().catch(err => console.log('Video play failed:', err));
+          card.classList.add('is-playing');
+          currentlyPlaying = card;
+        }
+      });
+
+      // When video ends, reset state
+      video.addEventListener('ended', function() {
+        card.classList.remove('is-playing');
+        video.currentTime = 0;
+        currentlyPlaying = null;
+      });
+
+      // Click on card (not play button) to pause
+      card.addEventListener('click', function(e) {
+        if (e.target === playBtn || playBtn.contains(e.target)) return;
+
+        if (card.classList.contains('is-playing')) {
+          video.pause();
+          card.classList.remove('is-playing');
+          currentlyPlaying = null;
+        }
+      });
+    });
+
+    // Pause video when slide changes
+    swiper.on('slideChange', function() {
+      if (currentlyPlaying) {
+        const video = currentlyPlaying.querySelector('video');
+        if (video) {
+          video.pause();
+          video.currentTime = 0;
+        }
+        currentlyPlaying.classList.remove('is-playing');
+        currentlyPlaying = null;
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Video Slider 5",
+  "tag": "section",
+  "class": "section-video-slider-5",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "OUR TESTIMONIALS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why people love our brand"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Don't just take our word for it, see what our customers are saying"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#f5a623"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_bg",
+      "label": "Navigation button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_icon",
+      "label": "Navigation button icon",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_slide",
+      "name": "Video Slide",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Poster/Thumbnail image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer name",
+          "default": "Maya F."
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product name",
+          "default": "Blue Velvet Blazer"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_stars",
+          "label": "Show star rating",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Video Slider 5",
+      "blocks": [
+        {
+          "type": "video_slide",
+          "settings": {
+            "name": "Sofia A.",
+            "product_name": "Organic Cotton Pajamas",
+            "show_stars": true
+          }
+        },
+        {
+          "type": "video_slide",
+          "settings": {
+            "name": "Gabriela M.",
+            "product_name": "V-neck Floral Dress",
+            "show_stars": true
+          }
+        },
+        {
+          "type": "video_slide",
+          "settings": {
+            "name": "Maya F.",
+            "product_name": "Blue Velvet Blazer",
+            "show_stars": true
+          }
+        },
+        {
+          "type": "video_slide",
+          "settings": {
+            "name": "Laura S.",
+            "product_name": "Turquoise Set",
+            "show_stars": true
+          }
+        },
+        {
+          "type": "video_slide",
+          "settings": {
+            "name": "Eleanor B.",
+            "product_name": "Fuchsia Silk Shirt",
+            "show_stars": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
