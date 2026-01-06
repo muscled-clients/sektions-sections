@@ -15,9 +15,145 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "feature_products4_LCfNrz": {
+      "type": "feature-products4",
+      "blocks": {
+        "product_wx8keJ": {
+          "type": "product",
+          "settings": {
+            "title": "Lion's Mane Matcha",
+            "thumbnail": "shopify://shop_images/matcha-lions-mane.webp",
+            "image": "shopify://shop_images/matcha-lions-mane.webp",
+            "slide_text": "The Lion's Mane mushroom is known for its brain-enhancing properties, helping with mental clarity, concentration and memory.",
+            "product_link": ""
+          }
+        },
+        "product_7JgiGR": {
+          "type": "product",
+          "settings": {
+            "title": "Vanilla Matcha",
+            "thumbnail": "shopify://shop_images/matcha-vanilla.webp",
+            "image": "shopify://shop_images/matcha-vanilla.webp",
+            "slide_text": "A smooth blend of premium matcha with natural vanilla, perfect for a creamy and delicious daily ritual.",
+            "product_link": ""
+          }
+        },
+        "product_t6XcrW": {
+          "type": "product",
+          "settings": {
+            "title": "Turmeric Matcha",
+            "thumbnail": "shopify://shop_images/matcha-turmeric.webp",
+            "image": "shopify://shop_images/matcha-turmeric.webp",
+            "slide_text": "Golden turmeric meets ceremonial matcha for a powerful antioxidant boost and natural anti-inflammatory benefits.",
+            "product_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_wx8keJ",
+        "product_7JgiGR",
+        "product_t6XcrW"
+      ],
+      "name": "SEK Featured Products 4",
+      "settings": {
+        "description": "Discover matcha and its benefits in a way you have never experienced before—tasty, easy, and fun.",
+        "button_text": "SHOP NOW",
+        "button_link": "",
+        "secondary_button_text": "EXPLORE THE FULL RANGE",
+        "secondary_button_link": "",
+        "background_color": "#f1f0ed",
+        "text_color": "#121212",
+        "title_active_color": "#121212",
+        "title_inactive_color": "#807e7a",
+        "border_color": "#121212",
+        "button_bg_color": "#121212",
+        "button_text_color": "#ffffff",
+        "button_hover_color": "#333333",
+        "button_outline_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "hero46_GCTrTt": {
+      "type": "hero46",
+      "blocks": {
+        "feature_XLGGVK": {
+          "type": "feature",
+          "settings": {
+            "text": "Advanced, multi-layer hydration"
+          }
+        },
+        "feature_QzMbDW": {
+          "type": "feature",
+          "settings": {
+            "text": "Barrier support with ceramides"
+          }
+        },
+        "feature_qm9fhK": {
+          "type": "feature",
+          "settings": {
+            "text": "Pro-vitamin B5 (panthenol)"
+          }
+        },
+        "feature_7xg3Fq": {
+          "type": "feature",
+          "settings": {
+            "text": "Lightweight, non-tacky texture"
+          }
+        },
+        "comparison_aQB7wg": {
+          "type": "comparison",
+          "settings": {
+            "before_image": "shopify://shop_images/after-woman-before-after-cosmetology-procedure-white-background_12066809-69a5-4e55-b40e-ad341529b78b.webp",
+            "after_image": "shopify://shop_images/before-woman-before-after-cosmetology-procedure-white-background_07d077d7-7a12-4e51-ab27-8b7d3aec6312.webp"
+          }
+        },
+        "comparison_Lwcyeq": {
+          "type": "comparison",
+          "settings": {
+            "before_image": "shopify://shop_images/before-woman-before-after-subtle-cosmetic-procedure-highlighting-natural-refined-results_a8bcf070-9e29-49dc-a7dd-735f86ac7cb1.webp",
+            "after_image": "shopify://shop_images/after-woman-before-after-subtle-cosmetic-procedure-highlighting-natural-refined-results_2b5a0148-a98f-466c-a30c-e07bb33460b2.webp"
+          }
+        }
+      },
+      "block_order": [
+        "feature_XLGGVK",
+        "feature_QzMbDW",
+        "feature_qm9fhK",
+        "feature_7xg3Fq",
+        "comparison_aQB7wg",
+        "comparison_Lwcyeq"
+      ],
+      "name": "SEK Hero 46",
+      "settings": {
+        "badge": "TEAM FAVOURITE",
+        "heading": "Glow-Up",
+        "heading_accent": "Without Surgery",
+        "description": "A second-generation hyaluronic acid serum formulated to deliver instant and long-lasting hydration.",
+        "button_text": "Shop Now",
+        "button_link": "",
+        "background_color": "#ffffff",
+        "text_color": "#000000",
+        "heading_accent_color": "#6b8a8e",
+        "badge_bg_color": "#2D4D51",
+        "badge_text_color": "#ffffff",
+        "button_bg_color": "#2D4D51",
+        "button_text_color": "#ffffff",
+        "button_hover_color": "#1e3538",
+        "card_bg_color": "#e5eeef",
+        "card_text_color": "#000000",
+        "number_color": "#999999",
+        "border_color": "rgba(0, 0, 0, 0.1)",
+        "label_color": "#2D4D51",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "feature_products4_LCfNrz",
+    "hero46_GCTrTt"
   ]
 }
