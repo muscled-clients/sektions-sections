@@ -1462,137 +1462,75 @@
         "margin_bottom": 0
       }
     },
-    "hero46_Ux9Cb6": {
-      "type": "hero46",
+    "blog_3_4VEA9w": {
+      "type": "blog-3",
       "blocks": {
-        "feature_bkEPqa": {
-          "type": "feature",
+        "article_RMPNN4": {
+          "type": "article",
           "settings": {
-            "text": "Advanced, multi-layer hydration"
+            "title": "How to add a Instafeed section to Shopify",
+            "excerpt": "Some description text",
+            "link": ""
           }
         },
-        "feature_8GyMkK": {
-          "type": "feature",
+        "article_9CnFYc": {
+          "type": "article",
           "settings": {
-            "text": "Barrier support with ceramides"
+            "title": "How to add trust badges below add to cart",
+            "excerpt": "Some description text",
+            "link": ""
           }
         },
-        "feature_dATKty": {
-          "type": "feature",
+        "article_JjbzrY": {
+          "type": "article",
           "settings": {
-            "text": "Pro-vitamin B5 (panthenol)"
+            "title": "How to add a FAQ section to Shopify",
+            "excerpt": "Some description text",
+            "link": ""
           }
         },
-        "feature_AzRcJJ": {
-          "type": "feature",
+        "article_Na8bpq": {
+          "type": "article",
           "settings": {
-            "text": "Lightweight, non-tacky texture"
+            "title": "Shopify Landing Page: Boost Sales & Conversions",
+            "excerpt": "Some description text",
+            "link": ""
           }
         },
-        "comparison_eF3qV8": {
-          "type": "comparison",
+        "article_g6M6Jr": {
+          "type": "article",
           "settings": {
-            "before_image": "shopify://shop_images/before-woman-before-after-cosmetology-procedure-white-background_07d077d7-7a12-4e51-ab27-8b7d3aec6312.webp",
-            "after_image": "shopify://shop_images/after-woman-before-after-cosmetology-procedure-white-background_12066809-69a5-4e55-b40e-ad341529b78b.webp"
+            "title": "Creative Shop Name Ideas: Get Inspired Now",
+            "excerpt": "Some description text",
+            "link": ""
           }
         },
-        "comparison_tpqgEV": {
-          "type": "comparison",
+        "article_NRGYRH": {
+          "type": "article",
           "settings": {
-            "before_image": "shopify://shop_images/before-woman-before-after-subtle-cosmetic-procedure-highlighting-natural-refined-results_a8bcf070-9e29-49dc-a7dd-735f86ac7cb1.webp",
-            "after_image": "shopify://shop_images/after-woman-before-after-subtle-cosmetic-procedure-highlighting-natural-refined-results_2b5a0148-a98f-466c-a30c-e07bb33460b2.webp"
+            "title": "10 Tips for Better Product Photography",
+            "excerpt": "Some description text",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "feature_bkEPqa",
-        "feature_8GyMkK",
-        "feature_dATKty",
-        "feature_AzRcJJ",
-        "comparison_eF3qV8",
-        "comparison_tpqgEV"
+        "article_RMPNN4",
+        "article_9CnFYc",
+        "article_JjbzrY",
+        "article_Na8bpq",
+        "article_g6M6Jr",
+        "article_NRGYRH"
       ],
-      "name": "SEK Hero 46",
+      "name": "SEK Blog 3",
       "settings": {
-        "badge": "TEAM FAVOURITE",
-        "heading": "Glow-Up",
-        "heading_accent": "Without Surgery",
-        "description": "A second-generation hyaluronic acid serum formulated to deliver instant and long-lasting hydration.",
-        "button_text": "Shop Now",
-        "button_link": "",
+        "title": "Articles",
+        "blog": "",
+        "articles_count": 6,
         "background_color": "#ffffff",
-        "text_color": "#000000",
-        "heading_accent_color": "#6b8a8e",
-        "badge_bg_color": "#2d4d51",
-        "badge_text_color": "#ffffff",
-        "button_bg_color": "#2d4d51",
-        "button_text_color": "#ffffff",
-        "button_hover_color": "#1e3538",
-        "card_bg_color": "#f5f3f0",
-        "card_text_color": "#000000",
-        "number_color": "#999999",
-        "border_color": "#0000001a",
-        "label_color": "#2d4d51",
-        "margin_top": 0,
-        "margin_bottom": 0
-      }
-    },
-    "feature_products4_3FXDCt": {
-      "type": "feature-products4",
-      "blocks": {
-        "product_7RNrPG": {
-          "type": "product",
-          "settings": {
-            "title": "Lion's Mane Matcha",
-            "thumbnail": "shopify://shop_images/matcha-lions-mane.webp",
-            "image": "shopify://shop_images/matcha-lions-mane.webp",
-            "slide_text": "The Lion's Mane mushroom is known for its brain-enhancing properties, helping with mental clarity, concentration and memory.",
-            "product_link": ""
-          }
-        },
-        "product_fNeaJN": {
-          "type": "product",
-          "settings": {
-            "title": "Vanilla Matcha",
-            "thumbnail": "shopify://shop_images/matcha-vanilla.webp",
-            "image": "shopify://shop_images/matcha-vanilla.webp",
-            "slide_text": "A smooth blend of premium matcha with natural vanilla, perfect for a creamy and delicious daily ritual.",
-            "product_link": ""
-          }
-        },
-        "product_Y7ywhY": {
-          "type": "product",
-          "settings": {
-            "title": "Turmeric Matcha",
-            "thumbnail": "shopify://shop_images/matcha-turmeric.webp",
-            "image": "shopify://shop_images/matcha-turmeric.webp",
-            "slide_text": "Golden turmeric meets ceremonial matcha for a powerful antioxidant boost and natural anti-inflammatory benefits.",
-            "product_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "product_7RNrPG",
-        "product_fNeaJN",
-        "product_Y7ywhY"
-      ],
-      "disabled": true,
-      "name": "SEK Featured Products 4",
-      "settings": {
-        "description": "Discover matcha and its benefits in a way you have never experienced before—tasty, easy, and fun.",
-        "button_text": "SHOP NOW",
-        "button_link": "",
-        "secondary_button_text": "EXPLORE THE FULL RANGE",
-        "secondary_button_link": "",
-        "background_color": "#f1f0ed",
-        "text_color": "#121212",
-        "title_active_color": "#121212",
-        "title_inactive_color": "#807e7a",
-        "border_color": "#121212",
-        "button_bg_color": "#121212",
-        "button_text_color": "#ffffff",
-        "button_hover_color": "#333333",
-        "button_outline_color": "#121212",
+        "heading_color": "#1a1b18",
+        "text_color": "#666666",
+        "card_background": "#ffffff",
         "margin_top": 0,
         "margin_bottom": 0
       }
@@ -1622,7 +1560,6 @@
     "countdown_timer4_UixKME",
     "multi_columnvideo2_rXBM6J",
     "map_4DqMCL",
-    "hero46_Ux9Cb6",
-    "feature_products4_3FXDCt"
+    "blog_3_4VEA9w"
   ]
 }
