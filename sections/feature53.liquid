@@ -1,0 +1,868 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --f53-bg: {{ section.settings.background_color }};
+    --f53-text: {{ section.settings.text_color }};
+    --f53-label: {{ section.settings.label_color }};
+    --f53-heading: {{ section.settings.heading_color }};
+    --f53-title: {{ section.settings.feature_title_color }};
+    --f53-icon-bg: {{ section.settings.icon_bg_color }};
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: {{ section.settings.margin_top | times: 0.7 | round }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 | round }}px;
+  }
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 | round }}px;
+    }
+  }
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 | round }}px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* Box-sizing */
+  .feature-53,
+  .feature-53 *,
+  .feature-53 *::before,
+  .feature-53 *::after {
+    box-sizing: border-box;
+  }
+
+  /* Base - Small Mobile (< 400px) */
+  .feature-53 {
+    background: var(--f53-bg, #f5f5f5);
+    padding: 40px 16px;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+  }
+
+  .feature-53__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .feature-53__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .feature-53__label {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--f53-label, #8b7355);
+    margin: 0 0 12px;
+  }
+
+  .feature-53__heading {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--f53-heading, #000000);
+    margin: 0 0 14px;
+  }
+
+  .feature-53__description {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--f53-text, #666666);
+    margin: 0 auto;
+    max-width: 600px;
+  }
+
+  /* Features Layout */
+  .feature-53__layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  /* Image */
+  .feature-53__image-wrapper {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    order: -1;
+  }
+
+  .feature-53__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .feature-53__image-wrapper:hover .feature-53__image {
+    transform: scale(1.05);
+  }
+
+  /* Features Grid */
+  .feature-53__features {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+  }
+
+  .feature-53__left,
+  .feature-53__right {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* Feature Item */
+  .feature-53__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .feature-53__left .feature-53__item {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .feature-53__right .feature-53__item {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  /* Icon */
+  .feature-53__icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 50%;
+    background: var(--f53-icon-bg, #ffffff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .feature-53__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Feature Content */
+  .feature-53__content {
+    flex: 1;
+  }
+
+  .feature-53__title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--f53-title, #000000);
+    margin: 0 0 6px;
+  }
+
+  .feature-53__text {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--f53-text, #666666);
+    margin: 0;
+  }
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    .feature-53 {
+      padding: 50px 20px;
+    }
+
+    .feature-53__header {
+      margin-bottom: 45px;
+    }
+
+    .feature-53__label {
+      font-size: 14px;
+    }
+
+    .feature-53__heading {
+      font-size: 32px;
+    }
+
+    .feature-53__description {
+      font-size: 15px;
+    }
+
+    .feature-53__image-wrapper {
+      width: 250px;
+      height: 250px;
+    }
+
+    .feature-53__icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+    }
+
+    .feature-53__icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .feature-53__title {
+      font-size: 16px;
+    }
+
+    .feature-53__text {
+      font-size: 14px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .feature-53 {
+      padding: 60px 24px;
+    }
+
+    .feature-53__header {
+      margin-bottom: 50px;
+    }
+
+    .feature-53__heading {
+      font-size: 36px;
+    }
+
+    .feature-53__description {
+      font-size: 16px;
+      max-width: 650px;
+    }
+
+    .feature-53__layout {
+      gap: 40px;
+    }
+
+    .feature-53__image-wrapper {
+      width: 280px;
+      height: 280px;
+    }
+
+    .feature-53__features {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .feature-53__left,
+    .feature-53__right {
+      flex: 1;
+      max-width: 260px;
+    }
+
+    .feature-53__left .feature-53__item {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .feature-53__right .feature-53__item {
+      flex-direction: row;
+      text-align: left;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .feature-53 {
+      padding: 70px 40px;
+    }
+
+    .feature-53__header {
+      margin-bottom: 50px;
+    }
+
+    .feature-53__heading {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .feature-53__description {
+      font-size: 17px;
+      max-width: 700px;
+    }
+
+    .feature-53__layout {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .feature-53__image-wrapper {
+      width: 300px;
+      height: 300px;
+      order: 0;
+    }
+
+    .feature-53__features {
+      display: contents;
+    }
+
+    .feature-53__left,
+    .feature-53__right {
+      width: 220px;
+      max-width: none;
+      gap: 50px;
+    }
+
+    .feature-53__left {
+      order: -1;
+    }
+
+    .feature-53__right {
+      order: 1;
+    }
+
+    .feature-53__icon {
+      width: 50px;
+      height: 50px;
+      min-width: 50px;
+    }
+
+    .feature-53__title {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .feature-53__text {
+      font-size: 14px;
+      line-height: 1.55;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .feature-53 {
+      padding: 80px 50px;
+    }
+
+    .feature-53__header {
+      margin-bottom: 60px;
+    }
+
+    .feature-53__label {
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .feature-53__heading {
+      font-size: 46px;
+      margin-bottom: 18px;
+    }
+
+    .feature-53__description {
+      font-size: 18px;
+      max-width: 750px;
+    }
+
+    .feature-53__layout {
+      gap: 50px;
+    }
+
+    .feature-53__image-wrapper {
+      width: 360px;
+      height: 360px;
+    }
+
+    .feature-53__left,
+    .feature-53__right {
+      width: 280px;
+      gap: 60px;
+    }
+
+    .feature-53__icon {
+      width: 54px;
+      height: 54px;
+      min-width: 54px;
+    }
+
+    .feature-53__icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .feature-53__title {
+      font-size: 18px;
+    }
+
+    .feature-53__text {
+      font-size: 15px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .feature-53 {
+      padding: 100px 60px;
+    }
+
+    .feature-53__container {
+      max-width: 1400px;
+    }
+
+    .feature-53__header {
+      margin-bottom: 70px;
+    }
+
+    .feature-53__heading {
+      font-size: 52px;
+    }
+
+    .feature-53__description {
+      font-size: 19px;
+      max-width: 800px;
+    }
+
+    .feature-53__layout {
+      gap: 70px;
+    }
+
+    .feature-53__image-wrapper {
+      width: 420px;
+      height: 420px;
+    }
+
+    .feature-53__left,
+    .feature-53__right {
+      width: 320px;
+      gap: 70px;
+    }
+
+    .feature-53__item {
+      gap: 18px;
+    }
+
+    .feature-53__icon {
+      width: 58px;
+      height: 58px;
+      min-width: 58px;
+    }
+
+    .feature-53__icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .feature-53__title {
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .feature-53__text {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  }
+</style>
+
+<section class="feature-53" data-section-id="{{ section.id }}">
+  <div class="feature-53__container">
+    <!-- Header -->
+    <div class="feature-53__header">
+      {%- if section.settings.label != blank -%}
+        <p class="feature-53__label">{{ section.settings.label }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="feature-53__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="feature-53__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Features Layout -->
+    <div class="feature-53__layout">
+      <!-- Left Features -->
+      <div class="feature-53__left">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.position == 'left' -%}
+            <div class="feature-53__item" {{ block.shopify_attributes }}>
+              <div class="feature-53__icon" style="{% if block.settings.icon_color != blank %}color: {{ block.settings.icon_color }};{% endif %}">
+                {%- case block.settings.icon -%}
+                  {%- when 'water' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/>
+                    </svg>
+                  {%- when 'wind' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                  {%- when 'leaf' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" fill="currentColor"/>
+                      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    </svg>
+                  {%- when 'sun' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                      <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  {%- when 'shield' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="currentColor"/>
+                    </svg>
+                  {%- when 'recycle' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5M11 22l-4-3 4-3m6-5h2.185a1.83 1.83 0 0 0 1.57-.881 1.785 1.785 0 0 0 .004-1.784L16.804 2.5M13 2l4 3-4 3m-3 5-2-4H2m5 0 2 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- when 'star' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                    </svg>
+                  {%- when 'check' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M22 4L12 14.01l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                {%- endcase -%}
+              </div>
+              <div class="feature-53__content">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="feature-53__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p class="feature-53__text">{{ block.settings.text }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <!-- Center Image -->
+      <div class="feature-53__image-wrapper">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 900 | image_tag: class: 'feature-53__image', loading: 'lazy' }}
+        {%- else -%}
+          <div class="feature-53__image" style="background: linear-gradient(135deg, #333333 0%, #666666 100%);"></div>
+        {%- endif -%}
+      </div>
+
+      <!-- Right Features -->
+      <div class="feature-53__right">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.position == 'right' -%}
+            <div class="feature-53__item" {{ block.shopify_attributes }}>
+              <div class="feature-53__icon" style="{% if block.settings.icon_color != blank %}color: {{ block.settings.icon_color }};{% endif %}">
+                {%- case block.settings.icon -%}
+                  {%- when 'water' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="currentColor"/>
+                    </svg>
+                  {%- when 'wind' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                  {%- when 'leaf' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" fill="currentColor"/>
+                      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    </svg>
+                  {%- when 'sun' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                      <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  {%- when 'shield' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="currentColor"/>
+                    </svg>
+                  {%- when 'recycle' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5M11 22l-4-3 4-3m6-5h2.185a1.83 1.83 0 0 0 1.57-.881 1.785 1.785 0 0 0 .004-1.784L16.804 2.5M13 2l4 3-4 3m-3 5-2-4H2m5 0 2 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- when 'star' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
+                    </svg>
+                  {%- when 'check' -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M22 4L12 14.01l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                {%- endcase -%}
+              </div>
+              <div class="feature-53__content">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="feature-53__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p class="feature-53__text">{{ block.settings.text }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Feature 53",
+  "tag": "section",
+  "class": "section-feature-53",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Rain-Ready, Responsibly Made"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Weather Shield: 2026 Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Designed in Scandinavia, our windbreakers and raincoats blend minimalist aesthetics with maximum protection for any climate."
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Center image"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#8b7355"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "feature_title_color",
+      "label": "Feature title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_color",
+      "label": "Icon background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "water",
+              "label": "Water droplet"
+            },
+            {
+              "value": "wind",
+              "label": "Wind"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            }
+          ],
+          "default": "water"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon color",
+          "default": "#5ba4d4"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Feature description text goes here explaining the benefit."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Feature 53",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "icon": "water",
+            "icon_color": "#5ba4d4",
+            "title": "Fully Waterproof Seams",
+            "text": "Tested under the heaviest Nordic storms for complete rain resistance."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "icon": "wind",
+            "icon_color": "#5ba4d4",
+            "title": "Breathable Membrane",
+            "text": "Stay dry from the inside out. Perfect for active days without moisture build-up."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "icon": "leaf",
+            "icon_color": "#6b9b4d",
+            "title": "Recycled & Sustainable",
+            "text": "Crafted using 100% recycled materials and ethical production methods."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "icon": "sun",
+            "icon_color": "#999999",
+            "title": "Integrated Reflectors",
+            "text": "Subtle, safety-first reflective accents for low light conditions."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
