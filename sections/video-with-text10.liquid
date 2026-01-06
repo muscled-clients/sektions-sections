@@ -1,0 +1,1155 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --vwt10-bg: {{ section.settings.background_color }};
+    --vwt10-text: {{ section.settings.text_color }};
+    --vwt10-label: {{ section.settings.label_color }};
+    --vwt10-heading: {{ section.settings.heading_color }};
+    --vwt10-overlay: {{ section.settings.overlay_text_color }};
+    --vwt10-btn-bg: {{ section.settings.button_bg }};
+    --vwt10-btn-text: {{ section.settings.button_text }};
+    --vwt10-nav-border: {{ section.settings.nav_border_color }};
+    --vwt10-nav-icon: {{ section.settings.nav_icon_color }};
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: {{ section.settings.margin_top | times: 0.7 | round }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 | round }}px;
+  }
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 | round }}px;
+    }
+  }
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 | round }}px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+  /* Box-sizing */
+  .video-with-text-10,
+  .video-with-text-10 *,
+  .video-with-text-10 *::before,
+  .video-with-text-10 *::after {
+    box-sizing: border-box;
+  }
+
+  /* Base - Small Mobile (< 400px) */
+  .video-with-text-10 {
+    background: var(--vwt10-bg, #ffffff);
+    padding: 40px 16px;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-with-text-10__container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .video-with-text-10__header {
+    margin-bottom: 24px;
+  }
+
+  .video-with-text-10__label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--vwt10-label, #666666);
+    margin: 0 0 10px;
+  }
+
+  .video-with-text-10__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--vwt10-heading, #000000);
+    margin: 0 0 12px;
+  }
+
+  .video-with-text-10__description {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--vwt10-text, #666666);
+    margin: 0;
+    max-width: 500px;
+  }
+
+  /* Slider Wrapper */
+  .video-with-text-10__slider-area {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .video-with-text-10__swiper {
+    overflow: visible !important;
+    width: 100%;
+  }
+
+  .video-with-text-10__swiper .swiper-wrapper {
+    align-items: stretch;
+  }
+
+  .video-with-text-10__slide {
+    width: 85% !important;
+    flex-shrink: 0;
+  }
+
+  /* Video Card */
+  .video-with-text-10__card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: #f0f0f0;
+    cursor: pointer;
+  }
+
+  .video-with-text-10__media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-with-text-10__poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .video-with-text-10__card.is-playing .video-with-text-10__poster {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Overlay Text */
+  .video-with-text-10__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .video-with-text-10__overlay-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--vwt10-overlay, #ffffff);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    padding: 0 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .swiper-slide-active .video-with-text-10__overlay-text {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Play Button */
+  .video-with-text-10__play-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+  }
+
+  .video-with-text-10__play-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: scale(1.05);
+  }
+
+  .video-with-text-10__play-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: #ffffff;
+    margin-left: 2px;
+  }
+
+  .video-with-text-10__card.is-playing .video-with-text-10__play-btn svg.play-icon {
+    display: none;
+  }
+
+  .video-with-text-10__card.is-playing .video-with-text-10__play-btn svg.pause-icon {
+    display: block;
+  }
+
+  .video-with-text-10__play-btn svg.pause-icon {
+    display: none;
+    margin-left: 0;
+  }
+
+  /* Content Area */
+  .video-with-text-10__content-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+  }
+
+  .video-with-text-10__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .video-with-text-10__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--vwt10-heading, #000000);
+    margin: 0 0 8px;
+  }
+
+  .video-with-text-10__text {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--vwt10-text, #666666);
+    margin: 0 0 16px;
+  }
+
+  .video-with-text-10__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    background: var(--vwt10-btn-bg, #000000);
+    color: var(--vwt10-btn-text, #ffffff);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .video-with-text-10__btn:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  /* Navigation */
+  .video-with-text-10__nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .video-with-text-10__nav {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1.5px solid var(--vwt10-nav-border, #e0e0e0);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .video-with-text-10__nav:hover {
+    background: var(--vwt10-nav-border, #e0e0e0);
+  }
+
+  .video-with-text-10__nav:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .video-with-text-10__nav svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--vwt10-nav-icon, #000000);
+    stroke-width: 2;
+    fill: none;
+  }
+
+  /* Content Slides (hidden, used for data) */
+  .video-with-text-10__content-slides {
+    display: none;
+  }
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    .video-with-text-10 {
+      padding: 50px 20px;
+    }
+
+    .video-with-text-10__header {
+      margin-bottom: 28px;
+    }
+
+    .video-with-text-10__label {
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .video-with-text-10__heading {
+      font-size: 32px;
+    }
+
+    .video-with-text-10__description {
+      font-size: 15px;
+    }
+
+    .video-with-text-10__slide {
+      width: 80% !important;
+    }
+
+    .video-with-text-10__card {
+      border-radius: 14px;
+    }
+
+    .video-with-text-10__overlay-text {
+      font-size: 32px;
+    }
+
+    .video-with-text-10__play-btn {
+      width: 44px;
+      height: 44px;
+      bottom: 14px;
+      right: 14px;
+    }
+
+    .video-with-text-10__play-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .video-with-text-10__title {
+      font-size: 20px;
+    }
+
+    .video-with-text-10__text {
+      font-size: 14px;
+    }
+
+    .video-with-text-10__nav {
+      width: 42px;
+      height: 42px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .video-with-text-10 {
+      padding: 60px 24px;
+    }
+
+    .video-with-text-10__header {
+      margin-bottom: 32px;
+    }
+
+    .video-with-text-10__heading {
+      font-size: 36px;
+    }
+
+    .video-with-text-10__slide {
+      width: 75% !important;
+    }
+
+    .video-with-text-10__card {
+      aspect-ratio: 16 / 10;
+      border-radius: 16px;
+    }
+
+    .video-with-text-10__overlay-text {
+      font-size: 38px;
+    }
+
+    .video-with-text-10__play-btn {
+      width: 48px;
+      height: 48px;
+      bottom: 16px;
+      right: 16px;
+    }
+
+    .video-with-text-10__play-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .video-with-text-10__slider-area {
+      margin-bottom: 24px;
+    }
+
+    .video-with-text-10__title {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .video-with-text-10__text {
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .video-with-text-10__btn {
+      padding: 14px 28px;
+      font-size: 14px;
+    }
+
+    .video-with-text-10__nav {
+      width: 44px;
+      height: 44px;
+    }
+
+    .video-with-text-10__nav svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .video-with-text-10 {
+      padding: 70px 40px;
+    }
+
+    .video-with-text-10__header {
+      margin-bottom: 36px;
+    }
+
+    .video-with-text-10__label {
+      font-size: 12px;
+      letter-spacing: 2.5px;
+    }
+
+    .video-with-text-10__heading {
+      font-size: 40px;
+      margin-bottom: 14px;
+    }
+
+    .video-with-text-10__description {
+      font-size: 16px;
+    }
+
+    .video-with-text-10__slide {
+      width: 70% !important;
+    }
+
+    .video-with-text-10__card {
+      aspect-ratio: 16 / 9;
+      border-radius: 18px;
+    }
+
+    .video-with-text-10__overlay-text {
+      font-size: 44px;
+    }
+
+    .video-with-text-10__play-btn {
+      width: 50px;
+      height: 50px;
+      bottom: 18px;
+      right: 18px;
+    }
+
+    .video-with-text-10__play-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .video-with-text-10__slider-area {
+      margin-bottom: 28px;
+    }
+
+    .video-with-text-10__title {
+      font-size: 24px;
+    }
+
+    .video-with-text-10__text {
+      font-size: 15px;
+      margin-bottom: 20px;
+      max-width: 450px;
+    }
+
+    .video-with-text-10__nav {
+      width: 46px;
+      height: 46px;
+    }
+
+    .video-with-text-10__nav-wrapper {
+      gap: 10px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .video-with-text-10 {
+      padding: 80px 50px;
+    }
+
+    .video-with-text-10__header {
+      margin-bottom: 40px;
+    }
+
+    .video-with-text-10__label {
+      font-size: 13px;
+      letter-spacing: 3px;
+    }
+
+    .video-with-text-10__heading {
+      font-size: 46px;
+      margin-bottom: 16px;
+    }
+
+    .video-with-text-10__description {
+      font-size: 17px;
+      max-width: 550px;
+    }
+
+    .video-with-text-10__slide {
+      width: 68% !important;
+    }
+
+    .video-with-text-10__card {
+      border-radius: 20px;
+    }
+
+    .video-with-text-10__overlay-text {
+      font-size: 52px;
+    }
+
+    .video-with-text-10__play-btn {
+      width: 54px;
+      height: 54px;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .video-with-text-10__play-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .video-with-text-10__slider-area {
+      margin-bottom: 32px;
+    }
+
+    .video-with-text-10__title {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    .video-with-text-10__text {
+      font-size: 16px;
+      max-width: 480px;
+    }
+
+    .video-with-text-10__btn {
+      padding: 15px 32px;
+      font-size: 14px;
+    }
+
+    .video-with-text-10__nav {
+      width: 48px;
+      height: 48px;
+    }
+
+    .video-with-text-10__nav svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .video-with-text-10 {
+      padding: 100px 60px;
+    }
+
+    .video-with-text-10__container {
+      max-width: 1600px;
+    }
+
+    .video-with-text-10__header {
+      margin-bottom: 50px;
+    }
+
+    .video-with-text-10__heading {
+      font-size: 52px;
+    }
+
+    .video-with-text-10__description {
+      font-size: 18px;
+      max-width: 600px;
+    }
+
+    .video-with-text-10__slide {
+      width: 65% !important;
+    }
+
+    .video-with-text-10__overlay-text {
+      font-size: 60px;
+    }
+
+    .video-with-text-10__play-btn {
+      width: 58px;
+      height: 58px;
+      bottom: 24px;
+      right: 24px;
+    }
+
+    .video-with-text-10__play-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .video-with-text-10__title {
+      font-size: 28px;
+    }
+
+    .video-with-text-10__text {
+      font-size: 17px;
+      max-width: 520px;
+    }
+
+    .video-with-text-10__btn {
+      padding: 16px 36px;
+      font-size: 15px;
+    }
+
+    .video-with-text-10__nav {
+      width: 50px;
+      height: 50px;
+    }
+  }
+</style>
+
+<section class="video-with-text-10" data-section-id="{{ section.id }}">
+  <div class="video-with-text-10__container">
+    <!-- Header -->
+    <div class="video-with-text-10__header">
+      {%- if section.settings.label != blank -%}
+        <p class="video-with-text-10__label">{{ section.settings.label }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="video-with-text-10__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="video-with-text-10__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Slider Area -->
+    <div class="video-with-text-10__slider-area">
+      <div class="video-with-text-10__swiper swiper">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="video-with-text-10__slide swiper-slide" {{ block.shopify_attributes }} data-index="{{ forloop.index0 }}">
+              <div class="video-with-text-10__card" data-card-index="{{ forloop.index0 }}">
+                <!-- Video -->
+                {%- if block.settings.video != blank -%}
+                  {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, class: 'video-with-text-10__media', playsinline: true, preload: 'metadata' }}
+                {%- endif -%}
+
+                <!-- Poster/Thumbnail -->
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 1200 | image_tag: class: 'video-with-text-10__poster', loading: 'lazy' }}
+                {%- else -%}
+                  <div class="video-with-text-10__poster" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                {%- endif -%}
+
+                <!-- Overlay Text -->
+                <div class="video-with-text-10__overlay">
+                  {%- if block.settings.overlay_text != blank -%}
+                    <span class="video-with-text-10__overlay-text">{{ block.settings.overlay_text }}</span>
+                  {%- endif -%}
+                </div>
+
+                <!-- Play Button -->
+                <button class="video-with-text-10__play-btn" aria-label="Play video">
+                  <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <svg class="pause-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="video-with-text-10__content-area">
+      <div class="video-with-text-10__content">
+        <h3 class="video-with-text-10__title">
+          {%- if section.blocks.size > 0 -%}
+            {{ section.blocks[0].settings.title }}
+          {%- endif -%}
+        </h3>
+        <p class="video-with-text-10__text">
+          {%- if section.blocks.size > 0 -%}
+            {{ section.blocks[0].settings.text }}
+          {%- endif -%}
+        </p>
+        <a href="{%- if section.blocks.size > 0 -%}{{ section.blocks[0].settings.button_link }}{%- else -%}#{%- endif -%}" class="video-with-text-10__btn">
+          {%- if section.blocks.size > 0 -%}
+            {{ section.blocks[0].settings.button_text }}
+          {%- else -%}
+            Shop Now
+          {%- endif -%}
+        </a>
+      </div>
+
+      <!-- Navigation -->
+      <div class="video-with-text-10__nav-wrapper">
+        <button class="video-with-text-10__nav video-with-text-10__nav--prev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button class="video-with-text-10__nav video-with-text-10__nav--next" aria-label="Next slide">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hidden Content Data for JS -->
+    <div class="video-with-text-10__content-slides">
+      {%- for block in section.blocks -%}
+        <div data-slide-content="{{ forloop.index0 }}"
+             data-title="{{ block.settings.title | escape }}"
+             data-text="{{ block.settings.text | escape }}"
+             data-button-text="{{ block.settings.button_text | escape }}"
+             data-button-link="{{ block.settings.button_link }}">
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
+
+    const swiperEl = section.querySelector('.video-with-text-10__swiper');
+    const prevBtn = section.querySelector('.video-with-text-10__nav--prev');
+    const nextBtn = section.querySelector('.video-with-text-10__nav--next');
+    const titleEl = section.querySelector('.video-with-text-10__title');
+    const textEl = section.querySelector('.video-with-text-10__text');
+    const btnEl = section.querySelector('.video-with-text-10__btn');
+    const contentSlides = section.querySelectorAll('[data-slide-content]');
+
+    // Initialize Swiper
+    const swiper = new Swiper(swiperEl, {
+      slidesPerView: 'auto',
+      spaceBetween: 16,
+      centeredSlides: false,
+      speed: 400,
+      breakpoints: {
+        400: {
+          spaceBetween: 18,
+        },
+        550: {
+          spaceBetween: 20,
+        },
+        768: {
+          spaceBetween: 24,
+        },
+        1024: {
+          spaceBetween: 28,
+        },
+        1400: {
+          spaceBetween: 32,
+        }
+      }
+    });
+
+    // Navigation buttons
+    prevBtn.addEventListener('click', () => swiper.slidePrev());
+    nextBtn.addEventListener('click', () => swiper.slideNext());
+
+    // Update navigation button states
+    function updateNavButtons() {
+      prevBtn.disabled = swiper.isBeginning;
+      nextBtn.disabled = swiper.isEnd;
+    }
+
+    // Update content on slide change
+    function updateContent(index) {
+      const contentData = contentSlides[index];
+      if (!contentData) return;
+
+      const title = contentData.dataset.title;
+      const text = contentData.dataset.text;
+      const buttonText = contentData.dataset.buttonText;
+      const buttonLink = contentData.dataset.buttonLink;
+
+      // Animate content change
+      titleEl.style.opacity = '0';
+      textEl.style.opacity = '0';
+      btnEl.style.opacity = '0';
+
+      setTimeout(() => {
+        titleEl.textContent = title;
+        textEl.textContent = text;
+        btnEl.textContent = buttonText;
+        btnEl.href = buttonLink || '#';
+
+        titleEl.style.opacity = '1';
+        textEl.style.opacity = '1';
+        btnEl.style.opacity = '1';
+      }, 150);
+    }
+
+    // Add transition styles for content
+    titleEl.style.transition = 'opacity 0.15s ease';
+    textEl.style.transition = 'opacity 0.15s ease';
+    btnEl.style.transition = 'opacity 0.15s ease';
+
+    // Swiper events
+    swiper.on('slideChange', function() {
+      updateNavButtons();
+      updateContent(swiper.activeIndex);
+    });
+
+    swiper.on('init', function() {
+      updateNavButtons();
+    });
+
+    // Initial state
+    updateNavButtons();
+
+    // Video playback management
+    const cards = section.querySelectorAll('.video-with-text-10__card');
+    let currentlyPlaying = null;
+
+    cards.forEach((card) => {
+      const playBtn = card.querySelector('.video-with-text-10__play-btn');
+      const video = card.querySelector('video');
+      const poster = card.querySelector('.video-with-text-10__poster');
+
+      if (!playBtn) return;
+
+      playBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+
+        if (!video) return;
+
+        // Pause any currently playing video
+        if (currentlyPlaying && currentlyPlaying !== card) {
+          const prevVideo = currentlyPlaying.querySelector('video');
+          if (prevVideo) {
+            prevVideo.pause();
+            prevVideo.currentTime = 0;
+            prevVideo.muted = true;
+          }
+          currentlyPlaying.classList.remove('is-playing');
+        }
+
+        // Toggle current video
+        if (card.classList.contains('is-playing')) {
+          video.pause();
+          card.classList.remove('is-playing');
+          currentlyPlaying = null;
+        } else {
+          video.muted = false;
+          video.play().catch(err => {
+            console.log('Video play failed:', err);
+            // Try muted autoplay as fallback
+            video.muted = true;
+            video.play();
+          });
+          card.classList.add('is-playing');
+          currentlyPlaying = card;
+        }
+      });
+
+      // When video ends, reset state
+      if (video) {
+        video.addEventListener('ended', function() {
+          card.classList.remove('is-playing');
+          video.currentTime = 0;
+          video.muted = true;
+          currentlyPlaying = null;
+        });
+      }
+
+      // Click on card to pause
+      card.addEventListener('click', function(e) {
+        if (e.target === playBtn || playBtn.contains(e.target)) return;
+
+        if (card.classList.contains('is-playing') && video) {
+          video.pause();
+          card.classList.remove('is-playing');
+          currentlyPlaying = null;
+        }
+      });
+    });
+
+    // Pause video when slide changes
+    swiper.on('slideChange', function() {
+      if (currentlyPlaying) {
+        const video = currentlyPlaying.querySelector('video');
+        if (video) {
+          video.pause();
+          video.currentTime = 0;
+          video.muted = true;
+        }
+        currentlyPlaying.classList.remove('is-playing');
+        currentlyPlaying = null;
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Video with Text 10",
+  "tag": "section",
+  "class": "section-video-with-text-10",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "OUR PROCESS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Crafted with Intention"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "We make blankets to elevate everyday life. Crafted for longevity. Designed for timeless appeal. Inspired by the world."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "Overlay text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_border_color",
+      "label": "Navigation border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "nav_icon_color",
+      "label": "Navigation icon color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_slide",
+      "name": "Video Slide",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Cover image"
+        },
+        {
+          "type": "text",
+          "id": "overlay_text",
+          "label": "Overlay text",
+          "default": "Product Name"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Product Name blanket"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Our blankets offer comfort and warmth wherever it's needed - draped over your bed, tossed on the couch, wrapped around you, or taken along for outdoor adventures."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Shop Product"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Video with Text 10",
+      "blocks": [
+        {
+          "type": "video_slide",
+          "settings": {
+            "overlay_text": "Sunset Mocha",
+            "title": "Sunset Mocha blanket",
+            "text": "Our blankets offer comfort and warmth wherever it's needed - draped over your bed, tossed on the couch, wrapped around you, or taken along for outdoor adventures.",
+            "button_text": "Shop Sunset Mocha"
+          }
+        },
+        {
+          "type": "video_slide",
+          "settings": {
+            "overlay_text": "Solar Dusk",
+            "title": "Solar Dusk blanket",
+            "text": "Our blankets offer comfort and warmth wherever it's needed - draped over your bed, tossed on the couch, wrapped around you, or taken along for outdoor adventures.",
+            "button_text": "Shop Solar Dusk"
+          }
+        },
+        {
+          "type": "video_slide",
+          "settings": {
+            "overlay_text": "Solar Dawn",
+            "title": "Solar Dawn blanket",
+            "text": "Our blankets offer comfort and warmth wherever it's needed - draped over your bed, tossed on the couch, wrapped around you, or taken along for outdoor adventures.",
+            "button_text": "Shop Solar Dawn"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
