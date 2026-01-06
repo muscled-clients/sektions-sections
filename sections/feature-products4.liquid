@@ -36,9 +36,15 @@
   }
 {% endstyle %}
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap');
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
   /* Box-sizing */
   .featured-products-4,
   .featured-products-4 *,
@@ -52,6 +58,8 @@
     background: var(--fp4-bg, #f1f0ed);
     padding: 40px 15px;
     font-family: 'Montserrat', sans-serif;
+    position: relative;
+    contain: layout style;
   }
 
   .featured-products-4__container {
@@ -60,17 +68,25 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 30px;
+    overflow: hidden;
+  }
+
+  .featured-products-4__container > * {
+    min-width: 0;
   }
 
   /* Left Content */
   .featured-products-4__content {
     display: flex;
     flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
   }
 
   /* Thumbnails */
   .featured-products-4__thumbnails {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 24px;
   }
@@ -78,6 +94,8 @@
   .featured-products-4__thumbnail {
     width: 70px;
     height: 70px;
+    min-width: 70px;
+    flex-shrink: 0;
     border-radius: 6px;
     overflow: hidden;
     cursor: pointer;
@@ -180,15 +198,25 @@
   /* Right Image Slider */
   .featured-products-4__slider-wrapper {
     position: relative;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .featured-products-4__swiper {
     border-radius: 12px;
     overflow: hidden;
+    width: 100%;
+  }
+
+  .featured-products-4__swiper .swiper-wrapper {
+    align-items: stretch;
   }
 
   .featured-products-4__slide {
     position: relative;
+    width: 100%;
+    flex-shrink: 0;
   }
 
   .featured-products-4__image-wrapper {
@@ -200,7 +228,9 @@
   .featured-products-4__image {
     width: 100%;
     height: 100%;
+    max-width: 100%;
     object-fit: cover;
+    display: block;
   }
 
   .featured-products-4__placeholder {
@@ -291,6 +321,7 @@
     .featured-products-4__thumbnail {
       width: 80px;
       height: 80px;
+      min-width: 80px;
       border-radius: 8px;
     }
 
@@ -340,6 +371,7 @@
     .featured-products-4__thumbnail {
       width: 90px;
       height: 90px;
+      min-width: 90px;
     }
 
     .featured-products-4__description {
@@ -394,6 +426,7 @@
     .featured-products-4__thumbnail {
       width: 75px;
       height: 75px;
+      min-width: 75px;
     }
 
     .featured-products-4__description {
@@ -443,6 +476,7 @@
     .featured-products-4__thumbnail {
       width: 85px;
       height: 85px;
+      min-width: 85px;
       border-radius: 10px;
     }
 
@@ -505,6 +539,7 @@
     .featured-products-4__thumbnail {
       width: 95px;
       height: 95px;
+      min-width: 95px;
     }
 
     .featured-products-4__description {
@@ -544,9 +579,6 @@
     }
   }
 </style>
-
-<!-- Swiper CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 <section class="featured-products-4" data-section-id="{{ section.id }}">
   <div class="featured-products-4__container">
