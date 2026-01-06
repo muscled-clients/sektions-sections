@@ -226,6 +226,78 @@
         "margin_bottom": 0
       }
     },
+    "hero45_NWmF3e": {
+      "type": "hero45",
+      "blocks": {
+        "image_HGWzhd": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/device-3_1.webp"
+          }
+        },
+        "image_XngwGN": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/device-1.webp"
+          }
+        },
+        "testimonial_QkjwhT": {
+          "type": "testimonial",
+          "disabled": true,
+          "settings": {
+            "quote": "Since I started using it, I feel calmer and more relaxed. It has improved my well-being. It is amazing!",
+            "author": "Nicole Johnson, PTSD Specialist"
+          }
+        },
+        "testimonial_Mtx7T6": {
+          "type": "testimonial",
+          "disabled": true,
+          "settings": {
+            "quote": "I feel much more balanced throughout the day. It gives me the boost I need to stay focused and carry on. It is life-changing!",
+            "author": "Paul Wilson, Media Personality"
+          }
+        },
+        "testimonial_7URi7H": {
+          "type": "testimonial",
+          "disabled": true,
+          "settings": {
+            "quote": "This product has transformed my sleep routine. I wake up feeling refreshed and energized every morning.",
+            "author": "Sarah Chen, Wellness Coach"
+          }
+        }
+      },
+      "block_order": [
+        "image_HGWzhd",
+        "image_XngwGN",
+        "testimonial_QkjwhT",
+        "testimonial_Mtx7T6",
+        "testimonial_7URi7H"
+      ],
+      "name": "SEK Hero 45",
+      "settings": {
+        "heading": "Reduce stress. Sleep peacefully. Carry peace.",
+        "subtitle": "The nerve stimulator that activates your parasympathetic nervous system.",
+        "primary_button_text": "Shop Pulse",
+        "primary_button_link": "",
+        "secondary_button_text": "Watch video",
+        "video_url": "",
+        "video": "shopify://files/videos/fbb140fd46e3429eba459e1549dbbe38.mp4",
+        "show_rating": true,
+        "rating_text": "Excellent 4.9",
+        "background_color": "#c8e4f4",
+        "heading_color": "#000000",
+        "subtitle_color": "#333333",
+        "text_color": "#333333",
+        "primary_button_bg": "#1850ff",
+        "primary_button_text_color": "#ffffff",
+        "secondary_button_bg_color": "#ffffff",
+        "secondary_button_text_color": "#000000",
+        "stars_color": "#00b67a",
+        "author_color": "#000000",
+        "margin_top": 20,
+        "margin_bottom": 20
+      }
+    },
     "video_slider5_WcfRxX": {
       "type": "video-slider5",
       "blocks": {
@@ -298,78 +370,6 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
-    },
-    "hero45_NWmF3e": {
-      "type": "hero45",
-      "blocks": {
-        "image_HGWzhd": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/device-3_1.webp"
-          }
-        },
-        "image_XngwGN": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/device-1.webp"
-          }
-        },
-        "testimonial_QkjwhT": {
-          "type": "testimonial",
-          "disabled": true,
-          "settings": {
-            "quote": "Since I started using it, I feel calmer and more relaxed. It has improved my well-being. It is amazing!",
-            "author": "Nicole Johnson, PTSD Specialist"
-          }
-        },
-        "testimonial_Mtx7T6": {
-          "type": "testimonial",
-          "disabled": true,
-          "settings": {
-            "quote": "I feel much more balanced throughout the day. It gives me the boost I need to stay focused and carry on. It is life-changing!",
-            "author": "Paul Wilson, Media Personality"
-          }
-        },
-        "testimonial_7URi7H": {
-          "type": "testimonial",
-          "disabled": true,
-          "settings": {
-            "quote": "This product has transformed my sleep routine. I wake up feeling refreshed and energized every morning.",
-            "author": "Sarah Chen, Wellness Coach"
-          }
-        }
-      },
-      "block_order": [
-        "image_HGWzhd",
-        "image_XngwGN",
-        "testimonial_QkjwhT",
-        "testimonial_Mtx7T6",
-        "testimonial_7URi7H"
-      ],
-      "name": "SEK Hero 45",
-      "settings": {
-        "heading": "Reduce stress. Sleep peacefully. Carry peace.",
-        "subtitle": "The nerve stimulator that activates your parasympathetic nervous system.",
-        "primary_button_text": "Shop Pulse",
-        "primary_button_link": "",
-        "secondary_button_text": "Watch video",
-        "video_url": "",
-        "video": "shopify://files/videos/fbb140fd46e3429eba459e1549dbbe38.mp4",
-        "show_rating": true,
-        "rating_text": "Excellent 4.9",
-        "background_color": "#c8e4f4",
-        "heading_color": "#000000",
-        "subtitle_color": "#333333",
-        "text_color": "#333333",
-        "primary_button_bg": "#1850ff",
-        "primary_button_text_color": "#ffffff",
-        "secondary_button_bg_color": "#ffffff",
-        "secondary_button_text_color": "#000000",
-        "stars_color": "#00b67a",
-        "author_color": "#000000",
-        "margin_top": 20,
-        "margin_bottom": 20
-      }
     }
   },
   "order": [
@@ -377,7 +377,7 @@
     "feature_products4_LCfNrz",
     "hero46_GCTrTt",
     "video_with_text10_4KTkYp",
-    "video_slider5_WcfRxX",
-    "hero45_NWmF3e"
+    "hero45_NWmF3e",
+    "video_slider5_WcfRxX"
   ]
 }
