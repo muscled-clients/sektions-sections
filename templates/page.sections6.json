@@ -298,6 +298,72 @@
         "margin_bottom": 20
       }
     },
+    "feature53_PmtbKq": {
+      "type": "feature53",
+      "blocks": {
+        "feature_zLHeBH": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "icon": "water",
+            "icon_color": "#5ba4d4",
+            "title": "Fully Waterproof Seams",
+            "text": "Tested under the heaviest Nordic storms for complete rain resistance."
+          }
+        },
+        "feature_fCfNVW": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "icon": "wind",
+            "icon_color": "#5ba4d4",
+            "title": "Breathable Membrane",
+            "text": "Stay dry from the inside out. Perfect for active days without moisture build-up."
+          }
+        },
+        "feature_rUeUyR": {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "icon": "leaf",
+            "icon_color": "#6b9b4d",
+            "title": "Recycled & Sustainable",
+            "text": "Crafted using 100% recycled materials and ethical production methods."
+          }
+        },
+        "feature_YcNgFp": {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "icon": "sun",
+            "icon_color": "#999999",
+            "title": "Integrated Reflectors",
+            "text": "Subtle, safety-first reflective accents for low light conditions."
+          }
+        }
+      },
+      "block_order": [
+        "feature_zLHeBH",
+        "feature_fCfNVW",
+        "feature_rUeUyR",
+        "feature_YcNgFp"
+      ],
+      "name": "SEK Feature 53",
+      "settings": {
+        "label": "Rain-Ready, Responsibly Made",
+        "heading": "Weather Shield: 2026 Collection",
+        "description": "Designed in Scandinavia, our windbreakers and raincoats blend minimalist aesthetics with maximum protection for any climate.",
+        "image": "shopify://shop_images/hamed-darzi-OhyxUN5iG-s-unsplash.webp",
+        "background_color": "#f5f5f5",
+        "text_color": "#666666",
+        "label_color": "#8b7355",
+        "heading_color": "#000000",
+        "feature_title_color": "#000000",
+        "icon_bg_color": "#ffffff",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
     "video_slider5_WcfRxX": {
       "type": "video-slider5",
       "blocks": {
@@ -378,6 +444,7 @@
     "hero46_GCTrTt",
     "video_with_text10_4KTkYp",
     "hero45_NWmF3e",
+    "feature53_PmtbKq",
     "video_slider5_WcfRxX"
   ]
 }
