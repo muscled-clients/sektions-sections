@@ -1,0 +1,998 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --hero45-bg: {{ section.settings.background_color }};
+    --hero45-text: {{ section.settings.text_color }};
+    --hero45-heading: {{ section.settings.heading_color }};
+    --hero45-subtitle: {{ section.settings.subtitle_color }};
+    --hero45-btn-primary-bg: {{ section.settings.primary_button_bg }};
+    --hero45-btn-primary-text: {{ section.settings.primary_button_text_color }};
+    --hero45-btn-secondary-bg: {{ section.settings.secondary_button_bg_color }};
+    --hero45-btn-secondary-text: {{ section.settings.secondary_button_text_color }};
+    --hero45-stars: {{ section.settings.stars_color }};
+    --hero45-author: {{ section.settings.author_color }};
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: {{ section.settings.margin_top | times: 0.7 | round }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 | round }}px;
+  }
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 | round }}px;
+    }
+  }
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 | round }}px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* Box-sizing */
+  .hero-45,
+  .hero-45 *,
+  .hero-45 *::before,
+  .hero-45 *::after {
+    box-sizing: border-box;
+  }
+
+  /* Base - Small Mobile (< 400px) */
+  .hero-45 {
+    background: var(--hero45-bg, #c8e4f4);
+    padding: 30px 16px;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    border-radius: 20px;
+    margin: 0 10px;
+    overflow: hidden;
+  }
+
+  .hero-45__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .hero-45__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-45__heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.15;
+    color: var(--hero45-heading, #000000);
+    margin: 0 0 14px;
+  }
+
+  .hero-45__subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--hero45-subtitle, #333333);
+    margin: 0 0 20px;
+    max-width: 450px;
+  }
+
+  /* Buttons */
+  .hero-45__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .hero-45__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  .hero-45__btn--primary {
+    background: var(--hero45-btn-primary-bg, #1850ff);
+    color: var(--hero45-btn-primary-text, #ffffff);
+  }
+
+  .hero-45__btn--primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .hero-45__btn--primary svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  .hero-45__btn--secondary {
+    background: var(--hero45-btn-secondary-bg, #ffffff);
+    color: var(--hero45-btn-secondary-text, #000000);
+  }
+
+  .hero-45__btn--secondary:hover {
+    background: #f5f5f5;
+  }
+
+  .hero-45__btn--secondary svg {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+  }
+
+  /* Trustpilot */
+  .hero-45__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .hero-45__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .hero-45__star {
+    width: 20px;
+    height: 20px;
+    background: var(--hero45-stars, #00b67a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-45__star svg {
+    width: 12px;
+    height: 12px;
+    fill: #ffffff;
+  }
+
+  .hero-45__rating-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--hero45-text, #333333);
+  }
+
+  /* Testimonial */
+  .hero-45__testimonial {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    position: relative;
+    min-height: 80px;
+  }
+
+  .hero-45__testimonial-item {
+    display: none;
+    align-items: flex-start;
+    gap: 14px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .hero-45__testimonial-item.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .hero-45__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .hero-45__testimonial-content {
+    flex: 1;
+  }
+
+  .hero-45__quote {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--hero45-text, #333333);
+    margin: 0 0 6px;
+  }
+
+  .hero-45__author {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--hero45-author, #000000);
+    margin: 0;
+  }
+
+  /* Image */
+  .hero-45__image-wrapper {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero-45__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Video Modal */
+  .hero-45__modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .hero-45__modal.active {
+    display: flex;
+  }
+
+  .hero-45__modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+  }
+
+  .hero-45__modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero-45__modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    background: #ffffff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .hero-45__modal-close:hover {
+    transform: scale(1.05);
+  }
+
+  .hero-45__modal-close svg {
+    width: 16px;
+    height: 16px;
+    stroke: #000000;
+    stroke-width: 2;
+  }
+
+  .hero-45__modal-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+  }
+
+  .hero-45__modal-video iframe,
+  .hero-45__modal-video video {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    .hero-45 {
+      padding: 40px 20px;
+      border-radius: 24px;
+      margin: 0 12px;
+    }
+
+    .hero-45__heading {
+      font-size: 36px;
+    }
+
+    .hero-45__subtitle {
+      font-size: 15px;
+      margin-bottom: 22px;
+    }
+
+    .hero-45__btn {
+      padding: 15px 30px;
+      font-size: 15px;
+    }
+
+    .hero-45__avatar {
+      width: 55px;
+      height: 55px;
+    }
+
+    .hero-45__quote {
+      font-size: 14px;
+    }
+
+    .hero-45__author {
+      font-size: 14px;
+    }
+
+    .hero-45__image-wrapper {
+      border-radius: 18px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .hero-45 {
+      padding: 50px 30px;
+      border-radius: 28px;
+      margin: 0 16px;
+    }
+
+    .hero-45__container {
+      gap: 36px;
+    }
+
+    .hero-45__heading {
+      font-size: 42px;
+      margin-bottom: 16px;
+    }
+
+    .hero-45__subtitle {
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+
+    .hero-45__buttons {
+      margin-bottom: 24px;
+    }
+
+    .hero-45__rating {
+      margin-bottom: 28px;
+    }
+
+    .hero-45__star {
+      width: 22px;
+      height: 22px;
+    }
+
+    .hero-45__star svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .hero-45__avatar {
+      width: 60px;
+      height: 60px;
+    }
+
+    .hero-45__image-wrapper {
+      border-radius: 20px;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .hero-45 {
+      padding: 50px 40px;
+      border-radius: 32px;
+      margin: 0 20px;
+    }
+
+    .hero-45__container {
+      flex-direction: row;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-45__content {
+      flex: 1;
+      max-width: 55%;
+    }
+
+    .hero-45__heading {
+      font-size: 44px;
+    }
+
+    .hero-45__subtitle {
+      font-size: 16px;
+    }
+
+    .hero-45__testimonial {
+      min-height: 90px;
+    }
+
+    .hero-45__image-wrapper {
+      flex: 1;
+      max-width: 45%;
+      aspect-ratio: 9 / 10;
+      border-radius: 24px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .hero-45 {
+      padding: 60px 50px;
+      border-radius: 40px;
+      margin: 0 30px;
+    }
+
+    .hero-45__container {
+      gap: 50px;
+    }
+
+    .hero-45__heading {
+      font-size: 52px;
+      margin-bottom: 18px;
+    }
+
+    .hero-45__subtitle {
+      font-size: 17px;
+      margin-bottom: 28px;
+      max-width: 480px;
+    }
+
+    .hero-45__btn {
+      padding: 16px 34px;
+      font-size: 15px;
+    }
+
+    .hero-45__buttons {
+      margin-bottom: 26px;
+    }
+
+    .hero-45__rating {
+      margin-bottom: 32px;
+    }
+
+    .hero-45__star {
+      width: 24px;
+      height: 24px;
+    }
+
+    .hero-45__star svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .hero-45__rating-text {
+      font-size: 14px;
+    }
+
+    .hero-45__avatar {
+      width: 65px;
+      height: 65px;
+    }
+
+    .hero-45__quote {
+      font-size: 15px;
+    }
+
+    .hero-45__author {
+      font-size: 15px;
+    }
+
+    .hero-45__image-wrapper {
+      border-radius: 28px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .hero-45 {
+      padding: 70px 60px;
+      border-radius: 48px;
+      margin: 0 40px;
+    }
+
+    .hero-45__container {
+      max-width: 1500px;
+      gap: 60px;
+    }
+
+    .hero-45__heading {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+
+    .hero-45__subtitle {
+      font-size: 18px;
+      margin-bottom: 30px;
+      max-width: 520px;
+    }
+
+    .hero-45__btn {
+      padding: 17px 38px;
+      font-size: 16px;
+    }
+
+    .hero-45__avatar {
+      width: 70px;
+      height: 70px;
+    }
+
+    .hero-45__quote {
+      font-size: 16px;
+    }
+
+    .hero-45__image-wrapper {
+      border-radius: 32px;
+    }
+
+    .hero-45__modal-close {
+      width: 40px;
+      height: 40px;
+      top: 16px;
+      right: 16px;
+    }
+  }
+</style>
+
+<section class="hero-45" data-section-id="{{ section.id }}">
+  <div class="hero-45__container">
+    <!-- Content -->
+    <div class="hero-45__content">
+      {%- if section.settings.heading != blank -%}
+        <h1 class="hero-45__heading">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.subtitle != blank -%}
+        <p class="hero-45__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      <!-- Buttons -->
+      <div class="hero-45__buttons">
+        {%- if section.settings.primary_button_text != blank -%}
+          <a href="{{ section.settings.primary_button_link }}" class="hero-45__btn hero-45__btn--primary">
+            {{ section.settings.primary_button_text }}
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.secondary_button_text != blank -%}
+          <button type="button" class="hero-45__btn hero-45__btn--secondary" data-video-trigger>
+            {{ section.settings.secondary_button_text }}
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+        {%- endif -%}
+      </div>
+
+      <!-- Rating -->
+      {%- if section.settings.show_rating -%}
+        <div class="hero-45__rating">
+          <div class="hero-45__stars">
+            {%- for i in (1..5) -%}
+              <div class="hero-45__star">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </div>
+            {%- endfor -%}
+          </div>
+          <span class="hero-45__rating-text">{{ section.settings.rating_text }}</span>
+        </div>
+      {%- endif -%}
+
+      <!-- Testimonials -->
+      {%- if section.blocks.size > 0 -%}
+        <div class="hero-45__testimonial">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <div class="hero-45__testimonial-item {% if forloop.first %}active{% endif %}" {{ block.shopify_attributes }}>
+                {%- if block.settings.avatar != blank -%}
+                  {{ block.settings.avatar | image_url: width: 150 | image_tag: class: 'hero-45__avatar', loading: 'lazy' }}
+                {%- else -%}
+                  <div class="hero-45__avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                {%- endif -%}
+                <div class="hero-45__testimonial-content">
+                  {%- if block.settings.quote != blank -%}
+                    <p class="hero-45__quote">{{ block.settings.quote }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.author != blank -%}
+                    <p class="hero-45__author">{{ block.settings.author }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Image -->
+    <div class="hero-45__image-wrapper">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: class: 'hero-45__image', loading: 'eager' }}
+      {%- else -%}
+        <div class="hero-45__image" style="background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);"></div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div class="hero-45__modal" data-video-modal>
+    <div class="hero-45__modal-overlay" data-modal-close></div>
+    <div class="hero-45__modal-content">
+      <button class="hero-45__modal-close" data-modal-close aria-label="Close video">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <div class="hero-45__modal-video">
+        {%- if section.settings.video_url != blank -%}
+          {%- if section.settings.video_url contains 'youtube' or section.settings.video_url contains 'youtu.be' -%}
+            {%- assign video_id = section.settings.video_url | split: 'v=' | last | split: '&' | first -%}
+            {%- if section.settings.video_url contains 'youtu.be' -%}
+              {%- assign video_id = section.settings.video_url | split: 'youtu.be/' | last | split: '?' | first -%}
+            {%- endif -%}
+            <iframe data-src="https://www.youtube.com/embed/{{ video_id }}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          {%- elsif section.settings.video_url contains 'vimeo' -%}
+            {%- assign video_id = section.settings.video_url | split: 'vimeo.com/' | last | split: '?' | first -%}
+            <iframe data-src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          {%- endif -%}
+        {%- elsif section.settings.video != blank -%}
+          {{ section.settings.video | video_tag: autoplay: false, loop: false, muted: false, controls: true, class: 'hero-45__video' }}
+        {%- else -%}
+          <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: #f0f0f0; color: #666;">
+            No video configured
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
+
+    // Testimonial rotation
+    const testimonials = section.querySelectorAll('.hero-45__testimonial-item');
+    if (testimonials.length > 1) {
+      let currentIndex = 0;
+
+      setInterval(function() {
+        testimonials[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % testimonials.length;
+        testimonials[currentIndex].classList.add('active');
+      }, 5000);
+    }
+
+    // Video modal
+    const videoTrigger = section.querySelector('[data-video-trigger]');
+    const videoModal = section.querySelector('[data-video-modal]');
+    const modalCloseButtons = section.querySelectorAll('[data-modal-close]');
+    const iframe = videoModal ? videoModal.querySelector('iframe') : null;
+    const video = videoModal ? videoModal.querySelector('video') : null;
+
+    if (videoTrigger && videoModal) {
+      videoTrigger.addEventListener('click', function() {
+        videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Load iframe src if present
+        if (iframe && iframe.dataset.src) {
+          iframe.src = iframe.dataset.src;
+        }
+
+        // Play video if present
+        if (video) {
+          video.play().catch(err => console.log('Video play failed:', err));
+        }
+      });
+
+      modalCloseButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          videoModal.classList.remove('active');
+          document.body.style.overflow = '';
+
+          // Stop iframe video
+          if (iframe) {
+            iframe.src = '';
+          }
+
+          // Pause video
+          if (video) {
+            video.pause();
+            video.currentTime = 0;
+          }
+        });
+      });
+
+      // Close on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+          videoModal.classList.remove('active');
+          document.body.style.overflow = '';
+          if (iframe) iframe.src = '';
+          if (video) {
+            video.pause();
+            video.currentTime = 0;
+          }
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Hero 45",
+  "tag": "section",
+  "class": "section-hero-45",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Reduce stress. Sleep peacefully. Carry peace."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "The nerve stimulator that activates your parasympathetic nervous system."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Primary button"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Button text",
+      "default": "Shop Pulse"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary button (Video)"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Button text",
+      "default": "Watch video"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "YouTube or Vimeo URL",
+      "info": "Paste a YouTube or Vimeo video URL"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Or upload a video",
+      "info": "Used if no URL is provided"
+    },
+    {
+      "type": "header",
+      "content": "Rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "Excellent 4.9"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#c8e4f4"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_bg",
+      "label": "Primary button background",
+      "default": "#1850ff"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_text_color",
+      "label": "Primary button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_bg_color",
+      "label": "Secondary button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_text_color",
+      "label": "Secondary button text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "stars_color",
+      "label": "Stars color",
+      "default": "#00b67a"
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "Author name color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar image"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Since I started using it, I feel calmer and more relaxed. It has improved my well-being. It is amazing!"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name & title",
+          "default": "Nicole Johnson, PTSD Specialist"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Hero 45",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Since I started using it, I feel calmer and more relaxed. It has improved my well-being. It is amazing!",
+            "author": "Nicole Johnson, PTSD Specialist"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I feel much more balanced throughout the day. It gives me the boost I need to stay focused and carry on. It is life-changing!",
+            "author": "Paul Wilson, Media Personality"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "This product has transformed my sleep routine. I wake up feeling refreshed and energized every morning.",
+            "author": "Sarah Chen, Wellness Coach"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
