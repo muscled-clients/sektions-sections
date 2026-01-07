@@ -1,0 +1,930 @@
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
+
+{% style %}
+  .hotspots-12-{{ section.id }} {
+    --hotspots-12-bg: {{ section.settings.background_color }};
+    --hotspots-12-text: {{ section.settings.text_color }};
+    --hotspots-12-hotspot-bg: {{ section.settings.hotspot_bg_color }};
+    --hotspots-12-hotspot-pulse: {{ section.settings.hotspot_pulse_color }};
+    --hotspots-12-card-bg: {{ section.settings.card_bg_color }};
+    --hotspots-12-price: {{ section.settings.price_color }};
+    --hotspots-12-sale-price: {{ section.settings.sale_price_color }};
+    --hotspots-12-arrow-bg: {{ section.settings.arrow_bg_color }};
+    --hotspots-12-arrow-color: {{ section.settings.arrow_color }};
+  }
+{% endstyle %}
+
+<section class="hotspots-12 hotspots-12-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="hotspots-12__container">
+    <!-- Image with Hotspots -->
+    <div class="hotspots-12__image-wrapper">
+      {% if section.settings.main_image != blank %}
+        <img
+          src="{{ section.settings.main_image | image_url: width: 1200 }}"
+          alt="{{ section.settings.main_image.alt | default: 'Product showcase' }}"
+          class="hotspots-12__image"
+          loading="lazy"
+        >
+      {% else %}
+        <div class="hotspots-12__image hotspots-12__image--placeholder">
+          {{ 'lifestyle-1' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+
+      <!-- Hotspot Markers -->
+      {% for block in section.blocks %}
+        {% if block.type == 'hotspot' %}
+          <button
+            class="hotspots-12__hotspot"
+            data-hotspot-index="{{ forloop.index0 }}"
+            style="left: {{ block.settings.position_x }}%; top: {{ block.settings.position_y }}%;"
+            aria-label="View product {{ forloop.index }}"
+            {{ block.shopify_attributes }}
+          >
+            <span class="hotspots-12__hotspot-dot"></span>
+            <span class="hotspots-12__hotspot-pulse"></span>
+          </button>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Product Details Slider -->
+    <div class="hotspots-12__products">
+      <div class="swiper hotspots-12__swiper">
+        <div class="swiper-wrapper">
+          {% assign hotspot_index = 0 %}
+          {% for block in section.blocks %}
+            {% if block.type == 'hotspot' %}
+              <div class="swiper-slide hotspots-12__slide" data-slide-index="{{ hotspot_index }}">
+                <div class="hotspots-12__product-card">
+                  <!-- Product Number -->
+                  <div class="hotspots-12__product-number">{{ hotspot_index | plus: 1 }}</div>
+
+                  <!-- Product Image -->
+                  <div class="hotspots-12__product-image-wrapper">
+                    {% if block.settings.product_image != blank %}
+                      <img
+                        src="{{ block.settings.product_image | image_url: width: 600 }}"
+                        alt="{{ block.settings.product_title | default: 'Product' }}"
+                        class="hotspots-12__product-image"
+                        loading="lazy"
+                      >
+                    {% elsif block.settings.product != blank and block.settings.product.featured_image != blank %}
+                      <img
+                        src="{{ block.settings.product.featured_image | image_url: width: 600 }}"
+                        alt="{{ block.settings.product.title }}"
+                        class="hotspots-12__product-image"
+                        loading="lazy"
+                      >
+                    {% else %}
+                      <div class="hotspots-12__product-image hotspots-12__product-image--placeholder">
+                        {{ 'product-1' | placeholder_svg_tag }}
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <!-- Product Info -->
+                  <div class="hotspots-12__product-info">
+                    <h3 class="hotspots-12__product-title">
+                      {% if block.settings.product != blank %}
+                        {{ block.settings.product.title }}
+                      {% else %}
+                        {{ block.settings.product_title | default: 'Product Title' }}
+                      {% endif %}
+                    </h3>
+
+                    {% if block.settings.product_variant != blank %}
+                      <p class="hotspots-12__product-variant">{{ block.settings.product_variant }}</p>
+                    {% endif %}
+
+                    <p class="hotspots-12__product-description">
+                      {% if block.settings.product != blank and block.settings.product_description == blank %}
+                        {{ block.settings.product.description | strip_html | truncate: 150 }}
+                      {% else %}
+                        {{ block.settings.product_description | default: 'Product description goes here. Add details about your product features and benefits.' }}
+                      {% endif %}
+                    </p>
+
+                    <!-- Price -->
+                    <div class="hotspots-12__product-price">
+                      {% if block.settings.product != blank %}
+                        {% if block.settings.product.compare_at_price > block.settings.product.price %}
+                          <span class="hotspots-12__price hotspots-12__price--sale">{{ block.settings.product.price | money }}</span>
+                          <span class="hotspots-12__price hotspots-12__price--compare">{{ block.settings.product.compare_at_price | money }}</span>
+                        {% else %}
+                          <span class="hotspots-12__price">{{ block.settings.product.price | money }}</span>
+                        {% endif %}
+                      {% else %}
+                        {% if block.settings.compare_price != blank %}
+                          <span class="hotspots-12__price hotspots-12__price--sale">{{ block.settings.price | default: '$99.00' }}</span>
+                          <span class="hotspots-12__price hotspots-12__price--compare">{{ block.settings.compare_price }}</span>
+                        {% else %}
+                          <span class="hotspots-12__price">{{ block.settings.price | default: '$99.00' }}</span>
+                        {% endif %}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% assign hotspot_index = hotspot_index | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <div class="hotspots-12__navigation">
+        <button class="hotspots-12__arrow hotspots-12__arrow--prev" aria-label="Previous product">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="hotspots-12__arrow hotspots-12__arrow--next" aria-label="Next product">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hotspots-12 {
+    box-sizing: border-box;
+    background-color: var(--hotspots-12-bg);
+    color: var(--hotspots-12-text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 40px 15px;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    overflow: hidden;
+  }
+
+  .hotspots-12 *,
+  .hotspots-12 *::before,
+  .hotspots-12 *::after {
+    box-sizing: border-box;
+  }
+
+  .hotspots-12__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: center;
+  }
+
+  /* Image with Hotspots */
+  .hotspots-12__image-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .hotspots-12__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+
+  .hotspots-12__image--placeholder {
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hotspots-12__image--placeholder svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Hotspot Markers */
+  .hotspots-12__hotspot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+  }
+
+  .hotspots-12__hotspot-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    background-color: var(--hotspots-12-hotspot-bg);
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    transition: transform 0.3s ease;
+  }
+
+  .hotspots-12__hotspot:hover .hotspots-12__hotspot-dot,
+  .hotspots-12__hotspot.active .hotspots-12__hotspot-dot {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  .hotspots-12__hotspot-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    background-color: var(--hotspots-12-hotspot-pulse);
+    border-radius: 50%;
+    opacity: 0.4;
+    z-index: 1;
+    animation: hotspots-12-pulse 2s ease-out infinite;
+  }
+
+  .hotspots-12__hotspot.active .hotspots-12__hotspot-pulse {
+    animation: none;
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+
+  @keyframes hotspots-12-pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0.6;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1.8);
+      opacity: 0;
+    }
+  }
+
+  /* Products Panel */
+  .hotspots-12__products {
+    position: relative;
+    width: 100%;
+  }
+
+  .hotspots-12__swiper {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .hotspots-12__slide {
+    height: auto;
+  }
+
+  .hotspots-12__product-card {
+    background-color: var(--hotspots-12-card-bg);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    height: 100%;
+  }
+
+  .hotspots-12__product-number {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    background-color: var(--hotspots-12-hotspot-bg);
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 5;
+  }
+
+  .hotspots-12__product-image-wrapper {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .hotspots-12__product-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hotspots-12__product-image--placeholder {
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hotspots-12__product-image--placeholder svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hotspots-12__product-info {
+    text-align: left;
+  }
+
+  .hotspots-12__product-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: var(--hotspots-12-text);
+    line-height: 1.3;
+  }
+
+  .hotspots-12__product-variant {
+    font-size: 14px;
+    color: var(--hotspots-12-text);
+    opacity: 0.6;
+    margin: 0 0 12px 0;
+  }
+
+  .hotspots-12__product-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--hotspots-12-text);
+    opacity: 0.8;
+    margin: 0 0 16px 0;
+  }
+
+  .hotspots-12__product-price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .hotspots-12__price {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--hotspots-12-price);
+  }
+
+  .hotspots-12__price--sale {
+    color: var(--hotspots-12-sale-price);
+  }
+
+  .hotspots-12__price--compare {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--hotspots-12-text);
+    opacity: 0.5;
+    text-decoration: line-through;
+  }
+
+  /* Navigation */
+  .hotspots-12__navigation {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .hotspots-12__arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--hotspots-12-arrow-bg);
+    color: var(--hotspots-12-arrow-color);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .hotspots-12__arrow:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+
+  .hotspots-12__arrow:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .hotspots-12__arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Responsive - Small Mobile (< 400px) */
+  @media (max-width: 399px) {
+    .hotspots-12 {
+      padding: 30px 12px;
+    }
+
+    .hotspots-12__image {
+      aspect-ratio: 1/1;
+    }
+
+    .hotspots-12__hotspot {
+      width: 30px;
+      height: 30px;
+    }
+
+    .hotspots-12__hotspot-dot {
+      width: 12px;
+      height: 12px;
+      border-width: 2px;
+    }
+
+    .hotspots-12__hotspot-pulse {
+      width: 30px;
+      height: 30px;
+    }
+
+    .hotspots-12__product-card {
+      padding: 16px;
+    }
+
+    .hotspots-12__product-number {
+      width: 28px;
+      height: 28px;
+      font-size: 12px;
+      top: 12px;
+      right: 12px;
+    }
+
+    .hotspots-12__product-title {
+      font-size: 18px;
+    }
+
+    .hotspots-12__product-description {
+      font-size: 13px;
+    }
+
+    .hotspots-12__price {
+      font-size: 20px;
+    }
+
+    .hotspots-12__arrow {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* Responsive - Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    .hotspots-12 {
+      padding: 40px 20px;
+    }
+
+    .hotspots-12__product-card {
+      padding: 20px;
+    }
+  }
+
+  /* Responsive - Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .hotspots-12 {
+      padding: 50px 24px;
+    }
+
+    .hotspots-12__image {
+      aspect-ratio: 16/10;
+    }
+
+    .hotspots-12__product-card {
+      padding: 24px;
+    }
+
+    .hotspots-12__product-title {
+      font-size: 22px;
+    }
+
+    .hotspots-12__price {
+      font-size: 24px;
+    }
+  }
+
+  /* Responsive - Tablet (768px+) */
+  @media (min-width: 768px) {
+    .hotspots-12 {
+      padding: 60px 30px;
+    }
+
+    .hotspots-12__container {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+    }
+
+    .hotspots-12__image {
+      aspect-ratio: 4/3;
+    }
+
+    .hotspots-12__hotspot {
+      width: 40px;
+      height: 40px;
+    }
+
+    .hotspots-12__hotspot-dot {
+      width: 18px;
+      height: 18px;
+    }
+
+    .hotspots-12__hotspot-pulse {
+      width: 40px;
+      height: 40px;
+    }
+
+    .hotspots-12__navigation {
+      justify-content: flex-start;
+    }
+
+    .hotspots-12__arrow {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  /* Responsive - Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .hotspots-12 {
+      padding: 80px 40px;
+    }
+
+    .hotspots-12__container {
+      grid-template-columns: 1.3fr 1fr;
+      gap: 50px;
+    }
+
+    .hotspots-12__image-wrapper {
+      border-radius: 20px;
+    }
+
+    .hotspots-12__product-card {
+      padding: 28px;
+      border-radius: 20px;
+    }
+
+    .hotspots-12__product-image-wrapper {
+      border-radius: 16px;
+    }
+
+    .hotspots-12__product-title {
+      font-size: 24px;
+    }
+
+    .hotspots-12__product-description {
+      font-size: 15px;
+    }
+
+    .hotspots-12__price {
+      font-size: 26px;
+    }
+  }
+
+  /* Responsive - Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .hotspots-12 {
+      padding: 100px 50px;
+    }
+
+    .hotspots-12__container {
+      gap: 60px;
+    }
+
+    .hotspots-12__hotspot {
+      width: 44px;
+      height: 44px;
+    }
+
+    .hotspots-12__hotspot-dot {
+      width: 20px;
+      height: 20px;
+    }
+
+    .hotspots-12__hotspot-pulse {
+      width: 44px;
+      height: 44px;
+    }
+
+    .hotspots-12__product-card {
+      padding: 32px;
+    }
+
+    .hotspots-12__product-title {
+      font-size: 26px;
+    }
+
+    .hotspots-12__price {
+      font-size: 28px;
+    }
+
+    .hotspots-12__arrow {
+      width: 52px;
+      height: 52px;
+    }
+
+    .hotspots-12__arrow svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('.hotspots-12-{{ section.id }}');
+    if (!section) return;
+
+    const swiperContainer = section.querySelector('.hotspots-12__swiper');
+    const prevBtn = section.querySelector('.hotspots-12__arrow--prev');
+    const nextBtn = section.querySelector('.hotspots-12__arrow--next');
+    const hotspots = section.querySelectorAll('.hotspots-12__hotspot');
+
+    if (!swiperContainer) return;
+
+    // Initialize Swiper
+    const swiper = new Swiper(swiperContainer, {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      speed: 400,
+      allowTouchMove: true,
+      on: {
+        init: function() {
+          updateActiveHotspot(0);
+        },
+        slideChange: function() {
+          updateActiveHotspot(this.activeIndex);
+        }
+      }
+    });
+
+    // Navigation
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function() {
+        swiper.slidePrev();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function() {
+        swiper.slideNext();
+      });
+    }
+
+    // Hotspot click handlers
+    hotspots.forEach(function(hotspot) {
+      hotspot.addEventListener('click', function() {
+        const index = parseInt(this.getAttribute('data-hotspot-index'), 10);
+        swiper.slideTo(index);
+      });
+    });
+
+    // Update active hotspot
+    function updateActiveHotspot(activeIndex) {
+      hotspots.forEach(function(hotspot, index) {
+        if (index === activeIndex) {
+          hotspot.classList.add('active');
+        } else {
+          hotspot.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Hotspots 12",
+  "tag": "section",
+  "class": "hotspots-12-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Image",
+      "info": "Lifestyle or product image with hotspots"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_bg_color",
+      "label": "Hotspot Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "hotspot_pulse_color",
+      "label": "Hotspot Pulse Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Product Card Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "sale_price_color",
+      "label": "Sale Price Color",
+      "default": "#e53935"
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg_color",
+      "label": "Arrow Background Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Icon Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Hotspot",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Hotspot Position"
+        },
+        {
+          "type": "range",
+          "id": "position_x",
+          "label": "Horizontal Position (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "position_y",
+          "label": "Vertical Position (%)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "Product Selection"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "Select a product or use custom fields below"
+        },
+        {
+          "type": "header",
+          "content": "Custom Product Details"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Image",
+          "info": "Overrides product image"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product Title",
+          "default": "Product Name"
+        },
+        {
+          "type": "text",
+          "id": "product_variant",
+          "label": "Product Variant",
+          "default": "Black / Medium"
+        },
+        {
+          "type": "textarea",
+          "id": "product_description",
+          "label": "Product Description",
+          "default": "A brief description of the product highlighting its key features and benefits."
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$99.00"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare at Price",
+          "info": "Leave empty if no sale"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Hotspots 12",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 25,
+            "position_y": 35,
+            "product_title": "Minimalist Watch",
+            "product_variant": "Silver / 40mm",
+            "product_description": "A sleek minimalist watch designed for everyday wear. Features a clean dial and premium leather strap.",
+            "price": "$149.00",
+            "compare_price": "$199.00"
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 65,
+            "position_y": 55,
+            "product_title": "Leather Wallet",
+            "product_variant": "Brown",
+            "product_description": "Handcrafted genuine leather wallet with multiple card slots and a sleek bifold design.",
+            "price": "$79.00"
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "position_x": 45,
+            "position_y": 75,
+            "product_title": "Wireless Earbuds",
+            "product_variant": "White",
+            "product_description": "Premium wireless earbuds with active noise cancellation and 24-hour battery life.",
+            "price": "$129.00",
+            "compare_price": "$159.00"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
