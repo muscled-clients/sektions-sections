@@ -1,0 +1,1025 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --t47-bg: {{ section.settings.background_color }};
+    --t47-text: {{ section.settings.text_color }};
+    --t47-heading: {{ section.settings.heading_color }};
+    --t47-card-bg: {{ section.settings.card_bg }};
+    --t47-stars: {{ section.settings.stars_color }};
+    --t47-btn-bg: {{ section.settings.button_bg }};
+    --t47-btn-text: {{ section.settings.button_text_color }};
+    --t47-badge-text: {{ section.settings.badge_text_color }};
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: {{ section.settings.margin_top | times: 0.7 | round }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.7 | round }}px;
+  }
+  @media (min-width: 550px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.8 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.8 | round }}px;
+    }
+  }
+  @media (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top | times: 0.9 | round }}px;
+      margin-bottom: {{ section.settings.margin_bottom | times: 0.9 | round }}px;
+    }
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+  /* Box-sizing */
+  .testimonials-47,
+  .testimonials-47 *,
+  .testimonials-47 *::before,
+  .testimonials-47 *::after {
+    box-sizing: border-box;
+  }
+
+  /* Base - Small Mobile (< 400px) */
+  .testimonials-47 {
+    background: var(--t47-bg, #ffffff);
+    padding: 40px 16px;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+  }
+
+  .testimonials-47__container {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .testimonials-47__header {
+    margin-bottom: 30px;
+  }
+
+  .testimonials-47__heading {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--t47-heading, #000000);
+    margin: 0 0 20px;
+  }
+
+  .testimonials-47__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .testimonials-47__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .testimonials-47__rating-star {
+    width: 24px;
+    height: 24px;
+    fill: var(--t47-heading, #000000);
+  }
+
+  .testimonials-47__rating-score {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--t47-heading, #000000);
+    line-height: 1;
+  }
+
+  .testimonials-47__rating-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--t47-text, #666666);
+  }
+
+  .testimonials-47__tagline {
+    font-size: 14px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--t47-text, #666666);
+    margin: 0;
+  }
+
+  /* Slider */
+  .testimonials-47__slider-wrapper {
+    position: relative;
+    margin-bottom: 30px;
+  }
+
+  .testimonials-47__swiper {
+    overflow: visible !important;
+    padding: 10px 0;
+  }
+
+  .testimonials-47__slide {
+    height: auto !important;
+  }
+
+  /* Card */
+  .testimonials-47__card {
+    background: var(--t47-card-bg, #ffffff);
+    border-radius: 12px;
+    padding: 24px;
+    height: 100%;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .testimonials-47__stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 14px;
+  }
+
+  .testimonials-47__star {
+    width: 20px;
+    height: 20px;
+    background: var(--t47-stars, #00b67a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .testimonials-47__star svg {
+    width: 12px;
+    height: 12px;
+    fill: #ffffff;
+  }
+
+  .testimonials-47__title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--t47-heading, #000000);
+    margin: 0 0 12px;
+  }
+
+  .testimonials-47__quote {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--t47-text, #666666);
+    margin: 0 0 16px;
+    flex: 1;
+  }
+
+  .testimonials-47__author {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--t47-text, #666666);
+    margin: 0;
+  }
+
+  /* Navigation */
+  .testimonials-47__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+  }
+
+  .testimonials-47__nav:hover {
+    background: #f8fafc;
+    border-color: #d0d0d0;
+  }
+
+  .testimonials-47__nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .testimonials-47__nav--prev {
+    left: -22px;
+  }
+
+  .testimonials-47__nav--next {
+    right: -22px;
+  }
+
+  .testimonials-47__nav svg {
+    width: 16px;
+    height: 16px;
+    stroke: #333333;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  /* Trust Badges */
+  .testimonials-47__badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 24px;
+    margin-bottom: 28px;
+    padding: 0 10px;
+  }
+
+  .testimonials-47__badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .testimonials-47__badge-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--t47-badge-text, #666666);
+  }
+
+  .testimonials-47__badge-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .testimonials-47__badge-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--t47-badge-text, #666666);
+  }
+
+  /* CTA Button */
+  .testimonials-47__cta {
+    text-align: center;
+  }
+
+  .testimonials-47__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 36px;
+    background: var(--t47-btn-bg, #3b6ccf);
+    color: var(--t47-btn-text, #ffffff);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .testimonials-47__btn:hover {
+    background: #2d5bb8;
+    transform: translateY(-2px);
+  }
+
+  .testimonials-47__btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    .testimonials-47 {
+      padding: 50px 20px;
+    }
+
+    .testimonials-47__heading {
+      font-size: 32px;
+    }
+
+    .testimonials-47__rating-score {
+      font-size: 40px;
+    }
+
+    .testimonials-47__card {
+      padding: 26px;
+      border-radius: 14px;
+    }
+
+    .testimonials-47__star {
+      width: 22px;
+      height: 22px;
+    }
+
+    .testimonials-47__title {
+      font-size: 17px;
+    }
+
+    .testimonials-47__badges {
+      gap: 18px 28px;
+    }
+
+    .testimonials-47__btn {
+      padding: 17px 40px;
+      font-size: 15px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .testimonials-47 {
+      padding: 60px 24px;
+    }
+
+    .testimonials-47__header {
+      margin-bottom: 36px;
+    }
+
+    .testimonials-47__heading {
+      font-size: 38px;
+      margin-bottom: 24px;
+    }
+
+    .testimonials-47__meta {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .testimonials-47__tagline {
+      text-align: right;
+      max-width: 350px;
+    }
+
+    .testimonials-47__slider-wrapper {
+      margin-bottom: 36px;
+    }
+
+    .testimonials-47__card {
+      padding: 28px;
+    }
+
+    .testimonials-47__badges {
+      margin-bottom: 32px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .testimonials-47 {
+      padding: 70px 40px;
+    }
+
+    .testimonials-47__header {
+      margin-bottom: 40px;
+    }
+
+    .testimonials-47__heading {
+      font-size: 44px;
+    }
+
+    .testimonials-47__rating-star {
+      width: 28px;
+      height: 28px;
+    }
+
+    .testimonials-47__rating-score {
+      font-size: 44px;
+    }
+
+    .testimonials-47__rating-text {
+      font-size: 15px;
+    }
+
+    .testimonials-47__tagline {
+      font-size: 15px;
+    }
+
+    .testimonials-47__slider-wrapper {
+      margin-bottom: 40px;
+    }
+
+    .testimonials-47__nav {
+      display: flex;
+    }
+
+    .testimonials-47__card {
+      border-radius: 16px;
+    }
+
+    .testimonials-47__star {
+      width: 24px;
+      height: 24px;
+    }
+
+    .testimonials-47__star svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .testimonials-47__title {
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    .testimonials-47__quote {
+      font-size: 15px;
+    }
+
+    .testimonials-47__author {
+      font-size: 14px;
+    }
+
+    .testimonials-47__badges {
+      gap: 20px 36px;
+    }
+
+    .testimonials-47__badge-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .testimonials-47__badge-text {
+      font-size: 14px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .testimonials-47 {
+      padding: 80px 50px;
+    }
+
+    .testimonials-47__header {
+      margin-bottom: 46px;
+    }
+
+    .testimonials-47__heading {
+      font-size: 50px;
+    }
+
+    .testimonials-47__rating-score {
+      font-size: 48px;
+    }
+
+    .testimonials-47__tagline {
+      font-size: 16px;
+      max-width: 400px;
+    }
+
+    .testimonials-47__slider-wrapper {
+      padding: 0 30px;
+      margin-bottom: 46px;
+    }
+
+    .testimonials-47__nav {
+      width: 48px;
+      height: 48px;
+    }
+
+    .testimonials-47__nav--prev {
+      left: -24px;
+    }
+
+    .testimonials-47__nav--next {
+      right: -24px;
+    }
+
+    .testimonials-47__card {
+      padding: 30px;
+    }
+
+    .testimonials-47__badges {
+      gap: 24px 44px;
+      margin-bottom: 36px;
+    }
+
+    .testimonials-47__btn {
+      padding: 18px 44px;
+      font-size: 16px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .testimonials-47 {
+      padding: 100px 60px;
+    }
+
+    .testimonials-47__container {
+      max-width: 1400px;
+    }
+
+    .testimonials-47__heading {
+      font-size: 56px;
+    }
+
+    .testimonials-47__rating-star {
+      width: 32px;
+      height: 32px;
+    }
+
+    .testimonials-47__rating-score {
+      font-size: 52px;
+    }
+
+    .testimonials-47__rating-text {
+      font-size: 16px;
+    }
+
+    .testimonials-47__tagline {
+      font-size: 17px;
+      max-width: 450px;
+    }
+
+    .testimonials-47__card {
+      padding: 32px;
+    }
+
+    .testimonials-47__title {
+      font-size: 19px;
+    }
+
+    .testimonials-47__quote {
+      font-size: 16px;
+    }
+
+    .testimonials-47__btn {
+      padding: 20px 50px;
+      font-size: 16px;
+    }
+  }
+</style>
+
+<section class="testimonials-47" data-section-id="{{ section.id }}">
+  <div class="testimonials-47__container">
+    <!-- Header -->
+    <div class="testimonials-47__header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="testimonials-47__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      <div class="testimonials-47__meta">
+        <!-- Rating -->
+        {%- if section.settings.show_rating -%}
+          <div class="testimonials-47__rating">
+            <svg class="testimonials-47__rating-star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <span class="testimonials-47__rating-score">{{ section.settings.rating_score }}</span>
+            <span class="testimonials-47__rating-text">{{ section.settings.rating_text }}</span>
+          </div>
+        {%- endif -%}
+
+        <!-- Tagline -->
+        {%- if section.settings.tagline != blank -%}
+          <p class="testimonials-47__tagline">{{ section.settings.tagline }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Slider -->
+    <div class="testimonials-47__slider-wrapper">
+      <div class="testimonials-47__swiper swiper">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <div class="testimonials-47__slide swiper-slide" {{ block.shopify_attributes }}>
+                <div class="testimonials-47__card">
+                  <!-- Stars -->
+                  <div class="testimonials-47__stars">
+                    {%- assign star_count = block.settings.stars | default: 5 -%}
+                    {%- for i in (1..star_count) -%}
+                      <div class="testimonials-47__star">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+
+                  <!-- Title -->
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="testimonials-47__title">{{ block.settings.title }}</h3>
+                  {%- endif -%}
+
+                  <!-- Quote -->
+                  {%- if block.settings.quote != blank -%}
+                    <p class="testimonials-47__quote">{{ block.settings.quote }}</p>
+                  {%- endif -%}
+
+                  <!-- Author -->
+                  {%- if block.settings.author != blank -%}
+                    <p class="testimonials-47__author">{{ block.settings.author }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <button class="testimonials-47__nav testimonials-47__nav--prev" aria-label="Previous">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <button class="testimonials-47__nav testimonials-47__nav--next" aria-label="Next">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Trust Badges -->
+    {%- if section.settings.show_badges -%}
+      <div class="testimonials-47__badges">
+        {%- if section.settings.badge_1 != blank -%}
+          <div class="testimonials-47__badge">
+            <div class="testimonials-47__badge-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <span class="testimonials-47__badge-text">{{ section.settings.badge_1 }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.badge_2 != blank -%}
+          <div class="testimonials-47__badge">
+            <div class="testimonials-47__badge-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <span class="testimonials-47__badge-text">{{ section.settings.badge_2 }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.badge_3 != blank -%}
+          <div class="testimonials-47__badge">
+            <div class="testimonials-47__badge-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" fill="none" stroke="currentColor" stroke-width="2"/>
+                <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <span class="testimonials-47__badge-text">{{ section.settings.badge_3 }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.badge_4 != blank -%}
+          <div class="testimonials-47__badge">
+            <div class="testimonials-47__badge-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" fill="none" stroke="currentColor" stroke-width="2"/>
+                <line x1="7" y1="7" x2="7.01" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="testimonials-47__badge-text">{{ section.settings.badge_4 }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.badge_5 != blank -%}
+          <div class="testimonials-47__badge">
+            <div class="testimonials-47__badge-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2"/>
+                <polyline points="9 22 9 12 15 12 15 22" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <span class="testimonials-47__badge-text">{{ section.settings.badge_5 }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- CTA Button -->
+    {%- if section.settings.button_text != blank -%}
+      <div class="testimonials-47__cta">
+        <a href="{{ section.settings.button_link }}" class="testimonials-47__btn">
+          {{ section.settings.button_text }}
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
+
+    const swiperEl = section.querySelector('.testimonials-47__swiper');
+    const prevBtn = section.querySelector('.testimonials-47__nav--prev');
+    const nextBtn = section.querySelector('.testimonials-47__nav--next');
+
+    const swiper = new Swiper(swiperEl, {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      loop: true,
+      speed: 400,
+      breakpoints: {
+        550: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 24,
+        },
+        1400: {
+          slidesPerView: 3,
+          spaceBetween: 28,
+        }
+      }
+    });
+
+    // Navigation
+    prevBtn.addEventListener('click', () => swiper.slidePrev());
+    nextBtn.addEventListener('click', () => swiper.slideNext());
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Testimonials 47",
+  "tag": "section",
+  "class": "section-testimonials-47",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our customers tell it better than we do!"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating score",
+      "default": "4.7"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "/5 based on 12,067 reviews"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Join thousands of Shopify merchants growing their business with our templates."
+    },
+    {
+      "type": "header",
+      "content": "Trust Badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Show trust badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_1",
+      "label": "Badge 1",
+      "default": "Secure Checkout"
+    },
+    {
+      "type": "text",
+      "id": "badge_2",
+      "label": "Badge 2",
+      "default": "24/7 Support"
+    },
+    {
+      "type": "text",
+      "id": "badge_3",
+      "label": "Badge 3",
+      "default": "Money-Back Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "badge_4",
+      "label": "Badge 4",
+      "default": "Used by 50k Stores"
+    },
+    {
+      "type": "text",
+      "id": "badge_5",
+      "label": "Badge 5",
+      "default": "Shopify"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View All Reviews"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "stars_color",
+      "label": "Stars color",
+      "default": "#00b67a"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#3b6ccf"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Changed my entire storefront!"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The templates are incredibly easy to use and customized. My conversion rate has doubled since I switched. Highly recommend!"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Sarah J., Shopify Merchant - Oct 26, 2023"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Testimonials 47",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "title": "Changed my entire storefront!",
+            "quote": "The templates are incredibly easy to use and customized. My conversion rate has doubled since I switched. Highly recommend!",
+            "author": "Sarah J., Shopify Merchant - Oct 26, 2023"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "title": "Best investment I've made!",
+            "quote": "Within a week of using these templates, I saw a 40% increase in sales. The design quality is outstanding and the support team is amazing.",
+            "author": "Michael R., Store Owner - Nov 15, 2023"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "title": "Professional and easy to use",
+            "quote": "I was able to completely redesign my store in just a few hours. The templates are beautiful and incredibly flexible. Worth every penny!",
+            "author": "Emma T., E-commerce Manager - Dec 3, 2023"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "title": "Game changer for my business",
+            "quote": "These templates have transformed my online store. The attention to detail and responsive design make my products look amazing on any device.",
+            "author": "David L., Entrepreneur - Jan 8, 2024"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
