@@ -718,6 +718,81 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "medi_grid2_Hh7PWf": {
+      "type": "medi-grid2",
+      "blocks": {
+        "media_card_HyBmMX": {
+          "type": "media_card",
+          "settings": {
+            "image": "shopify://shop_images/pexels-monica-turlui-7137418.jpg",
+            "title": "Soft to the touch",
+            "button_text": "SHOP THROWS",
+            "link": "",
+            "large_card": true
+          }
+        },
+        "media_card_NP6DCa": {
+          "type": "media_card",
+          "settings": {
+            "image": "shopify://shop_images/pexels-alexandre-weiss-9443286.webp",
+            "title": "Bedsheet",
+            "button_text": "USAGE GUIDE",
+            "link": "",
+            "large_card": false
+          }
+        },
+        "media_card_6GrKgp": {
+          "type": "media_card",
+          "settings": {
+            "image": "shopify://shop_images/pexels-jess-loiterton-8650462.webp",
+            "title": "Thick as a towel",
+            "button_text": "SHOP RUGS",
+            "link": "",
+            "large_card": false
+          }
+        },
+        "media_card_cWppcF": {
+          "type": "media_card",
+          "settings": {
+            "image": "shopify://shop_images/pexels-jess-loiterton-5008003.jpg",
+            "title": "Boost your home",
+            "button_text": "INSPIRATION",
+            "link": "",
+            "large_card": false
+          }
+        },
+        "media_card_HH9BfQ": {
+          "type": "media_card",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2023-12-29_at_10.00.45.webp",
+            "title": "Reversible design",
+            "button_text": "SEE HOW",
+            "link": "",
+            "large_card": false
+          }
+        }
+      },
+      "block_order": [
+        "media_card_HyBmMX",
+        "media_card_NP6DCa",
+        "media_card_6GrKgp",
+        "media_card_cWppcF",
+        "media_card_HH9BfQ"
+      ],
+      "name": "SEK Media Grid 2",
+      "settings": {
+        "background_color": "#ffffff",
+        "title_color": "#f8eedd",
+        "button_bg_color": "#f8eedd",
+        "button_text_color": "#573c2a",
+        "button_hover_bg_color": "#ffffff",
+        "grid_gap": 18,
+        "side_padding": 0,
+        "overlay_opacity": 15,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
@@ -731,6 +806,7 @@
     "testinomial47_MJ6Etm",
     "hotspot12_yaUmhP",
     "bentro_grid4_jh3g3i",
-    "video_slider5_WcfRxX"
+    "video_slider5_WcfRxX",
+    "medi_grid2_Hh7PWf"
   ]
 }
