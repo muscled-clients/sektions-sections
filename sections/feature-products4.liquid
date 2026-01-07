@@ -644,6 +644,11 @@
                   <p class="featured-products-4__slide-text">{{ block.settings.slide_text }}</p>
                 {%- endif -%}
                 <div class="featured-products-4__controls">
+                  <button class="featured-products-4__nav featured-products-4__nav--prev" aria-label="Previous slide">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                  </button>
                   <span class="featured-products-4__pagination">
                     <span data-current>{{ forloop.index }}</span>/{{ section.blocks.size }}
                   </span>
@@ -674,8 +679,9 @@
     const swiperEl = section.querySelector('.featured-products-4__swiper');
     const thumbnails = section.querySelectorAll('.featured-products-4__thumbnail');
     const titles = section.querySelectorAll('.featured-products-4__title');
-    const nextBtn = section.querySelector('.featured-products-4__nav--next');
-    const paginationCurrent = section.querySelector('[data-current]');
+    const prevBtns = section.querySelectorAll('.featured-products-4__nav--prev');
+    const nextBtns = section.querySelectorAll('.featured-products-4__nav--next');
+    const paginationCurrents = section.querySelectorAll('[data-current]');
     const shopBtn = section.querySelector('[data-shop-btn]');
 
     // Store product links for button updates
@@ -711,10 +717,10 @@
         title.classList.toggle('is-active', i === index);
       });
 
-      // Update pagination
-      if (paginationCurrent) {
-        paginationCurrent.textContent = index + 1;
-      }
+      // Update pagination (all instances)
+      paginationCurrents.forEach(el => {
+        el.textContent = index + 1;
+      });
 
       // Update shop button link
       if (shopBtn && productLinks[index]) {
@@ -736,16 +742,27 @@
       });
     });
 
-    // Next button
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
+    // Prev buttons (all instances)
+    prevBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (swiper.activeIndex > 0) {
+          swiper.slidePrev();
+        } else {
+          swiper.slideTo(swiper.slides.length - 1); // Loop back to last
+        }
+      });
+    });
+
+    // Next buttons (all instances)
+    nextBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
         if (swiper.activeIndex < swiper.slides.length - 1) {
           swiper.slideNext();
         } else {
           swiper.slideTo(0); // Loop back to first
         }
       });
-    }
+    });
 
     // Initialize first state
     updateActiveStates(0);
