@@ -15,7 +15,7 @@
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'large_stat' %}
-            <div class="bento-grid-4__card bento-grid-4__card--large-stat" style="grid-area: large-stat;" {{ block.shopify_attributes }}>
+            <div class="bento-grid-4__card bento-grid-4__card--large-stat" {{ block.shopify_attributes }}>
               <div class="bento-grid-4__stat-content">
                 <span class="bento-grid-4__stat-number">{{ block.settings.stat_number | default: '2M+' }}</span>
                 <span class="bento-grid-4__stat-label">{{ block.settings.stat_label | default: 'Followers' }}</span>
@@ -23,52 +23,32 @@
             </div>
 
           {% when 'heading_card' %}
-            <div class="bento-grid-4__card bento-grid-4__card--heading" style="grid-area: heading;" {{ block.shopify_attributes }}>
+            <div class="bento-grid-4__card bento-grid-4__card--heading" {{ block.shopify_attributes }}>
               <h2 class="bento-grid-4__heading">
                 <span class="bento-grid-4__heading-accent">{{ block.settings.heading_accent | default: 'About us' }}</span>
                 <span class="bento-grid-4__heading-text"> {{ block.settings.heading_text | default: 'in a few numbers' }}</span>
               </h2>
             </div>
 
-          {% when 'image_card' %}
-            {% assign image_count = 0 %}
-            {% for b in section.blocks %}
-              {% if b.type == 'image_card' and b.id == block.id %}
-                {% break %}
-              {% endif %}
-              {% if b.type == 'image_card' %}
-                {% assign image_count = image_count | plus: 1 %}
-              {% endif %}
-            {% endfor %}
-            <div class="bento-grid-4__card bento-grid-4__card--image" style="grid-area: img{{ image_count | plus: 1 }};" {{ block.shopify_attributes }}>
-              {% if block.settings.image != blank %}
-                <img
-                  src="{{ block.settings.image | image_url: width: 600 }}"
-                  alt="{{ block.settings.image.alt | default: 'Illustration' }}"
-                  class="bento-grid-4__image"
-                  loading="lazy"
-                >
-              {% else %}
-                <div class="bento-grid-4__image-placeholder">
-                  {{ 'image' | placeholder_svg_tag }}
-                </div>
-              {% endif %}
-            </div>
-
-          {% when 'stat_card' %}
-            {% assign stat_count = 0 %}
-            {% for b in section.blocks %}
-              {% if b.type == 'stat_card' and b.id == block.id %}
-                {% break %}
-              {% endif %}
-              {% if b.type == 'stat_card' %}
-                {% assign stat_count = stat_count | plus: 1 %}
-              {% endif %}
-            {% endfor %}
-            <div class="bento-grid-4__card bento-grid-4__card--stat" style="grid-area: stat{{ stat_count | plus: 1 }};" {{ block.shopify_attributes }}>
-              <div class="bento-grid-4__stat-content bento-grid-4__stat-content--small">
-                <span class="bento-grid-4__stat-number bento-grid-4__stat-number--small">{{ block.settings.stat_number | default: '875 MW' }}</span>
-                <span class="bento-grid-4__stat-label bento-grid-4__stat-label--small">{{ block.settings.stat_label | default: 'Installed production capacity' }}</span>
+          {% when 'image_stat_card' %}
+            <div class="bento-grid-4__card bento-grid-4__card--image-stat" {{ block.shopify_attributes }}>
+              <div class="bento-grid-4__image-section">
+                {% if block.settings.image != blank %}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 600 }}"
+                    alt="{{ block.settings.image.alt | default: 'Illustration' }}"
+                    class="bento-grid-4__image"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <div class="bento-grid-4__image-placeholder">
+                    {{ 'image' | placeholder_svg_tag }}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="bento-grid-4__stat-section">
+                <span class="bento-grid-4__stat-number bento-grid-4__stat-number--medium">{{ block.settings.stat_number | default: '875 MW' }}</span>
+                <span class="bento-grid-4__stat-label bento-grid-4__stat-label--medium">{{ block.settings.stat_label | default: 'Installed production capacity' }}</span>
               </div>
             </div>
         {% endcase %}
@@ -123,17 +103,6 @@
   .bento-grid-4__grid {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "large-stat"
-      "img1"
-      "img2"
-      "stat1"
-      "stat2"
-      "heading"
-      "img3"
-      "img4"
-      "stat3"
-      "stat4";
     gap: 12px;
   }
 
@@ -200,12 +169,20 @@
     color: var(--bento-4-heading-text);
   }
 
-  /* Image Card */
-  .bento-grid-4__card--image {
-    padding: 20px;
-    min-height: 160px;
+  /* Combined Image + Stat Card */
+  .bento-grid-4__card--image-stat {
+    flex-direction: column;
+    padding: 0;
+    min-height: 280px;
+  }
+
+  .bento-grid-4__image-section {
+    flex: 1;
+    display: flex;
     align-items: center;
     justify-content: center;
+    padding: 24px 20px;
+    min-height: 160px;
   }
 
   .bento-grid-4__image {
@@ -213,7 +190,7 @@
     width: auto;
     height: auto;
     max-width: 100%;
-    max-height: 120px;
+    max-height: 140px;
     object-fit: contain;
   }
 
@@ -232,24 +209,20 @@
     opacity: 0.4;
   }
 
-  /* Small Stat Card */
-  .bento-grid-4__card--stat {
-    padding: 20px 16px;
-    min-height: 100px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .bento-grid-4__stat-content--small {
+  .bento-grid-4__stat-section {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 20px;
+    min-height: 100px;
   }
 
-  .bento-grid-4__stat-number--small {
+  .bento-grid-4__stat-number--medium {
     font-size: 32px;
   }
 
-  .bento-grid-4__stat-label--small {
+  .bento-grid-4__stat-label--medium {
     font-size: 11px;
     text-align: center;
     opacity: 0.7;
@@ -296,25 +269,29 @@
       font-size: 22px;
     }
 
-    .bento-grid-4__card--image {
+    .bento-grid-4__card--image-stat {
+      min-height: 240px;
+    }
+
+    .bento-grid-4__image-section {
       padding: 16px;
       min-height: 140px;
     }
 
     .bento-grid-4__image {
-      max-height: 100px;
+      max-height: 110px;
     }
 
-    .bento-grid-4__card--stat {
-      padding: 16px 12px;
-      min-height: 90px;
+    .bento-grid-4__stat-section {
+      padding: 16px;
+      min-height: 80px;
     }
 
-    .bento-grid-4__stat-number--small {
+    .bento-grid-4__stat-number--medium {
       font-size: 26px;
     }
 
-    .bento-grid-4__stat-label--small {
+    .bento-grid-4__stat-label--medium {
       font-size: 10px;
     }
   }
@@ -327,19 +304,13 @@
 
     .bento-grid-4__grid {
       grid-template-columns: repeat(2, 1fr);
-      grid-template-areas:
-        "large-stat img1"
-        "large-stat img2"
-        "stat1 stat2"
-        "heading img3"
-        "heading img4"
-        "stat3 stat4";
       gap: 12px;
     }
 
+    /* First large stat and heading span full width on 2-col */
     .bento-grid-4__card--large-stat,
     .bento-grid-4__card--heading {
-      min-height: auto;
+      grid-column: span 2;
     }
 
     .bento-grid-4__stat-number {
@@ -350,11 +321,11 @@
       font-size: 26px;
     }
 
-    .bento-grid-4__stat-number--small {
+    .bento-grid-4__stat-number--medium {
       font-size: 34px;
     }
 
-    .bento-grid-4__stat-label--small {
+    .bento-grid-4__stat-label--medium {
       font-size: 11px;
     }
   }
@@ -394,25 +365,29 @@
       font-size: 30px;
     }
 
-    .bento-grid-4__card--image {
-      padding: 24px;
+    .bento-grid-4__card--image-stat {
+      min-height: 320px;
+    }
+
+    .bento-grid-4__image-section {
+      padding: 28px 24px;
       min-height: 180px;
     }
 
     .bento-grid-4__image {
-      max-height: 140px;
+      max-height: 150px;
     }
 
-    .bento-grid-4__card--stat {
+    .bento-grid-4__stat-section {
       padding: 24px 20px;
       min-height: 110px;
     }
 
-    .bento-grid-4__stat-number--small {
+    .bento-grid-4__stat-number--medium {
       font-size: 38px;
     }
 
-    .bento-grid-4__stat-label--small {
+    .bento-grid-4__stat-label--medium {
       font-size: 12px;
     }
   }
@@ -425,12 +400,27 @@
 
     .bento-grid-4__grid {
       grid-template-columns: repeat(3, 1fr);
-      grid-template-areas:
-        "large-stat img1 img2"
-        "large-stat stat1 stat2"
-        "heading img3 img4"
-        "heading stat3 stat4";
+      grid-template-rows: repeat(2, 1fr);
       gap: 16px;
+    }
+
+    /* Large stat spans 2 rows in first column */
+    .bento-grid-4__card--large-stat {
+      grid-column: 1;
+      grid-row: span 1;
+    }
+
+    /* Heading spans 2 rows in first column */
+    .bento-grid-4__card--heading {
+      grid-column: 1;
+      grid-row: span 1;
+    }
+
+    /* Image+stat cards take single cells */
+    .bento-grid-4__card--image-stat {
+      grid-column: span 1;
+      grid-row: span 1;
+      min-height: auto;
     }
 
     .bento-grid-4__card {
@@ -439,6 +429,7 @@
 
     .bento-grid-4__card--large-stat {
       padding: 32px 28px;
+      min-height: auto;
     }
 
     .bento-grid-4__stat-number {
@@ -451,30 +442,33 @@
 
     .bento-grid-4__card--heading {
       padding: 32px 28px;
+      min-height: auto;
     }
 
     .bento-grid-4__heading {
       font-size: 34px;
     }
 
-    .bento-grid-4__card--image {
-      min-height: 160px;
+    .bento-grid-4__image-section {
+      padding: 20px;
+      min-height: 140px;
     }
 
     .bento-grid-4__image {
-      max-height: 130px;
+      max-height: 120px;
     }
 
-    .bento-grid-4__card--stat {
-      min-height: 100px;
+    .bento-grid-4__stat-section {
+      padding: 16px;
+      min-height: 90px;
     }
 
-    .bento-grid-4__stat-number--small {
-      font-size: 40px;
+    .bento-grid-4__stat-number--medium {
+      font-size: 36px;
     }
 
-    .bento-grid-4__stat-label--small {
-      font-size: 13px;
+    .bento-grid-4__stat-label--medium {
+      font-size: 11px;
     }
   }
 
@@ -513,26 +507,26 @@
       font-size: 40px;
     }
 
-    .bento-grid-4__card--image {
-      padding: 28px;
-      min-height: 180px;
+    .bento-grid-4__image-section {
+      padding: 24px;
+      min-height: 160px;
     }
 
     .bento-grid-4__image {
-      max-height: 150px;
+      max-height: 140px;
     }
 
-    .bento-grid-4__card--stat {
-      padding: 28px 24px;
-      min-height: 120px;
+    .bento-grid-4__stat-section {
+      padding: 20px;
+      min-height: 100px;
     }
 
-    .bento-grid-4__stat-number--small {
-      font-size: 46px;
+    .bento-grid-4__stat-number--medium {
+      font-size: 42px;
     }
 
-    .bento-grid-4__stat-label--small {
-      font-size: 14px;
+    .bento-grid-4__stat-label--medium {
+      font-size: 13px;
     }
   }
 
@@ -575,26 +569,26 @@
       font-size: 46px;
     }
 
-    .bento-grid-4__card--image {
-      padding: 32px;
-      min-height: 200px;
+    .bento-grid-4__image-section {
+      padding: 28px;
+      min-height: 180px;
     }
 
     .bento-grid-4__image {
-      max-height: 170px;
+      max-height: 160px;
     }
 
-    .bento-grid-4__card--stat {
-      padding: 32px 28px;
-      min-height: 140px;
+    .bento-grid-4__stat-section {
+      padding: 24px;
+      min-height: 120px;
     }
 
-    .bento-grid-4__stat-number--small {
-      font-size: 52px;
+    .bento-grid-4__stat-number--medium {
+      font-size: 48px;
     }
 
-    .bento-grid-4__stat-label--small {
-      font-size: 15px;
+    .bento-grid-4__stat-label--medium {
+      font-size: 14px;
     }
   }
 </style>
@@ -710,23 +704,16 @@
       ]
     },
     {
-      "type": "image_card",
-      "name": "Image Card",
+      "type": "image_stat_card",
+      "name": "Image + Stat Card",
       "limit": 4,
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
           "label": "Image",
-          "info": "Illustration or graphic for the card"
-        }
-      ]
-    },
-    {
-      "type": "stat_card",
-      "name": "Stat Card",
-      "limit": 4,
-      "settings": [
+          "info": "Illustration or graphic"
+        },
         {
           "type": "text",
           "id": "stat_number",
@@ -755,20 +742,14 @@
           }
         },
         {
-          "type": "image_card"
-        },
-        {
-          "type": "image_card"
-        },
-        {
-          "type": "stat_card",
+          "type": "image_stat_card",
           "settings": {
             "stat_number": "875 MW",
             "stat_label": "Installed production capacity"
           }
         },
         {
-          "type": "stat_card",
+          "type": "image_stat_card",
           "settings": {
             "stat_number": "9",
             "stat_label": "Hydrogen service stations"
@@ -782,20 +763,14 @@
           }
         },
         {
-          "type": "image_card"
-        },
-        {
-          "type": "image_card"
-        },
-        {
-          "type": "stat_card",
+          "type": "image_stat_card",
           "settings": {
             "stat_number": "500+",
             "stat_label": "Employees over multiple markets"
           }
         },
         {
-          "type": "stat_card",
+          "type": "image_stat_card",
           "settings": {
             "stat_number": "20+",
             "stat_label": "Countries with our presence"
