@@ -1,0 +1,703 @@
+{% style %}
+  .bento-grid-4-{{ section.id }} {
+    --bento-4-bg: {{ section.settings.background_color }};
+    --bento-4-card-bg: {{ section.settings.card_bg_color }};
+    --bento-4-stat-color: {{ section.settings.stat_color }};
+    --bento-4-label-color: {{ section.settings.label_color }};
+    --bento-4-heading-accent: {{ section.settings.heading_accent_color }};
+    --bento-4-heading-text: {{ section.settings.heading_text_color }};
+  }
+{% endstyle %}
+
+<section class="bento-grid-4 bento-grid-4-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="bento-grid-4__container">
+    <div class="bento-grid-4__grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'large_stat' %}
+            <div class="bento-grid-4__card bento-grid-4__card--large-stat" style="grid-area: large-stat;" {{ block.shopify_attributes }}>
+              <div class="bento-grid-4__stat-content">
+                <span class="bento-grid-4__stat-number">{{ block.settings.stat_number | default: '2M+' }}</span>
+                <span class="bento-grid-4__stat-label">{{ block.settings.stat_label | default: 'Followers' }}</span>
+              </div>
+            </div>
+
+          {% when 'heading_card' %}
+            <div class="bento-grid-4__card bento-grid-4__card--heading" style="grid-area: heading;" {{ block.shopify_attributes }}>
+              <h2 class="bento-grid-4__heading">
+                <span class="bento-grid-4__heading-accent">{{ block.settings.heading_accent | default: 'About us' }}</span>
+                <span class="bento-grid-4__heading-text"> {{ block.settings.heading_text | default: 'in a few numbers' }}</span>
+              </h2>
+            </div>
+
+          {% when 'image_card' %}
+            {% assign image_count = 0 %}
+            {% for b in section.blocks %}
+              {% if b.type == 'image_card' and b.id == block.id %}
+                {% break %}
+              {% endif %}
+              {% if b.type == 'image_card' %}
+                {% assign image_count = image_count | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+            <div class="bento-grid-4__card bento-grid-4__card--image" style="grid-area: img{{ image_count | plus: 1 }};" {{ block.shopify_attributes }}>
+              {% if block.settings.image != blank %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  alt="{{ block.settings.image.alt | default: 'Illustration' }}"
+                  class="bento-grid-4__image"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="bento-grid-4__image bento-grid-4__image--placeholder">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+          {% when 'stat_card' %}
+            {% assign stat_count = 0 %}
+            {% for b in section.blocks %}
+              {% if b.type == 'stat_card' and b.id == block.id %}
+                {% break %}
+              {% endif %}
+              {% if b.type == 'stat_card' %}
+                {% assign stat_count = stat_count | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+            <div class="bento-grid-4__card bento-grid-4__card--stat" style="grid-area: stat{{ stat_count | plus: 1 }};" {{ block.shopify_attributes }}>
+              <div class="bento-grid-4__stat-content bento-grid-4__stat-content--small">
+                <span class="bento-grid-4__stat-number bento-grid-4__stat-number--small">{{ block.settings.stat_number | default: '875 MW' }}</span>
+                <span class="bento-grid-4__stat-label bento-grid-4__stat-label--small">{{ block.settings.stat_label | default: 'Installed production capacity' }}</span>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .bento-grid-4 {
+    box-sizing: border-box;
+    background-color: var(--bento-4-bg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 30px 15px;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    overflow: hidden;
+  }
+
+  .bento-grid-4 *,
+  .bento-grid-4 *::before,
+  .bento-grid-4 *::after {
+    box-sizing: border-box;
+  }
+
+  .bento-grid-4__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .bento-grid-4__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "large-stat"
+      "img1"
+      "img2"
+      "stat1"
+      "stat2"
+      "heading"
+      "img3"
+      "img4"
+      "stat3"
+      "stat4";
+    gap: 12px;
+  }
+
+  /* Card Base */
+  .bento-grid-4__card {
+    background-color: var(--bento-4-card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Large Stat Card */
+  .bento-grid-4__card--large-stat {
+    padding: 30px 24px;
+    min-height: 180px;
+  }
+
+  .bento-grid-4__stat-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .bento-grid-4__stat-number {
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--bento-4-stat-color);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .bento-grid-4__stat-label {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--bento-4-label-color);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  /* Heading Card */
+  .bento-grid-4__card--heading {
+    padding: 30px 24px;
+    min-height: 180px;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .bento-grid-4__heading {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .bento-grid-4__heading-accent {
+    color: var(--bento-4-heading-accent);
+  }
+
+  .bento-grid-4__heading-text {
+    color: var(--bento-4-heading-text);
+  }
+
+  /* Image Card */
+  .bento-grid-4__card--image {
+    padding: 20px;
+    min-height: 180px;
+  }
+
+  .bento-grid-4__image {
+    width: 100%;
+    height: auto;
+    max-height: 160px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .bento-grid-4__image--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e8e8e8;
+    border-radius: 12px;
+    height: 140px;
+    width: 100%;
+  }
+
+  .bento-grid-4__image--placeholder svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.5;
+  }
+
+  /* Small Stat Card */
+  .bento-grid-4__card--stat {
+    padding: 24px 20px;
+    min-height: 120px;
+  }
+
+  .bento-grid-4__stat-content--small {
+    align-items: center;
+    text-align: center;
+  }
+
+  .bento-grid-4__stat-number--small {
+    font-size: 36px;
+  }
+
+  .bento-grid-4__stat-label--small {
+    font-size: 12px;
+    text-align: center;
+    opacity: 0.7;
+  }
+
+  /* Responsive - Small Mobile (< 400px) */
+  @media (max-width: 399px) {
+    .bento-grid-4 {
+      padding: 20px 12px;
+    }
+
+    .bento-grid-4__grid {
+      gap: 10px;
+    }
+
+    .bento-grid-4__card {
+      border-radius: 16px;
+    }
+
+    .bento-grid-4__card--large-stat {
+      padding: 24px 20px;
+      min-height: 150px;
+    }
+
+    .bento-grid-4__stat-number {
+      font-size: 44px;
+    }
+
+    .bento-grid-4__heading {
+      font-size: 24px;
+    }
+
+    .bento-grid-4__card--image {
+      padding: 16px;
+      min-height: 150px;
+    }
+
+    .bento-grid-4__image {
+      max-height: 130px;
+    }
+
+    .bento-grid-4__stat-number--small {
+      font-size: 28px;
+    }
+
+    .bento-grid-4__stat-label--small {
+      font-size: 11px;
+    }
+  }
+
+  /* Responsive - Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    .bento-grid-4 {
+      padding: 30px 20px;
+    }
+
+    .bento-grid-4__grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "large-stat large-stat"
+        "img1 img2"
+        "stat1 stat2"
+        "heading heading"
+        "img3 img4"
+        "stat3 stat4";
+    }
+
+    .bento-grid-4__stat-number {
+      font-size: 52px;
+    }
+
+    .bento-grid-4__heading {
+      font-size: 30px;
+    }
+  }
+
+  /* Responsive - Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .bento-grid-4 {
+      padding: 40px 24px;
+    }
+
+    .bento-grid-4__grid {
+      gap: 14px;
+    }
+
+    .bento-grid-4__card {
+      border-radius: 22px;
+    }
+
+    .bento-grid-4__card--large-stat {
+      padding: 36px 28px;
+      min-height: 200px;
+    }
+
+    .bento-grid-4__stat-number {
+      font-size: 60px;
+    }
+
+    .bento-grid-4__stat-label {
+      font-size: 15px;
+    }
+
+    .bento-grid-4__heading {
+      font-size: 34px;
+    }
+
+    .bento-grid-4__card--image {
+      min-height: 200px;
+    }
+
+    .bento-grid-4__image {
+      max-height: 180px;
+    }
+
+    .bento-grid-4__stat-number--small {
+      font-size: 40px;
+    }
+
+    .bento-grid-4__stat-label--small {
+      font-size: 13px;
+    }
+  }
+
+  /* Responsive - Tablet (768px+) */
+  @media (min-width: 768px) {
+    .bento-grid-4 {
+      padding: 50px 30px;
+    }
+
+    .bento-grid-4__grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+        "large-stat img1 img2"
+        "large-stat stat1 stat2"
+        "heading img3 img4"
+        "heading stat3 stat4";
+      gap: 14px;
+    }
+
+    .bento-grid-4__stat-number {
+      font-size: 66px;
+    }
+
+    .bento-grid-4__heading {
+      font-size: 36px;
+    }
+
+    .bento-grid-4__card--image {
+      min-height: 180px;
+    }
+  }
+
+  /* Responsive - Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .bento-grid-4 {
+      padding: 60px 40px;
+    }
+
+    .bento-grid-4__grid {
+      gap: 16px;
+    }
+
+    .bento-grid-4__card {
+      border-radius: 24px;
+    }
+
+    .bento-grid-4__card--large-stat {
+      padding: 40px 32px;
+    }
+
+    .bento-grid-4__stat-number {
+      font-size: 76px;
+    }
+
+    .bento-grid-4__stat-label {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .bento-grid-4__card--heading {
+      padding: 40px 32px;
+    }
+
+    .bento-grid-4__heading {
+      font-size: 42px;
+    }
+
+    .bento-grid-4__card--image {
+      padding: 24px;
+      min-height: 200px;
+    }
+
+    .bento-grid-4__image {
+      max-height: 200px;
+    }
+
+    .bento-grid-4__card--stat {
+      padding: 28px 24px;
+      min-height: 140px;
+    }
+
+    .bento-grid-4__stat-number--small {
+      font-size: 44px;
+    }
+
+    .bento-grid-4__stat-label--small {
+      font-size: 14px;
+    }
+  }
+
+  /* Responsive - Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .bento-grid-4 {
+      padding: 80px 50px;
+    }
+
+    .bento-grid-4__container {
+      max-width: 1300px;
+    }
+
+    .bento-grid-4__grid {
+      gap: 18px;
+    }
+
+    .bento-grid-4__card--large-stat {
+      padding: 48px 36px;
+    }
+
+    .bento-grid-4__stat-number {
+      font-size: 90px;
+    }
+
+    .bento-grid-4__stat-label {
+      font-size: 17px;
+      margin-top: 12px;
+    }
+
+    .bento-grid-4__card--heading {
+      padding: 48px 36px;
+    }
+
+    .bento-grid-4__heading {
+      font-size: 48px;
+    }
+
+    .bento-grid-4__card--image {
+      padding: 28px;
+      min-height: 220px;
+    }
+
+    .bento-grid-4__image {
+      max-height: 220px;
+    }
+
+    .bento-grid-4__card--stat {
+      padding: 32px 28px;
+      min-height: 160px;
+    }
+
+    .bento-grid-4__stat-number--small {
+      font-size: 50px;
+    }
+
+    .bento-grid-4__stat-label--small {
+      font-size: 15px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "SEK Bento Grid 4",
+  "tag": "section",
+  "class": "bento-grid-4-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#dbd9db"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background Color",
+      "default": "#f7f6f5"
+    },
+    {
+      "type": "color",
+      "id": "stat_color",
+      "label": "Stat Number Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#4a4a4a"
+    },
+    {
+      "type": "color",
+      "id": "heading_accent_color",
+      "label": "Heading Accent Color",
+      "default": "#ff5837"
+    },
+    {
+      "type": "color",
+      "id": "heading_text_color",
+      "label": "Heading Text Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "large_stat",
+      "name": "Large Stat",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat_number",
+          "label": "Stat Number",
+          "default": "2M+"
+        },
+        {
+          "type": "text",
+          "id": "stat_label",
+          "label": "Stat Label",
+          "default": "Followers"
+        }
+      ]
+    },
+    {
+      "type": "heading_card",
+      "name": "Heading Card",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading_accent",
+          "label": "Heading Accent Text",
+          "default": "About us"
+        },
+        {
+          "type": "text",
+          "id": "heading_text",
+          "label": "Heading Text",
+          "default": "in a few numbers"
+        }
+      ]
+    },
+    {
+      "type": "image_card",
+      "name": "Image Card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Illustration or graphic for the card"
+        }
+      ]
+    },
+    {
+      "type": "stat_card",
+      "name": "Stat Card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat_number",
+          "label": "Stat Number",
+          "default": "875 MW"
+        },
+        {
+          "type": "text",
+          "id": "stat_label",
+          "label": "Stat Label",
+          "default": "Installed production capacity"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Bento Grid 4",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "large_stat",
+          "settings": {
+            "stat_number": "2M+",
+            "stat_label": "Followers"
+          }
+        },
+        {
+          "type": "image_card"
+        },
+        {
+          "type": "image_card"
+        },
+        {
+          "type": "stat_card",
+          "settings": {
+            "stat_number": "875 MW",
+            "stat_label": "Installed production capacity"
+          }
+        },
+        {
+          "type": "stat_card",
+          "settings": {
+            "stat_number": "9",
+            "stat_label": "Hydrogen service stations"
+          }
+        },
+        {
+          "type": "heading_card",
+          "settings": {
+            "heading_accent": "About us",
+            "heading_text": "in a few numbers"
+          }
+        },
+        {
+          "type": "image_card"
+        },
+        {
+          "type": "image_card"
+        },
+        {
+          "type": "stat_card",
+          "settings": {
+            "stat_number": "500+",
+            "stat_label": "Employees over multiple markets"
+          }
+        },
+        {
+          "type": "stat_card",
+          "settings": {
+            "stat_number": "20+",
+            "stat_label": "Countries with our presence"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
