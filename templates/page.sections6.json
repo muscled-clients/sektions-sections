@@ -1317,6 +1317,70 @@
         "overlay_opacity": 45,
         "card_bg_color": "#4a90a4"
       }
+    },
+    "why_chosse_us_AC4m9N": {
+      "type": "why-chosse-us",
+      "blocks": {
+        "feature_card_43zbUR": {
+          "type": "feature_card",
+          "settings": {
+            "icon": "shopify://shop_images/Icon_647e51b7-eefc-4067-b118-8085acbd4cf0.svg",
+            "title": "SAME-DAY SHIP OUT",
+            "description": "Your order prints today. Ships today. Place your order before noon and we'll ship it the same day. No delays, no excuses.",
+            "card_style": "white"
+          }
+        },
+        "feature_card_gtKdxj": {
+          "type": "feature_card",
+          "settings": {
+            "icon": "shopify://shop_images/Icon_01aa85ce-3cf0-43cc-9fb6-b054dbf11766.svg",
+            "title": "ZERO-DOUBT™ QUALITY CHECK",
+            "description": "Checked by real humans, reprinted if needed. Every transfer is reviewed. We stand behind every print, no questions asked.",
+            "card_style": "dark"
+          }
+        },
+        "feature_card_jE834j": {
+          "type": "feature_card",
+          "settings": {
+            "icon": "shopify://shop_images/Icon_38476dda-8f15-430e-bdf1-6a6785c5c80d.svg",
+            "title": "ANY DESIGN, ANY DETAIL",
+            "description": "No color limits. No size limits. Whether it's text, full-color art, or fine detail, we print it exactly how you envision it.",
+            "card_style": "white"
+          }
+        },
+        "feature_card_QctdJq": {
+          "type": "feature_card",
+          "settings": {
+            "icon": "shopify://shop_images/Icon.svg",
+            "title": "SKILLED DESIGNER SUPPORT",
+            "description": "Have tweaks or edits? We've got you. Our team can adjust your artwork, just leave a note at checkout.",
+            "card_style": "gray"
+          }
+        }
+      },
+      "block_order": [
+        "feature_card_43zbUR",
+        "feature_card_gtKdxj",
+        "feature_card_jE834j",
+        "feature_card_QctdJq"
+      ],
+      "name": "SEK Why Choose Us",
+      "settings": {
+        "subtitle": "WHY 80,000+ CREATORS CHOOSE DTFSHEET™",
+        "heading_part1": "WHY",
+        "heading_part2": "CHOOSE US?",
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "accent_color": "#00D4D4",
+        "text_color": "#666666",
+        "description_color": "#888888",
+        "subtitle_color": "#888888",
+        "card_bg_color": "#ffffff",
+        "card_border_color": "#e8e8e8",
+        "gray_card_bg_color": "#f0f0f0",
+        "dark_card_bg_color": "#1a1a1a",
+        "dark_card_text_color": "#ffffff"
+      }
     }
   },
   "order": [
@@ -1336,6 +1400,7 @@
     "feature13_eqG449",
     "product_deatils2_TQ9nrC",
     "prouct_details_xt3rF7",
-    "hero2_bzeyWB"
+    "hero2_bzeyWB",
+    "why_chosse_us_AC4m9N"
   ]
 }
