@@ -1279,6 +1279,7 @@
     },
     "hero2_bzeyWB": {
       "type": "hero2",
+      "disabled": true,
       "name": "SEK Hero 2",
       "settings": {
         "background_image": "shopify://shop_images/moises-alex-WqI-PbYugn4-unsplash_1.jpg",
@@ -1316,6 +1317,67 @@
         "overlay_opacity": 45,
         "card_bg_color": "#4a90a4"
       }
+    },
+    "why_chosse_us_FKUwrY": {
+      "type": "why-chosse-us",
+      "blocks": {
+        "feature_card_VTpgwX": {
+          "type": "feature_card",
+          "settings": {
+            "icon": "shopify://shop_images/Icon_647e51b7-eefc-4067-b118-8085acbd4cf0.svg",
+            "title": "SAME-DAY SHIP OUT",
+            "description": "Your order prints today. Ships today. Place your order before noon and we'll ship it the same day. No delays, no excuses.",
+            "is_dark": false
+          }
+        },
+        "feature_card_6N6t8r": {
+          "type": "feature_card",
+          "settings": {
+            "icon": "shopify://shop_images/Icon_01aa85ce-3cf0-43cc-9fb6-b054dbf11766.svg",
+            "title": "ZERO-DOUBT™ QUALITY CHECK",
+            "description": "Checked by real humans, reprinted if needed. Every transfer is reviewed. We stand behind every print, no questions asked.",
+            "is_dark": true
+          }
+        },
+        "feature_card_cmxygn": {
+          "type": "feature_card",
+          "settings": {
+            "icon": "shopify://shop_images/Icon_38476dda-8f15-430e-bdf1-6a6785c5c80d.svg",
+            "title": "ANY DESIGN, ANY DETAIL",
+            "description": "No color limits. No size limits. Whether it's text, full-color art, or fine detail, we print it exactly how you envision it.",
+            "is_dark": false
+          }
+        },
+        "feature_card_6F4H8f": {
+          "type": "feature_card",
+          "settings": {
+            "icon": "shopify://shop_images/Icon.svg",
+            "title": "SKILLED DESIGNER SUPPORT",
+            "description": "Have tweaks or edits? We've got you. Our team can adjust your artwork, just leave a note at checkout.",
+            "is_dark": false
+          }
+        }
+      },
+      "block_order": [
+        "feature_card_VTpgwX",
+        "feature_card_6N6t8r",
+        "feature_card_cmxygn",
+        "feature_card_6F4H8f"
+      ],
+      "name": "SEK Why Choose Us",
+      "settings": {
+        "subtitle": "WHY 80,000+ CREATORS CHOOSE DTFSHEET™",
+        "heading_part1": "WHY",
+        "heading_part2": "CHOOSE US?",
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "accent_color": "#00d4d4",
+        "text_color": "#666666",
+        "subtitle_color": "#888888",
+        "card_bg_color": "#ffffff",
+        "dark_card_bg_color": "#1a1a1a",
+        "dark_card_text_color": "#ffffff"
+      }
     }
   },
   "order": [
@@ -1335,6 +1397,7 @@
     "feature13_eqG449",
     "product_deatils2_TQ9nrC",
     "prouct_details_xt3rF7",
-    "hero2_bzeyWB"
+    "hero2_bzeyWB",
+    "why_chosse_us_FKUwrY"
   ]
 }
