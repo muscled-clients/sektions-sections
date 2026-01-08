@@ -1,0 +1,846 @@
+{% style %}
+  .press-go-steps-{{ section.id }} {
+    --pgs-bg: {{ section.settings.background_color }};
+    --pgs-heading-color: {{ section.settings.heading_color }};
+    --pgs-accent-color: {{ section.settings.accent_color }};
+    --pgs-text-color: {{ section.settings.text_color }};
+    --pgs-subtitle-color: {{ section.settings.subtitle_color }};
+    --pgs-card-bg: {{ section.settings.card_bg_color }};
+    --pgs-badge-bg: {{ section.settings.badge_bg_color }};
+    --pgs-badge-text: {{ section.settings.badge_text_color }};
+  }
+{% endstyle %}
+
+<section class="press-go-steps press-go-steps-{{ section.id }}" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color }};">
+  <!-- Decorative Elements -->
+  <div class="pgs__decorations">
+    {% if section.settings.decor_arc_left != blank %}
+      <div class="pgs__decor pgs__decor--arc-left">
+        <img src="{{ section.settings.decor_arc_left | image_url: width: 120 }}" alt="" loading="lazy">
+      </div>
+    {% endif %}
+    {% if section.settings.decor_arc_right != blank %}
+      <div class="pgs__decor pgs__decor--arc-right">
+        <img src="{{ section.settings.decor_arc_right | image_url: width: 120 }}" alt="" loading="lazy">
+      </div>
+    {% endif %}
+    {% if section.settings.decor_dot_1 != blank %}
+      <div class="pgs__decor pgs__decor--dot-1">
+        <img src="{{ section.settings.decor_dot_1 | image_url: width: 60 }}" alt="" loading="lazy">
+      </div>
+    {% endif %}
+    {% if section.settings.decor_dot_2 != blank %}
+      <div class="pgs__decor pgs__decor--dot-2">
+        <img src="{{ section.settings.decor_dot_2 | image_url: width: 60 }}" alt="" loading="lazy">
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="pgs__container">
+    <!-- Header -->
+    <div class="pgs__header">
+      {% if section.settings.subtitle != blank %}
+        <p class="pgs__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      <h2 class="pgs__heading">
+        <span class="pgs__heading-line1">{{ section.settings.heading_line1 }}</span>
+        <span class="pgs__heading-line2">{{ section.settings.heading_line2 }}</span>
+      </h2>
+    </div>
+
+    <!-- Steps Cards -->
+    <div class="pgs__cards">
+      {% for block in section.blocks %}
+        {% if block.type == 'step_card' %}
+          <div class="pgs__card pgs__card--{{ forloop.index }}" {{ block.shopify_attributes }}>
+            <!-- Content Area (White Box) -->
+            <div class="pgs__card-content">
+              <div class="pgs__card-badge">{{ forloop.index }}</div>
+              <h3 class="pgs__card-title">{{ block.settings.title }}</h3>
+              <p class="pgs__card-description">{{ block.settings.description }}</p>
+            </div>
+            <!-- Image (Extends Beyond) -->
+            <div class="pgs__card-image">
+              {% if block.settings.image != blank %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 500 }}"
+                  srcset="{{ block.settings.image | image_url: width: 300 }} 300w,
+                          {{ block.settings.image | image_url: width: 400 }} 400w,
+                          {{ block.settings.image | image_url: width: 500 }} 500w"
+                  sizes="(max-width: 767px) 90vw, 350px"
+                  alt="{{ block.settings.title }}"
+                  width="500"
+                  height="auto"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="pgs__card-image-placeholder">
+                  <svg viewBox="0 0 100 80" fill="none" stroke="currentColor" stroke-width="1">
+                    <rect x="5" y="5" width="90" height="70" rx="4"/>
+                    <circle cx="30" cy="30" r="10"/>
+                    <path d="M5 60 L30 35 L50 55 L70 30 L95 50 L95 75 L5 75 Z"/>
+                  </svg>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ========================================
+     BASE STYLES (Mobile First)
+     ======================================== */
+  .press-go-steps {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 60px 20px 120px;
+    background-color: var(--pgs-bg, #f5f5f5) !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow: visible !important;
+    clip-path: none !important;
+  }
+
+  .press-go-steps *,
+  .press-go-steps *::before,
+  .press-go-steps *::after {
+    box-sizing: border-box;
+  }
+
+  .press-go-steps img {
+    max-width: 100%;
+    height: auto;
+    border: 0;
+  }
+
+  /* ========================================
+     DECORATIVE ELEMENTS
+     ======================================== */
+  .pgs__decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 5;
+    overflow: visible;
+  }
+
+  .pgs__decor {
+    position: absolute;
+    z-index: 5;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .pgs__decor img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Arc Left */
+  .pgs__decor--arc-left {
+    top: 10px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Arc Right */
+  .pgs__decor--arc-right {
+    top: 10px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Dot 1 */
+  .pgs__decor--dot-1 {
+    top: 120px;
+    left: 15%;
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Dot 2 */
+  .pgs__decor--dot-2 {
+    top: 90px;
+    left: 40%;
+    width: 28px;
+    height: 28px;
+  }
+
+  /* ========================================
+     CONTAINER
+     ======================================== */
+  .pgs__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    max-width: 1300px;
+    z-index: 10;
+  }
+
+  /* ========================================
+     HEADER
+     ======================================== */
+  .pgs__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .pgs__subtitle {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pgs-subtitle-color, #888888);
+    margin: 0;
+  }
+
+  .pgs__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+  }
+
+  .pgs__heading-line1 {
+    font-size: 32px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--pgs-heading-color, #1a1a1a);
+    line-height: 1.2;
+  }
+
+  .pgs__heading-line2 {
+    font-size: 32px;
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--pgs-heading-color, #1a1a1a);
+    background-color: var(--pgs-accent-color, #00D4D4);
+    padding: 8px 24px;
+    line-height: 1.2;
+  }
+
+  /* ========================================
+     CARDS GRID
+     ======================================== */
+  .pgs__cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    width: 100%;
+    padding-top: 20px;
+  }
+
+  /* ========================================
+     INDIVIDUAL CARD
+     ======================================== */
+  .pgs__card {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+  }
+
+  /* Card Content (White Box) */
+  .pgs__card-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: var(--pgs-card-bg, #ffffff);
+    border-radius: 12px 12px 0 0;
+    padding: 48px 24px 24px;
+    gap: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    z-index: 2;
+  }
+
+  /* Card Badge */
+  .pgs__card-badge {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--pgs-badge-bg, #1a1a1a);
+    color: var(--pgs-badge-text, #ffffff);
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 8px;
+    z-index: 3;
+  }
+
+  /* Badge positions per card */
+  .pgs__card--1 .pgs__card-badge {
+    left: 24px;
+    transform: none;
+  }
+
+  .pgs__card--2 .pgs__card-badge {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .pgs__card--3 .pgs__card-badge {
+    left: auto;
+    right: 24px;
+    transform: none;
+  }
+
+  .pgs__card-title {
+    font-size: 20px;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--pgs-heading-color, #1a1a1a);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .pgs__card-description {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--pgs-text-color, #666666);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Card Image (Extends Beyond) */
+  .pgs__card-image {
+    position: relative;
+    width: 100%;
+    margin-top: -1px;
+    z-index: 1;
+  }
+
+  .pgs__card-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .pgs__card-image-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background-color: #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bbb;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .pgs__card-image-placeholder svg {
+    width: 50%;
+    height: auto;
+  }
+
+  /* ========================================
+     RESPONSIVE - MEDIUM MOBILE (400px+)
+     ======================================== */
+  @media (min-width: 400px) {
+    .press-go-steps {
+      padding: 70px 24px 140px;
+    }
+
+    .pgs__subtitle {
+      font-size: 12px;
+    }
+
+    .pgs__heading-line1,
+    .pgs__heading-line2 {
+      font-size: 36px;
+    }
+
+    .pgs__card {
+      max-width: 380px;
+    }
+
+    .pgs__card-title {
+      font-size: 22px;
+    }
+
+    .pgs__decor--arc-left {
+      width: 55px;
+      height: 55px;
+      top: 10px;
+      left: 30px;
+    }
+
+    .pgs__decor--arc-right {
+      width: 55px;
+      height: 55px;
+      top: 10px;
+      right: 30px;
+    }
+
+    .pgs__decor--dot-1 {
+      top: 130px;
+      left: 18%;
+    }
+
+    .pgs__decor--dot-2 {
+      top: 100px;
+      left: 42%;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE MOBILE (550px+)
+     ======================================== */
+  @media (min-width: 550px) {
+    .press-go-steps {
+      padding: 80px 32px 160px;
+    }
+
+    .pgs__container {
+      gap: 60px;
+    }
+
+    .pgs__heading-line1,
+    .pgs__heading-line2 {
+      font-size: 40px;
+    }
+
+    .pgs__card-content {
+      padding: 52px 28px 28px;
+    }
+
+    .pgs__card-title {
+      font-size: 24px;
+    }
+
+    .pgs__card-description {
+      font-size: 15px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - TABLET (768px+)
+     ======================================== */
+  @media (min-width: 768px) {
+    .press-go-steps {
+      padding: 80px 40px 180px;
+    }
+
+    .pgs__container {
+      gap: 60px;
+    }
+
+    .pgs__heading-line1,
+    .pgs__heading-line2 {
+      font-size: 44px;
+    }
+
+    .pgs__heading-line2 {
+      padding: 10px 28px;
+    }
+
+    .pgs__cards {
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      padding-top: 30px;
+    }
+
+    .pgs__card {
+      flex: 0 0 calc(33.333% - 20px);
+      max-width: 360px;
+    }
+
+    /* Card rotations */
+    .pgs__card--1 {
+      transform: rotate(-4deg);
+      margin-top: 20px;
+    }
+
+    .pgs__card--2 {
+      transform: rotate(0deg);
+    }
+
+    .pgs__card--3 {
+      transform: rotate(4deg);
+      margin-top: 20px;
+    }
+
+    .pgs__card-badge {
+      width: 48px;
+      height: 48px;
+      font-size: 22px;
+      top: -22px;
+    }
+
+    .pgs__decor--arc-left {
+      width: 60px;
+      height: 60px;
+      top: 15px;
+      left: 60px;
+    }
+
+    .pgs__decor--arc-right {
+      width: 60px;
+      height: 60px;
+      top: 15px;
+      right: 60px;
+    }
+
+    .pgs__decor--dot-1 {
+      top: 150px;
+      left: 12%;
+      width: 14px;
+      height: 14px;
+    }
+
+    .pgs__decor--dot-2 {
+      top: 110px;
+      left: 40%;
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - DESKTOP (1024px+)
+     ======================================== */
+  @media (min-width: 1024px) {
+    .press-go-steps {
+      padding: 100px 48px 200px;
+    }
+
+    .pgs__container {
+      gap: 70px;
+    }
+
+    .pgs__heading-line1,
+    .pgs__heading-line2 {
+      font-size: 50px;
+    }
+
+    .pgs__cards {
+      gap: 40px;
+    }
+
+    .pgs__card {
+      max-width: 400px;
+    }
+
+    /* Enhanced rotations */
+    .pgs__card--1 {
+      transform: rotate(-5deg);
+      margin-top: 30px;
+    }
+
+    .pgs__card--3 {
+      transform: rotate(5deg);
+      margin-top: 30px;
+    }
+
+    .pgs__card-content {
+      padding: 56px 32px 32px;
+      gap: 14px;
+    }
+
+    .pgs__card-title {
+      font-size: 26px;
+    }
+
+    .pgs__card-badge {
+      width: 52px;
+      height: 52px;
+      font-size: 24px;
+      top: -24px;
+      border-radius: 10px;
+    }
+
+    .pgs__decor--arc-left {
+      width: 60px;
+      height: 60px;
+      top: 20px;
+      left: 100px;
+    }
+
+    .pgs__decor--arc-right {
+      width: 60px;
+      height: 60px;
+      top: 20px;
+      right: 100px;
+    }
+
+    .pgs__decor--dot-1 {
+      top: 160px;
+      left: 15%;
+      width: 14px;
+      height: 14px;
+    }
+
+    .pgs__decor--dot-2 {
+      top: 120px;
+      left: 42%;
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE DESKTOP (1400px+)
+     ======================================== */
+  @media (min-width: 1400px) {
+    .press-go-steps {
+      padding: 120px 48px 240px;
+    }
+
+    .pgs__container {
+      gap: 80px;
+    }
+
+    .pgs__heading-line1,
+    .pgs__heading-line2 {
+      font-size: 56px;
+    }
+
+    .pgs__cards {
+      gap: 50px;
+    }
+
+    .pgs__card {
+      max-width: 420px;
+    }
+
+    .pgs__card-content {
+      padding: 60px 36px 36px;
+    }
+
+    .pgs__card-title {
+      font-size: 28px;
+    }
+
+    .pgs__card-description {
+      font-size: 16px;
+    }
+
+    .pgs__decor--arc-left {
+      width: 60px;
+      height: 60px;
+      top: 25px;
+      left: 120px;
+    }
+
+    .pgs__decor--arc-right {
+      width: 60px;
+      height: 60px;
+      top: 25px;
+      right: 120px;
+    }
+
+    .pgs__decor--dot-1 {
+      top: 180px;
+      left: 18%;
+      width: 14px;
+      height: 14px;
+    }
+
+    .pgs__decor--dot-2 {
+      top: 130px;
+      left: 44%;
+      width: 28px;
+      height: 28px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Press & Go Steps",
+  "tag": "section",
+  "class": "press-go-steps-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "FROM UPLOAD TO FINISHED PRODUCT"
+    },
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading Line 1",
+      "default": "HOW IT WORKS"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading Line 2 (Highlighted)",
+      "default": "JUST PRESS & GO"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#00D4D4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Decorative Elements"
+    },
+    {
+      "type": "image_picker",
+      "id": "decor_arc_left",
+      "label": "Left Arc Icon",
+      "info": "Upload a C-shaped arc icon (PNG with transparency recommended, ~60x60px)"
+    },
+    {
+      "type": "image_picker",
+      "id": "decor_arc_right",
+      "label": "Right Arc Icon",
+      "info": "Upload a C-shaped arc icon (PNG with transparency recommended, ~60x60px)"
+    },
+    {
+      "type": "image_picker",
+      "id": "decor_dot_1",
+      "label": "Decoration 1 (Solid Dot)",
+      "info": "Upload a solid dot icon (PNG with transparency recommended, ~14x14px)"
+    },
+    {
+      "type": "image_picker",
+      "id": "decor_dot_2",
+      "label": "Decoration 2 (Ring)",
+      "info": "Upload a hollow ring icon (PNG with transparency recommended, ~28x28px)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step_card",
+      "name": "Step Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "STEP TITLE"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Description text explaining this step in the process."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Step Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press & Go Steps",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "step_card",
+          "settings": {
+            "title": "PLACE YOUR TRANSFER",
+            "description": "Position your DTF Sheet on the fabric, print side up. Make sure it's centered and smooth, ready to press."
+          }
+        },
+        {
+          "type": "step_card",
+          "settings": {
+            "title": "HEAT PRESS",
+            "description": "At 320F° for 100% cotton and At 280F° for polyester or blends for 8 seconds."
+          }
+        },
+        {
+          "type": "step_card",
+          "settings": {
+            "title": "PEEL DTF SHEET",
+            "description": "Peel while warm for a smooth, clean finish. (Cold peel also works, your call.)"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
