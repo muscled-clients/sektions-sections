@@ -134,7 +134,7 @@
   .wcu__cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0;
+    gap: 24px;
     width: 100%;
   }
 
@@ -145,18 +145,15 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 32px 28px;
-    background-color: var(--wcu-card-bg);
-    border-right: 1px solid rgba(0, 0, 0, 0.08);
-  }
-
-  .wcu__card:last-child {
-    border-right: none;
+    padding: 32px 24px;
+    background-color: transparent;
   }
 
   /* Dark card variant */
   .wcu__card--dark {
     background-color: var(--wcu-dark-card-bg);
+    border-radius: 16px;
+    padding: 32px 28px;
   }
 
   .wcu__card--dark .wcu__card-title,
@@ -237,16 +234,16 @@
 
     .wcu__cards {
       grid-template-columns: 1fr;
+      gap: 16px;
     }
 
     .wcu__card {
-      border-right: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      padding: 28px 20px;
+      padding: 24px 16px;
     }
 
-    .wcu__card:last-child {
-      border-bottom: none;
+    .wcu__card--dark {
+      padding: 24px 20px;
+      border-radius: 12px;
     }
 
     .wcu__card-icon {
@@ -292,16 +289,16 @@
 
     .wcu__cards {
       grid-template-columns: 1fr;
+      gap: 20px;
     }
 
     .wcu__card {
-      border-right: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      padding: 28px 24px;
+      padding: 28px 20px;
     }
 
-    .wcu__card:last-child {
-      border-bottom: none;
+    .wcu__card--dark {
+      padding: 28px 24px;
+      border-radius: 14px;
     }
 
     .wcu__card-icon {
@@ -334,19 +331,15 @@
 
     .wcu__cards {
       grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
     }
 
     .wcu__card {
-      border-right: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 28px 20px;
     }
 
-    .wcu__card:nth-child(odd) {
-      border-right: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    .wcu__card:nth-last-child(-n+2) {
-      border-bottom: none;
+    .wcu__card--dark {
+      padding: 28px 24px;
     }
   }
 
@@ -368,20 +361,15 @@
 
     .wcu__cards {
       grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
     }
 
     .wcu__card {
-      border-right: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      padding: 32px;
+      padding: 32px 24px;
     }
 
-    .wcu__card:nth-child(odd) {
-      border-right: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    .wcu__card:nth-last-child(-n+2) {
-      border-bottom: none;
+    .wcu__card--dark {
+      padding: 32px 28px;
     }
   }
 
@@ -403,16 +391,15 @@
 
     .wcu__cards {
       grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
     }
 
     .wcu__card {
       padding: 32px 24px;
-      border-right: 1px solid rgba(0, 0, 0, 0.08);
-      border-bottom: none;
     }
 
-    .wcu__card:last-child {
-      border-right: none;
+    .wcu__card--dark {
+      padding: 32px 28px;
     }
   }
 
@@ -436,8 +423,16 @@
       font-size: 36px;
     }
 
+    .wcu__cards {
+      gap: 28px;
+    }
+
     .wcu__card {
       padding: 32px 28px;
+    }
+
+    .wcu__card--dark {
+      padding: 36px 32px;
     }
 
     .wcu__card-title {
