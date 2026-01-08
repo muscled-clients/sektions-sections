@@ -1,0 +1,608 @@
+{% style %}
+  .why-choose-us-{{ section.id }} {
+    --wcu-bg: {{ section.settings.background_color }};
+    --wcu-heading-color: {{ section.settings.heading_color }};
+    --wcu-accent-color: {{ section.settings.accent_color }};
+    --wcu-text-color: {{ section.settings.text_color }};
+    --wcu-subtitle-color: {{ section.settings.subtitle_color }};
+    --wcu-card-bg: {{ section.settings.card_bg_color }};
+    --wcu-dark-card-bg: {{ section.settings.dark_card_bg_color }};
+    --wcu-dark-card-text: {{ section.settings.dark_card_text_color }};
+  }
+{% endstyle %}
+
+<section class="why-choose-us why-choose-us-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="wcu__container">
+    <!-- Header -->
+    <div class="wcu__header">
+      {% if section.settings.subtitle != blank %}
+        <p class="wcu__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      <h2 class="wcu__heading">
+        <span class="wcu__heading-dark">{{ section.settings.heading_part1 }}</span>
+        <span class="wcu__heading-accent">{{ section.settings.heading_part2 }}</span>
+      </h2>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="wcu__cards">
+      {% for block in section.blocks %}
+        {% if block.type == 'feature_card' %}
+          <div class="wcu__card {% if block.settings.is_dark %}wcu__card--dark{% endif %}" {{ block.shopify_attributes }}>
+            <div class="wcu__card-icon">
+              {% if block.settings.icon != blank %}
+                <img
+                  src="{{ block.settings.icon | image_url: width: 64 }}"
+                  alt="{{ block.settings.title }}"
+                  width="64"
+                  height="64"
+                  loading="lazy"
+                >
+              {% else %}
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="32" cy="32" r="24"/>
+                </svg>
+              {% endif %}
+            </div>
+            <h3 class="wcu__card-title">{{ block.settings.title }}</h3>
+            <p class="wcu__card-description">{{ block.settings.description }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ========================================
+     BASE STYLES
+     ======================================== */
+  .why-choose-us {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 96px 48px;
+    background-color: var(--wcu-bg);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .why-choose-us *,
+  .why-choose-us *::before,
+  .why-choose-us *::after {
+    box-sizing: border-box;
+  }
+
+  .why-choose-us img {
+    max-width: 100%;
+    height: auto;
+    border: 0;
+  }
+
+  /* ========================================
+     CONTAINER
+     ======================================== */
+  .wcu__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+    width: 100%;
+    max-width: 1400px;
+  }
+
+  /* ========================================
+     HEADER
+     ======================================== */
+  .wcu__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .wcu__subtitle {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--wcu-subtitle-color);
+    margin: 0;
+  }
+
+  .wcu__heading {
+    font-size: 36px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .wcu__heading-dark {
+    color: var(--wcu-heading-color);
+  }
+
+  .wcu__heading-accent {
+    color: var(--wcu-accent-color);
+  }
+
+  /* ========================================
+     CARDS GRID
+     ======================================== */
+  .wcu__cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    width: 100%;
+  }
+
+  /* ========================================
+     INDIVIDUAL CARD
+     ======================================== */
+  .wcu__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 28px;
+    background-color: var(--wcu-card-bg);
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .wcu__card:last-child {
+    border-right: none;
+  }
+
+  /* Dark card variant */
+  .wcu__card--dark {
+    background-color: var(--wcu-dark-card-bg);
+  }
+
+  .wcu__card--dark .wcu__card-title,
+  .wcu__card--dark .wcu__card-description {
+    color: var(--wcu-dark-card-text);
+  }
+
+  /* Card Icon */
+  .wcu__card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 24px;
+    color: var(--wcu-accent-color);
+  }
+
+  .wcu__card-icon img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+  }
+
+  .wcu__card-icon svg {
+    width: 64px;
+    height: 64px;
+  }
+
+  /* Card Title */
+  .wcu__card-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-heading-color);
+    margin: 0 0 16px 0;
+    line-height: 1.3;
+  }
+
+  .wcu__card--dark .wcu__card-title {
+    color: var(--wcu-dark-card-text);
+  }
+
+  /* Card Description */
+  .wcu__card-description {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--wcu-text-color);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .wcu__card--dark .wcu__card-description {
+    color: var(--wcu-dark-card-text);
+    opacity: 0.85;
+  }
+
+  /* ========================================
+     RESPONSIVE - SMALL MOBILE (< 400px)
+     ======================================== */
+  @media screen and (max-width: 399px) {
+    .why-choose-us {
+      padding: 48px 20px;
+    }
+
+    .wcu__container {
+      gap: 40px;
+    }
+
+    .wcu__subtitle {
+      font-size: 10px;
+    }
+
+    .wcu__heading {
+      font-size: 24px;
+    }
+
+    .wcu__cards {
+      grid-template-columns: 1fr;
+    }
+
+    .wcu__card {
+      border-right: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 28px 20px;
+    }
+
+    .wcu__card:last-child {
+      border-bottom: none;
+    }
+
+    .wcu__card-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 20px;
+    }
+
+    .wcu__card-icon img,
+    .wcu__card-icon svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .wcu__card-title {
+      font-size: 13px;
+    }
+
+    .wcu__card-description {
+      font-size: 12px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - MEDIUM MOBILE (400px+)
+     ======================================== */
+  @media screen and (min-width: 400px) and (max-width: 549px) {
+    .why-choose-us {
+      padding: 56px 24px;
+    }
+
+    .wcu__container {
+      gap: 48px;
+    }
+
+    .wcu__subtitle {
+      font-size: 11px;
+    }
+
+    .wcu__heading {
+      font-size: 28px;
+    }
+
+    .wcu__cards {
+      grid-template-columns: 1fr;
+    }
+
+    .wcu__card {
+      border-right: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 28px 24px;
+    }
+
+    .wcu__card:last-child {
+      border-bottom: none;
+    }
+
+    .wcu__card-icon {
+      width: 56px;
+      height: 56px;
+    }
+
+    .wcu__card-icon img,
+    .wcu__card-icon svg {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE MOBILE (550px+)
+     ======================================== */
+  @media screen and (min-width: 550px) and (max-width: 767px) {
+    .why-choose-us {
+      padding: 64px 32px;
+    }
+
+    .wcu__container {
+      gap: 52px;
+    }
+
+    .wcu__heading {
+      font-size: 30px;
+    }
+
+    .wcu__cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .wcu__card {
+      border-right: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .wcu__card:nth-child(odd) {
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .wcu__card:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - TABLET (768px+)
+     ======================================== */
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .why-choose-us {
+      padding: 72px 40px;
+    }
+
+    .wcu__container {
+      gap: 56px;
+    }
+
+    .wcu__heading {
+      font-size: 32px;
+    }
+
+    .wcu__cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .wcu__card {
+      border-right: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 32px;
+    }
+
+    .wcu__card:nth-child(odd) {
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .wcu__card:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - DESKTOP (1024px+)
+     ======================================== */
+  @media screen and (min-width: 1024px) {
+    .why-choose-us {
+      padding: 80px 48px;
+    }
+
+    .wcu__container {
+      gap: 60px;
+    }
+
+    .wcu__heading {
+      font-size: 34px;
+    }
+
+    .wcu__cards {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .wcu__card {
+      padding: 32px 24px;
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
+      border-bottom: none;
+    }
+
+    .wcu__card:last-child {
+      border-right: none;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE DESKTOP (1400px+)
+     ======================================== */
+  @media screen and (min-width: 1400px) {
+    .why-choose-us {
+      padding: 96px 48px;
+    }
+
+    .wcu__container {
+      gap: 64px;
+    }
+
+    .wcu__subtitle {
+      font-size: 12px;
+    }
+
+    .wcu__heading {
+      font-size: 36px;
+    }
+
+    .wcu__card {
+      padding: 32px 28px;
+    }
+
+    .wcu__card-title {
+      font-size: 14px;
+    }
+
+    .wcu__card-description {
+      font-size: 13px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "SEK Why Choose Us",
+  "tag": "section",
+  "class": "why-choose-us-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Content"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "WHY 80,000+ CREATORS CHOOSE DTFSHEET™"
+    },
+    {
+      "type": "text",
+      "id": "heading_part1",
+      "label": "Heading Part 1 (Dark)",
+      "default": "WHY"
+    },
+    {
+      "type": "text",
+      "id": "heading_part2",
+      "label": "Heading Part 2 (Accent)",
+      "default": "CHOOSE US?"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color (Dark)",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Cyan)",
+      "default": "#00D4D4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "dark_card_bg_color",
+      "label": "Dark Card Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "dark_card_text_color",
+      "label": "Dark Card Text",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_card",
+      "name": "Feature Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon Image",
+          "info": "Upload a 64x64 icon image (PNG or SVG recommended)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "FEATURE TITLE"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Description text goes here. Explain the feature or benefit in a few sentences."
+        },
+        {
+          "type": "checkbox",
+          "id": "is_dark",
+          "label": "Dark Background",
+          "default": false,
+          "info": "Enable to use dark background for this card"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Why Choose Us",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "feature_card",
+          "settings": {
+            "title": "SAME-DAY SHIP OUT",
+            "description": "Your order prints today. Ships today. Place your order before noon and we'll ship it the same day. No delays, no excuses.",
+            "is_dark": false
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "title": "ZERO-DOUBT™ QUALITY CHECK",
+            "description": "Checked by real humans, reprinted if needed. Every transfer is reviewed. We stand behind every print, no questions asked.",
+            "is_dark": true
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "title": "ANY DESIGN, ANY DETAIL",
+            "description": "No color limits. No size limits. Whether it's text, full-color art, or fine detail, we print it exactly how you envision it.",
+            "is_dark": false
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "title": "SKILLED DESIGNER SUPPORT",
+            "description": "Have tweaks or edits? We've got you. Our team can adjust your artwork, just leave a note at checkout.",
+            "is_dark": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
