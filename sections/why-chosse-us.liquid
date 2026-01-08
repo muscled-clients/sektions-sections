@@ -7,6 +7,7 @@
     --wcu-subtitle-color: {{ section.settings.subtitle_color }};
     --wcu-card-bg: {{ section.settings.card_bg_color }};
     --wcu-card-border: {{ section.settings.card_border_color }};
+    --wcu-gray-card-bg: {{ section.settings.gray_card_bg_color }};
     --wcu-dark-card-bg: {{ section.settings.dark_card_bg_color }};
     --wcu-dark-card-text: {{ section.settings.dark_card_text_color }};
   }
@@ -20,8 +21,8 @@
         <p class="wcu__subtitle">{{ section.settings.subtitle }}</p>
       {% endif %}
       <h2 class="wcu__heading">
-        <span class="wcu__heading-dark">{{ section.settings.heading_part1 }}</span>
-        <span class="wcu__heading-accent">{{ section.settings.heading_part2 }}</span>
+        <span class="wcu__heading-highlight">{{ section.settings.heading_part1 }}</span>
+        <span class="wcu__heading-regular">{{ section.settings.heading_part2 }}</span>
       </h2>
     </div>
 
@@ -29,7 +30,7 @@
     <div class="wcu__cards">
       {% for block in section.blocks %}
         {% if block.type == 'feature_card' %}
-          <div class="wcu__card {% if block.settings.is_dark %}wcu__card--dark{% endif %}" {{ block.shopify_attributes }}>
+          <div class="wcu__card {% if block.settings.card_style == 'dark' %}wcu__card--dark{% elsif block.settings.card_style == 'gray' %}wcu__card--gray{% endif %}" {{ block.shopify_attributes }}>
             <div class="wcu__card-icon">
               {% if block.settings.icon != blank %}
                 <img
@@ -119,14 +120,21 @@
     letter-spacing: 0.02em;
     margin: 0;
     line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
-  .wcu__heading-dark {
+  .wcu__heading-highlight {
     color: var(--wcu-heading-color);
+    background-color: var(--wcu-accent-color);
+    padding: 4px 12px;
   }
 
-  .wcu__heading-accent {
-    color: var(--wcu-accent-color);
+  .wcu__heading-regular {
+    color: var(--wcu-heading-color);
   }
 
   /* ========================================
@@ -163,6 +171,12 @@
   .wcu__card--dark .wcu__card-title,
   .wcu__card--dark .wcu__card-description {
     color: var(--wcu-dark-card-text);
+  }
+
+  /* Gray card variant */
+  .wcu__card--gray {
+    background-color: var(--wcu-gray-card-bg);
+    border-color: var(--wcu-gray-card-bg);
   }
 
   /* Card Icon */
@@ -501,6 +515,12 @@
     },
     {
       "type": "color",
+      "id": "gray_card_bg_color",
+      "label": "Gray Card Background",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "color",
       "id": "dark_card_bg_color",
       "label": "Dark Card Background",
       "default": "#1a1a1a"
@@ -536,11 +556,15 @@
           "default": "Description text goes here. Explain the feature or benefit in a few sentences."
         },
         {
-          "type": "checkbox",
-          "id": "is_dark",
-          "label": "Dark Background",
-          "default": false,
-          "info": "Enable to use dark background for this card"
+          "type": "select",
+          "id": "card_style",
+          "label": "Card Style",
+          "default": "white",
+          "options": [
+            { "value": "white", "label": "White" },
+            { "value": "gray", "label": "Gray" },
+            { "value": "dark", "label": "Dark" }
+          ]
         }
       ]
     }
@@ -555,7 +579,7 @@
           "settings": {
             "title": "SAME-DAY SHIP OUT",
             "description": "Your order prints today. Ships today. Place your order before noon and we'll ship it the same day. No delays, no excuses.",
-            "is_dark": false
+            "card_style": "white"
           }
         },
         {
@@ -563,7 +587,7 @@
           "settings": {
             "title": "ZERO-DOUBT™ QUALITY CHECK",
             "description": "Checked by real humans, reprinted if needed. Every transfer is reviewed. We stand behind every print, no questions asked.",
-            "is_dark": true
+            "card_style": "dark"
           }
         },
         {
@@ -571,7 +595,7 @@
           "settings": {
             "title": "ANY DESIGN, ANY DETAIL",
             "description": "No color limits. No size limits. Whether it's text, full-color art, or fine detail, we print it exactly how you envision it.",
-            "is_dark": false
+            "card_style": "white"
           }
         },
         {
@@ -579,7 +603,7 @@
           "settings": {
             "title": "SKILLED DESIGNER SUPPORT",
             "description": "Have tweaks or edits? We've got you. Our team can adjust your artwork, just leave a note at checkout.",
-            "is_dark": false
+            "card_style": "gray"
           }
         }
       ]
