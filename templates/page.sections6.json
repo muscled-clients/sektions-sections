@@ -901,6 +901,81 @@
         "button_text_color": "#ffffff",
         "button_hover_bg_color": "#2d2d4a",
         "table_bg_color": "#ffffff",
+        "table_dark_bg_color": "#2d2b43",
+        "table_dark_text_color": "#ffffff",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "feature13_eqG449": {
+      "type": "feature13",
+      "blocks": {
+        "feature_left_EUNMKp": {
+          "type": "feature_left",
+          "settings": {
+            "icon": "heart",
+            "title": "EYE COMFORT",
+            "description": "Reduces eye strain by blocking harmful blue light from screens, making digital time comfortable."
+          }
+        },
+        "feature_left_PBcJDB": {
+          "type": "feature_left",
+          "settings": {
+            "icon": "clock",
+            "title": "BETTER SLEEP",
+            "description": "Improves sleep quality by minimizing blue light exposure, which can interfere with circadian rhythms."
+          }
+        },
+        "feature_left_Np6Gzg": {
+          "type": "feature_left",
+          "settings": {
+            "icon": "gift",
+            "title": "ENHANCED PROTECTION",
+            "description": "Shields your screen from scratches and impacts, extending the lifespan of your device."
+          }
+        },
+        "feature_right_rkzRdD": {
+          "type": "feature_right",
+          "settings": {
+            "icon": "eye",
+            "title": "ANTI-GLARE",
+            "description": "Reduces glare from sunlight and artificial lighting, improving visibility in bright conditions."
+          }
+        },
+        "feature_right_UyEdqQ": {
+          "type": "feature_right",
+          "settings": {
+            "icon": "globe",
+            "title": "TOUCH SENSITIVITY",
+            "description": "Maintains the original touch responsiveness of your device, ensuring a seamless user experience."
+          }
+        },
+        "feature_right_yJif6V": {
+          "type": "feature_right",
+          "settings": {
+            "icon": "frame",
+            "title": "EASY INSTALLATION",
+            "description": "Designed for a bubble-free application, making it simple to apply without professional assistance."
+          }
+        }
+      },
+      "block_order": [
+        "feature_left_EUNMKp",
+        "feature_left_PBcJDB",
+        "feature_left_Np6Gzg",
+        "feature_right_rkzRdD",
+        "feature_right_UyEdqQ",
+        "feature_right_yJif6V"
+      ],
+      "name": "SEK Feature 13",
+      "settings": {
+        "heading": "Why we are better",
+        "image": "shopify://shop_images/bg_med_pakke_close_up_482c942e-0040-4947-bcfa-9a89224998eb.webp",
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a2e",
+        "title_color": "#1a1a2e",
+        "text_color": "#6b6b7b",
+        "icon_color": "#1a1a2e",
         "margin_top": 0,
         "margin_bottom": 0
       }
@@ -919,6 +994,7 @@
     "bentro_grid4_jh3g3i",
     "medi_grid2_Hh7PWf",
     "video_slider5_WcfRxX",
-    "comparison_table6_bFRtBa"
+    "comparison_table6_bFRtBa",
+    "feature13_eqG449"
   ]
 }
