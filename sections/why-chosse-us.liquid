@@ -6,6 +6,7 @@
     --wcu-text-color: {{ section.settings.text_color }};
     --wcu-subtitle-color: {{ section.settings.subtitle_color }};
     --wcu-card-bg: {{ section.settings.card_bg_color }};
+    --wcu-card-border: {{ section.settings.card_border_color }};
     --wcu-dark-card-bg: {{ section.settings.dark_card_bg_color }};
     --wcu-dark-card-text: {{ section.settings.dark_card_text_color }};
   }
@@ -134,8 +135,9 @@
   .wcu__cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 16px;
     width: 100%;
+    align-items: stretch;
   }
 
   /* ========================================
@@ -145,15 +147,17 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 32px 24px;
-    background-color: transparent;
+    padding: 32px 28px;
+    background-color: var(--wcu-card-bg);
+    border: 1px solid var(--wcu-card-border);
+    border-radius: 12px;
   }
 
   /* Dark card variant */
   .wcu__card--dark {
     background-color: var(--wcu-dark-card-bg);
-    border-radius: 16px;
-    padding: 32px 28px;
+    border-color: var(--wcu-dark-card-bg);
+    border-radius: 12px;
   }
 
   .wcu__card--dark .wcu__card-title,
@@ -234,16 +238,12 @@
 
     .wcu__cards {
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 12px;
     }
 
     .wcu__card {
-      padding: 24px 16px;
-    }
-
-    .wcu__card--dark {
       padding: 24px 20px;
-      border-radius: 12px;
+      border-radius: 10px;
     }
 
     .wcu__card-icon {
@@ -289,16 +289,12 @@
 
     .wcu__cards {
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 12px;
     }
 
     .wcu__card {
-      padding: 28px 20px;
-    }
-
-    .wcu__card--dark {
       padding: 28px 24px;
-      border-radius: 14px;
+      border-radius: 10px;
     }
 
     .wcu__card-icon {
@@ -331,14 +327,10 @@
 
     .wcu__cards {
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 14px;
     }
 
     .wcu__card {
-      padding: 28px 20px;
-    }
-
-    .wcu__card--dark {
       padding: 28px 24px;
     }
   }
@@ -361,14 +353,10 @@
 
     .wcu__cards {
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
+      gap: 16px;
     }
 
     .wcu__card {
-      padding: 32px 24px;
-    }
-
-    .wcu__card--dark {
       padding: 32px 28px;
     }
   }
@@ -391,14 +379,10 @@
 
     .wcu__cards {
       grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      gap: 16px;
     }
 
     .wcu__card {
-      padding: 32px 24px;
-    }
-
-    .wcu__card--dark {
       padding: 32px 28px;
     }
   }
@@ -424,14 +408,10 @@
     }
 
     .wcu__cards {
-      gap: 28px;
+      gap: 16px;
     }
 
     .wcu__card {
-      padding: 32px 28px;
-    }
-
-    .wcu__card--dark {
       padding: 36px 32px;
     }
 
@@ -512,6 +492,12 @@
       "id": "card_bg_color",
       "label": "Card Background",
       "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border",
+      "default": "#e8e8e8"
     },
     {
       "type": "color",
