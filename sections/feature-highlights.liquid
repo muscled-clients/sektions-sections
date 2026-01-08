@@ -64,10 +64,9 @@
           {% if section.settings.content_line2 != blank %}
             <span class="fh__content-line">{{ section.settings.content_line2 }}</span>
           {% endif %}
-          {% if section.settings.content_line3 != blank %}
+          {% if section.settings.content_line3_prefix != blank or section.settings.content_line3_highlight != blank %}
             <span class="fh__content-line">
-              {{ section.settings.content_line3_prefix }}
-              <span class="fh__content-highlight">{{ section.settings.content_line3_highlight }}</span>
+              {% if section.settings.content_line3_prefix != blank %}{{ section.settings.content_line3_prefix }} {% endif %}<span class="fh__content-highlight">{{ section.settings.content_line3_highlight }}</span>
             </span>
           {% endif %}
           {% if section.settings.content_line4 != blank %}
@@ -272,8 +271,9 @@
     letter-spacing: 0.1em;
     text-decoration: none;
     border: none;
+    border-radius: 6px;
     cursor: pointer;
-    margin-top: 8px;
+    margin-top: 12px;
     transition: opacity 0.2s ease;
   }
 
@@ -356,21 +356,22 @@
     .fh__content {
       flex-direction: row;
       align-items: center;
+      justify-content: space-between;
       gap: 48px;
     }
 
     .fh__image-wrapper {
-      flex: 1;
-      max-width: none;
+      flex: 0 0 55%;
+      max-width: 680px;
     }
 
     .fh__text-content {
-      flex: 1;
-      gap: 24px;
+      flex: 0 0 42%;
+      gap: 20px;
     }
 
     .fh__content-line {
-      font-size: 30px;
+      font-size: 28px;
     }
 
     .fh__content-highlight {
@@ -395,16 +396,24 @@
     }
 
     .fh__content {
-      gap: 64px;
+      gap: 60px;
+    }
+
+    .fh__image-wrapper {
+      flex: 0 0 52%;
+    }
+
+    .fh__text-content {
+      flex: 0 0 44%;
     }
 
     .fh__content-line {
-      font-size: 34px;
+      font-size: 32px;
     }
 
     .fh__button {
-      padding: 16px 36px;
-      font-size: 14px;
+      padding: 16px 32px;
+      font-size: 13px;
     }
   }
 
@@ -418,7 +427,7 @@
 
     .fh__container {
       gap: 64px;
-      max-width: 1300px;
+      max-width: 1400px;
     }
 
     .fh__heading {
@@ -430,7 +439,11 @@
     }
 
     .fh__content-line {
-      font-size: 38px;
+      font-size: 36px;
+    }
+
+    .fh__content-highlight {
+      padding: 4px 12px;
     }
   }
 </style>
