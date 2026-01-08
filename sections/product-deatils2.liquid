@@ -1,0 +1,929 @@
+{% style %}
+  .product-details-2-{{ section.id }} {
+    --pd2-bg: {{ section.settings.background_color }};
+    --pd2-text-color: {{ section.settings.text_color }};
+    --pd2-heading-color: {{ section.settings.heading_color }};
+    --pd2-accent-color: {{ section.settings.accent_color }};
+    --pd2-border-color: {{ section.settings.border_color }};
+    --pd2-badge-bg: {{ section.settings.badge_bg_color }};
+    --pd2-badge-text: {{ section.settings.badge_text_color }};
+    --pd2-compare-color: {{ section.settings.compare_price_color }};
+  }
+{% endstyle %}
+
+<section class="product-details-2 product-details-2-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="pd2__container">
+    <div class="pd2__grid">
+      <!-- Left Column - FAQ -->
+      <div class="pd2__left">
+        <div class="pd2__faq">
+          {% for block in section.blocks %}
+            {% if block.type == 'faq_item' %}
+              <div class="pd2__faq-item" data-faq-item {{ block.shopify_attributes }}>
+                <button class="pd2__faq-question" type="button" aria-expanded="false">
+                  <span class="pd2__faq-question-text">{{ block.settings.question }}</span>
+                  <span class="pd2__faq-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </span>
+                </button>
+                <div class="pd2__faq-answer">
+                  <div class="pd2__faq-answer-inner">
+                    {{ block.settings.answer }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Right Column - Features & Similar Products -->
+      <div class="pd2__right">
+        <!-- Product Features -->
+        {% assign has_features = false %}
+        {% for block in section.blocks %}
+          {% if block.type == 'feature_badge' %}
+            {% assign has_features = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if has_features %}
+          <div class="pd2__features">
+            <h3 class="pd2__section-title">{{ section.settings.features_title | default: 'Product features' }}</h3>
+            <div class="pd2__features-list">
+              {% for block in section.blocks %}
+                {% if block.type == 'feature_badge' %}
+                  <span class="pd2__feature-badge" {{ block.shopify_attributes }}>
+                    <span class="pd2__badge-icon">
+                      {% case block.settings.icon %}
+                        {% when 'headphones' %}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                          </svg>
+                        {% when 'check' %}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        {% when 'heart' %}
+                          <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                          </svg>
+                        {% when 'shield' %}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                          </svg>
+                        {% when 'star' %}
+                          <svg viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                          </svg>
+                        {% when 'zap' %}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                          </svg>
+                        {% else %}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                          </svg>
+                        {% endcase %}
+                    </span>
+                    <span class="pd2__badge-text">{{ block.settings.text }}</span>
+                  </span>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Similar Products -->
+        {% assign has_products = false %}
+        {% for block in section.blocks %}
+          {% if block.type == 'similar_product' %}
+            {% assign has_products = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if has_products %}
+          <div class="pd2__similar">
+            <h3 class="pd2__section-title">{{ section.settings.similar_title | default: 'Similar products' }}</h3>
+            <div class="pd2__similar-list">
+              {% for block in section.blocks %}
+                {% if block.type == 'similar_product' %}
+                  <div class="pd2__product-card" {{ block.shopify_attributes }}>
+                    <div class="pd2__product-image">
+                      {% if block.settings.image != blank %}
+                        <img
+                          src="{{ block.settings.image | image_url: width: 200 }}"
+                          alt="{{ block.settings.title }}"
+                          loading="lazy"
+                        >
+                      {% else %}
+                        <div class="pd2__product-placeholder">
+                          {{ 'product-1' | placeholder_svg_tag }}
+                        </div>
+                      {% endif %}
+                    </div>
+                    <div class="pd2__product-info">
+                      <span class="pd2__product-title">{{ block.settings.title }}</span>
+                      <span class="pd2__product-pricing">
+                        {% if block.settings.compare_price != blank %}
+                          <span class="pd2__compare-price">{{ block.settings.compare_price }}</span>
+                        {% endif %}
+                        <span class="pd2__price">{{ block.settings.price }}</span>
+                      </span>
+                    </div>
+                    <button class="pd2__product-add" type="button" aria-label="Add {{ block.settings.title }}">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                    </button>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Base Section */
+  .product-details-2 {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    background-color: var(--pd2-bg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 48px 20px;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .product-details-2 *,
+  .product-details-2 *::before,
+  .product-details-2 *::after {
+    box-sizing: border-box;
+  }
+
+  .product-details-2 img {
+    max-width: 100%;
+    height: auto;
+    border: 0;
+    vertical-align: middle;
+  }
+
+  .product-details-2 h3 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .product-details-2 button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  /* Container */
+  .pd2__container {
+    display: block;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Grid - Mobile First */
+  .pd2__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  /* Left Column */
+  .pd2__left {
+    width: 100%;
+  }
+
+  /* FAQ Section */
+  .pd2__faq {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pd2__faq-item {
+    border: 1px solid var(--pd2-border-color);
+    border-radius: 28px;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .pd2__faq-item.active {
+    border-color: var(--pd2-border-color);
+  }
+
+  .pd2__faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 18px 24px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--pd2-heading-color);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    line-height: 1.4;
+  }
+
+  .pd2__faq-item.active .pd2__faq-question {
+    color: var(--pd2-accent-color);
+  }
+
+  .pd2__faq-question-text {
+    flex: 1;
+    padding-right: 16px;
+  }
+
+  .pd2__faq-icon {
+    display: flex;
+    flex-shrink: 0;
+    color: var(--pd2-text-color);
+    transition: transform 0.25s ease;
+  }
+
+  .pd2__faq-item.active .pd2__faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .pd2__faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .pd2__faq-item.active .pd2__faq-answer {
+    max-height: 300px;
+  }
+
+  .pd2__faq-answer-inner {
+    padding: 0 24px 20px;
+    font-size: 14px;
+    color: var(--pd2-text-color);
+    line-height: 1.6;
+  }
+
+  /* Right Column */
+  .pd2__right {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Section Titles */
+  .pd2__section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--pd2-heading-color);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  /* Features List */
+  .pd2__features-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .pd2__feature-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background-color: var(--pd2-badge-bg);
+    color: var(--pd2-badge-text);
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .pd2__badge-icon {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .pd2__badge-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .pd2__badge-text {
+    white-space: nowrap;
+  }
+
+  /* Similar Products */
+  .pd2__similar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pd2__product-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--pd2-border-color);
+  }
+
+  .pd2__product-card:first-child {
+    padding-top: 0;
+  }
+
+  .pd2__product-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .pd2__product-image {
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    flex-shrink: 0;
+  }
+
+  .pd2__product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .pd2__product-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #e8e8e8;
+  }
+
+  .pd2__product-placeholder svg {
+    width: 50%;
+    height: auto;
+    opacity: 0.4;
+  }
+
+  .pd2__product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .pd2__product-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--pd2-heading-color);
+    line-height: 1.4;
+  }
+
+  .pd2__product-pricing {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pd2__compare-price {
+    font-size: 13px;
+    color: var(--pd2-compare-color);
+    text-decoration: line-through;
+  }
+
+  .pd2__price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--pd2-heading-color);
+  }
+
+  .pd2__product-add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    color: var(--pd2-heading-color);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .pd2__product-add:hover {
+    color: var(--pd2-accent-color);
+    transform: scale(1.1);
+  }
+
+  /* ========================================
+     RESPONSIVE BREAKPOINTS
+     ======================================== */
+
+  /* Small Mobile (< 400px) */
+  @media screen and (max-width: 399px) {
+    .product-details-2 {
+      padding: 36px 16px;
+    }
+
+    .pd2__grid {
+      gap: 36px;
+    }
+
+    .pd2__faq-question {
+      padding: 14px 18px;
+      font-size: 13px;
+    }
+
+    .pd2__faq-answer-inner {
+      padding: 0 18px 16px;
+      font-size: 13px;
+    }
+
+    .pd2__section-title {
+      font-size: 15px;
+    }
+
+    .pd2__feature-badge {
+      padding: 8px 14px;
+      font-size: 12px;
+    }
+
+    .pd2__badge-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .pd2__product-image {
+      width: 60px;
+      height: 60px;
+    }
+
+    .pd2__product-title {
+      font-size: 13px;
+    }
+
+    .pd2__compare-price {
+      font-size: 12px;
+    }
+
+    .pd2__price {
+      font-size: 13px;
+    }
+  }
+
+  /* Medium Mobile (400px+) */
+  @media screen and (min-width: 400px) {
+    .product-details-2 {
+      padding: 56px 24px;
+    }
+
+    .pd2__faq-question {
+      font-size: 15px;
+    }
+
+    .pd2__product-image {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media screen and (min-width: 550px) {
+    .product-details-2 {
+      padding: 64px 32px;
+    }
+
+    .pd2__grid {
+      gap: 56px;
+    }
+
+    .pd2__faq {
+      gap: 12px;
+    }
+
+    .pd2__faq-question {
+      padding: 20px 28px;
+    }
+
+    .pd2__faq-answer-inner {
+      padding: 0 28px 22px;
+    }
+  }
+
+  /* Tablet (768px+) - Two Column Layout */
+  @media screen and (min-width: 768px) {
+    .product-details-2 {
+      padding: 72px 40px;
+    }
+
+    .pd2__grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .pd2__section-title {
+      font-size: 17px;
+    }
+
+    .pd2__feature-badge {
+      padding: 11px 20px;
+      font-size: 13px;
+    }
+
+    .pd2__product-image {
+      width: 88px;
+      height: 88px;
+      border-radius: 14px;
+    }
+
+    .pd2__product-title {
+      font-size: 15px;
+    }
+
+    .pd2__price {
+      font-size: 15px;
+    }
+  }
+
+  /* Desktop (1024px+) */
+  @media screen and (min-width: 1024px) {
+    .product-details-2 {
+      padding: 80px 50px;
+    }
+
+    .pd2__grid {
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 64px;
+    }
+
+    .pd2__faq {
+      gap: 14px;
+    }
+
+    .pd2__faq-item {
+      border-radius: 32px;
+    }
+
+    .pd2__faq-question {
+      padding: 22px 32px;
+      font-size: 15px;
+    }
+
+    .pd2__faq-answer-inner {
+      padding: 0 32px 24px;
+      font-size: 15px;
+    }
+
+    .pd2__right {
+      gap: 40px;
+    }
+
+    .pd2__section-title {
+      font-size: 18px;
+      margin-bottom: 18px;
+    }
+
+    .pd2__features-list {
+      gap: 12px;
+    }
+
+    .pd2__feature-badge {
+      padding: 12px 22px;
+      font-size: 14px;
+      border-radius: 28px;
+    }
+
+    .pd2__badge-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .pd2__product-card {
+      padding: 18px 0;
+    }
+
+    .pd2__product-image {
+      width: 96px;
+      height: 96px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media screen and (min-width: 1400px) {
+    .product-details-2 {
+      padding: 100px 60px;
+    }
+
+    .pd2__container {
+      max-width: 1200px;
+    }
+
+    .pd2__grid {
+      gap: 80px;
+    }
+
+    .pd2__faq-question {
+      font-size: 16px;
+    }
+
+    .pd2__feature-badge {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const section = document.querySelector('.product-details-2-{{ section.id }}');
+    if (!section) return;
+
+    // FAQ Accordion
+    const faqItems = section.querySelectorAll('[data-faq-item]');
+
+    faqItems.forEach(item => {
+      const question = item.querySelector('.pd2__faq-question');
+
+      question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+
+        // Close all other items
+        faqItems.forEach(otherItem => {
+          otherItem.classList.remove('active');
+          otherItem.querySelector('.pd2__faq-question').setAttribute('aria-expanded', 'false');
+        });
+
+        // Toggle current item
+        if (!isActive) {
+          item.classList.add('active');
+          question.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SEK Product Details 2",
+  "tag": "section",
+  "class": "product-details-2-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Titles"
+    },
+    {
+      "type": "text",
+      "id": "features_title",
+      "label": "Features Section Title",
+      "default": "Product features"
+    },
+    {
+      "type": "text",
+      "id": "similar_title",
+      "label": "Similar Products Title",
+      "default": "Similar products"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Active FAQ)",
+      "default": "#c16d0b"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Feature Badge Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Feature Badge Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Compare Price Color",
+      "default": "#999999"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How do I connect my headphone to my device?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "You can connect two devices at once to these headphones."
+        }
+      ]
+    },
+    {
+      "type": "feature_badge",
+      "name": "Feature Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "headphones",
+          "options": [
+            { "value": "headphones", "label": "Headphones" },
+            { "value": "check", "label": "Checkmark" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "star", "label": "Star" },
+            { "value": "zap", "label": "Zap" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Badge Text",
+          "default": "Hi-Fi attenuation"
+        }
+      ]
+    },
+    {
+      "type": "similar_product",
+      "name": "Similar Product",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "EchoHEARS"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$39.00"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare at Price",
+          "default": "$49.00"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Product Details 2",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I connect my headphone to my device?",
+            "answer": "Simply turn on Bluetooth on your device and select EchoHEARS from the available devices list. The connection is quick and seamless."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many devices can be paired at the same time?",
+            "answer": "You can connect two devices at once to these headphones."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is active noise cancelling?",
+            "answer": "Active noise cancelling uses microphones to detect external sounds and creates inverse sound waves to reduce unwanted noise."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is transparency mode?",
+            "answer": "Transparency mode allows ambient sounds to pass through so you can hear your surroundings while wearing the earbuds."
+          }
+        },
+        {
+          "type": "feature_badge",
+          "settings": {
+            "icon": "headphones",
+            "text": "Hi-Fi attenuation"
+          }
+        },
+        {
+          "type": "feature_badge",
+          "settings": {
+            "icon": "check",
+            "text": "20-25 dB protection"
+          }
+        },
+        {
+          "type": "feature_badge",
+          "settings": {
+            "icon": "heart",
+            "text": "All day comfort"
+          }
+        },
+        {
+          "type": "similar_product",
+          "settings": {
+            "title": "EchoHEARS",
+            "price": "$39.00",
+            "compare_price": "$49.00"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
