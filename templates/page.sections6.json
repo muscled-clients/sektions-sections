@@ -777,6 +777,7 @@
         "video_slide_9kCxK4",
         "video_slide_VC4Txr"
       ],
+      "disabled": true,
       "name": "SEK Video Slider 5",
       "settings": {
         "label": "OUR TESTIMONIALS",
@@ -790,6 +791,116 @@
         "star_color": "#f5a623",
         "nav_button_bg": "#ffffff",
         "nav_button_icon": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "comparison_table6_bFRtBa": {
+      "type": "comparison-table6",
+      "blocks": {
+        "feature_HbGGfn": {
+          "type": "feature",
+          "settings": {
+            "text": "Fall asleep quicker"
+          }
+        },
+        "feature_gBh9K3": {
+          "type": "feature",
+          "settings": {
+            "text": "Relax & Restorative sleep"
+          }
+        },
+        "feature_yP4dh6": {
+          "type": "feature",
+          "settings": {
+            "text": "Wake up refreshed"
+          }
+        },
+        "feature_PPamjX": {
+          "type": "feature",
+          "settings": {
+            "text": "Plant based"
+          }
+        },
+        "comparison_row_nh9Qmz": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "Optimized Dosing",
+            "us_has_feature": true,
+            "others_have_feature": false
+          }
+        },
+        "comparison_row_kKVV6F": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "Plant Based",
+            "us_has_feature": true,
+            "others_have_feature": false
+          }
+        },
+        "comparison_row_MNgDVy": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "Low Sugar",
+            "us_has_feature": true,
+            "others_have_feature": false
+          }
+        },
+        "comparison_row_yJdNNH": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "Simple Ingredients",
+            "us_has_feature": true,
+            "others_have_feature": false
+          }
+        },
+        "comparison_row_MiVTBJ": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "3rd Party Tested",
+            "us_has_feature": true,
+            "others_have_feature": false
+          }
+        },
+        "comparison_row_ERDxW3": {
+          "type": "comparison_row",
+          "settings": {
+            "feature_name": "Delicious Taste",
+            "us_has_feature": true,
+            "others_have_feature": false
+          }
+        }
+      },
+      "block_order": [
+        "feature_HbGGfn",
+        "feature_gBh9K3",
+        "feature_yP4dh6",
+        "feature_PPamjX",
+        "comparison_row_nh9Qmz",
+        "comparison_row_kKVV6F",
+        "comparison_row_MNgDVy",
+        "comparison_row_yJdNNH",
+        "comparison_row_MiVTBJ",
+        "comparison_row_ERDxW3"
+      ],
+      "name": "SEK Comparison Table 6",
+      "settings": {
+        "heading_italic": "US",
+        "heading": "vs Other Brands",
+        "description": "We pride ourselves in our quality and focus on sleep, we cannot say the same for others.",
+        "button_text": "TRY DEEP DREAMS",
+        "button_link": "",
+        "brand_name": "Us",
+        "others_label": "Other Brands",
+        "background_color": "#f5f3f7",
+        "heading_color": "#1a1a2e",
+        "text_color": "#6b6b7b",
+        "check_color": "#2ba5a5",
+        "x_color": "#e05858",
+        "button_bg_color": "#1a1a2e",
+        "button_text_color": "#ffffff",
+        "button_hover_bg_color": "#2d2d4a",
+        "table_bg_color": "#ffffff",
         "margin_top": 0,
         "margin_bottom": 0
       }
@@ -807,6 +918,7 @@
     "hotspot12_yaUmhP",
     "bentro_grid4_jh3g3i",
     "medi_grid2_Hh7PWf",
-    "video_slider5_WcfRxX"
+    "video_slider5_WcfRxX",
+    "comparison_table6_bFRtBa"
   ]
 }
