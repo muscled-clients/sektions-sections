@@ -12,7 +12,11 @@
 {% endstyle %}
 
 <section class="press-go-steps press-go-steps-{{ section.id }}" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color }};">
-  <!-- Decorative Elements -->
+  <!-- Decorative Corner Shapes -->
+  <div class="pgs__corner-shape pgs__corner-shape--left"></div>
+  <div class="pgs__corner-shape pgs__corner-shape--right"></div>
+
+  <!-- Decorative Elements (Icons) -->
   <div class="pgs__decorations">
     {% if section.settings.decor_arc_left != blank %}
       <div class="pgs__decor pgs__decor--arc-left">
@@ -102,10 +106,9 @@
     width: 100%;
     max-width: 100%;
     padding: 60px 20px 120px;
-    background-color: var(--pgs-bg, #f5f5f5) !important;
+    background-color: var(--pgs-bg, #ffffff) !important;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    overflow: visible !important;
-    clip-path: none !important;
+    overflow: hidden;
   }
 
   .press-go-steps *,
@@ -121,7 +124,32 @@
   }
 
   /* ========================================
-     DECORATIVE ELEMENTS
+     DECORATIVE CORNER SHAPES
+     ======================================== */
+  .pgs__corner-shape {
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    background-color: var(--pgs-card-bg, #f0f0f0);
+    border-radius: 16px;
+    z-index: 1;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  .pgs__corner-shape--left {
+    top: -80px;
+    left: -100px;
+    transform: rotate(-12deg);
+  }
+
+  .pgs__corner-shape--right {
+    top: -80px;
+    right: -100px;
+    transform: rotate(12deg);
+  }
+
+  /* ========================================
+     DECORATIVE ELEMENTS (Icons)
      ======================================== */
   .pgs__decorations {
     position: absolute;
@@ -130,13 +158,13 @@
     right: 0;
     bottom: 0;
     pointer-events: none;
-    z-index: 5;
+    z-index: 6;
     overflow: visible;
   }
 
   .pgs__decor {
     position: absolute;
-    z-index: 5;
+    z-index: 6;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -148,18 +176,18 @@
     object-fit: contain;
   }
 
-  /* Arc Left */
+  /* Arc Left - positioned on corner shape */
   .pgs__decor--arc-left {
-    top: 10px;
-    left: 20px;
+    top: 30px;
+    left: 50px;
     width: 50px;
     height: 50px;
   }
 
-  /* Arc Right */
+  /* Arc Right - positioned on corner shape */
   .pgs__decor--arc-right {
-    top: 10px;
-    right: 20px;
+    top: 30px;
+    right: 50px;
     width: 50px;
     height: 50px;
   }
@@ -390,18 +418,33 @@
       font-size: 22px;
     }
 
+    .pgs__corner-shape {
+      width: 180px;
+      height: 220px;
+    }
+
+    .pgs__corner-shape--left {
+      top: -70px;
+      left: -90px;
+    }
+
+    .pgs__corner-shape--right {
+      top: -70px;
+      right: -90px;
+    }
+
     .pgs__decor--arc-left {
-      width: 55px;
-      height: 55px;
-      top: 10px;
-      left: 30px;
+      width: 50px;
+      height: 50px;
+      top: 25px;
+      left: 40px;
     }
 
     .pgs__decor--arc-right {
-      width: 55px;
-      height: 55px;
-      top: 10px;
-      right: 30px;
+      width: 50px;
+      height: 50px;
+      top: 25px;
+      right: 40px;
     }
 
     .pgs__decor--dot-1 {
@@ -442,6 +485,21 @@
 
     .pgs__card-description {
       font-size: 15px;
+    }
+
+    .pgs__corner-shape {
+      width: 200px;
+      height: 250px;
+    }
+
+    .pgs__corner-shape--left {
+      top: -80px;
+      left: -90px;
+    }
+
+    .pgs__corner-shape--right {
+      top: -80px;
+      right: -90px;
     }
   }
 
@@ -501,18 +559,33 @@
       top: -22px;
     }
 
+    .pgs__corner-shape {
+      width: 220px;
+      height: 280px;
+    }
+
+    .pgs__corner-shape--left {
+      top: -100px;
+      left: -80px;
+    }
+
+    .pgs__corner-shape--right {
+      top: -100px;
+      right: -80px;
+    }
+
     .pgs__decor--arc-left {
       width: 60px;
       height: 60px;
-      top: 15px;
-      left: 60px;
+      top: 20px;
+      left: 80px;
     }
 
     .pgs__decor--arc-right {
       width: 60px;
       height: 60px;
-      top: 15px;
-      right: 60px;
+      top: 20px;
+      right: 80px;
     }
 
     .pgs__decor--dot-1 {
@@ -583,18 +656,33 @@
       border-radius: 10px;
     }
 
+    .pgs__corner-shape {
+      width: 260px;
+      height: 320px;
+    }
+
+    .pgs__corner-shape--left {
+      top: -120px;
+      left: -60px;
+    }
+
+    .pgs__corner-shape--right {
+      top: -120px;
+      right: -60px;
+    }
+
     .pgs__decor--arc-left {
       width: 60px;
       height: 60px;
-      top: 20px;
-      left: 100px;
+      top: 25px;
+      left: 120px;
     }
 
     .pgs__decor--arc-right {
       width: 60px;
       height: 60px;
-      top: 20px;
-      right: 100px;
+      top: 25px;
+      right: 120px;
     }
 
     .pgs__decor--dot-1 {
@@ -649,18 +737,33 @@
       font-size: 16px;
     }
 
+    .pgs__corner-shape {
+      width: 300px;
+      height: 360px;
+    }
+
+    .pgs__corner-shape--left {
+      top: -140px;
+      left: -40px;
+    }
+
+    .pgs__corner-shape--right {
+      top: -140px;
+      right: -40px;
+    }
+
     .pgs__decor--arc-left {
       width: 60px;
       height: 60px;
-      top: 25px;
-      left: 120px;
+      top: 30px;
+      left: 160px;
     }
 
     .pgs__decor--arc-right {
       width: 60px;
       height: 60px;
-      top: 25px;
-      right: 120px;
+      top: 30px;
+      right: 160px;
     }
 
     .pgs__decor--dot-1 {
@@ -715,7 +818,7 @@
       "type": "color",
       "id": "background_color",
       "label": "Background Color",
-      "default": "#f5f5f5"
+      "default": "#ffffff"
     },
     {
       "type": "color",
@@ -745,7 +848,7 @@
       "type": "color",
       "id": "card_bg_color",
       "label": "Card Background",
-      "default": "#ffffff"
+      "default": "#f0f0f0"
     },
     {
       "type": "color",
