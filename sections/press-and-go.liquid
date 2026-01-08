@@ -16,9 +16,8 @@
   <div class="pgs__decorations">
     <div class="pgs__decor pgs__decor--arc-left" style="border-top-color: {{ section.settings.accent_color }} !important; border-left-color: {{ section.settings.accent_color }} !important; border-right-color: transparent !important; border-bottom-color: transparent !important;"></div>
     <div class="pgs__decor pgs__decor--arc-right" style="border-top-color: {{ section.settings.accent_color }} !important; border-right-color: {{ section.settings.accent_color }} !important; border-left-color: transparent !important; border-bottom-color: transparent !important;"></div>
-    <div class="pgs__decor pgs__decor--dot-1" style="background-color: {{ section.settings.accent_color }} !important;"></div>
-    <div class="pgs__decor pgs__decor--dot-2" style="background-color: {{ section.settings.accent_color }} !important;"></div>
-    <div class="pgs__decor pgs__decor--dot-3" style="background-color: {{ section.settings.accent_color }} !important;"></div>
+    <div class="pgs__decor pgs__decor--dot-solid" style="background-color: {{ section.settings.accent_color }} !important;"></div>
+    <div class="pgs__decor pgs__decor--dot-ring" style="border-color: {{ section.settings.accent_color }} !important;"></div>
   </div>
 
   <div class="pgs__container">
@@ -127,50 +126,49 @@
     opacity: 1 !important;
   }
 
+  /* Arc Left - 60px C-shape opening to bottom-right */
   .pgs__decor--arc-left {
-    top: 10px;
-    left: 20px;
-    width: 100px;
-    height: 100px;
+    top: -15px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
     border-style: solid;
-    border-width: 8px;
+    border-width: 6px;
     border-radius: 50%;
     transform: rotate(-45deg);
   }
 
+  /* Arc Right - 60px C-shape opening to bottom-left */
   .pgs__decor--arc-right {
-    top: 15px;
-    right: 20px;
-    width: 80px;
-    height: 80px;
+    top: -10px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
     border-style: solid;
-    border-width: 8px;
+    border-width: 6px;
     border-radius: 50%;
     transform: rotate(45deg);
   }
 
-  .pgs__decor--dot-1 {
-    top: 120px;
-    left: 15%;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-  }
-
-  .pgs__decor--dot-2 {
-    top: 80px;
-    left: 35%;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-
-  .pgs__decor--dot-3 {
-    top: 100px;
-    right: 12%;
+  /* Solid Dot - 14px */
+  .pgs__decor--dot-solid {
+    top: 140px;
+    left: 20%;
     width: 14px;
     height: 14px;
     border-radius: 50%;
+  }
+
+  /* Hollow Ring - 28px */
+  .pgs__decor--dot-ring {
+    top: 100px;
+    left: 40%;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 4px;
+    background-color: transparent !important;
   }
 
   /* ========================================
@@ -384,13 +382,17 @@
     }
 
     .pgs__decor--arc-left {
-      width: 100px;
-      height: 100px;
+      width: 60px;
+      height: 60px;
+      top: -15px;
+      left: 40px;
     }
 
     .pgs__decor--arc-right {
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
+      top: -10px;
+      right: 40px;
     }
   }
 
@@ -481,40 +483,33 @@
     }
 
     .pgs__decor--arc-left {
-      width: 140px;
-      height: 140px;
-      top: 10px;
-      left: 40px;
-      border-width: 10px;
+      width: 60px;
+      height: 60px;
+      top: -20px;
+      left: 60px;
+      border-width: 6px;
     }
 
     .pgs__decor--arc-right {
-      width: 110px;
-      height: 110px;
-      top: 15px;
-      right: 40px;
-      border-width: 10px;
+      width: 60px;
+      height: 60px;
+      top: -15px;
+      right: 60px;
+      border-width: 6px;
     }
 
-    .pgs__decor--dot-1 {
-      top: 150px;
-      left: 18%;
-      width: 18px;
-      height: 18px;
+    .pgs__decor--dot-solid {
+      top: 160px;
+      left: 15%;
+      width: 14px;
+      height: 14px;
     }
 
-    .pgs__decor--dot-2 {
-      top: 100px;
-      left: 38%;
-      width: 12px;
-      height: 12px;
-    }
-
-    .pgs__decor--dot-3 {
-      top: 130px;
-      right: 15%;
-      width: 16px;
-      height: 16px;
+    .pgs__decor--dot-ring {
+      top: 120px;
+      left: 42%;
+      width: 28px;
+      height: 28px;
     }
   }
 
@@ -572,40 +567,33 @@
     }
 
     .pgs__decor--arc-left {
-      width: 160px;
-      height: 160px;
-      top: 10px;
-      left: 60px;
-      border-width: 12px;
+      width: 60px;
+      height: 60px;
+      top: -25px;
+      left: 80px;
+      border-width: 6px;
     }
 
     .pgs__decor--arc-right {
-      width: 130px;
-      height: 130px;
-      top: 15px;
-      right: 60px;
-      border-width: 12px;
+      width: 60px;
+      height: 60px;
+      top: -20px;
+      right: 80px;
+      border-width: 6px;
     }
 
-    .pgs__decor--dot-1 {
+    .pgs__decor--dot-solid {
       top: 180px;
-      left: 20%;
-      width: 20px;
-      height: 20px;
-    }
-
-    .pgs__decor--dot-2 {
-      top: 120px;
-      left: 40%;
+      left: 18%;
       width: 14px;
       height: 14px;
     }
 
-    .pgs__decor--dot-3 {
-      top: 150px;
-      right: 18%;
-      width: 18px;
-      height: 18px;
+    .pgs__decor--dot-ring {
+      top: 130px;
+      left: 44%;
+      width: 28px;
+      height: 28px;
     }
   }
 
@@ -647,40 +635,33 @@
     }
 
     .pgs__decor--arc-left {
-      width: 180px;
-      height: 180px;
-      top: 10px;
-      left: 80px;
-      border-width: 14px;
+      width: 60px;
+      height: 60px;
+      top: -30px;
+      left: 100px;
+      border-width: 6px;
     }
 
     .pgs__decor--arc-right {
-      width: 150px;
-      height: 150px;
-      top: 15px;
-      right: 80px;
-      border-width: 14px;
+      width: 60px;
+      height: 60px;
+      top: -25px;
+      right: 100px;
+      border-width: 6px;
     }
 
-    .pgs__decor--dot-1 {
+    .pgs__decor--dot-solid {
       top: 200px;
-      left: 22%;
-      width: 22px;
-      height: 22px;
+      left: 20%;
+      width: 14px;
+      height: 14px;
     }
 
-    .pgs__decor--dot-2 {
-      top: 140px;
-      left: 42%;
-      width: 16px;
-      height: 16px;
-    }
-
-    .pgs__decor--dot-3 {
-      top: 170px;
-      right: 20%;
-      width: 20px;
-      height: 20px;
+    .pgs__decor--dot-ring {
+      top: 150px;
+      left: 45%;
+      width: 28px;
+      height: 28px;
     }
   }
 </style>
