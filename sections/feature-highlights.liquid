@@ -1,0 +1,590 @@
+{% style %}
+  .feature-highlights-{{ section.id }} {
+    --fh-bg: {{ section.settings.background_color }};
+    --fh-heading-color: {{ section.settings.heading_color }};
+    --fh-accent-color: {{ section.settings.accent_color }};
+    --fh-text-color: {{ section.settings.text_color }};
+    --fh-subtitle-color: {{ section.settings.subtitle_color }};
+    --fh-btn-bg: {{ section.settings.button_bg_color }};
+    --fh-btn-text: {{ section.settings.button_text_color }};
+  }
+{% endstyle %}
+
+<section class="feature-highlights feature-highlights-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="fh__container">
+    <!-- Header -->
+    <div class="fh__header">
+      {% if section.settings.subtitle != blank %}
+        <p class="fh__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      <h2 class="fh__heading">
+        <span class="fh__heading-regular">{{ section.settings.heading_part1 }}</span>
+        <span class="fh__heading-highlight">{{ section.settings.heading_part2 }}</span>
+      </h2>
+    </div>
+
+    <!-- Content Row -->
+    <div class="fh__content">
+      <!-- Left: Image -->
+      <div class="fh__image-wrapper">
+        {% if section.settings.image != blank %}
+          <img
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            srcset="{{ section.settings.image | image_url: width: 400 }} 400w,
+                    {{ section.settings.image | image_url: width: 600 }} 600w,
+                    {{ section.settings.image | image_url: width: 800 }} 800w"
+            sizes="(max-width: 767px) 100vw, 50vw"
+            alt="{{ section.settings.image_alt | default: section.settings.heading_part1 }}"
+            width="800"
+            height="auto"
+            loading="lazy"
+            class="fh__image"
+          >
+        {% else %}
+          <div class="fh__image-placeholder">
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+              <rect x="10" y="10" width="80" height="80" rx="4"/>
+              <circle cx="35" cy="35" r="8"/>
+              <path d="M10 70 L35 45 L55 65 L75 40 L90 55 L90 90 L10 90 Z"/>
+            </svg>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Right: Text Content -->
+      <div class="fh__text-content">
+        {% if section.settings.content_label != blank %}
+          <p class="fh__content-label">{{ section.settings.content_label }}</p>
+        {% endif %}
+
+        <h3 class="fh__content-heading">
+          {% if section.settings.content_line1 != blank %}
+            <span class="fh__content-line">{{ section.settings.content_line1 }}</span>
+          {% endif %}
+          {% if section.settings.content_line2 != blank %}
+            <span class="fh__content-line">{{ section.settings.content_line2 }}</span>
+          {% endif %}
+          {% if section.settings.content_line3 != blank %}
+            <span class="fh__content-line">
+              {{ section.settings.content_line3_prefix }}
+              <span class="fh__content-highlight">{{ section.settings.content_line3_highlight }}</span>
+            </span>
+          {% endif %}
+          {% if section.settings.content_line4 != blank %}
+            <span class="fh__content-line">{{ section.settings.content_line4 }}</span>
+          {% endif %}
+        </h3>
+
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link }}" class="fh__button">
+            {{ section.settings.button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ========================================
+     BASE STYLES (Mobile First)
+     ======================================== */
+  .feature-highlights {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 48px 20px;
+    background-color: var(--fh-bg);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  .feature-highlights *,
+  .feature-highlights *::before,
+  .feature-highlights *::after {
+    box-sizing: border-box;
+  }
+
+  .feature-highlights img {
+    max-width: 100%;
+    height: auto;
+    border: 0;
+  }
+
+  /* ========================================
+     CONTAINER
+     ======================================== */
+  .fh__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  /* ========================================
+     HEADER
+     ======================================== */
+  .fh__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .fh__subtitle {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--fh-subtitle-color);
+    margin: 0;
+  }
+
+  .fh__heading {
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .fh__heading-regular {
+    color: var(--fh-heading-color);
+  }
+
+  .fh__heading-highlight {
+    color: var(--fh-heading-color);
+    background-color: var(--fh-accent-color);
+    padding: 4px 12px;
+  }
+
+  /* ========================================
+     CONTENT ROW
+     ======================================== */
+  .fh__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+  }
+
+  /* ========================================
+     IMAGE
+     ======================================== */
+  .fh__image-wrapper {
+    width: 100%;
+    max-width: 680px;
+  }
+
+  .fh__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 680 / 537.97;
+    border-radius: 6px;
+    object-fit: cover;
+    object-position: center;
+    background-color: #f5f5f5;
+  }
+
+  .fh__image-placeholder {
+    width: 100%;
+    aspect-ratio: 680 / 537.97;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+  }
+
+  .fh__image-placeholder svg {
+    width: 60%;
+    height: auto;
+  }
+
+  /* ========================================
+     TEXT CONTENT
+     ======================================== */
+  .fh__text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .fh__content-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--fh-subtitle-color);
+    margin: 0;
+  }
+
+  .fh__content-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0;
+  }
+
+  .fh__content-line {
+    display: block;
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--fh-heading-color);
+    line-height: 1.2;
+  }
+
+  .fh__content-highlight {
+    background-color: var(--fh-accent-color);
+    padding: 2px 8px;
+  }
+
+  /* ========================================
+     BUTTON
+     ======================================== */
+  .fh__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    background-color: var(--fh-btn-bg);
+    color: var(--fh-btn-text);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: opacity 0.2s ease;
+  }
+
+  .fh__button:hover {
+    opacity: 0.85;
+  }
+
+  /* ========================================
+     RESPONSIVE - MEDIUM MOBILE (400px+)
+     ======================================== */
+  @media (min-width: 400px) {
+    .feature-highlights {
+      padding: 56px 24px;
+    }
+
+    .fh__container {
+      gap: 48px;
+    }
+
+    .fh__subtitle {
+      font-size: 11px;
+    }
+
+    .fh__heading {
+      font-size: 32px;
+    }
+
+    .fh__content-label {
+      font-size: 11px;
+    }
+
+    .fh__content-line {
+      font-size: 26px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE MOBILE (550px+)
+     ======================================== */
+  @media (min-width: 550px) {
+    .feature-highlights {
+      padding: 64px 32px;
+    }
+
+    .fh__heading {
+      font-size: 36px;
+    }
+
+    .fh__content-line {
+      font-size: 28px;
+    }
+
+    .fh__button {
+      padding: 16px 32px;
+      font-size: 13px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - TABLET (768px+)
+     ======================================== */
+  @media (min-width: 768px) {
+    .feature-highlights {
+      padding: 72px 40px;
+    }
+
+    .fh__container {
+      gap: 56px;
+    }
+
+    .fh__subtitle,
+    .fh__content-label {
+      font-size: 12px;
+    }
+
+    .fh__heading {
+      font-size: 40px;
+    }
+
+    .fh__content {
+      flex-direction: row;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .fh__image-wrapper {
+      flex: 1;
+      max-width: none;
+    }
+
+    .fh__text-content {
+      flex: 1;
+      gap: 24px;
+    }
+
+    .fh__content-line {
+      font-size: 30px;
+    }
+
+    .fh__content-highlight {
+      padding: 4px 10px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - DESKTOP (1024px+)
+     ======================================== */
+  @media (min-width: 1024px) {
+    .feature-highlights {
+      padding: 80px 48px;
+    }
+
+    .fh__container {
+      gap: 60px;
+    }
+
+    .fh__heading {
+      font-size: 44px;
+    }
+
+    .fh__content {
+      gap: 64px;
+    }
+
+    .fh__content-line {
+      font-size: 34px;
+    }
+
+    .fh__button {
+      padding: 16px 36px;
+      font-size: 14px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE DESKTOP (1400px+)
+     ======================================== */
+  @media (min-width: 1400px) {
+    .feature-highlights {
+      padding: 96px 48px;
+    }
+
+    .fh__container {
+      gap: 64px;
+      max-width: 1300px;
+    }
+
+    .fh__heading {
+      font-size: 48px;
+    }
+
+    .fh__content {
+      gap: 80px;
+    }
+
+    .fh__content-line {
+      font-size: 38px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Feature Highlights",
+  "tag": "section",
+  "class": "feature-highlights-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "HOW DTFSHEET™ WORKS FOR YOU"
+    },
+    {
+      "type": "text",
+      "id": "heading_part1",
+      "label": "Heading Part 1",
+      "default": "FEATURE"
+    },
+    {
+      "type": "text",
+      "id": "heading_part2",
+      "label": "Heading Part 2 (Highlighted)",
+      "default": "HIGHLIGHTS"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image Alt Text",
+      "default": "Feature highlights image"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "content_label",
+      "label": "Content Label",
+      "default": "MAKE YOUR DESIGNS POP"
+    },
+    {
+      "type": "text",
+      "id": "content_line1",
+      "label": "Content Line 1",
+      "default": "CREATE BOLD,"
+    },
+    {
+      "type": "text",
+      "id": "content_line2",
+      "label": "Content Line 2",
+      "default": "EYE-CATCHING DESIGNS"
+    },
+    {
+      "type": "text",
+      "id": "content_line3_prefix",
+      "label": "Content Line 3 Prefix",
+      "default": "WITH"
+    },
+    {
+      "type": "text",
+      "id": "content_line3_highlight",
+      "label": "Content Line 3 Highlighted Text",
+      "default": "DTF TRANSFERS"
+    },
+    {
+      "type": "text",
+      "id": "content_line4",
+      "label": "Content Line 4",
+      "default": "THAT SELL"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "TRY IT NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Highlight)",
+      "default": "#00D4D4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Highlights",
+      "category": "Image with text"
+    }
+  ]
+}
+{% endschema %}
