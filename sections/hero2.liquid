@@ -1,0 +1,1107 @@
+{% style %}
+  .hero-2-{{ section.id }} {
+    --h2-accent: {{ section.settings.accent_color }};
+    --h2-text: {{ section.settings.text_color }};
+    --h2-overlay: {{ section.settings.overlay_color }};
+    --h2-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --h2-card-bg: {{ section.settings.card_bg_color }};
+  }
+{% endstyle %}
+
+<section class="hero-2 hero-2-{{ section.id }}" data-section-id="{{ section.id }}">
+  <!-- Background Image -->
+  <div class="h2__background">
+    {% if section.settings.background_image != blank %}
+      <img
+        src="{{ section.settings.background_image | image_url: width: 1920 }}"
+        alt="{{ section.settings.background_image.alt | default: 'Hero background' }}"
+        loading="eager"
+        class="h2__bg-image"
+      >
+    {% else %}
+      <div class="h2__bg-placeholder"></div>
+    {% endif %}
+    <div class="h2__overlay"></div>
+  </div>
+
+  <!-- Content Container -->
+  <div class="h2__container">
+    <!-- Top Navigation Row -->
+    <div class="h2__top-row">
+      <div class="h2__top-left">
+        <a href="{{ section.settings.left_link }}" class="h2__nav-link">
+          <span class="h2__nav-small">{{ section.settings.left_small_text }}</span>
+          <span class="h2__nav-large">{{ section.settings.left_large_text }}</span>
+        </a>
+      </div>
+      <div class="h2__top-center">
+        <span class="h2__top-tagline">{{ section.settings.center_tagline }}</span>
+      </div>
+      <div class="h2__top-right">
+        <a href="{{ section.settings.right_link }}" class="h2__nav-link h2__nav-link--right">
+          <span class="h2__nav-small">{{ section.settings.right_small_text }}</span>
+          <span class="h2__nav-large h2__nav-large--italic">{{ section.settings.right_large_text }}</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Center Content -->
+    <div class="h2__center">
+      <h1 class="h2__main-title" data-text="{{ section.settings.main_title }}">{{ section.settings.main_title }}</h1>
+      <p class="h2__script-text">{{ section.settings.script_text }}</p>
+      <div class="h2__subtitle-row">
+        <span class="h2__working-text">{{ section.settings.working_text }}</span>
+      </div>
+      <h2 class="h2__brand-text">{{ section.settings.brand_text }}</h2>
+      <p class="h2__description">
+        {{ section.settings.description_line1 }}
+        <span class="h2__highlight">{{ section.settings.highlight1 }}</span>
+        {{ section.settings.description_line2 }}
+        <span class="h2__highlight">{{ section.settings.highlight2 }}</span>
+        {{ section.settings.description_line3 }}
+        <span class="h2__highlight">{{ section.settings.highlight3 }}</span>
+        {{ section.settings.description_line4 }}
+        <span class="h2__highlight">{{ section.settings.highlight4 }}</span>
+        {{ section.settings.description_line5 }}
+        <span class="h2__highlight">{{ section.settings.highlight5 }}</span>
+      </p>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="h2__bottom-row">
+      <!-- Bottom Left -->
+      <div class="h2__bottom-left">
+        <div class="h2__badge-row">
+          <span class="h2__est-badge">{{ section.settings.est_text }}</span>
+          <span class="h2__barcode">
+            <svg viewBox="0 0 100 40" fill="currentColor">
+              <rect x="2" y="0" width="2" height="40"/>
+              <rect x="6" y="0" width="1" height="40"/>
+              <rect x="9" y="0" width="3" height="40"/>
+              <rect x="14" y="0" width="1" height="40"/>
+              <rect x="17" y="0" width="2" height="40"/>
+              <rect x="21" y="0" width="1" height="40"/>
+              <rect x="24" y="0" width="3" height="40"/>
+              <rect x="29" y="0" width="1" height="40"/>
+              <rect x="32" y="0" width="2" height="40"/>
+              <rect x="36" y="0" width="1" height="40"/>
+              <rect x="39" y="0" width="3" height="40"/>
+              <rect x="44" y="0" width="1" height="40"/>
+              <rect x="47" y="0" width="2" height="40"/>
+              <rect x="51" y="0" width="1" height="40"/>
+              <rect x="54" y="0" width="3" height="40"/>
+              <rect x="59" y="0" width="1" height="40"/>
+              <rect x="62" y="0" width="2" height="40"/>
+              <rect x="66" y="0" width="1" height="40"/>
+              <rect x="69" y="0" width="3" height="40"/>
+              <rect x="74" y="0" width="1" height="40"/>
+              <rect x="77" y="0" width="2" height="40"/>
+              <rect x="81" y="0" width="1" height="40"/>
+              <rect x="84" y="0" width="3" height="40"/>
+              <rect x="89" y="0" width="1" height="40"/>
+              <rect x="92" y="0" width="2" height="40"/>
+              <rect x="96" y="0" width="2" height="40"/>
+            </svg>
+          </span>
+        </div>
+        <div class="h2__info-card">
+          <div class="h2__info-header">{{ section.settings.info_header }}</div>
+          <div class="h2__info-body">{{ section.settings.info_address }}</div>
+        </div>
+      </div>
+
+      <!-- Bottom Right -->
+      <div class="h2__bottom-right">
+        <a href="{{ section.settings.card_link }}" class="h2__explore-card">
+          <div class="h2__card-bg">
+            {% if section.settings.card_image != blank %}
+              <img
+                src="{{ section.settings.card_image | image_url: width: 400 }}"
+                alt="{{ section.settings.card_image.alt | default: 'Explore' }}"
+                loading="lazy"
+              >
+            {% endif %}
+          </div>
+          <div class="h2__card-content">
+            <div class="h2__card-top">
+              <span class="h2__card-title">{{ section.settings.card_title }}</span>
+              <span class="h2__card-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="10"/>
+                </svg>
+              </span>
+            </div>
+            <div class="h2__card-bottom">
+              <span class="h2__card-subtitle">{{ section.settings.card_subtitle }}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ========================================
+     BASE STYLES
+     ======================================== */
+  .hero-2 {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .hero-2 *,
+  .hero-2 *::before,
+  .hero-2 *::after {
+    box-sizing: border-box;
+  }
+
+  .hero-2 img {
+    max-width: 100%;
+    height: auto;
+    border: 0;
+  }
+
+  .hero-2 a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* ========================================
+     BACKGROUND
+     ======================================== */
+  .h2__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .h2__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.16);
+  }
+
+  .h2__bg-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  }
+
+  .h2__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--h2-overlay);
+    opacity: var(--h2-overlay-opacity);
+  }
+
+  /* ========================================
+     CONTAINER
+     ======================================== */
+  .h2__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px 20px;
+  }
+
+  /* ========================================
+     TOP ROW
+     ======================================== */
+  .h2__top-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .h2__top-left {
+    text-align: left;
+  }
+
+  .h2__top-center {
+    text-align: center;
+  }
+
+  .h2__top-right {
+    text-align: right;
+  }
+
+  .h2__nav-link {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: opacity 0.3s ease;
+  }
+
+  .h2__nav-link:hover {
+    opacity: 0.8;
+  }
+
+  .h2__nav-link--right {
+    align-items: flex-end;
+  }
+
+  .h2__nav-small {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--h2-text);
+  }
+
+  .h2__nav-large {
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--h2-accent);
+    line-height: 1;
+  }
+
+  .h2__nav-large--italic {
+    font-style: italic;
+  }
+
+  .h2__top-tagline {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--h2-accent);
+  }
+
+  /* ========================================
+     CENTER CONTENT
+     ======================================== */
+  .h2__center {
+    text-align: center;
+    padding: 40px 0;
+  }
+
+  .h2__main-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--h2-accent);
+    text-stroke: 2px var(--h2-accent);
+    letter-spacing: 0.05em;
+    margin: 0 0 8px 0;
+    line-height: 1;
+  }
+
+  .h2__script-text {
+    font-family: 'Pinyon Script', 'Dancing Script', cursive;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--h2-accent);
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+
+  .h2__subtitle-row {
+    margin-bottom: 8px;
+  }
+
+  .h2__working-text {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--h2-text);
+  }
+
+  .h2__brand-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--h2-accent);
+    letter-spacing: 0.1em;
+    margin: 0 0 16px 0;
+  }
+
+  .h2__description {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--h2-text);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .h2__highlight {
+    color: var(--h2-accent);
+    font-weight: 700;
+  }
+
+  /* ========================================
+     BOTTOM ROW
+     ======================================== */
+  .h2__bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  /* Bottom Left */
+  .h2__bottom-left {
+    display: none;
+  }
+
+  .h2__badge-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .h2__est-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: 1px solid var(--h2-accent);
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--h2-text);
+    text-transform: uppercase;
+  }
+
+  .h2__barcode {
+    display: flex;
+    width: 80px;
+    height: 30px;
+    color: var(--h2-accent);
+  }
+
+  .h2__barcode svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .h2__info-card {
+    border: 2px solid var(--h2-accent);
+    max-width: 220px;
+  }
+
+  .h2__info-header {
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--h2-accent);
+    border-bottom: 2px solid var(--h2-accent);
+  }
+
+  .h2__info-body {
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--h2-accent);
+    line-height: 1.5;
+  }
+
+  /* Bottom Right */
+  .h2__bottom-right {
+    flex-shrink: 0;
+  }
+
+  .h2__explore-card {
+    display: block;
+    position: relative;
+    width: 160px;
+    height: 100px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--h2-card-bg);
+  }
+
+  .h2__card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .h2__card-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .h2__card-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .h2__explore-card:hover .h2__card-bg img {
+    transform: scale(1.05);
+  }
+
+  .h2__card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 12px;
+  }
+
+  .h2__card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .h2__card-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+  }
+
+  .h2__card-icon {
+    display: flex;
+    width: 18px;
+    height: 18px;
+    color: #c8e84b;
+  }
+
+  .h2__card-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .h2__card-bottom {
+    text-align: left;
+  }
+
+  .h2__card-subtitle {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+  }
+
+  /* ========================================
+     RESPONSIVE - SMALL MOBILE (< 400px)
+     ======================================== */
+  @media screen and (max-width: 399px) {
+    .h2__container {
+      padding: 20px 16px;
+    }
+
+    .h2__top-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .h2__top-center {
+      grid-column: 1 / -1;
+      order: -1;
+      margin-bottom: 16px;
+    }
+
+    .h2__nav-large {
+      font-size: 24px;
+    }
+
+    .h2__main-title {
+      font-size: 40px;
+      -webkit-text-stroke: 1.5px var(--h2-accent);
+      text-stroke: 1.5px var(--h2-accent);
+    }
+
+    .h2__script-text {
+      font-size: 28px;
+    }
+
+    .h2__brand-text {
+      font-size: 18px;
+    }
+
+    .h2__description {
+      font-size: 10px;
+    }
+
+    .h2__explore-card {
+      width: 140px;
+      height: 90px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - MEDIUM MOBILE (400px+)
+     ======================================== */
+  @media screen and (min-width: 400px) {
+    .h2__container {
+      padding: 28px 24px;
+    }
+
+    .h2__nav-large {
+      font-size: 36px;
+    }
+
+    .h2__main-title {
+      font-size: 70px;
+    }
+
+    .h2__script-text {
+      font-size: 40px;
+    }
+
+    .h2__brand-text {
+      font-size: 26px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE MOBILE (550px+)
+     ======================================== */
+  @media screen and (min-width: 550px) {
+    .h2__container {
+      padding: 32px;
+    }
+
+    .h2__nav-small {
+      font-size: 14px;
+    }
+
+    .h2__nav-large {
+      font-size: 44px;
+    }
+
+    .h2__top-tagline {
+      font-size: 14px;
+    }
+
+    .h2__main-title {
+      font-size: 90px;
+    }
+
+    .h2__script-text {
+      font-size: 48px;
+    }
+
+    .h2__brand-text {
+      font-size: 30px;
+    }
+
+    .h2__description {
+      font-size: 12px;
+    }
+
+    .h2__explore-card {
+      width: 180px;
+      height: 110px;
+    }
+
+    .h2__card-title {
+      font-size: 16px;
+    }
+
+    .h2__card-subtitle {
+      font-size: 20px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - TABLET (768px+)
+     ======================================== */
+  @media screen and (min-width: 768px) {
+    .h2__container {
+      padding: 40px;
+    }
+
+    .h2__nav-small {
+      font-size: 16px;
+    }
+
+    .h2__nav-large {
+      font-size: 56px;
+    }
+
+    .h2__top-tagline {
+      font-size: 16px;
+    }
+
+    .h2__main-title {
+      font-size: 110px;
+      -webkit-text-stroke: 2.5px var(--h2-accent);
+      text-stroke: 2.5px var(--h2-accent);
+    }
+
+    .h2__script-text {
+      font-size: 56px;
+    }
+
+    .h2__working-text {
+      font-size: 12px;
+    }
+
+    .h2__brand-text {
+      font-size: 36px;
+    }
+
+    .h2__description {
+      font-size: 13px;
+      max-width: 700px;
+    }
+
+    .h2__bottom-left {
+      display: block;
+    }
+
+    .h2__explore-card {
+      width: 220px;
+      height: 140px;
+    }
+
+    .h2__card-content {
+      padding: 16px;
+    }
+
+    .h2__card-title {
+      font-size: 18px;
+    }
+
+    .h2__card-subtitle {
+      font-size: 24px;
+    }
+
+    .h2__card-icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - DESKTOP (1024px+)
+     ======================================== */
+  @media screen and (min-width: 1024px) {
+    .h2__container {
+      padding: 48px 60px;
+    }
+
+    .h2__nav-small {
+      font-size: 18px;
+    }
+
+    .h2__nav-large {
+      font-size: 68px;
+    }
+
+    .h2__top-tagline {
+      font-size: 18px;
+    }
+
+    .h2__main-title {
+      font-size: 140px;
+      -webkit-text-stroke: 3px var(--h2-accent);
+      text-stroke: 3px var(--h2-accent);
+    }
+
+    .h2__script-text {
+      font-size: 66px;
+    }
+
+    .h2__working-text {
+      font-size: 14px;
+    }
+
+    .h2__brand-text {
+      font-size: 44px;
+    }
+
+    .h2__description {
+      font-size: 14px;
+      max-width: 800px;
+    }
+
+    .h2__est-badge {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+
+    .h2__barcode {
+      width: 100px;
+      height: 35px;
+    }
+
+    .h2__info-card {
+      max-width: 240px;
+    }
+
+    .h2__info-header {
+      font-size: 12px;
+      padding: 12px 16px;
+    }
+
+    .h2__info-body {
+      font-size: 12px;
+      padding: 12px 16px;
+    }
+
+    .h2__explore-card {
+      width: 260px;
+      height: 160px;
+    }
+
+    .h2__card-content {
+      padding: 20px;
+    }
+
+    .h2__card-title {
+      font-size: 20px;
+    }
+
+    .h2__card-subtitle {
+      font-size: 28px;
+    }
+
+    .h2__card-icon {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE DESKTOP (1400px+)
+     ======================================== */
+  @media screen and (min-width: 1400px) {
+    .h2__container {
+      padding: 60px 80px;
+    }
+
+    .h2__nav-small {
+      font-size: 20px;
+    }
+
+    .h2__nav-large {
+      font-size: 80px;
+    }
+
+    .h2__top-tagline {
+      font-size: 20px;
+    }
+
+    .h2__main-title {
+      font-size: 160px;
+    }
+
+    .h2__script-text {
+      font-size: 76px;
+    }
+
+    .h2__brand-text {
+      font-size: 52px;
+    }
+
+    .h2__description {
+      font-size: 15px;
+    }
+
+    .h2__explore-card {
+      width: 300px;
+      height: 180px;
+    }
+
+    .h2__card-title {
+      font-size: 22px;
+    }
+
+    .h2__card-subtitle {
+      font-size: 32px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "SEK Hero 2",
+  "tag": "section",
+  "class": "hero-2-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "header",
+      "content": "Top Navigation - Left"
+    },
+    {
+      "type": "text",
+      "id": "left_small_text",
+      "label": "Small Text",
+      "default": "INSTAGRAM"
+    },
+    {
+      "type": "text",
+      "id": "left_large_text",
+      "label": "Large Text",
+      "default": "INFO"
+    },
+    {
+      "type": "url",
+      "id": "left_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Top Navigation - Center"
+    },
+    {
+      "type": "text",
+      "id": "center_tagline",
+      "label": "Center Tagline",
+      "default": "AVAILABLE FOR COMMISSIONS 2023"
+    },
+    {
+      "type": "header",
+      "content": "Top Navigation - Right"
+    },
+    {
+      "type": "text",
+      "id": "right_small_text",
+      "label": "Small Text",
+      "default": "WIMBLEDON"
+    },
+    {
+      "type": "text",
+      "id": "right_large_text",
+      "label": "Large Text",
+      "default": "EVENTS"
+    },
+    {
+      "type": "url",
+      "id": "right_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Center Content"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Main Title (Outlined)",
+      "default": "WILSON®"
+    },
+    {
+      "type": "text",
+      "id": "script_text",
+      "label": "Script Text",
+      "default": "Rethinking rackets"
+    },
+    {
+      "type": "text",
+      "id": "working_text",
+      "label": "Working On Text",
+      "default": "WORKING ON PROJECTS FOR"
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand Text",
+      "default": "BRAND DIRECTION DIGITAL"
+    },
+    {
+      "type": "header",
+      "content": "Description (with highlights)"
+    },
+    {
+      "type": "text",
+      "id": "description_line1",
+      "label": "Text Before Highlight 1",
+      "default": "COLLABORATING WITH"
+    },
+    {
+      "type": "text",
+      "id": "highlight1",
+      "label": "Highlight 1",
+      "default": "AMBITIOUS BRANDS"
+    },
+    {
+      "type": "text",
+      "id": "description_line2",
+      "label": "Text Before Highlight 2",
+      "default": "THAT HAVE"
+    },
+    {
+      "type": "text",
+      "id": "highlight2",
+      "label": "Highlight 2",
+      "default": "POWERFUL STORIES"
+    },
+    {
+      "type": "text",
+      "id": "description_line3",
+      "label": "Text Before Highlight 3",
+      "default": "TO TELL| WORK"
+    },
+    {
+      "type": "text",
+      "id": "highlight3",
+      "label": "Highlight 3",
+      "default": "INDEPENDENTLY"
+    },
+    {
+      "type": "text",
+      "id": "description_line4",
+      "label": "Text Before Highlight 4",
+      "default": "AND WITH CREATIVE"
+    },
+    {
+      "type": "text",
+      "id": "highlight4",
+      "label": "Highlight 4",
+      "default": "FREELANCERS, STUDIOS"
+    },
+    {
+      "type": "text",
+      "id": "description_line5",
+      "label": "Text Before Highlight 5",
+      "default": "AND"
+    },
+    {
+      "type": "text",
+      "id": "highlight5",
+      "label": "Highlight 5",
+      "default": "AGENCIES"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Left - Badge & Info"
+    },
+    {
+      "type": "text",
+      "id": "est_text",
+      "label": "Established Text",
+      "default": "EST.2021"
+    },
+    {
+      "type": "text",
+      "id": "info_header",
+      "label": "Info Card Header",
+      "default": "WILSON® TENNIS"
+    },
+    {
+      "type": "textarea",
+      "id": "info_address",
+      "label": "Info Card Address",
+      "default": "88-92 Frederiksborgade, Indre By, Copenhagen, Denmark, 1360 K"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Right - Explore Card"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_image",
+      "label": "Card Background Image"
+    },
+    {
+      "type": "text",
+      "id": "card_title",
+      "label": "Card Title",
+      "default": "EXPLORE"
+    },
+    {
+      "type": "text",
+      "id": "card_subtitle",
+      "label": "Card Subtitle",
+      "default": "FRAMES"
+    },
+    {
+      "type": "url",
+      "id": "card_link",
+      "label": "Card Link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Lime)",
+      "default": "#bfea88"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 45,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background Color",
+      "default": "#4a90a4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Hero 2",
+      "category": "Hero"
+    }
+  ]
+}
+{% endschema %}
