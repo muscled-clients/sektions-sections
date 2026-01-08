@@ -9,8 +9,8 @@
     --ct6-button-text: {{ section.settings.button_text_color }};
     --ct6-button-hover-bg: {{ section.settings.button_hover_bg_color }};
     --ct6-table-bg: {{ section.settings.table_bg_color }};
-    --ct6-table-row-bg: {{ section.settings.table_row_bg_color }};
-    --ct6-table-border: {{ section.settings.table_border_color }};
+    --ct6-table-dark-bg: {{ section.settings.table_dark_bg_color }};
+    --ct6-table-dark-text: {{ section.settings.table_dark_text_color }};
   }
 {% endstyle %}
 
@@ -54,67 +54,70 @@
 
       <!-- Right Comparison Table -->
       <div class="ct6__table-wrapper">
-        <table class="ct6__table">
-          <thead>
-            <tr class="ct6__table-header">
-              <th class="ct6__th ct6__th--feature"></th>
-              <th class="ct6__th ct6__th--brand">
-                {% if section.settings.brand_logo != blank %}
-                  <img
-                    src="{{ section.settings.brand_logo | image_url: width: 200 }}"
-                    alt="{{ section.settings.brand_name | default: 'Our Brand' }}"
-                    class="ct6__brand-logo"
-                    loading="lazy"
-                  >
-                {% else %}
-                  <span class="ct6__brand-name">{{ section.settings.brand_name | default: 'Us' }}</span>
-                {% endif %}
-              </th>
-              <th class="ct6__th ct6__th--others">{{ section.settings.others_label | default: 'Other Brands' }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for block in section.blocks %}
-              {% if block.type == 'comparison_row' %}
-                <tr class="ct6__row" {{ block.shopify_attributes }}>
-                  <td class="ct6__td ct6__td--feature">{{ block.settings.feature_name }}</td>
-                  <td class="ct6__td ct6__td--us">
-                    {% if block.settings.us_has_feature %}
-                      <span class="ct6__icon ct6__icon--check">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                          <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                      </span>
-                    {% else %}
-                      <span class="ct6__icon ct6__icon--x">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                          <line x1="18" y1="6" x2="6" y2="18"></line>
-                          <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                      </span>
-                    {% endif %}
-                  </td>
-                  <td class="ct6__td ct6__td--others">
-                    {% if block.settings.others_have_feature %}
-                      <span class="ct6__icon ct6__icon--check">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                          <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                      </span>
-                    {% else %}
-                      <span class="ct6__icon ct6__icon--x">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                          <line x1="18" y1="6" x2="6" y2="18"></line>
-                          <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                      </span>
-                    {% endif %}
-                  </td>
-                </tr>
+        <div class="ct6__table">
+          <!-- Header Row -->
+          <div class="ct6__table-row ct6__table-row--header">
+            <div class="ct6__cell ct6__cell--feature ct6__cell--dark"></div>
+            <div class="ct6__cell ct6__cell--brand ct6__cell--dark">
+              {% if section.settings.brand_logo != blank %}
+                <img
+                  src="{{ section.settings.brand_logo | image_url: width: 200 }}"
+                  alt="{{ section.settings.brand_name | default: 'Our Brand' }}"
+                  class="ct6__brand-logo"
+                  loading="lazy"
+                >
+              {% else %}
+                <span class="ct6__brand-name">{{ section.settings.brand_name | default: 'Us' }}</span>
               {% endif %}
-            {% endfor %}
-          </tbody>
-        </table>
+            </div>
+            <div class="ct6__cell ct6__cell--others ct6__cell--light">
+              <span class="ct6__others-label">{{ section.settings.others_label | default: 'Other Brands' }}</span>
+            </div>
+          </div>
+
+          <!-- Data Rows -->
+          {% for block in section.blocks %}
+            {% if block.type == 'comparison_row' %}
+              <div class="ct6__table-row" {{ block.shopify_attributes }}>
+                <div class="ct6__cell ct6__cell--feature ct6__cell--dark">
+                  <span class="ct6__feature-name">{{ block.settings.feature_name }}</span>
+                </div>
+                <div class="ct6__cell ct6__cell--us ct6__cell--light">
+                  {% if block.settings.us_has_feature %}
+                    <span class="ct6__icon ct6__icon--check">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                  {% else %}
+                    <span class="ct6__icon ct6__icon--x">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </span>
+                  {% endif %}
+                </div>
+                <div class="ct6__cell ct6__cell--others ct6__cell--light">
+                  {% if block.settings.others_have_feature %}
+                    <span class="ct6__icon ct6__icon--check">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                  {% else %}
+                    <span class="ct6__icon ct6__icon--x">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </span>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
@@ -282,84 +285,82 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Table */
+  /* Table - CSS Grid based */
   .ct6__table {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     min-width: 320px;
-    background-color: var(--ct6-table-bg);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--ct6-table-border);
+    gap: 2px;
+    background-color: transparent;
   }
 
-  /* Table Header */
-  .ct6__table-header {
-    background-color: var(--ct6-table-bg);
+  /* Table Row */
+  .ct6__table-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 2px;
+    min-height: 50px;
   }
 
-  .ct6__th {
-    padding: 16px 12px;
-    font-size: 12px;
+  .ct6__table-row--header {
+    min-height: 60px;
+  }
+
+  /* Table Cell Base */
+  .ct6__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  /* Dark cells (feature column + brand header) */
+  .ct6__cell--dark {
+    background-color: var(--ct6-table-dark-bg);
+    color: var(--ct6-table-dark-text);
+  }
+
+  /* Light cells (value columns) */
+  .ct6__cell--light {
+    background-color: var(--ct6-table-bg);
+    color: var(--ct6-heading-color);
+  }
+
+  /* Feature cell */
+  .ct6__cell--feature {
+    justify-content: flex-start;
+  }
+
+  .ct6__feature-name {
+    font-size: 13px;
     font-weight: 500;
-    color: var(--ct6-text-color);
-    text-align: center;
-    vertical-align: middle;
-    border-bottom: 1px solid var(--ct6-table-border);
+    letter-spacing: 0.01em;
   }
 
-  .ct6__th--feature {
-    width: 40%;
-    text-align: left;
-  }
-
-  .ct6__th--brand,
-  .ct6__th--others {
-    width: 30%;
-  }
-
+  /* Brand header cell */
   .ct6__brand-logo {
     display: block;
     max-width: 80px;
-    max-height: 40px;
+    max-height: 36px;
     width: auto;
     height: auto;
-    margin: 0 auto;
     object-fit: contain;
   }
 
   .ct6__brand-name {
     font-size: 14px;
     font-weight: 600;
-    color: var(--ct6-heading-color);
+    color: var(--ct6-table-dark-text);
   }
 
-  /* Table Rows */
-  .ct6__row {
-    background-color: var(--ct6-table-bg);
-    transition: background-color 0.2s ease;
-  }
-
-  .ct6__row:nth-child(odd) {
-    background-color: var(--ct6-table-row-bg);
-  }
-
-  .ct6__td {
-    padding: 14px 12px;
+  /* Others header cell */
+  .ct6__others-label {
     font-size: 13px;
-    font-weight: 400;
-    color: var(--ct6-heading-color);
-    text-align: center;
-    vertical-align: middle;
-    border-bottom: 1px solid var(--ct6-table-border);
-  }
-
-  .ct6__row:last-child .ct6__td {
-    border-bottom: none;
-  }
-
-  .ct6__td--feature {
-    text-align: left;
     font-weight: 500;
+    color: var(--ct6-text-color);
   }
 
   /* Icons in table */
@@ -427,19 +428,34 @@
       padding: 14px 28px;
     }
 
-    .ct6__th {
-      padding: 12px 8px;
+    .ct6__table-row {
+      min-height: 44px;
+    }
+
+    .ct6__table-row--header {
+      min-height: 50px;
+    }
+
+    .ct6__cell {
+      padding: 10px 8px;
       font-size: 11px;
     }
 
-    .ct6__td {
-      padding: 12px 8px;
-      font-size: 12px;
+    .ct6__feature-name {
+      font-size: 11px;
     }
 
     .ct6__brand-logo {
-      max-width: 60px;
-      max-height: 30px;
+      max-width: 50px;
+      max-height: 24px;
+    }
+
+    .ct6__brand-name {
+      font-size: 11px;
+    }
+
+    .ct6__others-label {
+      font-size: 11px;
     }
 
     .ct6__icon svg {
@@ -466,18 +482,21 @@
       font-size: 15px;
     }
 
-    .ct6__th {
-      padding: 18px 14px;
+    .ct6__cell {
+      padding: 14px 12px;
     }
 
-    .ct6__td {
-      padding: 16px 14px;
-      font-size: 14px;
+    .ct6__feature-name {
+      font-size: 13px;
     }
 
     .ct6__brand-logo {
-      max-width: 90px;
-      max-height: 40px;
+      max-width: 70px;
+      max-height: 32px;
+    }
+
+    .ct6__others-label {
+      font-size: 12px;
     }
   }
 
@@ -519,6 +538,31 @@
       font-size: 12px;
       padding: 18px 36px;
     }
+
+    .ct6__table-row {
+      min-height: 52px;
+    }
+
+    .ct6__table-row--header {
+      min-height: 60px;
+    }
+
+    .ct6__cell {
+      padding: 16px 14px;
+    }
+
+    .ct6__feature-name {
+      font-size: 14px;
+    }
+
+    .ct6__brand-logo {
+      max-width: 80px;
+      max-height: 36px;
+    }
+
+    .ct6__others-label {
+      font-size: 13px;
+    }
   }
 
   /* Tablet (768px+) */
@@ -557,23 +601,33 @@
       margin-bottom: 40px;
     }
 
-    .ct6__table {
-      border-radius: 12px;
+    .ct6__table-row {
+      min-height: 54px;
     }
 
-    .ct6__th {
-      padding: 20px 16px;
-      font-size: 13px;
+    .ct6__table-row--header {
+      min-height: 64px;
     }
 
-    .ct6__td {
-      padding: 18px 16px;
+    .ct6__cell {
+      padding: 16px;
+    }
+
+    .ct6__feature-name {
       font-size: 14px;
     }
 
     .ct6__brand-logo {
-      max-width: 100px;
-      max-height: 45px;
+      max-width: 90px;
+      max-height: 40px;
+    }
+
+    .ct6__brand-name {
+      font-size: 14px;
+    }
+
+    .ct6__others-label {
+      font-size: 14px;
     }
 
     .ct6__icon svg {
@@ -616,14 +670,25 @@
       padding: 18px 40px;
     }
 
-    .ct6__th {
-      padding: 22px 20px;
-      font-size: 14px;
+    .ct6__table-row {
+      min-height: 56px;
     }
 
-    .ct6__td {
-      padding: 20px;
+    .ct6__table-row--header {
+      min-height: 68px;
+    }
+
+    .ct6__cell {
+      padding: 18px 20px;
+    }
+
+    .ct6__feature-name {
       font-size: 15px;
+    }
+
+    .ct6__brand-logo {
+      max-width: 100px;
+      max-height: 45px;
     }
 
     .ct6__icon svg {
@@ -682,22 +747,33 @@
       padding: 20px 44px;
     }
 
-    .ct6__table {
-      border-radius: 14px;
+    .ct6__table-row {
+      min-height: 60px;
     }
 
-    .ct6__th {
-      padding: 24px;
+    .ct6__table-row--header {
+      min-height: 72px;
     }
 
-    .ct6__td {
-      padding: 22px 24px;
+    .ct6__cell {
+      padding: 20px 24px;
+    }
+
+    .ct6__feature-name {
       font-size: 16px;
     }
 
     .ct6__brand-logo {
       max-width: 120px;
       max-height: 50px;
+    }
+
+    .ct6__brand-name {
+      font-size: 15px;
+    }
+
+    .ct6__others-label {
+      font-size: 15px;
     }
 
     .ct6__icon svg {
@@ -828,20 +904,20 @@
     {
       "type": "color",
       "id": "table_bg_color",
-      "label": "Table Background",
+      "label": "Table Light Cells Background",
       "default": "#ffffff"
     },
     {
       "type": "color",
-      "id": "table_row_bg_color",
-      "label": "Table Row Alternate Background",
-      "default": "#fafafa"
+      "id": "table_dark_bg_color",
+      "label": "Table Dark Cells Background",
+      "default": "#2d2b43"
     },
     {
       "type": "color",
-      "id": "table_border_color",
-      "label": "Table Border Color",
-      "default": "#e8e8ec"
+      "id": "table_dark_text_color",
+      "label": "Table Dark Cells Text Color",
+      "default": "#ffffff"
     },
     {
       "type": "header",
