@@ -11,14 +11,14 @@
   }
 {% endstyle %}
 
-<section class="press-go-steps press-go-steps-{{ section.id }}" data-section-id="{{ section.id }}">
+<section class="press-go-steps press-go-steps-{{ section.id }}" data-section-id="{{ section.id }}" style="background-color: {{ section.settings.background_color }};">
   <!-- Decorative Elements -->
   <div class="pgs__decorations">
-    <div class="pgs__decor pgs__decor--arc-left"></div>
-    <div class="pgs__decor pgs__decor--arc-right"></div>
-    <div class="pgs__decor pgs__decor--dot-1"></div>
-    <div class="pgs__decor pgs__decor--dot-2"></div>
-    <div class="pgs__decor pgs__decor--dot-3"></div>
+    <div class="pgs__decor pgs__decor--arc-left" style="border-color: {{ section.settings.accent_color }}; border-right-color: transparent; border-bottom-color: transparent;"></div>
+    <div class="pgs__decor pgs__decor--arc-right" style="border-color: {{ section.settings.accent_color }}; border-left-color: transparent; border-top-color: transparent;"></div>
+    <div class="pgs__decor pgs__decor--dot-1" style="background-color: {{ section.settings.accent_color }};"></div>
+    <div class="pgs__decor pgs__decor--dot-2" style="background-color: {{ section.settings.accent_color }};"></div>
+    <div class="pgs__decor pgs__decor--dot-3" style="background-color: {{ section.settings.accent_color }};"></div>
   </div>
 
   <div class="pgs__container">
@@ -87,9 +87,9 @@
     width: 100%;
     max-width: 100%;
     padding: 60px 20px 120px;
-    background-color: var(--pgs-bg);
+    background-color: var(--pgs-bg, #f5f5f5) !important;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .press-go-steps *,
@@ -114,60 +114,58 @@
     right: 0;
     bottom: 0;
     pointer-events: none;
+    z-index: 1;
+    overflow: visible;
   }
 
   .pgs__decor {
     position: absolute;
+    z-index: 1;
   }
 
   .pgs__decor--arc-left {
-    top: 10px;
-    left: 5%;
-    width: 80px;
-    height: 80px;
-    border: 5px solid var(--pgs-accent-color);
+    top: 20px;
+    left: 60px;
+    width: 100px;
+    height: 100px;
+    border-style: solid;
+    border-width: 8px;
     border-radius: 50%;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-    transform: rotate(-45deg);
+    transform: rotate(-30deg);
   }
 
   .pgs__decor--arc-right {
-    top: 30px;
-    right: 5%;
-    width: 60px;
-    height: 60px;
-    border: 5px solid var(--pgs-accent-color);
+    top: 40px;
+    right: 60px;
+    width: 80px;
+    height: 80px;
+    border-style: solid;
+    border-width: 8px;
     border-radius: 50%;
-    border-left-color: transparent;
-    border-top-color: transparent;
-    transform: rotate(-45deg);
+    transform: rotate(-30deg);
   }
 
   .pgs__decor--dot-1 {
-    top: 120px;
-    left: 20%;
-    width: 12px;
-    height: 12px;
-    background-color: var(--pgs-accent-color);
+    top: 160px;
+    left: 25%;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
   }
 
   .pgs__decor--dot-2 {
-    top: 80px;
-    left: 40%;
-    width: 8px;
-    height: 8px;
-    background-color: var(--pgs-accent-color);
+    top: 120px;
+    left: 45%;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
   }
 
   .pgs__decor--dot-3 {
-    top: 150px;
-    right: 25%;
-    width: 10px;
-    height: 10px;
-    background-color: var(--pgs-accent-color);
+    top: 180px;
+    right: 20%;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
   }
 
@@ -182,7 +180,7 @@
     gap: 50px;
     width: 100%;
     max-width: 1300px;
-    z-index: 1;
+    z-index: 2;
   }
 
   /* ========================================
@@ -201,7 +199,7 @@
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--pgs-subtitle-color);
+    color: var(--pgs-subtitle-color, #888888);
     margin: 0;
   }
 
@@ -218,7 +216,7 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    color: var(--pgs-heading-color);
+    color: var(--pgs-heading-color, #1a1a1a);
     line-height: 1.2;
   }
 
@@ -228,8 +226,8 @@
     font-style: italic;
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    color: var(--pgs-heading-color);
-    background-color: var(--pgs-accent-color);
+    color: var(--pgs-heading-color, #1a1a1a);
+    background-color: var(--pgs-accent-color, #00D4D4);
     padding: 8px 24px;
     line-height: 1.2;
   }
@@ -262,7 +260,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background-color: var(--pgs-card-bg);
+    background-color: var(--pgs-card-bg, #ffffff);
     border-radius: 12px 12px 0 0;
     padding: 48px 24px 24px;
     gap: 12px;
@@ -281,12 +279,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--pgs-badge-bg);
-    color: var(--pgs-badge-text);
+    background-color: var(--pgs-badge-bg, #1a1a1a);
+    color: var(--pgs-badge-text, #ffffff);
     font-size: 20px;
     font-weight: 700;
     border-radius: 8px;
     z-index: 3;
+  }
+
+  /* Badge positions per card */
+  .pgs__card--1 .pgs__card-badge {
+    left: 24px;
+    transform: none;
+  }
+
+  .pgs__card--2 .pgs__card-badge {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .pgs__card--3 .pgs__card-badge {
+    left: auto;
+    right: 24px;
+    transform: none;
   }
 
   .pgs__card-title {
@@ -295,7 +310,7 @@
     font-style: italic;
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    color: var(--pgs-heading-color);
+    color: var(--pgs-heading-color, #1a1a1a);
     margin: 0;
     line-height: 1.3;
   }
@@ -303,7 +318,7 @@
   .pgs__card-description {
     font-size: 14px;
     font-weight: 400;
-    color: var(--pgs-text-color);
+    color: var(--pgs-text-color, #666666);
     line-height: 1.6;
     margin: 0;
   }
@@ -462,38 +477,40 @@
     }
 
     .pgs__decor--arc-left {
-      width: 120px;
-      height: 120px;
-      top: 20px;
-      left: 8%;
-      border-width: 6px;
+      width: 140px;
+      height: 140px;
+      top: 10px;
+      left: 80px;
+      border-width: 10px;
     }
 
     .pgs__decor--arc-right {
-      width: 100px;
-      height: 100px;
-      top: 40px;
-      right: 8%;
-      border-width: 6px;
+      width: 110px;
+      height: 110px;
+      top: 30px;
+      right: 80px;
+      border-width: 10px;
     }
 
     .pgs__decor--dot-1 {
-      top: 140px;
-      left: 25%;
-      width: 14px;
-      height: 14px;
+      top: 180px;
+      left: 20%;
+      width: 16px;
+      height: 16px;
     }
 
     .pgs__decor--dot-2 {
-      top: 100px;
-      width: 10px;
-      height: 10px;
+      top: 140px;
+      left: 40%;
+      width: 12px;
+      height: 12px;
     }
 
     .pgs__decor--dot-3 {
-      top: 170px;
-      width: 12px;
-      height: 12px;
+      top: 200px;
+      right: 18%;
+      width: 14px;
+      height: 14px;
     }
   }
 
