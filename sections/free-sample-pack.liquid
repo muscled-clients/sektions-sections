@@ -5,7 +5,9 @@
     --fsp-card-border: {{ section.settings.card_border_color }};
     --fsp-accent: {{ section.settings.accent_color }};
     --fsp-text: {{ section.settings.text_color }};
-    --fsp-heading: {{ section.settings.heading_color }};
+    --fsp-tagline: {{ section.settings.tagline_color }};
+    --fsp-title: {{ section.settings.title_color }};
+    --fsp-image-bg: {{ section.settings.image_bg_color }};
     display: block;
     width: 100%;
   }
@@ -19,27 +21,40 @@
         <p class="fsp__tagline">{{ section.settings.tagline }}</p>
       {%- endif -%}
 
-      <h2 class="fsp__title">
-        <span class="fsp__title-highlight">{{ section.settings.title_highlight }}</span>
-        <span class="fsp__title-regular">{{ section.settings.title_regular }}</span>
-      </h2>
+      <div class="fsp__title-row">
+        <!-- Left Chevron -->
+        <div class="fsp__chevron fsp__chevron--left">
+          {%- if section.settings.chevron_icon != blank -%}
+            <img src="{{ section.settings.chevron_icon | image_url: width: 140 }}" alt="" class="fsp__chevron-img" loading="lazy">
+          {%- else -%}
+            <svg class="fsp__chevron-svg" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0L13 12L26 0L39 12L52 0L65 12L80 0" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
+              <path d="M0 12L13 24L26 12L39 24L52 12L65 24L80 12" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
+            </svg>
+          {%- endif -%}
+        </div>
 
-      <!-- Chevron Decoration -->
-      <div class="fsp__chevron">
-        {%- if section.settings.chevron_icon != blank -%}
-          <img src="{{ section.settings.chevron_icon | image_url: width: 140 }}" alt="" class="fsp__chevron-img" loading="lazy">
-        {%- else -%}
-          <svg class="fsp__chevron-svg" viewBox="0 0 139 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 0L23 17L46 0L69 17L92 0L115 17L139 0" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
-            <path d="M0 17L23 34L46 17L69 34L92 17L115 34L139 17" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
-          </svg>
-        {%- endif -%}
+        <h2 class="fsp__title">
+          <span class="fsp__title-highlight">{{ section.settings.title_highlight }}</span>
+          <span class="fsp__title-regular">{{ section.settings.title_regular }}</span>
+        </h2>
+
+        <!-- Right Chevron -->
+        <div class="fsp__chevron fsp__chevron--right">
+          {%- if section.settings.chevron_icon != blank -%}
+            <img src="{{ section.settings.chevron_icon | image_url: width: 140 }}" alt="" class="fsp__chevron-img" loading="lazy">
+          {%- else -%}
+            <svg class="fsp__chevron-svg" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0L13 12L26 0L39 12L52 0L65 12L80 0" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
+              <path d="M0 12L13 24L26 12L39 24L52 12L65 24L80 12" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
+            </svg>
+          {%- endif -%}
+        </div>
       </div>
     </div>
 
     <!-- Main Grid -->
     <div class="fsp__grid">
-      <!-- Product Card 1 -->
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'product_card' -%}
@@ -52,30 +67,32 @@
                 </div>
 
                 <div class="fsp__card-image">
-                  {%- if block.settings.image != blank -%}
-                    <img
-                      src="{{ block.settings.image | image_url: width: 800 }}"
-                      alt="{{ block.settings.image.alt | default: block.settings.title }}"
-                      loading="lazy"
-                      class="fsp__product-img"
-                    >
-                  {%- else -%}
-                    <div class="fsp__placeholder-img"></div>
-                  {%- endif -%}
-
-                  {%- if block.settings.badge_icon != blank -%}
-                    <div class="fsp__card-badge">
+                  <div class="fsp__image-wrapper">
+                    {%- if block.settings.image != blank -%}
                       <img
-                        src="{{ block.settings.badge_icon | image_url: width: 80 }}"
-                        alt=""
+                        src="{{ block.settings.image | image_url: width: 800 }}"
+                        alt="{{ block.settings.image.alt | default: block.settings.title }}"
                         loading="lazy"
-                        class="fsp__badge-img"
+                        class="fsp__product-img"
                       >
-                    </div>
-                  {%- endif -%}
+                    {%- else -%}
+                      <div class="fsp__placeholder-img"></div>
+                    {%- endif -%}
+
+                    {%- if block.settings.badge_icon != blank -%}
+                      <div class="fsp__card-badge">
+                        <img
+                          src="{{ block.settings.badge_icon | image_url: width: 80 }}"
+                          alt=""
+                          loading="lazy"
+                          class="fsp__badge-img"
+                        >
+                      </div>
+                    {%- endif -%}
+                  </div>
                 </div>
 
-                <a href="{{ block.settings.button_link }}" class="fsp__btn fsp__btn--primary">
+                <a href="{{ block.settings.button_link }}" class="fsp__btn fsp__btn--light">
                   {{ block.settings.button_text }}
                 </a>
               </div>
@@ -119,8 +136,8 @@
                   {%- endif -%}
                 </div>
 
-                <a href="{{ block.settings.button_link }}" class="fsp__btn {{ block.settings.button_style }}">
-                  {{ block.settings.button_text }}
+                <a href="{{ block.settings.button_link }}" class="fsp__btn fsp__btn--dark">
+                  <span class="fsp__btn-text {{ block.settings.button_text_style }}">{{ block.settings.button_text }}</span>
                 </a>
               </div>
             </div>
@@ -140,7 +157,7 @@
     flex-direction: column;
     align-items: center;
     gap: 40px;
-    background: var(--fsp-bg, #F5F5F5);
+    background: var(--fsp-bg, #1A1A1A);
     font-family: 'Inter', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
@@ -168,7 +185,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
   }
 
   .fsp__tagline {
@@ -176,8 +193,15 @@
     font-weight: 600;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--fsp-accent, #00D4D4);
+    color: var(--fsp-tagline, #888888);
     margin: 0;
+  }
+
+  .fsp__title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
   }
 
   .fsp__title {
@@ -202,15 +226,13 @@
   }
 
   .fsp__title-regular {
-    color: var(--fsp-heading, #000000);
+    color: var(--fsp-title, #FFFFFF);
   }
 
   .fsp__chevron {
-    margin-top: 8px;
-    width: 80px;
-    height: 24px;
-    display: flex;
-    justify-content: center;
+    width: 60px;
+    height: 20px;
+    display: none;
     align-items: center;
   }
 
@@ -238,9 +260,9 @@
      CARD BASE STYLES
      ======================================== */
   .fsp__card {
-    background: var(--fsp-card-bg, #2A2A2A);
+    background: var(--fsp-card-bg, #2D2D2D);
     border-radius: 12px;
-    border: 1px solid var(--fsp-card-border, #3D3D3D);
+    border: 1px solid var(--fsp-card-border, #3A3A3A);
     overflow: hidden;
   }
 
@@ -291,30 +313,41 @@
   .fsp__card-image {
     position: relative;
     flex: 1;
-    min-height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
+  .fsp__image-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 180px;
+    background: var(--fsp-image-bg, #FFFFFF);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
   .fsp__product-img {
     width: 100%;
     height: 100%;
-    max-height: 260px;
+    max-height: 220px;
     object-fit: contain;
   }
 
   .fsp__placeholder-img {
     width: 100%;
     height: 180px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.05);
     border-radius: 8px;
   }
 
   .fsp__card-badge {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 12px;
+    left: 12px;
     width: 36px;
     height: 36px;
   }
@@ -346,32 +379,26 @@
     margin-top: auto;
   }
 
-  .fsp__btn--primary {
-    background: var(--fsp-accent, #00D4D4);
-    color: #000000;
+  .fsp__btn--light {
+    background: #E8E8E8;
+    color: #1A1A1A;
   }
 
-  .fsp__btn--primary:hover {
-    background: #00BFBF;
-  }
-
-  .fsp__btn--outline {
-    background: transparent;
-    color: var(--fsp-text, #FFFFFF);
-    border: 1px solid var(--fsp-text, #FFFFFF);
-  }
-
-  .fsp__btn--outline:hover {
-    background: rgba(255, 255, 255, 0.1);
+  .fsp__btn--light:hover {
+    background: #D8D8D8;
   }
 
   .fsp__btn--dark {
-    background: #1A1A1A;
+    background: #3A3A3A;
     color: var(--fsp-text, #FFFFFF);
   }
 
   .fsp__btn--dark:hover {
-    background: #252525;
+    background: #454545;
+  }
+
+  .fsp__btn-text--accent {
+    color: var(--fsp-accent, #00D4D4);
   }
 
   /* ========================================
@@ -379,8 +406,10 @@
      ======================================== */
   .fsp__card--cta .fsp__card-inner {
     gap: 14px;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 200px;
   }
 
   .fsp__cta-icon {
@@ -412,6 +441,7 @@
     display: flex;
     flex-direction: column;
     gap: 0;
+    align-items: center;
   }
 
   .fsp__cta-text {
@@ -442,7 +472,6 @@
 
   .fsp__card--cta .fsp__btn {
     margin-top: 8px;
-    align-self: flex-start;
   }
 
   /* ========================================
@@ -464,11 +493,6 @@
 
     .fsp__title {
       font-size: 34px;
-    }
-
-    .fsp__chevron {
-      width: 100px;
-      height: 28px;
     }
 
     .fsp__card-inner {
@@ -511,6 +535,10 @@
       font-size: 13px;
     }
 
+    .fsp__title-row {
+      gap: 20px;
+    }
+
     .fsp__title {
       font-size: 42px;
       gap: 8px 12px;
@@ -521,20 +549,21 @@
     }
 
     .fsp__chevron {
-      width: 110px;
-      height: 30px;
+      display: flex;
+      width: 70px;
+      height: 22px;
     }
 
     .fsp__card-inner {
       padding: 28px;
     }
 
-    .fsp__card-image {
+    .fsp__image-wrapper {
       min-height: 200px;
     }
 
     .fsp__product-img {
-      max-height: 280px;
+      max-height: 240px;
     }
 
     .fsp__cta-text,
@@ -557,11 +586,15 @@
     }
 
     .fsp__header {
-      gap: 10px;
+      gap: 14px;
     }
 
     .fsp__tagline {
       font-size: 14px;
+    }
+
+    .fsp__title-row {
+      gap: 24px;
     }
 
     .fsp__title {
@@ -574,9 +607,8 @@
     }
 
     .fsp__chevron {
-      width: 130px;
-      height: 34px;
-      margin-top: 10px;
+      width: 90px;
+      height: 26px;
     }
 
     .fsp__grid {
@@ -607,8 +639,9 @@
       font-size: 13px;
     }
 
-    .fsp__card-image {
+    .fsp__image-wrapper {
       min-height: 220px;
+      padding: 20px;
     }
 
     .fsp__card-badge {
@@ -623,6 +656,7 @@
 
     .fsp__card--cta .fsp__card-inner {
       gap: 16px;
+      min-height: 220px;
     }
 
     .fsp__cta-icon {
@@ -690,8 +724,17 @@
       font-size: 14px;
     }
 
+    .fsp__title-row {
+      gap: 28px;
+    }
+
     .fsp__title {
       font-size: 54px;
+    }
+
+    .fsp__chevron {
+      width: 100px;
+      height: 28px;
     }
 
     .fsp__card-inner {
@@ -702,17 +745,16 @@
       padding: 32px 28px;
     }
 
-    .fsp__card-image {
+    .fsp__image-wrapper {
       min-height: 260px;
     }
 
     .fsp__product-img {
-      max-height: 320px;
+      max-height: 300px;
     }
 
     .fsp__card--cta .fsp__card-inner {
       padding: 28px;
-      justify-content: center;
     }
 
     .fsp__cta-text,
@@ -731,6 +773,15 @@
   @media screen and (min-width: 1200px) {
     .fsp__container {
       max-width: 1320px;
+    }
+
+    .fsp__title-row {
+      gap: 32px;
+    }
+
+    .fsp__chevron {
+      width: 110px;
+      height: 30px;
     }
 
     .fsp__grid {
@@ -755,15 +806,15 @@
 
     .fsp__card-desc {
       font-size: 13px;
-      max-width: 260px;
+      max-width: 280px;
     }
 
-    .fsp__card-image {
+    .fsp__image-wrapper {
       min-height: 280px;
     }
 
     .fsp__product-img {
-      max-height: 340px;
+      max-height: 320px;
     }
 
     .fsp__card-badge {
@@ -808,6 +859,11 @@
       font-size: 58px;
     }
 
+    .fsp__chevron {
+      width: 120px;
+      height: 32px;
+    }
+
     .fsp__grid {
       gap: 28px;
     }
@@ -816,12 +872,12 @@
       padding: 40px 36px;
     }
 
-    .fsp__card-image {
+    .fsp__image-wrapper {
       min-height: 300px;
     }
 
     .fsp__product-img {
-      max-height: 360px;
+      max-height: 340px;
     }
 
     .fsp__cta-text,
@@ -877,20 +933,20 @@
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background Color",
-      "default": "#F5F5F5"
+      "label": "Section Background Color",
+      "default": "#1A1A1A"
     },
     {
       "type": "color",
       "id": "card_bg_color",
       "label": "Card Background Color",
-      "default": "#2A2A2A"
+      "default": "#2D2D2D"
     },
     {
       "type": "color",
       "id": "card_border_color",
       "label": "Card Border Color",
-      "default": "#3D3D3D"
+      "default": "#3A3A3A"
     },
     {
       "type": "color",
@@ -906,9 +962,21 @@
     },
     {
       "type": "color",
-      "id": "heading_color",
-      "label": "Header Text Color",
-      "default": "#000000"
+      "id": "tagline_color",
+      "label": "Tagline Color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "image_bg_color",
+      "label": "Product Image Background",
+      "default": "#FFFFFF"
     }
   ],
   "blocks": [
@@ -1022,23 +1090,19 @@
         },
         {
           "type": "select",
-          "id": "button_style",
-          "label": "Button Style",
+          "id": "button_text_style",
+          "label": "Button Text Style",
           "options": [
             {
-              "value": "fsp__btn--primary",
-              "label": "Primary (Cyan)"
+              "value": "",
+              "label": "White Text"
             },
             {
-              "value": "fsp__btn--outline",
-              "label": "Outline (White Border)"
-            },
-            {
-              "value": "fsp__btn--dark",
-              "label": "Dark (Solid Dark)"
+              "value": "fsp__btn-text--accent",
+              "label": "Accent Color Text"
             }
           ],
-          "default": "fsp__btn--outline"
+          "default": ""
         }
       ]
     }
@@ -1073,7 +1137,7 @@
             "highlight_text": "ORDER",
             "text_line1_after": "DIRECTLY.",
             "button_text": "ORDER DIRECTLY",
-            "button_style": "fsp__btn--outline"
+            "button_text_style": ""
           }
         },
         {
@@ -1083,7 +1147,7 @@
             "text_line1": "WANT TO TEST? UPLOAD YOUR DESIGN AND ORDER INSTANTLY,",
             "accent_line": "NO MINIMUMS.",
             "button_text": "EASY ORDER",
-            "button_style": "fsp__btn--dark"
+            "button_text_style": ""
           }
         }
       ]
