@@ -72,10 +72,10 @@
         {% for block in section.blocks %}
           {% if block.type == 'step_card' %}
             <div class="pgs2__card pgs2__card--{{ forloop.index }}" {{ block.shopify_attributes }}>
-              <div class="pgs2__card-inner">
-                <!-- Badge -->
-                <div class="pgs2__badge">{{ forloop.index }}</div>
+              <!-- Badge (outside card-inner to avoid overflow:hidden) -->
+              <div class="pgs2__badge">{{ forloop.index }}</div>
 
+              <div class="pgs2__card-inner">
                 <!-- Content (TOP) -->
                 <div class="pgs2__card-content">
                   <h3 class="pgs2__card-title">{{ block.settings.title }}</h3>
@@ -303,7 +303,7 @@
     position: relative;
     width: 100%;
     max-width: 300px;
-    padding-top: 18px;
+    padding-top: 20px;
   }
 
   .pgs2__card-inner {
@@ -317,23 +317,23 @@
     height: 100%;
   }
 
-  /* Badge - All centered at top */
+  /* Badge - Positioned on the card wrapper, not card-inner */
   .pgs2__badge {
     position: absolute;
-    top: -18px;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--pgs2-badge-bg, #1a1a1a);
     color: var(--pgs2-badge-text, #ffffff);
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     border-radius: var(--pgs2-badge-radius, 8px);
-    z-index: 5;
+    z-index: 10;
   }
 
   /* Card Content (TOP) */
@@ -663,34 +663,32 @@
     }
 
     /* Card rotations and overlap using negative margins */
+    /* Overlap order: 1 (back) → 2 (middle) → 3 (front) */
     .pgs2__card--1 {
       transform: rotate(-5deg);
       margin-right: -30px;
-      margin-top: 30px;
       z-index: 1;
     }
 
     .pgs2__card--2 {
       transform: rotate(0deg);
-      z-index: 3;
+      z-index: 2;
     }
 
     .pgs2__card--3 {
       transform: rotate(5deg);
       margin-left: -30px;
-      margin-top: 30px;
-      z-index: 2;
+      z-index: 3;
     }
 
     .pgs2__badge {
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
-      top: -20px;
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
     }
 
     .pgs2__card-content {
-      padding: 28px 16px 16px;
+      padding: 30px 16px 16px;
     }
 
     .pgs2__card-title {
@@ -781,24 +779,21 @@
     .pgs2__card--1 {
       transform: rotate(-5deg);
       margin-right: -40px;
-      margin-top: 35px;
     }
 
     .pgs2__card--3 {
       transform: rotate(5deg);
       margin-left: -40px;
-      margin-top: 35px;
     }
 
     .pgs2__badge {
-      width: 44px;
-      height: 44px;
-      font-size: 20px;
-      top: -22px;
+      width: 46px;
+      height: 46px;
+      font-size: 21px;
     }
 
     .pgs2__card-content {
-      padding: 30px 20px 20px;
+      padding: 32px 20px 20px;
     }
 
     .pgs2__card-title {
@@ -866,24 +861,21 @@
     .pgs2__card--1 {
       transform: rotate(-6deg);
       margin-right: -45px;
-      margin-top: 40px;
     }
 
     .pgs2__card--3 {
       transform: rotate(6deg);
       margin-left: -45px;
-      margin-top: 40px;
     }
 
     .pgs2__badge {
-      width: 46px;
-      height: 46px;
-      font-size: 21px;
-      top: -24px;
+      width: 48px;
+      height: 48px;
+      font-size: 22px;
     }
 
     .pgs2__card-content {
-      padding: 32px 24px 24px;
+      padding: 34px 24px 24px;
     }
 
     .pgs2__card-title {
@@ -968,24 +960,21 @@
     .pgs2__card--1 {
       transform: rotate(-6deg);
       margin-right: -50px;
-      margin-top: 45px;
     }
 
     .pgs2__card--3 {
       transform: rotate(6deg);
       margin-left: -50px;
-      margin-top: 45px;
     }
 
     .pgs2__badge {
-      width: 48px;
-      height: 48px;
-      font-size: 22px;
-      top: -26px;
+      width: 50px;
+      height: 50px;
+      font-size: 23px;
     }
 
     .pgs2__card-content {
-      padding: 34px 28px 28px;
+      padding: 36px 28px 28px;
     }
 
     .pgs2__card-title {
@@ -1041,24 +1030,21 @@
     .pgs2__card--1 {
       transform: rotate(-6deg);
       margin-right: -55px;
-      margin-top: 50px;
     }
 
     .pgs2__card--3 {
       transform: rotate(6deg);
       margin-left: -55px;
-      margin-top: 50px;
     }
 
     .pgs2__badge {
-      width: 50px;
-      height: 50px;
+      width: 52px;
+      height: 52px;
       font-size: 24px;
-      top: -28px;
     }
 
     .pgs2__card-content {
-      padding: 36px 32px 32px;
+      padding: 38px 32px 32px;
     }
 
     .pgs2__card-title {
