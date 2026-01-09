@@ -1514,70 +1514,6 @@
         "overlay_opacity": 45,
         "card_bg_color": "#4a90a4"
       }
-    },
-    "free_sample_pack_XC6LbY": {
-      "type": "free-sample-pack",
-      "blocks": {
-        "product_card_iXdnJG": {
-          "type": "product_card",
-          "settings": {
-            "title": "FREE SAMPLE PACK",
-            "price": "$0.00",
-            "description": "Get a taste of our premium quality, for free. Includes a variety of sample prints so you can test our colors, softness, and durability before placing your first real order.",
-            "image": "shopify://shop_images/965f8c035097e63225261cbb10e0f55ed0c1b5e4.png",
-            "button_text": "GET FREE SAMPLE",
-            "button_link": ""
-          }
-        },
-        "product_card_cCQzAC": {
-          "type": "product_card",
-          "settings": {
-            "title": "CUSTOM GANG SHEET",
-            "price": "$19.99",
-            "description": "Use this product if you have a pre-made gang sheet file. Select the desired size for your gang sheet. Adjust the quantity to get multiple sheets.",
-            "image": "shopify://shop_images/004707c14d117d0bde0ad115a0dc516b040041fb.png",
-            "button_text": "CUSTOM GANG SHEET",
-            "button_link": ""
-          }
-        },
-        "cta_card_TcKnfB": {
-          "type": "cta_card",
-          "settings": {
-            "icon_type": "cart",
-            "highlight_text": "ORDER",
-            "button_text": "ORDER DIRECTLY",
-            "button_link": "",
-            "button_style": "fsp__card-btn--outline"
-          }
-        },
-        "cta_card_8WB98C": {
-          "type": "cta_card",
-          "settings": {
-            "icon_type": "tag",
-            "highlight_text": "ORDER",
-            "button_text": "EASY ORDER",
-            "button_link": "",
-            "button_style": "fsp__card-btn--accent"
-          }
-        }
-      },
-      "block_order": [
-        "product_card_iXdnJG",
-        "product_card_cCQzAC",
-        "cta_card_TcKnfB",
-        "cta_card_8WB98C"
-      ],
-      "name": "SEK Free Sample Pack",
-      "settings": {
-        "tagline": "TRY IT. FEEL IT. PRESS IT.",
-        "title_highlight": "FREE",
-        "title_regular": "SAMPLE PACK",
-        "background_color": "#F5F5F5",
-        "card_bg_color": "#1A1A1A",
-        "accent_color": "#00D4D4",
-        "text_color": "#FFFFFF",
-        "heading_color": "#000000"
-      }
     }
   },
   "order": [
@@ -1601,7 +1537,6 @@
     "feature_highlights_ABmMKC",
     "press_and_go_xfQLwt",
     "press_and_go2_6Wj7KQ",
-    "hero2_bzeyWB",
-    "free_sample_pack_XC6LbY"
+    "hero2_bzeyWB"
   ]
 }
