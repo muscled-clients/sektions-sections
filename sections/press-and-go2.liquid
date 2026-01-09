@@ -73,7 +73,15 @@
           {% if block.type == 'step_card' %}
             <div class="pgs2__card pgs2__card--{{ forloop.index }}" {{ block.shopify_attributes }}>
               <div class="pgs2__card-inner">
-                <!-- Image (TOP) -->
+                <!-- Badge -->
+                <div class="pgs2__badge">{{ forloop.index }}</div>
+                <!-- Content (TOP) -->
+                <div class="pgs2__card-content">
+                  <h3 class="pgs2__card-title">{{ block.settings.title }}</h3>
+                  <p class="pgs2__card-desc">{{ block.settings.description }}</p>
+                </div>
+
+                <!-- Image (BOTTOM) -->
                 <div class="pgs2__card-image">
                   {% if block.settings.image != blank %}
                     <img
@@ -97,13 +105,6 @@
                       </svg>
                     </div>
                   {% endif %}
-                </div>
-
-                <!-- Content (BOTTOM) with Badge overlapping -->
-                <div class="pgs2__card-content">
-                  <div class="pgs2__badge">{{ forloop.index }}</div>
-                  <h3 class="pgs2__card-title">{{ block.settings.title }}</h3>
-                  <p class="pgs2__card-desc">{{ block.settings.description }}</p>
                 </div>
               </div>
             </div>
@@ -311,17 +312,44 @@
     background-color: var(--pgs2-card-bg, #ffffff);
     border-radius: var(--pgs2-card-radius, 16px);
     box-shadow: var(--pgs2-card-shadow, 0 6px 30px rgba(0, 0, 0, 0.08));
-    overflow: hidden;
+    overflow: visible;
     height: 100%;
   }
 
-  /* Card Image (TOP) */
+  /* Badge - At top of card */
+  .pgs2__badge {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--pgs2-badge-bg, #1a1a1a);
+    color: var(--pgs2-badge-text, #ffffff);
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: var(--pgs2-badge-radius, 8px);
+    z-index: 10;
+  }
+
+  /* Card Content (TOP) */
+  .pgs2__card-content {
+    padding: 50px 16px 16px;
+    text-align: center;
+    flex: 0 0 auto;
+  }
+
+  /* Card Image (BOTTOM) */
   .pgs2__card-image {
     position: relative;
     width: 100%;
     flex: 1 1 auto;
     min-height: 180px;
     overflow: hidden;
+    border-radius: 0 0 var(--pgs2-card-radius, 16px) var(--pgs2-card-radius, 16px);
   }
 
   .pgs2__card-image img {
@@ -345,33 +373,6 @@
   .pgs2__card-placeholder svg {
     width: 50%;
     height: auto;
-  }
-
-  /* Card Content (BOTTOM) */
-  .pgs2__card-content {
-    position: relative;
-    padding: 28px 16px 16px;
-    text-align: center;
-    flex: 0 0 auto;
-  }
-
-  /* Badge - Overlapping image/content boundary */
-  .pgs2__badge {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--pgs2-badge-bg, #1a1a1a);
-    color: var(--pgs2-badge-text, #ffffff);
-    font-size: 18px;
-    font-weight: 700;
-    border-radius: var(--pgs2-badge-radius, 8px);
-    z-index: 10;
   }
 
   .pgs2__card-title {
@@ -447,11 +448,11 @@
       width: 40px;
       height: 40px;
       font-size: 18px;
-      top: -20px;
+      top: 4px;
     }
 
     .pgs2__card-content {
-      padding: 28px 20px 20px;
+      padding: 50px 20px 20px;
     }
 
     .pgs2__card-title {
@@ -544,12 +545,12 @@
       width: 44px;
       height: 44px;
       font-size: 20px;
-      top: -22px;
+      top: 6px;
       border-radius: 10px;
     }
 
     .pgs2__card-content {
-      padding: 30px 24px 24px;
+      padding: 56px 24px 24px;
     }
 
     .pgs2__card-title {
@@ -683,11 +684,11 @@
       width: 44px;
       height: 44px;
       font-size: 20px;
-      top: -22px;
+      top: 6px;
     }
 
     .pgs2__card-content {
-      padding: 30px 16px 16px;
+      padding: 56px 16px 16px;
     }
 
     .pgs2__card-title {
@@ -788,11 +789,11 @@
       width: 46px;
       height: 46px;
       font-size: 21px;
-      top: -23px;
+      top: 8px;
     }
 
     .pgs2__card-content {
-      padding: 32px 20px 20px;
+      padding: 60px 20px 20px;
     }
 
     .pgs2__card-title {
@@ -870,11 +871,11 @@
       width: 48px;
       height: 48px;
       font-size: 22px;
-      top: -24px;
+      top: 10px;
     }
 
     .pgs2__card-content {
-      padding: 34px 24px 24px;
+      padding: 64px 24px 24px;
     }
 
     .pgs2__card-title {
@@ -969,11 +970,11 @@
       width: 50px;
       height: 50px;
       font-size: 23px;
-      top: -25px;
+      top: 12px;
     }
 
     .pgs2__card-content {
-      padding: 36px 28px 28px;
+      padding: 68px 28px 28px;
     }
 
     .pgs2__card-title {
@@ -1039,11 +1040,11 @@
       width: 52px;
       height: 52px;
       font-size: 24px;
-      top: -26px;
+      top: 14px;
     }
 
     .pgs2__card-content {
-      padding: 38px 32px 32px;
+      padding: 72px 32px 32px;
     }
 
     .pgs2__card-title {
