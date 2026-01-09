@@ -299,13 +299,16 @@
     background-color: var(--pgs2-card-bg, #ffffff);
     border-radius: 12px;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
-    overflow: visible;
+    overflow: hidden;
+    height: 100%;
   }
 
-  /* Badge */
+  /* Badge - All centered at top */
   .pgs2__badge {
     position: absolute;
     top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 36px;
     height: 36px;
     display: flex;
@@ -319,25 +322,11 @@
     z-index: 5;
   }
 
-  /* Badge positions per card (mobile - all left) */
-  .pgs2__card--1 .pgs2__badge {
-    left: 16px;
-  }
-
-  .pgs2__card--2 .pgs2__badge {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .pgs2__card--3 .pgs2__badge {
-    right: 16px;
-    left: auto;
-  }
-
   /* Card Content */
   .pgs2__card-content {
     padding: 36px 16px 16px;
     text-align: center;
+    flex: 0 0 auto;
   }
 
   .pgs2__card-title {
@@ -363,24 +352,26 @@
   .pgs2__card-image {
     position: relative;
     width: 100%;
+    flex: 1 1 auto;
+    min-height: 180px;
   }
 
   .pgs2__card-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
-    border-radius: 0 0 12px 12px;
+    object-fit: cover;
   }
 
   .pgs2__card-placeholder {
     width: 100%;
-    aspect-ratio: 4/3;
+    height: 100%;
+    min-height: 180px;
     background-color: #e5e5e5;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #bbb;
-    border-radius: 0 0 12px 12px;
   }
 
   .pgs2__card-placeholder svg {
@@ -638,20 +629,25 @@
     .pgs2__cards {
       flex-direction: row;
       justify-content: center;
-      align-items: flex-start;
+      align-items: stretch;
       gap: 0;
     }
 
     .pgs2__card {
-      flex: 0 0 280px;
-      max-width: 280px;
+      flex: 0 0 260px;
+      max-width: 260px;
+      height: 380px;
+    }
+
+    .pgs2__card-inner {
+      border-radius: 16px;
+      height: 100%;
     }
 
     /* Card rotations and overlap using negative margins */
     .pgs2__card--1 {
-      transform: rotate(-5deg);
-      margin-top: 25px;
-      margin-right: -35px;
+      transform: rotate(-4deg);
+      margin-right: -25px;
       z-index: 1;
     }
 
@@ -661,46 +657,33 @@
     }
 
     .pgs2__card--3 {
-      transform: rotate(5deg);
-      margin-top: 25px;
-      margin-left: -35px;
+      transform: rotate(4deg);
+      margin-left: -25px;
       z-index: 2;
     }
 
-    .pgs2__card-inner {
-      border-radius: 16px;
-    }
-
-    .pgs2__card-image img,
-    .pgs2__card-placeholder {
-      border-radius: 0 0 16px 16px;
-    }
-
     .pgs2__badge {
-      width: 44px;
-      height: 44px;
-      font-size: 20px;
-      top: -18px;
-    }
-
-    .pgs2__card--1 .pgs2__badge {
-      left: 18px;
-    }
-
-    .pgs2__card--3 .pgs2__badge {
-      right: 18px;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      top: -16px;
+      border-radius: 10px;
     }
 
     .pgs2__card-content {
-      padding: 44px 20px 20px;
+      padding: 40px 16px 16px;
     }
 
     .pgs2__card-title {
-      font-size: 18px;
+      font-size: 16px;
     }
 
     .pgs2__card-desc {
-      font-size: 13px;
+      font-size: 12px;
+    }
+
+    .pgs2__card-image {
+      min-height: 200px;
     }
   }
 
@@ -767,49 +750,44 @@
     }
 
     .pgs2__card {
-      flex: 0 0 340px;
-      max-width: 340px;
+      flex: 0 0 300px;
+      max-width: 300px;
+      height: 440px;
     }
 
     .pgs2__card--1 {
-      transform: rotate(-7deg);
-      margin-top: 35px;
-      margin-right: -48px;
+      transform: rotate(-5deg);
+      margin-right: -35px;
     }
 
     .pgs2__card--3 {
-      transform: rotate(7deg);
-      margin-top: 35px;
-      margin-left: -48px;
+      transform: rotate(5deg);
+      margin-left: -35px;
     }
 
     .pgs2__badge {
-      width: 48px;
-      height: 48px;
-      font-size: 22px;
-      top: -20px;
-      border-radius: 12px;
-    }
-
-    .pgs2__card--1 .pgs2__badge {
-      left: 20px;
-    }
-
-    .pgs2__card--3 .pgs2__badge {
-      right: 20px;
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+      top: -18px;
+      border-radius: 10px;
     }
 
     .pgs2__card-content {
-      padding: 50px 24px 24px;
+      padding: 46px 20px 20px;
     }
 
     .pgs2__card-title {
-      font-size: 22px;
-      margin-bottom: 12px;
+      font-size: 18px;
+      margin-bottom: 10px;
     }
 
     .pgs2__card-desc {
-      font-size: 14px;
+      font-size: 13px;
+    }
+
+    .pgs2__card-image {
+      min-height: 240px;
     }
   }
 
@@ -852,32 +830,42 @@
     }
 
     .pgs2__card {
-      flex: 0 0 380px;
-      max-width: 380px;
+      flex: 0 0 340px;
+      max-width: 340px;
+      height: 480px;
     }
 
     .pgs2__card--1 {
-      transform: rotate(-8deg);
-      margin-top: 40px;
-      margin-right: -55px;
+      transform: rotate(-6deg);
+      margin-right: -40px;
     }
 
     .pgs2__card--3 {
-      transform: rotate(8deg);
-      margin-top: 40px;
-      margin-left: -55px;
+      transform: rotate(6deg);
+      margin-left: -40px;
+    }
+
+    .pgs2__badge {
+      width: 46px;
+      height: 46px;
+      font-size: 21px;
+      top: -19px;
     }
 
     .pgs2__card-content {
-      padding: 56px 28px 28px;
+      padding: 50px 24px 24px;
     }
 
     .pgs2__card-title {
-      font-size: 24px;
+      font-size: 20px;
     }
 
     .pgs2__card-desc {
-      font-size: 15px;
+      font-size: 14px;
+    }
+
+    .pgs2__card-image {
+      min-height: 260px;
     }
   }
 
@@ -938,35 +926,43 @@
     }
 
     .pgs2__card {
-      flex: 0 0 420px;
-      max-width: 420px;
+      flex: 0 0 380px;
+      max-width: 380px;
+      height: 520px;
     }
 
     .pgs2__card--1 {
-      margin-right: -60px;
+      transform: rotate(-6deg);
+      margin-right: -45px;
     }
 
     .pgs2__card--3 {
-      margin-left: -60px;
+      transform: rotate(6deg);
+      margin-left: -45px;
     }
 
     .pgs2__badge {
-      width: 52px;
-      height: 52px;
-      font-size: 24px;
-      top: -22px;
+      width: 48px;
+      height: 48px;
+      font-size: 22px;
+      top: -20px;
+      border-radius: 12px;
     }
 
     .pgs2__card-content {
-      padding: 64px 32px 32px;
+      padding: 54px 28px 28px;
     }
 
     .pgs2__card-title {
-      font-size: 26px;
+      font-size: 22px;
     }
 
     .pgs2__card-desc {
-      font-size: 16px;
+      font-size: 15px;
+    }
+
+    .pgs2__card-image {
+      min-height: 280px;
     }
   }
 
@@ -998,16 +994,42 @@
     }
 
     .pgs2__card {
-      flex: 0 0 450px;
-      max-width: 450px;
+      flex: 0 0 400px;
+      max-width: 400px;
+      height: 560px;
     }
 
     .pgs2__card--1 {
-      margin-right: -70px;
+      transform: rotate(-6deg);
+      margin-right: -50px;
     }
 
     .pgs2__card--3 {
-      margin-left: -70px;
+      transform: rotate(6deg);
+      margin-left: -50px;
+    }
+
+    .pgs2__badge {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      top: -21px;
+    }
+
+    .pgs2__card-content {
+      padding: 58px 32px 32px;
+    }
+
+    .pgs2__card-title {
+      font-size: 24px;
+    }
+
+    .pgs2__card-desc {
+      font-size: 16px;
+    }
+
+    .pgs2__card-image {
+      min-height: 300px;
     }
   }
 </style>
