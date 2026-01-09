@@ -1459,6 +1459,55 @@
         "decor_dot_2": "shopify://shop_images/Ellipse_4.svg"
       }
     },
+    "press_and_go2_q6TjRz": {
+      "type": "press-and-go2",
+      "blocks": {
+        "step_card_r9jejY": {
+          "type": "step_card",
+          "settings": {
+            "title": "PLACE YOUR TRANSFER",
+            "description": "Position your DTF Sheet on the fabric, print side up. Make sure it's centered and smooth, ready to press."
+          }
+        },
+        "step_card_MFhwKG": {
+          "type": "step_card",
+          "settings": {
+            "title": "HEAT PRESS",
+            "description": "At 320F° for 100% cotton and At 280F° for polyester or blends for 8 seconds."
+          }
+        },
+        "step_card_kxJRdh": {
+          "type": "step_card",
+          "settings": {
+            "title": "PEEL DTF SHEET",
+            "description": "Peel while warm for a smooth, clean finish. (Cold peel also works, your call.)"
+          }
+        }
+      },
+      "block_order": [
+        "step_card_r9jejY",
+        "step_card_MFhwKG",
+        "step_card_kxJRdh"
+      ],
+      "name": "How it Works",
+      "settings": {
+        "subtitle": "",
+        "heading_line1": "HOW IT WORKS",
+        "heading_line2": "JUST PRESS & GO",
+        "background_color": "#f7f7f7",
+        "corner_shape_color": "#ededed",
+        "heading_color": "#1a1a1a",
+        "accent_color": "#00d4d4",
+        "text_color": "#666666",
+        "subtitle_color": "#888888",
+        "card_bg_color": "#ffffff",
+        "badge_bg_color": "#1a1a1a",
+        "badge_text_color": "#ffffff",
+        "card_border_radius": 16,
+        "badge_border_radius": 10,
+        "card_shadow": "medium"
+      }
+    },
     "free_sample_pack_6mQAUV": {
       "type": "free-sample-pack",
       "blocks": {
@@ -1534,53 +1583,96 @@
         "image_bg_color": "#ffffff"
       }
     },
-    "press_and_go2_q6TjRz": {
-      "type": "press-and-go2",
+    "works_on_garmets_V7M9ME": {
+      "type": "works-on-garmets",
       "blocks": {
-        "step_card_r9jejY": {
-          "type": "step_card",
+        "fabric_icon_pmYTHC": {
+          "type": "fabric_icon",
           "settings": {
-            "title": "PLACE YOUR TRANSFER",
-            "description": "Position your DTF Sheet on the fabric, print side up. Make sure it's centered and smooth, ready to press."
+            "icon": "shopify://shop_images/Group.svg",
+            "icon_text": "",
+            "label": "Leather"
           }
         },
-        "step_card_MFhwKG": {
-          "type": "step_card",
+        "fabric_icon_bBNKpj": {
+          "type": "fabric_icon",
           "settings": {
-            "title": "HEAT PRESS",
-            "description": "At 320F° for 100% cotton and At 280F° for polyester or blends for 8 seconds."
+            "icon": "shopify://shop_images/Group_7dec55ca-2c27-4482-9541-6d9766ad8c20.svg",
+            "icon_text": "",
+            "label": "Linen"
           }
         },
-        "step_card_kxJRdh": {
-          "type": "step_card",
+        "fabric_icon_rjWJ7j": {
+          "type": "fabric_icon",
           "settings": {
-            "title": "PEEL DTF SHEET",
-            "description": "Peel while warm for a smooth, clean finish. (Cold peel also works, your call.)"
+            "icon": "shopify://shop_images/Group_99c90957-9561-4300-8a19-53bf651bbb39.svg",
+            "icon_text": "",
+            "label": "Wool"
+          }
+        },
+        "fabric_icon_6LN4wK": {
+          "type": "fabric_icon",
+          "settings": {
+            "icon": "shopify://shop_images/Group_99c90957-9561-4300-8a19-53bf651bbb39.svg",
+            "icon_text": "",
+            "label": "Bamboo"
+          }
+        },
+        "fabric_icon_mHFJcR": {
+          "type": "fabric_icon",
+          "settings": {
+            "icon": "shopify://shop_images/Group_7dec55ca-2c27-4482-9541-6d9766ad8c20.svg",
+            "icon_text": "",
+            "label": "Cotton"
+          }
+        },
+        "fabric_icon_fhTgar": {
+          "type": "fabric_icon",
+          "settings": {
+            "icon_text": "20+",
+            "label": "Fabrics"
           }
         }
       },
       "block_order": [
-        "step_card_r9jejY",
-        "step_card_MFhwKG",
-        "step_card_kxJRdh"
+        "fabric_icon_pmYTHC",
+        "fabric_icon_bBNKpj",
+        "fabric_icon_rjWJ7j",
+        "fabric_icon_6LN4wK",
+        "fabric_icon_mHFJcR",
+        "fabric_icon_fhTgar"
       ],
-      "name": "How it Works",
+      "name": "Works On Garment",
       "settings": {
-        "subtitle": "",
-        "heading_line1": "HOW IT WORKS",
-        "heading_line2": "JUST PRESS & GO",
-        "background_color": "#F7F7F7",
-        "corner_shape_color": "#EDEDED",
-        "heading_color": "#1a1a1a",
-        "accent_color": "#00D4D4",
-        "text_color": "#666666",
-        "subtitle_color": "#888888",
-        "card_bg_color": "#ffffff",
-        "badge_bg_color": "#1a1a1a",
-        "badge_text_color": "#ffffff",
-        "card_border_radius": 16,
-        "badge_border_radius": 10,
-        "card_shadow": "medium"
+        "tagline": "WORKS ON ANY GARMENT",
+        "heading_line1": "STAND OUT WITH",
+        "heading_highlight": "DTFSHEET™",
+        "heading_line2": "TRANSFERS -",
+        "heading_line3": "CRISP RESULTS ON",
+        "heading_underline": "ANY GARMENT",
+        "description": "DTFSheet™ transfers apply cleanly onto cotton, linen, bamboo, wool, nylon blends, and more. Compatible with 20+ fabric types and counting.",
+        "btn_primary_text": "UPLOAD & PRINT NOW",
+        "btn_primary_link": "",
+        "btn_secondary_text": "BUILD GANG SHEET",
+        "btn_secondary_link": "",
+        "main_image": "shopify://shop_images/2139d6cf995a4b908f91a7bf123cf0aefa9038f7.jpg",
+        "show_dots": true,
+        "dots_image": "shopify://shop_images/Dots_Container.svg",
+        "background_color": "#080808",
+        "border_color": "#EBEBEB",
+        "tagline_color": "#888888",
+        "title_color": "#FFFFFF",
+        "highlight_bg_color": "#00D4D4",
+        "highlight_text_color": "#000000",
+        "underline_color": "#00D4D4",
+        "description_color": "#AAAAAA",
+        "icon_label_color": "#FFFFFF",
+        "btn_primary_bg": "#00D4D4",
+        "btn_primary_text_color": "#000000",
+        "btn_secondary_bg": "#FFFFFF",
+        "btn_secondary_text_color": "#000000",
+        "btn_secondary_border": "#FFFFFF",
+        "dots_color": "#D4A000"
       }
     }
   },
@@ -1606,6 +1698,7 @@
     "feature_highlights_ABmMKC",
     "press_and_go_xfQLwt",
     "press_and_go2_q6TjRz",
-    "free_sample_pack_6mQAUV"
+    "free_sample_pack_6mQAUV",
+    "works_on_garmets_V7M9ME"
   ]
 }
