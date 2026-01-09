@@ -1674,6 +1674,65 @@
         "btn_secondary_border": "#FFFFFF",
         "dots_color": "#D4A000"
       }
+    },
+    "usa_quality_i3xFWJ": {
+      "type": "usa-quality",
+      "blocks": {
+        "feature_twRwq9": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/download_1.png",
+            "title": "MADE IN THE USA",
+            "description": "All production and shipping handled locally."
+          }
+        },
+        "feature_daVQx9": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Quality_Icon_dc6b1037-4f03-4a23-8d44-a3f1cfb00bcc.svg",
+            "title": "IN-HOUSE QUALITY",
+            "description": "No outsourcing. Full control, every step."
+          }
+        },
+        "feature_YxV7pE": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Shipping_Icon_42ca0964-68a9-4929-8121-0931dacd9a29.svg",
+            "title": "FAST U.S. SHIPPING",
+            "description": "Quick delivery from within the country."
+          }
+        },
+        "feature_GmhzMJ": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/Workflow_Icon_05d08f03-cc01-4d15-a564-17c3cd400dcd.svg",
+            "title": "RELIABLE WORKFLOW",
+            "description": "Consistent, secure, and always on time."
+          }
+        }
+      },
+      "block_order": [
+        "feature_twRwq9",
+        "feature_daVQx9",
+        "feature_YxV7pE",
+        "feature_GmhzMJ"
+      ],
+      "name": "USA Quality",
+      "settings": {
+        "main_image": "shopify://shop_images/d9e6a9a8da4b7cda4f3d1ccb3a9486afd19c43ab.png",
+        "tagline": "100% AMERICAN-MADE QUALITY.",
+        "heading_line1": "BUILT, PRINTED AND",
+        "heading_line2": "SHIPPED IN THE",
+        "heading_highlight": "USA",
+        "background_color": "#FFFFFF",
+        "tagline_color": "#666666",
+        "title_color": "#000000",
+        "highlight_bg_color": "#00D4D4",
+        "highlight_text_color": "#000000",
+        "feature_title_color": "#000000",
+        "feature_desc_color": "#666666",
+        "icon_color": "#000000"
+      }
     }
   },
   "order": [
@@ -1699,6 +1758,7 @@
     "press_and_go_xfQLwt",
     "press_and_go2_q6TjRz",
     "free_sample_pack_6mQAUV",
-    "works_on_garmets_YpxyCi"
+    "works_on_garmets_YpxyCi",
+    "usa_quality_i3xFWJ"
   ]
 }
