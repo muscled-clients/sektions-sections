@@ -2,11 +2,10 @@
   #shopify-section-{{ section.id }} {
     --fsp-bg: {{ section.settings.background_color }};
     --fsp-card-bg: {{ section.settings.card_bg_color }};
+    --fsp-card-border: {{ section.settings.card_border_color }};
     --fsp-accent: {{ section.settings.accent_color }};
     --fsp-text: {{ section.settings.text_color }};
     --fsp-heading: {{ section.settings.heading_color }};
-    --fsp-btn-bg: {{ section.settings.button_bg_color }};
-    --fsp-btn-text: {{ section.settings.button_text_color }};
     display: block;
     width: 100%;
   }
@@ -31,8 +30,8 @@
           <img src="{{ section.settings.chevron_icon | image_url: width: 140 }}" alt="" class="fsp__chevron-img" loading="lazy">
         {%- else -%}
           <svg class="fsp__chevron-svg" viewBox="0 0 139 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M69.5 17L0 0H139L69.5 17Z" fill="var(--fsp-accent)"/>
-            <path d="M69.5 34L0 17H139L69.5 34Z" fill="var(--fsp-accent)"/>
+            <path d="M0 0L23 17L46 0L69 17L92 0L115 17L139 0" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
+            <path d="M0 17L23 34L46 17L69 34L92 17L115 34L139 17" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
           </svg>
         {%- endif -%}
       </div>
@@ -40,84 +39,90 @@
 
     <!-- Main Grid -->
     <div class="fsp__grid">
-      <!-- Product Cards -->
+      <!-- Product Card 1 -->
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'product_card' -%}
             <div class="fsp__card fsp__card--product" {{ block.shopify_attributes }}>
-              <div class="fsp__card-content">
-                <h3 class="fsp__card-title">{{ block.settings.title }}</h3>
-                <p class="fsp__card-price">{{ block.settings.price }}</p>
-                <p class="fsp__card-desc">{{ block.settings.description }}</p>
-              </div>
+              <div class="fsp__card-inner">
+                <div class="fsp__card-content">
+                  <h3 class="fsp__card-title">{{ block.settings.title }}</h3>
+                  <p class="fsp__card-price">{{ block.settings.price }}</p>
+                  <p class="fsp__card-desc">{{ block.settings.description }}</p>
+                </div>
 
-              <div class="fsp__card-image">
-                {%- if block.settings.image != blank -%}
-                  <img
-                    src="{{ block.settings.image | image_url: width: 800 }}"
-                    alt="{{ block.settings.image.alt | default: block.settings.title }}"
-                    loading="lazy"
-                    class="fsp__product-img"
-                  >
-                {%- else -%}
-                  <div class="fsp__placeholder-img"></div>
-                {%- endif -%}
-
-                {%- if block.settings.badge_icon != blank -%}
-                  <div class="fsp__card-badge">
+                <div class="fsp__card-image">
+                  {%- if block.settings.image != blank -%}
                     <img
-                      src="{{ block.settings.badge_icon | image_url: width: 80 }}"
-                      alt=""
+                      src="{{ block.settings.image | image_url: width: 800 }}"
+                      alt="{{ block.settings.image.alt | default: block.settings.title }}"
                       loading="lazy"
-                      class="fsp__badge-img"
+                      class="fsp__product-img"
                     >
-                  </div>
-                {%- endif -%}
-              </div>
+                  {%- else -%}
+                    <div class="fsp__placeholder-img"></div>
+                  {%- endif -%}
 
-              <a href="{{ block.settings.button_link }}" class="fsp__card-btn fsp__card-btn--solid">
-                {{ block.settings.button_text }}
-              </a>
+                  {%- if block.settings.badge_icon != blank -%}
+                    <div class="fsp__card-badge">
+                      <img
+                        src="{{ block.settings.badge_icon | image_url: width: 80 }}"
+                        alt=""
+                        loading="lazy"
+                        class="fsp__badge-img"
+                      >
+                    </div>
+                  {%- endif -%}
+                </div>
+
+                <a href="{{ block.settings.button_link }}" class="fsp__btn fsp__btn--primary">
+                  {{ block.settings.button_text }}
+                </a>
+              </div>
             </div>
 
           {%- when 'cta_card' -%}
-            <div class="fsp__card fsp__card--cta {{ block.settings.card_style }}" {{ block.shopify_attributes }}>
-              <div class="fsp__cta-icon">
-                {%- if block.settings.icon_image != blank -%}
-                  <img
-                    src="{{ block.settings.icon_image | image_url: width: 100 }}"
-                    alt=""
-                    loading="lazy"
-                    class="fsp__icon-img"
-                  >
-                {%- elsif block.settings.icon_type == 'cart' -%}
-                  <svg class="fsp__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                {%- else -%}
-                  <svg class="fsp__icon-svg fsp__icon-svg--tag" viewBox="0 0 24 24" fill="var(--fsp-accent)" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.59 13.41L13.42 20.58C13.2343 20.766 13.0137 20.9135 12.7709 21.0141C12.5281 21.1148 12.2678 21.1666 12.005 21.1666C11.7422 21.1666 11.4819 21.1148 11.2391 21.0141C10.9963 20.9135 10.7757 20.766 10.59 20.58L2 12V2H12L20.59 10.59C20.9625 10.9647 21.1716 11.4716 21.1716 12C21.1716 12.5284 20.9625 13.0353 20.59 13.41Z" stroke="var(--fsp-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M7 7H7.01" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                {%- endif -%}
+            <div class="fsp__card fsp__card--cta" {{ block.shopify_attributes }}>
+              <div class="fsp__card-inner">
+                <div class="fsp__cta-icon">
+                  {%- if block.settings.icon_image != blank -%}
+                    <img
+                      src="{{ block.settings.icon_image | image_url: width: 100 }}"
+                      alt=""
+                      loading="lazy"
+                      class="fsp__icon-img"
+                    >
+                  {%- elsif block.settings.icon_type == 'cart' -%}
+                    <svg class="fsp__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- else -%}
+                    <svg class="fsp__icon-svg fsp__icon-svg--tag" viewBox="0 0 24 24" fill="var(--fsp-accent)" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.59 13.41L13.42 20.58C13.2343 20.766 13.0137 20.9135 12.7709 21.0141C12.5281 21.1148 12.2678 21.1666 12.005 21.1666C11.7422 21.1666 11.4819 21.1148 11.2391 21.0141C10.9963 20.9135 10.7757 20.766 10.59 20.58L2 12V2H12L20.59 10.59C20.9625 10.9647 21.1716 11.4716 21.1716 12C21.1716 12.5284 20.9625 13.0353 20.59 13.41Z"/>
+                      <circle cx="7" cy="7" r="1.5" fill="white"/>
+                    </svg>
+                  {%- endif -%}
+                </div>
+
+                <div class="fsp__cta-text-wrapper">
+                  <p class="fsp__cta-text">
+                    {{ block.settings.text_line1 }}
+                    {%- if block.settings.highlight_text != blank -%}
+                      <span class="fsp__text-highlight">{{ block.settings.highlight_text }}</span>
+                    {%- endif -%}
+                    {{ block.settings.text_line1_after }}
+                  </p>
+                  {%- if block.settings.accent_line != blank -%}
+                    <p class="fsp__cta-accent">{{ block.settings.accent_line }}</p>
+                  {%- endif -%}
+                </div>
+
+                <a href="{{ block.settings.button_link }}" class="fsp__btn {{ block.settings.button_style }}">
+                  {{ block.settings.button_text }}
+                </a>
               </div>
-
-              <p class="fsp__cta-text">
-                {{ block.settings.text_before }}
-                {%- if block.settings.highlight_text != blank -%}
-                  <span class="fsp__text-highlight">{{ block.settings.highlight_text }}</span>
-                {%- endif -%}
-                {{ block.settings.text_after }}
-                {%- if block.settings.accent_text != blank -%}
-                  <span class="fsp__text-accent">{{ block.settings.accent_text }}</span>
-                {%- endif -%}
-              </p>
-
-              <a href="{{ block.settings.button_link }}" class="fsp__card-btn {{ block.settings.button_style }}">
-                {{ block.settings.button_text }}
-              </a>
             </div>
         {%- endcase -%}
       {%- endfor -%}
@@ -136,7 +141,7 @@
     align-items: center;
     gap: 40px;
     background: var(--fsp-bg, #F5F5F5);
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .free-sample-pack *,
@@ -147,7 +152,7 @@
 
   .fsp__container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -163,20 +168,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
   }
 
   .fsp__tagline {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--fsp-accent, #00D4D4);
     margin: 0;
   }
 
   .fsp__title {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 900;
     text-transform: uppercase;
     margin: 0;
@@ -185,15 +190,15 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 8px 12px;
+    gap: 6px 10px;
   }
 
   .fsp__title-highlight {
     background: var(--fsp-accent, #00D4D4);
     color: #000000;
-    padding: 4px 12px;
+    padding: 4px 14px;
     display: inline-block;
-    transform: skewX(-3deg);
+    font-weight: 900;
   }
 
   .fsp__title-regular {
@@ -202,15 +207,21 @@
 
   .fsp__chevron {
     margin-top: 8px;
-    width: 100px;
+    width: 80px;
+    height: 24px;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
-  .fsp__chevron-img,
-  .fsp__chevron-svg {
+  .fsp__chevron-img {
     width: 100%;
     height: auto;
+  }
+
+  .fsp__chevron-svg {
+    width: 100%;
+    height: 100%;
   }
 
   /* ========================================
@@ -219,7 +230,7 @@
   .fsp__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
     width: 100%;
   }
 
@@ -227,47 +238,52 @@
      CARD BASE STYLES
      ======================================== */
   .fsp__card {
-    background: var(--fsp-card-bg, #1A1A1A);
-    border-radius: 16px;
+    background: var(--fsp-card-bg, #2A2A2A);
+    border-radius: 12px;
+    border: 1px solid var(--fsp-card-border, #3D3D3D);
     overflow: hidden;
+  }
+
+  .fsp__card-inner {
+    padding: 24px;
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 
   /* ========================================
      PRODUCT CARD
      ======================================== */
-  .fsp__card--product {
-    padding: 24px;
+  .fsp__card--product .fsp__card-inner {
     gap: 16px;
   }
 
   .fsp__card-content {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
   }
 
   .fsp__card-title {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--fsp-text, #FFFFFF);
     margin: 0;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
   }
 
   .fsp__card-price {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
     color: var(--fsp-text, #FFFFFF);
     margin: 0;
   }
 
   .fsp__card-desc {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.65);
     margin: 8px 0 0;
     line-height: 1.5;
   }
@@ -275,7 +291,7 @@
   .fsp__card-image {
     position: relative;
     flex: 1;
-    min-height: 200px;
+    min-height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -284,23 +300,23 @@
   .fsp__product-img {
     width: 100%;
     height: 100%;
-    max-height: 280px;
+    max-height: 260px;
     object-fit: contain;
   }
 
   .fsp__placeholder-img {
     width: 100%;
-    height: 200px;
-    background: rgba(255, 255, 255, 0.1);
+    height: 180px;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
   }
 
   .fsp__card-badge {
     position: absolute;
-    bottom: 8px;
-    left: 8px;
-    width: 32px;
-    height: 32px;
+    bottom: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
   }
 
   .fsp__badge-img {
@@ -309,13 +325,16 @@
     object-fit: contain;
   }
 
-  .fsp__card-btn {
+  /* ========================================
+     BUTTONS
+     ======================================== */
+  .fsp__btn {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 14px 24px;
     font-family: inherit;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -327,47 +346,46 @@
     margin-top: auto;
   }
 
-  .fsp__card-btn--solid {
-    background: var(--fsp-btn-bg, #2D2D2D);
-    color: var(--fsp-btn-text, #FFFFFF);
-  }
-
-  .fsp__card-btn--solid:hover {
-    background: #3D3D3D;
-  }
-
-  .fsp__card-btn--outline {
-    background: transparent;
-    color: var(--fsp-text, #FFFFFF);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  .fsp__card-btn--outline:hover {
-    border-color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .fsp__card-btn--accent {
+  .fsp__btn--primary {
     background: var(--fsp-accent, #00D4D4);
     color: #000000;
   }
 
-  .fsp__card-btn--accent:hover {
+  .fsp__btn--primary:hover {
     background: #00BFBF;
+  }
+
+  .fsp__btn--outline {
+    background: transparent;
+    color: var(--fsp-text, #FFFFFF);
+    border: 1px solid var(--fsp-text, #FFFFFF);
+  }
+
+  .fsp__btn--outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .fsp__btn--dark {
+    background: #1A1A1A;
+    color: var(--fsp-text, #FFFFFF);
+  }
+
+  .fsp__btn--dark:hover {
+    background: #252525;
   }
 
   /* ========================================
      CTA CARD
      ======================================== */
-  .fsp__card--cta {
-    padding: 28px 24px;
-    gap: 16px;
+  .fsp__card--cta .fsp__card-inner {
+    gap: 14px;
+    justify-content: flex-start;
     align-items: flex-start;
   }
 
   .fsp__cta-icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -380,37 +398,51 @@
   }
 
   .fsp__icon-svg {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     color: var(--fsp-text, #FFFFFF);
   }
 
   .fsp__icon-svg--tag {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .fsp__cta-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
   .fsp__cta-text {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 800;
     text-transform: uppercase;
     color: var(--fsp-text, #FFFFFF);
     margin: 0;
-    line-height: 1.3;
-    letter-spacing: 0.02em;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
   }
 
   .fsp__text-highlight {
     background: var(--fsp-accent, #00D4D4);
     color: #000000;
-    padding: 2px 6px;
+    padding: 1px 6px;
     display: inline;
   }
 
-  .fsp__text-accent {
+  .fsp__cta-accent {
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
     color: var(--fsp-accent, #00D4D4);
-    display: block;
-    margin-top: 4px;
+    margin: 2px 0 0;
+    line-height: 1.35;
+  }
+
+  .fsp__card--cta .fsp__btn {
+    margin-top: 8px;
+    align-self: flex-start;
   }
 
   /* ========================================
@@ -427,35 +459,33 @@
     }
 
     .fsp__tagline {
-      font-size: 13px;
-    }
-
-    .fsp__title {
-      font-size: 38px;
-    }
-
-    .fsp__chevron {
-      width: 120px;
-    }
-
-    .fsp__card--product {
-      padding: 28px;
-    }
-
-    .fsp__card-title {
-      font-size: 15px;
-    }
-
-    .fsp__card-price {
-      font-size: 20px;
-    }
-
-    .fsp__card-desc {
       font-size: 12px;
     }
 
-    .fsp__cta-text {
-      font-size: 20px;
+    .fsp__title {
+      font-size: 34px;
+    }
+
+    .fsp__chevron {
+      width: 100px;
+      height: 28px;
+    }
+
+    .fsp__card-inner {
+      padding: 26px;
+    }
+
+    .fsp__card-title {
+      font-size: 14px;
+    }
+
+    .fsp__card-price {
+      font-size: 24px;
+    }
+
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 17px;
     }
   }
 
@@ -474,35 +504,42 @@
 
     .fsp__grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
+      gap: 20px;
     }
 
     .fsp__tagline {
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .fsp__title {
-      font-size: 44px;
+      font-size: 42px;
+      gap: 8px 12px;
     }
 
     .fsp__title-highlight {
-      padding: 6px 16px;
+      padding: 5px 16px;
     }
 
     .fsp__chevron {
-      width: 130px;
+      width: 110px;
+      height: 30px;
     }
 
-    .fsp__card--product {
-      padding: 30px;
+    .fsp__card-inner {
+      padding: 28px;
     }
 
     .fsp__card-image {
-      min-height: 220px;
+      min-height: 200px;
     }
 
     .fsp__product-img {
-      max-height: 300px;
+      max-height: 280px;
+    }
+
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 18px;
     }
   }
 
@@ -520,42 +557,50 @@
     }
 
     .fsp__header {
-      gap: 16px;
+      gap: 10px;
     }
 
     .fsp__tagline {
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .fsp__title {
-      font-size: 52px;
-      gap: 12px 16px;
+      font-size: 50px;
+      gap: 8px 14px;
     }
 
     .fsp__title-highlight {
-      padding: 8px 20px;
+      padding: 6px 18px;
     }
 
     .fsp__chevron {
-      width: 140px;
-      margin-top: 12px;
+      width: 130px;
+      height: 34px;
+      margin-top: 10px;
     }
 
     .fsp__grid {
-      gap: 28px;
+      gap: 24px;
     }
 
-    .fsp__card--product {
+    .fsp__card {
+      border-radius: 14px;
+    }
+
+    .fsp__card-inner {
       padding: 32px;
+    }
+
+    .fsp__card--product .fsp__card-inner {
       gap: 20px;
     }
 
     .fsp__card-title {
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .fsp__card-price {
-      font-size: 22px;
+      font-size: 26px;
     }
 
     .fsp__card-desc {
@@ -563,40 +608,45 @@
     }
 
     .fsp__card-image {
-      min-height: 240px;
+      min-height: 220px;
     }
 
-    .fsp__card-btn {
+    .fsp__card-badge {
+      width: 40px;
+      height: 40px;
+    }
+
+    .fsp__btn {
       padding: 16px 28px;
-      font-size: 13px;
+      font-size: 12px;
     }
 
-    .fsp__card--cta {
-      padding: 32px 28px;
-      gap: 18px;
+    .fsp__card--cta .fsp__card-inner {
+      gap: 16px;
     }
 
     .fsp__cta-icon {
-      width: 44px;
-      height: 44px;
-    }
-
-    .fsp__icon-svg {
       width: 36px;
       height: 36px;
     }
 
-    .fsp__icon-svg--tag {
-      width: 44px;
-      height: 44px;
+    .fsp__icon-svg {
+      width: 32px;
+      height: 32px;
     }
 
-    .fsp__cta-text {
-      font-size: 22px;
+    .fsp__icon-svg--tag {
+      width: 36px;
+      height: 36px;
+    }
+
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 20px;
     }
 
     .fsp__text-highlight {
-      padding: 3px 8px;
+      padding: 2px 8px;
     }
   }
 
@@ -610,11 +660,11 @@
 
     .fsp__grid {
       grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 24px;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
     }
 
-    /* Product cards span 1 column each, 2 rows */
+    /* Product cards span full height (2 rows) */
     .fsp__card--product:nth-of-type(1) {
       grid-column: 1;
       grid-row: 1 / 3;
@@ -637,39 +687,41 @@
     }
 
     .fsp__tagline {
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .fsp__title {
-      font-size: 56px;
+      font-size: 54px;
     }
 
-    .fsp__card--product {
-      padding: 36px;
+    .fsp__card-inner {
+      padding: 28px;
+    }
+
+    .fsp__card--product .fsp__card-inner {
+      padding: 32px 28px;
     }
 
     .fsp__card-image {
-      min-height: 280px;
+      min-height: 260px;
     }
 
     .fsp__product-img {
-      max-height: 350px;
+      max-height: 320px;
     }
 
-    .fsp__card-badge {
-      width: 40px;
-      height: 40px;
-      bottom: 12px;
-      left: 12px;
-    }
-
-    .fsp__card--cta {
-      padding: 36px 32px;
+    .fsp__card--cta .fsp__card-inner {
+      padding: 28px;
       justify-content: center;
     }
 
-    .fsp__cta-text {
-      font-size: 24px;
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 18px;
+    }
+
+    .fsp__card--cta .fsp__btn {
+      margin-top: 12px;
     }
   }
 
@@ -677,52 +729,66 @@
      RESPONSIVE - LARGE DESKTOP (1200px+)
      ======================================== */
   @media screen and (min-width: 1200px) {
-    .fsp__grid {
-      gap: 28px;
+    .fsp__container {
+      max-width: 1320px;
     }
 
-    .fsp__card--product {
-      padding: 40px;
+    .fsp__grid {
+      gap: 24px;
+    }
+
+    .fsp__card-inner {
+      padding: 32px;
+    }
+
+    .fsp__card--product .fsp__card-inner {
+      padding: 36px 32px;
     }
 
     .fsp__card-title {
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .fsp__card-price {
-      font-size: 24px;
+      font-size: 28px;
     }
 
     .fsp__card-desc {
-      font-size: 14px;
-      max-width: 280px;
+      font-size: 13px;
+      max-width: 260px;
     }
 
     .fsp__card-image {
-      min-height: 300px;
+      min-height: 280px;
     }
 
-    .fsp__card--cta {
-      padding: 40px 36px;
+    .fsp__product-img {
+      max-height: 340px;
+    }
+
+    .fsp__card-badge {
+      width: 44px;
+      height: 44px;
     }
 
     .fsp__cta-icon {
-      width: 48px;
-      height: 48px;
-    }
-
-    .fsp__icon-svg {
       width: 40px;
       height: 40px;
     }
 
-    .fsp__icon-svg--tag {
-      width: 48px;
-      height: 48px;
+    .fsp__icon-svg {
+      width: 36px;
+      height: 36px;
     }
 
-    .fsp__cta-text {
-      font-size: 26px;
+    .fsp__icon-svg--tag {
+      width: 40px;
+      height: 40px;
+    }
+
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 20px;
     }
   }
 
@@ -735,36 +801,37 @@
     }
 
     .fsp__container {
-      max-width: 1500px;
+      max-width: 1400px;
     }
 
     .fsp__title {
-      font-size: 60px;
+      font-size: 58px;
     }
 
     .fsp__grid {
-      gap: 32px;
+      gap: 28px;
     }
 
-    .fsp__card--product {
-      padding: 44px;
+    .fsp__card--product .fsp__card-inner {
+      padding: 40px 36px;
     }
 
     .fsp__card-image {
-      min-height: 320px;
+      min-height: 300px;
     }
 
     .fsp__product-img {
-      max-height: 380px;
+      max-height: 360px;
     }
 
-    .fsp__cta-text {
-      font-size: 28px;
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 22px;
     }
 
-    .fsp__card-btn {
-      padding: 18px 32px;
-      font-size: 14px;
+    .fsp__btn {
+      padding: 16px 32px;
+      font-size: 13px;
     }
   }
 </style>
@@ -801,7 +868,7 @@
       "type": "image_picker",
       "id": "chevron_icon",
       "label": "Chevron Decoration Image",
-      "info": "Upload custom chevron/arrow decoration. Leave empty for default SVG."
+      "info": "Upload custom chevron/zigzag decoration. Leave empty for default SVG."
     },
     {
       "type": "header",
@@ -817,7 +884,13 @@
       "type": "color",
       "id": "card_bg_color",
       "label": "Card Background Color",
-      "default": "#1A1A1A"
+      "default": "#2A2A2A"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border Color",
+      "default": "#3D3D3D"
     },
     {
       "type": "color",
@@ -836,18 +909,6 @@
       "id": "heading_color",
       "label": "Header Text Color",
       "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "button_bg_color",
-      "label": "Button Background Color",
-      "default": "#2D2D2D"
-    },
-    {
-      "type": "color",
-      "id": "button_text_color",
-      "label": "Button Text Color",
-      "default": "#FFFFFF"
     }
   ],
   "blocks": [
@@ -925,27 +986,28 @@
         },
         {
           "type": "text",
-          "id": "text_before",
-          "label": "Text Before Highlight",
+          "id": "text_line1",
+          "label": "Text Line (before highlight)",
           "default": "DON'T NEED A SAMPLE? JUST"
         },
         {
           "type": "text",
           "id": "highlight_text",
           "label": "Highlighted Text",
+          "info": "Text with cyan background",
           "default": "ORDER"
         },
         {
           "type": "text",
-          "id": "text_after",
+          "id": "text_line1_after",
           "label": "Text After Highlight",
           "default": "DIRECTLY."
         },
         {
           "type": "text",
-          "id": "accent_text",
-          "label": "Accent Text (New Line)",
-          "info": "Text in accent color on a new line"
+          "id": "accent_line",
+          "label": "Accent Line (cyan text)",
+          "info": "Text displayed in accent color below main text"
         },
         {
           "type": "text",
@@ -964,19 +1026,19 @@
           "label": "Button Style",
           "options": [
             {
-              "value": "fsp__card-btn--solid",
-              "label": "Solid"
+              "value": "fsp__btn--primary",
+              "label": "Primary (Cyan)"
             },
             {
-              "value": "fsp__card-btn--outline",
-              "label": "Outline"
+              "value": "fsp__btn--outline",
+              "label": "Outline (White Border)"
             },
             {
-              "value": "fsp__card-btn--accent",
-              "label": "Accent"
+              "value": "fsp__btn--dark",
+              "label": "Dark (Solid Dark)"
             }
           ],
-          "default": "fsp__card-btn--outline"
+          "default": "fsp__btn--outline"
         }
       ]
     }
@@ -1007,21 +1069,21 @@
           "type": "cta_card",
           "settings": {
             "icon_type": "cart",
-            "text_before": "DON'T NEED A SAMPLE? JUST",
+            "text_line1": "DON'T NEED A SAMPLE? JUST",
             "highlight_text": "ORDER",
-            "text_after": "DIRECTLY.",
+            "text_line1_after": "DIRECTLY.",
             "button_text": "ORDER DIRECTLY",
-            "button_style": "fsp__card-btn--outline"
+            "button_style": "fsp__btn--outline"
           }
         },
         {
           "type": "cta_card",
           "settings": {
             "icon_type": "tag",
-            "text_before": "WANT TO TEST? UPLOAD YOUR DESIGN AND ORDER INSTANTLY,",
-            "accent_text": "NO MINIMUMS.",
+            "text_line1": "WANT TO TEST? UPLOAD YOUR DESIGN AND ORDER INSTANTLY,",
+            "accent_line": "NO MINIMUMS.",
             "button_text": "EASY ORDER",
-            "button_style": "fsp__card-btn--accent"
+            "button_style": "fsp__btn--dark"
           }
         }
       ]
