@@ -64,13 +64,7 @@
                 <!-- Badge -->
                 <div class="pgs2__badge">{{ forloop.index }}</div>
 
-                <!-- Content -->
-                <div class="pgs2__card-content">
-                  <h3 class="pgs2__card-title">{{ block.settings.title }}</h3>
-                  <p class="pgs2__card-desc">{{ block.settings.description }}</p>
-                </div>
-
-                <!-- Image -->
+                <!-- Image (TOP) -->
                 <div class="pgs2__card-image">
                   {% if block.settings.image != blank %}
                     <img
@@ -94,6 +88,12 @@
                       </svg>
                     </div>
                   {% endif %}
+                </div>
+
+                <!-- Content (BOTTOM) -->
+                <div class="pgs2__card-content">
+                  <h3 class="pgs2__card-title">{{ block.settings.title }}</h3>
+                  <p class="pgs2__card-desc">{{ block.settings.description }}</p>
                 </div>
               </div>
             </div>
@@ -322,38 +322,14 @@
     z-index: 5;
   }
 
-  /* Card Content */
-  .pgs2__card-content {
-    padding: 36px 16px 16px;
-    text-align: center;
-    flex: 0 0 auto;
-  }
-
-  .pgs2__card-title {
-    font-size: 16px;
-    font-weight: 700;
-    font-style: italic;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    color: var(--pgs2-heading-color, #1a1a1a);
-    margin: 0 0 8px 0;
-    line-height: 1.2;
-  }
-
-  .pgs2__card-desc {
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--pgs2-text-color, #666666);
-    line-height: 1.5;
-    margin: 0;
-  }
-
-  /* Card Image */
+  /* Card Image (TOP) */
   .pgs2__card-image {
     position: relative;
     width: 100%;
     flex: 1 1 auto;
     min-height: 180px;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
   }
 
   .pgs2__card-image img {
@@ -377,6 +353,32 @@
   .pgs2__card-placeholder svg {
     width: 50%;
     height: auto;
+  }
+
+  /* Card Content (BOTTOM) */
+  .pgs2__card-content {
+    padding: 16px;
+    text-align: center;
+    flex: 0 0 auto;
+  }
+
+  .pgs2__card-title {
+    font-size: 16px;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--pgs2-heading-color, #1a1a1a);
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+
+  .pgs2__card-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--pgs2-text-color, #666666);
+    line-height: 1.5;
+    margin: 0;
   }
 
   /* ========================================
@@ -644,20 +646,25 @@
       height: 100%;
     }
 
+    .pgs2__card-image {
+      min-height: 220px;
+      border-radius: 16px 16px 0 0;
+    }
+
     /* Card rotations and overlap using negative margins */
     .pgs2__card--1 {
-      transform: rotate(-4deg);
+      transform: rotate(-4deg) !important;
       margin-right: -25px;
       z-index: 1;
     }
 
     .pgs2__card--2 {
-      transform: rotate(0deg);
+      transform: rotate(0deg) !important;
       z-index: 3;
     }
 
     .pgs2__card--3 {
-      transform: rotate(4deg);
+      transform: rotate(4deg) !important;
       margin-left: -25px;
       z-index: 2;
     }
@@ -671,7 +678,7 @@
     }
 
     .pgs2__card-content {
-      padding: 40px 16px 16px;
+      padding: 16px;
     }
 
     .pgs2__card-title {
@@ -680,10 +687,6 @@
 
     .pgs2__card-desc {
       font-size: 12px;
-    }
-
-    .pgs2__card-image {
-      min-height: 200px;
     }
   }
 
@@ -755,13 +758,22 @@
       height: 440px;
     }
 
+    .pgs2__card-inner {
+      border-radius: 18px;
+    }
+
+    .pgs2__card-image {
+      min-height: 260px;
+      border-radius: 18px 18px 0 0;
+    }
+
     .pgs2__card--1 {
-      transform: rotate(-5deg);
+      transform: rotate(-5deg) !important;
       margin-right: -35px;
     }
 
     .pgs2__card--3 {
-      transform: rotate(5deg);
+      transform: rotate(5deg) !important;
       margin-left: -35px;
     }
 
@@ -774,7 +786,7 @@
     }
 
     .pgs2__card-content {
-      padding: 46px 20px 20px;
+      padding: 20px;
     }
 
     .pgs2__card-title {
@@ -784,10 +796,6 @@
 
     .pgs2__card-desc {
       font-size: 13px;
-    }
-
-    .pgs2__card-image {
-      min-height: 240px;
     }
   }
 
@@ -835,13 +843,22 @@
       height: 480px;
     }
 
+    .pgs2__card-inner {
+      border-radius: 20px;
+    }
+
+    .pgs2__card-image {
+      min-height: 290px;
+      border-radius: 20px 20px 0 0;
+    }
+
     .pgs2__card--1 {
-      transform: rotate(-6deg);
+      transform: rotate(-6deg) !important;
       margin-right: -40px;
     }
 
     .pgs2__card--3 {
-      transform: rotate(6deg);
+      transform: rotate(6deg) !important;
       margin-left: -40px;
     }
 
@@ -853,7 +870,7 @@
     }
 
     .pgs2__card-content {
-      padding: 50px 24px 24px;
+      padding: 24px;
     }
 
     .pgs2__card-title {
@@ -862,10 +879,6 @@
 
     .pgs2__card-desc {
       font-size: 14px;
-    }
-
-    .pgs2__card-image {
-      min-height: 260px;
     }
   }
 
@@ -931,13 +944,22 @@
       height: 520px;
     }
 
+    .pgs2__card-inner {
+      border-radius: 22px;
+    }
+
+    .pgs2__card-image {
+      min-height: 320px;
+      border-radius: 22px 22px 0 0;
+    }
+
     .pgs2__card--1 {
-      transform: rotate(-6deg);
+      transform: rotate(-6deg) !important;
       margin-right: -45px;
     }
 
     .pgs2__card--3 {
-      transform: rotate(6deg);
+      transform: rotate(6deg) !important;
       margin-left: -45px;
     }
 
@@ -950,7 +972,7 @@
     }
 
     .pgs2__card-content {
-      padding: 54px 28px 28px;
+      padding: 28px;
     }
 
     .pgs2__card-title {
@@ -959,10 +981,6 @@
 
     .pgs2__card-desc {
       font-size: 15px;
-    }
-
-    .pgs2__card-image {
-      min-height: 280px;
     }
   }
 
@@ -999,13 +1017,22 @@
       height: 560px;
     }
 
+    .pgs2__card-inner {
+      border-radius: 24px;
+    }
+
+    .pgs2__card-image {
+      min-height: 350px;
+      border-radius: 24px 24px 0 0;
+    }
+
     .pgs2__card--1 {
-      transform: rotate(-6deg);
+      transform: rotate(-6deg) !important;
       margin-right: -50px;
     }
 
     .pgs2__card--3 {
-      transform: rotate(6deg);
+      transform: rotate(6deg) !important;
       margin-left: -50px;
     }
 
@@ -1017,7 +1044,7 @@
     }
 
     .pgs2__card-content {
-      padding: 58px 32px 32px;
+      padding: 32px;
     }
 
     .pgs2__card-title {
@@ -1026,10 +1053,6 @@
 
     .pgs2__card-desc {
       font-size: 16px;
-    }
-
-    .pgs2__card-image {
-      min-height: 300px;
     }
   }
 </style>
