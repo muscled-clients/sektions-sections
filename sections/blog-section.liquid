@@ -51,7 +51,7 @@
     <div class="blog-sec__cards">
       {% for block in section.blocks %}
         {% if block.type == 'blog_card' %}
-          <article class="blog-sec__card" {{ block.shopify_attributes }}>
+          <article class="blog-sec__card{% if block.settings.featured %} blog-sec__card--featured{% endif %}" {{ block.shopify_attributes }}>
             <!-- Card Image -->
             <div class="blog-sec__card-image-wrapper">
               {% if block.settings.image != blank %}
@@ -230,6 +230,16 @@
   .blog-sec__card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Featured Card Styles */
+  .blog-sec__card--featured {
+    border: 4px solid var(--blog-highlight-bg, #00D4D4);
+  }
+
+  .blog-sec__card--featured .blog-sec__card-title,
+  .blog-sec__card--featured .blog-sec__card-title a {
+    color: var(--blog-highlight-bg, #00D4D4);
   }
 
   /* ========================================
@@ -656,6 +666,13 @@
       "name": "Blog Card",
       "settings": [
         {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured Card",
+          "info": "Adds cyan border and title color",
+          "default": false
+        },
+        {
           "type": "image_picker",
           "id": "image",
           "label": "Featured Image"
@@ -715,6 +732,7 @@
         {
           "type": "blog_card",
           "settings": {
+            "featured": true,
             "title": "HEAT TRANSFER DIY AT HOME: STEP-BY-STEP GUIDE FOR CRA...",
             "description": "DIY Heat Transfers Made Easy (Like, Actually Easy) If you've ever tried a heat transfer DIY at home and...",
             "author": "DTF SHEET",
