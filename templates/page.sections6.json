@@ -1459,62 +1459,6 @@
         "decor_dot_2": "shopify://shop_images/Ellipse_4.svg"
       }
     },
-    "press_and_go2_6Wj7KQ": {
-      "type": "press-and-go2",
-      "blocks": {
-        "step_card_EYYMLR": {
-          "type": "step_card",
-          "settings": {
-            "title": "PLACE YOUR TRANSFER",
-            "description": "Position your DTF Sheet on the fabric, print side up. Make sure it's centered and smooth, ready to press.",
-            "image": "shopify://shop_images/37ba289b95b5aef9c2af5e07f49f3582c3bd6d9f.jpg"
-          }
-        },
-        "step_card_kXP9BG": {
-          "type": "step_card",
-          "settings": {
-            "title": "HEAT PRESS",
-            "description": "At 320F° for 100% cotton and At 280F° for polyester or blends for 8 seconds.",
-            "image": "shopify://shop_images/550224eb690e5d751f88528c88982677ffd2bb4e.jpg"
-          }
-        },
-        "step_card_dzEaiV": {
-          "type": "step_card",
-          "settings": {
-            "title": "PEEL DTF SHEET",
-            "description": "Peel while warm for a smooth, clean finish. (Cold peel also works, your call.)",
-            "image": "shopify://shop_images/352e02992b7d516b39908f5b6821c60dfd250236.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "step_card_EYYMLR",
-        "step_card_kXP9BG",
-        "step_card_dzEaiV"
-      ],
-      "name": "Press & Go Steps V2",
-      "settings": {
-        "subtitle": "",
-        "heading_line1": "HOW IT WORKS",
-        "heading_line2": "JUST PRESS & GO",
-        "background_color": "#f7f7f7",
-        "corner_shape_color": "#ededed",
-        "heading_color": "#1a1a1a",
-        "accent_color": "#00d4d4",
-        "text_color": "#666666",
-        "subtitle_color": "#888888",
-        "card_bg_color": "#ffffff",
-        "badge_bg_color": "#1a1a1a",
-        "badge_text_color": "#ffffff",
-        "card_border_radius": 16,
-        "badge_border_radius": 10,
-        "card_shadow": "medium",
-        "decor_arc_left": "shopify://shop_images/Ellipse_1.svg",
-        "decor_arc_right": "shopify://shop_images/Ellipse_2.svg",
-        "decor_dot": "shopify://shop_images/Ellipse_3.svg",
-        "decor_ring": "shopify://shop_images/Ellipse_3.svg"
-      }
-    },
     "free_sample_pack_6mQAUV": {
       "type": "free-sample-pack",
       "blocks": {
@@ -1544,9 +1488,13 @@
           "type": "cta_card",
           "settings": {
             "icon_type": "cart",
+            "text_line1": "DON'T NEED A SAMPLE? JUST",
             "highlight_text": "ORDER",
+            "text_line1_after": "DIRECTLY.",
+            "accent_line": "",
             "button_text": "ORDER DIRECTLY",
-            "button_link": ""
+            "button_link": "",
+            "button_text_style": ""
           }
         },
         "cta_card_EwnrVA": {
@@ -1554,9 +1502,13 @@
           "settings": {
             "icon_type": "tag",
             "icon_image": "shopify://shop_images/Tag_Icon_4319d44c-2314-44d2-8c46-a55f6a0e1cd5.svg",
+            "text_line1": "DON'T NEED A SAMPLE? JUST",
             "highlight_text": "ORDER",
+            "text_line1_after": "DIRECTLY.",
+            "accent_line": "",
             "button_text": "EASY ORDER",
-            "button_link": ""
+            "button_link": "",
+            "button_text_style": ""
           }
         }
       },
@@ -1573,9 +1525,62 @@
         "title_regular": "SAMPLE PACK",
         "chevron_icon": "shopify://shop_images/Vector_4.svg",
         "background_color": "#000000",
-        "card_bg_color": "#1A1A1A",
+        "card_bg_color": "#1a1a1a",
+        "card_border_color": "#3a3a3a",
+        "accent_color": "#00d4d4",
+        "text_color": "#ffffff",
+        "tagline_color": "#888888",
+        "title_color": "#ffffff",
+        "image_bg_color": "#ffffff"
+      }
+    },
+    "press_and_go2_q6TjRz": {
+      "type": "press-and-go2",
+      "blocks": {
+        "step_card_r9jejY": {
+          "type": "step_card",
+          "settings": {
+            "title": "PLACE YOUR TRANSFER",
+            "description": "Position your DTF Sheet on the fabric, print side up. Make sure it's centered and smooth, ready to press."
+          }
+        },
+        "step_card_MFhwKG": {
+          "type": "step_card",
+          "settings": {
+            "title": "HEAT PRESS",
+            "description": "At 320F° for 100% cotton and At 280F° for polyester or blends for 8 seconds."
+          }
+        },
+        "step_card_kxJRdh": {
+          "type": "step_card",
+          "settings": {
+            "title": "PEEL DTF SHEET",
+            "description": "Peel while warm for a smooth, clean finish. (Cold peel also works, your call.)"
+          }
+        }
+      },
+      "block_order": [
+        "step_card_r9jejY",
+        "step_card_MFhwKG",
+        "step_card_kxJRdh"
+      ],
+      "name": "How it Works",
+      "settings": {
+        "subtitle": "",
+        "heading_line1": "HOW IT WORKS",
+        "heading_line2": "JUST PRESS & GO",
+        "background_color": "#F7F7F7",
+        "corner_shape_color": "#EDEDED",
+        "heading_color": "#1a1a1a",
         "accent_color": "#00D4D4",
-        "text_color": "#FFFFFF"
+        "text_color": "#666666",
+        "subtitle_color": "#888888",
+        "card_bg_color": "#ffffff",
+        "badge_bg_color": "#1a1a1a",
+        "badge_text_color": "#ffffff",
+        "card_border_radius": 16,
+        "badge_border_radius": 10,
+        "card_shadow": "medium"
       }
     }
   },
@@ -1600,7 +1605,7 @@
     "why_chosse_us_AC4m9N",
     "feature_highlights_ABmMKC",
     "press_and_go_xfQLwt",
-    "press_and_go2_6Wj7KQ",
+    "press_and_go2_q6TjRz",
     "free_sample_pack_6mQAUV"
   ]
 }
