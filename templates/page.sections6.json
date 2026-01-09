@@ -1277,6 +1277,46 @@
         "margin_bottom": 0
       }
     },
+    "hero2_bzeyWB": {
+      "type": "hero2",
+      "name": "SEK Hero 2",
+      "settings": {
+        "background_image": "shopify://shop_images/moises-alex-WqI-PbYugn4-unsplash_1.jpg",
+        "left_small_text": "INSTAGRAM",
+        "left_large_text": "INFO",
+        "left_link": "",
+        "center_tagline": "AVAILABLE FOR COMMISSIONS 2023",
+        "right_small_text": "WIMBLEDON",
+        "right_large_text": "EVENTS",
+        "right_link": "",
+        "main_title": "WILSON®",
+        "script_text": "Rethinking rackets",
+        "working_text": "WORKING ON PROJECTS FOR",
+        "brand_text": "BRAND DIRECTION DIGITAL",
+        "description_line1": "COLLABORATING WITH",
+        "highlight1": "AMBITIOUS BRANDS",
+        "description_line2": "THAT HAVE",
+        "highlight2": "POWERFUL STORIES",
+        "description_line3": "TO TELL| WORK",
+        "highlight3": "INDEPENDENTLY",
+        "description_line4": "AND WITH CREATIVE",
+        "highlight4": "FREELANCERS, STUDIOS",
+        "description_line5": "AND",
+        "highlight5": "AGENCIES",
+        "est_text": "EST.2021",
+        "info_header": "WILSON® TENNIS",
+        "info_address": "88-92 Frederiksborgade, Indre By, Copenhagen, Denmark, 1360 K",
+        "card_image": "shopify://shop_images/josephine-gasser-cv83wpGtFtg-unsplash.webp",
+        "card_title": "EXPLORE",
+        "card_subtitle": "FRAMES",
+        "card_link": "",
+        "accent_color": "#bfea88",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 45,
+        "card_bg_color": "#4a90a4"
+      }
+    },
     "why_chosse_us_AC4m9N": {
       "type": "why-chosse-us",
       "blocks": {
@@ -1475,44 +1515,67 @@
         "decor_ring": "shopify://shop_images/Ellipse_3.svg"
       }
     },
-    "hero2_bzeyWB": {
-      "type": "hero2",
-      "name": "SEK Hero 2",
+    "free_sample_pack_6mQAUV": {
+      "type": "free-sample-pack",
+      "blocks": {
+        "product_card_RAyUA7": {
+          "type": "product_card",
+          "settings": {
+            "title": "FREE SAMPLE PACK",
+            "price": "$0.00",
+            "description": "Get a taste of our premium quality, for free. Includes a variety of sample prints so you can test our colors, softness, and durability before placing your first real order.",
+            "image": "shopify://shop_images/965f8c035097e63225261cbb10e0f55ed0c1b5e4.png",
+            "button_text": "GET FREE SAMPLE",
+            "button_link": ""
+          }
+        },
+        "product_card_aVVR4Q": {
+          "type": "product_card",
+          "settings": {
+            "title": "CUSTOM GANG SHEET",
+            "price": "$19.99",
+            "description": "Use this product if you have a pre-made gang sheet file. Select the desired size for your gang sheet. Adjust the quantity to get multiple sheets.",
+            "image": "shopify://shop_images/004707c14d117d0bde0ad115a0dc516b040041fb.png",
+            "button_text": "CUSTOM GANG SHEET",
+            "button_link": ""
+          }
+        },
+        "cta_card_Dzfgnw": {
+          "type": "cta_card",
+          "settings": {
+            "icon_type": "cart",
+            "highlight_text": "ORDER",
+            "button_text": "ORDER DIRECTLY",
+            "button_link": ""
+          }
+        },
+        "cta_card_EwnrVA": {
+          "type": "cta_card",
+          "settings": {
+            "icon_type": "tag",
+            "icon_image": "shopify://shop_images/Tag_Icon_4319d44c-2314-44d2-8c46-a55f6a0e1cd5.svg",
+            "highlight_text": "ORDER",
+            "button_text": "EASY ORDER",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_card_RAyUA7",
+        "product_card_aVVR4Q",
+        "cta_card_Dzfgnw",
+        "cta_card_EwnrVA"
+      ],
+      "name": "SEK Free Sample Pack",
       "settings": {
-        "background_image": "shopify://shop_images/moises-alex-WqI-PbYugn4-unsplash_1.jpg",
-        "left_small_text": "INSTAGRAM",
-        "left_large_text": "INFO",
-        "left_link": "",
-        "center_tagline": "AVAILABLE FOR COMMISSIONS 2023",
-        "right_small_text": "WIMBLEDON",
-        "right_large_text": "EVENTS",
-        "right_link": "",
-        "main_title": "WILSON®",
-        "script_text": "Rethinking rackets",
-        "working_text": "WORKING ON PROJECTS FOR",
-        "brand_text": "BRAND DIRECTION DIGITAL",
-        "description_line1": "COLLABORATING WITH",
-        "highlight1": "AMBITIOUS BRANDS",
-        "description_line2": "THAT HAVE",
-        "highlight2": "POWERFUL STORIES",
-        "description_line3": "TO TELL| WORK",
-        "highlight3": "INDEPENDENTLY",
-        "description_line4": "AND WITH CREATIVE",
-        "highlight4": "FREELANCERS, STUDIOS",
-        "description_line5": "AND",
-        "highlight5": "AGENCIES",
-        "est_text": "EST.2021",
-        "info_header": "WILSON® TENNIS",
-        "info_address": "88-92 Frederiksborgade, Indre By, Copenhagen, Denmark, 1360 K",
-        "card_image": "shopify://shop_images/josephine-gasser-cv83wpGtFtg-unsplash.webp",
-        "card_title": "EXPLORE",
-        "card_subtitle": "FRAMES",
-        "card_link": "",
-        "accent_color": "#bfea88",
-        "text_color": "#ffffff",
-        "overlay_color": "#000000",
-        "overlay_opacity": 45,
-        "card_bg_color": "#4a90a4"
+        "tagline": "TRY IT. FEEL IT. PRESS IT.",
+        "title_highlight": "FREE",
+        "title_regular": "SAMPLE PACK",
+        "chevron_icon": "shopify://shop_images/Vector_4.svg",
+        "background_color": "#000000",
+        "card_bg_color": "#1A1A1A",
+        "accent_color": "#00D4D4",
+        "text_color": "#FFFFFF"
       }
     }
   },
@@ -1533,10 +1596,11 @@
     "feature13_eqG449",
     "product_deatils2_TQ9nrC",
     "prouct_details_xt3rF7",
+    "hero2_bzeyWB",
     "why_chosse_us_AC4m9N",
     "feature_highlights_ABmMKC",
     "press_and_go_xfQLwt",
     "press_and_go2_6Wj7KQ",
-    "hero2_bzeyWB"
+    "free_sample_pack_6mQAUV"
   ]
 }
