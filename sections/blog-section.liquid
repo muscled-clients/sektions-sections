@@ -1,0 +1,757 @@
+{% comment %}
+  Blog Section
+  - Light mint/cyan background
+  - Header with tagline, highlighted title, and CTA button
+  - 3 blog cards with images, titles, descriptions, author info
+{% endcomment %}
+
+<div class="blog-sec" style="
+  --blog-bg: {{ section.settings.background_color }};
+  --blog-tagline: {{ section.settings.tagline_color }};
+  --blog-title: {{ section.settings.title_color }};
+  --blog-highlight-bg: {{ section.settings.highlight_bg_color }};
+  --blog-highlight-text: {{ section.settings.highlight_text_color }};
+  --blog-btn-bg: {{ section.settings.btn_bg_color }};
+  --blog-btn-text: {{ section.settings.btn_text_color }};
+  --blog-card-bg: {{ section.settings.card_bg_color }};
+  --blog-card-title: {{ section.settings.card_title_color }};
+  --blog-card-desc: {{ section.settings.card_desc_color }};
+  --blog-card-author: {{ section.settings.card_author_color }};
+  --blog-card-meta: {{ section.settings.card_meta_color }};
+">
+  <div class="blog-sec__container">
+    <!-- Header -->
+    <div class="blog-sec__header">
+      <div class="blog-sec__header-content">
+        {% if section.settings.tagline != blank %}
+          <p class="blog-sec__tagline">{{ section.settings.tagline }}</p>
+        {% endif %}
+
+        <h2 class="blog-sec__heading">
+          {% if section.settings.heading_before != blank %}
+            <span class="blog-sec__heading-text">{{ section.settings.heading_before }}</span>
+          {% endif %}
+          {% if section.settings.heading_highlight != blank %}
+            <span class="blog-sec__heading-highlight">{{ section.settings.heading_highlight }}</span>
+          {% endif %}
+          {% if section.settings.heading_after != blank %}
+            <span class="blog-sec__heading-text">{{ section.settings.heading_after }}</span>
+          {% endif %}
+        </h2>
+      </div>
+
+      {% if section.settings.btn_text != blank %}
+        <a href="{{ section.settings.btn_link }}" class="blog-sec__btn">
+          {{ section.settings.btn_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- Blog Cards -->
+    <div class="blog-sec__cards">
+      {% for block in section.blocks %}
+        {% if block.type == 'blog_card' %}
+          <article class="blog-sec__card{% if block.settings.featured %} blog-sec__card--featured{% endif %}" {{ block.shopify_attributes }}>
+            <!-- Card Image -->
+            <div class="blog-sec__card-image-wrapper">
+              {% if block.settings.image != blank %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 800 }}"
+                  srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
+                          {{ block.settings.image | image_url: width: 600 }} 600w,
+                          {{ block.settings.image | image_url: width: 800 }} 800w"
+                  sizes="(max-width: 550px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  alt="{{ block.settings.title | escape }}"
+                  class="blog-sec__card-image"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="blog-sec__card-placeholder">
+                  {{ 'image' | placeholder_svg_tag: 'blog-sec__placeholder-svg' }}
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Card Content -->
+            <div class="blog-sec__card-content">
+              {% if block.settings.title != blank %}
+                <h3 class="blog-sec__card-title">
+                  {% if block.settings.link != blank %}
+                    <a href="{{ block.settings.link }}">{{ block.settings.title }}</a>
+                  {% else %}
+                    {{ block.settings.title }}
+                  {% endif %}
+                </h3>
+              {% endif %}
+
+              {% if block.settings.description != blank %}
+                <p class="blog-sec__card-desc">{{ block.settings.description }}</p>
+              {% endif %}
+
+              <div class="blog-sec__card-meta">
+                {% if block.settings.author != blank %}
+                  <span class="blog-sec__card-author">{{ block.settings.author }}</span>
+                {% endif %}
+                <div class="blog-sec__card-info">
+                  {% if block.settings.date != blank %}
+                    <span class="blog-sec__card-date">{{ block.settings.date }}</span>
+                  {% endif %}
+                  {% if block.settings.read_time != blank %}
+                    <span class="blog-sec__card-dot">&middot;</span>
+                    <span class="blog-sec__card-read">{{ block.settings.read_time }}</span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ========================================
+     BLOG SECTION - BASE STYLES
+     ======================================== */
+  .blog-sec {
+    display: flex;
+    padding: 64px 24px 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    background: var(--blog-bg, #D0FBF5);
+    overflow: hidden;
+  }
+
+  .blog-sec__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    width: 100%;
+    max-width: 1400px;
+  }
+
+  /* ========================================
+     HEADER STYLES
+     ======================================== */
+  .blog-sec__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .blog-sec__header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .blog-sec__tagline {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blog-tagline, #1A1A1A);
+    margin: 0;
+  }
+
+  .blog-sec__heading {
+    font-family: inherit;
+    font-size: clamp(32px, 7vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--blog-title, #000000);
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+  }
+
+  .blog-sec__heading-text {
+    display: inline;
+  }
+
+  .blog-sec__heading-highlight {
+    display: inline-block;
+    background: var(--blog-highlight-bg, #00D4D4);
+    color: var(--blog-highlight-text, #000000);
+    padding: 4px 12px;
+  }
+
+  .blog-sec__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: var(--blog-btn-bg, #1A1A1A);
+    color: var(--blog-btn-text, #FFFFFF);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .blog-sec__btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  /* ========================================
+     CARDS GRID STYLES
+     ======================================== */
+  .blog-sec__cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .blog-sec__card {
+    display: flex;
+    flex-direction: column;
+    background: var(--blog-card-bg, #FFFFFF);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .blog-sec__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Featured Card Styles */
+  .blog-sec__card--featured {
+    border: 4px solid var(--blog-highlight-bg, #00D4D4);
+  }
+
+  .blog-sec__card--featured .blog-sec__card-title,
+  .blog-sec__card--featured .blog-sec__card-title a {
+    color: var(--blog-highlight-bg, #00D4D4);
+  }
+
+  /* ========================================
+     CARD IMAGE STYLES
+     ======================================== */
+  .blog-sec__card-image-wrapper {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+  }
+
+  .blog-sec__card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .blog-sec__card:hover .blog-sec__card-image {
+    transform: scale(1.03);
+  }
+
+  .blog-sec__card-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #E5E5E5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .blog-sec__placeholder-svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+  }
+
+  /* ========================================
+     CARD CONTENT STYLES
+     ======================================== */
+  .blog-sec__card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    flex-grow: 1;
+  }
+
+  .blog-sec__card-title {
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: var(--blog-card-title, #000000);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .blog-sec__card-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .blog-sec__card-title a:hover {
+    text-decoration: underline;
+  }
+
+  .blog-sec__card-desc {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--blog-card-desc, #666666);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .blog-sec__card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: auto;
+    padding-top: 12px;
+  }
+
+  .blog-sec__card-author {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--blog-card-author, #000000);
+  }
+
+  .blog-sec__card-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--blog-card-meta, #666666);
+  }
+
+  .blog-sec__card-dot {
+    color: var(--blog-card-meta, #666666);
+  }
+
+  /* ========================================
+     RESPONSIVE - SMALL MOBILE (400px+)
+     ======================================== */
+  @media (min-width: 400px) {
+    .blog-sec {
+      padding: 72px 28px 0;
+      gap: 56px;
+    }
+
+    .blog-sec__tagline {
+      font-size: 13px;
+    }
+
+    .blog-sec__card-content {
+      padding: 24px;
+    }
+
+    .blog-sec__card-title {
+      font-size: 17px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - MOBILE LANDSCAPE (550px+)
+     ======================================== */
+  @media (min-width: 550px) {
+    .blog-sec {
+      padding: 80px 36px 0;
+      gap: 56px;
+    }
+
+    .blog-sec__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .blog-sec__tagline {
+      font-size: 14px;
+    }
+
+    .blog-sec__cards {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .blog-sec__card-title {
+      font-size: 16px;
+    }
+
+    .blog-sec__card-desc {
+      font-size: 14px;
+      -webkit-line-clamp: 2;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - TABLET (768px+)
+     ======================================== */
+  @media (min-width: 768px) {
+    .blog-sec {
+      padding: 88px 48px 0;
+      gap: 64px;
+    }
+
+    .blog-sec__container {
+      gap: 56px;
+    }
+
+    .blog-sec__heading {
+      gap: 10px 14px;
+    }
+
+    .blog-sec__heading-highlight {
+      padding: 6px 14px;
+    }
+
+    .blog-sec__btn {
+      padding: 16px 28px;
+      font-size: 14px;
+    }
+
+    .blog-sec__cards {
+      gap: 28px;
+    }
+
+    .blog-sec__card-title {
+      font-size: 17px;
+    }
+
+    .blog-sec__card-desc {
+      font-size: 15px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - DESKTOP (1024px+)
+     ======================================== */
+  @media (min-width: 1024px) {
+    .blog-sec {
+      padding: 96px 48px 0;
+      gap: 64px;
+    }
+
+    .blog-sec__cards {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .blog-sec__card-image-wrapper {
+      aspect-ratio: 3 / 2;
+    }
+
+    .blog-sec__card-content {
+      gap: 14px;
+      padding: 24px;
+    }
+
+    .blog-sec__card-title {
+      font-size: 18px;
+    }
+
+    .blog-sec__card-desc {
+      font-size: 15px;
+      -webkit-line-clamp: 3;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE DESKTOP (1200px+)
+     ======================================== */
+  @media (min-width: 1200px) {
+    .blog-sec__cards {
+      gap: 36px;
+    }
+
+    .blog-sec__card-content {
+      padding: 28px;
+    }
+
+    .blog-sec__card-title {
+      font-size: 19px;
+    }
+
+    .blog-sec__card-desc {
+      font-size: 16px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - XL DESKTOP (1400px+)
+     ======================================== */
+  @media (min-width: 1400px) {
+    .blog-sec {
+      padding: 96px 64px 0;
+    }
+
+    .blog-sec__cards {
+      gap: 40px;
+    }
+
+    .blog-sec__card-content {
+      padding: 32px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - XXL DESKTOP (1600px+)
+     ======================================== */
+  @media (min-width: 1600px) {
+    .blog-sec__container {
+      max-width: 1500px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Blog Section",
+  "tag": "section",
+  "class": "blog-sec-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Content"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "FROM BEGINNER TIPS TO PRO TRICKS"
+    },
+    {
+      "type": "text",
+      "id": "heading_before",
+      "label": "Heading (before highlight)",
+      "default": "THE"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Highlighted Text",
+      "default": "DTFSHEET"
+    },
+    {
+      "type": "text",
+      "id": "heading_after",
+      "label": "Heading (after highlight)",
+      "default": "BLOG"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "SEE ALL BLOG"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#D0FBF5"
+    },
+    {
+      "type": "color",
+      "id": "tagline_color",
+      "label": "Tagline Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "highlight_bg_color",
+      "label": "Highlight Background",
+      "default": "#00D4D4"
+    },
+    {
+      "type": "color",
+      "id": "highlight_text_color",
+      "label": "Highlight Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button Background",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Card Colors"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_desc_color",
+      "label": "Card Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_author_color",
+      "label": "Card Author Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_meta_color",
+      "label": "Card Meta Color",
+      "default": "#666666"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "blog_card",
+      "name": "Blog Card",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured Card",
+          "info": "Adds cyan border and title color",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Featured Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "BLOG POST TITLE HERE"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description/Excerpt",
+          "default": "Blog post description or excerpt goes here. This will be truncated after a few lines."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "AUTHOR NAME"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "default": "July 11, 2025"
+        },
+        {
+          "type": "text",
+          "id": "read_time",
+          "label": "Read Time",
+          "default": "5 min read"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Blog Post Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog Section",
+      "blocks": [
+        {
+          "type": "blog_card",
+          "settings": {
+            "title": "TROUBLESHOOTING HEAT TRANSFER PRINTS: HOW TO FI...",
+            "description": "Ah, heat transfer printing. It's the creative world's version of \"it's not you, it's me\" except in this case, it ...",
+            "author": "CHERRIE MAE PATRIARCA",
+            "date": "July 11, 2025",
+            "read_time": "5 min read"
+          }
+        },
+        {
+          "type": "blog_card",
+          "settings": {
+            "featured": true,
+            "title": "HEAT TRANSFER DIY AT HOME: STEP-BY-STEP GUIDE FOR CRA...",
+            "description": "DIY Heat Transfers Made Easy (Like, Actually Easy) If you've ever tried a heat transfer DIY at home and...",
+            "author": "DTF SHEET",
+            "date": "July 10, 2025",
+            "read_time": "4 min read"
+          }
+        },
+        {
+          "type": "blog_card",
+          "settings": {
+            "title": "WASH INSTRUCTIONS FOR HEAT TRANSFER: HOW TO PRESERVE...",
+            "description": "So, you've just pressed a custom DTF design that looks so good it practically winked at you. Nice work....",
+            "author": "DTF SHEET",
+            "date": "July 9, 2025",
+            "read_time": "6 min read"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
