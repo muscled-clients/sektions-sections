@@ -122,7 +122,7 @@
   .pgs2 {
     position: relative;
     width: 100%;
-    padding: 48px 16px 60px;
+    padding: 48px 16px 0;
     background-color: var(--pgs2-bg, #F7F7F7);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow: hidden;
@@ -312,11 +312,11 @@
     background-color: var(--pgs2-card-bg, #ffffff);
     border-radius: var(--pgs2-card-radius, 16px);
     box-shadow: var(--pgs2-card-shadow, 0 6px 30px rgba(0, 0, 0, 0.08));
-    overflow: visible;
+    overflow: hidden;
     height: 100%;
   }
 
-  /* Badge - At top of card */
+  /* Badge - Fully inside card at top */
   .pgs2__badge {
     position: absolute;
     top: 4px;
@@ -337,7 +337,7 @@
 
   /* Card Content (TOP) */
   .pgs2__card-content {
-    padding: 50px 16px 16px;
+    padding: 46px 16px 16px;
     text-align: center;
     flex: 0 0 auto;
   }
@@ -349,7 +349,6 @@
     flex: 1 1 auto;
     min-height: 180px;
     overflow: hidden;
-    border-radius: 0 0 var(--pgs2-card-radius, 16px) var(--pgs2-card-radius, 16px);
   }
 
   .pgs2__card-image img {
@@ -399,7 +398,7 @@
      ======================================== */
   @media (min-width: 400px) {
     .pgs2 {
-      padding: 56px 20px 70px;
+      padding: 56px 20px 0;
     }
 
     .pgs2__corner {
@@ -452,7 +451,7 @@
     }
 
     .pgs2__card-content {
-      padding: 50px 20px 20px;
+      padding: 46px 20px 20px;
     }
 
     .pgs2__card-title {
@@ -469,7 +468,7 @@
      ======================================== */
   @media (min-width: 550px) {
     .pgs2 {
-      padding: 64px 24px 80px;
+      padding: 64px 24px 0;
     }
 
     .pgs2__corner {
@@ -545,12 +544,12 @@
       width: 44px;
       height: 44px;
       font-size: 20px;
-      top: 6px;
+      top: 4px;
       border-radius: 10px;
     }
 
     .pgs2__card-content {
-      padding: 56px 24px 24px;
+      padding: 50px 24px 24px;
     }
 
     .pgs2__card-title {
@@ -578,7 +577,7 @@
      ======================================== */
   @media (min-width: 768px) {
     .pgs2 {
-      padding: 80px 32px 100px;
+      padding: 80px 32px 0;
     }
 
     .pgs2__corner {
@@ -684,11 +683,11 @@
       width: 44px;
       height: 44px;
       font-size: 20px;
-      top: 6px;
+      top: 4px;
     }
 
     .pgs2__card-content {
-      padding: 56px 16px 16px;
+      padding: 50px 16px 16px;
     }
 
     .pgs2__card-title {
@@ -705,7 +704,7 @@
      ======================================== */
   @media (min-width: 1024px) {
     .pgs2 {
-      padding: 96px 48px 120px;
+      padding: 96px 48px 0;
     }
 
     .pgs2__corner {
@@ -789,11 +788,11 @@
       width: 46px;
       height: 46px;
       font-size: 21px;
-      top: 8px;
+      top: 6px;
     }
 
     .pgs2__card-content {
-      padding: 60px 20px 20px;
+      padding: 54px 20px 20px;
     }
 
     .pgs2__card-title {
@@ -871,11 +870,11 @@
       width: 48px;
       height: 48px;
       font-size: 22px;
-      top: 10px;
+      top: 6px;
     }
 
     .pgs2__card-content {
-      padding: 64px 24px 24px;
+      padding: 56px 24px 24px;
     }
 
     .pgs2__card-title {
@@ -892,7 +891,7 @@
      ======================================== */
   @media (min-width: 1400px) {
     .pgs2 {
-      padding: 120px 64px 150px;
+      padding: 120px 64px 0;
     }
 
     .pgs2__corner {
@@ -970,11 +969,11 @@
       width: 50px;
       height: 50px;
       font-size: 23px;
-      top: 12px;
+      top: 8px;
     }
 
     .pgs2__card-content {
-      padding: 68px 28px 28px;
+      padding: 60px 28px 28px;
     }
 
     .pgs2__card-title {
@@ -1040,11 +1039,11 @@
       width: 52px;
       height: 52px;
       font-size: 24px;
-      top: 14px;
+      top: 8px;
     }
 
     .pgs2__card-content {
-      padding: 72px 32px 32px;
+      padding: 62px 32px 32px;
     }
 
     .pgs2__card-title {
@@ -1059,7 +1058,7 @@
 
 {% schema %}
 {
-  "name": "Press & Go Steps V2",
+  "name": "How it Works",
   "tag": "section",
   "class": "pgs2-section",
   "settings": [
@@ -1234,7 +1233,7 @@
   ],
   "presets": [
     {
-      "name": "Press & Go Steps V2",
+      "name": "How it Works",
       "category": "Text",
       "blocks": [
         {
