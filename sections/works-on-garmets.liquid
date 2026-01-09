@@ -19,6 +19,7 @@
   --wog-icon-label: {{ section.settings.icon_label_color }};
   --wog-btn-primary-bg: {{ section.settings.btn_primary_bg }};
   --wog-btn-primary-text: {{ section.settings.btn_primary_text_color }};
+  --wog-btn-primary-border: {{ section.settings.btn_primary_border }};
   --wog-btn-secondary-bg: {{ section.settings.btn_secondary_bg }};
   --wog-btn-secondary-text: {{ section.settings.btn_secondary_text_color }};
   --wog-btn-secondary-border: {{ section.settings.btn_secondary_border }};
@@ -211,10 +212,7 @@
 
   .wog__heading-underline {
     display: inline-block;
-    text-decoration: underline;
-    text-decoration-color: var(--wog-underline, #00D4D4);
-    text-decoration-thickness: 3px;
-    text-underline-offset: 6px;
+    color: var(--wog-underline, #00D4D4);
   }
 
   .wog__description {
@@ -313,7 +311,7 @@
   .wog__btn--primary {
     background: var(--wog-btn-primary-bg, #1A1A1A);
     color: var(--wog-btn-primary-text, #FFFFFF);
-    border: 2px solid var(--wog-btn-primary-bg, #1A1A1A);
+    border: 2px solid var(--wog-btn-primary-border, #FFFFFF);
   }
 
   .wog__btn--primary:hover {
@@ -375,9 +373,8 @@
      ======================================== */
   .wog__dots {
     position: absolute;
-    left: 50%;
+    left: 20px;
     bottom: 20px;
-    transform: translateX(-50%);
     display: flex;
     flex-direction: row;
     gap: 8px;
@@ -519,11 +516,6 @@
 
     .wog__content {
       gap: 32px;
-    }
-
-    .wog__heading-underline {
-      text-decoration-thickness: 4px;
-      text-underline-offset: 8px;
     }
 
     .wog__description {
@@ -798,6 +790,12 @@
       "type": "color",
       "id": "btn_primary_text_color",
       "label": "Primary Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "btn_primary_border",
+      "label": "Primary Button Border",
       "default": "#FFFFFF"
     },
     {
