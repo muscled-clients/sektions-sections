@@ -11,8 +11,6 @@
     --pgs2-badge-text: {{ section.settings.badge_text_color }};
     --pgs2-card-radius: {{ section.settings.card_border_radius }}px;
     --pgs2-badge-radius: {{ section.settings.badge_border_radius }}px;
-    --pgs2-card-rotation: {{ section.settings.card_rotation }}deg;
-    --pgs2-card-overlap: {{ section.settings.card_overlap }}px;
     {% case section.settings.card_shadow %}
       {% when 'none' %}
         --pgs2-card-shadow: none;
@@ -129,6 +127,7 @@
     background-color: var(--pgs2-bg, #F7F7F7);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow: hidden;
+    overflow-x: clip;
   }
 
   .pgs2 *,
@@ -304,6 +303,7 @@
     position: relative;
     width: 100%;
     max-width: 300px;
+    padding-top: 18px;
   }
 
   .pgs2__card-inner {
@@ -320,7 +320,7 @@
   /* Badge - All centered at top */
   .pgs2__badge {
     position: absolute;
-    top: -14px;
+    top: -18px;
     left: 50%;
     transform: translateX(-50%);
     width: 36px;
@@ -644,18 +644,18 @@
     .pgs2__cards {
       flex-direction: row;
       justify-content: center;
-      align-items: stretch;
+      align-items: flex-start;
       gap: 0;
     }
 
     .pgs2__card {
       flex: 0 0 260px;
       max-width: 260px;
-      height: 380px;
+      padding-top: 20px;
     }
 
     .pgs2__card-inner {
-      height: 100%;
+      height: 380px;
     }
 
     .pgs2__card-image {
@@ -664,19 +664,21 @@
 
     /* Card rotations and overlap using negative margins */
     .pgs2__card--1 {
-      transform: rotate(calc(var(--pgs2-card-rotation, 5deg) * -1)) !important;
-      margin-right: calc(var(--pgs2-card-overlap, 35px) * -1);
+      transform: rotate(-5deg);
+      margin-right: -30px;
+      margin-top: 30px;
       z-index: 1;
     }
 
     .pgs2__card--2 {
-      transform: rotate(0deg) !important;
+      transform: rotate(0deg);
       z-index: 3;
     }
 
     .pgs2__card--3 {
-      transform: rotate(var(--pgs2-card-rotation, 5deg)) !important;
-      margin-left: calc(var(--pgs2-card-overlap, 35px) * -1);
+      transform: rotate(5deg);
+      margin-left: -30px;
+      margin-top: 30px;
       z-index: 2;
     }
 
@@ -684,11 +686,11 @@
       width: 40px;
       height: 40px;
       font-size: 18px;
-      top: -16px;
+      top: -20px;
     }
 
     .pgs2__card-content {
-      padding: 40px 16px 16px;
+      padding: 28px 16px 16px;
     }
 
     .pgs2__card-title {
@@ -765,6 +767,10 @@
     .pgs2__card {
       flex: 0 0 300px;
       max-width: 300px;
+      padding-top: 22px;
+    }
+
+    .pgs2__card-inner {
       height: 440px;
     }
 
@@ -773,24 +779,26 @@
     }
 
     .pgs2__card--1 {
-      transform: rotate(calc(var(--pgs2-card-rotation, 5deg) * -1)) !important;
-      margin-right: calc(var(--pgs2-card-overlap, 35px) * -1);
+      transform: rotate(-5deg);
+      margin-right: -40px;
+      margin-top: 35px;
     }
 
     .pgs2__card--3 {
-      transform: rotate(var(--pgs2-card-rotation, 5deg)) !important;
-      margin-left: calc(var(--pgs2-card-overlap, 35px) * -1);
+      transform: rotate(5deg);
+      margin-left: -40px;
+      margin-top: 35px;
     }
 
     .pgs2__badge {
       width: 44px;
       height: 44px;
       font-size: 20px;
-      top: -18px;
+      top: -22px;
     }
 
     .pgs2__card-content {
-      padding: 46px 20px 20px;
+      padding: 30px 20px 20px;
     }
 
     .pgs2__card-title {
@@ -844,6 +852,10 @@
     .pgs2__card {
       flex: 0 0 340px;
       max-width: 340px;
+      padding-top: 24px;
+    }
+
+    .pgs2__card-inner {
       height: 480px;
     }
 
@@ -852,24 +864,26 @@
     }
 
     .pgs2__card--1 {
-      transform: rotate(calc(var(--pgs2-card-rotation, 5deg) * -1)) !important;
-      margin-right: calc(var(--pgs2-card-overlap, 35px) * -1);
+      transform: rotate(-6deg);
+      margin-right: -45px;
+      margin-top: 40px;
     }
 
     .pgs2__card--3 {
-      transform: rotate(var(--pgs2-card-rotation, 5deg)) !important;
-      margin-left: calc(var(--pgs2-card-overlap, 35px) * -1);
+      transform: rotate(6deg);
+      margin-left: -45px;
+      margin-top: 40px;
     }
 
     .pgs2__badge {
       width: 46px;
       height: 46px;
       font-size: 21px;
-      top: -19px;
+      top: -24px;
     }
 
     .pgs2__card-content {
-      padding: 50px 24px 24px;
+      padding: 32px 24px 24px;
     }
 
     .pgs2__card-title {
@@ -940,6 +954,10 @@
     .pgs2__card {
       flex: 0 0 380px;
       max-width: 380px;
+      padding-top: 26px;
+    }
+
+    .pgs2__card-inner {
       height: 520px;
     }
 
@@ -948,24 +966,26 @@
     }
 
     .pgs2__card--1 {
-      transform: rotate(calc(var(--pgs2-card-rotation, 5deg) * -1)) !important;
-      margin-right: calc(var(--pgs2-card-overlap, 35px) * -1);
+      transform: rotate(-6deg);
+      margin-right: -50px;
+      margin-top: 45px;
     }
 
     .pgs2__card--3 {
-      transform: rotate(var(--pgs2-card-rotation, 5deg)) !important;
-      margin-left: calc(var(--pgs2-card-overlap, 35px) * -1);
+      transform: rotate(6deg);
+      margin-left: -50px;
+      margin-top: 45px;
     }
 
     .pgs2__badge {
       width: 48px;
       height: 48px;
       font-size: 22px;
-      top: -20px;
+      top: -26px;
     }
 
     .pgs2__card-content {
-      padding: 54px 28px 28px;
+      padding: 34px 28px 28px;
     }
 
     .pgs2__card-title {
@@ -1007,6 +1027,10 @@
     .pgs2__card {
       flex: 0 0 400px;
       max-width: 400px;
+      padding-top: 28px;
+    }
+
+    .pgs2__card-inner {
       height: 560px;
     }
 
@@ -1015,24 +1039,26 @@
     }
 
     .pgs2__card--1 {
-      transform: rotate(calc(var(--pgs2-card-rotation, 5deg) * -1)) !important;
-      margin-right: calc(var(--pgs2-card-overlap, 35px) * -1);
+      transform: rotate(-6deg);
+      margin-right: -55px;
+      margin-top: 50px;
     }
 
     .pgs2__card--3 {
-      transform: rotate(var(--pgs2-card-rotation, 5deg)) !important;
-      margin-left: calc(var(--pgs2-card-overlap, 35px) * -1);
+      transform: rotate(6deg);
+      margin-left: -55px;
+      margin-top: 50px;
     }
 
     .pgs2__badge {
       width: 50px;
       height: 50px;
       font-size: 24px;
-      top: -21px;
+      top: -28px;
     }
 
     .pgs2__card-content {
-      padding: 58px 32px 32px;
+      padding: 36px 32px 32px;
     }
 
     .pgs2__card-title {
@@ -1166,28 +1192,6 @@
         { "value": "large", "label": "Large" }
       ],
       "default": "medium"
-    },
-    {
-      "type": "range",
-      "id": "card_rotation",
-      "label": "Card Rotation (degrees)",
-      "min": 0,
-      "max": 12,
-      "step": 1,
-      "default": 5,
-      "unit": "°",
-      "info": "Rotation angle for side cards"
-    },
-    {
-      "type": "range",
-      "id": "card_overlap",
-      "label": "Card Overlap",
-      "min": 0,
-      "max": 80,
-      "step": 5,
-      "default": 35,
-      "unit": "px",
-      "info": "How much cards overlap each other"
     },
     {
       "type": "header",
