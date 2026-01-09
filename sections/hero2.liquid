@@ -8,7 +8,7 @@
   }
 {% endstyle %}
 
-<section class="hero-2 hero-2-{{ section.id }}" data-section-id="{{ section.id }}">
+<section class="hero-2 hero-2-{{ section.id }}" data-section-id="{{ section.id }}" data-h2-animate>
   <!-- Background Image -->
   <div class="h2__background">
     {% if section.settings.background_image != blank %}
@@ -16,10 +16,10 @@
         src="{{ section.settings.background_image | image_url: width: 1920 }}"
         alt="{{ section.settings.background_image.alt | default: 'Hero background' }}"
         loading="eager"
-        class="h2__bg-image"
+        class="h2__bg-image h2__anim h2__anim--scale"
       >
     {% else %}
-      <div class="h2__bg-placeholder"></div>
+      <div class="h2__bg-placeholder h2__anim h2__anim--scale"></div>
     {% endif %}
     <div class="h2__overlay"></div>
   </div>
@@ -28,16 +28,16 @@
   <div class="h2__container">
     <!-- Top Navigation Row -->
     <div class="h2__top-row">
-      <div class="h2__top-left">
+      <div class="h2__top-left h2__anim h2__anim--fade-down" data-delay="1">
         <a href="{{ section.settings.left_link }}" class="h2__nav-link">
           <span class="h2__nav-small">{{ section.settings.left_small_text }}</span>
           <span class="h2__nav-large">{{ section.settings.left_large_text }}</span>
         </a>
       </div>
-      <div class="h2__top-center">
+      <div class="h2__top-center h2__anim h2__anim--fade-down" data-delay="2">
         <span class="h2__top-tagline">{{ section.settings.center_tagline }}</span>
       </div>
-      <div class="h2__top-right">
+      <div class="h2__top-right h2__anim h2__anim--fade-down" data-delay="3">
         <a href="{{ section.settings.right_link }}" class="h2__nav-link h2__nav-link--right">
           <span class="h2__nav-small">{{ section.settings.right_small_text }}</span>
           <span class="h2__nav-large h2__nav-large--italic">{{ section.settings.right_large_text }}</span>
@@ -47,13 +47,13 @@
 
     <!-- Center Content -->
     <div class="h2__center">
-      <h1 class="h2__main-title" data-text="{{ section.settings.main_title }}">{{ section.settings.main_title }}</h1>
-      <p class="h2__script-text">{{ section.settings.script_text }}</p>
-      <div class="h2__subtitle-row">
+      <h1 class="h2__main-title h2__anim h2__anim--fade-up" data-delay="4" data-text="{{ section.settings.main_title }}">{{ section.settings.main_title }}</h1>
+      <p class="h2__script-text h2__anim h2__anim--fade-up" data-delay="5">{{ section.settings.script_text }}</p>
+      <div class="h2__subtitle-row h2__anim h2__anim--fade-up" data-delay="6">
         <span class="h2__working-text">{{ section.settings.working_text }}</span>
       </div>
-      <h2 class="h2__brand-text">{{ section.settings.brand_text }}</h2>
-      <p class="h2__description">
+      <h2 class="h2__brand-text h2__anim h2__anim--fade-up" data-delay="7">{{ section.settings.brand_text }}</h2>
+      <p class="h2__description h2__anim h2__anim--fade-up" data-delay="8">
         {{ section.settings.description_line1 }}
         <span class="h2__highlight">{{ section.settings.highlight1 }}</span>
         {{ section.settings.description_line2 }}
@@ -70,7 +70,7 @@
     <!-- Bottom Row -->
     <div class="h2__bottom-row">
       <!-- Bottom Left -->
-      <div class="h2__bottom-left">
+      <div class="h2__bottom-left h2__anim h2__anim--fade-up" data-delay="9">
         <div class="h2__badge-row">
           <span class="h2__est-badge">{{ section.settings.est_text }}</span>
           <span class="h2__barcode">
@@ -111,7 +111,7 @@
       </div>
 
       <!-- Bottom Right -->
-      <div class="h2__bottom-right">
+      <div class="h2__bottom-right h2__anim h2__anim--fade-up" data-delay="10">
         <a href="{{ section.settings.card_link }}" class="h2__explore-card">
           <div class="h2__card-bg">
             {% if section.settings.card_image != blank %}
@@ -148,6 +148,7 @@
   .hero-2 {
     display: block;
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     position: relative;
     overflow: hidden;
@@ -213,11 +214,13 @@
     position: relative;
     z-index: 2;
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 24px 20px;
+    overflow: hidden;
   }
 
   /* ========================================
@@ -266,7 +269,7 @@
   }
 
   .h2__nav-large {
-    font-size: 32px;
+    font-size: clamp(24px, 6vw, 32px);
     font-weight: 700;
     text-transform: uppercase;
     color: var(--h2-accent);
@@ -291,11 +294,14 @@
   .h2__center {
     text-align: center;
     padding: 40px 0;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .h2__main-title {
     font-family: 'Montserrat', sans-serif;
-    font-size: 60px;
+    font-size: clamp(40px, 10vw, 60px);
     font-weight: 700;
     text-transform: uppercase;
     color: transparent;
@@ -304,15 +310,20 @@
     letter-spacing: 0.05em;
     margin: 0 0 8px 0;
     line-height: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
   }
 
   .h2__script-text {
     font-family: 'Pinyon Script', 'Dancing Script', cursive;
-    font-size: 36px;
+    font-size: clamp(28px, 8vw, 36px);
     font-weight: 400;
     color: var(--h2-accent);
     margin: 0 0 8px 0;
     line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .h2__subtitle-row {
@@ -329,12 +340,14 @@
 
   .h2__brand-text {
     font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
+    font-size: clamp(18px, 5vw, 24px);
     font-weight: 700;
     text-transform: uppercase;
     color: var(--h2-accent);
     letter-spacing: 0.1em;
     margin: 0 0 16px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .h2__description {
@@ -343,9 +356,10 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--h2-text);
-    max-width: 600px;
+    max-width: 100%;
     margin: 0 auto;
     line-height: 1.8;
+    padding: 0 10px;
   }
 
   .h2__highlight {
@@ -574,19 +588,19 @@
     }
 
     .h2__nav-large {
-      font-size: 36px;
+      font-size: clamp(28px, 8vw, 36px);
     }
 
     .h2__main-title {
-      font-size: 70px;
+      font-size: clamp(50px, 15vw, 70px);
     }
 
     .h2__script-text {
-      font-size: 40px;
+      font-size: clamp(32px, 9vw, 40px);
     }
 
     .h2__brand-text {
-      font-size: 26px;
+      font-size: clamp(20px, 6vw, 26px);
     }
   }
 
@@ -603,7 +617,7 @@
     }
 
     .h2__nav-large {
-      font-size: 44px;
+      font-size: clamp(36px, 8vw, 44px);
     }
 
     .h2__top-tagline {
@@ -611,19 +625,21 @@
     }
 
     .h2__main-title {
-      font-size: 90px;
+      font-size: clamp(60px, 16vw, 90px);
     }
 
     .h2__script-text {
-      font-size: 48px;
+      font-size: clamp(38px, 9vw, 48px);
     }
 
     .h2__brand-text {
-      font-size: 30px;
+      font-size: clamp(24px, 5.5vw, 30px);
     }
 
     .h2__description {
       font-size: 12px;
+      max-width: 600px;
+      padding: 0;
     }
 
     .h2__explore-card {
@@ -653,7 +669,7 @@
     }
 
     .h2__nav-large {
-      font-size: 56px;
+      font-size: clamp(44px, 7vw, 56px);
     }
 
     .h2__top-tagline {
@@ -661,13 +677,13 @@
     }
 
     .h2__main-title {
-      font-size: 110px;
+      font-size: clamp(80px, 14vw, 110px);
       -webkit-text-stroke: 2.5px var(--h2-accent);
       text-stroke: 2.5px var(--h2-accent);
     }
 
     .h2__script-text {
-      font-size: 56px;
+      font-size: clamp(44px, 7vw, 56px);
     }
 
     .h2__working-text {
@@ -675,7 +691,7 @@
     }
 
     .h2__brand-text {
-      font-size: 36px;
+      font-size: clamp(28px, 5vw, 36px);
     }
 
     .h2__description {
@@ -723,7 +739,7 @@
     }
 
     .h2__nav-large {
-      font-size: 68px;
+      font-size: clamp(56px, 6vw, 68px);
     }
 
     .h2__top-tagline {
@@ -731,13 +747,13 @@
     }
 
     .h2__main-title {
-      font-size: 140px;
+      font-size: clamp(100px, 12vw, 140px);
       -webkit-text-stroke: 3px var(--h2-accent);
       text-stroke: 3px var(--h2-accent);
     }
 
     .h2__script-text {
-      font-size: 66px;
+      font-size: clamp(52px, 6vw, 66px);
     }
 
     .h2__working-text {
@@ -745,7 +761,7 @@
     }
 
     .h2__brand-text {
-      font-size: 44px;
+      font-size: clamp(36px, 4vw, 44px);
     }
 
     .h2__description {
@@ -813,7 +829,7 @@
     }
 
     .h2__nav-large {
-      font-size: 80px;
+      font-size: clamp(68px, 5.5vw, 80px);
     }
 
     .h2__top-tagline {
@@ -821,15 +837,15 @@
     }
 
     .h2__main-title {
-      font-size: 160px;
+      font-size: clamp(140px, 11vw, 160px);
     }
 
     .h2__script-text {
-      font-size: 76px;
+      font-size: clamp(66px, 5.5vw, 76px);
     }
 
     .h2__brand-text {
-      font-size: 52px;
+      font-size: clamp(44px, 3.5vw, 52px);
     }
 
     .h2__description {
@@ -849,7 +865,117 @@
       font-size: 32px;
     }
   }
+
+  /* ========================================
+     LOAD ANIMATIONS
+     ======================================== */
+  @keyframes h2FadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes h2FadeDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes h2ScaleIn {
+    from {
+      opacity: 0;
+      transform: scale(1.1);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Animation base state - hidden */
+  .h2__anim {
+    opacity: 0;
+  }
+
+  /* Animation triggered state */
+  .hero-2.h2--animated .h2__anim--fade-up {
+    animation: h2FadeUp 0.8s ease forwards;
+  }
+
+  .hero-2.h2--animated .h2__anim--fade-down {
+    animation: h2FadeDown 0.8s ease forwards;
+  }
+
+  .hero-2.h2--animated .h2__anim--scale {
+    animation: h2ScaleIn 1.2s ease forwards;
+  }
+
+  /* Staggered delays */
+  .hero-2.h2--animated .h2__anim[data-delay="1"] { animation-delay: 0.1s; }
+  .hero-2.h2--animated .h2__anim[data-delay="2"] { animation-delay: 0.2s; }
+  .hero-2.h2--animated .h2__anim[data-delay="3"] { animation-delay: 0.3s; }
+  .hero-2.h2--animated .h2__anim[data-delay="4"] { animation-delay: 0.4s; }
+  .hero-2.h2--animated .h2__anim[data-delay="5"] { animation-delay: 0.5s; }
+  .hero-2.h2--animated .h2__anim[data-delay="6"] { animation-delay: 0.6s; }
+  .hero-2.h2--animated .h2__anim[data-delay="7"] { animation-delay: 0.7s; }
+  .hero-2.h2--animated .h2__anim[data-delay="8"] { animation-delay: 0.8s; }
+  .hero-2.h2--animated .h2__anim[data-delay="9"] { animation-delay: 0.9s; }
+  .hero-2.h2--animated .h2__anim[data-delay="10"] { animation-delay: 1.0s; }
+
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .h2__anim {
+      opacity: 1;
+      animation: none !important;
+    }
+  }
 </style>
+
+<script>
+  (function() {
+    const section = document.querySelector('.hero-2-{{ section.id }}');
+    if (!section) return;
+
+    // Trigger animations on load
+    function triggerAnimations() {
+      section.classList.add('h2--animated');
+    }
+
+    // Check if section is in viewport
+    function isInViewport(el) {
+      const rect = el.getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
+    }
+
+    // If section is already in viewport, animate immediately
+    if (isInViewport(section)) {
+      // Small delay to ensure CSS is loaded
+      setTimeout(triggerAnimations, 100);
+    } else {
+      // Otherwise, animate when section comes into view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            triggerAnimations();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+
+      observer.observe(section);
+    }
+  })();
+</script>
 
 {% schema %}
 {
