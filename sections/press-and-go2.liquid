@@ -54,7 +54,7 @@
       </h2>
     </div>
 
-    <!-- Cards Container (with negative gap for overlap) -->
+    <!-- Cards Container -->
     <div class="pgs2__cards-wrapper">
       <div class="pgs2__cards">
         {% for block in section.blocks %}
@@ -70,15 +70,16 @@
                   <p class="pgs2__card-desc">{{ block.settings.description }}</p>
                 </div>
 
-                <!-- Image (extends beyond card) -->
+                <!-- Image -->
                 <div class="pgs2__card-image">
                   {% if block.settings.image != blank %}
                     <img
                       src="{{ block.settings.image | image_url: width: 600 }}"
-                      srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
+                      srcset="{{ block.settings.image | image_url: width: 300 }} 300w,
+                              {{ block.settings.image | image_url: width: 400 }} 400w,
                               {{ block.settings.image | image_url: width: 500 }} 500w,
                               {{ block.settings.image | image_url: width: 600 }} 600w"
-                      sizes="(max-width: 767px) 90vw, 400px"
+                      sizes="(max-width: 400px) 280px, (max-width: 550px) 320px, (max-width: 767px) 360px, (max-width: 1023px) 300px, 380px"
                       alt="{{ block.settings.title }}"
                       width="600"
                       height="auto"
@@ -105,12 +106,12 @@
 
 <style>
   /* ========================================
-     BASE STYLES
+     BASE STYLES (Mobile First - 320px+)
      ======================================== */
   .pgs2 {
     position: relative;
     width: 100%;
-    padding: 96px 24px;
+    padding: 48px 16px 60px;
     background-color: var(--pgs2-bg, #F7F7F7);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow: hidden;
@@ -133,22 +134,22 @@
      ======================================== */
   .pgs2__corner {
     position: absolute;
-    width: 280px;
-    height: 350px;
+    width: 140px;
+    height: 180px;
     background-color: var(--pgs2-corner-bg, #EDEDED);
-    border-radius: 20px;
+    border-radius: 12px;
     z-index: 1;
   }
 
   .pgs2__corner--left {
-    top: -120px;
-    left: -80px;
+    top: -60px;
+    left: -70px;
     transform: rotate(-15deg);
   }
 
   .pgs2__corner--right {
-    top: -120px;
-    right: -80px;
+    top: -60px;
+    right: -70px;
     transform: rotate(15deg);
   }
 
@@ -176,32 +177,32 @@
   }
 
   .pgs2__icon--arc-left {
-    top: 40px;
-    left: 100px;
-    width: 60px;
-    height: 60px;
+    top: 15px;
+    left: 30px;
+    width: 35px;
+    height: 35px;
   }
 
   .pgs2__icon--arc-right {
-    top: 40px;
-    right: 100px;
-    width: 60px;
-    height: 60px;
+    top: 15px;
+    right: 30px;
+    width: 35px;
+    height: 35px;
   }
 
   .pgs2__icon--dot {
-    top: 180px;
-    left: 200px;
-    width: 14px;
-    height: 14px;
+    top: 100px;
+    left: 10%;
+    width: 10px;
+    height: 10px;
   }
 
   .pgs2__icon--ring {
-    top: 140px;
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
-    width: 28px;
-    height: 28px;
+    width: 18px;
+    height: 18px;
   }
 
   /* ========================================
@@ -212,7 +213,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 64px;
+    gap: 40px;
     max-width: 1400px;
     margin: 0 auto;
     z-index: 10;
@@ -225,14 +226,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     text-align: center;
+    padding: 0 10px;
   }
 
   .pgs2__subtitle {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--pgs2-subtitle-color, #888888);
     margin: 0;
@@ -242,12 +244,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     margin: 0;
   }
 
   .pgs2__heading-line1 {
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.02em;
@@ -256,14 +258,14 @@
   }
 
   .pgs2__heading-line2 {
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 800;
     font-style: italic;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--pgs2-heading-color, #1a1a1a);
     background-color: var(--pgs2-accent-color, #00D4D4);
-    padding: 10px 28px;
+    padding: 6px 16px;
     line-height: 1.1;
   }
 
@@ -272,15 +274,13 @@
      ======================================== */
   .pgs2__cards-wrapper {
     width: 100%;
-    padding: 64px 0;
   }
 
   .pgs2__cards {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
-    padding: 0 20px;
+    gap: 30px;
   }
 
   /* ========================================
@@ -289,7 +289,7 @@
   .pgs2__card {
     position: relative;
     width: 100%;
-    max-width: 380px;
+    max-width: 300px;
   }
 
   .pgs2__card-inner {
@@ -297,31 +297,31 @@
     display: flex;
     flex-direction: column;
     background-color: var(--pgs2-card-bg, #ffffff);
-    border-radius: 16px;
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
     overflow: visible;
   }
 
   /* Badge */
   .pgs2__badge {
     position: absolute;
-    top: -18px;
-    width: 44px;
-    height: 44px;
+    top: -14px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--pgs2-badge-bg, #1a1a1a);
     color: var(--pgs2-badge-text, #ffffff);
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
-    border-radius: 10px;
+    border-radius: 8px;
     z-index: 5;
   }
 
-  /* Badge positions per card */
+  /* Badge positions per card (mobile - all left) */
   .pgs2__card--1 .pgs2__badge {
-    left: 20px;
+    left: 16px;
   }
 
   .pgs2__card--2 .pgs2__badge {
@@ -330,32 +330,32 @@
   }
 
   .pgs2__card--3 .pgs2__badge {
-    right: 20px;
+    right: 16px;
     left: auto;
   }
 
   /* Card Content */
   .pgs2__card-content {
-    padding: 48px 24px 24px;
+    padding: 36px 16px 16px;
     text-align: center;
   }
 
   .pgs2__card-title {
-    font-size: 22px;
+    font-size: 16px;
     font-weight: 700;
     font-style: italic;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--pgs2-heading-color, #1a1a1a);
-    margin: 0 0 12px 0;
+    margin: 0 0 8px 0;
     line-height: 1.2;
   }
 
   .pgs2__card-desc {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     color: var(--pgs2-text-color, #666666);
-    line-height: 1.6;
+    line-height: 1.5;
     margin: 0;
   }
 
@@ -363,14 +363,13 @@
   .pgs2__card-image {
     position: relative;
     width: 100%;
-    margin-top: -1px;
   }
 
   .pgs2__card-image img {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 12px 12px;
   }
 
   .pgs2__card-placeholder {
@@ -381,7 +380,7 @@
     align-items: center;
     justify-content: center;
     color: #bbb;
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 12px 12px;
   }
 
   .pgs2__card-placeholder svg {
@@ -390,64 +389,268 @@
   }
 
   /* ========================================
-     RESPONSIVE - TABLET (768px+)
+     RESPONSIVE - 400px+
      ======================================== */
-  @media (min-width: 768px) {
+  @media (min-width: 400px) {
     .pgs2 {
-      padding: 96px 48px;
+      padding: 56px 20px 70px;
     }
 
     .pgs2__corner {
-      width: 300px;
-      height: 380px;
+      width: 160px;
+      height: 200px;
     }
 
     .pgs2__corner--left {
-      top: -140px;
-      left: -60px;
+      top: -70px;
+      left: -70px;
     }
 
     .pgs2__corner--right {
-      top: -140px;
-      right: -60px;
+      top: -70px;
+      right: -70px;
     }
 
     .pgs2__icon--arc-left {
-      top: 30px;
-      left: 120px;
+      top: 18px;
+      left: 40px;
+      width: 40px;
+      height: 40px;
     }
 
     .pgs2__icon--arc-right {
-      top: 30px;
-      right: 120px;
+      top: 18px;
+      right: 40px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .pgs2__subtitle {
+      font-size: 11px;
     }
 
     .pgs2__heading-line1,
     .pgs2__heading-line2 {
-      font-size: 44px;
+      font-size: 28px;
+    }
+
+    .pgs2__card {
+      max-width: 340px;
+    }
+
+    .pgs2__badge {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      top: -16px;
+    }
+
+    .pgs2__card-content {
+      padding: 40px 20px 20px;
+    }
+
+    .pgs2__card-title {
+      font-size: 18px;
+    }
+
+    .pgs2__card-desc {
+      font-size: 13px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - 550px+
+     ======================================== */
+  @media (min-width: 550px) {
+    .pgs2 {
+      padding: 64px 24px 80px;
+    }
+
+    .pgs2__corner {
+      width: 180px;
+      height: 230px;
+      border-radius: 14px;
+    }
+
+    .pgs2__corner--left {
+      top: -80px;
+      left: -60px;
+    }
+
+    .pgs2__corner--right {
+      top: -80px;
+      right: -60px;
+    }
+
+    .pgs2__icon--arc-left {
+      top: 20px;
+      left: 60px;
+      width: 45px;
+      height: 45px;
+    }
+
+    .pgs2__icon--arc-right {
+      top: 20px;
+      right: 60px;
+      width: 45px;
+      height: 45px;
+    }
+
+    .pgs2__icon--dot {
+      top: 120px;
+      left: 12%;
+      width: 12px;
+      height: 12px;
+    }
+
+    .pgs2__icon--ring {
+      top: 100px;
+      width: 22px;
+      height: 22px;
+    }
+
+    .pgs2__content {
+      gap: 50px;
+    }
+
+    .pgs2__subtitle {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+    }
+
+    .pgs2__heading-line1,
+    .pgs2__heading-line2 {
+      font-size: 32px;
+    }
+
+    .pgs2__heading-line2 {
+      padding: 8px 20px;
+    }
+
+    .pgs2__cards {
+      gap: 35px;
+    }
+
+    .pgs2__card {
+      max-width: 380px;
+    }
+
+    .pgs2__badge {
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+      top: -18px;
+      border-radius: 10px;
+    }
+
+    .pgs2__card-content {
+      padding: 44px 24px 24px;
+    }
+
+    .pgs2__card-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .pgs2__card-desc {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pgs2__card-inner {
+      border-radius: 14px;
+    }
+
+    .pgs2__card-image img,
+    .pgs2__card-placeholder {
+      border-radius: 0 0 14px 14px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - TABLET (768px+)
+     ======================================== */
+  @media (min-width: 768px) {
+    .pgs2 {
+      padding: 80px 32px 100px;
+    }
+
+    .pgs2__corner {
+      width: 240px;
+      height: 300px;
+      border-radius: 16px;
+    }
+
+    .pgs2__corner--left {
+      top: -100px;
+      left: -50px;
+    }
+
+    .pgs2__corner--right {
+      top: -100px;
+      right: -50px;
+    }
+
+    .pgs2__icon--arc-left {
+      top: 25px;
+      left: 100px;
+      width: 50px;
+      height: 50px;
+    }
+
+    .pgs2__icon--arc-right {
+      top: 25px;
+      right: 100px;
+      width: 50px;
+      height: 50px;
+    }
+
+    .pgs2__icon--dot {
+      top: 150px;
+      left: 15%;
+      width: 14px;
+      height: 14px;
+    }
+
+    .pgs2__icon--ring {
+      top: 120px;
+      width: 26px;
+      height: 26px;
+    }
+
+    .pgs2__content {
+      gap: 60px;
+    }
+
+    .pgs2__heading-line1,
+    .pgs2__heading-line2 {
+      font-size: 40px;
+    }
+
+    .pgs2__heading-line2 {
+      padding: 10px 24px;
     }
 
     .pgs2__cards-wrapper {
-      padding: 64px 48px;
+      padding: 30px 0;
     }
 
     .pgs2__cards {
       flex-direction: row;
       justify-content: center;
       align-items: flex-start;
-      gap: -48px; /* NEGATIVE GAP for overlap */
-      padding: 0;
+      gap: -30px;
     }
 
     .pgs2__card {
-      flex: 0 0 340px;
-      max-width: 340px;
+      flex: 0 0 280px;
+      max-width: 280px;
     }
 
     /* Card rotations */
     .pgs2__card--1 {
-      transform: rotate(-6deg);
-      margin-top: 30px;
+      transform: rotate(-5deg);
+      margin-top: 25px;
       z-index: 1;
     }
 
@@ -457,20 +660,45 @@
     }
 
     .pgs2__card--3 {
-      transform: rotate(6deg);
-      margin-top: 30px;
+      transform: rotate(5deg);
+      margin-top: 25px;
       z-index: 2;
     }
 
+    .pgs2__card-inner {
+      border-radius: 16px;
+    }
+
+    .pgs2__card-image img,
+    .pgs2__card-placeholder {
+      border-radius: 0 0 16px 16px;
+    }
+
     .pgs2__badge {
-      width: 48px;
-      height: 48px;
-      font-size: 22px;
-      top: -20px;
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+      top: -18px;
+    }
+
+    .pgs2__card--1 .pgs2__badge {
+      left: 18px;
+    }
+
+    .pgs2__card--3 .pgs2__badge {
+      right: 18px;
+    }
+
+    .pgs2__card-content {
+      padding: 44px 20px 20px;
     }
 
     .pgs2__card-title {
-      font-size: 24px;
+      font-size: 18px;
+    }
+
+    .pgs2__card-desc {
+      font-size: 13px;
     }
   }
 
@@ -478,19 +706,130 @@
      RESPONSIVE - DESKTOP (1024px+)
      ======================================== */
   @media (min-width: 1024px) {
+    .pgs2 {
+      padding: 96px 48px 120px;
+    }
+
+    .pgs2__corner {
+      width: 300px;
+      height: 380px;
+      border-radius: 18px;
+    }
+
+    .pgs2__corner--left {
+      top: -130px;
+      left: -40px;
+    }
+
+    .pgs2__corner--right {
+      top: -130px;
+      right: -40px;
+    }
+
+    .pgs2__icon--arc-left {
+      top: 30px;
+      left: 150px;
+      width: 55px;
+      height: 55px;
+    }
+
+    .pgs2__icon--arc-right {
+      top: 30px;
+      right: 150px;
+      width: 55px;
+      height: 55px;
+    }
+
+    .pgs2__icon--dot {
+      top: 180px;
+      left: 18%;
+    }
+
+    .pgs2__icon--ring {
+      top: 140px;
+      width: 28px;
+      height: 28px;
+    }
+
+    .pgs2__content {
+      gap: 70px;
+    }
+
+    .pgs2__heading-line1,
+    .pgs2__heading-line2 {
+      font-size: 48px;
+    }
+
+    .pgs2__heading-line2 {
+      padding: 12px 28px;
+    }
+
+    .pgs2__cards {
+      gap: -45px;
+    }
+
+    .pgs2__card {
+      flex: 0 0 340px;
+      max-width: 340px;
+    }
+
+    .pgs2__card--1 {
+      transform: rotate(-7deg);
+      margin-top: 35px;
+    }
+
+    .pgs2__card--3 {
+      transform: rotate(7deg);
+      margin-top: 35px;
+    }
+
+    .pgs2__badge {
+      width: 48px;
+      height: 48px;
+      font-size: 22px;
+      top: -20px;
+      border-radius: 12px;
+    }
+
+    .pgs2__card--1 .pgs2__badge {
+      left: 20px;
+    }
+
+    .pgs2__card--3 .pgs2__badge {
+      right: 20px;
+    }
+
+    .pgs2__card-content {
+      padding: 50px 24px 24px;
+    }
+
+    .pgs2__card-title {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .pgs2__card-desc {
+      font-size: 14px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE DESKTOP (1200px+)
+     ======================================== */
+  @media (min-width: 1200px) {
     .pgs2__corner {
       width: 340px;
       height: 420px;
     }
 
     .pgs2__corner--left {
-      top: -160px;
-      left: -40px;
+      top: -150px;
+      left: -30px;
     }
 
     .pgs2__corner--right {
-      top: -160px;
-      right: -40px;
+      top: -150px;
+      right: -30px;
     }
 
     .pgs2__icon--arc-left {
@@ -507,22 +846,13 @@
       height: 60px;
     }
 
-    .pgs2__icon--dot {
-      top: 200px;
-      left: 280px;
-    }
-
-    .pgs2__icon--ring {
-      top: 160px;
-    }
-
     .pgs2__heading-line1,
     .pgs2__heading-line2 {
       font-size: 52px;
     }
 
     .pgs2__cards {
-      gap: -48px;
+      gap: -55px;
     }
 
     .pgs2__card {
@@ -540,20 +870,12 @@
       margin-top: 40px;
     }
 
-    .pgs2__badge {
-      width: 52px;
-      height: 52px;
-      font-size: 24px;
-      top: -22px;
-      border-radius: 12px;
-    }
-
     .pgs2__card-content {
       padding: 56px 28px 28px;
     }
 
     .pgs2__card-title {
-      font-size: 26px;
+      font-size: 24px;
     }
 
     .pgs2__card-desc {
@@ -562,25 +884,26 @@
   }
 
   /* ========================================
-     RESPONSIVE - LARGE DESKTOP (1400px+)
+     RESPONSIVE - XL DESKTOP (1400px+)
      ======================================== */
   @media (min-width: 1400px) {
     .pgs2 {
-      padding: 120px 64px;
+      padding: 120px 64px 150px;
     }
 
     .pgs2__corner {
       width: 380px;
       height: 460px;
+      border-radius: 20px;
     }
 
     .pgs2__corner--left {
-      top: -180px;
+      top: -170px;
       left: -20px;
     }
 
     .pgs2__corner--right {
-      top: -180px;
+      top: -170px;
       right: -20px;
     }
 
@@ -594,6 +917,15 @@
       right: 220px;
     }
 
+    .pgs2__icon--dot {
+      top: 200px;
+      left: 20%;
+    }
+
+    .pgs2__icon--ring {
+      top: 160px;
+    }
+
     .pgs2__content {
       gap: 80px;
     }
@@ -601,6 +933,10 @@
     .pgs2__heading-line1,
     .pgs2__heading-line2 {
       font-size: 58px;
+    }
+
+    .pgs2__heading-line2 {
+      padding: 14px 32px;
     }
 
     .pgs2__cards {
@@ -612,16 +948,60 @@
       max-width: 420px;
     }
 
+    .pgs2__badge {
+      width: 52px;
+      height: 52px;
+      font-size: 24px;
+      top: -22px;
+    }
+
     .pgs2__card-content {
       padding: 64px 32px 32px;
     }
 
     .pgs2__card-title {
-      font-size: 28px;
+      font-size: 26px;
     }
 
     .pgs2__card-desc {
       font-size: 16px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - XXL DESKTOP (1600px+)
+     ======================================== */
+  @media (min-width: 1600px) {
+    .pgs2__corner {
+      width: 420px;
+      height: 500px;
+    }
+
+    .pgs2__corner--left {
+      top: -190px;
+      left: 0;
+    }
+
+    .pgs2__corner--right {
+      top: -190px;
+      right: 0;
+    }
+
+    .pgs2__icon--arc-left {
+      left: 260px;
+    }
+
+    .pgs2__icon--arc-right {
+      right: 260px;
+    }
+
+    .pgs2__cards {
+      gap: -70px;
+    }
+
+    .pgs2__card {
+      flex: 0 0 450px;
+      max-width: 450px;
     }
   }
 </style>
