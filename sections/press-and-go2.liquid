@@ -639,7 +639,7 @@
       flex-direction: row;
       justify-content: center;
       align-items: flex-start;
-      gap: -30px;
+      gap: 0;
     }
 
     .pgs2__card {
@@ -647,10 +647,11 @@
       max-width: 280px;
     }
 
-    /* Card rotations */
+    /* Card rotations and overlap using negative margins */
     .pgs2__card--1 {
       transform: rotate(-5deg);
       margin-top: 25px;
+      margin-right: -35px;
       z-index: 1;
     }
 
@@ -662,6 +663,7 @@
     .pgs2__card--3 {
       transform: rotate(5deg);
       margin-top: 25px;
+      margin-left: -35px;
       z-index: 2;
     }
 
@@ -764,10 +766,6 @@
       padding: 12px 28px;
     }
 
-    .pgs2__cards {
-      gap: -45px;
-    }
-
     .pgs2__card {
       flex: 0 0 340px;
       max-width: 340px;
@@ -776,11 +774,13 @@
     .pgs2__card--1 {
       transform: rotate(-7deg);
       margin-top: 35px;
+      margin-right: -48px;
     }
 
     .pgs2__card--3 {
       transform: rotate(7deg);
       margin-top: 35px;
+      margin-left: -48px;
     }
 
     .pgs2__badge {
@@ -851,10 +851,6 @@
       font-size: 52px;
     }
 
-    .pgs2__cards {
-      gap: -55px;
-    }
-
     .pgs2__card {
       flex: 0 0 380px;
       max-width: 380px;
@@ -863,11 +859,13 @@
     .pgs2__card--1 {
       transform: rotate(-8deg);
       margin-top: 40px;
+      margin-right: -55px;
     }
 
     .pgs2__card--3 {
       transform: rotate(8deg);
       margin-top: 40px;
+      margin-left: -55px;
     }
 
     .pgs2__card-content {
@@ -939,13 +937,17 @@
       padding: 14px 32px;
     }
 
-    .pgs2__cards {
-      gap: -60px;
-    }
-
     .pgs2__card {
       flex: 0 0 420px;
       max-width: 420px;
+    }
+
+    .pgs2__card--1 {
+      margin-right: -60px;
+    }
+
+    .pgs2__card--3 {
+      margin-left: -60px;
     }
 
     .pgs2__badge {
@@ -995,13 +997,17 @@
       right: 260px;
     }
 
-    .pgs2__cards {
-      gap: -70px;
-    }
-
     .pgs2__card {
       flex: 0 0 450px;
       max-width: 450px;
+    }
+
+    .pgs2__card--1 {
+      margin-right: -70px;
+    }
+
+    .pgs2__card--3 {
+      margin-left: -70px;
     }
   }
 </style>
