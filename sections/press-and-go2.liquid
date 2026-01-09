@@ -9,6 +9,20 @@
     --pgs2-card-bg: {{ section.settings.card_bg_color }};
     --pgs2-badge-bg: {{ section.settings.badge_bg_color }};
     --pgs2-badge-text: {{ section.settings.badge_text_color }};
+    --pgs2-card-radius: {{ section.settings.card_border_radius }}px;
+    --pgs2-badge-radius: {{ section.settings.badge_border_radius }}px;
+    --pgs2-card-rotation: {{ section.settings.card_rotation }}deg;
+    --pgs2-card-overlap: {{ section.settings.card_overlap }}px;
+    {% case section.settings.card_shadow %}
+      {% when 'none' %}
+        --pgs2-card-shadow: none;
+      {% when 'small' %}
+        --pgs2-card-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      {% when 'medium' %}
+        --pgs2-card-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
+      {% when 'large' %}
+        --pgs2-card-shadow: 0 10px 50px rgba(0, 0, 0, 0.12);
+    {% endcase %}
   }
 {% endstyle %}
 
@@ -64,7 +78,13 @@
                 <!-- Badge -->
                 <div class="pgs2__badge">{{ forloop.index }}</div>
 
-                <!-- Image (TOP) -->
+                <!-- Content (TOP) -->
+                <div class="pgs2__card-content">
+                  <h3 class="pgs2__card-title">{{ block.settings.title }}</h3>
+                  <p class="pgs2__card-desc">{{ block.settings.description }}</p>
+                </div>
+
+                <!-- Image (BOTTOM) -->
                 <div class="pgs2__card-image">
                   {% if block.settings.image != blank %}
                     <img
@@ -88,12 +108,6 @@
                       </svg>
                     </div>
                   {% endif %}
-                </div>
-
-                <!-- Content (BOTTOM) -->
-                <div class="pgs2__card-content">
-                  <h3 class="pgs2__card-title">{{ block.settings.title }}</h3>
-                  <p class="pgs2__card-desc">{{ block.settings.description }}</p>
                 </div>
               </div>
             </div>
@@ -297,8 +311,8 @@
     display: flex;
     flex-direction: column;
     background-color: var(--pgs2-card-bg, #ffffff);
-    border-radius: 12px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
+    border-radius: var(--pgs2-card-radius, 16px);
+    box-shadow: var(--pgs2-card-shadow, 0 6px 30px rgba(0, 0, 0, 0.08));
     overflow: hidden;
     height: 100%;
   }
@@ -318,17 +332,23 @@
     color: var(--pgs2-badge-text, #ffffff);
     font-size: 16px;
     font-weight: 700;
-    border-radius: 8px;
+    border-radius: var(--pgs2-badge-radius, 8px);
     z-index: 5;
   }
 
-  /* Card Image (TOP) */
+  /* Card Content (TOP) */
+  .pgs2__card-content {
+    padding: 36px 16px 16px;
+    text-align: center;
+    flex: 0 0 auto;
+  }
+
+  /* Card Image (BOTTOM) */
   .pgs2__card-image {
     position: relative;
     width: 100%;
     flex: 1 1 auto;
     min-height: 180px;
-    border-radius: 12px 12px 0 0;
     overflow: hidden;
   }
 
@@ -353,13 +373,6 @@
   .pgs2__card-placeholder svg {
     width: 50%;
     height: auto;
-  }
-
-  /* Card Content (BOTTOM) */
-  .pgs2__card-content {
-    padding: 16px;
-    text-align: center;
-    flex: 0 0 auto;
   }
 
   .pgs2__card-title {
@@ -642,19 +655,17 @@
     }
 
     .pgs2__card-inner {
-      border-radius: 16px;
       height: 100%;
     }
 
     .pgs2__card-image {
       min-height: 220px;
-      border-radius: 16px 16px 0 0;
     }
 
     /* Card rotations and overlap using negative margins */
     .pgs2__card--1 {
-      transform: rotate(-4deg) !important;
-      margin-right: -25px;
+      transform: rotate(calc(var(--pgs2-card-rotation, 5deg) * -1)) !important;
+      margin-right: calc(var(--pgs2-card-overlap, 35px) * -1);
       z-index: 1;
     }
 
@@ -664,8 +675,8 @@
     }
 
     .pgs2__card--3 {
-      transform: rotate(4deg) !important;
-      margin-left: -25px;
+      transform: rotate(var(--pgs2-card-rotation, 5deg)) !important;
+      margin-left: calc(var(--pgs2-card-overlap, 35px) * -1);
       z-index: 2;
     }
 
@@ -674,11 +685,10 @@
       height: 40px;
       font-size: 18px;
       top: -16px;
-      border-radius: 10px;
     }
 
     .pgs2__card-content {
-      padding: 16px;
+      padding: 40px 16px 16px;
     }
 
     .pgs2__card-title {
@@ -758,23 +768,18 @@
       height: 440px;
     }
 
-    .pgs2__card-inner {
-      border-radius: 18px;
-    }
-
     .pgs2__card-image {
       min-height: 260px;
-      border-radius: 18px 18px 0 0;
     }
 
     .pgs2__card--1 {
-      transform: rotate(-5deg) !important;
-      margin-right: -35px;
+      transform: rotate(calc(var(--pgs2-card-rotation, 5deg) * -1)) !important;
+      margin-right: calc(var(--pgs2-card-overlap, 35px) * -1);
     }
 
     .pgs2__card--3 {
-      transform: rotate(5deg) !important;
-      margin-left: -35px;
+      transform: rotate(var(--pgs2-card-rotation, 5deg)) !important;
+      margin-left: calc(var(--pgs2-card-overlap, 35px) * -1);
     }
 
     .pgs2__badge {
@@ -782,11 +787,10 @@
       height: 44px;
       font-size: 20px;
       top: -18px;
-      border-radius: 10px;
     }
 
     .pgs2__card-content {
-      padding: 20px;
+      padding: 46px 20px 20px;
     }
 
     .pgs2__card-title {
@@ -843,23 +847,18 @@
       height: 480px;
     }
 
-    .pgs2__card-inner {
-      border-radius: 20px;
-    }
-
     .pgs2__card-image {
       min-height: 290px;
-      border-radius: 20px 20px 0 0;
     }
 
     .pgs2__card--1 {
-      transform: rotate(-6deg) !important;
-      margin-right: -40px;
+      transform: rotate(calc(var(--pgs2-card-rotation, 5deg) * -1)) !important;
+      margin-right: calc(var(--pgs2-card-overlap, 35px) * -1);
     }
 
     .pgs2__card--3 {
-      transform: rotate(6deg) !important;
-      margin-left: -40px;
+      transform: rotate(var(--pgs2-card-rotation, 5deg)) !important;
+      margin-left: calc(var(--pgs2-card-overlap, 35px) * -1);
     }
 
     .pgs2__badge {
@@ -870,7 +869,7 @@
     }
 
     .pgs2__card-content {
-      padding: 24px;
+      padding: 50px 24px 24px;
     }
 
     .pgs2__card-title {
@@ -944,23 +943,18 @@
       height: 520px;
     }
 
-    .pgs2__card-inner {
-      border-radius: 22px;
-    }
-
     .pgs2__card-image {
       min-height: 320px;
-      border-radius: 22px 22px 0 0;
     }
 
     .pgs2__card--1 {
-      transform: rotate(-6deg) !important;
-      margin-right: -45px;
+      transform: rotate(calc(var(--pgs2-card-rotation, 5deg) * -1)) !important;
+      margin-right: calc(var(--pgs2-card-overlap, 35px) * -1);
     }
 
     .pgs2__card--3 {
-      transform: rotate(6deg) !important;
-      margin-left: -45px;
+      transform: rotate(var(--pgs2-card-rotation, 5deg)) !important;
+      margin-left: calc(var(--pgs2-card-overlap, 35px) * -1);
     }
 
     .pgs2__badge {
@@ -968,11 +962,10 @@
       height: 48px;
       font-size: 22px;
       top: -20px;
-      border-radius: 12px;
     }
 
     .pgs2__card-content {
-      padding: 28px;
+      padding: 54px 28px 28px;
     }
 
     .pgs2__card-title {
@@ -1017,23 +1010,18 @@
       height: 560px;
     }
 
-    .pgs2__card-inner {
-      border-radius: 24px;
-    }
-
     .pgs2__card-image {
       min-height: 350px;
-      border-radius: 24px 24px 0 0;
     }
 
     .pgs2__card--1 {
-      transform: rotate(-6deg) !important;
-      margin-right: -50px;
+      transform: rotate(calc(var(--pgs2-card-rotation, 5deg) * -1)) !important;
+      margin-right: calc(var(--pgs2-card-overlap, 35px) * -1);
     }
 
     .pgs2__card--3 {
-      transform: rotate(6deg) !important;
-      margin-left: -50px;
+      transform: rotate(var(--pgs2-card-rotation, 5deg)) !important;
+      margin-left: calc(var(--pgs2-card-overlap, 35px) * -1);
     }
 
     .pgs2__badge {
@@ -1044,7 +1032,7 @@
     }
 
     .pgs2__card-content {
-      padding: 32px;
+      padding: 58px 32px 32px;
     }
 
     .pgs2__card-title {
@@ -1142,6 +1130,64 @@
       "id": "badge_text_color",
       "label": "Badge Text Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Card Styling"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card Border Radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_border_radius",
+      "label": "Badge Border Radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "card_shadow",
+      "label": "Card Shadow",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "range",
+      "id": "card_rotation",
+      "label": "Card Rotation (degrees)",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "default": 5,
+      "unit": "°",
+      "info": "Rotation angle for side cards"
+    },
+    {
+      "type": "range",
+      "id": "card_overlap",
+      "label": "Card Overlap",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 35,
+      "unit": "px",
+      "info": "How much cards overlap each other"
     },
     {
       "type": "header",
