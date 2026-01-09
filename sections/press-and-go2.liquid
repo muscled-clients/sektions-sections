@@ -72,10 +72,9 @@
         {% for block in section.blocks %}
           {% if block.type == 'step_card' %}
             <div class="pgs2__card pgs2__card--{{ forloop.index }}" {{ block.shopify_attributes }}>
-              <!-- Badge (outside card-inner to avoid overflow:hidden) -->
-              <div class="pgs2__badge">{{ forloop.index }}</div>
-
               <div class="pgs2__card-inner">
+                <!-- Badge -->
+                <div class="pgs2__badge">{{ forloop.index }}</div>
                 <!-- Content (TOP) -->
                 <div class="pgs2__card-content">
                   <h3 class="pgs2__card-title">{{ block.settings.title }}</h3>
@@ -303,6 +302,7 @@
     position: relative;
     width: 100%;
     max-width: 300px;
+    padding-top: 20px;
   }
 
   .pgs2__card-inner {
@@ -312,15 +312,14 @@
     background-color: var(--pgs2-card-bg, #ffffff);
     border-radius: var(--pgs2-card-radius, 16px);
     box-shadow: var(--pgs2-card-shadow, 0 6px 30px rgba(0, 0, 0, 0.08));
-    overflow: hidden;
+    overflow: visible;
     height: 100%;
-    margin-top: 20px;
   }
 
   /* Badge - Overlaps top edge of card (half in, half out) */
   .pgs2__badge {
     position: absolute;
-    top: 0;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
     width: 40px;
@@ -651,11 +650,11 @@
     .pgs2__card {
       flex: 0 0 260px;
       max-width: 260px;
+      padding-top: 22px;
     }
 
     .pgs2__card-inner {
       height: 380px;
-      margin-top: 22px;
     }
 
     .pgs2__card-image {
@@ -685,6 +684,7 @@
       width: 44px;
       height: 44px;
       font-size: 20px;
+      top: -22px;
     }
 
     .pgs2__card-content {
@@ -765,11 +765,11 @@
     .pgs2__card {
       flex: 0 0 300px;
       max-width: 300px;
+      padding-top: 23px;
     }
 
     .pgs2__card-inner {
       height: 440px;
-      margin-top: 24px;
     }
 
     .pgs2__card-image {
@@ -790,6 +790,7 @@
       width: 46px;
       height: 46px;
       font-size: 21px;
+      top: -23px;
     }
 
     .pgs2__card-content {
@@ -847,11 +848,11 @@
     .pgs2__card {
       flex: 0 0 340px;
       max-width: 340px;
+      padding-top: 24px;
     }
 
     .pgs2__card-inner {
       height: 480px;
-      margin-top: 26px;
     }
 
     .pgs2__card-image {
@@ -872,6 +873,7 @@
       width: 48px;
       height: 48px;
       font-size: 22px;
+      top: -24px;
     }
 
     .pgs2__card-content {
@@ -946,11 +948,11 @@
     .pgs2__card {
       flex: 0 0 380px;
       max-width: 380px;
+      padding-top: 25px;
     }
 
     .pgs2__card-inner {
       height: 520px;
-      margin-top: 28px;
     }
 
     .pgs2__card-image {
@@ -971,6 +973,7 @@
       width: 50px;
       height: 50px;
       font-size: 23px;
+      top: -25px;
     }
 
     .pgs2__card-content {
@@ -1016,11 +1019,11 @@
     .pgs2__card {
       flex: 0 0 400px;
       max-width: 400px;
+      padding-top: 26px;
     }
 
     .pgs2__card-inner {
       height: 560px;
-      margin-top: 30px;
     }
 
     .pgs2__card-image {
@@ -1041,6 +1044,7 @@
       width: 52px;
       height: 52px;
       font-size: 24px;
+      top: -26px;
     }
 
     .pgs2__card-content {
