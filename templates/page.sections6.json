@@ -1401,7 +1401,7 @@
         "button_link": "",
         "background_color": "#ffffff",
         "heading_color": "#1a1a1a",
-        "accent_color": "#00D4D4",
+        "accent_color": "#00d4d4",
         "text_color": "#1a1a1a",
         "subtitle_color": "#888888",
         "button_bg_color": "#1a1a1a",
@@ -1459,6 +1459,59 @@
         "decor_dot_1": "shopify://shop_images/Ellipse_3.svg",
         "decor_dot_2": "shopify://shop_images/Ellipse_4.svg"
       }
+    },
+    "press_and_go2_EPBfMz": {
+      "type": "press-and-go2",
+      "blocks": {
+        "step_card_zQ7zJB": {
+          "type": "step_card",
+          "settings": {
+            "title": "PLACE YOUR TRANSFER",
+            "description": "Position your DTF Sheet on the fabric, print side up. Make sure it's centered and smooth, ready to press.",
+            "image": "shopify://shop_images/37ba289b95b5aef9c2af5e07f49f3582c3bd6d9f.jpg"
+          }
+        },
+        "step_card_EPxmPW": {
+          "type": "step_card",
+          "settings": {
+            "title": "HEAT PRESS",
+            "description": "At 320F° for 100% cotton and At 280F° for polyester or blends for 8 seconds.",
+            "image": "shopify://shop_images/550224eb690e5d751f88528c88982677ffd2bb4e.jpg"
+          }
+        },
+        "step_card_wmkxaR": {
+          "type": "step_card",
+          "settings": {
+            "title": "PEEL DTF SHEET",
+            "description": "Peel while warm for a smooth, clean finish. (Cold peel also works, your call.)",
+            "image": "shopify://shop_images/352e02992b7d516b39908f5b6821c60dfd250236.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "step_card_zQ7zJB",
+        "step_card_EPxmPW",
+        "step_card_wmkxaR"
+      ],
+      "name": "Press & Go Steps V2",
+      "settings": {
+        "subtitle": "",
+        "heading_line1": "HOW IT WORKS",
+        "heading_line2": "JUST PRESS & GO",
+        "background_color": "#F7F7F7",
+        "corner_shape_color": "#EDEDED",
+        "heading_color": "#1a1a1a",
+        "accent_color": "#00D4D4",
+        "text_color": "#666666",
+        "subtitle_color": "#888888",
+        "card_bg_color": "#ffffff",
+        "badge_bg_color": "#1a1a1a",
+        "badge_text_color": "#ffffff",
+        "decor_arc_left": "shopify://shop_images/Ellipse_1.svg",
+        "decor_arc_right": "shopify://shop_images/Ellipse_2.svg",
+        "decor_dot": "shopify://shop_images/Ellipse_4.svg",
+        "decor_ring": "shopify://shop_images/Ellipse_3.svg"
+      }
     }
   },
   "order": [
@@ -1481,6 +1534,7 @@
     "hero2_bzeyWB",
     "why_chosse_us_AC4m9N",
     "feature_highlights_ABmMKC",
-    "press_and_go_xfQLwt"
+    "press_and_go_xfQLwt",
+    "press_and_go2_EPBfMz"
   ]
 }
