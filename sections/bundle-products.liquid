@@ -117,10 +117,10 @@
   }
 
   #shopify-section-{{ section.id }} .product-title {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: {{ section.settings.title_font_weight }};
     margin-bottom: 6px;
-    color: #111827;
+    color: {{ section.settings.title_color }};
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -129,8 +129,8 @@
   }
 
   #shopify-section-{{ section.id }} .product-description {
-    font-size: 13px;
-    color: #6b7280;
+    font-size: {{ section.settings.description_font_size }}px;
+    color: {{ section.settings.description_color }};
     margin-bottom: 8px;
     line-height: 1.4;
     display: -webkit-box;
@@ -141,9 +141,9 @@
   }
 
   #shopify-section-{{ section.id }} .product-price {
-    font-size: 14px;
-    font-weight: 600;
-    color: #111827;
+    font-size: {{ section.settings.price_font_size }}px;
+    font-weight: {{ section.settings.price_font_weight }};
+    color: {{ section.settings.price_color }};
     margin-bottom: 0;
     margin-top: auto;
   }
