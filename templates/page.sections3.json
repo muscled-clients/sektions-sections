@@ -254,12 +254,313 @@
         "padding_top": 40,
         "padding_bottom": 52
       }
+    },
+    "category_circles_nMKA4Q": {
+      "type": "category-circles",
+      "blocks": {
+        "category_PBXjM6": {
+          "type": "category",
+          "settings": {
+            "title": "Furniture",
+            "url": ""
+          }
+        },
+        "category_fC78Dc": {
+          "type": "category",
+          "settings": {
+            "title": "Planters",
+            "url": ""
+          }
+        },
+        "category_kNBAGb": {
+          "type": "category",
+          "settings": {
+            "title": "Outdoor & Garden",
+            "url": ""
+          }
+        },
+        "category_TT9DgR": {
+          "type": "category",
+          "settings": {
+            "title": "Kids",
+            "url": ""
+          }
+        },
+        "category_PYk3aV": {
+          "type": "category",
+          "settings": {
+            "title": "Coffee Accessories",
+            "url": ""
+          }
+        },
+        "category_Dz7TJz": {
+          "type": "category",
+          "settings": {
+            "title": "Knives",
+            "url": ""
+          }
+        },
+        "category_gnxXbG": {
+          "type": "category",
+          "settings": {
+            "title": "Bookends",
+            "url": ""
+          }
+        },
+        "category_zLGh3V": {
+          "type": "category",
+          "settings": {
+            "title": "Canadiana",
+            "url": ""
+          }
+        },
+        "category_jkacAF": {
+          "type": "category",
+          "settings": {
+            "title": "Design icons",
+            "url": ""
+          }
+        },
+        "category_bjnKee": {
+          "type": "category",
+          "settings": {
+            "title": "Limited Editions",
+            "url": ""
+          }
+        },
+        "category_TYe8PA": {
+          "type": "category",
+          "settings": {
+            "title": "Games & Puzzles",
+            "url": ""
+          }
+        },
+        "category_Tk8R7Q": {
+          "type": "category",
+          "settings": {
+            "title": "Sale",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_PBXjM6",
+        "category_fC78Dc",
+        "category_kNBAGb",
+        "category_TT9DgR",
+        "category_PYk3aV",
+        "category_Dz7TJz",
+        "category_gnxXbG",
+        "category_zLGh3V",
+        "category_jkacAF",
+        "category_bjnKee",
+        "category_TYe8PA",
+        "category_Tk8R7Q"
+      ],
+      "name": "Category Circles",
+      "settings": {
+        "heading": "Shop by Category",
+        "columns": 6,
+        "heading_size": 36,
+        "heading_color": "#1a1a1a",
+        "circle_size": 160,
+        "text_size": 16,
+        "text_color": "#333333",
+        "background_color": "#ffffff",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "collections_grid_jrb6tm": {
+      "type": "collections-grid",
+      "blocks": {
+        "collection_8MDAmC": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "title": "Rings"
+          }
+        },
+        "collection_8xptMQ": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "title": "Necklaces"
+          }
+        },
+        "collection_a3Ef6r": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "title": "Engagement"
+          }
+        },
+        "collection_Jnym8t": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "title": "Earrings"
+          }
+        }
+      },
+      "block_order": [
+        "collection_8MDAmC",
+        "collection_8xptMQ",
+        "collection_a3Ef6r",
+        "collection_Jnym8t"
+      ],
+      "name": "Collections Grid",
+      "settings": {
+        "heading": "The Collections",
+        "heading_font": "serif",
+        "heading_size": 42,
+        "heading_color": "#000000",
+        "title_size": 16,
+        "title_color": "#000000",
+        "background_color": "#ffffff",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "faq_accordion_JwVrFy": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_item_iFkt6x": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's the shipping time in US?",
+            "answer": "<p>Typically 3-5 business days depending on location.</p>"
+          }
+        },
+        "faq_item_Bnajj3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where are your products made?",
+            "answer": "<p>All our products are proudly made with quality materials.</p>"
+          }
+        },
+        "faq_item_ECxFq8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is this faq section really free?",
+            "answer": "<p>Yes 100%! I have more sections you can check out.</p>"
+          }
+        },
+        "faq_item_eb3r73": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Who made the FAQ?",
+            "answer": "<p>A developer who loves Shopify and clean design.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_iFkt6x",
+        "faq_item_Bnajj3",
+        "faq_item_ECxFq8",
+        "faq_item_eb3r73"
+      ],
+      "name": "FAQ Accordion",
+      "settings": {
+        "heading": "Most asked questions",
+        "heading_font": "system-ui",
+        "heading_size": 28,
+        "heading_weight": 600,
+        "heading_margin": 40,
+        "question_background": "#9a8b73",
+        "question_hover_background": "#8a7b63",
+        "question_color": "#ffffff",
+        "arrow_color": "#ffffff",
+        "question_font": "system-ui",
+        "question_size": 14,
+        "question_weight": 500,
+        "question_padding_vertical": 18,
+        "question_padding_horizontal": 24,
+        "answer_background": "#ffffff",
+        "answer_color": "#333333",
+        "answer_font": "system-ui",
+        "answer_size": 14,
+        "answer_padding": 24,
+        "container_width": 800,
+        "item_gap": 8,
+        "item_border_radius": 8,
+        "section_background": "#ffffff",
+        "heading_color": "#000000",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "countdown_banner_dNBRiD": {
+      "type": "countdown-banner",
+      "name": "Countdown Banner",
+      "settings": {
+        "max_width": 1400,
+        "border_radius": 16,
+        "min_height_desktop": 500,
+        "min_height_mobile": 400,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "background_color": "#ffffff",
+        "background_image_desktop": "shopify://shop_images/high-fashion-model-in-red.webp",
+        "enable_overlay": true,
+        "overlay_color": "rgba(0, 0, 0, 0.3)",
+        "overlay_opacity": 30,
+        "image_brightness": 100,
+        "heading": "50% off all suits and accessories",
+        "heading_size_desktop": 48,
+        "heading_size_mobile": 32,
+        "heading_weight": "700",
+        "heading_color": "#ffffff",
+        "heading_transform": "none",
+        "heading_margin": 20,
+        "subheading": "",
+        "subheading_size": 18,
+        "subheading_size_mobile": 16,
+        "subheading_color": "#ffffff",
+        "subheading_margin": 30,
+        "button_text": "View Discounted Items",
+        "button_link": "",
+        "button_bg_color": "#ffffff",
+        "button_text_color": "#000000",
+        "button_hover_bg_color": "#f0f0f0",
+        "button_hover_text_color": "#000000",
+        "button_padding_x": 30,
+        "button_padding_y": 12,
+        "button_border_radius": 50,
+        "button_font_size": 16,
+        "button_font_weight": "500",
+        "countdown_end_date": "2025-12-31 23:59:59",
+        "expired_text": "Offer Expired",
+        "countdown_number_size": 48,
+        "countdown_number_size_mobile": 36,
+        "countdown_number_color": "#ffffff",
+        "countdown_number_weight": 300,
+        "countdown_label_size": 12,
+        "countdown_label_size_mobile": 10,
+        "countdown_label_color": "#ffffff",
+        "days_label": "DAYS",
+        "hours_label": "HOURS",
+        "minutes_label": "MINUTES",
+        "seconds_label": "SECONDS",
+        "expired_text_color": "#ffffff",
+        "countdown_separator_color": "#ffffff",
+        "countdown_separator_opacity": 50,
+        "countdown_separator_thickness": 1,
+        "countdown_spacing": 30,
+        "countdown_spacing_mobile": 20,
+        "separator_margin": 20,
+        "separator_margin_mobile": 13
+      }
     }
   },
   "order": [
     "main",
     "hero_38_1_XCC6VW",
     "hero_38_2_gfjWNP",
-    "hero_38_3_zxy9kq"
+    "hero_38_3_zxy9kq",
+    "category_circles_nMKA4Q",
+    "collections_grid_jrb6tm",
+    "faq_accordion_JwVrFy",
+    "countdown_banner_dNBRiD"
   ]
 }
