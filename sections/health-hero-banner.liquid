@@ -238,11 +238,12 @@
   /* Mobile responsive */
   @media screen and (max-width: 768px) {
     #health-hero-{{ section.id }} {
-      padding: {{ section.settings.mobile_padding_top }}px {{ section.settings.mobile_padding_horizontal }}px {{ section.settings.mobile_padding_bottom }}px {{ section.settings.mobile_padding_horizontal }}px;
+      padding: {{ section.settings.mobile_padding_top }}px {{ section.settings.mobile_padding_horizontal }}px 0 {{ section.settings.mobile_padding_horizontal }}px;
     }
 
     #health-hero-{{ section.id }} .hero-container {
-      padding-bottom: 0 !important;
+      padding-bottom: 80px;
+      position: relative;
     }
 
     #health-hero-{{ section.id }} .hero-wrapper {
@@ -263,7 +264,7 @@
       max-width: none;
       top: {{ section.settings.mobile_content_top_position }}px;
       transform: none;
-      padding-bottom: 120px;
+      padding-bottom: 100px;
     }
 
     #health-hero-{{ section.id }} .hero-heading {
@@ -281,11 +282,10 @@
     }
 
     #health-hero-{{ section.id }} .cards-container {
-      position: relative;
-      bottom: auto;
-      left: auto;
-      right: auto;
-      transform: none;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -295,7 +295,6 @@
       z-index: 2;
       box-sizing: border-box;
       padding: 0 {{ section.settings.mobile_cards_horizontal_margin }}px;
-      margin-top: -72px;
     }
 
     #health-hero-{{ section.id }} .info-card {
