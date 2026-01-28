@@ -3,7 +3,7 @@
 <style>
   #collection-carousel-{{ section.id }} {
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
-    background-color: #ffffff;
+    background-color: {{ section.settings.background_color }};
     overflow: hidden;
   }
 
@@ -87,9 +87,9 @@
   }
 
   #collection-carousel-{{ section.id }} .card-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #ffffff;
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: {{ section.settings.title_font_weight }};
+    color: {{ section.settings.title_color }};
     text-align: center;
     margin: 0;
     padding: 12px 24px;
@@ -211,7 +211,7 @@
     }
 
     #collection-carousel-{{ section.id }} .card-title {
-      font-size: 20px;
+      font-size: {{ section.settings.title_font_size | minus: 4 }}px;
       padding: 10px 18px;
     }
 
@@ -253,8 +253,10 @@
         {% endfor %}
       </div>
 
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      {% if section.settings.show_arrows %}
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      {% endif %}
     </div>
   </div>
 </section>
