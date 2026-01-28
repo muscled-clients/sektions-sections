@@ -3,7 +3,7 @@
 <style>
   #collection-carousel-{{ section.id }} {
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
-    background-color: {{ section.settings.background_color }};
+    background-color: #ffffff;
     overflow: hidden;
   }
 
@@ -87,9 +87,9 @@
   }
 
   #collection-carousel-{{ section.id }} .card-title {
-    font-size: {{ section.settings.title_font_size }}px;
-    font-weight: {{ section.settings.title_font_weight }};
-    color: {{ section.settings.title_color }};
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
     text-align: center;
     margin: 0;
     padding: 12px 24px;
@@ -211,7 +211,7 @@
     }
 
     #collection-carousel-{{ section.id }} .card-title {
-      font-size: {{ section.settings.title_font_size | minus: 4 }}px;
+      font-size: 20px;
       padding: 10px 18px;
     }
 
@@ -253,87 +253,124 @@
         {% endfor %}
       </div>
 
-      {% if section.settings.show_arrows %}
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      {% endif %}
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
   </div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const swiperEl = document.querySelector('.swiper-{{ section.id }}');
-    const slides = Array.from(swiperEl.querySelectorAll('.swiper-slide'));
-    const totalSlides = slides.length;
+  (function() {
+    let swiperInstance = null;
 
-    // Clone slides multiple times to ensure smooth looping
-    const wrapper = swiperEl.querySelector('.swiper-wrapper');
+    function initSwiper() {
+      const swiperEl = document.querySelector('.swiper-{{ section.id }}');
+      if (!swiperEl) return;
 
-    // Add clones before (in reverse order to maintain sequence)
-    for (let i = 0; i < 5; i++) {
-      for (let j = slides.length - 1; j >= 0; j--) {
-        const clone = slides[j].cloneNode(true);
-        wrapper.insertBefore(clone, wrapper.firstChild);
+      // Destroy existing swiper instance if it exists
+      if (swiperInstance) {
+        swiperInstance.destroy(true, true);
+        swiperInstance = null;
       }
-    }
 
-    // Add clones after
-    for (let i = 0; i < 5; i++) {
-      slides.forEach(function(slide) {
-        const clone = slide.cloneNode(true);
-        wrapper.appendChild(clone);
+      // Reset wrapper to original slides only
+      const wrapper = swiperEl.querySelector('.swiper-wrapper');
+      const allSlides = Array.from(wrapper.querySelectorAll('.swiper-slide'));
+
+      // Keep only original slides (remove clones if any exist from previous init)
+      const originalSlides = allSlides.filter(slide => !slide.classList.contains('swiper-slide-clone'));
+      const slides = originalSlides.length > 0 ? originalSlides : allSlides;
+      const totalSlides = slides.length;
+
+      if (totalSlides === 0) return;
+
+      // Clear wrapper and re-add original slides
+      wrapper.innerHTML = '';
+      slides.forEach(slide => {
+        slide.classList.remove('swiper-slide-clone');
+        wrapper.appendChild(slide.cloneNode(true));
+      });
+
+      // Get fresh reference to slides
+      const freshSlides = Array.from(wrapper.querySelectorAll('.swiper-slide'));
+
+      // Add clones before (in reverse order to maintain sequence)
+      for (let i = 0; i < 5; i++) {
+        for (let j = freshSlides.length - 1; j >= 0; j--) {
+          const clone = freshSlides[j].cloneNode(true);
+          clone.classList.add('swiper-slide-clone');
+          wrapper.insertBefore(clone, wrapper.firstChild);
+        }
+      }
+
+      // Add clones after
+      for (let i = 0; i < 5; i++) {
+        freshSlides.forEach(function(slide) {
+          const clone = slide.cloneNode(true);
+          clone.classList.add('swiper-slide-clone');
+          wrapper.appendChild(clone);
+        });
+      }
+
+      let isResetting = false;
+
+      swiperInstance = new Swiper('.swiper-{{ section.id }}', {
+        slidesPerView: 'auto',
+        spaceBetween: {{ section.settings.space_between }},
+        centeredSlides: true,
+        speed: {{ section.settings.transition_speed }},
+        slideToClickedSlide: true,
+        initialSlide: totalSlides * 5,
+        {% if section.settings.autoplay %}
+        autoplay: {
+          delay: {{ section.settings.autoplay_delay }},
+          disableOnInteraction: false,
+        },
+        {% endif %}
+        navigation: {
+          nextEl: '#collection-carousel-{{ section.id }} .swiper-button-next',
+          prevEl: '#collection-carousel-{{ section.id }} .swiper-button-prev',
+        },
+        on: {
+          slideChangeTransitionEnd: function() {
+            if (isResetting) return;
+
+            const currentIndex = this.activeIndex;
+            const realIndex = currentIndex % totalSlides;
+
+            // Reset position when going backwards - trigger earlier for smoother reset
+            if (currentIndex < totalSlides * 2) {
+              isResetting = true;
+              setTimeout(() => {
+                this.slideTo(totalSlides * 5 + realIndex, 0, false);
+                setTimeout(() => { isResetting = false; }, 100);
+              }, 10);
+            }
+
+            // Reset position when going forwards - trigger earlier for smoother reset
+            if (currentIndex >= totalSlides * 9) {
+              isResetting = true;
+              setTimeout(() => {
+                this.slideTo(totalSlides * 5 + realIndex, 0, false);
+                setTimeout(() => { isResetting = false; }, 100);
+              }, 10);
+            }
+          }
+        }
       });
     }
 
-    let isResetting = false;
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initSwiper);
 
-    const swiper = new Swiper('.swiper-{{ section.id }}', {
-      slidesPerView: 'auto',
-      spaceBetween: {{ section.settings.space_between }},
-      centeredSlides: true,
-      speed: {{ section.settings.transition_speed }},
-      slideToClickedSlide: true,
-      initialSlide: totalSlides * 5,
-      {% if section.settings.autoplay %}
-      autoplay: {
-        delay: {{ section.settings.autoplay_delay }},
-        disableOnInteraction: false,
-      },
-      {% endif %}
-      navigation: {
-        nextEl: '#collection-carousel-{{ section.id }} .swiper-button-next',
-        prevEl: '#collection-carousel-{{ section.id }} .swiper-button-prev',
-      },
-      on: {
-        slideChangeTransitionEnd: function() {
-          if (isResetting) return;
-
-          const currentIndex = this.activeIndex;
-          const realIndex = currentIndex % totalSlides;
-
-          // Reset position when going backwards - trigger earlier for smoother reset
-          if (currentIndex < totalSlides * 2) {
-            isResetting = true;
-            setTimeout(() => {
-              this.slideTo(totalSlides * 5 + realIndex, 0, false);
-              setTimeout(() => { isResetting = false; }, 100);
-            }, 10);
-          }
-
-          // Reset position when going forwards - trigger earlier for smoother reset
-          if (currentIndex >= totalSlides * 9) {
-            isResetting = true;
-            setTimeout(() => {
-              this.slideTo(totalSlides * 5 + realIndex, 0, false);
-              setTimeout(() => { isResetting = false; }, 100);
-            }, 10);
-          }
-        }
+    // Re-initialize when section is reloaded in theme editor
+    document.addEventListener('shopify:section:load', function(event) {
+      if (event.target.querySelector('#collection-carousel-{{ section.id }}')) {
+        setTimeout(initSwiper, 100);
       }
     });
-  });
+  })();
 </script>
 
 {% schema %}
