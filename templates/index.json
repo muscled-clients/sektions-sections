@@ -76,62 +76,6 @@
         "padding_bottom": 36
       }
     },
-    "featured_pairs_XMBXng": {
-      "type": "featured-pairs",
-      "blocks": {
-        "feature_card_bWFJbt": {
-          "type": "feature_card",
-          "settings": {
-            "image": "shopify://shop_images/Detox_fddc584f-b649-4eee-b6b7-4b32b3feb8f0.webp",
-            "image_alt": "",
-            "aspect_ratio": "natural",
-            "show_shadow": false,
-            "eyebrow": "Bright. Light. Fruity.",
-            "title": "Super Detox Smoothies",
-            "link_url": "#",
-            "link_aria_label": "",
-            "make_card_clickable": false,
-            "eyebrow_color": "",
-            "title_color": "",
-            "card_bg": "rgba(0,0,0,0)"
-          }
-        },
-        "feature_card_tmUdrY": {
-          "type": "feature_card",
-          "settings": {
-            "image": "shopify://shop_images/Energy_boosting.webp",
-            "image_alt": "",
-            "aspect_ratio": "natural",
-            "show_shadow": false,
-            "eyebrow": "Cleansing. Refreshing. Flavourful.",
-            "title": "Energy Boosting Smoothies",
-            "link_url": "#",
-            "link_aria_label": "",
-            "make_card_clickable": false,
-            "eyebrow_color": "",
-            "title_color": "",
-            "card_bg": "rgba(0,0,0,0)"
-          }
-        }
-      },
-      "block_order": [
-        "feature_card_bWFJbt",
-        "feature_card_tmUdrY"
-      ],
-      "name": "Featured Pairs",
-      "settings": {
-        "eyebrow_font_size": 15,
-        "heading_font_size": 34,
-        "text_align": "center",
-        "container_width": "1280",
-        "gap_desktop": 32,
-        "gap_mobile": 16,
-        "pad_top": 60,
-        "pad_bottom": 60,
-        "pad_side": 20,
-        "show_divider": false
-      }
-    },
     "hero_background_split_jw9Pig": {
       "type": "hero-background-split",
       "name": "Hero Background Split",
@@ -267,35 +211,6 @@
         "border_radius": 8,
         "padding_top": 40,
         "padding_bottom": 40
-      }
-    },
-    "bestsellers_grid_wcnVFP": {
-      "type": "bestsellers-grid",
-      "name": "Bestsellers Grid",
-      "settings": {
-        "heading": "Bestsellers",
-        "cta_label": "SHOP NEW ARRIVALS",
-        "cta_link": "",
-        "source": "products",
-        "collection": "",
-        "products": [
-          "cleansing-body-gel",
-          "renewal-face-cream",
-          "nourishing-hair-repair-mask",
-          "eye-treatment"
-        ],
-        "products_to_show": 4,
-        "show_vendor": false,
-        "show_price": true,
-        "show_quick_view": true,
-        "show_dots": true,
-        "title_font_size": 15,
-        "price_font_size": 14,
-        "quick_view_font_size": 11,
-        "quick_view_font_weight": 400,
-        "quick_view_letter_spacing": 10,
-        "quick_view_opacity": 70,
-        "quick_view_margin_top": 8
       }
     },
     "hotspot_hero_UrRMiz": {
@@ -576,82 +491,6 @@
         "border_width": 1,
         "border_color": "#000000",
         "background_color": "#ffffff"
-      }
-    },
-    "faq_accordion_VKYyzi": {
-      "type": "faq-accordion",
-      "blocks": {
-        "faq_rjeJfM": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What's the shipping time?",
-            "answer": "<p>Typically 3-5 business days depending on location.</p>"
-          }
-        },
-        "faq_GFJTVg": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What's the shipping time in US?",
-            "answer": "<p>Typically 3-5 business days depending on location.</p>"
-          }
-        },
-        "faq_MRGUwF": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Where are your products made?",
-            "answer": "<p>All our products are proudly made with quality materials.</p>"
-          }
-        },
-        "faq_7BFUT9": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Is this faq section really free?",
-            "answer": "<p>Yes 100%! I have more sections you can check out.</p>"
-          }
-        },
-        "faq_e9NRtc": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Who made the FAQ?",
-            "answer": "<p>A developer who loves Shopify and clean design.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "faq_rjeJfM",
-        "faq_GFJTVg",
-        "faq_MRGUwF",
-        "faq_7BFUT9",
-        "faq_e9NRtc"
-      ],
-      "name": "FAQ Accordion",
-      "settings": {
-        "heading": "Most asked questions",
-        "heading_font": "system-ui",
-        "heading_size": 28,
-        "heading_weight": 600,
-        "heading_margin": 40,
-        "question_background": "#d4cba6",
-        "question_hover_background": "#d4cba6",
-        "question_color": "#ffffff",
-        "arrow_color": "#ffffff",
-        "question_font": "system-ui",
-        "question_size": 14,
-        "question_weight": 500,
-        "question_padding_vertical": 18,
-        "question_padding_horizontal": 24,
-        "answer_background": "#ffffff",
-        "answer_color": "#121212",
-        "answer_font": "system-ui",
-        "answer_size": 14,
-        "answer_padding": 24,
-        "container_width": 800,
-        "item_gap": 8,
-        "item_border_radius": 8,
-        "section_background": "#ffffff",
-        "heading_color": "#333333",
-        "padding_top": 50,
-        "padding_bottom": 50
       }
     },
     "comfort_features_byGWX8": {
@@ -1093,16 +932,13 @@
   "order": [
     "image_banner",
     "featured_collection",
-    "featured_pairs_XMBXng",
     "hero_background_split_jw9Pig",
     "category_slider_4h7k3e",
     "before_after_slider_QerQyQ",
-    "bestsellers_grid_wcnVFP",
     "hotspot_hero_UrRMiz",
     "testimonials_slider_NExgjY",
     "trustpilot_reviews_GCjcCL",
     "scrolling_images_xjDw6k",
-    "faq_accordion_VKYyzi",
     "comfort_features_byGWX8",
     "bundle_builder_Dgd4UJ",
     "bundle_products_HmUWWr",
