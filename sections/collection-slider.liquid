@@ -18,9 +18,9 @@
   }
 
   #collection-slider-{{ section.id }} .section-heading {
-    font-size: 42px;
+    font-size: {{ section.settings.heading_size }}px;
     font-weight: 700;
-    color: #000000;
+    color: {{ section.settings.heading_color }};
     margin: 0 0 10px 0;
     line-height: 1.2;
   }
@@ -28,7 +28,7 @@
   #collection-slider-{{ section.id }} .section-subheading {
     font-size: {{ section.settings.subheading_size }}px;
     font-weight: 400;
-    color: #666666;
+    color: {{ section.settings.subheading_color }};
     margin: 0;
     line-height: 1.4;
   }
@@ -215,7 +215,7 @@
     }
 
     #collection-slider-{{ section.id }} .section-heading {
-      font-size: 34px;
+      font-size: {{ section.settings.heading_size | minus: 8 }}px;
       word-break: break-word;
     }
 
@@ -256,7 +256,7 @@
 
   @media (max-width: 480px) {
     #collection-slider-{{ section.id }} .section-heading {
-      font-size: 28px;
+      font-size: {{ section.settings.heading_size | minus: 14 }}px;
     }
 
     #collection-slider-{{ section.id }} .slide-card {
@@ -311,7 +311,7 @@
                     <p class="slide-card-label">{{ block.settings.label }}</p>
                   {% endif %}
                   {% if block.settings.title != blank %}
-                    <h3 class="slide-card-title" style="color: {{ block.settings.title_color }}; font-size: {{ block.settings.title_size }}px; font-weight: 700;">{{ block.settings.title }}</h3>
+                    <h3 class="slide-card-title" style="color: {{ block.settings.title_color }}; font-size: {{ block.settings.title_size }}px; font-weight: {{ block.settings.title_weight }};">{{ block.settings.title }}</h3>
                   {% endif %}
                 </div>
 
@@ -458,7 +458,7 @@
 
     // Auto slide functionality
     const autoSlideEnabled = {{ section.settings.enable_autoplay | default: true }};
-    const autoSlideSpeed = 3000;
+    const autoSlideSpeed = {{ section.settings.autoplay_speed }};
 
     function startAutoSlide() {
       if (!autoSlideEnabled) return;
