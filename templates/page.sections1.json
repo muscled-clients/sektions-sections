@@ -622,38 +622,6 @@
         "image_4_link": ""
       }
     },
-    "product_gallery_f8wrz6": {
-      "type": "product-gallery",
-      "name": "Product Gallery",
-      "settings": {
-        "heading": "Discover our most popular products",
-        "subheading": "Make sure to tag @section.saver on Instagram to be featured in our gallery!",
-        "max_width": "100%",
-        "padding_top": 60,
-        "padding_bottom": 60,
-        "image_1": "shopify://shop_images/1_b84c421f-9bc0-4631-9c8a-286858f7e651.webp",
-        "link_1": "",
-        "alt_1": "",
-        "image_2": "shopify://shop_images/3_a852f79c-ffd8-4c11-a334-c473117774b2.webp",
-        "link_2": "",
-        "alt_2": "",
-        "image_3": "shopify://shop_images/8_7e199b32-7d43-4bf1-b41c-ebb0e95328db.webp",
-        "link_3": "",
-        "alt_3": "",
-        "image_4": "shopify://shop_images/5_6f55f3ed-2101-4419-999a-3a3cadbe5895.webp",
-        "link_4": "",
-        "alt_4": "",
-        "image_5": "shopify://shop_images/4_ab74c7d5-27af-4d01-ae0c-34425a44e8df.webp",
-        "link_5": "",
-        "alt_5": "",
-        "image_6": "shopify://shop_images/3_5320173f-3d53-4a50-b8a4-52663baaa4b7.webp",
-        "link_6": "",
-        "alt_6": "",
-        "image_7": "shopify://shop_images/4_87ce220e-8931-4a1a-91fa-5337c072430c.webp",
-        "link_7": "",
-        "alt_7": ""
-      }
-    },
     "handmade_ceramics_GY78pt": {
       "type": "handmade-ceramics",
       "name": "Handmade Ceramics",
@@ -732,6 +700,38 @@
         "mobile_heading_margin": 16,
         "mobile_description_size": 15,
         "mobile_description_margin": 20
+      }
+    },
+    "product_gallery_f8wrz6": {
+      "type": "product-gallery",
+      "name": "Product Gallery",
+      "settings": {
+        "heading": "Discover our most popular products",
+        "subheading": "Make sure to tag @section.saver on Instagram to be featured in our gallery!",
+        "max_width": "100%",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "image_1": "shopify://shop_images/1_b84c421f-9bc0-4631-9c8a-286858f7e651.webp",
+        "link_1": "",
+        "alt_1": "",
+        "image_2": "shopify://shop_images/3_a852f79c-ffd8-4c11-a334-c473117774b2.webp",
+        "link_2": "",
+        "alt_2": "",
+        "image_3": "shopify://shop_images/8_7e199b32-7d43-4bf1-b41c-ebb0e95328db.webp",
+        "link_3": "",
+        "alt_3": "",
+        "image_4": "shopify://shop_images/5_6f55f3ed-2101-4419-999a-3a3cadbe5895.webp",
+        "link_4": "",
+        "alt_4": "",
+        "image_5": "shopify://shop_images/4_ab74c7d5-27af-4d01-ae0c-34425a44e8df.webp",
+        "link_5": "",
+        "alt_5": "",
+        "image_6": "shopify://shop_images/3_5320173f-3d53-4a50-b8a4-52663baaa4b7.webp",
+        "link_6": "",
+        "alt_6": "",
+        "image_7": "shopify://shop_images/4_87ce220e-8931-4a1a-91fa-5337c072430c.webp",
+        "link_7": "",
+        "alt_7": ""
       }
     },
     "sliding_announcement_bar_QTNJmp": {
@@ -836,47 +836,6 @@
         "slide_transition_speed": 500
       }
     },
-    "cyber_monday_sale_hRnGmh": {
-      "type": "cyber-monday-sale",
-      "name": "Cyber Monday Sale",
-      "settings": {
-        "background_image": "shopify://shop_images/theme_cover_image.jpg",
-        "section_height": 600,
-        "overlay_max_width": 900,
-        "overlay_bg_r": 50,
-        "overlay_bg_g": 60,
-        "overlay_bg_b": 65,
-        "overlay_bg_opacity": 55,
-        "sale_title": "Cyber Monday Sale",
-        "title_color": "#ffffff",
-        "title_font_size": 42,
-        "sale_subheading": "Get your offer before the sale ends in",
-        "subheading_color": "#e0e0e0",
-        "subheading_font_size": 15,
-        "end_date": "Dec 31, 2025 23:59:59",
-        "timer_background": "#ffeb94",
-        "timer_number_color": "#000000",
-        "timer_number_size": 48,
-        "timer_label_color": "#333333",
-        "timer_label_size": 13,
-        "timer_padding_vertical": 30,
-        "timer_padding_horizontal": 20,
-        "timer_inner_border_color": "#d4af37",
-        "timer_inner_border_width": 3,
-        "timer_margin_horizontal": 25,
-        "timer_border_radius": 8,
-        "sale_description": "Grab premium quality at unbeatable prices. Don't miss out, offer ends when the timer hits zero! Sale will ends soon!",
-        "description_color": "#d0d0d0",
-        "description_font_size": 14,
-        "button_text": "Shop now",
-        "button_link": "",
-        "button_border_color": "#ffffff",
-        "button_text_color": "#ffffff",
-        "button_font_size": 15,
-        "button_hover_bg": "#ffffff",
-        "button_hover_text": "#000000"
-      }
-    },
     "collection_carousel_dAyamn": {
       "type": "collection-carousel",
       "blocks": {
@@ -968,6 +927,47 @@
         "autoplay": false,
         "autoplay_delay": 3000,
         "transition_speed": 600
+      }
+    },
+    "cyber_monday_sale_hRnGmh": {
+      "type": "cyber-monday-sale",
+      "name": "Cyber Monday Sale",
+      "settings": {
+        "background_image": "shopify://shop_images/theme_cover_image.jpg",
+        "section_height": 600,
+        "overlay_max_width": 900,
+        "overlay_bg_r": 50,
+        "overlay_bg_g": 60,
+        "overlay_bg_b": 65,
+        "overlay_bg_opacity": 55,
+        "sale_title": "Cyber Monday Sale",
+        "title_color": "#ffffff",
+        "title_font_size": 42,
+        "sale_subheading": "Get your offer before the sale ends in",
+        "subheading_color": "#e0e0e0",
+        "subheading_font_size": 15,
+        "end_date": "Dec 31, 2025 23:59:59",
+        "timer_background": "#ffeb94",
+        "timer_number_color": "#000000",
+        "timer_number_size": 48,
+        "timer_label_color": "#333333",
+        "timer_label_size": 13,
+        "timer_padding_vertical": 30,
+        "timer_padding_horizontal": 20,
+        "timer_inner_border_color": "#d4af37",
+        "timer_inner_border_width": 3,
+        "timer_margin_horizontal": 25,
+        "timer_border_radius": 8,
+        "sale_description": "Grab premium quality at unbeatable prices. Don't miss out, offer ends when the timer hits zero! Sale will ends soon!",
+        "description_color": "#d0d0d0",
+        "description_font_size": 14,
+        "button_text": "Shop now",
+        "button_link": "",
+        "button_border_color": "#ffffff",
+        "button_text_color": "#ffffff",
+        "button_font_size": 15,
+        "button_hover_bg": "#ffffff",
+        "button_hover_text": "#000000"
       }
     },
     "popular_products_grid_kJbPbN": {
@@ -1108,7 +1108,7 @@
         "background_color": "#ffffff",
         "padding_top": 60,
         "padding_bottom": 60,
-        "enable_autoplay": true,
+        "enable_autoplay": false,
         "autoplay_speed": 1500
       }
     },
@@ -1142,7 +1142,7 @@
       "name": "Perfect Regimen Hero",
       "settings": {
         "section_height_desktop": 100,
-        "section_height_tablet": 70,
+        "section_height_tablet": 100,
         "section_height_mobile": 90,
         "border_radius": 25,
         "overlay_opacity": 15,
