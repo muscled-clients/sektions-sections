@@ -688,6 +688,62 @@
         "quick_view_opacity": 70,
         "quick_view_margin_top": 8
       }
+    },
+    "featured_pairs_aHrhLd": {
+      "type": "featured-pairs",
+      "blocks": {
+        "feature_card_pJfFVr": {
+          "type": "feature_card",
+          "settings": {
+            "image": "shopify://shop_images/Detox_fddc584f-b649-4eee-b6b7-4b32b3feb8f0.webp",
+            "image_alt": "",
+            "aspect_ratio": "natural",
+            "show_shadow": false,
+            "eyebrow": "Bright. Light. Fruity.",
+            "title": "Super Detox Smoothies",
+            "link_url": "",
+            "link_aria_label": "",
+            "make_card_clickable": false,
+            "eyebrow_color": "",
+            "title_color": "",
+            "card_bg": "transparent"
+          }
+        },
+        "feature_card_c3D9az": {
+          "type": "feature_card",
+          "settings": {
+            "image": "shopify://shop_images/Energy_boosting.webp",
+            "image_alt": "",
+            "aspect_ratio": "natural",
+            "show_shadow": false,
+            "eyebrow": "Cleansing. Refreshing. Flavourful.",
+            "title": "Energy Boosting Smoothies",
+            "link_url": "",
+            "link_aria_label": "",
+            "make_card_clickable": false,
+            "eyebrow_color": "",
+            "title_color": "",
+            "card_bg": "transparent"
+          }
+        }
+      },
+      "block_order": [
+        "feature_card_pJfFVr",
+        "feature_card_c3D9az"
+      ],
+      "name": "Featured Pairs",
+      "settings": {
+        "eyebrow_font_size": 14,
+        "heading_font_size": 24,
+        "text_align": "center",
+        "container_width": "1280",
+        "gap_desktop": 32,
+        "gap_mobile": 16,
+        "pad_top": 60,
+        "pad_bottom": 60,
+        "pad_side": 20,
+        "show_divider": false
+      }
     }
   },
   "order": [
@@ -700,6 +756,7 @@
     "faq_accordion_JwVrFy",
     "countdown_banner_dNBRiD",
     "feature_blocks_icons_fHMWkC",
-    "bestsellers_grid_yBnzNK"
+    "bestsellers_grid_yBnzNK",
+    "featured_pairs_aHrhLd"
   ]
 }
