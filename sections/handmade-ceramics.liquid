@@ -1,6 +1,6 @@
 <style>
   #handmade-ceramics-{{ section.id }} {
-    background-color: #ffffff;
+    background-color: {{ section.settings.background_color }};
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
     max-width: 100%;
     overflow-x: hidden;
@@ -120,18 +120,18 @@
   }
 
   #handmade-ceramics-{{ section.id }} .ceramics-heading {
-    font-size: 36px;
+    font-size: {{ section.settings.heading_size }}px;
     font-weight: {{ section.settings.heading_weight }};
-    color: #1a1a1a;
+    color: {{ section.settings.heading_color }};
     margin-bottom: {{ section.settings.heading_margin_bottom }}px;
     line-height: {{ section.settings.heading_line_height }};
     font-family: {{ section.settings.heading_font_family }};
   }
 
   #handmade-ceramics-{{ section.id }} .ceramics-description {
-    font-size: 16px;
+    font-size: {{ section.settings.description_size }}px;
     line-height: {{ section.settings.description_line_height }};
-    color: #666666;
+    color: {{ section.settings.description_color }};
     margin-bottom: {{ section.settings.description_margin_bottom }}px;
   }
 
