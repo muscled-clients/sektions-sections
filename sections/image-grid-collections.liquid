@@ -41,8 +41,8 @@
 
 <style>
 .image-grid-collections {
-  padding: 60px 0;
-  background: #ffffff;
+  padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.background_color }};
 }
 
 .page-width {
@@ -53,10 +53,10 @@
 
 .image-grid-collections__heading {
   text-align: center;
-  font-size: 32px;
-  font-weight: 700;
-  margin: 0 0 40px;
-  color: #000000;
+  font-size: {{ section.settings.heading_size }}px;
+  font-weight: {{ section.settings.heading_weight }};
+  margin: 0 0 {{ section.settings.heading_margin_bottom }}px;
+  color: {{ section.settings.heading_color }};
   text-transform: capitalize;
 }
 
@@ -125,8 +125,8 @@
   position: absolute;
   bottom: 15px;
   left: 15px;
-  color: #ffffff;
-  font-size: 12px;
+  color: {{ section.settings.label_color }};
+  font-size: {{ section.settings.label_size }}px;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -154,12 +154,12 @@
 /* Mobile Layout (<768px) */
 @media screen and (max-width: 767px) {
   .image-grid-collections {
-    padding: 40px 0;
+    padding: calc({{ section.settings.padding_top }}px * 0.67) 0 calc({{ section.settings.padding_bottom }}px * 0.67);
   }
 
   .image-grid-collections__heading {
-    font-size: 24px;
-    margin-bottom: 30px;
+    font-size: calc({{ section.settings.heading_size }}px * 0.75);
+    margin-bottom: calc({{ section.settings.heading_margin_bottom }}px * 0.75);
   }
 
   .image-grid-collections__grid {
@@ -191,7 +191,7 @@
   }
 
   .image-grid-collections__label {
-    font-size: 10px;
+    font-size: calc({{ section.settings.label_size }}px * 0.83);
     bottom: 10px;
     left: 10px;
   }
@@ -204,8 +204,8 @@
   }
 
   .image-grid-collections__heading {
-    font-size: 20px;
-    margin-bottom: 20px;
+    font-size: calc({{ section.settings.heading_size }}px * 0.625);
+    margin-bottom: calc({{ section.settings.heading_margin_bottom }}px * 0.5);
   }
 
   .image-grid-collections__grid {
@@ -226,6 +226,98 @@
       "id": "heading",
       "label": "Section Heading",
       "default": "Image Grid Collections"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Heading Style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading Weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Space Below Heading",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Label Style"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "label": "Label Size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#ffffff"
     },
     {
       "type": "header",

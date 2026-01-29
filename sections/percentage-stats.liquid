@@ -46,7 +46,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #9B8B7E;
+    color: {{ section.settings.title_color }};
     margin-bottom: 50px;
     text-align: left;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -74,7 +74,7 @@
     width: 1px;
     min-width: 1px;
     height: 80px;
-    background-color: #000000;
+    background-color: {{ section.settings.divider_color }};
     flex-shrink: 0;
     display: block;
   }
@@ -88,7 +88,7 @@
   #percentage-stats-{{ section.id }} .percentage-stat-number {
     font-size: {{ section.settings.percentage_size }}px;
     font-weight: {{ section.settings.percentage_weight }};
-    color: #2e402d;
+    color: {{ section.settings.percentage_color }};
     line-height: 1;
     letter-spacing: -2px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -97,7 +97,7 @@
   #percentage-stats-{{ section.id }} .percentage-stat-symbol {
     font-size: {{ section.settings.percentage_size }}px;
     font-weight: {{ section.settings.percentage_weight }};
-    color: #2e402d;
+    color: {{ section.settings.percentage_color }};
     margin-left: 2px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
@@ -105,7 +105,7 @@
   #percentage-stats-{{ section.id }} .percentage-stat-description {
     font-size: {{ section.settings.description_size }}px;
     line-height: 1.4;
-    color: #2e402d;
+    color: {{ section.settings.description_color }};
     margin: 0;
     font-weight: 400;
     max-width: 400px;
@@ -115,7 +115,7 @@
   #percentage-stats-{{ section.id }} .percentage-stats-footnote {
     font-size: {{ section.settings.footnote_size }}px;
     font-style: italic;
-    color: #6B6B6B;
+    color: {{ section.settings.footnote_color }};
     text-align: left;
     margin-top: 40px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -325,6 +325,40 @@
       "unit": "px",
       "label": "Space Between Stats",
       "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#9B8B7E"
+    },
+    {
+      "type": "color",
+      "id": "percentage_color",
+      "label": "Percentage Color",
+      "default": "#2e402d"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#2e402d"
+    },
+    {
+      "type": "color",
+      "id": "footnote_color",
+      "label": "Footnote Color",
+      "default": "#6B6B6B"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider Color",
+      "default": "#000000"
     },
     {
       "type": "header",

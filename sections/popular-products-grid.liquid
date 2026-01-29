@@ -128,15 +128,15 @@
 
   @media screen and (max-width: 480px) {
     .popular-products-title {
-      font-size: 24px;
+      font-size: calc({{ section.settings.mobile_heading_font_size }}px * 0.75);
     }
 
     .popular-products-subtitle {
-      font-size: 14px;
+      font-size: calc({{ section.settings.mobile_subheading_font_size }}px * 1);
     }
 
     .popular-products-section {
-      padding: 40px 15px;
+      padding: calc({{ section.settings.mobile_section_padding_top }}px * 1) calc({{ section.settings.mobile_section_padding_horizontal }}px * 1);
     }
 
     .small-images-grid {

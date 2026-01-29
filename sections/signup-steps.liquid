@@ -153,21 +153,21 @@
 
     #signup-steps-{{ section.id }} .step-title {
       margin-bottom: {{ section.settings.step_title_gap_mobile }}px;
-      font-size: 18px;
+      font-size: calc({{ section.settings.step_title_font_size }}px * 0.75);
       font-weight: 700;
       line-height: 1;
     }
 
     #signup-steps-{{ section.id }} .step-description {
       max-width: none;
-      font-size: 14px;
+      font-size: calc({{ section.settings.step_description_font_size }}px * 0.875);
       line-height: 1.4;
       margin-bottom: 0;
     }
 
     #signup-steps-{{ section.id }} .section-title {
       margin-bottom: 40px;
-      font-size: 24px;
+      font-size: calc({{ section.settings.title_font_size }}px * 0.75);
       text-align: center;
     }
   }
