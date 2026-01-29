@@ -373,14 +373,14 @@
       "settings": {
         "heading": "Shop by Category",
         "columns": 6,
-        "heading_size": 36,
-        "heading_color": "#1a1a1a",
-        "circle_size": 160,
-        "text_size": 16,
-        "text_color": "#333333",
-        "background_color": "#ffffff",
-        "padding_top": 50,
-        "padding_bottom": 50
+        "heading_size": 48,
+        "heading_color": "#fc1313",
+        "circle_size": 200,
+        "text_size": 20,
+        "text_color": "#54c2ff",
+        "background_color": "#d3ed0d",
+        "padding_top": 100,
+        "padding_bottom": 100
       }
     },
     "collections_grid_jrb6tm": {
@@ -429,8 +429,8 @@
       "settings": {
         "heading": "The Collections",
         "heading_font": "serif",
-        "heading_size": 42,
-        "heading_color": "#000000",
+        "heading_size": 56,
+        "heading_color": "#e70e0e",
         "title_size": 16,
         "title_color": "#000000",
         "background_color": "#ffffff",
@@ -519,7 +519,7 @@
         "background_color": "#ffffff",
         "background_image_desktop": "shopify://shop_images/high-fashion-model-in-red.webp",
         "enable_overlay": true,
-        "overlay_color": "rgba(0, 0, 0, 0.3)",
+        "overlay_color": "#0000004d",
         "overlay_opacity": 30,
         "image_brightness": 100,
         "heading": "50% off all suits and accessories",
@@ -708,7 +708,7 @@
             "make_card_clickable": false,
             "eyebrow_color": "",
             "title_color": "",
-            "card_bg": "transparent"
+            "card_bg": "rgba(0,0,0,0)"
           }
         },
         "feature_card_c3D9az": {
@@ -725,7 +725,7 @@
             "make_card_clickable": false,
             "eyebrow_color": "",
             "title_color": "",
-            "card_bg": "transparent"
+            "card_bg": "rgba(0,0,0,0)"
           }
         }
       },
