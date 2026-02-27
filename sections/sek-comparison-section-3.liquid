@@ -1,0 +1,692 @@
+{%- style -%}
+  /* Section Scoped Styles for comparison-section-3 */
+
+  /* Base Section */
+  #shopify-section-{{ section.id }} .comparison-3-section {
+    position: relative;
+    width: calc(100% - 20px);
+    max-width: 100%;
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 36px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} {
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .comparison-3-section {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 2rem;
+    border-radius: 16px;
+    background-color: {{ section.settings.container_bg_color }};
+  }
+
+  /* Heading */
+  #shopify-section-{{ section.id }} .comparison-3__heading {
+    text-align: center;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: {{ section.settings.heading_size }}px;
+    font-style: italic;
+    font-weight: 700;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 3rem 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* Main Content Layout */
+  #shopify-section-{{ section.id }} .comparison-3__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+  }
+
+  /* Images */
+  #shopify-section-{{ section.id }} .comparison-3__image {
+    flex: 0 0 auto;
+    width: 235px;
+    height: 295px;
+    overflow: hidden;
+    border-radius: 12px;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__image--left {
+    background-color: {{ section.settings.left_image_bg }};
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__image--right {
+    background-color: {{ section.settings.right_image_bg }};
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__image .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+  }
+
+  /* Comparison Table */
+  #shopify-section-{{ section.id }} .comparison-3__table {
+    flex: 1;
+    max-width: 700px;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Each Row */
+  #shopify-section-{{ section.id }} .comparison-3__row {
+    display: flex;
+    position: relative;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__row:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Cells */
+  #shopify-section-{{ section.id }} .comparison-3__cell {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-radius: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__cell--left {
+    background-color: {{ section.settings.cell_bg_color }};
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__cell--right {
+    background-color: {{ section.settings.cell_bg_color }};
+  }
+
+  /* Icons */
+  #shopify-section-{{ section.id }} .comparison-3__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Text */
+  #shopify-section-{{ section.id }} .comparison-3__text {
+    font-family: var(--font-body-family, sans-serif);
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__text--positive {
+    color: {{ section.settings.positive_text_color }};
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__text--negative {
+    color: {{ section.settings.negative_text_color }};
+  }
+
+  /* VS Badge */
+  #shopify-section-{{ section.id }} .comparison-3__vs {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 46px;
+    height: 46px;
+    background-color: {{ section.settings.vs_bg_color }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__vs span {
+    font-family: var(--font-body-family, sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    color: {{ section.settings.vs_text_color }};
+    letter-spacing: 0.05em;
+  }
+
+  /* Mobile VS Badge - hidden on desktop */
+  #shopify-section-{{ section.id }} .comparison-3__vs--mobile {
+    display: none;
+  }
+
+  /* Button */
+  #shopify-section-{{ section.id }} .comparison-3__button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    font-family: var(--font-body-family, sans-serif);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    border: none;
+    transition: all 0.25s ease;
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__button:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__button svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.25s ease;
+  }
+
+  #shopify-section-{{ section.id }} .comparison-3__button:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Responsive Styles */
+
+  /* Tablet */
+  @media screen and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .comparison-3__image {
+      width: 200px;
+      height: 250px;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__table {
+      max-width: 550px;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__cell {
+      padding: 12px 15px;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__text {
+      font-size: 14px;
+    }
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .comparison-3__container {
+      padding: 0 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.72);
+      margin-bottom: 2rem;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__content {
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: relative;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__image {
+      width: calc(50% - 0.5rem);
+      height: auto;
+      min-height: 180px;
+      max-width: none;
+      order: 0;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__image--left {
+      order: 0;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__image--right {
+      order: 1;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__table {
+      width: 100%;
+      max-width: 100%;
+      order: 2;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__cell {
+      padding: 12px 10px;
+      gap: 8px;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__text {
+      font-size: 13px;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__row {
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    /* Hide VS in table on mobile */
+    #shopify-section-{{ section.id }} .comparison-3__row .comparison-3__vs {
+      display: none;
+    }
+
+    /* Show VS between images on mobile */
+    #shopify-section-{{ section.id }} .comparison-3__vs--mobile {
+      display: flex;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      top: calc((50vw - 1rem) / 2 + 90px);
+      width: 40px;
+      height: 40px;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__vs--mobile span {
+      font-size: 11px;
+    }
+
+    #shopify-section-{{ section.id }} .comparison-3__button {
+      width: 100%;
+      max-width: 280px;
+    }
+  }
+
+{%- endstyle -%}
+
+<div class="comparison-3-section">
+  <div class="comparison-3__container">
+    <!-- Heading -->
+    {%- if section.settings.heading != blank -%}
+      <h2 class="comparison-3__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <!-- Main Content -->
+    <div class="comparison-3__content">
+      <!-- Mobile VS Badge -->
+      <div class="comparison-3__vs comparison-3__vs--mobile">
+        <span>VS</span>
+      </div>
+
+      <!-- Left Image -->
+      <div class="comparison-3__image comparison-3__image--left">
+        {%- if section.settings.left_image != blank -%}
+          <img
+            src="{{ section.settings.left_image | image_url: width: 600 }}"
+            alt="{{ section.settings.left_image.alt | default: 'Our product' | escape }}"
+            loading="lazy"
+            width="600"
+            height="{{ 600 | divided_by: section.settings.left_image.aspect_ratio | round }}"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="comparison-3__table">
+        <div class="comparison-3__rows">
+          {%- assign middle_index = section.blocks.size | divided_by: 2 -%}
+          {%- for block in section.blocks -%}
+            <div class="comparison-3__row" {{ block.shopify_attributes }}>
+              <!-- Left Column (Positive) -->
+              <div class="comparison-3__cell comparison-3__cell--left">
+                <span class="comparison-3__icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="9" stroke="{{ section.settings.positive_icon_color }}" stroke-width="1.5" fill="none"/>
+                    <path d="M6 10L9 13L14 7" stroke="{{ section.settings.positive_icon_color }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  </svg>
+                </span>
+                <span class="comparison-3__text comparison-3__text--positive">{{ block.settings.left_text }}</span>
+              </div>
+
+              <!-- VS Badge (only show on middle row) -->
+              {%- if forloop.index0 == middle_index -%}
+                <div class="comparison-3__vs">
+                  <span>VS</span>
+                </div>
+              {%- endif -%}
+
+              <!-- Right Column (Negative) -->
+              <div class="comparison-3__cell comparison-3__cell--right">
+                <span class="comparison-3__icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="9" stroke="{{ section.settings.negative_icon_color }}" stroke-width="1.5" fill="none"/>
+                    <path d="M7 7L13 13M13 7L7 13" stroke="{{ section.settings.negative_icon_color }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  </svg>
+                </span>
+                <span class="comparison-3__text comparison-3__text--negative">{{ block.settings.right_text }}</span>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- Right Image -->
+      <div class="comparison-3__image comparison-3__image--right">
+        {%- if section.settings.right_image != blank -%}
+          <img
+            src="{{ section.settings.right_image | image_url: width: 600 }}"
+            alt="{{ section.settings.right_image.alt | default: 'Competitor product' | escape }}"
+            loading="lazy"
+            width="600"
+            height="{{ 600 | divided_by: section.settings.right_image.aspect_ratio | round }}"
+          >
+        {%- else -%}
+          {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Button -->
+    {%- if section.settings.button_text != blank -%}
+      <div class="comparison-3__button-wrapper">
+        <a href="{{ section.settings.button_link }}" class="comparison-3__button">
+          {{ section.settings.button_text }}
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector('#shopify-section-' + sectionId);
+
+    if (section) {
+      const button = section.querySelector('.comparison-3__button');
+      if (button) {
+        button.addEventListener('mouseenter', function() {
+          this.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.15)';
+        });
+        button.addEventListener('mouseleave', function() {
+          this.style.boxShadow = 'none';
+        });
+      }
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Sek Comparison Section 3",
+  "tag": "section",
+  "class": "section-comparison-3",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Which Product is Better?"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Image (Our Product)"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right Image (Competitor)"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "container_bg_color",
+      "label": "Container Background Color",
+      "default": "#faf6e8"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "left_image_bg",
+      "label": "Left Image Background",
+      "default": "#d4dde3"
+    },
+    {
+      "type": "color",
+      "id": "right_image_bg",
+      "label": "Right Image Background",
+      "default": "#b8e8e0"
+    },
+    {
+      "type": "color",
+      "id": "cell_bg_color",
+      "label": "Cell Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "positive_text_color",
+      "label": "Positive Text Color",
+      "default": "#d4a029"
+    },
+    {
+      "type": "color",
+      "id": "positive_icon_color",
+      "label": "Positive Icon Color",
+      "default": "#d4a029"
+    },
+    {
+      "type": "color",
+      "id": "negative_text_color",
+      "label": "Negative Text Color",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "negative_icon_color",
+      "label": "Negative Icon Color",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "vs_bg_color",
+      "label": "VS Badge Background",
+      "default": "#3d3d3d"
+    },
+    {
+      "type": "color",
+      "id": "vs_text_color",
+      "label": "VS Badge Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#2d2d2d"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "comparison_row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "left_text",
+          "label": "Left Text (Positive)",
+          "default": "Innovative refill"
+        },
+        {
+          "type": "text",
+          "id": "right_text",
+          "label": "Right Text (Negative)",
+          "default": "Single-use plastic"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sek Comparison Section 3",
+      "blocks": [
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Innovative refill",
+            "right_text": "Single-use plastic"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Plant-based",
+            "right_text": "Synthetic chemicals"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Natural essential oils",
+            "right_text": "Synthetic fragrances"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Hypoallergenic",
+            "right_text": "Can trigger allergy"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Safer for plants",
+            "right_text": "Can harm plants"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Safe for indoor use",
+            "right_text": "Contribute to air pollution"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Cruelty-free",
+            "right_text": "Tested on animals"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
