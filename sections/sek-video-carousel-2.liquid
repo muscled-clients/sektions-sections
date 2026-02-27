@@ -1,0 +1,857 @@
+<style>
+    #shopify-section-{{ section.id }} .sek-vid-coverflow {
+      position: relative;
+      width: 100%;
+      background-color: {{ section.settings.background_color }};
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__caption {
+      text-align: center;
+      font-size: {{ section.settings.caption_font_size }}px;
+      font-weight: {{ section.settings.caption_font_weight }};
+      font-family: {{ section.settings.caption_font_family }};
+      color: {{ section.settings.caption_color }};
+      margin: 0 0 8px 0;
+      padding: 0 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__heading {
+      text-align: center;
+      font-size: {{ section.settings.heading_font_size }}px;
+      font-weight: {{ section.settings.heading_font_weight }};
+      font-family: {{ section.settings.heading_font_family }};
+      color: {{ section.settings.heading_color }};
+      margin: 0;
+      padding: 0 20px;
+      letter-spacing: 0.5px;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__subheading {
+      text-align: center;
+      font-size: {{ section.settings.subheading_font_size }}px;
+      font-weight: {{ section.settings.subheading_font_weight }};
+      font-family: {{ section.settings.subheading_font_family }};
+      color: {{ section.settings.subheading_color }};
+      margin: 8px 0 0 0;
+      padding: 0 20px;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 520px;
+      perspective: 1200px;
+      max-width: 1500px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__card {
+      position: absolute;
+      width: 370px;
+      aspect-ratio: 9.6 / 12;
+      border-radius: 0;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+      cursor: pointer;
+      left: 50%;
+      top: 50%;
+      margin-left: -185px;
+      margin-top: -231.25px;
+      transform-style: preserve-3d;
+      background: #000;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__card-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__card-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 50%, #0f1520 100%);
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__card-placeholder svg {
+      width: 48px;
+      height: 48px;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65%;
+      z-index: 2;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) -0.46%, #000000 99.58%);
+      border-radius: 0;
+      pointer-events: none;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: none;
+      aspect-ratio: 1 / 1;
+      border: 1px solid white;
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      z-index: 10;
+      padding: 0;
+      transition: opacity 0.3s;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__play-btn svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__card-content {
+      position: relative;
+      z-index: 5;
+      padding: 0 18px 18px;
+      color: {{ section.settings.card_text_color }};
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__video-title {
+      font-size: {{ section.settings.card_title_font_size }}px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin: 0;
+      color: {{ section.settings.card_text_color }};
+      line-height: 1.3;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__video-subtitle {
+      font-size: {{ section.settings.card_subtitle_font_size }}px;
+      font-weight: 400;
+      margin: 0;
+      color: {{ section.settings.card_subtitle_color }};
+      line-height: 1.3;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__stars {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-top: 4px;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__stars svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .sek-vid-coverflow__card.is-active {
+      z-index: 100 !important;
+    }
+
+
+    @media screen and (max-width: 1023px) {
+      #shopify-section-{{ section.id }} .sek-vid-coverflow__card {
+        width: 80vw;
+        margin-left: -40vw;
+        margin-top: calc(-40vw * 12 / 9.6);
+      }
+      #shopify-section-{{ section.id }} .sek-vid-coverflow__card.is-active {
+        width: 80vw;
+        margin-left: -40vw;
+        margin-top: calc(-40vw * 12 / 9.6);
+      }
+      #shopify-section-{{ section.id }} .sek-vid-coverflow__wrapper {
+        height: calc(80vw * 12 / 9.6 + 40px);
+      }
+  #shopify-section-{{ section.id }} .sek-vid-coverflow__video-title {
+        font-size: calc({{ section.settings.card_title_font_size }}px * 0.72);
+      }
+      #shopify-section-{{ section.id }} .sek-vid-coverflow__video-subtitle {
+        font-size: calc({{ section.settings.card_subtitle_font_size }}px * 0.85);
+      }
+      #shopify-section-{{ section.id }} .sek-vid-coverflow__card-content {
+        padding: 0 10px 12px;
+      }
+      #shopify-section-{{ section.id }} .sek-vid-coverflow__stars svg {
+        width: 13px;
+        height: 13px;
+      }
+    }
+</style>
+
+<div class="sek-vid-coverflow">
+  <div class="sek-vid-coverflow__header">
+    {% if section.settings.caption != blank %}
+      <p class="sek-vid-coverflow__caption">{{ section.settings.caption }}</p>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="sek-vid-coverflow__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <p class="sek-vid-coverflow__subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+  </div>
+
+  <div class="sek-vid-coverflow__wrapper">
+    <div class="sek-vid-coverflow__track" id="sek-vid2-track-{{ section.id }}">
+      {% for block in section.blocks %}
+        <div class="sek-vid-coverflow__card" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="sek-vid-coverflow__card-inner">
+            {% if block.settings.video != blank %}
+              <video
+                class="sek-vid-coverflow__card-video"
+                {% if block.settings.loop %}
+                  loop
+                {% endif %}
+                muted
+                playsinline
+                preload="metadata"
+                data-autoplay="{{ block.settings.autoplay }}"
+              >
+                {% for source in block.settings.video.sources %}
+                  <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                {% endfor %}
+              </video>
+            {% else %}
+              <div class="sek-vid-coverflow__card-placeholder">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </div>
+            {% endif %}
+            <button class="sek-vid-coverflow__play-btn" aria-label="Play video" data-video-index="{{ forloop.index0 }}">
+              <svg width="61" height="60" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.7461 0.5H48.7461C55.0974 0.5 60.2461 5.64873 60.2461 12V48C60.2461 54.3513 55.0974 59.5 48.7461 59.5H12.7461C6.39482 59.5 1.24609 54.3513 1.24609 48V12C1.24609 5.64873 6.39482 0.5 12.7461 0.5Z" fill="transparent" fill-opacity="0.2" stroke="transparent"></path>
+                <path d="M21.7461 23.4817V36.5201C21.7461 39.1905 24.6062 40.8663 26.8889 39.5311L32.4615 36.2749L38.034 33.005C40.3168 31.6699 40.3168 28.3319 38.034 26.9967L32.4615 23.7269L26.8889 20.4707C24.6062 19.1356 21.7461 20.7977 21.7461 23.4817Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <div class="sek-vid-coverflow__card-overlay">&nbsp;</div>
+            <div class="sek-vid-coverflow__card-content">
+              {% if block.settings.title != blank %}
+                <h3 class="sek-vid-coverflow__video-title">{{ block.settings.title }}</h3>
+              {% endif %}
+              {% if block.settings.subtitle != blank %}
+                <p class="sek-vid-coverflow__video-subtitle">{{ block.settings.subtitle }}</p>
+              {% endif %}
+              {% assign stars = block.settings.stars %}
+              {% if stars > 0 %}
+                <div class="sek-vid-coverflow__stars">
+                  {% for i in (1..5) %}
+                    {% if i <= stars %}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{{ section.settings.star_color }}" stroke="none">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    {% else %}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="rgba(255,255,255,0.3)"
+                        stroke="none"
+                      >
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var sectionId = '{{ section.id }}';
+    var track = document.getElementById('sek-vid2-track-' + sectionId);
+    if (!track) return;
+
+    var cards = Array.from(track.querySelectorAll('.sek-vid-coverflow__card'));
+    var totalCards = cards.length;
+    if (totalCards === 0) return;
+
+    var currentIndex = Math.floor(totalCards / 2);
+    var isAnimating = false;
+
+    function getSpacing() {
+      var vw = window.innerWidth;
+      if (vw < 750) return 145;
+      if (vw < 990) return 210;
+      if (vw < 1200) return 230;
+      return 250;
+    }
+
+    function getDepth() {
+      var vw = window.innerWidth;
+      if (vw < 750) return 60;
+      if (vw < 990) return 80;
+      if (vw < 1200) return 100;
+      return 120;
+    }
+
+    function renderCards() {
+      var spacing = getSpacing();
+      var depth = getDepth();
+      var visibleRange = 3;
+
+      cards.forEach(function (card, i) {
+        var offset = i - currentIndex;
+
+        var halfTotal = totalCards / 2;
+        if (offset > halfTotal) {
+          offset = offset - totalCards;
+        } else if (offset < -halfTotal) {
+          offset = offset + totalCards;
+        }
+
+        var absOffset = Math.abs(offset);
+
+        if (absOffset > visibleRange) {
+          card.style.opacity = '0';
+          card.style.pointerEvents = 'none';
+          card.style.transform = 'translateX(' + (offset > 0 ? 1000 : -1000) + 'px) scale(0.5)';
+          card.style.zIndex = '0';
+          card.classList.remove('is-active');
+          return;
+        }
+
+        var x = offset * spacing;
+        var z = -absOffset * depth;
+        var scale = 1 - absOffset * 0.08;
+        if (scale < 0.65) scale = 0.65;
+        var opacity = 1 - absOffset * 0.1;
+        if (opacity < 0.5) opacity = 0.5;
+        var zIndex = 50 - absOffset * 5;
+
+        card.style.transform = 'translateX(' + x + 'px) translateZ(' + z + 'px) scale(' + scale + ')';
+        card.style.zIndex = zIndex;
+        card.style.opacity = opacity;
+        card.style.pointerEvents = 'auto';
+
+        if (offset === 0) {
+          card.classList.add('is-active');
+        } else {
+          card.classList.remove('is-active');
+        }
+      });
+    }
+
+    function slideNext() {
+      if (isAnimating) return;
+      isAnimating = true;
+      currentIndex = (currentIndex + 1) % totalCards;
+      renderCards();
+      muteAllExceptActive();
+      setTimeout(function () {
+        isAnimating = false;
+      }, 500);
+    }
+
+    function slidePrev() {
+      if (isAnimating) return;
+      isAnimating = true;
+      currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+      renderCards();
+      muteAllExceptActive();
+      setTimeout(function () {
+        isAnimating = false;
+      }, 500);
+    }
+
+    /* Initialize */
+    renderCards();
+    muteAllExceptActive();
+
+    /* Click card to navigate, or pause video on active card */
+    cards.forEach(function (card, index) {
+      card.addEventListener('click', function (e) {
+        if (index === currentIndex) {
+          var video = card.querySelector('.sek-vid-coverflow__card-video');
+          var btn = card.querySelector('.sek-vid-coverflow__play-btn');
+          if (video && !video.paused) {
+            video.pause();
+            if (btn) {
+              btn.style.opacity = '1';
+              btn.style.pointerEvents = 'auto';
+            }
+          }
+          return;
+        }
+        e.preventDefault();
+        if (isAnimating) return;
+        isAnimating = true;
+        currentIndex = index;
+        renderCards();
+        muteAllExceptActive();
+        setTimeout(function () {
+          isAnimating = false;
+        }, 500);
+      });
+    });
+
+    /* Play/pause + unmute toggle on active card */
+    var playBtns = track.querySelectorAll('.sek-vid-coverflow__play-btn');
+    playBtns.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var card = btn.closest('.sek-vid-coverflow__card');
+        if (!card.classList.contains('is-active')) return;
+        var video = card.querySelector('.sek-vid-coverflow__card-video');
+        if (!video) return;
+
+        if (video.muted) {
+          video.muted = false;
+          video.play();
+          btn.style.opacity = '0';
+          btn.style.pointerEvents = 'none';
+        } else if (video.paused) {
+          video.play();
+          btn.style.opacity = '0';
+          btn.style.pointerEvents = 'none';
+        } else {
+          video.pause();
+          btn.style.opacity = '1';
+          btn.style.pointerEvents = 'auto';
+        }
+      });
+    });
+
+    /* Pause and mute non-active cards, autoplay active card if enabled */
+    function muteAllExceptActive() {
+      cards.forEach(function (card) {
+        var video = card.querySelector('.sek-vid-coverflow__card-video');
+        var btn = card.querySelector('.sek-vid-coverflow__play-btn');
+        if (!video) return;
+        if (!card.classList.contains('is-active')) {
+          video.pause();
+          video.muted = true;
+          if (btn) {
+            btn.style.opacity = '1';
+            btn.style.pointerEvents = 'auto';
+          }
+        } else {
+          if (video.dataset.autoplay === 'true') {
+            video.muted = true;
+            video.play();
+          }
+        }
+      });
+    }
+
+    /* Touch support */
+    var touchStartX = 0;
+    track.addEventListener(
+      'touchstart',
+      function (e) {
+        touchStartX = e.touches[0].clientX;
+      },
+      { passive: true }
+    );
+
+    track.addEventListener(
+      'touchend',
+      function (e) {
+        var diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) slideNext();
+          else slidePrev();
+        }
+      },
+      { passive: true }
+    );
+
+    /* Mouse drag support for desktop */
+    var mouseStartX = 0;
+    var isDragging = false;
+
+    track.addEventListener('mousedown', function (e) {
+      mouseStartX = e.clientX;
+      isDragging = true;
+      track.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mouseup', function (e) {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.cursor = 'grab';
+      var diff = mouseStartX - e.clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) slideNext();
+        else slidePrev();
+      }
+    });
+
+    document.addEventListener('mousemove', function (e) {
+      if (isDragging) e.preventDefault();
+    });
+
+    track.style.cursor = 'grab';
+
+    /* Resize */
+    window.addEventListener('resize', renderCards);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "sek-video-carousel-2",
+  "tag": "section",
+  "class": "section-sek-video-carousel-2",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Caption"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption text",
+      "default": "Testimonials"
+    },
+    {
+      "type": "range",
+      "id": "caption_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "label": "Caption font size (px)",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "caption_font_weight",
+      "label": "Caption font weight",
+      "default": "600",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "caption_font_family",
+      "label": "Caption font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "Arial, sans-serif", "label": "Arial" },
+        { "value": "'Helvetica Neue', Helvetica, sans-serif", "label": "Helvetica" },
+        { "value": "Georgia, serif", "label": "Georgia" },
+        { "value": "'Times New Roman', serif", "label": "Times New Roman" },
+        { "value": "'Courier New', monospace", "label": "Courier New" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption color",
+      "default": "#888888"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading text",
+      "default": "Video Carousel"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "label": "Heading font size (px)",
+      "default": 42
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "default": "700",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "Arial, sans-serif", "label": "Arial" },
+        { "value": "'Helvetica Neue', Helvetica, sans-serif", "label": "Helvetica" },
+        { "value": "Georgia, serif", "label": "Georgia" },
+        { "value": "'Times New Roman', serif", "label": "Times New Roman" },
+        { "value": "'Courier New', monospace", "label": "Courier New" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading text",
+      "default": "See what our customers are saying"
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "label": "Subheading font size (px)",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "subheading_font_weight",
+      "label": "Subheading font weight",
+      "default": "400",
+      "options": [
+        { "value": "300", "label": "Light" },
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "subheading_font_family",
+      "label": "Subheading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "Arial, sans-serif", "label": "Arial" },
+        { "value": "'Helvetica Neue', Helvetica, sans-serif", "label": "Helvetica" },
+        { "value": "Georgia, serif", "label": "Georgia" },
+        { "value": "'Times New Roman', serif", "label": "Times New Roman" },
+        { "value": "'Courier New', monospace", "label": "Courier New" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Card Title & Subtitle"
+    },
+    {
+      "type": "range",
+      "id": "card_title_font_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "label": "Card title font size (px)",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_subtitle_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "label": "Card subtitle font size (px)",
+      "default": 13
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_subtitle_color",
+      "label": "Card subtitle color",
+      "default": "#bbbbbb"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#f5a623"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Section padding top (px)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Section padding bottom (px)",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_card",
+      "name": "Video Card",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Video Title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Product Name"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "Review stars",
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Autoplay",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "loop",
+          "label": "Loop",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "sek-video-carousel-2",
+      "settings": {
+        "heading": "Video Carousel"
+      },
+      "blocks": [
+        { "type": "video_card", "settings": { "title": "Eleanor B.", "subtitle": "Fuchsia Silk Shirt", "stars": 5 } },
+        { "type": "video_card", "settings": { "title": "Sophie M.", "subtitle": "Ivory Cashmere Top", "stars": 5 } },
+        { "type": "video_card", "settings": { "title": "Olivia R.", "subtitle": "Navy Wool Blazer", "stars": 4 } },
+        { "type": "video_card", "settings": { "title": "Amelia K.", "subtitle": "Emerald Satin Dress", "stars": 5 } },
+        { "type": "video_card", "settings": { "title": "Charlotte W.", "subtitle": "Blush Linen Blouse", "stars": 5 } },
+        {
+          "type": "video_card",
+          "settings": { "title": "Isabella D.", "subtitle": "Charcoal Knit Sweater", "stars": 4 }
+        },
+        { "type": "video_card", "settings": { "title": "Grace L.", "subtitle": "Burgundy Velvet Skirt", "stars": 5 } },
+        { "type": "video_card", "settings": { "title": "Emma T.", "subtitle": "Pearl White Jacket", "stars": 5 } },
+        { "type": "video_card", "settings": { "title": "Lily H.", "subtitle": "Midnight Blue Gown", "stars": 5 } }
+      ]
+    }
+  ]
+}
+{% endschema %}
