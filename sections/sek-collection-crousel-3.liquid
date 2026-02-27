@@ -1,0 +1,722 @@
+<style>
+  #shopify-section-{{ section.id }} .slider-v3 {
+    position: relative;
+    width: 100%;
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    overflow: hidden;
+    clip-path: inset(0);
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__heading {
+    text-align: center;
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 2.5rem 0;
+    padding: 0 20px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__container {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Card Base - width and height calculated by JS to fill screen */
+  #shopify-section-{{ section.id }} .slider-v3__card {
+    position: absolute;
+    width: calc(100vw / 4);
+    border-radius: 0;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+                opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+                height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+                visibility 0s linear 0.5s;
+    left: 50%;
+    top: 50%;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Hide the separate overlay - we'll use content background instead */
+  #shopify-section-{{ section.id }} .slider-v3__overlay {
+    display: none;
+  }
+
+  /* Badge - top left */
+  #shopify-section-{{ section.id }} .slider-v3__badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 8px 14px;
+    background: {{ section.settings.badge_bg_color }};
+    color: {{ section.settings.badge_text_color }};
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 4px;
+    z-index: 10;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Content bar at bottom with white blur */
+  #shopify-section-{{ section.id }} .slider-v3__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 18px 20px;
+    z-index: 5;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0.85) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__text-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__title {
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: 700;
+    margin: 0;
+    color: {{ section.settings.title_color }};
+    line-height: 1.2;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__subtitle {
+    font-size: {{ section.settings.subtitle_size }}px;
+    color: {{ section.settings.subtitle_color }};
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    background: transparent;
+    color: {{ section.settings.button_text_color }};
+    font-size: 14px;
+    font-weight: 500;
+    line-height:100%;
+    text-decoration: none;
+    border-radius: 0;
+    border: 1px solid {{ section.settings.button_border_color }};
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  /* ========== ACTIVE/CENTER CARD ========== */
+  #shopify-section-{{ section.id }} .slider-v3__card.is-active {
+    z-index: 100 !important;
+    aspect-ratio: 9.6 / 12;
+    height: auto !important;
+  }
+
+
+  /* Navigation */
+  #shopify-section-{{ section.id }} .slider-v3__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 0;
+    background: transparent;
+    border: 1px solid {{ section.settings.nav_border_color }};
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    transition: all 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__nav:hover {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__nav svg {
+    width: 18px;
+    height: 18px;
+    color: {{ section.settings.nav_icon_color }};
+    transition: color 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__nav:hover svg {
+    color: #ffffff;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__nav--prev {
+    left: 3%;
+  }
+
+  #shopify-section-{{ section.id }} .slider-v3__nav--next {
+    right: 3%;
+  }
+
+  @media screen and (min-width: 1400px) {
+    #shopify-section-{{ section.id }} .slider-v3__container {
+      height: 580px;
+    }
+  }
+
+  @media screen and (max-width: 1199px) {
+    #shopify-section-{{ section.id }} .slider-v3__container {
+      height: 520px;
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    #shopify-section-{{ section.id }} .slider-v3 {
+      padding: 20px 0;
+    }
+    #shopify-section-{{ section.id }} .slider-v3__container {
+      height: 80vh;
+      min-height: 500px;
+      max-height: 750px;
+      overflow: hidden;
+    }
+    #shopify-section-{{ section.id }} .slider-v3__track {
+      width: 100%;
+      height: 100%;
+    }
+    #shopify-section-{{ section.id }} .slider-v3__card {
+      width: 88% !important;
+      height: 100% !important;
+      left: 50%;
+      top: 0 !important;
+      aspect-ratio: unset !important;
+      transition: left 0.4s ease, opacity 0.4s ease;
+    }
+    #shopify-section-{{ section.id }} .slider-v3__card.is-active {
+      width: 88% !important;
+      height: 100% !important;
+      aspect-ratio: unset !important;
+    }
+    #shopify-section-{{ section.id }} .slider-v3__card:not(.is-active) .slider-v3__content {
+      display: none;
+    }
+    #shopify-section-{{ section.id }} .slider-v3__card:not(.is-active) .slider-v3__badge {
+      display: none;
+    }
+    #shopify-section-{{ section.id }} .slider-v3__nav {
+      display: none;
+    }
+    #shopify-section-{{ section.id }} .slider-v3__title {
+      font-size: calc({{ section.settings.title_size }}px * 0.89);
+    }
+    #shopify-section-{{ section.id }} .slider-v3__content {
+      padding: 16px;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .slider-v3__heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.76);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .slider-v3 {
+      padding: calc({{ section.settings.padding_top }}px * 0.67) 0 calc({{ section.settings.padding_bottom }}px * 0.67);
+    }
+    #shopify-section-{{ section.id }} .slider-v3__heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.57);
+    }
+    #shopify-section-{{ section.id }} .slider-v3__title {
+      font-size: calc({{ section.settings.title_size }}px * 0.78);
+    }
+    #shopify-section-{{ section.id }} .slider-v3__subtitle {
+      font-size: calc({{ section.settings.subtitle_size }}px * 0.85);
+    }
+    #shopify-section-{{ section.id }} .slider-v3__btn {
+      padding: 10px 16px;
+      font-size: 12px;
+    }
+    #shopify-section-{{ section.id }} .slider-v3__content {
+      padding: 14px;
+      gap: 8px;
+    }
+    #shopify-section-{{ section.id }} .slider-v3__badge {
+      padding: 5px 12px;
+      font-size: 10px;
+    }
+  }
+</style>
+
+<div class="slider-v3 {% if section.settings.background_color == '#ffffff' or section.settings.background_color == 'rgba(255,255,255,1)' %}slider-v3--light{% endif %}">
+  {% if section.settings.heading != blank %}
+    <h2 class="slider-v3__heading">{{ section.settings.heading }}</h2>
+  {% endif %}
+
+  <div class="slider-v3__container">
+    <button class="slider-v3__nav slider-v3__nav--prev" aria-label="Previous">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
+    <div class="slider-v3__track" id="slider-v3-track-{{ section.id }}">
+      {% assign collection = section.settings.collection %}
+
+      {% if collection != blank and collection.products.size > 0 %}
+        {% for product in collection.products limit: section.settings.products_limit %}
+          <div class="slider-v3__card" data-index="{{ forloop.index0 }}">
+            <div class="slider-v3__card-inner">
+              <img class="slider-v3__card-image" src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
+              <div class="slider-v3__overlay"></div>
+              <span class="slider-v3__badge">
+                {% if product.tags contains 'new' %}New In
+                {% elsif product.tags contains 'bestseller' %}Bestseller
+                {% elsif product.tags contains 'sale' or product.compare_at_price > product.price %}Sale
+                {% else %}{{ section.settings.badge_text }}{% endif %}
+              </span>
+              <div class="slider-v3__content">
+                <div class="slider-v3__text-wrap">
+                  <h3 class="slider-v3__title">{{ product.title }}</h3>
+                  <p class="slider-v3__subtitle">{{ section.settings.subtitle_text }}</p>
+                </div>
+                <a href="{{ product.url }}" class="slider-v3__btn">{{ section.settings.button_text }}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        {% assign sample_titles = 'Skeleton Watches,Diving Watches,Tourbillon,Limited Edition,Classic Watches,Sport Watches,Luxury Watches,Vintage Watches,Modern Watches' | split: ',' %}
+        {% assign sample_badges = 'Bestseller,New In,Limited,Sale,Trending,New In,Bestseller,Limited,New In' | split: ',' %}
+        {% for i in (1..9) %}
+          {% assign idx = forloop.index0 | modulo: 9 %}
+          <div class="slider-v3__card" data-index="{{ forloop.index0 }}">
+            <div class="slider-v3__card-inner">
+              <div class="slider-v3__card-image" style="background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 50%, #0f1520 100%);"></div>
+              <div class="slider-v3__overlay"></div>
+              <span class="slider-v3__badge">{{ sample_badges[idx] }}</span>
+              <div class="slider-v3__content">
+                <div class="slider-v3__text-wrap">
+                  <h3 class="slider-v3__title">{{ sample_titles[idx] }}</h3>
+                  <p class="slider-v3__subtitle">{{ section.settings.subtitle_text }}</p>
+                </div>
+                <a href="#" class="slider-v3__btn">{{ section.settings.button_text }}</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <button class="slider-v3__nav slider-v3__nav--next" aria-label="Next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var sectionId = '{{ section.id }}';
+    var track = document.getElementById('slider-v3-track-' + sectionId);
+    if (!track) return;
+
+    var cards = Array.from(track.querySelectorAll('.slider-v3__card'));
+    var totalCards = cards.length;
+    if (totalCards === 0) return;
+
+    var container = track.closest('.slider-v3__container');
+    var prevBtn = container.querySelector('.slider-v3__nav--prev');
+    var nextBtn = container.querySelector('.slider-v3__nav--next');
+
+    var currentIndex = Math.floor(totalCards / 2);
+    var isAnimating = false;
+    var lastIsMobile = null;
+
+    function getConfig() {
+      var vw = window.innerWidth;
+      var cardWidth = vw / 4;
+      var spacing = cardWidth * 0.85;
+      var heights = [480, 420, 360];
+
+      if (vw < 1024) {
+        return { isMobile: true };
+      } else if (vw < 1200) {
+        heights = [440, 385, 330];
+        return { isMobile: false, cardWidth: cardWidth, spacing: spacing, visibleCards: 2, heights: heights };
+      }
+      return { isMobile: false, cardWidth: cardWidth, spacing: spacing, visibleCards: 2, heights: heights };
+    }
+
+    function resetCardStyles(card) {
+      card.style.transform = '';
+      card.style.left = '';
+      card.style.top = '';
+      card.style.width = '';
+      card.style.height = '';
+      card.style.marginLeft = '';
+      card.style.opacity = '';
+      card.style.zIndex = '';
+      card.style.pointerEvents = '';
+      card.style.visibility = '';
+      card.style.transition = '';
+    }
+
+    function render() {
+      var config = getConfig();
+      var isMobile = config.isMobile;
+
+      // Reset styles when switching between mobile and desktop
+      if (lastIsMobile !== null && lastIsMobile !== isMobile) {
+        cards.forEach(function(card) {
+          resetCardStyles(card);
+        });
+      }
+      lastIsMobile = isMobile;
+
+      cards.forEach(function(card, i) {
+        var offset = i - currentIndex;
+
+        var halfTotal = totalCards / 2;
+        if (offset > halfTotal) offset -= totalCards;
+        else if (offset < -halfTotal) offset += totalCards;
+
+        var absOffset = Math.abs(offset);
+
+        // Mobile/Tablet mode
+        if (isMobile) {
+          card.style.transform = 'none';
+          card.style.top = '0';
+
+          // Hide cards more than 1 position away
+          if (absOffset > 1) {
+            card.style.opacity = '0';
+            card.style.pointerEvents = 'none';
+            card.style.left = offset > 0 ? '200%' : '-100%';
+            card.style.marginLeft = '0';
+            card.style.zIndex = '0';
+            card.classList.remove('is-active');
+            return;
+          }
+
+          if (offset === 0) {
+            // Center card - main visible card
+            card.style.opacity = '1';
+            card.style.pointerEvents = 'auto';
+            card.style.left = '50%';
+            card.style.marginLeft = '-44%';
+            card.style.zIndex = '100';
+            card.classList.add('is-active');
+          } else {
+            // Side cards - peeking from edges
+            var sidePosition = offset > 0 ? 'calc(100% - 12%)' : '-32%';
+            card.style.opacity = '1';
+            card.style.pointerEvents = 'auto';
+            card.style.left = sidePosition;
+            card.style.marginLeft = '0';
+            card.style.zIndex = '50';
+            card.classList.remove('is-active');
+          }
+          return;
+        }
+
+        // Desktop mode
+        card.style.left = '50%';
+        card.style.top = '50%';
+        card.style.marginLeft = '';
+
+        if (absOffset > config.visibleCards) {
+          card.style.transition = 'opacity 0.3s ease';
+          card.style.opacity = '0';
+          card.style.pointerEvents = 'none';
+          card.style.visibility = 'hidden';
+          card.style.zIndex = '0';
+          card.classList.remove('is-active');
+          setTimeout(function() {
+            card.style.transform = 'translateX(calc(-50% + ' + (offset > 0 ? '200%' : '-200%') + ')) translateY(-50%)';
+          }, 50);
+          return;
+        }
+
+        card.style.width = config.cardWidth + 'px';
+        var cardHeight = config.heights[absOffset] || config.heights[2];
+        card.style.height = cardHeight + 'px';
+
+        var x = offset * config.spacing;
+        var zIndex = 100 - absOffset * 10;
+
+        card.style.transform = 'translateX(calc(-50% + ' + x + 'px)) translateY(-50%)';
+        card.style.zIndex = zIndex;
+        card.style.opacity = '1';
+        card.style.visibility = 'visible';
+        card.style.pointerEvents = 'auto';
+        card.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)';
+
+        if (absOffset === 0) {
+          card.classList.add('is-active');
+        } else {
+          card.classList.remove('is-active');
+        }
+      });
+    }
+
+    function next() {
+      if (isAnimating) return;
+      isAnimating = true;
+      currentIndex = (currentIndex + 1) % totalCards;
+      render();
+      setTimeout(function() { isAnimating = false; }, 500);
+    }
+
+    function prev() {
+      if (isAnimating) return;
+      isAnimating = true;
+      currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+      render();
+      setTimeout(function() { isAnimating = false; }, 500);
+    }
+
+    render();
+
+    prevBtn.addEventListener('click', function(e) { e.preventDefault(); prev(); });
+    nextBtn.addEventListener('click', function(e) { e.preventDefault(); next(); });
+
+    cards.forEach(function(card, index) {
+      card.addEventListener('click', function(e) {
+        if (card.classList.contains('is-active')) return;
+        e.preventDefault();
+        if (isAnimating) return;
+        isAnimating = true;
+        currentIndex = index;
+        render();
+        setTimeout(function() { isAnimating = false; }, 500);
+      });
+    });
+
+    // Touch support
+    var touchStartX = 0;
+    track.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', function(e) {
+      var diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); }
+    }, { passive: true });
+
+    window.addEventListener('resize', render);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "sek Collection Carousel 3",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Featured Collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "min": 5,
+      "max": 15,
+      "step": 1,
+      "label": "Maximum products",
+      "default": 9
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Default badge text",
+      "default": "NEW IN"
+    },
+    {
+      "type": "text",
+      "id": "subtitle_text",
+      "label": "Subtitle text",
+      "default": "Bags and more"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Product title size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Product title color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge background",
+      "default": "#1e1e1e"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button border color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "nav_border_color",
+      "label": "Nav border color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_icon_color",
+      "label": "Nav icon color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "sek Collection Carousel 3"
+    }
+  ]
+}
+{% endschema %}
