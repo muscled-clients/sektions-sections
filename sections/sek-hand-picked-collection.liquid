@@ -1,0 +1,1043 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .hand-picked-{{ section.id }} {
+    --hp-spotlight-color: {{ section.settings.spotlight_color }};
+    --hp-text-color: {{ section.settings.text_color }};
+    --hp-tab-border-color: {{ section.settings.tab_border_color }};
+    --hp-tab-active-bg: {{ section.settings.tab_active_bg }};
+    --hp-tab-active-text: {{ section.settings.tab_active_text }};
+    --hp-card-bg: {{ section.settings.card_bg }};
+    --hp-price-color: {{ section.settings.price_color }};
+    --hp-compare-price-color: {{ section.settings.compare_price_color }};
+    --hp-heading-font-size: {{ section.settings.heading_font_size | default: 40 }}px;
+    --hp-tab-font-size: {{ section.settings.tab_font_size | default: 14 }}px;
+    --hp-product-title-font-size: {{ section.settings.product_title_font_size | default: 20 }}px;
+  }
+
+  .hand-picked-{{ section.id }}.hand-picked {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: {{ section.settings.section_bg_color }};
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__container {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__triangle-bg {
+    position: absolute;
+    top: 0;
+    left: 15%;
+    width: 70%;
+    height: 60%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__triangle-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__header {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__title {
+    margin: 0;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-weight: 700;
+    color: var(--hp-text-color, #1a1a1a);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    font-size: var(--hp-heading-font-size, 40px);
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__nav {
+    position: relative;
+    z-index: 3;
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__nav-track {
+    display: inline-flex;
+    gap: 12px;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 28px;
+    font-family: var(--font-body-family, sans-serif);
+    font-size: var(--hp-tab-font-size, 14px);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--hp-text-color, #1a1a1a);
+    background-color: {{ section.settings.section_bg_color }};
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__tab:hover {
+    background-color: {{ section.settings.section_bg_color }};
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__tab.is-active {
+    border: 1px solid var(--hp-tab-border-color, #1a1a1a);
+    background-color: var(--hp-tab-active-bg, #1a1a1a);
+    color: var(--hp-tab-active-text, #ffffff);
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__panels {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__panel {
+    display: none;
+    opacity: 0;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__panel.is-active {
+    display: block;
+    animation: hpPanelFadeIn-{{ section.id }} 0.4s ease forwards;
+  }
+
+  @keyframes hpPanelFadeIn-{{ section.id }} {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__carousel {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__carousel-track {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    will-change: transform;
+    width: max-content;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__slide {
+    flex: 0 0 auto;
+    width: 240px;
+    transition: width 0.4s ease, transform 0.4s ease;
+    cursor: pointer;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__slide.is-active {
+    width: 350px;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__slide:not(.is-active) .hand-picked__product-card {
+    transform: translateY(12%);
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__slide.is-active .hand-picked__product-card {
+    transform: translateY(0);
+    background-color: #f0f0f0;
+    aspect-ratio: 3 / 3.75;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__product-link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__product-card {
+    position: relative;
+    width: 100%;
+    background-color: var(--hp-card-bg, #d8d8d8);
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease, background-color 0.3s ease;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__product-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__product-img--primary {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__product-img--secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__product-card:has(.hand-picked__product-img--secondary):hover .hand-picked__product-img--primary {
+    opacity: 0;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__product-card:hover .hand-picked__product-img--secondary {
+    opacity: 1;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__product-card .placeholder-svg {
+    width: 60%;
+    height: auto;
+    opacity: 0.4;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 20;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ section.settings.arrow_bg_color }};
+    color: {{ section.settings.arrow_icon_color }};
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__arrow--prev {
+    left: 0;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__arrow--next {
+    right: 0;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__arrow:hover {
+    opacity: 0.85;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__product-info {
+    text-align: center;
+    padding: 2rem 1rem 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__product-title {
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: var(--hp-product-title-font-size, 20px);
+    font-weight: 600;
+    color: var(--hp-text-color, #1a1a1a);
+    margin: 0 0 0.5rem 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__product-price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__price {
+    font-family: var(--font-body-family, sans-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--hp-price-color, #1a1a1a);
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__compare-price {
+    font-family: var(--font-body-family, sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--hp-compare-price-color, #999999);
+    text-decoration: line-through;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__compare-price:empty {
+    display: none;
+  }
+
+  .hand-picked-{{ section.id }} .hand-picked__slide.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hand-picked-{{ section.id }} .hand-picked__slide,
+    .hand-picked-{{ section.id }} .hand-picked__arrow,
+    .hand-picked-{{ section.id }} .hand-picked__panel,
+    .hand-picked-{{ section.id }} .hand-picked__product-card img,
+    .hand-picked-{{ section.id }} .hand-picked__product-info {
+      transition: none !important;
+    }
+    @keyframes hpPanelFadeIn-{{ section.id }} {
+      from { opacity: 1; }
+      to { opacity: 1; }
+    }
+  }
+
+  @media screen and (max-width: 1299px) {
+    .hand-picked-{{ section.id }} .hand-picked__container {
+      max-width: 100%;
+      padding: 0;
+    }
+    .hand-picked-{{ section.id }} .hand-picked__header,
+    .hand-picked-{{ section.id }} .hand-picked__nav {
+      padding: 0 1rem;
+    }
+    .hand-picked-{{ section.id }} .hand-picked__product-info {
+      padding: 1.5rem 1rem 0;
+    }
+  }
+
+  @media screen and (max-width: 1023px) and (min-width: 768px) {
+    .hand-picked-{{ section.id }} .hand-picked__nav {
+      justify-content: flex-start;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .hand-picked-{{ section.id }} .hand-picked__nav::-webkit-scrollbar {
+      display: none;
+    }
+    .hand-picked-{{ section.id }} .hand-picked__slide {
+      width: calc((100vw - 50px) / 5);
+    }
+    .hand-picked-{{ section.id }} .hand-picked__slide.is-active {
+      width: calc((100vw - 50px) / 5 + 30px);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .hand-picked-{{ section.id }} .hand-picked__slide {
+      width: calc(80vw - 20px);
+      flex-shrink: 0;
+    }
+    .hand-picked-{{ section.id }} .hand-picked__slide.is-active {
+      width: 80vw;
+    }
+    .hand-picked-{{ section.id }} .hand-picked__slide:not(.is-active) .hand-picked__product-card {
+      transform: translateY(5%);
+    }
+    .hand-picked-{{ section.id }} .hand-picked__carousel-track {
+      gap: 0;
+    }
+    .hand-picked-{{ section.id }} .hand-picked__arrow {
+      display: none;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  class="hand-picked hand-picked-{{ section.id }} section-{{ section.id }}-padding"
+  data-section-id="{{ section.id }}"
+  data-active-tab="{{ section.blocks.first.id }}"
+>
+  <div class="hand-picked__triangle-bg" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="hand-picked__triangle-svg">
+      <polygon class="hand-picked__triangle-shape" points="0,0 100,0 50,100" fill="{{ section.blocks.first.settings.triangle_color | default: '#E5A88A' }}"/>
+    </svg>
+  </div>
+
+  <div class="hand-picked__container">
+    {%- if section.settings.heading != blank -%}
+      <div class="hand-picked__header">
+        <h2 class="hand-picked__title">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="hand-picked__nav" role="tablist">
+      <div class="hand-picked__nav-track">
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="hand-picked__tab{% if forloop.first %} is-active{% endif %}"
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-controls="hp-tab-panel-{{ block.id }}"
+            data-tab-id="{{ block.id }}"
+            data-tab-index="{{ forloop.index0 }}"
+            data-triangle-color="{{ block.settings.triangle_color | default: '#E5A88A' }}"
+            {{ block.shopify_attributes }}
+          >
+            {{ block.settings.tab_title }}
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="hand-picked__panels">
+      {%- for block in section.blocks -%}
+        {%- assign collection = collections[block.settings.collection] -%}
+        <div
+          class="hand-picked__panel{% if forloop.first %} is-active{% endif %}"
+          id="hp-tab-panel-{{ block.id }}"
+          role="tabpanel"
+          data-panel-id="{{ block.id }}"
+          aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+        >
+          <div class="hand-picked__carousel-wrapper">
+            <button type="button" class="hand-picked__arrow hand-picked__arrow--prev" aria-label="{{ 'accessibility.previous_slide' | t }}" data-carousel-prev>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <div class="hand-picked__carousel" data-carousel-id="{{ section.id }}-{{ block.id }}">
+              <div class="hand-picked__carousel-track">
+                {%- if collection != blank and collection.products.size > 0 -%}
+                  {%- for product in collection.products limit: block.settings.products_limit -%}
+                    <div
+                      class="hand-picked__slide{% if forloop.index == 3 %} is-active{% endif %}"
+                      data-slide-index="{{ forloop.index0 }}"
+                      data-product-title="{{ product.title | escape }}"
+                      data-product-price="{{ product.price | money }}"
+                      data-product-compare-price="{% if product.compare_at_price > product.price %}{{ product.compare_at_price | money }}{% endif %}"
+                      data-product-url="{{ product.url }}"
+                    >
+                      <a href="{{ product.url }}" class="hand-picked__product-link">
+                        <div class="hand-picked__product-card">
+                          {%- if product.featured_media -%}
+                            <img
+                              class="hand-picked__product-img hand-picked__product-img--primary"
+                              src="{{ product.featured_media | image_url: width: 500 }}"
+                              alt="{{ product.featured_media.alt | default: product.title | escape }}"
+                              loading="lazy"
+                              width="500"
+                              height="{{ 500 | divided_by: product.featured_media.aspect_ratio | round }}"
+                            >
+                            {%- if product.media[1] -%}
+                              <img
+                                class="hand-picked__product-img hand-picked__product-img--secondary"
+                                src="{{ product.media[1] | image_url: width: 500 }}"
+                                alt="{{ product.media[1].alt | default: product.title | escape }}"
+                                loading="lazy"
+                                width="500"
+                                height="{{ 500 | divided_by: product.media[1].aspect_ratio | round }}"
+                              >
+                            {%- endif -%}
+                          {%- else -%}
+                            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                          {%- endif -%}
+                        </div>
+                      </a>
+                    </div>
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- for i in (1..6) -%}
+                    <div
+                      class="hand-picked__slide{% if i == 3 %} is-active{% endif %}"
+                      data-slide-index="{{ forloop.index0 }}"
+                      data-product-title="Product {{ i }}"
+                      data-product-price="$99.00"
+                      data-product-compare-price="$129.00"
+                      data-product-url="#"
+                    >
+                      <div class="hand-picked__product-link">
+                        <div class="hand-picked__product-card">
+                          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                {%- endif -%}
+              </div>
+            </div>
+
+            <button type="button" class="hand-picked__arrow hand-picked__arrow--next" aria-label="{{ 'accessibility.next_slide' | t }}" data-carousel-next>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="hand-picked__product-info">
+            <h3 class="hand-picked__product-title">
+              {%- if collection != blank and collection.products.size > 2 -%}
+                {{ collection.products[2].title }}
+              {%- elsif collection != blank and collection.products.size > 0 -%}
+                {{ collection.products.first.title }}
+              {%- else -%}
+                Product Title
+              {%- endif -%}
+            </h3>
+            <div class="hand-picked__product-price">
+              <span class="hand-picked__price">
+                {%- if collection != blank and collection.products.size > 2 -%}
+                  {{ collection.products[2].price | money }}
+                {%- elsif collection != blank and collection.products.size > 0 -%}
+                  {{ collection.products.first.price | money }}
+                {%- else -%}
+                  $148.00
+                {%- endif -%}
+              </span>
+              <span class="hand-picked__compare-price">
+                {%- if collection != blank and collection.products.size > 2 -%}
+                  {%- if collection.products[2].compare_at_price > collection.products[2].price -%}
+                    {{ collection.products[2].compare_at_price | money }}
+                  {%- endif -%}
+                {%- elsif collection != blank and collection.products.size > 0 -%}
+                  {%- if collection.products.first.compare_at_price > collection.products.first.price -%}
+                    {{ collection.products.first.compare_at_price | money }}
+                  {%- endif -%}
+                {%- else -%}
+                  $185.00
+                {%- endif -%}
+              </span>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const sectionId = '{{ section.id }}';
+
+  class HandPickedCollection {
+    constructor(section) {
+      this.section = section;
+      this.sectionId = section.dataset.sectionId;
+      this.tabs = section.querySelectorAll('.hand-picked__tab');
+      this.panels = section.querySelectorAll('.hand-picked__panel');
+      this.triangleShape = section.querySelector('.hand-picked__triangle-shape');
+      this.carousels = new Map();
+      this.init();
+    }
+
+    init() {
+      this.bindTabEvents();
+      this.initCarousels();
+      if (window.Shopify && Shopify.designMode) {
+        document.addEventListener('shopify:section:load', (e) => {
+          if (e.detail.sectionId === this.sectionId) this.reinitialize();
+        });
+        document.addEventListener('shopify:block:select', (e) => {
+          const tab = this.section.querySelector(`[data-tab-id="${e.detail.blockId}"]`);
+          if (tab) this.switchTab(tab);
+        });
+      }
+    }
+
+    bindTabEvents() {
+      this.tabs.forEach((tab) => {
+        tab.addEventListener('click', () => this.switchTab(tab));
+      });
+    }
+
+    switchTab(selectedTab) {
+      const tabId = selectedTab.dataset.tabId;
+      const triangleColor = selectedTab.dataset.triangleColor;
+      this.tabs.forEach((tab) => {
+        const isSelected = tab === selectedTab;
+        tab.classList.toggle('is-active', isSelected);
+        tab.setAttribute('aria-selected', isSelected);
+      });
+      this.panels.forEach((panel) => {
+        const isActive = panel.dataset.panelId === tabId;
+        panel.classList.toggle('is-active', isActive);
+        panel.setAttribute('aria-hidden', !isActive);
+        if (isActive) {
+          const carousel = this.carousels.get(panel.dataset.panelId);
+          if (carousel) carousel.onPanelActivate();
+        }
+      });
+      if (this.triangleShape && triangleColor) {
+        this.triangleShape.setAttribute('fill', triangleColor);
+      }
+      this.section.dataset.activeTab = tabId;
+    }
+
+    initCarousels() {
+      this.panels.forEach((panel) => {
+        const carousel = new HandPickedCarousel(panel, this);
+        this.carousels.set(panel.dataset.panelId, carousel);
+      });
+    }
+
+    reinitialize() {
+      this.carousels.forEach((carousel) => carousel.destroy());
+      this.carousels.clear();
+      this.initCarousels();
+    }
+  }
+
+  class HandPickedCarousel {
+    constructor(panel, parent) {
+      this.panel = panel;
+      this.parent = parent;
+      this.track = panel.querySelector('.hand-picked__carousel-track');
+      this.originalSlides = Array.from(panel.querySelectorAll('.hand-picked__slide'));
+      this.prevBtn = panel.querySelector('[data-carousel-prev]');
+      this.nextBtn = panel.querySelector('[data-carousel-next]');
+      this.productInfo = panel.querySelector('.hand-picked__product-info');
+      this.titleEl = panel.querySelector('.hand-picked__product-title');
+      this.priceEl = panel.querySelector('.hand-picked__price');
+      this.comparePriceEl = panel.querySelector('.hand-picked__compare-price');
+      this.currentIndex = 0;
+      this.isAnimating = false;
+      this.slidesPerView = 5;
+      this.cloneCount = 3;
+      this.init();
+    }
+
+    init() {
+      if (this.originalSlides.length === 0) return;
+      this.setupInfiniteLoop();
+      this.bindEvents();
+      this.goTo(0, false);
+    }
+
+    setupInfiniteLoop() {
+      const totalOriginal = this.originalSlides.length;
+      for (let i = 0; i < this.cloneCount; i++) {
+        const index = (totalOriginal - this.cloneCount + i + totalOriginal) % totalOriginal;
+        const clone = this.originalSlides[index].cloneNode(true);
+        clone.classList.add('is-clone');
+        clone.setAttribute('data-clone-index', index);
+        this.track.insertBefore(clone, this.track.firstChild);
+      }
+      for (let i = 0; i < this.cloneCount; i++) {
+        const index = i % totalOriginal;
+        const clone = this.originalSlides[index].cloneNode(true);
+        clone.classList.add('is-clone');
+        clone.setAttribute('data-clone-index', index);
+        this.track.appendChild(clone);
+      }
+      this.slides = Array.from(this.track.querySelectorAll('.hand-picked__slide'));
+      this.slides.forEach((slide, index) => {
+        slide.addEventListener('click', (e) => {
+          const realIndex = this.getRealIndex(index);
+          if (realIndex !== this.currentIndex) {
+            e.preventDefault();
+            this.goTo(realIndex);
+          }
+        });
+      });
+    }
+
+    getRealIndex(slideIndex) {
+      const totalOriginal = this.originalSlides.length;
+      if (slideIndex < this.cloneCount) return totalOriginal - this.cloneCount + slideIndex;
+      else if (slideIndex >= this.cloneCount + totalOriginal) return slideIndex - this.cloneCount - totalOriginal;
+      else return slideIndex - this.cloneCount;
+    }
+
+    getSlideIndex(realIndex) {
+      return realIndex + this.cloneCount;
+    }
+
+    bindEvents() {
+      this.prevBtn?.addEventListener('click', () => this.prev());
+      this.nextBtn?.addEventListener('click', () => this.next());
+      let startX = 0;
+      let isDragging = false;
+      this.track?.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      }, { passive: true });
+      this.track?.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) this.next();
+          else this.prev();
+        }
+      }, { passive: true });
+    }
+
+    prev() {
+      if (this.isAnimating) return;
+      this.goTo(this.currentIndex - 1);
+    }
+
+    next() {
+      if (this.isAnimating) return;
+      this.goTo(this.currentIndex + 1);
+    }
+
+    goTo(index, animate = true) {
+      if (this.isAnimating) return;
+      const totalOriginal = this.originalSlides.length;
+      let normalizedIndex = index;
+      if (index < 0) normalizedIndex = totalOriginal + index;
+      else if (index >= totalOriginal) normalizedIndex = index - totalOriginal;
+      this.currentIndex = normalizedIndex;
+      this.displayIndex = index;
+      this.isAnimating = animate;
+      this.updateTrackPosition(index, animate);
+      this.updateSlideStates(index);
+      this.updateProductInfo();
+      if (animate) {
+        setTimeout(() => {
+          this.isAnimating = false;
+          if (index < 0 || index >= totalOriginal) {
+            this.updateTrackPosition(normalizedIndex, false);
+            this.updateSlideStates(normalizedIndex);
+          }
+        }, 400);
+      }
+    }
+
+    updateTrackPosition(index, animate) {
+      const slideIndex = this.getSlideIndex(index);
+      const slideWidth = this.getSlideWidth();
+      const activeWidth = this.getActiveSlideWidth();
+      const gap = this.getGap();
+      const containerWidth = this.track.parentElement.offsetWidth;
+      const leftEdgeOfActive = slideIndex * (slideWidth + gap);
+      const centerOfActiveSlide = leftEdgeOfActive + activeWidth / 2;
+      const translateX = (containerWidth / 2) - centerOfActiveSlide;
+      this.track.style.transition = animate ? 'transform 0.4s ease' : 'none';
+      this.track.style.transform = `translateX(${translateX}px)`;
+    }
+
+    getSlideWidth() {
+      const vw = window.innerWidth;
+      if (vw < 768) return (vw * 0.8) - 20;
+      if (vw >= 1024) return 240;
+      return (vw - 50) / 5;
+    }
+
+    getActiveSlideWidth() {
+      const vw = window.innerWidth;
+      if (vw < 768) return vw * 0.8;
+      if (vw >= 1024) return 350;
+      return (vw - 50) / 5 + 30;
+    }
+
+    getGap() {
+      if (window.innerWidth < 768) return 0;
+      return 10;
+    }
+
+    updateSlideStates(index) {
+      const activeSlideIndex = this.getSlideIndex(index);
+      this.slides.forEach((slide, slideIndex) => {
+        slide.classList.remove('is-active', 'is-adjacent');
+        if (slideIndex === activeSlideIndex) slide.classList.add('is-active');
+      });
+    }
+
+    updateProductInfo() {
+      const activeSlide = this.originalSlides[this.currentIndex];
+      if (!activeSlide) return;
+      const title = activeSlide.dataset.productTitle || 'Product Title';
+      const price = activeSlide.dataset.productPrice || '';
+      const comparePrice = activeSlide.dataset.productComparePrice || '';
+      if (this.productInfo) {
+        this.productInfo.style.opacity = '0';
+        setTimeout(() => {
+          if (this.titleEl) this.titleEl.textContent = title;
+          if (this.priceEl) this.priceEl.textContent = price;
+          if (this.comparePriceEl) this.comparePriceEl.textContent = comparePrice;
+          this.productInfo.style.opacity = '1';
+        }, 200);
+      }
+    }
+
+    onPanelActivate() {
+      this.updateTrackPosition(this.currentIndex, false);
+      this.updateSlideStates(this.currentIndex);
+    }
+
+    destroy() {
+      this.track.querySelectorAll('.is-clone').forEach((clone) => clone.remove());
+    }
+  }
+
+  function initHandPickedSection() {
+    const section = document.querySelector('.hand-picked-' + sectionId);
+    if (section && !section.dataset.initialized) {
+      const instance = new HandPickedCollection(section);
+      section.handPickedInstance = instance;
+      section.dataset.initialized = 'true';
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHandPickedSection);
+  } else {
+    initHandPickedSection();
+  }
+
+  document.addEventListener('shopify:section:load', (e) => {
+    if (e.detail.sectionId === sectionId) initHandPickedSection();
+  });
+
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      const section = document.querySelector('.hand-picked-' + sectionId);
+      if (section && section.handPickedInstance) {
+        section.handPickedInstance.carousels.forEach((carousel) => {
+          carousel.updateTrackPosition(carousel.currentIndex, false);
+        });
+      }
+    }, 100);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Sek Hand-Picked",
+  "tag": "section",
+  "class": "section-hand-picked-collection",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "HAND-PICKED FOR YOU"
+    },
+    {
+      "type": "header",
+      "content": "Font Sizes"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "tab_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Collection Tab Font Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "product_title_font_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Product Title Font Size",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "spotlight_color",
+      "label": "Spotlight Color",
+      "default": "#E5A88A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "tab_border_color",
+      "label": "Tab Border Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg",
+      "label": "Active Tab Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text",
+      "label": "Active Tab Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Product Card Background",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Compare Price Color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg_color",
+      "label": "Arrow Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "arrow_icon_color",
+      "label": "Arrow Icon Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_tab",
+      "name": "Collection Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "default": "Collection"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "range",
+          "id": "products_limit",
+          "min": 4,
+          "max": 20,
+          "step": 1,
+          "default": 10,
+          "label": "Maximum products"
+        },
+        {
+          "type": "color",
+          "id": "triangle_color",
+          "label": "Triangle Background Color",
+          "default": "#E5A88A"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sek Hand-Picked",
+      "blocks": [
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "UNISEX"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "WOMEN"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "MEN"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
