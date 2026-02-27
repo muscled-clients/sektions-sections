@@ -1,0 +1,1122 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .atelier-{{ section.id }} {
+    --atelier-bg-color: {{ section.settings.background_color }};
+    --atelier-overlay-color: {{ section.settings.overlay_color }};
+    --atelier-accent-color: {{ section.settings.accent_color }};
+    --atelier-text-color: {{ section.settings.text_color }};
+    --atelier-subtext-color: {{ section.settings.subtext_color }};
+    --atelier-heading-size: {{ section.settings.heading_font_size | default: 48 }}px;
+    --atelier-tab-size: {{ section.settings.tab_font_size | default: 14 }}px;
+    --atelier-product-title-size: {{ section.settings.product_title_font_size | default: 28 }}px;
+    --atelier-subtitle-size: {{ section.settings.subtitle_font_size | default: 14 }}px;
+  }
+
+  .atelier-{{ section.id }}.atelier-selection {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--atelier-bg-color, #1a1a1a);
+  }
+
+  .atelier-{{ section.id }} .atelier__container {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .atelier-{{ section.id }} .atelier__bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .atelier-{{ section.id }} .atelier__bg-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .atelier-{{ section.id }} .atelier__header {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .atelier-{{ section.id }} .atelier__title {
+    margin: 0;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--atelier-text-color, #ffffff);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    font-size: var(--atelier-heading-size, 48px);
+  }
+
+  .atelier-{{ section.id }} .atelier__subtitle {
+    margin: 1rem auto 0;
+    max-width: 600px;
+    font-family: var(--font-body-family, sans-serif);
+    font-size: var(--atelier-subtitle-size, 14px);
+    font-weight: 400;
+    color: var(--atelier-subtext-color, #999999);
+    line-height: 1.6;
+  }
+
+  .atelier-{{ section.id }} .atelier__nav {
+    position: relative;
+    z-index: 3;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .atelier-{{ section.id }} .atelier__nav-track {
+    display: inline-flex;
+    gap: 8px;
+  }
+
+  .atelier-{{ section.id }} .atelier__tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    font-family: var(--font-body-family, sans-serif);
+    font-size: var(--atelier-tab-size, 14px);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--atelier-subtext-color, #999999);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .atelier-{{ section.id }} .atelier__tab:hover {
+    color: var(--atelier-text-color, #ffffff);
+  }
+
+  .atelier-{{ section.id }} .atelier__tab.is-active {
+    color: var(--atelier-accent-color, #d4a84b);
+  }
+
+  .atelier-{{ section.id }} .atelier__panels {
+    position: relative;
+    z-index: 2;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+  }
+
+  .atelier-{{ section.id }} .atelier__panel {
+    display: none;
+    opacity: 0;
+  }
+
+  .atelier-{{ section.id }} .atelier__panel.is-active {
+    display: block;
+    animation: atelierPanelFadeIn-{{ section.id }} 0.4s ease forwards;
+  }
+
+  @keyframes atelierPanelFadeIn-{{ section.id }} {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .atelier-{{ section.id }} .atelier__carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  .atelier-{{ section.id }} .atelier__carousel {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .atelier-{{ section.id }} .atelier__carousel-track {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    will-change: transform;
+    width: max-content;
+  }
+
+  .atelier-{{ section.id }} .atelier__slide {
+    flex: 0 0 auto;
+    width: 350px;
+    transition: width 0.4s ease, transform 0.4s ease;
+    cursor: pointer;
+  }
+
+  .atelier-{{ section.id }} .atelier__slide.is-active {
+    width: 350px;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-card {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    background-color: #e8e8e8;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .atelier-{{ section.id }} .atelier__slide.is-active .atelier__product-card {
+    height: auto;
+    aspect-ratio: 12 / 15;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-img--primary {
+    position: relative;
+    z-index: 1;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-img--secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-card:has(.atelier__product-img--secondary):hover .atelier__product-img--primary {
+    opacity: 0;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-card:hover .atelier__product-img--secondary {
+    opacity: 1;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-card .placeholder-svg {
+    width: 60%;
+    height: auto;
+    opacity: 0.4;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-info {
+    text-align: center;
+    padding: 2rem 1rem 1.5rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-title {
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: var(--atelier-product-title-size, 28px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--atelier-text-color, #ffffff);
+    max-width: 320px;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-vendor {
+    font-family: var(--font-body-family, sans-serif);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--atelier-subtext-color, #999999);
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+  }
+
+  .atelier-{{ section.id }} .atelier__product-price {
+    font-family: var(--font-body-family, sans-serif);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--atelier-accent-color, #d4a84b);
+    margin: 0;
+  }
+
+  .atelier-{{ section.id }} .atelier__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 0 auto;
+    margin-top: 1.5rem;
+    padding: 0 1rem;
+    max-width: 1200px;
+  }
+
+  .atelier-{{ section.id }} .atelier__arrow {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: var(--atelier-accent-color, #d4a84b);
+    border: 1px solid var(--atelier-accent-color, #d4a84b);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .atelier-{{ section.id }} .atelier__arrow:hover {
+    background-color: var(--atelier-accent-color, #d4a84b);
+    color: var(--atelier-bg-color, #1a1a1a);
+  }
+
+  .atelier-{{ section.id }} .atelier__arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .atelier-{{ section.id }} .atelier__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: 0 auto;
+  }
+
+  .atelier-{{ section.id }} .atelier__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 48px;
+    font-family: var(--font-body-family, sans-serif);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .atelier-{{ section.id }} .atelier__btn--view {
+    background-color: transparent;
+    color: var(--atelier-accent-color, #d4a84b);
+    border: 1px solid var(--atelier-accent-color, #d4a84b);
+    padding: 14px 36px;
+  }
+
+  .atelier-{{ section.id }} .atelier__btn--view:hover {
+    background-color: var(--atelier-accent-color, #d4a84b);
+    color: var(--atelier-bg-color, #1a1a1a);
+  }
+
+  .atelier-{{ section.id }} .atelier__btn--collection {
+    background-color: transparent;
+    color: var(--atelier-accent-color, #d4a84b);
+    border: 1px solid var(--atelier-accent-color, #d4a84b);
+    margin-top: 48px;
+  }
+
+  .atelier-{{ section.id }} .atelier__btn--collection:hover {
+    background-color: var(--atelier-accent-color, #d4a84b);
+    color: var(--atelier-bg-color, #1a1a1a);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .atelier-{{ section.id }} .atelier__slide,
+    .atelier-{{ section.id }} .atelier__arrow,
+    .atelier-{{ section.id }} .atelier__panel,
+    .atelier-{{ section.id }} .atelier__product-card img,
+    .atelier-{{ section.id }} .atelier__product-info,
+    .atelier-{{ section.id }} .atelier__btn {
+      transition: none !important;
+    }
+    @keyframes atelierPanelFadeIn-{{ section.id }} {
+      from { opacity: 1; }
+      to { opacity: 1; }
+    }
+  }
+
+  @media screen and (max-width: 1299px) {
+    .atelier-{{ section.id }} .atelier__container {
+      max-width: 100%;
+      padding: 0 1.5rem;
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    .atelier-{{ section.id }} .atelier__header {
+      text-align: left;
+      padding: 0 1rem;
+    }
+    .atelier-{{ section.id }} .atelier__subtitle {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .atelier-{{ section.id }} .atelier__nav {
+      justify-content: flex-start;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 0 1rem;
+    }
+    .atelier-{{ section.id }} .atelier__nav::-webkit-scrollbar {
+      display: none;
+    }
+    .atelier-{{ section.id }} .atelier__slide {
+      width: 225px;
+    }
+    .atelier-{{ section.id }} .atelier__slide.is-active {
+      width: 225px;
+    }
+    .atelier-{{ section.id }} .atelier__product-card {
+      width: 225px;
+      height: 225px;
+    }
+    .atelier-{{ section.id }} .atelier__slide.is-active .atelier__product-card {
+      height: auto;
+      aspect-ratio: 12 / 15;
+    }
+    .atelier-{{ section.id }} .atelier__arrow {
+      display: none;
+    }
+    .atelier-{{ section.id }} .atelier__bottom {
+      gap: 1.5rem;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .atelier-{{ section.id }} .atelier__container {
+      padding: 0;
+    }
+    .atelier-{{ section.id }} .atelier__header {
+      padding: 0 1rem;
+    }
+    .atelier-{{ section.id }} .atelier__title {
+      font-size: calc({{ section.settings.heading_font_size }}px * 0.67);
+    }
+    .atelier-{{ section.id }} .atelier__subtitle {
+      font-size: calc({{ section.settings.subtitle_font_size }}px * 0.93);
+      padding: 0 1rem;
+    }
+    .atelier-{{ section.id }} .atelier__slide {
+      width: 80vw;
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+    .atelier-{{ section.id }} .atelier__slide.is-active {
+      width: 80vw;
+      opacity: 1;
+    }
+    .atelier-{{ section.id }} .atelier__product-card {
+      width: 80vw;
+      height: 80vw;
+    }
+    .atelier-{{ section.id }} .atelier__slide.is-active .atelier__product-card {
+      height: auto;
+      aspect-ratio: 12 / 15;
+    }
+    .atelier-{{ section.id }} .atelier__carousel-track {
+      gap: 8px;
+    }
+    .atelier-{{ section.id }} .atelier__product-info {
+      padding: 1.5rem 1rem 1rem;
+    }
+    .atelier-{{ section.id }} .atelier__product-title {
+      font-size: calc({{ section.settings.product_title_font_size }}px * 0.79);
+    }
+    .atelier-{{ section.id }} .atelier__bottom {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .atelier-{{ section.id }} .atelier__arrow {
+      display: none;
+    }
+    .atelier-{{ section.id }} .atelier__actions {
+      width: auto;
+      padding: 0 1rem;
+    }
+    .atelier-{{ section.id }} .atelier__btn {
+      width: max-content;
+      min-width: unset;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  class="atelier-selection atelier-{{ section.id }} section-{{ section.id }}-padding"
+  data-section-id="{{ section.id }}"
+  data-active-tab="{{ section.blocks.first.id }}"
+>
+  <div class="atelier__bg-overlay" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="atelier__bg-svg">
+      <polygon points="0,0 100,0 50,100" fill="var(--atelier-overlay-color)"/>
+    </svg>
+  </div>
+
+  <div class="atelier__container">
+    <div class="atelier__header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="atelier__title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="atelier__subtitle">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="atelier__nav" role="tablist">
+      <div class="atelier__nav-track">
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="atelier__tab{% if forloop.first %} is-active{% endif %}"
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-controls="atelier-panel-{{ block.id }}"
+            data-tab-id="{{ block.id }}"
+            {{ block.shopify_attributes }}
+          >
+            {{ block.settings.tab_title }}
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="atelier__panels">
+      {%- for block in section.blocks -%}
+        {%- assign collection = collections[block.settings.collection] -%}
+        <div
+          class="atelier__panel{% if forloop.first %} is-active{% endif %}"
+          id="atelier-panel-{{ block.id }}"
+          role="tabpanel"
+          data-panel-id="{{ block.id }}"
+          aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+        >
+          <div class="atelier__carousel-wrapper">
+            <div class="atelier__carousel" data-carousel-id="{{ section.id }}-{{ block.id }}">
+              <div class="atelier__carousel-track">
+                {%- if collection != blank and collection.products.size > 0 -%}
+                  {%- for product in collection.products limit: block.settings.products_limit -%}
+                    <div
+                      class="atelier__slide{% if forloop.index == 3 %} is-active{% endif %}"
+                      data-slide-index="{{ forloop.index0 }}"
+                      data-product-title="{{ product.title | escape }}"
+                      data-product-vendor="{{ product.vendor | escape }}"
+                      data-product-price="{{ product.price | money }}"
+                      data-product-url="{{ product.url }}"
+                    >
+                      <a href="{{ product.url }}" class="atelier__product-link">
+                        <div class="atelier__product-card">
+                          {%- if product.featured_media -%}
+                            <img
+                              class="atelier__product-img atelier__product-img--primary"
+                              src="{{ product.featured_media | image_url: width: 600 }}"
+                              alt="{{ product.featured_media.alt | default: product.title | escape }}"
+                              loading="lazy"
+                              width="600"
+                              height="{{ 600 | divided_by: product.featured_media.aspect_ratio | round }}"
+                            >
+                            {%- if product.media[1] -%}
+                              <img
+                                class="atelier__product-img atelier__product-img--secondary"
+                                src="{{ product.media[1] | image_url: width: 600 }}"
+                                alt="{{ product.media[1].alt | default: product.title | escape }}"
+                                loading="lazy"
+                                width="600"
+                                height="{{ 600 | divided_by: product.media[1].aspect_ratio | round }}"
+                              >
+                            {%- endif -%}
+                          {%- else -%}
+                            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                          {%- endif -%}
+                        </div>
+                      </a>
+                    </div>
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- for i in (1..6) -%}
+                    <div
+                      class="atelier__slide{% if i == 3 %} is-active{% endif %}"
+                      data-slide-index="{{ forloop.index0 }}"
+                      data-product-title="Product {{ i }}"
+                      data-product-vendor="Brand Name"
+                      data-product-price="$108.00"
+                      data-product-url="#"
+                    >
+                      <div class="atelier__product-link">
+                        <div class="atelier__product-card">
+                          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+
+          <div class="atelier__product-info">
+            <h3 class="atelier__product-title">
+              {%- if collection != blank and collection.products.size > 2 -%}
+                {{ collection.products[2].title }}
+              {%- elsif collection != blank and collection.products.size > 0 -%}
+                {{ collection.products.first.title }}
+              {%- else -%}
+                Summer Dress
+              {%- endif -%}
+            </h3>
+            <p class="atelier__product-vendor">
+              {%- if collection != blank and collection.products.size > 2 -%}
+                {{ collection.products[2].vendor }}
+              {%- elsif collection != blank and collection.products.size > 0 -%}
+                {{ collection.products.first.vendor }}
+              {%- else -%}
+                United By Blue
+              {%- endif -%}
+            </p>
+            <p class="atelier__product-price">
+              {%- if collection != blank and collection.products.size > 2 -%}
+                {{ collection.products[2].price | money }}
+              {%- elsif collection != blank and collection.products.size > 0 -%}
+                {{ collection.products.first.price | money }}
+              {%- else -%}
+                $108.00
+              {%- endif -%}
+            </p>
+          </div>
+
+          <div class="atelier__bottom">
+            <button type="button" class="atelier__arrow atelier__arrow--prev" aria-label="{{ 'accessibility.previous_slide' | t }}" data-carousel-prev>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <div class="atelier__actions">
+              <a href="#" class="atelier__btn atelier__btn--view" data-view-item>{{ section.settings.view_button_text }}</a>
+              {%- if collection != blank -%}
+                <a href="{{ collection.url }}" class="atelier__btn atelier__btn--collection">{{ section.settings.collection_button_text }}</a>
+              {%- else -%}
+                <a href="#" class="atelier__btn atelier__btn--collection">{{ section.settings.collection_button_text }}</a>
+              {%- endif -%}
+            </div>
+
+            <button type="button" class="atelier__arrow atelier__arrow--next" aria-label="{{ 'accessibility.next_slide' | t }}" data-carousel-next>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const sectionId = '{{ section.id }}';
+
+  class AtelierSelection {
+    constructor(section) {
+      this.section = section;
+      this.sectionId = section.dataset.sectionId;
+      this.tabs = section.querySelectorAll('.atelier__tab');
+      this.panels = section.querySelectorAll('.atelier__panel');
+      this.carousels = new Map();
+      this.init();
+    }
+
+    init() {
+      this.bindTabEvents();
+      this.initCarousels();
+      if (window.Shopify && Shopify.designMode) {
+        document.addEventListener('shopify:section:load', (e) => {
+          if (e.detail.sectionId === this.sectionId) this.reinitialize();
+        });
+        document.addEventListener('shopify:block:select', (e) => {
+          const tab = this.section.querySelector(`[data-tab-id="${e.detail.blockId}"]`);
+          if (tab) this.switchTab(tab);
+        });
+      }
+    }
+
+    bindTabEvents() {
+      this.tabs.forEach((tab) => {
+        tab.addEventListener('click', () => this.switchTab(tab));
+      });
+    }
+
+    switchTab(selectedTab) {
+      const tabId = selectedTab.dataset.tabId;
+      this.tabs.forEach((tab) => {
+        const isSelected = tab === selectedTab;
+        tab.classList.toggle('is-active', isSelected);
+        tab.setAttribute('aria-selected', isSelected);
+      });
+      this.panels.forEach((panel) => {
+        const isActive = panel.dataset.panelId === tabId;
+        panel.classList.toggle('is-active', isActive);
+        panel.setAttribute('aria-hidden', !isActive);
+        if (isActive) {
+          const carousel = this.carousels.get(panel.dataset.panelId);
+          if (carousel) carousel.onPanelActivate();
+        }
+      });
+      this.section.dataset.activeTab = tabId;
+    }
+
+    initCarousels() {
+      this.panels.forEach((panel) => {
+        const carousel = new AtelierCarousel(panel, this);
+        this.carousels.set(panel.dataset.panelId, carousel);
+      });
+    }
+
+    reinitialize() {
+      this.carousels.forEach((carousel) => carousel.destroy());
+      this.carousels.clear();
+      this.initCarousels();
+    }
+  }
+
+  class AtelierCarousel {
+    constructor(panel, parent) {
+      this.panel = panel;
+      this.parent = parent;
+      this.track = panel.querySelector('.atelier__carousel-track');
+      this.originalSlides = Array.from(panel.querySelectorAll('.atelier__slide'));
+      this.prevBtn = panel.querySelector('[data-carousel-prev]');
+      this.nextBtn = panel.querySelector('[data-carousel-next]');
+      this.productInfo = panel.querySelector('.atelier__product-info');
+      this.titleEl = panel.querySelector('.atelier__product-title');
+      this.vendorEl = panel.querySelector('.atelier__product-vendor');
+      this.priceEl = panel.querySelector('.atelier__product-price');
+      this.viewBtn = panel.querySelector('[data-view-item]');
+      this.currentIndex = 0;
+      this.isAnimating = false;
+      this.cloneCount = 3;
+      this.init();
+    }
+
+    init() {
+      if (this.originalSlides.length === 0) return;
+      this.setupInfiniteLoop();
+      this.bindEvents();
+      this.goTo(0, false);
+    }
+
+    setupInfiniteLoop() {
+      const totalOriginal = this.originalSlides.length;
+      for (let i = 0; i < this.cloneCount; i++) {
+        const index = (totalOriginal - this.cloneCount + i + totalOriginal) % totalOriginal;
+        const clone = this.originalSlides[index].cloneNode(true);
+        clone.classList.add('is-clone');
+        clone.setAttribute('data-clone-index', index);
+        this.track.insertBefore(clone, this.track.firstChild);
+      }
+      for (let i = 0; i < this.cloneCount; i++) {
+        const index = i % totalOriginal;
+        const clone = this.originalSlides[index].cloneNode(true);
+        clone.classList.add('is-clone');
+        clone.setAttribute('data-clone-index', index);
+        this.track.appendChild(clone);
+      }
+      this.slides = Array.from(this.track.querySelectorAll('.atelier__slide'));
+      this.slides.forEach((slide, index) => {
+        slide.addEventListener('click', (e) => {
+          const realIndex = this.getRealIndex(index);
+          if (realIndex !== this.currentIndex) {
+            e.preventDefault();
+            this.goTo(realIndex);
+          }
+        });
+      });
+    }
+
+    getRealIndex(slideIndex) {
+      const totalOriginal = this.originalSlides.length;
+      if (slideIndex < this.cloneCount) return totalOriginal - this.cloneCount + slideIndex;
+      else if (slideIndex >= this.cloneCount + totalOriginal) return slideIndex - this.cloneCount - totalOriginal;
+      else return slideIndex - this.cloneCount;
+    }
+
+    getSlideIndex(realIndex) {
+      return realIndex + this.cloneCount;
+    }
+
+    bindEvents() {
+      this.prevBtn?.addEventListener('click', () => this.prev());
+      this.nextBtn?.addEventListener('click', () => this.next());
+      let startX = 0;
+      let isDragging = false;
+      this.track?.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      }, { passive: true });
+      this.track?.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) this.next();
+          else this.prev();
+        }
+      }, { passive: true });
+    }
+
+    prev() {
+      if (this.isAnimating) return;
+      this.goTo(this.currentIndex - 1);
+    }
+
+    next() {
+      if (this.isAnimating) return;
+      this.goTo(this.currentIndex + 1);
+    }
+
+    goTo(index, animate = true) {
+      if (this.isAnimating) return;
+      const totalOriginal = this.originalSlides.length;
+      let normalizedIndex = index;
+      if (index < 0) normalizedIndex = totalOriginal + index;
+      else if (index >= totalOriginal) normalizedIndex = index - totalOriginal;
+      this.currentIndex = normalizedIndex;
+      this.displayIndex = index;
+      this.isAnimating = animate;
+      this.updateTrackPosition(index, animate);
+      this.updateSlideStates(index);
+      this.updateProductInfo();
+      if (animate) {
+        setTimeout(() => {
+          this.isAnimating = false;
+          if (index < 0 || index >= totalOriginal) {
+            this.updateTrackPosition(normalizedIndex, false);
+            this.updateSlideStates(normalizedIndex);
+          }
+        }, 400);
+      }
+    }
+
+    updateTrackPosition(index, animate) {
+      const slideIndex = this.getSlideIndex(index);
+      const slideWidth = this.getSlideWidth();
+      const activeWidth = this.getActiveSlideWidth();
+      const gap = this.getGap();
+      const containerWidth = this.track.parentElement.offsetWidth;
+      const leftEdgeOfActive = slideIndex * (slideWidth + gap);
+      const centerOfActiveSlide = leftEdgeOfActive + activeWidth / 2;
+      const translateX = containerWidth / 2 - centerOfActiveSlide;
+      this.track.style.transition = animate ? 'transform 0.4s ease' : 'none';
+      this.track.style.transform = `translateX(${translateX}px)`;
+    }
+
+    getSlideWidth() {
+      const vw = window.innerWidth;
+      if (vw < 768) return vw * 0.8;
+      if (vw < 1024) return 225;
+      return 350;
+    }
+
+    getActiveSlideWidth() {
+      const vw = window.innerWidth;
+      if (vw < 768) return vw * 0.8;
+      if (vw < 1024) return 225;
+      return 350;
+    }
+
+    getGap() {
+      if (window.innerWidth < 768) return 8;
+      return 12;
+    }
+
+    updateSlideStates(index) {
+      const activeSlideIndex = this.getSlideIndex(index);
+      this.slides.forEach((slide, slideIndex) => {
+        slide.classList.remove('is-active');
+        if (slideIndex === activeSlideIndex) slide.classList.add('is-active');
+      });
+    }
+
+    updateProductInfo() {
+      const activeSlide = this.originalSlides[this.currentIndex];
+      if (!activeSlide) return;
+      const title = activeSlide.dataset.productTitle || 'Product Title';
+      const vendor = activeSlide.dataset.productVendor || 'Brand Name';
+      const price = activeSlide.dataset.productPrice || '';
+      const url = activeSlide.dataset.productUrl || '#';
+      if (this.productInfo) {
+        this.productInfo.style.opacity = '0';
+        setTimeout(() => {
+          if (this.titleEl) this.titleEl.textContent = title;
+          if (this.vendorEl) this.vendorEl.textContent = vendor;
+          if (this.priceEl) this.priceEl.textContent = price;
+          if (this.viewBtn) this.viewBtn.href = url;
+          this.productInfo.style.opacity = '1';
+        }, 200);
+      }
+    }
+
+    onPanelActivate() {
+      this.updateTrackPosition(this.currentIndex, false);
+      this.updateSlideStates(this.currentIndex);
+    }
+
+    destroy() {
+      this.track.querySelectorAll('.is-clone').forEach((clone) => clone.remove());
+    }
+  }
+
+  function initAtelierSection() {
+    const section = document.querySelector('.atelier-' + sectionId);
+    if (section && !section.dataset.initialized) {
+      const instance = new AtelierSelection(section);
+      section.atelierInstance = instance;
+      section.dataset.initialized = 'true';
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAtelierSection);
+  } else {
+    initAtelierSection();
+  }
+
+  document.addEventListener('shopify:section:load', (e) => {
+    if (e.detail.sectionId === sectionId) initAtelierSection();
+  });
+
+  let atelierResizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(atelierResizeTimeout);
+    atelierResizeTimeout = setTimeout(() => {
+      const section = document.querySelector('.atelier-' + sectionId);
+      if (section && section.atelierInstance) {
+        section.atelierInstance.carousels.forEach((carousel) => {
+          carousel.updateTrackPosition(carousel.currentIndex, false);
+        });
+      }
+    }, 100);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Sek Atelier Selection",
+  "tag": "section",
+  "class": "section-atelier-selection",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Atelier Selection."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "A curated release of limited-edition items and signature staples. Crafted for enduring elegance and modern expression."
+    },
+    {
+      "type": "text",
+      "id": "view_button_text",
+      "label": "View Button Text",
+      "default": "View Item"
+    },
+    {
+      "type": "text",
+      "id": "collection_button_text",
+      "label": "Collection Button Text",
+      "default": "Explore Full Collection"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#2d2d2d"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Yellow)",
+      "default": "#d4a84b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext Color",
+      "default": "#999999"
+    },
+    {
+      "type": "header",
+      "content": "Font Sizes"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "subtitle_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle Font Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "tab_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tab Font Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "product_title_font_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Product Title Font Size",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_tab",
+      "name": "Collection Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "default": "SIGNATURE"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "range",
+          "id": "products_limit",
+          "min": 4,
+          "max": 20,
+          "step": 1,
+          "default": 10,
+          "label": "Maximum products"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sek Atelier Selection",
+      "blocks": [
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "SIGNATURE"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "LIMITED EDITION"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
