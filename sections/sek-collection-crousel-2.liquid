@@ -1,0 +1,823 @@
+<style>
+  #shopify-section-{{ section.id }} .coverflow-section-v2 {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(180deg, {{ section.settings.bg_gradient_start }} 0%, {{ section.settings.bg_gradient_end }} 100%);
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__heading {
+    text-align: center;
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 3rem 0;
+    padding: 0 20px;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+    perspective: 1500px;
+    max-width: 1600px;
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__card {
+    position: absolute;
+    width: 400px;
+    height: 500px;
+    border-radius: {{ section.settings.card_border_radius }}px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    cursor: pointer;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -250px;
+    transform-style: preserve-3d;
+    background: #fff;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__card-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 6px 16px;
+    background: {{ section.settings.badge_bg_color }};
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: {{ section.settings.badge_text_color }};
+    font-size: 12px;
+    line-height:100%;
+    font-weight: 500;
+    border-radius: 20px;
+    z-index: 10;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__badge-icon {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    padding: 24px 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.1) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-radius: 0 0 {{ section.settings.card_border_radius }}px {{ section.settings.card_border_radius }}px;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__product-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__product-title {
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin: 0 0 4px 0;
+    color: {{ section.settings.card_title_color }};
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__product-subtitle {
+    font-size: {{ section.settings.subtitle_size }}px;
+    color: {{ section.settings.card_subtitle_color }};
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__view-btn {
+    padding: 12px 20px;
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 100px;
+    border: none;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__view-btn:hover {
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__card.is-active {
+    width: 420px;
+    height: 530px;
+    margin-left: -210px;
+    margin-top: -265px;
+    z-index: 100 !important;
+  }
+
+
+  #shopify-section-{{ section.id }} .coverflow__card.is-active .coverflow__product-subtitle {
+    font-size: calc({{ section.settings.subtitle_size }}px * 1.08);
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__card.is-active .coverflow__view-btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__card:not(.is-active) .coverflow__badge {
+    opacity: 0;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background-color: {{ section.settings.nav_bg_color }};
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__nav:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__nav svg {
+    width: 20px;
+    height: 20px;
+    color: {{ section.settings.nav_icon_color }};
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__nav--prev {
+    left: calc(50% - 500px);
+  }
+
+  #shopify-section-{{ section.id }} .coverflow__nav--next {
+    right: calc(50% - 500px);
+  }
+
+  @media screen and (min-width: 1400px) {
+    #shopify-section-{{ section.id }} .coverflow__wrapper {
+      height: 650px;
+    }
+    #shopify-section-{{ section.id }} .coverflow__card {
+      width: 400px;
+      height: 500px;
+      margin-left: -200px;
+      margin-top: -250px;
+    }
+    #shopify-section-{{ section.id }} .coverflow__card.is-active {
+      width: 440px;
+      height: 550px;
+      margin-left: -220px;
+      margin-top: -275px;
+    }
+    #shopify-section-{{ section.id }} .coverflow__nav--prev {
+      left: calc(50% - 580px);
+    }
+    #shopify-section-{{ section.id }} .coverflow__nav--next {
+      right: calc(50% - 580px);
+    }
+  }
+
+  @media screen and (max-width: 1199px) {
+    #shopify-section-{{ section.id }} .coverflow__wrapper {
+      height: 520px;
+    }
+    #shopify-section-{{ section.id }} .coverflow__card {
+      width: 320px;
+      height: 400px;
+      margin-left: -160px;
+      margin-top: -200px;
+    }
+    #shopify-section-{{ section.id }} .coverflow__card.is-active {
+      width: 350px;
+      height: 440px;
+      margin-left: -175px;
+      margin-top: -220px;
+    }
+    #shopify-section-{{ section.id }} .coverflow__nav--prev {
+      left: calc(50% - 420px);
+    }
+    #shopify-section-{{ section.id }} .coverflow__nav--next {
+      right: calc(50% - 420px);
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    #shopify-section-{{ section.id }} .coverflow-section-v2 {
+      padding: 20px 0;
+    }
+    #shopify-section-{{ section.id }} .coverflow__wrapper {
+      height: 80vh;
+      min-height: 500px;
+      max-height: 750px;
+      perspective: none;
+      overflow: hidden;
+      padding: 0;
+    }
+    #shopify-section-{{ section.id }} .coverflow__track {
+      transform-style: flat;
+      width: 100%;
+      height: 100%;
+    }
+    #shopify-section-{{ section.id }} .coverflow__card {
+      width: 88%;
+      max-width: none;
+      height: 100%;
+      left: 50%;
+      top: 0;
+      margin-left: -44%;
+      margin-top: 0;
+      position: absolute;
+      border-radius: 24px;
+      transition: left 0.4s ease, opacity 0.4s ease;
+    }
+    #shopify-section-{{ section.id }} .coverflow__card.is-active {
+      width: 88%;
+      height: 100%;
+      left: 50%;
+      margin-left: -44%;
+      margin-top: 0;
+    }
+    #shopify-section-{{ section.id }} .coverflow__card:not(.is-active) .coverflow__card-content {
+      display: none;
+    }
+    #shopify-section-{{ section.id }} .coverflow__card:not(.is-active) .coverflow__badge {
+      display: none;
+    }
+    #shopify-section-{{ section.id }} .coverflow__nav {
+      display: none;
+    }
+    #shopify-section-{{ section.id }} .coverflow__card-content {
+      padding: 20px;
+    }
+    #shopify-section-{{ section.id }} .coverflow__product-title {
+      font-size: calc({{ section.settings.title_size }}px * 0.83);
+    }
+    #shopify-section-{{ section.id }} .coverflow__product-subtitle {
+      font-size: {{ section.settings.subtitle_size }}px;
+    }
+    #shopify-section-{{ section.id }} .coverflow__view-btn {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .coverflow__heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.76);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .coverflow-section-v2 {
+      padding: calc({{ section.settings.padding_top }}px * 0.5) 0 calc({{ section.settings.padding_bottom }}px * 0.5);
+    }
+    #shopify-section-{{ section.id }} .coverflow__heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.57);
+    }
+    #shopify-section-{{ section.id }} .coverflow__card-content {
+      padding: 16px;
+    }
+    #shopify-section-{{ section.id }} .coverflow__product-title {
+      font-size: calc({{ section.settings.title_size }}px * 0.75);
+    }
+    #shopify-section-{{ section.id }} .coverflow__product-subtitle {
+      font-size: calc({{ section.settings.subtitle_size }}px * 0.92);
+    }
+    #shopify-section-{{ section.id }} .coverflow__badge {
+      font-size: 10px;
+      padding: 5px 12px;
+    }
+  }
+</style>
+
+<div class="coverflow-section-v2">
+  {% if section.settings.heading != blank %}
+    <h2 class="coverflow__heading">{{ section.settings.heading }}</h2>
+  {% endif %}
+
+  <div class="coverflow__wrapper">
+    <button class="coverflow__nav coverflow__nav--prev" aria-label="Previous">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
+    <div class="coverflow__track" id="coverflow-track-v2-{{ section.id }}">
+      {% assign collection = section.settings.collection %}
+
+      {% if collection != blank and collection.products.size > 0 %}
+        {% for product in collection.products limit: section.settings.products_limit %}
+          <div class="coverflow__card" data-index="{{ forloop.index0 }}">
+            <span class="coverflow__badge">
+              <svg class="coverflow__badge-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C13.1 2 14 2.9 14 4C14 4.74 13.6 5.39 13 5.73V7H14C17.31 7 20 9.69 20 13V20C20 21.1 19.1 22 18 22H6C4.9 22 4 21.1 4 20V13C4 9.69 6.69 7 10 7H11V5.73C10.4 5.39 10 4.74 10 4C10 2.9 10.9 2 12 2M6 13V20H18V13C18 10.79 16.21 9 14 9H10C7.79 9 6 10.79 6 13M12 12C13.1 12 14 12.9 14 14C14 15.1 13.1 16 12 16C10.9 16 10 15.1 10 14C10 12.9 10.9 12 12 12Z"/>
+              </svg>
+              {% if product.tags contains 'bestseller' or product.tags contains 'trending' %}
+                {{ section.settings.badge_text }}
+              {% elsif product.available == false %}
+                Sold Out
+              {% elsif product.compare_at_price > product.price %}
+                Sale
+              {% else %}
+                {{ section.settings.badge_text }}
+              {% endif %}
+            </span>
+            <div class="coverflow__card-image-wrapper">
+              <img class="coverflow__card-image" src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title | escape }}" loading="lazy">
+            </div>
+            <div class="coverflow__card-content">
+              <div class="coverflow__product-info">
+                <h3 class="coverflow__product-title">{{ product.title }}</h3>
+                <p class="coverflow__product-subtitle">{{ product.metafields.custom.subtitle | default: product.vendor }}</p>
+              </div>
+              <a href="{{ product.url }}" class="coverflow__view-btn">{{ section.settings.button_text }}</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        {% assign sample_data = 'LED Beauty Wand|Red & Blue Light Therapy,Derma Roller|Titanium Microneedle,Sleep Tape|The #1 most recommended,Sculpting Roller|Lift and contour,LED Mask|Professional therapy,Gua Sha Tool|Natural jade stone,Face Steamer|Deep pore cleansing,Eye Massager|Reduce dark circles,Hair Remover|Painless technology' | split: ',' %}
+        {% for i in (1..9) %}
+          {% assign item_data = sample_data[forloop.index0] | split: '|' %}
+          <div class="coverflow__card" data-index="{{ forloop.index0 }}">
+            <span class="coverflow__badge">
+              <svg class="coverflow__badge-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C13.1 2 14 2.9 14 4C14 4.74 13.6 5.39 13 5.73V7H14C17.31 7 20 9.69 20 13V20C20 21.1 19.1 22 18 22H6C4.9 22 4 21.1 4 20V13C4 9.69 6.69 7 10 7H11V5.73C10.4 5.39 10 4.74 10 4C10 2.9 10.9 2 12 2M6 13V20H18V13C18 10.79 16.21 9 14 9H10C7.79 9 6 10.79 6 13M12 12C13.1 12 14 12.9 14 14C14 15.1 13.1 16 12 16C10.9 16 10 15.1 10 14C10 12.9 10.9 12 12 12Z"/>
+              </svg>
+              {{ section.settings.badge_text }}
+            </span>
+            <div class="coverflow__card-image-wrapper">
+              <div class="coverflow__card-image" style="background: linear-gradient(135deg, #e8d4c4 0%, #d4b8a8 50%, #c9a898 100%); width: 100%; height: 100%;"></div>
+            </div>
+            <div class="coverflow__card-content">
+              <div class="coverflow__product-info">
+                <h3 class="coverflow__product-title">{{ item_data[0] | default: 'Product Title' }}</h3>
+                <p class="coverflow__product-subtitle">{{ item_data[1] | default: 'Product subtitle' }}</p>
+              </div>
+              <a href="#" class="coverflow__view-btn">{{ section.settings.button_text }}</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <button class="coverflow__nav coverflow__nav--next" aria-label="Next">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var sectionId = '{{ section.id }}';
+  var track = document.getElementById('coverflow-track-v2-' + sectionId);
+  if (!track) return;
+
+  var cards = Array.from(track.querySelectorAll('.coverflow__card'));
+  var totalCards = cards.length;
+  if (totalCards === 0) return;
+
+  var currentIndex = Math.floor(totalCards / 2);
+  var isAnimating = false;
+
+  function getSpacing() {
+    var vw = window.innerWidth;
+    if (vw < 750) return 100;
+    if (vw < 990) return 160;
+    if (vw < 1200) return 200;
+    if (vw < 1400) return 260;
+    return 290;
+  }
+
+  function getDepth() {
+    var vw = window.innerWidth;
+    if (vw < 750) return 30;
+    if (vw < 990) return 50;
+    if (vw < 1200) return 70;
+    return 80;
+  }
+
+  var lastIsMobile = null;
+
+  function resetCardStyles(card) {
+    card.style.transform = '';
+    card.style.left = '';
+    card.style.marginLeft = '';
+    card.style.marginTop = '';
+    card.style.opacity = '';
+    card.style.zIndex = '';
+    card.style.pointerEvents = '';
+  }
+
+  function renderCards() {
+    var vw = window.innerWidth;
+    var isMobile = vw < 1024;
+    var spacing = getSpacing();
+    var depth = getDepth();
+    var visibleRange = isMobile ? 0 : 2;
+
+    // Reset all card styles when switching between mobile and desktop
+    if (lastIsMobile !== null && lastIsMobile !== isMobile) {
+      cards.forEach(function(card) {
+        resetCardStyles(card);
+      });
+    }
+    lastIsMobile = isMobile;
+
+    cards.forEach(function(card, i) {
+      var offset = i - currentIndex;
+
+      var halfTotal = totalCards / 2;
+      if (offset > halfTotal) {
+        offset = offset - totalCards;
+      } else if (offset < -halfTotal) {
+        offset = offset + totalCards;
+      }
+
+      var absOffset = Math.abs(offset);
+
+      // On mobile, show active card full and side cards peeking from edges
+      if (isMobile) {
+        card.style.transform = 'none';
+
+        // Hide cards more than 1 position away
+        if (absOffset > 1) {
+          card.style.opacity = '0';
+          card.style.pointerEvents = 'none';
+          card.style.left = offset > 0 ? '200%' : '-100%';
+          card.style.marginLeft = '0';
+          card.style.zIndex = '0';
+          card.classList.remove('is-active');
+          return;
+        }
+
+        if (offset === 0) {
+          // Center card - main visible card
+          card.style.opacity = '1';
+          card.style.pointerEvents = 'auto';
+          card.style.left = '50%';
+          card.style.marginLeft = '-44%';
+          card.style.zIndex = '100';
+          card.classList.add('is-active');
+        } else {
+          // Side cards - peeking from edges
+          var sidePosition = offset > 0 ? 'calc(100% - 12%)' : '-32%';
+          card.style.opacity = '1';
+          card.style.pointerEvents = 'auto';
+          card.style.left = sidePosition;
+          card.style.marginLeft = '0';
+          card.style.zIndex = '50';
+          card.classList.remove('is-active');
+        }
+        return;
+      }
+
+      // Desktop mode - reset mobile-specific styles
+      card.style.left = '';
+      card.style.marginLeft = '';
+
+      if (absOffset > visibleRange) {
+        card.style.opacity = '0';
+        card.style.pointerEvents = 'none';
+        card.style.transform = 'translateX(' + (offset > 0 ? 1000 : -1000) + 'px) scale(0.5)';
+        card.style.zIndex = '0';
+        card.classList.remove('is-active');
+        return;
+      }
+
+      var x = offset * spacing;
+      var z = -absOffset * depth;
+
+      var scale = 1 - (absOffset * 0.1);
+      if (scale < 0.8) scale = 0.8;
+
+      var opacity = 1 - (absOffset * 0.2);
+      if (opacity < 0.5) opacity = 0.5;
+
+      var zIndex = 50 - absOffset * 10;
+
+      card.style.transform = 'translateX(' + x + 'px) translateZ(' + z + 'px) scale(' + scale + ')';
+      card.style.zIndex = zIndex;
+      card.style.opacity = opacity;
+      card.style.pointerEvents = 'auto';
+
+      if (offset === 0) {
+        card.classList.add('is-active');
+      } else {
+        card.classList.remove('is-active');
+      }
+    });
+  }
+
+  function slideNext() {
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex = (currentIndex + 1) % totalCards;
+    renderCards();
+    setTimeout(function() { isAnimating = false; }, 500);
+  }
+
+  function slidePrev() {
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+    renderCards();
+    setTimeout(function() { isAnimating = false; }, 500);
+  }
+
+  renderCards();
+
+  var section = track.closest('.coverflow-section-v2');
+  var prevBtn = section.querySelector('.coverflow__nav--prev');
+  var nextBtn = section.querySelector('.coverflow__nav--next');
+
+  prevBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    slidePrev();
+  });
+
+  nextBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    slideNext();
+  });
+
+  cards.forEach(function(card, index) {
+    card.addEventListener('click', function(e) {
+      if (index === currentIndex) return;
+      e.preventDefault();
+      if (isAnimating) return;
+      isAnimating = true;
+      currentIndex = index;
+      renderCards();
+      setTimeout(function() { isAnimating = false; }, 500);
+    });
+  });
+
+  var touchStartX = 0;
+  track.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  track.addEventListener('touchend', function(e) {
+    var diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) slideNext();
+      else slidePrev();
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', renderCards);
+});
+</script>
+
+{% schema %}
+{
+  "name": "sek Collection Carousel 2",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "min": 5,
+      "max": 15,
+      "step": 1,
+      "label": "Maximum products",
+      "default": 9
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Bestseller / Trending"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 14,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Product title size",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Product subtitle size",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_gradient_start",
+      "label": "Background gradient start",
+      "default": "#f5c6a5"
+    },
+    {
+      "type": "color",
+      "id": "bg_gradient_end",
+      "label": "Background gradient end",
+      "default": "#fde8dc"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge background",
+      "default": "#c75050"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_content_bg",
+      "label": "Card content background",
+      "default": "#e8ddd4"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card title color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "card_subtitle_color",
+      "label": "Card subtitle color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "nav_bg_color",
+      "label": "Nav button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_icon_color",
+      "label": "Nav icon color",
+      "default": "#1a1a1a"
+    }
+  ],
+  "presets": [
+    {
+      "name": "sek Collection Carousel 2"
+    }
+  ]
+}
+{% endschema %}
