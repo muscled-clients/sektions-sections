@@ -1,0 +1,528 @@
+<style>
+  #shopify-section-{{ section.id }} .reveal-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .reveal-carousel__heading {
+    text-align: center;
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 40px;
+    padding: 0 20px;
+    letter-spacing: 0.5px;
+  }
+
+  #shopify-section-{{ section.id }} .reveal-carousel__wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Center divider line — 14px wide, card height, rounded */
+  #shopify-section-{{ section.id }} .reveal-carousel__line {
+    display:block !important;
+    position: absolute;
+    top: {{ section.settings.card_gap }}px;
+    bottom: {{ section.settings.card_gap }}px;
+    left: 50%;
+    width: 14px;
+    transform: translateX(-50%);
+    background: {{ section.settings.line_color }};
+    z-index: 10;
+    pointer-events: none;
+    border-radius: 7px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 119, 0, 0.2);
+  }
+
+  #shopify-section-{{ section.id }} .reveal-carousel__line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200%;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.35) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    animation: revealLineFlow-{{ section.id }} 2s ease-in-out infinite;
+  }
+
+  @keyframes revealLineFlow-{{ section.id }} {
+    {% if section.settings.direction == 'left' %}
+    0%   { transform: translateY(-50%); }
+    100% { transform: translateY(0%); }
+    {% else %}
+    0%   { transform: translateY(0%); }
+    100% { transform: translateY(-50%); }
+    {% endif %}
+  }
+
+
+  /* Track holds all cards in a row */
+  #shopify-section-{{ section.id }} .reveal-carousel__track {
+    display: flex;
+    will-change: transform;
+  }
+
+  /* Each card is 1/6 of the container width */
+  #shopify-section-{{ section.id }} .reveal-carousel__card {
+    flex: 0 0 calc(100% / 6);
+    position: relative;
+    box-sizing: border-box;
+    padding: {{ section.settings.card_gap }}px;
+  }
+
+  #shopify-section-{{ section.id }} .reveal-carousel__card-inner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9.6 / 12;
+    max-height: 290px;
+    overflow: hidden;
+    border-radius: {{ section.settings.card_radius }}px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Image layers stacked on top of each other */
+  #shopify-section-{{ section.id }} .reveal-carousel__layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  #shopify-section-{{ section.id }} .reveal-carousel__layer--before {
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .reveal-carousel__layer--after {
+    z-index: 2;
+    {% if section.settings.direction == 'right' %}
+    clip-path: inset(0 0 0 100%);
+    {% else %}
+    clip-path: inset(0 100% 0 0);
+    {% endif %}
+    will-change: clip-path;
+  }
+
+  /* Responsive: 4 cards on tablet */
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .reveal-carousel__card {
+      flex: 0 0 calc(100% / 4);
+    }
+    #shopify-section-{{ section.id }} .reveal-carousel__heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.71);
+      margin-bottom: 30px;
+    }
+  }
+
+  /* Responsive: 2 cards on mobile */
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .reveal-carousel__card {
+      flex: 0 0 calc(100% / 2);
+    }
+    #shopify-section-{{ section.id }} .reveal-carousel__heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.57);
+      margin-bottom: 24px;
+    }
+  }
+</style>
+
+<section class="reveal-carousel" id="reveal-carousel-{{ section.id }}">
+  {% if section.settings.heading != blank %}
+    <h2 class="reveal-carousel__heading">{{ section.settings.heading }}</h2>
+  {% endif %}
+
+  <div class="reveal-carousel__wrapper" id="reveal-wrapper-{{ section.id }}">
+    <div class="reveal-carousel__line"></div>
+    <div class="reveal-carousel__track" id="reveal-track-{{ section.id }}">
+      {% for block in section.blocks %}
+        <div class="reveal-carousel__card" {{ block.shopify_attributes }}>
+          <div class="reveal-carousel__card-inner">
+            {%- comment -%} LAYER 1: visible before crossing the center line {%- endcomment -%}
+            {% if block.settings.image_before != blank %}
+              <div class="reveal-carousel__layer reveal-carousel__layer--before"
+                   style="background-image: url('{{ block.settings.image_before | image_url: width: 800 }}');">
+              </div>
+            {% else %}
+              <div class="reveal-carousel__layer reveal-carousel__layer--before"
+                   style="background: linear-gradient(135deg, {{ block.settings.color_before_start }} 0%, {{ block.settings.color_before_end }} 100%);">
+              </div>
+            {% endif %}
+
+            {%- comment -%} LAYER 2: revealed after crossing the center line {%- endcomment -%}
+            {% if block.settings.image_after != blank %}
+              <div class="reveal-carousel__layer reveal-carousel__layer--after"
+                   style="background-image: url('{{ block.settings.image_after | image_url: width: 800 }}');">
+              </div>
+            {% else %}
+              <div class="reveal-carousel__layer reveal-carousel__layer--after"
+                   style="background: linear-gradient(135deg, {{ block.settings.color_after_start }} 0%, {{ block.settings.color_after_end }} 100%);">
+              </div>
+            {% endif %}
+
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var SECTION_ID = '{{ section.id }}';
+  var SPEED = parseFloat('{{ section.settings.speed }}') || 1;
+  var DIRECTION = '{{ section.settings.direction }}';
+
+  function initRevealCarousel() {
+    var sectionEl = document.getElementById('reveal-carousel-' + SECTION_ID);
+    if (!sectionEl) return;
+
+    var wrapper = document.getElementById('reveal-wrapper-' + SECTION_ID);
+    var track = document.getElementById('reveal-track-' + SECTION_ID);
+    if (!wrapper || !track) return;
+
+    var originalCards = track.querySelectorAll('.reveal-carousel__card');
+    var originalCount = originalCards.length;
+    if (originalCount === 0) return;
+
+    /* ── Clone cards for seamless infinite loop ── */
+    var originalHTML = track.innerHTML;
+    var visibleCount = 6;
+    var repeatCount = Math.max(3, Math.ceil((visibleCount * 3) / originalCount) + 1);
+    var allHTML = '';
+    for (var r = 0; r < repeatCount; r++) {
+      allHTML += originalHTML;
+    }
+    track.innerHTML = allHTML;
+
+    /* ── Cache elements after cloning ── */
+    var allInners = track.querySelectorAll('.reveal-carousel__card-inner');
+    var allAfterLayers = track.querySelectorAll('.reveal-carousel__layer--after');
+
+    var scrollPos = 0;
+    var animFrameId = null;
+    var directionMultiplier = DIRECTION === 'right' ? -1 : 1;
+
+    /* ── Get one full set width (original cards only) ── */
+    function getSetWidth() {
+      var cardWidth = wrapper.offsetWidth / visibleCount;
+      return originalCount * cardWidth;
+    }
+
+    /* ── Update clip-path on every after-layer based on center line position ── */
+    function updateClipping() {
+      var wrapperRect = wrapper.getBoundingClientRect();
+      var centerX = wrapperRect.left + wrapperRect.width / 2;
+      var wLeft = wrapperRect.left - 10;
+      var wRight = wrapperRect.right + 10;
+
+      for (var i = 0; i < allInners.length; i++) {
+        var rect = allInners[i].getBoundingClientRect();
+        var afterLayer = allAfterLayers[i];
+        if (!afterLayer) continue;
+
+        /* Skip cards outside the visible wrapper area */
+        if (rect.right < wLeft || rect.left > wRight) continue;
+
+        if (DIRECTION === 'right') {
+          /* Cards move left → right; reveal from right side */
+          if (rect.left >= centerX) {
+            afterLayer.style.clipPath = 'inset(0 0 0 0)';
+          } else if (rect.right <= centerX) {
+            afterLayer.style.clipPath = 'inset(0 0 0 100%)';
+          } else {
+            var passed = rect.right - centerX;
+            var clipLeft = ((rect.width - passed) / rect.width) * 100;
+            afterLayer.style.clipPath = 'inset(0 0 0 ' + clipLeft.toFixed(2) + '%)';
+          }
+        } else {
+          /* Cards move right → left; reveal from left side */
+          if (rect.right <= centerX) {
+            afterLayer.style.clipPath = 'inset(0 0 0 0)';
+          } else if (rect.left >= centerX) {
+            afterLayer.style.clipPath = 'inset(0 100% 0 0)';
+          } else {
+            var passed = centerX - rect.left;
+            var clipRight = ((rect.width - passed) / rect.width) * 100;
+            afterLayer.style.clipPath = 'inset(0 ' + clipRight.toFixed(2) + '% 0 0)';
+          }
+        }
+      }
+    }
+
+    /* ── Animation loop ── */
+    function animate() {
+      scrollPos += SPEED * directionMultiplier;
+      var setWidth = getSetWidth();
+
+      /* Wrap around for infinite scrolling */
+      if (DIRECTION === 'right') {
+        if (scrollPos <= 0) {
+          scrollPos += setWidth;
+        }
+      } else {
+        if (scrollPos >= setWidth) {
+          scrollPos -= setWidth;
+        }
+      }
+
+      track.style.transform = 'translateX(' + (-scrollPos) + 'px)';
+      updateClipping();
+      animFrameId = requestAnimationFrame(animate);
+    }
+
+    /* ── Start ── */
+    animFrameId = requestAnimationFrame(animate);
+
+    /* ── Handle resize: recache visible count for responsive ── */
+    function updateVisibleCount() {
+      var vw = window.innerWidth;
+      if (vw <= 749) {
+        visibleCount = 2;
+      } else if (vw <= 989) {
+        visibleCount = 4;
+      } else {
+        visibleCount = 6;
+      }
+    }
+
+    updateVisibleCount();
+
+    /* Set initial scroll offset for right direction so cards exist on the left */
+    if (DIRECTION === 'right') {
+      scrollPos = getSetWidth();
+    }
+
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        updateVisibleCount();
+        var setWidth = getSetWidth();
+        if (DIRECTION === 'right') {
+          if (scrollPos <= 0 || scrollPos > setWidth * 2) scrollPos = setWidth;
+        } else {
+          if (scrollPos >= setWidth) scrollPos = 0;
+        }
+      }, 150);
+    });
+
+    /* ── Cleanup on section unload (Shopify editor) ── */
+    if (window.Shopify && window.Shopify.designMode) {
+      document.addEventListener('shopify:section:unload', function(e) {
+        if (e.detail.sectionId === SECTION_ID && animFrameId) {
+          cancelAnimationFrame(animFrameId);
+        }
+      });
+    }
+  }
+
+  /* ── Init when DOM is ready ── */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRevealCarousel);
+  } else {
+    initRevealCarousel();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "sek-image-reveal",
+  "tag": "section",
+  "class": "section-reveal-carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Reveal Carousel"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 42
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Center line color",
+      "default": "#d4976b"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "label": "Card border radius (px)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "label": "Card gap (px)",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Auto-slide speed",
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Slide direction",
+      "default": "right",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Section padding top (px)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Section padding bottom (px)",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_before",
+          "label": "Image (Before Line)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_after",
+          "label": "Image (After Line)"
+        },
+        {
+          "type": "header",
+          "content": "Fallback colors (when no images set)"
+        },
+        {
+          "type": "color",
+          "id": "color_before_start",
+          "label": "Before gradient start",
+          "default": "#667eea"
+        },
+        {
+          "type": "color",
+          "id": "color_before_end",
+          "label": "Before gradient end",
+          "default": "#764ba2"
+        },
+        {
+          "type": "color",
+          "id": "color_after_start",
+          "label": "After gradient start",
+          "default": "#f093fb"
+        },
+        {
+          "type": "color",
+          "id": "color_after_end",
+          "label": "After gradient end",
+          "default": "#f5576c"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "sek-image-reveal",
+      "settings": {
+        "heading": "Reveal Carousel"
+      },
+      "blocks": [
+        {
+          "type": "card",
+          "settings": { "color_before_start": "#667eea", "color_before_end": "#764ba2", "color_after_start": "#f093fb", "color_after_end": "#f5576c" }
+        },
+        {
+          "type": "card",
+          "settings": { "color_before_start": "#2d3436", "color_before_end": "#636e72", "color_after_start": "#00b894", "color_after_end": "#00cec9" }
+        },
+        {
+          "type": "card",
+          "settings": { "color_before_start": "#0c0c1d", "color_before_end": "#1a1a3e", "color_after_start": "#e17055", "color_after_end": "#fdcb6e" }
+        },
+        {
+          "type": "card",
+          "settings": { "color_before_start": "#2c3e50", "color_before_end": "#3498db", "color_after_start": "#e74c3c", "color_after_end": "#f39c12" }
+        },
+        {
+          "type": "card",
+          "settings": { "color_before_start": "#1e3c72", "color_before_end": "#2a5298", "color_after_start": "#e55d87", "color_after_end": "#5fc3e4" }
+        },
+        {
+          "type": "card",
+          "settings": { "color_before_start": "#0f2027", "color_before_end": "#203a43", "color_after_start": "#fc4a1a", "color_after_end": "#f7b733" }
+        },
+        {
+          "type": "card",
+          "settings": { "color_before_start": "#200122", "color_before_end": "#6f0000", "color_after_start": "#56ab2f", "color_after_end": "#a8e063" }
+        },
+        {
+          "type": "card",
+          "settings": { "color_before_start": "#141e30", "color_before_end": "#243b55", "color_after_start": "#f857a6", "color_after_end": "#ff5858" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
