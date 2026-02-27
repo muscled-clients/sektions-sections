@@ -1,0 +1,631 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .comparison-{{ section.id }} {
+    --comparison-bg-color: {{ section.settings.background_color }};
+    --comparison-text-color: {{ section.settings.text_color }};
+    --comparison-left-bg: {{ section.settings.left_column_bg }};
+    --comparison-right-bg: {{ section.settings.right_column_bg }};
+    --comparison-btn-bg: {{ section.settings.button_bg_color }};
+    --comparison-btn-text: {{ section.settings.button_text_color }};
+  }
+
+  .comparison-{{ section.id }}.comparison-section {
+    position: relative;
+    width: 100%;
+    background-color: var(--comparison-bg-color, #ffffff);
+  }
+
+  .comparison-{{ section.id }} .comparison__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .comparison-{{ section.id }} .comparison__heading {
+    text-align: center;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    color: var(--comparison-text-color, #1a1a1a);
+    margin: 0 0 3rem 0;
+    letter-spacing: 0.02em;
+  }
+
+  .comparison-{{ section.id }} .comparison__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    position: relative;
+  }
+
+  .comparison-{{ section.id }} .comparison__image {
+    flex: 0 0 auto;
+    width: 280px;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .comparison-{{ section.id }} .comparison__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .comparison-{{ section.id }} .comparison__image .placeholder-svg {
+    width: 100%;
+    height: 300px;
+    background-color: #f0f0f0;
+  }
+
+  .comparison-{{ section.id }} .comparison__table {
+    flex: 1;
+    max-width: 500px;
+    position: relative;
+  }
+
+  .comparison-{{ section.id }} .comparison__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .comparison-{{ section.id }} .comparison__row {
+    display: flex;
+    position: relative;
+    gap: 5px;
+    margin-bottom: 5px;
+  }
+
+  .comparison-{{ section.id }} .comparison__cell {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border: 1px solid #e0e0e0;
+    margin: -0.5px;
+  }
+
+  .comparison-{{ section.id }} .comparison__cell--left {
+    background-color: var(--comparison-left-bg, #f5f5f5);
+    justify-content: center;
+  }
+
+  .comparison-{{ section.id }} .comparison__cell--right {
+    background-color: var(--comparison-right-bg, #f0f0f0);
+    justify-content: center;
+  }
+
+  .comparison-{{ section.id }} .comparison__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .comparison-{{ section.id }} .comparison__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .comparison-{{ section.id }} .comparison__text {
+    font-family: var(--font-body-family, sans-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--comparison-text-color, #1a1a1a);
+  }
+
+  .comparison-{{ section.id }} .comparison__vs {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background-color: {{ section.settings.vs_badge_color }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .comparison-{{ section.id }} .comparison__vs span {
+    font-family: var(--font-body-family, sans-serif);
+    font-size: 14px;
+    font-weight: 700;
+    color: {{ section.settings.vs_text_color }};
+    letter-spacing: 0.05em;
+  }
+
+  .comparison-{{ section.id }} .comparison__vs--mobile {
+    display: none;
+  }
+
+  .comparison-{{ section.id }} .comparison__button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  .comparison-{{ section.id }} .comparison__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 40px;
+    background-color: var(--comparison-btn-bg, #ffffff);
+    color: var(--comparison-btn-text, #1a1a1a);
+    font-family: var(--font-body-family, sans-serif);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid {{ section.settings.button_border_color }};
+    transition: all 0.25s ease;
+  }
+
+  .comparison-{{ section.id }} .comparison__button:hover {
+    background-color: {{ section.settings.button_border_color }};
+    color: {{ section.settings.vs_text_color }};
+  }
+
+  @media screen and (max-width: 1024px) {
+    .comparison-{{ section.id }} .comparison__image {
+      width: 220px;
+    }
+    .comparison-{{ section.id }} .comparison__table {
+      max-width: 400px;
+    }
+    .comparison-{{ section.id }} .comparison__cell {
+      padding: 12px 15px;
+    }
+    .comparison-{{ section.id }} .comparison__text {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .comparison-{{ section.id }} .comparison__container {
+      padding: 0 1rem;
+    }
+    .comparison-{{ section.id }} .comparison__heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.67);
+      margin-bottom: 2rem;
+    }
+    .comparison-{{ section.id }} .comparison__content {
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: relative;
+    }
+    .comparison-{{ section.id }} .comparison__image {
+      width: calc(50% - 0.5rem);
+      max-width: none;
+      order: 0;
+    }
+    .comparison-{{ section.id }} .comparison__image--left {
+      order: 0;
+    }
+    .comparison-{{ section.id }} .comparison__image--right {
+      order: 1;
+    }
+    .comparison-{{ section.id }} .comparison__table {
+      width: 100%;
+      max-width: 100%;
+      order: 2;
+    }
+    .comparison-{{ section.id }} .comparison__cell {
+      padding: 12px 10px;
+      gap: 8px;
+    }
+    .comparison-{{ section.id }} .comparison__text {
+      font-size: 13px;
+    }
+    .comparison-{{ section.id }} .comparison__row .comparison__vs {
+      display: none;
+    }
+    .comparison-{{ section.id }} .comparison__vs--mobile {
+      display: flex;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      top: calc((50vw - 1rem) / 2);
+      width: 40px;
+      height: 40px;
+    }
+    .comparison-{{ section.id }} .comparison__vs--mobile span {
+      font-size: 12px;
+    }
+    .comparison-{{ section.id }} .comparison__button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="comparison-section comparison-{{ section.id }} section-{{ section.id }}-padding">
+  <div class="comparison__container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="comparison__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="comparison__content">
+      <div class="comparison__image comparison__image--left">
+        {%- if section.settings.left_image != blank -%}
+          <img
+            src="{{ section.settings.left_image | image_url: width: 600 }}"
+            alt="{{ section.settings.left_image.alt | default: 'Left comparison image' | escape }}"
+            loading="lazy"
+            width="600"
+            height="{{ 600 | divided_by: section.settings.left_image.aspect_ratio | round }}"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      <div class="comparison__vs comparison__vs--mobile">
+        <span>VS</span>
+      </div>
+
+      <div class="comparison__table">
+        <div class="comparison__rows">
+          {%- for block in section.blocks -%}
+            <div class="comparison__row" {{ block.shopify_attributes }}>
+              <div class="comparison__cell comparison__cell--left">
+                <span class="comparison__icon comparison__icon--{{ block.settings.left_icon }}">
+                  {%- if block.settings.left_icon == 'check' -%}
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="10" cy="10" r="10" fill="#4A7C59"/>
+                      <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- elsif block.settings.left_icon == 'cross' -%}
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="10" cy="10" r="10" fill="#8B8B8B"/>
+                      <path d="M7 7L13 13M13 7L7 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- elsif block.settings.left_icon == 'star' -%}
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="10" cy="10" r="10" fill="#D4A84B"/>
+                      <path d="M10 4L11.5 8H15.5L12.5 10.5L13.5 14.5L10 12L6.5 14.5L7.5 10.5L4.5 8H8.5L10 4Z" fill="white"/>
+                    </svg>
+                  {%- endif -%}
+                </span>
+                <span class="comparison__text">{{ block.settings.left_text }}</span>
+              </div>
+
+              {%- assign middle_index = section.blocks.size | divided_by: 2 -%}
+              {%- if forloop.index0 == middle_index -%}
+                <div class="comparison__vs">
+                  <span>VS</span>
+                </div>
+              {%- endif -%}
+
+              <div class="comparison__cell comparison__cell--right">
+                <span class="comparison__icon comparison__icon--{{ block.settings.right_icon }}">
+                  {%- if block.settings.right_icon == 'check' -%}
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="10" cy="10" r="10" fill="#4A7C59"/>
+                      <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- elsif block.settings.right_icon == 'cross' -%}
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="10" cy="10" r="10" fill="#8B8B8B"/>
+                      <path d="M7 7L13 13M13 7L7 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- elsif block.settings.right_icon == 'star' -%}
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="10" cy="10" r="10" fill="#D4A84B"/>
+                      <path d="M10 4L11.5 8H15.5L12.5 10.5L13.5 14.5L10 12L6.5 14.5L7.5 10.5L4.5 8H8.5L10 4Z" fill="white"/>
+                    </svg>
+                  {%- endif -%}
+                </span>
+                <span class="comparison__text">{{ block.settings.right_text }}</span>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="comparison__image comparison__image--right">
+        {%- if section.settings.right_image != blank -%}
+          <img
+            src="{{ section.settings.right_image | image_url: width: 600 }}"
+            alt="{{ section.settings.right_image.alt | default: 'Right comparison image' | escape }}"
+            loading="lazy"
+            width="600"
+            height="{{ 600 | divided_by: section.settings.right_image.aspect_ratio | round }}"
+          >
+        {%- else -%}
+          {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.settings.button_text != blank -%}
+      <div class="comparison__button-wrapper">
+        <a href="{{ section.settings.button_link }}" class="comparison__button">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Sek Comparison Section 1",
+  "tag": "section",
+  "class": "section-comparison-1",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "IS BOXED WATER REALLY BETTER?"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right Image"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "left_column_bg",
+      "label": "Left Column Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "right_column_bg",
+      "label": "Right Column Background",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "color",
+      "id": "vs_badge_color",
+      "label": "VS Badge Background",
+      "default": "#4A7C59"
+    },
+    {
+      "type": "color",
+      "id": "vs_text_color",
+      "label": "VS Badge Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button Border Color",
+      "default": "#4A7C59"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "comparison_row",
+      "name": "Comparison Row",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Left Side"
+        },
+        {
+          "type": "text",
+          "id": "left_text",
+          "label": "Left Text",
+          "default": "Plant-based"
+        },
+        {
+          "type": "select",
+          "id": "left_icon",
+          "label": "Left Icon",
+          "options": [
+            {
+              "value": "check",
+              "label": "Checkmark"
+            },
+            {
+              "value": "cross",
+              "label": "Cross"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "header",
+          "content": "Right Side"
+        },
+        {
+          "type": "text",
+          "id": "right_text",
+          "label": "Right Text",
+          "default": "Plastic"
+        },
+        {
+          "type": "select",
+          "id": "right_icon",
+          "label": "Right Icon",
+          "options": [
+            {
+              "value": "check",
+              "label": "Checkmark"
+            },
+            {
+              "value": "cross",
+              "label": "Cross"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            }
+          ],
+          "default": "cross"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sek Comparison Section 1",
+      "blocks": [
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Plant-based",
+            "left_icon": "check",
+            "right_text": "Plastic",
+            "right_icon": "cross"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Biodegradable",
+            "left_icon": "check",
+            "right_text": "Non-degradable",
+            "right_icon": "cross"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Maintains its taste",
+            "left_icon": "check",
+            "right_text": "Plastic-like taste",
+            "right_icon": "cross"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Sustainable",
+            "left_icon": "check",
+            "right_text": "Non-sustainable",
+            "right_icon": "cross"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Plant-based cap",
+            "left_icon": "check",
+            "right_text": "HDPE",
+            "right_icon": "cross"
+          }
+        },
+        {
+          "type": "comparison_row",
+          "settings": {
+            "left_text": "Made from trees",
+            "left_icon": "check",
+            "right_text": "PET",
+            "right_icon": "cross"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
