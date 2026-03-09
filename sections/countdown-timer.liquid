@@ -1,0 +1,967 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+  }
+
+  .sek-countdown-{{ section.id }} {
+    --sek-ct-bg: {{ section.settings.background_color }};
+    --sek-ct-text: {{ section.settings.text_color }};
+    --sek-ct-timer: {{ section.settings.timer_color }};
+    --sek-ct-separator: {{ section.settings.separator_color }};
+    --sek-ct-btn-bg: {{ section.settings.button_bg }};
+    --sek-ct-btn-text: {{ section.settings.button_text_color }};
+    --sek-ct-btn-hover-bg: {{ section.settings.button_hover_bg }};
+    --sek-ct-btn-hover-text: {{ section.settings.button_hover_text_color }};
+
+    position: relative;
+    background: var(--sek-ct-bg);
+    padding: 40px 12px;
+    box-sizing: border-box;
+  }
+
+  .sek-countdown-{{ section.id }} *,
+  .sek-countdown-{{ section.id }} *::before,
+  .sek-countdown-{{ section.id }} *::after {
+    box-sizing: border-box;
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__background {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__overlay {
+    position: absolute;
+    inset: 0;
+    background: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__container {
+    position: relative;
+    z-index: 2;
+    max-width: {{ section.settings.container_width }}px;
+    margin: 0 auto;
+    text-align: {{ section.settings.text_align }};
+    color: var(--sek-ct-text);
+  }
+
+  {% if section.settings.enable_content_bg %}
+    .sek-countdown-{{ section.id }} .sek-ct__container {
+      background: {{ section.settings.content_bg }};
+      padding: 25px 15px;
+      border-radius: {{ section.settings.content_radius }}px;
+    }
+  {% endif %}
+
+  .sek-countdown-{{ section.id }} .sek-ct__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: {{ section.settings.badge_bg }};
+    color: {{ section.settings.badge_text_color }};
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: {{ section.settings.badge_dot_color }};
+    animation: sek-ct-pulse-{{ section.id }} 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes sek-ct-pulse-{{ section.id }} {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__heading {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 10px;
+    color: var(--sek-ct-text);
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__description {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: var(--sek-ct-text);
+    opacity: 0.95;
+  }
+
+  /* Countdown Timer */
+  .sek-countdown-{{ section.id }} .sek-ct__timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 45px;
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__number {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--sek-ct-timer);
+    font-family: 'Archivo Narrow', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__label {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 5px;
+    color: var(--sek-ct-separator);
+    font-weight: 600;
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__separator {
+    width: {{ section.settings.separator_width }}px;
+    height: 25px;
+    background: var(--sek-ct-separator);
+  }
+
+  /* Completed State */
+  .sek-countdown-{{ section.id }} .sek-ct__completed {
+    display: none;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--sek-ct-timer);
+    margin-bottom: 20px;
+  }
+
+  .sek-countdown-{{ section.id }}.is-completed .sek-ct__timer {
+    display: none;
+  }
+
+  .sek-countdown-{{ section.id }}.is-completed .sek-ct__completed {
+    display: block;
+  }
+
+  /* Button */
+  .sek-countdown-{{ section.id }} .sek-ct__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 24px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: {{ section.settings.button_radius }}px;
+    background: var(--sek-ct-btn-bg);
+    color: var(--sek-ct-btn-text);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__button:hover {
+    background: var(--sek-ct-btn-hover-bg);
+    color: var(--sek-ct-btn-hover-text);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+
+  .sek-countdown-{{ section.id }} .sek-ct__button svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Medium Mobile - 400px */
+  @media (min-width: 400px) {
+    .sek-countdown-{{ section.id }} {
+      padding: 50px 15px;
+    }
+
+    {% if section.settings.enable_content_bg %}
+      .sek-countdown-{{ section.id }} .sek-ct__container {
+        padding: 30px 20px;
+      }
+    {% endif %}
+
+    .sek-countdown-{{ section.id }} .sek-ct__badge {
+      font-size: 10px;
+      padding: 7px 14px;
+      gap: 7px;
+      margin-bottom: 15px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__badge-dot {
+      width: 7px;
+      height: 7px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__heading {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__description {
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__timer {
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__time-block {
+      min-width: 55px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__number {
+      font-size: 38px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__label {
+      font-size: 9px;
+      margin-top: 6px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__separator {
+      height: 30px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__completed {
+      font-size: 20px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__button {
+      padding: 13px 28px;
+      font-size: 13px;
+      gap: 7px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__button svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  /* Large Mobile - 550px */
+  @media (min-width: 550px) {
+    .sek-countdown-{{ section.id }} {
+      padding: 55px 20px;
+    }
+
+    {% if section.settings.enable_content_bg %}
+      .sek-countdown-{{ section.id }} .sek-ct__container {
+        padding: 35px 30px;
+      }
+    {% endif %}
+
+    .sek-countdown-{{ section.id }} .sek-ct__badge {
+      font-size: 11px;
+      padding: 8px 16px;
+      letter-spacing: 0.8px;
+      margin-bottom: 18px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__heading {
+      font-size: 34px;
+      margin-bottom: 14px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__description {
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__timer {
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__time-block {
+      min-width: 65px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__number {
+      font-size: 48px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__label {
+      font-size: 10px;
+      letter-spacing: 0.8px;
+      margin-top: 7px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__separator {
+      height: 40px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__completed {
+      font-size: 22px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__button {
+      padding: 14px 32px;
+      font-size: 14px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__button svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  /* Tablet - 768px */
+  @media (min-width: 768px) {
+    .sek-countdown-{{ section.id }} {
+      padding: 60px 40px;
+    }
+
+    {% if section.settings.enable_content_bg %}
+      .sek-countdown-{{ section.id }} .sek-ct__container {
+        padding: 45px 40px;
+      }
+    {% endif %}
+
+    .sek-countdown-{{ section.id }} .sek-ct__badge {
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__badge-dot {
+      width: 8px;
+      height: 8px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__heading {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__description {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__timer {
+      gap: 24px;
+      margin-bottom: 35px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__time-block {
+      min-width: 80px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__number {
+      font-size: 60px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__label {
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin-top: 8px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__separator {
+      height: 50px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__completed {
+      font-size: 24px;
+      margin-bottom: 25px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__button {
+      padding: 15px 36px;
+      font-size: 15px;
+      gap: 8px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__button svg {
+      width: 17px;
+      height: 17px;
+    }
+  }
+
+  /* Small Desktop - 1024px */
+  @media (min-width: 1024px) {
+    .sek-countdown-{{ section.id }} {
+      padding: {{ section.settings.padding_top }}px 50px {{ section.settings.padding_bottom }}px;
+    }
+
+    {% if section.settings.enable_content_bg %}
+      .sek-countdown-{{ section.id }} .sek-ct__container {
+        padding: 55px 50px;
+      }
+    {% endif %}
+
+    .sek-countdown-{{ section.id }} .sek-ct__heading {
+      font-size: 50px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__description {
+      font-size: 17px;
+      margin-bottom: 40px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__timer {
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__time-block {
+      min-width: 90px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__number {
+      font-size: 72px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__label {
+      font-size: 13px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__separator {
+      height: 60px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__button {
+      padding: 16px 40px;
+      font-size: 16px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__button svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  /* Large Desktop - 1400px */
+  @media (min-width: 1400px) {
+    .sek-countdown-{{ section.id }} {
+      padding: {{ section.settings.padding_top }}px 60px {{ section.settings.padding_bottom }}px;
+    }
+
+    {% if section.settings.enable_content_bg %}
+      .sek-countdown-{{ section.id }} .sek-ct__container {
+        padding: 70px 60px;
+      }
+    {% endif %}
+
+    .sek-countdown-{{ section.id }} .sek-ct__heading {
+      font-size: {{ section.settings.heading_size }}px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__description {
+      font-size: 18px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__timer {
+      gap: 32px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__time-block {
+      min-width: 100px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__number {
+      font-size: {{ section.settings.timer_size }}px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__label {
+      font-size: 14px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__separator {
+      height: 70px;
+    }
+
+    .sek-countdown-{{ section.id }} .sek-ct__completed {
+      font-size: 26px;
+      margin-bottom: 30px;
+    }
+  }
+{% endstyle %}
+
+<div class="sek-countdown-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="sek-countdown" data-end-date="{{ section.settings.end_date }}">
+  <!-- Background -->
+  {% if section.settings.background_image != blank %}
+    <div class="sek-ct__background">
+      <img
+        src="{{ section.settings.background_image | image_url: width: 2000 }}"
+        srcset="{{ section.settings.background_image | image_url: width: 800 }} 800w,
+                {{ section.settings.background_image | image_url: width: 1200 }} 1200w,
+                {{ section.settings.background_image | image_url: width: 1600 }} 1600w,
+                {{ section.settings.background_image | image_url: width: 2000 }} 2000w"
+        sizes="100vw"
+        alt="{{ section.settings.background_image.alt | escape }}"
+        class="sek-ct__bg-image"
+        loading="lazy"
+      >
+      <div class="sek-ct__overlay"></div>
+    </div>
+  {% endif %}
+
+  <div class="sek-ct__container">
+    <!-- Badge -->
+    {% if section.settings.badge_text != blank %}
+      <div class="sek-ct__badge">
+        {% if section.settings.show_badge_dot %}
+          <span class="sek-ct__badge-dot"></span>
+        {% endif %}
+        {{ section.settings.badge_text }}
+      </div>
+    {% endif %}
+
+    <!-- Heading -->
+    {% if section.settings.heading != blank %}
+      <h2 class="sek-ct__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <!-- Description -->
+    {% if section.settings.description != blank %}
+      <p class="sek-ct__description">{{ section.settings.description }}</p>
+    {% endif %}
+
+    <!-- Countdown Timer -->
+    <div class="sek-ct__timer" data-timer>
+      <div class="sek-ct__time-block">
+        <div class="sek-ct__number" data-days>00</div>
+        <div class="sek-ct__label">{{ section.settings.label_days }}</div>
+      </div>
+
+      <div class="sek-ct__separator"></div>
+
+      <div class="sek-ct__time-block">
+        <div class="sek-ct__number" data-hours>00</div>
+        <div class="sek-ct__label">{{ section.settings.label_hours }}</div>
+      </div>
+
+      <div class="sek-ct__separator"></div>
+
+      <div class="sek-ct__time-block">
+        <div class="sek-ct__number" data-minutes>00</div>
+        <div class="sek-ct__label">{{ section.settings.label_minutes }}</div>
+      </div>
+
+      <div class="sek-ct__separator"></div>
+
+      <div class="sek-ct__time-block">
+        <div class="sek-ct__number" data-seconds>00</div>
+        <div class="sek-ct__label">{{ section.settings.label_seconds }}</div>
+      </div>
+    </div>
+
+    <!-- Completed Message -->
+    {% if section.settings.completed_text != blank %}
+      <div class="sek-ct__completed">{{ section.settings.completed_text }}</div>
+    {% endif %}
+
+    <!-- Button -->
+    {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_link }}" class="sek-ct__button">
+        {{ section.settings.button_text }}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  (function() {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+
+    const endDate = section.dataset.endDate;
+    if (!endDate) return;
+
+    const daysEl = section.querySelector('[data-days]');
+    const hoursEl = section.querySelector('[data-hours]');
+    const minutesEl = section.querySelector('[data-minutes]');
+    const secondsEl = section.querySelector('[data-seconds]');
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const end = new Date(endDate).getTime();
+      const distance = end - now;
+
+      if (distance < 0) {
+        section.classList.add('is-completed');
+        if (daysEl) daysEl.textContent = '00';
+        if (hoursEl) hoursEl.textContent = '00';
+        if (minutesEl) minutesEl.textContent = '00';
+        if (secondsEl) secondsEl.textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+
+    // Update immediately
+    updateCountdown();
+
+    // Update every second
+    const interval = setInterval(updateCountdown, 1000);
+
+    // Cleanup on unload
+    window.addEventListener('beforeunload', () => {
+      clearInterval(interval);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SEK Countdown Timer",
+  "class": "sek-countdown-section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Countdown Settings"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "End date and time",
+      "info": "Format: YYYY-MM-DD HH:MM:SS (e.g., 2025-12-31 23:59:59)",
+      "default": "2025-12-31 23:59:59"
+    },
+    {
+      "type": "text",
+      "id": "completed_text",
+      "label": "Completed message",
+      "default": "Sale Ended!"
+    },
+    {
+      "type": "header",
+      "content": "Timer Labels"
+    },
+    {
+      "type": "text",
+      "id": "label_days",
+      "label": "Days label",
+      "default": "Days"
+    },
+    {
+      "type": "text",
+      "id": "label_hours",
+      "label": "Hours label",
+      "default": "Hours"
+    },
+    {
+      "type": "text",
+      "id": "label_minutes",
+      "label": "Minutes label",
+      "default": "Minutes"
+    },
+    {
+      "type": "text",
+      "id": "label_seconds",
+      "label": "Seconds label",
+      "default": "Seconds"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "HALF OF THE STOCK IS ALREADY SOLD!"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge_dot",
+      "label": "Show animated dot",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Hurry! Save 60% On All Items"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 32,
+      "max": 72,
+      "step": 2,
+      "default": 56,
+      "unit": "px"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Explore top products at unbeatable prices. Don't miss out, save now before it's too late!"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View Discounted Items"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 100,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Timer Style"
+    },
+    {
+      "type": "range",
+      "id": "timer_size",
+      "label": "Timer number size",
+      "min": 48,
+      "max": 120,
+      "step": 4,
+      "default": 84,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "separator_width",
+      "label": "Separator width",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 2,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "default": 1200,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_content_bg",
+      "label": "Enable content background box",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "content_bg",
+      "label": "Content background",
+      "default": "rgba(0,0,0,0.4)"
+    },
+    {
+      "type": "range",
+      "id": "content_radius",
+      "label": "Content border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "timer_color",
+      "label": "Timer color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "separator_color",
+      "label": "Separator color",
+      "default": "#afafaf"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg",
+      "label": "Badge background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_dot_color",
+      "label": "Badge dot color",
+      "default": "#ff9500"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#f5e55b"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Button hover background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Countdown Timer",
+      "settings": {
+        "end_date": "2025-12-31 23:59:59",
+        "badge_text": "HALF OF THE STOCK IS ALREADY SOLD!",
+        "heading": "Hurry! Save 60% On All Items",
+        "description": "Limited time offer. Shop now and save big on your favorite items!",
+        "button_text": "SHOP NOW"
+      }
+    }
+  ]
+}
+{% endschema %}

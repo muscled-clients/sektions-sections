@@ -1,0 +1,859 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --mcv-bg: {{ section.settings.background_color }};
+    --mcv-text: {{ section.settings.text_color }};
+    --mcv-heading: {{ section.settings.heading_color }};
+    --mcv-card-bg: {{ section.settings.card_background }};
+    --mcv-btn-bg: {{ section.settings.button_background }};
+    --mcv-btn-text: {{ section.settings.button_text_color }};
+    --mcv-card-radius: {{ section.settings.card_border_radius }}px;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+  .multicolumn-video,
+  .multicolumn-video * {
+    box-sizing: border-box;
+  }
+
+  /* Base - Small Mobile (< 400px) */
+  .multicolumn-video {
+    background: var(--mcv-bg, #ffffff);
+    padding: 30px 0;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  .multicolumn-video__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Header */
+  .multicolumn-video__header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 0 15px;
+  }
+
+  .multicolumn-video__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--mcv-heading, #000000);
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+
+  .multicolumn-video__subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--mcv-text, #1d1d1f);
+    margin: 0;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  /* Swiper for Mobile/Tablet - visible by default */
+  .multicolumn-video__swiper {
+    overflow: visible !important;
+    padding: 0 15px;
+    display: block;
+  }
+
+  .multicolumn-video__swiper .swiper-slide {
+    width: 80%;
+    height: auto;
+  }
+
+  /* Pagination - visible by default */
+  .multicolumn-video__pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .multicolumn-video__pagination .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: var(--mcv-text, #1d1d1f);
+    opacity: 0.25;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .multicolumn-video__pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: var(--mcv-btn-bg, #424750);
+  }
+
+  /* Grid - Hidden on mobile, shown on desktop */
+  .multicolumn-video__grid {
+    display: none !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* Card */
+  .multicolumn-video__card {
+    background: var(--mcv-card-bg, #f5f5f7);
+    border-radius: var(--mcv-card-radius, 16px);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+
+  .multicolumn-video__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Media */
+  .multicolumn-video__media {
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%;
+    overflow: hidden;
+    background: #e8e8e8;
+  }
+
+  .multicolumn-video__media video,
+  .multicolumn-video__media img,
+  .multicolumn-video__media iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .multicolumn-video__media-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e0e0e0 0%, #c8c8c8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 13px;
+  }
+
+  /* Content */
+  .multicolumn-video__content {
+    padding: 20px 16px;
+  }
+
+  .multicolumn-video__card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+
+  .multicolumn-video__card-description {
+    font-size: 13px;
+    font-weight: 400;
+    color: #1d1d1f;
+    line-height: 1.5;
+    margin: 0 0 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Button */
+  .multicolumn-video__button {
+    display: inline-block;
+    background: var(--mcv-btn-bg, #424750);
+    color: var(--mcv-btn-text, #ffffff);
+    padding: 10px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+
+  .multicolumn-video__button:hover {
+    background: #2d3138;
+    transform: translateY(-1px);
+  }
+
+  /* Medium Mobile (400px+) */
+  @media (min-width: 400px) {
+    .multicolumn-video {
+      padding: 36px 0;
+    }
+
+    .multicolumn-video__header {
+      margin-bottom: 28px;
+      padding: 0 20px;
+    }
+
+    .multicolumn-video__title {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    .multicolumn-video__subtitle {
+      font-size: 14px;
+    }
+
+    .multicolumn-video__swiper {
+      padding: 0 20px;
+    }
+
+    .multicolumn-video__swiper .swiper-slide {
+      width: 75%;
+    }
+
+    .multicolumn-video__content {
+      padding: 22px 18px;
+    }
+
+    .multicolumn-video__card-title {
+      font-size: 19px;
+    }
+
+    .multicolumn-video__card-description {
+      font-size: 13px;
+      -webkit-line-clamp: 4;
+    }
+
+    .multicolumn-video__button {
+      padding: 11px 22px;
+      font-size: 12px;
+    }
+  }
+
+  /* Large Mobile (550px+) */
+  @media (min-width: 550px) {
+    .multicolumn-video {
+      padding: 44px 0;
+    }
+
+    .multicolumn-video__header {
+      margin-bottom: 32px;
+      padding: 0 24px;
+    }
+
+    .multicolumn-video__title {
+      font-size: 30px;
+    }
+
+    .multicolumn-video__subtitle {
+      font-size: 15px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .multicolumn-video__swiper {
+      padding: 0 24px;
+    }
+
+    .multicolumn-video__swiper .swiper-slide {
+      width: 55%;
+    }
+
+    .multicolumn-video__content {
+      padding: 24px 20px;
+    }
+
+    .multicolumn-video__card-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .multicolumn-video__card-description {
+      font-size: 14px;
+      margin-bottom: 18px;
+      -webkit-line-clamp: unset;
+      display: block;
+      overflow: visible;
+    }
+
+    .multicolumn-video__button {
+      padding: 12px 26px;
+      font-size: 12px;
+    }
+  }
+
+  /* Tablet (768px+) */
+  @media (min-width: 768px) {
+    .multicolumn-video {
+      padding: 55px 0;
+    }
+
+    .multicolumn-video__header {
+      margin-bottom: 40px;
+      padding: 0 30px;
+    }
+
+    .multicolumn-video__title {
+      font-size: 36px;
+      margin-bottom: 14px;
+    }
+
+    .multicolumn-video__subtitle {
+      font-size: 16px;
+      max-width: 600px;
+    }
+
+    .multicolumn-video__swiper {
+      padding: 0 30px;
+    }
+
+    .multicolumn-video__swiper .swiper-slide {
+      width: 45%;
+    }
+
+    .multicolumn-video__content {
+      padding: 28px 22px;
+    }
+
+    .multicolumn-video__card-title {
+      font-size: 22px;
+    }
+
+    .multicolumn-video__card-description {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .multicolumn-video__button {
+      padding: 13px 28px;
+      font-size: 12px;
+    }
+  }
+
+  /* Desktop (1024px+) - Switch to Grid */
+  @media (min-width: 1024px) {
+    .multicolumn-video {
+      padding: 70px 40px;
+    }
+
+    .multicolumn-video__header {
+      margin-bottom: 50px;
+      padding: 0;
+    }
+
+    .multicolumn-video__title {
+      font-size: 42px;
+    }
+
+    .multicolumn-video__subtitle {
+      font-size: 17px;
+      max-width: 700px;
+    }
+
+    /* Hide swiper, show grid */
+    .multicolumn-video__swiper {
+      display: none !important;
+    }
+
+    .multicolumn-video__pagination {
+      display: none !important;
+    }
+
+    .multicolumn-video__grid {
+      display: grid !important;
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+      gap: 32px;
+    }
+
+    .multicolumn-video__media {
+      padding-bottom: 70%;
+    }
+
+    .multicolumn-video__content {
+      padding: 30px 24px;
+    }
+
+    .multicolumn-video__card-title {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .multicolumn-video__card-description {
+      font-size: 15px;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    .multicolumn-video__button {
+      padding: 14px 32px;
+      font-size: 13px;
+    }
+  }
+
+  /* Large Desktop (1400px+) */
+  @media (min-width: 1400px) {
+    .multicolumn-video {
+      padding: 90px 60px;
+    }
+
+    .multicolumn-video__header {
+      margin-bottom: 60px;
+    }
+
+    .multicolumn-video__title {
+      font-size: 48px;
+    }
+
+    .multicolumn-video__subtitle {
+      font-size: 18px;
+    }
+
+    .multicolumn-video__grid {
+      gap: 40px;
+    }
+
+    .multicolumn-video__content {
+      padding: 32px 28px;
+    }
+
+    .multicolumn-video__card-description {
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+  }
+</style>
+
+<section class="multicolumn-video" data-section-id="{{ section.id }}">
+  <div class="multicolumn-video__container">
+    <!-- Header -->
+    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="multicolumn-video__header">
+        {%- if section.settings.title != blank -%}
+          <h2 class="multicolumn-video__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="multicolumn-video__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Swiper for Mobile/Tablet -->
+    <div class="multicolumn-video__swiper swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="swiper-slide">
+            <div class="multicolumn-video__card" {{ block.shopify_attributes }}>
+              <!-- Media -->
+              <div class="multicolumn-video__media">
+                {%- if block.settings.video != blank -%}
+                  <video class="multicolumn-video__video" muted loop playsinline preload="metadata" {% if section.settings.autoplay %}autoplay{% endif %}>
+                    {%- for source in block.settings.video.sources -%}
+                      <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                    {%- endfor -%}
+                  </video>
+                {%- elsif block.settings.video_url != blank -%}
+                  <iframe src="{{ block.settings.video_url }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                {%- elsif block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.title }}
+                {%- else -%}
+                  <div class="multicolumn-video__media-placeholder">
+                    <span>Add media</span>
+                  </div>
+                {%- endif -%}
+              </div>
+
+              <!-- Content -->
+              <div class="multicolumn-video__content">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="multicolumn-video__card-title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.description != blank -%}
+                  <p class="multicolumn-video__card-description">{{ block.settings.description }}</p>
+                {%- endif -%}
+
+                {%- if block.settings.button_text != blank -%}
+                  <a href="{{ block.settings.button_link }}" class="multicolumn-video__button">
+                    {{ block.settings.button_text }}
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="multicolumn-video__pagination"></div>
+
+    <!-- Grid for Desktop -->
+    <div class="multicolumn-video__grid">
+      {%- for block in section.blocks -%}
+        <div class="multicolumn-video__card" {{ block.shopify_attributes }}>
+          <!-- Media -->
+          <div class="multicolumn-video__media">
+            {%- if block.settings.video != blank -%}
+              <video class="multicolumn-video__video" muted loop playsinline preload="metadata" {% if section.settings.autoplay %}autoplay{% endif %}>
+                {%- for source in block.settings.video.sources -%}
+                  <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                {%- endfor -%}
+              </video>
+            {%- elsif block.settings.video_url != blank -%}
+              <iframe src="{{ block.settings.video_url }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            {%- elsif block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.title }}
+            {%- else -%}
+              <div class="multicolumn-video__media-placeholder">
+                <span>Add media</span>
+              </div>
+            {%- endif -%}
+          </div>
+
+          <!-- Content -->
+          <div class="multicolumn-video__content">
+            {%- if block.settings.title != blank -%}
+              <h3 class="multicolumn-video__card-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.description != blank -%}
+              <p class="multicolumn-video__card-description">{{ block.settings.description }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.button_text != blank -%}
+              <a href="{{ block.settings.button_link }}" class="multicolumn-video__button">
+                {{ block.settings.button_text }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionId = '{{ section.id }}';
+    const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+    if (!section) return;
+
+    // Initialize Swiper for mobile
+    const swiperEl = section.querySelector('.multicolumn-video__swiper');
+    const paginationEl = section.querySelector('.multicolumn-video__pagination');
+
+    if (swiperEl && typeof Swiper !== 'undefined') {
+      new Swiper(swiperEl, {
+        slidesPerView: 'auto',
+        spaceBetween: 16,
+        grabCursor: true,
+        touchEventsTarget: 'container',
+        pagination: {
+          el: paginationEl,
+          clickable: true
+        },
+        breakpoints: {
+          400: {
+            spaceBetween: 20
+          },
+          550: {
+            spaceBetween: 20
+          },
+          768: {
+            spaceBetween: 24
+          }
+        }
+      });
+    }
+
+    const videos = section.querySelectorAll('.multicolumn-video__video');
+
+    // Function to play video
+    function playVideo(video) {
+      if (video && video.paused) {
+        video.play().catch(err => {
+          console.log('Video autoplay prevented:', err);
+        });
+      }
+    }
+
+    // Play all videos if autoplay is enabled
+    {% if section.settings.autoplay %}
+    videos.forEach(video => {
+      playVideo(video);
+    });
+    {% endif %}
+
+    // Intersection Observer for better performance
+    if ('IntersectionObserver' in window) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            {% if section.settings.autoplay %}
+            playVideo(video);
+            {% endif %}
+          } else {
+            if (!video.paused) {
+              video.pause();
+            }
+          }
+        });
+      }, {
+        threshold: 0.5
+      });
+
+      videos.forEach(video => {
+        videoObserver.observe(video);
+      });
+    }
+
+    // Play on hover (fallback if autoplay doesn't work)
+    {% unless section.settings.autoplay %}
+    videos.forEach(video => {
+      const card = video.closest('.multicolumn-video__card');
+      if (card) {
+        card.addEventListener('mouseenter', () => playVideo(video));
+        card.addEventListener('mouseleave', () => {
+          if (!video.paused) {
+            video.pause();
+            video.currentTime = 0;
+          }
+        });
+      }
+    });
+    {% endunless %}
+  });
+</script>
+
+{% schema %}
+{
+  "name": "SEK Multicolumn Video",
+  "tag": "section",
+  "class": "section-multicolumn-video",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Reimagine Your Everyday"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Enhance your lifestyle with cutting-edge technology designed for you."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns (desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Video settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay videos",
+      "default": false,
+      "info": "Videos will play muted on loop"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1d1d1f"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#f5f5f7"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#424750"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Media"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Upload Video",
+          "info": "Upload a video file"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Or video embed URL",
+          "info": "YouTube, TikTok, Vimeo, or other embed URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Used if no video is provided"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Column Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Add a description to highlight your product features and benefits."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "SHOP NOW"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Multicolumn Video",
+      "settings": {
+        "title": "Reimagine Your Everyday",
+        "subtitle": "Enhance your lifestyle with cutting-edge technology designed for you.",
+        "columns_desktop": 3
+      },
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "title": "Stay Connected, Stay Ahead",
+            "description": "Monitor your fitness, stay on track, and look stylish all day long.",
+            "button_text": "SHOP NOW"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Elevate Your Audio Experience",
+            "description": "Discover the perfect blend of style, comfort, and superior sound.",
+            "button_text": "SHOP NOW"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "Virtual Adventure Awaits",
+            "description": "Step into a world of limitless imagination with our premier VR headsets.",
+            "button_text": "SHOP NOW"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

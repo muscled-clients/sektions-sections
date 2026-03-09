@@ -1,0 +1,1157 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --fsp-bg: {{ section.settings.background_color }};
+    --fsp-card-bg: {{ section.settings.card_bg_color }};
+    --fsp-card-border: {{ section.settings.card_border_color }};
+    --fsp-accent: {{ section.settings.accent_color }};
+    --fsp-text: {{ section.settings.text_color }};
+    --fsp-tagline: {{ section.settings.tagline_color }};
+    --fsp-title: {{ section.settings.title_color }};
+    --fsp-image-bg: {{ section.settings.image_bg_color }};
+    display: block;
+    width: 100%;
+  }
+{% endstyle %}
+
+<section class="free-sample-pack fsp-{{ section.id }}">
+  <div class="fsp__container">
+    <!-- Header -->
+    <div class="fsp__header">
+      {%- if section.settings.tagline != blank -%}
+        <p class="fsp__tagline">{{ section.settings.tagline }}</p>
+      {%- endif -%}
+
+      <div class="fsp__title-row">
+        <!-- Left Chevron -->
+        <div class="fsp__chevron fsp__chevron--left">
+          {%- if section.settings.chevron_icon != blank -%}
+            <img src="{{ section.settings.chevron_icon | image_url: width: 140 }}" alt="" class="fsp__chevron-img" loading="lazy">
+          {%- else -%}
+            <svg class="fsp__chevron-svg" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0L13 12L26 0L39 12L52 0L65 12L80 0" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
+              <path d="M0 12L13 24L26 12L39 24L52 12L65 24L80 12" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
+            </svg>
+          {%- endif -%}
+        </div>
+
+        <h2 class="fsp__title">
+          <span class="fsp__title-highlight">{{ section.settings.title_highlight }}</span>
+          <span class="fsp__title-regular">{{ section.settings.title_regular }}</span>
+        </h2>
+
+        <!-- Right Chevron -->
+        <div class="fsp__chevron fsp__chevron--right">
+          {%- if section.settings.chevron_icon != blank -%}
+            <img src="{{ section.settings.chevron_icon | image_url: width: 140 }}" alt="" class="fsp__chevron-img" loading="lazy">
+          {%- else -%}
+            <svg class="fsp__chevron-svg" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0L13 12L26 0L39 12L52 0L65 12L80 0" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
+              <path d="M0 12L13 24L26 12L39 24L52 12L65 24L80 12" stroke="var(--fsp-accent)" stroke-width="4" fill="none"/>
+            </svg>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="fsp__grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'product_card' -%}
+            <div class="fsp__card fsp__card--product" {{ block.shopify_attributes }}>
+              <div class="fsp__card-inner">
+                <div class="fsp__card-content">
+                  <h3 class="fsp__card-title">{{ block.settings.title }}</h3>
+                  <p class="fsp__card-price">{{ block.settings.price }}</p>
+                  <p class="fsp__card-desc">{{ block.settings.description }}</p>
+                </div>
+
+                <div class="fsp__card-image">
+                  <div class="fsp__image-wrapper">
+                    {%- if block.settings.image != blank -%}
+                      <img
+                        src="{{ block.settings.image | image_url: width: 800 }}"
+                        alt="{{ block.settings.image.alt | default: block.settings.title }}"
+                        loading="lazy"
+                        class="fsp__product-img"
+                      >
+                    {%- else -%}
+                      <div class="fsp__placeholder-img"></div>
+                    {%- endif -%}
+
+                    {%- if block.settings.badge_icon != blank -%}
+                      <div class="fsp__card-badge">
+                        <img
+                          src="{{ block.settings.badge_icon | image_url: width: 80 }}"
+                          alt=""
+                          loading="lazy"
+                          class="fsp__badge-img"
+                        >
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+
+                <a href="{{ block.settings.button_link }}" class="fsp__btn fsp__btn--light">
+                  {{ block.settings.button_text }}
+                </a>
+              </div>
+            </div>
+
+          {%- when 'cta_card' -%}
+            <div class="fsp__card fsp__card--cta" {{ block.shopify_attributes }}>
+              <div class="fsp__card-inner">
+                <div class="fsp__cta-icon">
+                  {%- if block.settings.icon_image != blank -%}
+                    <img
+                      src="{{ block.settings.icon_image | image_url: width: 100 }}"
+                      alt=""
+                      loading="lazy"
+                      class="fsp__icon-img"
+                    >
+                  {%- elsif block.settings.icon_type == 'cart' -%}
+                    <svg class="fsp__icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- else -%}
+                    <svg class="fsp__icon-svg fsp__icon-svg--tag" viewBox="0 0 24 24" fill="var(--fsp-accent)" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.59 13.41L13.42 20.58C13.2343 20.766 13.0137 20.9135 12.7709 21.0141C12.5281 21.1148 12.2678 21.1666 12.005 21.1666C11.7422 21.1666 11.4819 21.1148 11.2391 21.0141C10.9963 20.9135 10.7757 20.766 10.59 20.58L2 12V2H12L20.59 10.59C20.9625 10.9647 21.1716 11.4716 21.1716 12C21.1716 12.5284 20.9625 13.0353 20.59 13.41Z"/>
+                      <circle cx="7" cy="7" r="1.5" fill="white"/>
+                    </svg>
+                  {%- endif -%}
+                </div>
+
+                <div class="fsp__cta-text-wrapper">
+                  <p class="fsp__cta-text">
+                    {{ block.settings.text_line1 }}
+                    {%- if block.settings.highlight_text != blank -%}
+                      <span class="fsp__text-highlight">{{ block.settings.highlight_text }}</span>
+                    {%- endif -%}
+                    {{ block.settings.text_line1_after }}
+                  </p>
+                  {%- if block.settings.accent_line != blank -%}
+                    <p class="fsp__cta-accent">{{ block.settings.accent_line }}</p>
+                  {%- endif -%}
+                </div>
+
+                <a href="{{ block.settings.button_link }}" class="fsp__btn fsp__btn--dark">
+                  <span class="fsp__btn-text {{ block.settings.button_text_style }}">{{ block.settings.button_text }}</span>
+                </a>
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ========================================
+     BASE STYLES
+     ======================================== */
+  .free-sample-pack {
+    display: flex;
+    padding: 60px 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    background: var(--fsp-bg, #1A1A1A);
+    font-family: 'Inter', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .free-sample-pack *,
+  .free-sample-pack *::before,
+  .free-sample-pack *::after {
+    box-sizing: border-box;
+  }
+
+  .fsp__container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  /* ========================================
+     HEADER
+     ======================================== */
+  .fsp__header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .fsp__tagline {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--fsp-tagline, #888888);
+    margin: 0;
+  }
+
+  .fsp__title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .fsp__title {
+    font-size: 28px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px 10px;
+  }
+
+  .fsp__title-highlight {
+    background: var(--fsp-accent, #00D4D4);
+    color: #000000;
+    padding: 4px 14px;
+    display: inline-block;
+    font-weight: 900;
+  }
+
+  .fsp__title-regular {
+    color: var(--fsp-title, #FFFFFF);
+  }
+
+  .fsp__chevron {
+    width: 60px;
+    height: 20px;
+    display: none;
+    align-items: center;
+  }
+
+  .fsp__chevron-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .fsp__chevron-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ========================================
+     GRID LAYOUT
+     ======================================== */
+  .fsp__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+
+  /* ========================================
+     CARD BASE STYLES
+     ======================================== */
+  .fsp__card {
+    background: var(--fsp-card-bg, #2D2D2D);
+    border-radius: 12px;
+    border: 1px solid var(--fsp-card-border, #3A3A3A);
+    overflow: hidden;
+  }
+
+  .fsp__card-inner {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* ========================================
+     PRODUCT CARD
+     ======================================== */
+  .fsp__card--product .fsp__card-inner {
+    gap: 16px;
+  }
+
+  .fsp__card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .fsp__card-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--fsp-text, #FFFFFF);
+    margin: 0;
+    letter-spacing: 0.03em;
+  }
+
+  .fsp__card-price {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--fsp-text, #FFFFFF);
+    margin: 0;
+  }
+
+  .fsp__card-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 8px 0 0;
+    line-height: 1.5;
+  }
+
+  .fsp__card-image {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fsp__image-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 180px;
+    background: var(--fsp-image-bg, #FFFFFF);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .fsp__product-img {
+    width: 100%;
+    height: 100%;
+    max-height: 220px;
+    object-fit: contain;
+  }
+
+  .fsp__placeholder-img {
+    width: 100%;
+    height: 180px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+  }
+
+  .fsp__card-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .fsp__badge-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* ========================================
+     BUTTONS
+     ======================================== */
+  .fsp__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    margin-top: auto;
+  }
+
+  .fsp__btn--light {
+    background: #E8E8E8;
+    color: #1A1A1A;
+  }
+
+  .fsp__btn--light:hover {
+    background: #D8D8D8;
+  }
+
+  .fsp__btn--dark {
+    background: #3A3A3A;
+    color: var(--fsp-text, #FFFFFF);
+  }
+
+  .fsp__btn--dark:hover {
+    background: #454545;
+  }
+
+  .fsp__btn-text--accent {
+    color: var(--fsp-accent, #00D4D4);
+  }
+
+  /* ========================================
+     CTA CARD
+     ======================================== */
+  .fsp__card--cta .fsp__card-inner {
+    gap: 14px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 200px;
+  }
+
+  .fsp__cta-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fsp__icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .fsp__icon-svg {
+    width: 28px;
+    height: 28px;
+    color: var(--fsp-text, #FFFFFF);
+  }
+
+  .fsp__icon-svg--tag {
+    width: 32px;
+    height: 32px;
+  }
+
+  .fsp__cta-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+  }
+
+  .fsp__cta-text {
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--fsp-text, #FFFFFF);
+    margin: 0;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+  }
+
+  .fsp__text-highlight {
+    background: var(--fsp-accent, #00D4D4);
+    color: #000000;
+    padding: 1px 6px;
+    display: inline;
+  }
+
+  .fsp__cta-accent {
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--fsp-accent, #00D4D4);
+    margin: 2px 0 0;
+    line-height: 1.35;
+  }
+
+  .fsp__card--cta .fsp__btn {
+    margin-top: 8px;
+  }
+
+  /* ========================================
+     RESPONSIVE - MEDIUM MOBILE (400px+)
+     ======================================== */
+  @media screen and (min-width: 400px) {
+    .free-sample-pack {
+      padding: 70px 20px;
+      gap: 48px;
+    }
+
+    .fsp__container {
+      gap: 48px;
+    }
+
+    .fsp__tagline {
+      font-size: 12px;
+    }
+
+    .fsp__title {
+      font-size: 34px;
+    }
+
+    .fsp__card-inner {
+      padding: 26px;
+    }
+
+    .fsp__card-title {
+      font-size: 14px;
+    }
+
+    .fsp__card-price {
+      font-size: 24px;
+    }
+
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 17px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE MOBILE (550px+)
+     ======================================== */
+  @media screen and (min-width: 550px) {
+    .free-sample-pack {
+      padding: 80px 24px;
+      gap: 56px;
+    }
+
+    .fsp__container {
+      gap: 56px;
+    }
+
+    .fsp__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .fsp__tagline {
+      font-size: 13px;
+    }
+
+    .fsp__title-row {
+      gap: 20px;
+    }
+
+    .fsp__title {
+      font-size: 42px;
+      gap: 8px 12px;
+    }
+
+    .fsp__title-highlight {
+      padding: 5px 16px;
+    }
+
+    .fsp__chevron {
+      display: flex;
+      width: 70px;
+      height: 22px;
+    }
+
+    .fsp__card-inner {
+      padding: 28px;
+    }
+
+    .fsp__image-wrapper {
+      min-height: 200px;
+    }
+
+    .fsp__product-img {
+      max-height: 240px;
+    }
+
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 18px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - TABLET (768px+)
+     ======================================== */
+  @media screen and (min-width: 768px) {
+    .free-sample-pack {
+      padding: 96px 40px;
+      gap: 64px;
+    }
+
+    .fsp__container {
+      gap: 64px;
+    }
+
+    .fsp__header {
+      gap: 14px;
+    }
+
+    .fsp__tagline {
+      font-size: 14px;
+    }
+
+    .fsp__title-row {
+      gap: 24px;
+    }
+
+    .fsp__title {
+      font-size: 50px;
+      gap: 8px 14px;
+    }
+
+    .fsp__title-highlight {
+      padding: 6px 18px;
+    }
+
+    .fsp__chevron {
+      width: 90px;
+      height: 26px;
+    }
+
+    .fsp__grid {
+      gap: 24px;
+    }
+
+    .fsp__card {
+      border-radius: 14px;
+    }
+
+    .fsp__card-inner {
+      padding: 32px;
+    }
+
+    .fsp__card--product .fsp__card-inner {
+      gap: 20px;
+    }
+
+    .fsp__card-title {
+      font-size: 15px;
+    }
+
+    .fsp__card-price {
+      font-size: 26px;
+    }
+
+    .fsp__card-desc {
+      font-size: 13px;
+    }
+
+    .fsp__image-wrapper {
+      min-height: 220px;
+      padding: 20px;
+    }
+
+    .fsp__card-badge {
+      width: 40px;
+      height: 40px;
+    }
+
+    .fsp__btn {
+      padding: 16px 28px;
+      font-size: 12px;
+    }
+
+    .fsp__card--cta .fsp__card-inner {
+      gap: 16px;
+      min-height: 220px;
+    }
+
+    .fsp__cta-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .fsp__icon-svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .fsp__icon-svg--tag {
+      width: 36px;
+      height: 36px;
+    }
+
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 20px;
+    }
+
+    .fsp__text-highlight {
+      padding: 2px 8px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - DESKTOP (1024px+)
+     ======================================== */
+  @media screen and (min-width: 1024px) {
+    .free-sample-pack {
+      padding: 96px 48px;
+    }
+
+    .fsp__grid {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Product cards span full height (2 rows) */
+    .fsp__card--product:nth-of-type(1) {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+
+    .fsp__card--product:nth-of-type(2) {
+      grid-column: 2;
+      grid-row: 1 / 3;
+    }
+
+    /* CTA cards stack in column 3 */
+    .fsp__card--cta:nth-of-type(3) {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .fsp__card--cta:nth-of-type(4) {
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    .fsp__tagline {
+      font-size: 14px;
+    }
+
+    .fsp__title-row {
+      gap: 28px;
+    }
+
+    .fsp__title {
+      font-size: 54px;
+    }
+
+    .fsp__chevron {
+      width: 100px;
+      height: 28px;
+    }
+
+    .fsp__card-inner {
+      padding: 28px;
+    }
+
+    .fsp__card--product .fsp__card-inner {
+      padding: 32px 28px;
+    }
+
+    .fsp__image-wrapper {
+      min-height: 260px;
+    }
+
+    .fsp__product-img {
+      max-height: 300px;
+    }
+
+    .fsp__card--cta .fsp__card-inner {
+      padding: 28px;
+    }
+
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 18px;
+    }
+
+    .fsp__card--cta .fsp__btn {
+      margin-top: 12px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - LARGE DESKTOP (1200px+)
+     ======================================== */
+  @media screen and (min-width: 1200px) {
+    .fsp__container {
+      max-width: 1320px;
+    }
+
+    .fsp__title-row {
+      gap: 32px;
+    }
+
+    .fsp__chevron {
+      width: 110px;
+      height: 30px;
+    }
+
+    .fsp__grid {
+      gap: 24px;
+    }
+
+    .fsp__card-inner {
+      padding: 32px;
+    }
+
+    .fsp__card--product .fsp__card-inner {
+      padding: 36px 32px;
+    }
+
+    .fsp__card-title {
+      font-size: 16px;
+    }
+
+    .fsp__card-price {
+      font-size: 28px;
+    }
+
+    .fsp__card-desc {
+      font-size: 13px;
+      max-width: 280px;
+    }
+
+    .fsp__image-wrapper {
+      min-height: 280px;
+    }
+
+    .fsp__product-img {
+      max-height: 320px;
+    }
+
+    .fsp__card-badge {
+      width: 44px;
+      height: 44px;
+    }
+
+    .fsp__cta-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .fsp__icon-svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .fsp__icon-svg--tag {
+      width: 40px;
+      height: 40px;
+    }
+
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 20px;
+    }
+  }
+
+  /* ========================================
+     RESPONSIVE - XL DESKTOP (1400px+)
+     ======================================== */
+  @media screen and (min-width: 1400px) {
+    .free-sample-pack {
+      padding: 96px 60px;
+    }
+
+    .fsp__container {
+      max-width: 1400px;
+    }
+
+    .fsp__title {
+      font-size: 58px;
+    }
+
+    .fsp__chevron {
+      width: 120px;
+      height: 32px;
+    }
+
+    .fsp__grid {
+      gap: 28px;
+    }
+
+    .fsp__card--product .fsp__card-inner {
+      padding: 40px 36px;
+    }
+
+    .fsp__image-wrapper {
+      min-height: 300px;
+    }
+
+    .fsp__product-img {
+      max-height: 340px;
+    }
+
+    .fsp__cta-text,
+    .fsp__cta-accent {
+      font-size: 22px;
+    }
+
+    .fsp__btn {
+      padding: 16px 32px;
+      font-size: 13px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "SEK Free Sample Pack",
+  "tag": "section",
+  "class": "section-free-sample-pack",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Content"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "TRY IT. FEEL IT. PRESS IT."
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Title (Highlighted Part)",
+      "default": "FREE"
+    },
+    {
+      "type": "text",
+      "id": "title_regular",
+      "label": "Title (Regular Part)",
+      "default": "SAMPLE PACK"
+    },
+    {
+      "type": "image_picker",
+      "id": "chevron_icon",
+      "label": "Chevron Decoration Image",
+      "info": "Upload custom chevron/zigzag decoration. Leave empty for default SVG."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background Color",
+      "default": "#2D2D2D"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border Color",
+      "default": "#3A3A3A"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#00D4D4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Card Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "tagline_color",
+      "label": "Tagline Color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "image_bg_color",
+      "label": "Product Image Background",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "FREE SAMPLE PACK"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$0.00"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Get a taste of our premium quality, for free. Includes a variety of sample prints so you can test our colors, softness, and durability before placing your first real order."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "badge_icon",
+          "label": "Badge/Logo Icon",
+          "info": "Small icon displayed at bottom left of image"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "GET FREE SAMPLE"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    },
+    {
+      "type": "cta_card",
+      "name": "CTA Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "options": [
+            {
+              "value": "cart",
+              "label": "Shopping Cart"
+            },
+            {
+              "value": "tag",
+              "label": "Price Tag"
+            }
+          ],
+          "default": "cart"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Custom Icon Image",
+          "info": "Upload custom icon. Overrides icon type selection."
+        },
+        {
+          "type": "text",
+          "id": "text_line1",
+          "label": "Text Line (before highlight)",
+          "default": "DON'T NEED A SAMPLE? JUST"
+        },
+        {
+          "type": "text",
+          "id": "highlight_text",
+          "label": "Highlighted Text",
+          "info": "Text with cyan background",
+          "default": "ORDER"
+        },
+        {
+          "type": "text",
+          "id": "text_line1_after",
+          "label": "Text After Highlight",
+          "default": "DIRECTLY."
+        },
+        {
+          "type": "text",
+          "id": "accent_line",
+          "label": "Accent Line (cyan text)",
+          "info": "Text displayed in accent color below main text"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "ORDER DIRECTLY"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "button_text_style",
+          "label": "Button Text Style",
+          "options": [
+            {
+              "value": "",
+              "label": "White Text"
+            },
+            {
+              "value": "fsp__btn-text--accent",
+              "label": "Accent Color Text"
+            }
+          ],
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Free Sample Pack",
+      "blocks": [
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "FREE SAMPLE PACK",
+            "price": "$0.00",
+            "description": "Get a taste of our premium quality, for free. Includes a variety of sample prints so you can test our colors, softness, and durability before placing your first real order.",
+            "button_text": "GET FREE SAMPLE"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "title": "CUSTOM GANG SHEET",
+            "price": "$19.99",
+            "description": "Use this product if you have a pre-made gang sheet file. Select the desired size for your gang sheet. Adjust the quantity to get multiple sheets.",
+            "button_text": "CUSTOM GANG SHEET"
+          }
+        },
+        {
+          "type": "cta_card",
+          "settings": {
+            "icon_type": "cart",
+            "text_line1": "DON'T NEED A SAMPLE? JUST",
+            "highlight_text": "ORDER",
+            "text_line1_after": "DIRECTLY.",
+            "button_text": "ORDER DIRECTLY",
+            "button_text_style": ""
+          }
+        },
+        {
+          "type": "cta_card",
+          "settings": {
+            "icon_type": "tag",
+            "text_line1": "WANT TO TEST? UPLOAD YOUR DESIGN AND ORDER INSTANTLY,",
+            "accent_line": "NO MINIMUMS.",
+            "button_text": "EASY ORDER",
+            "button_text_style": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

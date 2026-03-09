@@ -1,0 +1,671 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --fp2-bg: {{ section.settings.background_color }};
+    --fp2-text: {{ section.settings.text_color }};
+    --fp2-heading: {{ section.settings.heading_color }};
+    --fp2-accent: {{ section.settings.accent_color }};
+    --fp2-btn-bg: {{ section.settings.button_background }};
+    --fp2-btn-text: {{ section.settings.button_text_color }};
+    --fp2-star-color: {{ section.settings.star_color }};
+    --fp2-badge-bg: {{ section.settings.badge_background }};
+    --fp2-badge-text: {{ section.settings.badge_text_color }};
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+{% endstyle %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Josefin+Sans:wght@600;700&family=Arimo:wght@400;500;600&display=swap');
+
+  .featured-product-2 {
+    background: var(--fp2-bg, #ffffff);
+    padding: 40px 20px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .featured-product-2__container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .featured-product-2__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: center;
+  }
+
+  /* Image Section */
+  .featured-product-2__image-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .featured-product-2__image {
+    width: 100%;
+    border-radius: {{ section.settings.image_border_radius }}px;
+    overflow: hidden;
+  }
+
+  .featured-product-2__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .featured-product-2__image-placeholder {
+    width: 100%;
+    padding-bottom: 100%;
+    background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+    border-radius: {{ section.settings.image_border_radius }}px;
+  }
+
+  /* Badge */
+  .featured-product-2__badge {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--fp2-badge-bg, #ffffff);
+    color: var(--fp2-badge-text, #1a1a1a);
+    padding: 12px 24px;
+    border-radius: 100px;
+    border: 2px dashed var(--fp2-accent, #3b8247);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .featured-product-2__badge-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--fp2-accent, #3b8247);
+  }
+
+  /* Content Section */
+  .featured-product-2__content {
+    text-align: center;
+  }
+
+  /* Reviews */
+  .featured-product-2__reviews {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .featured-product-2__stars {
+    display: flex;
+    gap: 3px;
+  }
+
+  .featured-product-2__star {
+    width: 18px;
+    height: 18px;
+    color: var(--fp2-star-color, #ffc107);
+  }
+
+  .featured-product-2__review-text {
+    font-size: 14px;
+    color: var(--fp2-text, #666666);
+    font-weight: 500;
+  }
+
+  /* Title */
+  .featured-product-2__title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--fp2-heading, #1a1a1a);
+    margin: 0 0 20px;
+    line-height: 1.2;
+  }
+
+  .featured-product-2__title-accent {
+    color: var(--fp2-accent, #3b8247);
+  }
+
+  /* Description */
+  .featured-product-2__description {
+    font-size: 16px;
+    color: var(--fp2-text, #666666);
+    line-height: 1.7;
+    margin: 0 0 24px;
+  }
+
+  /* Features List */
+  .featured-product-2__features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .featured-product-2__feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--fp2-text, #666666);
+    font-weight: 500;
+  }
+
+  .featured-product-2__feature-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--fp2-accent, #3b8247);
+    flex-shrink: 0;
+  }
+
+  /* Button */
+  .featured-product-2__button {
+    display: inline-block;
+    background: var(--fp2-btn-bg, #ffe658);
+    color: var(--fp2-btn-text, #1a1a1a);
+    padding: 18px 40px;
+    border-radius: {{ section.settings.button_border_radius }}px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .featured-product-2__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .featured-product-2__button-primary {
+    display: block;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .featured-product-2__button-secondary {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  /* Stock Alert */
+  .featured-product-2__stock-alert {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff3cd;
+    color: #856404;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border: 1px solid #ffeaa7;
+  }
+
+  .featured-product-2__stock-alert-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .featured-product-2 {
+      padding: 50px 30px;
+    }
+
+    .featured-product-2__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .featured-product-2__content {
+      text-align: left;
+    }
+
+    .featured-product-2__reviews {
+      justify-content: flex-start;
+    }
+
+    .featured-product-2__title {
+      font-size: 38px;
+    }
+
+    .featured-product-2__description {
+      font-size: 17px;
+    }
+
+    .featured-product-2__features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .featured-product-2__feature {
+      justify-content: flex-start;
+    }
+
+    .featured-product-2__button {
+      display: inline-block;
+      width: auto;
+    }
+
+    /* Layout Variations */
+    .featured-product-2--image-right .featured-product-2__grid {
+      grid-template-areas: "content image";
+    }
+
+    .featured-product-2--image-right .featured-product-2__image-wrapper {
+      grid-area: image;
+    }
+
+    .featured-product-2--image-right .featured-product-2__content {
+      grid-area: content;
+    }
+
+    .featured-product-2--image-left .featured-product-2__grid {
+      grid-template-areas: "image content";
+    }
+
+    .featured-product-2--image-left .featured-product-2__image-wrapper {
+      grid-area: image;
+    }
+
+    .featured-product-2--image-left .featured-product-2__content {
+      grid-area: content;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .featured-product-2 {
+      padding: 60px 40px;
+    }
+
+    .featured-product-2__grid {
+      gap: 60px;
+    }
+
+    .featured-product-2__title {
+      font-size: 44px;
+    }
+
+    .featured-product-2__description {
+      font-size: 18px;
+    }
+
+    .featured-product-2__badge {
+      padding: 14px 28px;
+      font-size: 14px;
+    }
+
+    .featured-product-2__badge-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* Large Desktop */
+  @media (min-width: 1400px) {
+    .featured-product-2 {
+      padding: 70px 60px;
+    }
+
+    .featured-product-2__grid {
+      gap: 80px;
+    }
+  }
+</style>
+
+<section class="featured-product-2 featured-product-2--image-{{ section.settings.image_position }}" data-section-id="{{ section.id }}">
+  <div class="featured-product-2__container">
+    <div class="featured-product-2__grid">
+      <!-- Image Section -->
+      <div class="featured-product-2__image-wrapper">
+        <div class="featured-product-2__image">
+          {%- if section.settings.product_image != blank -%}
+            {{ section.settings.product_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: section.settings.product_title }}
+          {%- else -%}
+            <div class="featured-product-2__image-placeholder"></div>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.show_badge and section.settings.badge_text != blank -%}
+          <div class="featured-product-2__badge">
+            <svg class="featured-product-2__badge-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span>{{ section.settings.badge_text }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Content Section -->
+      <div class="featured-product-2__content">
+        {%- if section.settings.show_reviews -%}
+          <div class="featured-product-2__reviews">
+            <div class="featured-product-2__stars">
+              {%- for i in (1..5) -%}
+                <svg class="featured-product-2__star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              {%- endfor -%}
+            </div>
+            {%- if section.settings.review_text != blank -%}
+              <span class="featured-product-2__review-text">{{ section.settings.review_text }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.product_title != blank -%}
+          <h2 class="featured-product-2__title">
+            {{ section.settings.product_title | replace: section.settings.accent_word, '<span class="featured-product-2__title-accent">' | append: section.settings.accent_word | append: '</span>' }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.show_stock_alert -%}
+          <div class="featured-product-2__stock-alert">
+            <svg class="featured-product-2__stock-alert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            <span>{{ section.settings.stock_alert_text }}</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <p class="featured-product-2__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="featured-product-2__features">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'feature' -%}
+                <div class="featured-product-2__feature" {{ block.shopify_attributes }}>
+                  <svg class="featured-product-2__feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>{{ block.settings.feature_text }}</span>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_text != blank -%}
+          <a href="{{ section.settings.button_link }}" class="featured-product-2__button">
+            <span class="featured-product-2__button-primary">{{ section.settings.button_text }}</span>
+            {%- if section.settings.button_subtext != blank -%}
+              <span class="featured-product-2__button-secondary">{{ section.settings.button_subtext }}</span>
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SEK Featured Product 2",
+  "tag": "section",
+  "class": "section-featured-product-2",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Product Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Best Seller"
+    },
+    {
+      "type": "header",
+      "content": "Product Info"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product title",
+      "default": "Premium Running Shoes"
+    },
+    {
+      "type": "text",
+      "id": "accent_word",
+      "label": "Accent word (from title)",
+      "default": "Premium",
+      "info": "This word will be highlighted in the accent color"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Experience ultimate comfort and performance with our premium running shoes. Engineered for athletes who demand the best, featuring advanced cushioning technology and breathable materials."
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show star rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_text",
+      "label": "Review text",
+      "default": "2,847 reviews"
+    },
+    {
+      "type": "header",
+      "content": "Stock Alert"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stock_alert",
+      "label": "Show stock alert",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "stock_alert_text",
+      "label": "Stock alert text",
+      "default": "Head's up, we're low on stock!"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "GET YOURS NOW"
+    },
+    {
+      "type": "text",
+      "id": "button_subtext",
+      "label": "Button subtext",
+      "default": "30-Day satisfaction guarantee"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#3b8247"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#ffe658"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#ffc107"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_text",
+          "label": "Feature text",
+          "default": "Lightweight & breathable"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK Featured Product 2",
+      "settings": {
+        "product_title": "Premium Running Shoes",
+        "accent_word": "Premium",
+        "description": "Experience ultimate comfort and performance with our premium running shoes. Engineered for athletes who demand the best, featuring advanced cushioning technology and breathable materials that keep your feet cool during intense workouts.",
+        "review_text": "2,847 reviews",
+        "badge_text": "Best Seller",
+        "button_text": "GET YOURS NOW",
+        "button_subtext": "30-Day satisfaction guarantee",
+        "image_position": "left"
+      },
+      "blocks": [
+        { "type": "feature", "settings": { "feature_text": "Lightweight & breathable design" } },
+        { "type": "feature", "settings": { "feature_text": "Advanced cushioning technology" } },
+        { "type": "feature", "settings": { "feature_text": "Durable non-slip outsole" } },
+        { "type": "feature", "settings": { "feature_text": "Ergonomic fit for all-day comfort" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

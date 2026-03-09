@@ -1,0 +1,801 @@
+{% comment %}
+  SEK How It Works - Two-column accordion steps section
+  Features: Image + accordion steps, expandable items, step numbers, chevron animation
+{% endcomment %}
+
+{%- assign section_id = section.id -%}
+
+{% style %}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  /* Section Container */
+  #sek-hiw-{{ section_id }} {
+    padding: {{ section.settings.section_padding_top_mobile }}px 20px {{ section.settings.section_padding_bottom_mobile }}px;
+    margin-top: {{ section.settings.section_margin_top }}px;
+    margin-bottom: {{ section.settings.section_margin_bottom }}px;
+    background-color: {{ section.settings.section_bg }};
+  }
+
+  @media (min-width: 750px) {
+    #sek-hiw-{{ section_id }} {
+      padding: {{ section.settings.section_padding_top_desktop }}px 5rem {{ section.settings.section_padding_bottom_desktop }}px;
+    }
+  }
+
+  /* Section Header */
+  #sek-hiw-{{ section_id }} .sek-hiw__header {
+    text-align: {{ section.settings.header_alignment }};
+    margin-bottom: {{ section.settings.header_spacing_mobile }}px;
+    max-width: {{ section.settings.max_width }}px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__header {
+      margin-bottom: {{ section.settings.header_spacing_desktop }}px;
+    }
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: {{ section.settings.subtitle_color }};
+    margin: 0 0 12px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__subtitle {
+      font-size: 13px;
+    }
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__title {
+    font-family: 'Inter', sans-serif;
+    font-size: {{ section.settings.title_size_mobile }}px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: {{ section.settings.title_color }};
+    margin: 0 0 12px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__title {
+      font-size: {{ section.settings.title_size_desktop }}px;
+    }
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__description {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: {{ section.settings.description_color }};
+    margin: 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__description {
+      font-size: 16px;
+    }
+  }
+
+  /* Main Grid */
+  #sek-hiw-{{ section_id }} .sek-hiw__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: {{ section.settings.gap_mobile }}px;
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 1024px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: {{ section.settings.gap_desktop }}px;
+      align-items: start;
+    }
+
+    #sek-hiw-{{ section_id }} .sek-hiw__grid--image-right {
+      direction: rtl;
+    }
+
+    #sek-hiw-{{ section_id }} .sek-hiw__grid--image-right > * {
+      direction: ltr;
+    }
+  }
+
+  /* Image Column */
+  #sek-hiw-{{ section_id }} .sek-hiw__image-col {
+    order: 1;
+  }
+
+  @media (min-width: 1024px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__image-col {
+      position: sticky;
+      top: 100px;
+    }
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__image-wrapper {
+    border-radius: {{ section.settings.image_radius }}px;
+    overflow: hidden;
+    aspect-ratio: {{ section.settings.image_aspect_ratio }};
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__image-wrapper img,
+  #sek-hiw-{{ section_id }} .sek-hiw__image-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Accordion Column */
+  #sek-hiw-{{ section_id }} .sek-hiw__accordion-col {
+    order: 2;
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__accordion {
+      gap: 16px;
+    }
+  }
+
+  /* Accordion Item */
+  #sek-hiw-{{ section_id }} .sek-hiw__item {
+    background-color: {{ section.settings.item_bg }};
+    border-radius: {{ section.settings.item_radius }}px;
+    overflow: hidden;
+    transition: all 0.25s ease;
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__item--active {
+    background-color: {{ section.settings.item_active_bg }};
+  }
+
+  /* Item Header (Clickable) */
+  #sek-hiw-{{ section_id }} .sek-hiw__item-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__item-header {
+      padding: 20px 24px;
+    }
+  }
+
+  /* Step Number */
+  #sek-hiw-{{ section_id }} .sek-hiw__step-number {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: {{ section.settings.number_bg }};
+    color: {{ section.settings.number_color }};
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__step-number {
+      width: 40px;
+      height: 40px;
+      font-size: 15px;
+    }
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__item--active .sek-hiw__step-number {
+    background-color: {{ section.settings.number_active_bg }};
+    color: {{ section.settings.number_active_color }};
+  }
+
+  /* Step Title */
+  #sek-hiw-{{ section_id }} .sek-hiw__step-title {
+    flex: 1;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: {{ section.settings.step_title_color }};
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__step-title {
+      font-size: 17px;
+    }
+  }
+
+  /* Chevron Icon */
+  #sek-hiw-{{ section_id }} .sek-hiw__chevron {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    stroke: {{ section.settings.chevron_color }};
+    fill: none;
+    stroke-width: 2;
+    transition: transform 0.25s ease;
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__item--active .sek-hiw__chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Item Content (Expandable) */
+  #sek-hiw-{{ section_id }} .sek-hiw__item-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__item--active .sek-hiw__item-content {
+    max-height: 500px;
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__item-content-inner {
+    padding: 0 20px 20px 72px;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__item-content-inner {
+      padding: 0 24px 24px 80px;
+    }
+  }
+
+  #sek-hiw-{{ section_id }} .sek-hiw__step-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: {{ section.settings.step_text_color }};
+    margin: 0;
+  }
+
+  @media (min-width: 750px) {
+    #sek-hiw-{{ section_id }} .sek-hiw__step-text {
+      font-size: 15px;
+    }
+  }
+{% endstyle %}
+
+<section id="sek-hiw-{{ section_id }}" class="sek-hiw">
+  <!-- Section Header -->
+  {%- if section.settings.subtitle != blank or section.settings.title != blank or section.settings.description != blank -%}
+    <div class="sek-hiw__header">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="sek-hiw__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="sek-hiw__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="sek-hiw__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <!-- Main Grid -->
+  <div class="sek-hiw__grid{% if section.settings.image_position == 'right' %} sek-hiw__grid--image-right{% endif %}">
+    <!-- Image/Video Column -->
+    <div class="sek-hiw__image-col">
+      <div class="sek-hiw__image-wrapper">
+        {%- if section.settings.video_url != blank -%}
+          <video autoplay muted loop playsinline controls>
+            <source src="{{ section.settings.video_url }}" type="video/mp4">
+          </video>
+        {%- elsif section.settings.video != blank -%}
+          {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: true }}
+        {%- elsif section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+        {%- else -%}
+          <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f9f7ef 0%, #e8e4dd 100%);"></div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Accordion Column -->
+    <div class="sek-hiw__accordion-col">
+      <div class="sek-hiw__accordion">
+        {%- assign step_number = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step' -%}
+            {%- assign step_number = step_number | plus: 1 -%}
+            <div class="sek-hiw__item{% if forloop.first %} sek-hiw__item--active{% endif %}" data-hiw-item {{ block.shopify_attributes }}>
+              <div class="sek-hiw__item-header" data-hiw-toggle>
+                <span class="sek-hiw__step-number">{{ step_number | prepend: '0' | slice: -2, 2 }}</span>
+                <h3 class="sek-hiw__step-title">{{ block.settings.title }}</h3>
+                <svg class="sek-hiw__chevron" viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </div>
+              <div class="sek-hiw__item-content">
+                <div class="sek-hiw__item-content-inner">
+                  <p class="sek-hiw__step-text">{{ block.settings.text }}</p>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- comment -%} Default steps if no blocks {%- endcomment -%}
+        {%- if section.blocks.size == 0 -%}
+          <div class="sek-hiw__item sek-hiw__item--active" data-hiw-item>
+            <div class="sek-hiw__item-header" data-hiw-toggle>
+              <span class="sek-hiw__step-number">01</span>
+              <h3 class="sek-hiw__step-title">Unbox your order</h3>
+              <svg class="sek-hiw__chevron" viewBox="0 0 24 24">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </div>
+            <div class="sek-hiw__item-content">
+              <div class="sek-hiw__item-content-inner">
+                <p class="sek-hiw__step-text">Carefully open your package and remove all items. Check that everything is included according to your order confirmation.</p>
+              </div>
+            </div>
+          </div>
+          <div class="sek-hiw__item" data-hiw-item>
+            <div class="sek-hiw__item-header" data-hiw-toggle>
+              <span class="sek-hiw__step-number">02</span>
+              <h3 class="sek-hiw__step-title">Follow the setup guide</h3>
+              <svg class="sek-hiw__chevron" viewBox="0 0 24 24">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </div>
+            <div class="sek-hiw__item-content">
+              <div class="sek-hiw__item-content-inner">
+                <p class="sek-hiw__step-text">Read through the included setup guide and follow each step carefully. The process takes only a few minutes.</p>
+              </div>
+            </div>
+          </div>
+          <div class="sek-hiw__item" data-hiw-item>
+            <div class="sek-hiw__item-header" data-hiw-toggle>
+              <span class="sek-hiw__step-number">03</span>
+              <h3 class="sek-hiw__step-title">Enjoy your product</h3>
+              <svg class="sek-hiw__chevron" viewBox="0 0 24 24">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </div>
+            <div class="sek-hiw__item-content">
+              <div class="sek-hiw__item-content-inner">
+                <p class="sek-hiw__step-text">Once setup is complete, you're ready to enjoy your new product. Contact our support team if you have any questions.</p>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const section = document.getElementById('sek-hiw-{{ section_id }}');
+    if (!section) return;
+
+    const items = section.querySelectorAll('[data-hiw-item]');
+    const toggles = section.querySelectorAll('[data-hiw-toggle]');
+
+    toggles.forEach((toggle, index) => {
+      toggle.addEventListener('click', () => {
+        const item = items[index];
+        const isActive = item.classList.contains('sek-hiw__item--active');
+
+        // Close all items
+        items.forEach(i => i.classList.remove('sek-hiw__item--active'));
+
+        // Open clicked item if it wasn't already open
+        if (!isActive) {
+          item.classList.add('sek-hiw__item--active');
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SEK How It Works",
+  "tag": "div",
+  "class": "sek-hiw-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Simple Setup"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "How It Works"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "What to expect when you unbox your order"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Title size (mobile)",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "label": "Title size (desktop)",
+      "min": 32,
+      "max": 72,
+      "step": 4,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#e51b94"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#262425"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#5c5c5c"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_mobile",
+      "label": "Header bottom spacing (mobile)",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_desktop",
+      "label": "Header bottom spacing (desktop)",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position (desktop)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "default": 1400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Gap between columns (mobile)",
+      "min": 20,
+      "max": 50,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "label": "Gap between columns (desktop)",
+      "min": 30,
+      "max": 80,
+      "step": 10,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video (Shopify hosted)"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL (external)",
+      "info": "MP4 video URL. Takes priority over Shopify hosted video."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Fallback image",
+      "info": "Shows if no video is set"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square (1:1)" },
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "3 / 4", "label": "Portrait (3:4)" },
+        { "value": "4 / 5", "label": "Portrait (4:5)" }
+      ],
+      "default": "1 / 1"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Accordion Items"
+    },
+    {
+      "type": "color",
+      "id": "item_bg",
+      "label": "Item background",
+      "default": "#f5f0e8"
+    },
+    {
+      "type": "color",
+      "id": "item_active_bg",
+      "label": "Active item background",
+      "default": "#f5f0e8"
+    },
+    {
+      "type": "range",
+      "id": "item_radius",
+      "label": "Item border radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Step Numbers"
+    },
+    {
+      "type": "color",
+      "id": "number_bg",
+      "label": "Number background",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Number color",
+      "default": "#262425"
+    },
+    {
+      "type": "color",
+      "id": "number_active_bg",
+      "label": "Active number background",
+      "default": "#e51b94"
+    },
+    {
+      "type": "color",
+      "id": "number_active_color",
+      "label": "Active number color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "color",
+      "id": "step_title_color",
+      "label": "Step title color",
+      "default": "#262425"
+    },
+    {
+      "type": "color",
+      "id": "step_text_color",
+      "label": "Step text color",
+      "default": "#5c5c5c"
+    },
+    {
+      "type": "color",
+      "id": "chevron_color",
+      "label": "Chevron color",
+      "default": "#262425"
+    },
+    {
+      "type": "header",
+      "content": "Section Style"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#f9f7ef"
+    },
+    {
+      "type": "range",
+      "id": "section_margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "label": "Top padding (mobile)",
+      "min": 30,
+      "max": 100,
+      "step": 10,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "label": "Bottom padding (mobile)",
+      "min": 30,
+      "max": 100,
+      "step": 10,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_desktop",
+      "label": "Top padding (desktop)",
+      "min": 50,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_desktop",
+      "label": "Bottom padding (desktop)",
+      "min": 50,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "Step title goes here"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Step description",
+          "default": "Describe this step in detail. Explain what the customer needs to do or what they can expect at this stage."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEK How It Works",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Unbox your order",
+            "text": "Carefully open your package and remove all items. Check that everything is included according to your order confirmation."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Follow the setup guide",
+            "text": "Read through the included setup guide and follow each step carefully. The process takes only a few minutes."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Allow time to settle",
+            "text": "Some products may need 24-48 hours to fully expand or settle. This is completely normal and ensures optimal performance."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Enjoy your product",
+            "text": "Once setup is complete, you're ready to enjoy your new product. Contact our support team if you have any questions."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
