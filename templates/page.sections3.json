@@ -964,7 +964,7 @@
             "tab_title": "UNISEX",
             "collection": "",
             "products_limit": 10,
-            "triangle_color": "#E5A88A"
+            "triangle_color": "#e5a88a"
           }
         },
         "collection_tab_PgQhhM": {
@@ -973,7 +973,7 @@
             "tab_title": "WOMEN",
             "collection": "",
             "products_limit": 10,
-            "triangle_color": "#E5A88A"
+            "triangle_color": "#e5a88a"
           }
         },
         "collection_tab_KMeRtW": {
@@ -982,7 +982,7 @@
             "tab_title": "MEN",
             "collection": "",
             "products_limit": 10,
-            "triangle_color": "#E5A88A"
+            "triangle_color": "#e5a88a"
           }
         }
       },
@@ -998,7 +998,7 @@
         "tab_font_size": 14,
         "product_title_font_size": 20,
         "section_bg_color": "#ffffff",
-        "spotlight_color": "#E5A88A",
+        "spotlight_color": "#e5a88a",
         "text_color": "#1a1a1a",
         "tab_border_color": "#1a1a1a",
         "tab_active_bg": "#1a1a1a",
@@ -1366,13 +1366,204 @@
         "card_title_font_size": 16,
         "card_subtitle_font_size": 12,
         "card_text_color": "#ffffff",
-        "subtitle_color": "#4ECDC4",
+        "subtitle_color": "#4ecdc4",
         "star_color": "#f5a623",
         "background_color": "#ffffff",
         "nav_bg_color": "#8b2942",
         "nav_icon_color": "#ffffff",
         "padding_top": 60,
         "padding_bottom": 60
+      }
+    },
+    "scrolling_images_cTk7nP": {
+      "type": "scrolling-images",
+      "blocks": {
+        "image_RpaAfc": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_UThDnN": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_aAJkJL": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_eYB7Qn": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_bfd3Pk": {
+          "type": "image",
+          "settings": {}
+        },
+        "image_pXKhcj": {
+          "type": "image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "image_RpaAfc",
+        "image_UThDnN",
+        "image_aAJkJL",
+        "image_eYB7Qn",
+        "image_bfd3Pk",
+        "image_pXKhcj"
+      ],
+      "name": "Scrolling Images",
+      "settings": {
+        "image_width": 120,
+        "image_height": 90,
+        "image_gap": 10,
+        "mobile_image_width": 90,
+        "mobile_image_height": 70,
+        "mobile_image_gap": 8,
+        "scroll_speed": 30,
+        "pause_on_hover": true,
+        "auto_adjust_speed": false,
+        "overlay_text": "+12,000 people loves our natural wine",
+        "text_size": 18,
+        "text_color": "#000000",
+        "font_family": "system",
+        "font_weight": "400",
+        "overlay_background": "#ffffff",
+        "overlay_padding": 20,
+        "border_width": 1,
+        "border_color": "#000000",
+        "background_color": "#ffffff"
+      }
+    },
+    "scrolling_images_2_yJCixe": {
+      "type": "scrolling-images-2",
+      "blocks": {
+        "mosaic_container_9zB4Pe": {
+          "type": "mosaic_container",
+          "settings": {}
+        },
+        "mosaic_container_TmUdje": {
+          "type": "mosaic_container",
+          "settings": {}
+        },
+        "mosaic_container_JHf6GE": {
+          "type": "mosaic_container",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "mosaic_container_9zB4Pe",
+        "mosaic_container_TmUdje",
+        "mosaic_container_JHf6GE"
+      ],
+      "name": "Scrolling Image 2",
+      "settings": {
+        "section_bg_color": "#ffffff",
+        "border_color": "#121212",
+        "border_size": 0,
+        "border_radius": 0,
+        "border_radius_desktop": 0,
+        "scroll_speed": 30,
+        "scroll_direction": "left",
+        "section_height_mobile": 400,
+        "section_height_desktop": 650,
+        "container_bg_color": "#ffffff",
+        "container_border_color": "#121212",
+        "container_border_size": 0,
+        "container_border_radius": 0,
+        "container_padding": 12,
+        "container_width_mobile": 300,
+        "container_height_mobile": 300,
+        "gap_between_images_mobile": 8,
+        "gap_between_containers_mobile": 12,
+        "container_width_desktop": 400,
+        "container_height_desktop": 500,
+        "gap_between_images_desktop": 12,
+        "gap_between_containers_desktop": 12,
+        "image_border_size": 0,
+        "image_border_color": "#121212",
+        "image_border_radius": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "margin_left_mobile": 0,
+        "margin_right_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "margin_left_desktop": 0,
+        "margin_right_desktop": 0
+      }
+    },
+    "scrolling_images_3_NJ9jKk": {
+      "type": "scrolling-images-3",
+      "blocks": {
+        "grid_container_a9VKmW": {
+          "type": "grid_container",
+          "settings": {}
+        },
+        "grid_container_cgDKmJ": {
+          "type": "grid_container",
+          "settings": {}
+        },
+        "grid_container_YhqCjg": {
+          "type": "grid_container",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "grid_container_a9VKmW",
+        "grid_container_cgDKmJ",
+        "grid_container_YhqCjg"
+      ],
+      "name": "Scrolling Image 3",
+      "settings": {
+        "section_bg_color": "#ffffff",
+        "border_color": "#121212",
+        "border_size": 0,
+        "border_radius": 0,
+        "border_radius_desktop": 0,
+        "scroll_speed": 30,
+        "scroll_direction": "left",
+        "section_height_mobile": 400,
+        "section_height_desktop": 650,
+        "container_bg_color": "#ffffff",
+        "container_border_color": "#121212",
+        "container_border_size": 0,
+        "container_border_radius": 0,
+        "container_padding": 12,
+        "container_width_mobile": 300,
+        "container_height_mobile": 300,
+        "gap_between_images_mobile": 8,
+        "gap_between_containers_mobile": 12,
+        "container_width_desktop": 400,
+        "container_height_desktop": 500,
+        "gap_between_images_desktop": 12,
+        "gap_between_containers_desktop": 12,
+        "image_border_size": 0,
+        "image_border_color": "#121212",
+        "image_border_radius": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "padding_left_mobile": 0,
+        "padding_right_mobile": 0,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "margin_left_mobile": 0,
+        "margin_right_mobile": 0,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0,
+        "margin_left_desktop": 0,
+        "margin_right_desktop": 0
       }
     }
   },
@@ -1396,6 +1587,9 @@
     "sek_hand_picked_collection_RLWin9",
     "sek_video_carousel_kJnqQP",
     "sek_video_carousel_2_bciEgN",
-    "sek_video_carousel_3_XpjLTU"
+    "sek_video_carousel_3_XpjLTU",
+    "scrolling_images_cTk7nP",
+    "scrolling_images_2_yJCixe",
+    "scrolling_images_3_NJ9jKk"
   ]
 }
