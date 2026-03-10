@@ -1,0 +1,311 @@
+{% comment %}
+  Collections Grid Section
+  Displays a grid of collection items with images and titles
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .collections-grid-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #shopify-section-{{ section.id }} .collections-heading {
+    text-align: center;
+    margin-bottom: 50px;
+    font-family: {% if section.settings.heading_font == 'serif' %}Georgia, 'Times New Roman', serif{% else %}-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif{% endif %};
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 400;
+    font-style: italic;
+    color: {{ section.settings.heading_color }};
+    letter-spacing: 0.5px;
+  }
+
+  #shopify-section-{{ section.id }} .collections-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+
+  #shopify-section-{{ section.id }} .collection-item {
+    text-decoration: none;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .collection-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  #shopify-section-{{ section.id }} .collection-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background-color: #f8f8f8;
+  }
+
+  #shopify-section-{{ section.id }} .collection-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .collection-item:hover .collection-image {
+    transform: scale(1.05);
+  }
+
+  #shopify-section-{{ section.id }} .collection-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+  }
+
+  #shopify-section-{{ section.id }} .collection-placeholder svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+  }
+
+  #shopify-section-{{ section.id }} .collection-title {
+    text-align: center;
+    margin-top: 15px;
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: 400;
+    color: {{ section.settings.title_color }};
+    letter-spacing: 0.5px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  @media screen and (max-width: 990px) {
+    #shopify-section-{{ section.id }} .collections-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .collections-heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.9);
+      margin-bottom: 35px;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .collections-grid {
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    #shopify-section-{{ section.id }} .collections-heading {
+      font-size: calc({{ section.settings.heading_size }}px * 0.8);
+      margin-bottom: 30px;
+    }
+
+    #shopify-section-{{ section.id }} .collection-title {
+      font-size: calc({{ section.settings.title_size }}px * 1.1);
+    }
+  }
+</style>
+
+<div class="collections-grid-container">
+  {% if section.settings.heading != blank %}
+    <h2 class="collections-heading">{{ section.settings.heading }}</h2>
+  {% endif %}
+
+  <div class="collections-grid">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'collection' %}
+          {% assign collection = collections[block.settings.collection] %}
+          <a href="{% if collection != blank %}{{ collection.url }}{% else %}#{% endif %}" class="collection-item" {{ block.shopify_attributes }}>
+            <div class="collection-image-wrapper">
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 600 | image_tag: 
+                  class: 'collection-image',
+                  loading: 'lazy',
+                  alt: block.settings.title | default: collection.title
+                }}
+              {% elsif collection.featured_image != blank %}
+                {{ collection.featured_image | image_url: width: 600 | image_tag: 
+                  class: 'collection-image',
+                  loading: 'lazy',
+                  alt: collection.title
+                }}
+              {% elsif collection.products.first.featured_image != blank %}
+                {{ collection.products.first.featured_image | image_url: width: 600 | image_tag: 
+                  class: 'collection-image',
+                  loading: 'lazy',
+                  alt: collection.title
+                }}
+              {% else %}
+                <div class="collection-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="7" width="18" height="10" rx="2" ry="2"></rect>
+                    <path d="M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"></path>
+                    <line x1="12" y1="11" x2="12" y2="13"></line>
+                  </svg>
+                </div>
+              {% endif %}
+            </div>
+            <h3 class="collection-title">
+              {{ block.settings.title | default: collection.title | default: 'Collection' }}
+            </h3>
+          </a>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collections Grid",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "The Collections"
+    },
+    {
+      "type": "select",
+      "id": "heading_font",
+      "label": "Heading font",
+      "options": [
+        {
+          "value": "serif",
+          "label": "Serif"
+        },
+        {
+          "value": "sans-serif",
+          "label": "Sans-serif"
+        }
+      ],
+      "default": "serif"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 28,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Collection title size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom image",
+          "info": "Optional. Overrides collection image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom title",
+          "info": "Optional. Overrides collection title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections Grid",
+      "blocks": [
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Rings"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Necklaces"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Engagement"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Earrings"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,444 @@
+{% comment %}
+  Feature Icons Section
+  Displays 4 feature blocks with icons, headings, and descriptions
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .features-container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #shopify-section-{{ section.id }} .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: {{ section.settings.column_gap }}px;
+    align-items: start;
+  }
+
+  #shopify-section-{{ section.id }} .feature-block {
+    text-align: center;
+    padding: {{ section.settings.block_padding }}px;
+  }
+
+  #shopify-section-{{ section.id }} .feature-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: {{ section.settings.icon_margin_bottom }}px;
+    height: {{ section.settings.icon_size }}px;
+  }
+
+  #shopify-section-{{ section.id }} .feature-icon {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .feature-icon-svg {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    stroke: {{ section.settings.icon_color }};
+    fill: none;
+    stroke-width: {{ section.settings.icon_weight }};
+  }
+
+  #shopify-section-{{ section.id }} .feature-heading {
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    color: {{ section.settings.heading_color }};
+    margin: 0 0 {{ section.settings.heading_margin_bottom }}px 0;
+    line-height: 1.2;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .feature-description {
+    font-size: {{ section.settings.description_size }}px;
+    color: {{ section.settings.description_color }};
+    margin: 0;
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Tablet Layout - 2x2 Grid */
+  @media screen and (max-width: 990px) and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: {{ section.settings.mobile_gap }}px;
+    }
+  }
+
+  /* Mobile Layout - 1 per row */
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .features-grid {
+      grid-template-columns: 1fr;
+      gap: {{ section.settings.mobile_gap }}px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-block {
+      padding: {{ section.settings.block_padding | times: 0.8 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-heading {
+      font-size: {{ section.settings.heading_size | times: 0.9 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-description {
+      font-size: {{ section.settings.description_size | times: 0.95 }}px;
+    }
+  }
+</style>
+
+<div class="features-container">
+  <div class="features-grid">
+    {% for block in section.blocks %}
+      {% if block.type == 'feature' %}
+        <div class="feature-block" {{ block.shopify_attributes }}>
+          <div class="feature-icon-wrapper">
+            {% if block.settings.icon_image != blank %}
+              {{ block.settings.icon_image | image_url: width: 100 | image_tag:
+                class: 'feature-icon',
+                alt: block.settings.heading
+              }}
+            {% elsif block.settings.icon_type != 'none' %}
+              {% case block.settings.icon_type %}
+                {% when 'shipping' %}
+                  <svg class="feature-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <rect x="1" y="3" width="15" height="13"></rect>
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                  </svg>
+                {% when 'price' %}
+                  <svg class="feature-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                  </svg>
+                {% when 'return' %}
+                  <svg class="feature-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <polyline points="1 4 1 10 7 10"></polyline>
+                    <polyline points="23 20 23 14 17 14"></polyline>
+                    <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                  </svg>
+                {% when 'star' %}
+                  <svg class="feature-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="{{ section.settings.icon_color }}">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                {% else %}
+                  {{ 'icon' | placeholder_svg_tag: 'feature-icon' }}
+              {% endcase %}
+            {% else %}
+              {{ 'icon' | placeholder_svg_tag: 'feature-icon' }}
+            {% endif %}
+          </div>
+
+          {% if block.settings.heading != blank %}
+            <h3 class="feature-heading">{{ block.settings.heading }}</h3>
+          {% endif %}
+
+          {% if block.settings.description != blank %}
+            <p class="feature-description">{{ block.settings.description }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Feature Icons",
+  "tag": "section",
+  "class": "feature-icons-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Gap between columns",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "Gap on mobile",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "block_padding",
+      "label": "Block padding",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "icon_weight",
+      "label": "Icon stroke weight",
+      "min": 0.5,
+      "max": 4,
+      "step": 0.5,
+      "default": 2,
+      "info": "Thickness of the icon lines"
+    },
+    {
+      "type": "range",
+      "id": "icon_margin_bottom",
+      "label": "Space below icon",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Space below heading",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon type",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "shipping",
+              "label": "Shipping truck"
+            },
+            {
+              "value": "price",
+              "label": "Price tag"
+            },
+            {
+              "value": "return",
+              "label": "Return arrow"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            }
+          ],
+          "default": "none",
+          "info": "Choose a built-in icon or upload a custom image below"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Custom icon image",
+          "info": "Upload a custom icon (overrides icon type selection)"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Feature"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Add a short description"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Feature Icons",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "shipping",
+            "heading": "Free Shipping",
+            "description": "Order today, receive tomorrow"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "price",
+            "heading": "Price-match guarantee",
+            "description": "Safe money when ordering with us"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "return",
+            "heading": "Hassle-free exchange",
+            "description": "Receive a slip for exchanges"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "star",
+            "heading": "5.0 Google Reviews",
+            "description": "Customer satisfaction #1 priority"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

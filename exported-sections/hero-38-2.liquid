@@ -1,0 +1,763 @@
+{% comment %}
+  Hero 38-2 Section - Blankets/Textiles Style
+  Image left, Content right with feature icons at bottom
+{% endcomment %}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .hero-38-2-{{ section.id }} {
+    --hero38-2-bg: {{ section.settings.background_color }};
+    --hero38-2-heading-color: {{ section.settings.heading_color }};
+    --hero38-2-text-color: {{ section.settings.text_color }};
+    --hero38-2-button-bg: {{ section.settings.button_background }};
+    --hero38-2-button-text: {{ section.settings.button_text_color }};
+    --hero38-2-border-color: {{ section.settings.border_color }};
+    --hero38-2-icon-bg: {{ section.settings.icon_background }};
+  }
+{%- endstyle -%}
+
+<div class="hero-38-2 hero-38-2-{{ section.id }} section-{{ section.id }}-padding">
+  <div class="hero-38-2__container {% if section.settings.full_width %}hero-38-2__container--full{% else %}page-width{% endif %}">
+    <div class="hero-38-2__grid">
+      <!-- Image Side -->
+      <div class="hero-38-2__media">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1200 }}"
+            srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                    {{ section.settings.image | image_url: width: 900 }} 900w,
+                    {{ section.settings.image | image_url: width: 1200 }} 1200w"
+            sizes="(max-width: 989px) 100vw, 50vw"
+            alt="{{ section.settings.image.alt | default: section.settings.heading }}"
+            loading="lazy"
+            class="hero-38-2__image"
+          >
+        {%- else -%}
+          <div class="hero-38-2__placeholder">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Content Side -->
+      <div class="hero-38-2__content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="hero-38-2__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <p class="hero-38-2__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.button_text != blank -%}
+          <a href="{{ section.settings.button_link }}" class="hero-38-2__button">
+            {{ section.settings.button_text }}
+          </a>
+        {%- endif -%}
+
+        <!-- Customer Rating -->
+        <div class="hero-38-2__rating">
+          <div class="hero-38-2__avatars">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'avatar' -%}
+                {%- if block.settings.avatar_image != blank -%}
+                  <div class="hero-38-2__avatar" {{ block.shopify_attributes }}>
+                    <img src="{{ block.settings.avatar_image | image_url: width: 80 }}" alt="Customer" loading="lazy">
+                  </div>
+                {%- else -%}
+                  <div class="hero-38-2__avatar hero-38-2__avatar--placeholder" {{ block.shopify_attributes }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+                    </svg>
+                  </div>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          <!-- Trustpilot Stars -->
+          <div class="hero-38-2__stars">
+            <svg width="88" height="17" viewBox="0 0 88 17">
+              <rect x="0" y="0" width="17" height="17" fill="#00b67a"/>
+              <rect x="18" y="0" width="17" height="17" fill="#00b67a"/>
+              <rect x="36" y="0" width="17" height="17" fill="#00b67a"/>
+              <rect x="54" y="0" width="17" height="17" fill="#00b67a"/>
+              <rect x="72" y="0" width="16" height="17" fill="#00b67a"/>
+              <polygon points="8.5,2.5 10,6.5 14.5,6.5 11,9.5 12.5,13.5 8.5,11 4.5,13.5 6,9.5 2.5,6.5 7,6.5" fill="#fff"/>
+              <polygon points="26.5,2.5 28,6.5 32.5,6.5 29,9.5 30.5,13.5 26.5,11 22.5,13.5 24,9.5 20.5,6.5 25,6.5" fill="#fff"/>
+              <polygon points="44.5,2.5 46,6.5 50.5,6.5 47,9.5 48.5,13.5 44.5,11 40.5,13.5 42,9.5 38.5,6.5 43,6.5" fill="#fff"/>
+              <polygon points="62.5,2.5 64,6.5 68.5,6.5 65,9.5 66.5,13.5 62.5,11 58.5,13.5 60,9.5 56.5,6.5 61,6.5" fill="#fff"/>
+              <polygon points="80,2.5 81.5,6.5 86,6.5 82.5,9.5 84,13.5 80,11 76,13.5 77.5,9.5 74,6.5 78.5,6.5" fill="#fff"/>
+            </svg>
+          </div>
+
+          <div class="hero-38-2__rating-text">
+            <span>{{ section.settings.rating_text }}</span>
+          </div>
+        </div>
+
+        <!-- Bullet Points -->
+        <div class="hero-38-2__bullets">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'bullet' -%}
+              <div class="hero-38-2__bullet" {{ block.shopify_attributes }}>
+                <div class="hero-38-2__bullet-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <span class="hero-38-2__bullet-text">{{ block.settings.bullet_text }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <!-- Feature Icons -->
+        <div class="hero-38-2__features">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature_icon' -%}
+              <div class="hero-38-2__feature" {{ block.shopify_attributes }}>
+                <div class="hero-38-2__feature-icon">
+                  {%- if block.settings.icon_svg != blank -%}
+                    {{ block.settings.icon_svg }}
+                  {%- else -%}
+                    {%- case block.settings.icon_type -%}
+                      {%- when 'truck' -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M1 3h15v13H1z"/>
+                          <path d="M16 8h4l3 3v5h-7V8z"/>
+                          <circle cx="5.5" cy="18.5" r="2.5"/>
+                          <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                      {%- when 'feather' -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+                          <line x1="16" y1="8" x2="2" y2="22"/>
+                          <line x1="17.5" y1="15" x2="9" y2="15"/>
+                        </svg>
+                      {%- when 'calendar' -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                          <line x1="16" y1="2" x2="16" y2="6"/>
+                          <line x1="8" y1="2" x2="8" y2="6"/>
+                          <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                      {%- when 'gift' -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="8" width="18" height="4" rx="1"/>
+                          <path d="M12 8v13"/>
+                          <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/>
+                          <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 4.8 0 0 1 12 7.5a4.8 4.8 0 0 1 4.5-4.5 2.5 2.5 0 0 1 0 5"/>
+                        </svg>
+                      {%- when 'reversible' -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M17 1l4 4-4 4"/>
+                          <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                          <path d="M7 23l-4-4 4-4"/>
+                          <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                      {%- when 'washing' -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="2" y="4" width="20" height="16" rx="2"/>
+                          <circle cx="12" cy="13" r="5"/>
+                          <path d="M6 8h.01"/>
+                          <path d="M10 8h.01"/>
+                          <path d="M14 8h4"/>
+                        </svg>
+                      {%- else -%}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <circle cx="12" cy="12" r="10"/>
+                          <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    {%- endcase -%}
+                  {%- endif -%}
+                </div>
+                <span class="hero-38-2__feature-text">{{ block.settings.feature_text }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-38-2 {
+    background-color: var(--hero38-2-bg);
+    width: 100%;
+  }
+
+  .hero-38-2__container {
+    width: 100%;
+  }
+
+  .hero-38-2__container--full {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .hero-38-2__container--full {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-38-2__container--full {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+  }
+
+  .hero-38-2__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-38-2__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+  }
+
+  /* Media */
+  .hero-38-2__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-38-2__media {
+      aspect-ratio: 1 / 1;
+      border-radius: 20px;
+    }
+  }
+
+  .hero-38-2__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-38-2__placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #e8e4dc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-38-2__placeholder .placeholder-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Content */
+  .hero-38-2__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-38-2__heading {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--hero38-2-heading-color);
+    margin: 0 0 20px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .hero-38-2__heading {
+      font-size: 42px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-38-2__heading {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+  }
+
+  .hero-38-2__description {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--hero38-2-text-color);
+    margin: 0 0 24px;
+    max-width: 440px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-38-2__description {
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+  }
+
+  .hero-38-2__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    background-color: var(--hero38-2-button-bg);
+    color: var(--hero38-2-button-text);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    margin-bottom: 28px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-38-2__button {
+      margin-bottom: 32px;
+    }
+  }
+
+  .hero-38-2__button:hover {
+    opacity: 0.9;
+  }
+
+  /* Rating */
+  .hero-38-2__rating {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-38-2__rating {
+      margin-bottom: 32px;
+    }
+  }
+
+  .hero-38-2__avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-38-2__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--hero38-2-bg);
+    margin-left: -8px;
+    background-color: #d5d1c8;
+  }
+
+  .hero-38-2__avatar:first-child {
+    margin-left: 0;
+  }
+
+  .hero-38-2__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-38-2__avatar--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8a8577;
+  }
+
+  .hero-38-2__avatar--placeholder svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .hero-38-2__stars {
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-38-2__rating-text {
+    font-size: 13px;
+    color: var(--hero38-2-text-color);
+  }
+
+  /* Bullets */
+  .hero-38-2__bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero-38-2__bullets {
+      gap: 24px;
+    }
+  }
+
+  .hero-38-2__bullet {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .hero-38-2__bullet-icon {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    background-color: var(--hero38-2-icon-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .hero-38-2__bullet-icon svg {
+    width: 12px;
+    height: 12px;
+    color: #ffffff;
+  }
+
+  .hero-38-2__bullet-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--hero38-2-text-color);
+  }
+
+  /* Features */
+  .hero-38-2__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .hero-38-2__features {
+      gap: 32px;
+    }
+  }
+
+  .hero-38-2__feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-38-2__feature-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--hero38-2-heading-color);
+  }
+
+  .hero-38-2__feature-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-38-2__feature-text {
+    font-size: 14px;
+    color: var(--hero38-2-text-color);
+    line-height: 1.3;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero 38-2",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Designed for timeless appeal"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Whether draped over your couch, layered on your bed, or wrapped around you on a chilly evening, it's versatility knows no bounds."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Rating"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "Excellent 4.9"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#fbf9f4"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#41441c"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#41441c"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#41441c"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#41441c"
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "Checkmark circle background",
+      "default": "#50522D"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width layout",
+      "default": true,
+      "info": "Use wider container (max 1500px) instead of page width"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "avatar",
+      "name": "Customer Avatar",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar_image",
+          "label": "Avatar image",
+          "info": "Recommended: 80x80px"
+        }
+      ]
+    },
+    {
+      "type": "bullet",
+      "name": "Bullet Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "bullet_text",
+          "label": "Bullet text",
+          "default": "Sustainable materials"
+        }
+      ]
+    },
+    {
+      "type": "feature_icon",
+      "name": "Feature Icon",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_text",
+          "label": "Feature text",
+          "default": "Feature"
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon type",
+          "default": "gift",
+          "options": [
+            {
+              "value": "truck",
+              "label": "Delivery Truck"
+            },
+            {
+              "value": "feather",
+              "label": "Feather (Fair Trade)"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar (Trial Period)"
+            },
+            {
+              "value": "gift",
+              "label": "Gift"
+            },
+            {
+              "value": "reversible",
+              "label": "Reversible Arrows"
+            },
+            {
+              "value": "washing",
+              "label": "Washing Machine"
+            }
+          ]
+        },
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Custom SVG icon",
+          "info": "Paste SVG code here for custom icon (overrides icon type)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero 38-2",
+      "blocks": [
+        {
+          "type": "avatar"
+        },
+        {
+          "type": "avatar"
+        },
+        {
+          "type": "avatar"
+        },
+        {
+          "type": "bullet",
+          "settings": {
+            "bullet_text": "Premium sustainable materials"
+          }
+        },
+        {
+          "type": "bullet",
+          "settings": {
+            "bullet_text": "Ethically sourced fabrics"
+          }
+        },
+        {
+          "type": "bullet",
+          "settings": {
+            "bullet_text": "Eco-friendly packaging"
+          }
+        },
+        {
+          "type": "feature_icon",
+          "settings": {
+            "feature_text": "Perfect for gifting",
+            "icon_type": "gift"
+          }
+        },
+        {
+          "type": "feature_icon",
+          "settings": {
+            "feature_text": "Reversible design",
+            "icon_type": "reversible"
+          }
+        },
+        {
+          "type": "feature_icon",
+          "settings": {
+            "feature_text": "Machine washable",
+            "icon_type": "washing"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

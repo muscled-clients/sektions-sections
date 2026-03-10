@@ -1,0 +1,320 @@
+<style>
+  #product-stats-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  #product-stats-{{ section.id }} .container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #product-stats-{{ section.id }} .section-title {
+    text-align: center;
+    font-size: {{ section.settings.title_font_size }}px;
+    font-weight: {{ section.settings.title_font_weight }};
+    color: {{ section.settings.title_color }};
+    margin-bottom: {{ section.settings.title_margin_bottom }}px;
+    line-height: 1.2;
+    width: 100%;
+  }
+
+  #product-stats-{{ section.id }} .stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.bar_spacing }}px;
+    width: 100%;
+  }
+
+  #product-stats-{{ section.id }} .stat-item {
+    width: 100%;
+  }
+
+  #product-stats-{{ section.id }} .stat-label {
+    font-size: {{ section.settings.label_font_size }}px;
+    color: {{ section.settings.label_color }};
+    margin-bottom: {{ section.settings.label_margin_bottom }}px;
+    display: block;
+  }
+
+  #product-stats-{{ section.id }} .progress-bar {
+    width: 100%;
+    height: {{ section.settings.bar_height }}px;
+    background-color: {{ section.settings.bar_background_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  #product-stats-{{ section.id }} .progress-fill {
+    height: 100%;
+    background-color: {{ section.settings.bar_fill_color }};
+    transition: width 1.5s ease;
+    display: block;
+    width: 0;
+  }
+
+  #product-stats-{{ section.id }}.animated .progress-fill {
+    width: var(--progress-width);
+  }
+
+  @media (max-width: 768px) {
+    #product-stats-{{ section.id }} .section-title {
+      font-size: {{ section.settings.title_font_size | minus: 4 }}px;
+      margin-bottom: {{ section.settings.title_margin_bottom | minus: 10 }}px;
+    }
+
+    #product-stats-{{ section.id }} .stat-label {
+      font-size: {{ section.settings.label_font_size | minus: 2 }}px;
+    }
+  }
+</style>
+
+<section id="product-stats-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.section_title != blank %}
+      <h2 class="section-title">{{ section.settings.section_title }}</h2>
+    {% endif %}
+
+    <div class="stats-container">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'stat' %}
+            <div class="stat-item" {{ block.shopify_attributes }}>
+              <span class="stat-label">{{ block.settings.label }}</span>
+              <div class="progress-bar">
+                <div class="progress-fill" style="--progress-width: {{ block.settings.percentage }}%;"></div>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.getElementById('product-stats-{{ section.id }}');
+
+    function animateBars() {
+      section.classList.add('animated');
+    }
+
+    function checkScroll() {
+      const sectionTop = section.getBoundingClientRect().top;
+      const triggerPoint = window.innerHeight * 0.8;
+
+      if (sectionTop < triggerPoint) {
+        animateBars();
+        window.removeEventListener('scroll', checkScroll);
+      }
+    }
+
+    window.addEventListener('scroll', checkScroll);
+    checkScroll();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Stats",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Nike Vaporfly 3.0"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title Font Size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_font_weight",
+      "label": "Title Font Weight",
+      "min": 400,
+      "max": 900,
+      "step": 100,
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom",
+      "label": "Title Bottom Margin",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Label Font Size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "label_margin_bottom",
+      "label": "Label Bottom Margin",
+      "min": 4,
+      "max": 16,
+      "step": 2,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "bar_background_color",
+      "label": "Bar Background Color",
+      "default": "#d3d3d3"
+    },
+    {
+      "type": "color",
+      "id": "bar_fill_color",
+      "label": "Bar Fill Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "bar_height",
+      "label": "Bar Height",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "bar_spacing",
+      "label": "Spacing Between Bars",
+      "min": 15,
+      "max": 40,
+      "step": 5,
+      "default": 25,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum Width",
+      "min": 600,
+      "max": 1200,
+      "step": 100,
+      "default": 900,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Speed"
+        },
+        {
+          "type": "range",
+          "id": "percentage",
+          "label": "Percentage",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Stats",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "label": "Speed",
+            "percentage": 95
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "label": "Endurance",
+            "percentage": 65
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "label": "Comfort",
+            "percentage": 75
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "label": "Lasting",
+            "percentage": 35
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

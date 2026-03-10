@@ -1,0 +1,648 @@
+<!-- Feature Blocks with Icons Section -->
+<style>
+  #feature-blocks-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  #feature-blocks-{{ section.id }} .container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 {{ section.settings.container_padding }}px;
+  }
+
+  #feature-blocks-{{ section.id }} .section-header {
+    text-align: center;
+    margin-bottom: {{ section.settings.header_margin_bottom }}px;
+  }
+
+  #feature-blocks-{{ section.id }} .section-title {
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: {{ section.settings.title_weight }};
+    color: {{ section.settings.title_color }};
+    margin-bottom: {{ section.settings.title_margin_bottom }}px;
+  }
+
+  #feature-blocks-{{ section.id }} .section-subtitle {
+    font-size: {{ section.settings.subtitle_size }}px;
+    color: {{ section.settings.subtitle_color }};
+    line-height: 1.6;
+  }
+
+  #feature-blocks-{{ section.id }} .feature-blocks-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    gap: {{ section.settings.column_gap }}px;
+    align-items: start;
+  }
+
+  #feature-blocks-{{ section.id }} .feature-block {
+    text-align: center;
+    padding: {{ section.settings.block_padding }}px;
+  }
+
+  #feature-blocks-{{ section.id }} .icon-circle {
+    width: {{ section.settings.circle_size }}px;
+    height: {{ section.settings.circle_size }}px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto {{ section.settings.icon_margin_bottom }}px;
+    transition: all 0.3s ease;
+  }
+
+  {% if section.settings.enable_hover_effect %}
+  #feature-blocks-{{ section.id }} .feature-block:hover .icon-circle {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+  {% endif %}
+
+  #feature-blocks-{{ section.id }} .icon-circle svg,
+  #feature-blocks-{{ section.id }} .icon-circle img {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    object-fit: contain;
+  }
+
+  #feature-blocks-{{ section.id }} .icon-circle svg {
+    stroke: {{ section.settings.icon_color }};
+    stroke-width: {{ section.settings.icon_stroke_width }};
+    fill: none;
+  }
+
+  #feature-blocks-{{ section.id }} .feature-title {
+    font-size: {{ section.settings.feature_title_size }}px;
+    font-weight: {{ section.settings.feature_title_weight }};
+    color: {{ section.settings.feature_title_color }};
+    margin-bottom: {{ section.settings.feature_title_margin }}px;
+    line-height: 1.2;
+  }
+
+  #feature-blocks-{{ section.id }} .feature-description {
+    font-size: {{ section.settings.feature_description_size }}px;
+    color: {{ section.settings.feature_description_color }};
+    line-height: {{ section.settings.feature_description_line_height }};
+    max-width: {{ section.settings.description_max_width }}px;
+    margin: 0 auto;
+  }
+
+  /* Tablet */
+  @media (max-width: 992px) {
+    #feature-blocks-{{ section.id }} .feature-blocks-grid {
+      grid-template-columns: repeat({{ section.settings.columns_tablet }}, 1fr);
+      gap: {{ section.settings.column_gap_tablet }}px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    #feature-blocks-{{ section.id }} .feature-blocks-grid {
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+      gap: {{ section.settings.column_gap_mobile }}px;
+    }
+
+    #feature-blocks-{{ section.id }} .section-title {
+      font-size: {{ section.settings.title_size_mobile }}px;
+    }
+
+    #feature-blocks-{{ section.id }} .feature-title {
+      font-size: {{ section.settings.feature_title_size_mobile }}px;
+    }
+
+    #feature-blocks-{{ section.id }} .feature-description {
+      font-size: {{ section.settings.feature_description_size_mobile }}px;
+    }
+
+    #feature-blocks-{{ section.id }} .icon-circle {
+      width: {{ section.settings.circle_size_mobile }}px;
+      height: {{ section.settings.circle_size_mobile }}px;
+    }
+
+    #feature-blocks-{{ section.id }} .icon-circle svg,
+    #feature-blocks-{{ section.id }} .icon-circle img {
+      width: {{ section.settings.icon_size_mobile }}px;
+      height: {{ section.settings.icon_size_mobile }}px;
+    }
+  }
+</style>
+
+<section id="feature-blocks-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.section_title != blank or section.settings.section_subtitle != blank %}
+      <div class="section-header">
+        {% if section.settings.section_title != blank %}
+          <h2 class="section-title">{{ section.settings.section_title }}</h2>
+        {% endif %}
+        {% if section.settings.section_subtitle != blank %}
+          <p class="section-subtitle">{{ section.settings.section_subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="feature-blocks-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'feature_block' %}
+          <div class="feature-block" {{ block.shopify_attributes }}>
+            <div class="icon-circle" style="background-color: {{ block.settings.circle_color }};">
+              {% if block.settings.icon_image %}
+                <img src="{{ block.settings.icon_image | image_url: width: 200 }}"
+                     alt="{{ block.settings.title | escape }}"
+                     loading="lazy">
+              {% elsif block.settings.icon_svg != blank %}
+                {{ block.settings.icon_svg }}
+              {% else %}
+                <!-- Default icon if none selected -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                </svg>
+              {% endif %}
+            </div>
+
+            {% if block.settings.title != blank %}
+              <h3 class="feature-title">{{ block.settings.title }}</h3>
+            {% endif %}
+
+            {% if block.settings.description != blank %}
+              <p class="feature-description">{{ block.settings.description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Feature Blocks Icons",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "default": 1200,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "container_padding",
+      "label": "Container padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Section padding top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Section padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title"
+    },
+    {
+      "type": "textarea",
+      "id": "section_subtitle",
+      "label": "Section subtitle"
+    },
+    {
+      "type": "range",
+      "id": "header_margin_bottom",
+      "label": "Header margin bottom",
+      "min": 20,
+      "max": 80,
+      "step": 10,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Title size (Mobile)",
+      "min": 20,
+      "max": 36,
+      "step": 2,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Title font weight",
+      "options": [
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom",
+      "label": "Title margin bottom",
+      "min": 0,
+      "max": 30,
+      "step": 5,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Grid Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns (Desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "label": "Columns (Tablet)",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns (Mobile)",
+      "options": [
+        {"value": "1", "label": "1 column"},
+        {"value": "2", "label": "2 columns"}
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap",
+      "min": 10,
+      "max": 60,
+      "step": 10,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "column_gap_tablet",
+      "label": "Column gap (Tablet)",
+      "min": 10,
+      "max": 40,
+      "step": 10,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "column_gap_mobile",
+      "label": "Column gap (Mobile)",
+      "min": 10,
+      "max": 40,
+      "step": 10,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "block_padding",
+      "label": "Block padding",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Icon Settings"
+    },
+    {
+      "type": "range",
+      "id": "circle_size",
+      "label": "Circle size",
+      "min": 80,
+      "max": 200,
+      "step": 10,
+      "default": 150,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "circle_size_mobile",
+      "label": "Circle size (Mobile)",
+      "min": 60,
+      "max": 150,
+      "step": 10,
+      "default": 120,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "label": "Icon size (Mobile)",
+      "min": 25,
+      "max": 80,
+      "step": 5,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#000000",
+      "info": "Color for SVG icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_stroke_width",
+      "label": "Icon stroke width",
+      "min": 1,
+      "max": 3,
+      "step": 0.5,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "icon_margin_bottom",
+      "label": "Icon margin bottom",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hover_effect",
+      "label": "Enable hover effect",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Feature Content"
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size",
+      "label": "Feature title size",
+      "min": 16,
+      "max": 28,
+      "step": 2,
+      "default": 22,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size_mobile",
+      "label": "Feature title size (Mobile)",
+      "min": 14,
+      "max": 24,
+      "step": 2,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "feature_title_weight",
+      "label": "Feature title weight",
+      "options": [
+        {"value": "400", "label": "Regular"},
+        {"value": "500", "label": "Medium"},
+        {"value": "600", "label": "Semi-bold"},
+        {"value": "700", "label": "Bold"}
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "feature_title_color",
+      "label": "Feature title color",
+      "default": "#4a3f36"
+    },
+    {
+      "type": "range",
+      "id": "feature_title_margin",
+      "label": "Feature title margin bottom",
+      "min": 5,
+      "max": 20,
+      "step": 5,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "feature_description_size",
+      "label": "Feature description size",
+      "min": 13,
+      "max": 18,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "feature_description_size_mobile",
+      "label": "Feature description size (Mobile)",
+      "min": 12,
+      "max": 16,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "feature_description_color",
+      "label": "Feature description color",
+      "default": "#8b7f77"
+    },
+    {
+      "type": "range",
+      "id": "feature_description_line_height",
+      "label": "Description line height",
+      "min": 1.2,
+      "max": 2,
+      "step": 0.1,
+      "default": 1.5
+    },
+    {
+      "type": "range",
+      "id": "description_max_width",
+      "label": "Description max width",
+      "min": 200,
+      "max": 400,
+      "step": 20,
+      "default": 300,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_block",
+      "name": "Feature Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon image",
+          "info": "Upload an icon image (PNG or SVG)"
+        },
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Custom SVG icon",
+          "info": "Paste SVG code if not using an image"
+        },
+        {
+          "type": "color",
+          "id": "circle_color",
+          "label": "Circle background color",
+          "default": "#A8E6A3"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Brief description of this feature"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Blocks Icons",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "feature_block",
+          "settings": {
+            "circle_color": "#A8E6A3",
+            "title": "Vegan",
+            "description": "Our entire Chella menu is completely vegan",
+            "icon_svg": "<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/></svg>"
+          }
+        },
+        {
+          "type": "feature_block",
+          "settings": {
+            "circle_color": "#B9DDE8",
+            "title": "All-Natural",
+            "description": "All of our ingredients are 100% natural",
+            "icon_svg": "<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><circle cx='12' cy='12' r='10'/><path d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z'/></svg>"
+          }
+        },
+        {
+          "type": "feature_block",
+          "settings": {
+            "circle_color": "#E8B9C7",
+            "title": "Made in Canada",
+            "description": "All items on our Chella menu are made in Canada",
+            "icon_svg": "<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z'/></svg>"
+          }
+        },
+        {
+          "type": "feature_block",
+          "settings": {
+            "circle_color": "#F8C784",
+            "title": "Handcrafted",
+            "description": "Each product on the Chella menu is unique and handcrafted",
+            "icon_svg": "<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z'/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
