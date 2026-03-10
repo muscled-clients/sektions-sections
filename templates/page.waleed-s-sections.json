@@ -15,9 +15,579 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "sek_hand_picked_collection_jwbwyA": {
+      "type": "sek-hand-picked-collection",
+      "blocks": {
+        "collection_tab_cJVTG7": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "UNISEX",
+            "collection": "",
+            "products_limit": 10,
+            "triangle_color": "#E5A88A"
+          }
+        },
+        "collection_tab_ebmFB7": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "WOMEN",
+            "collection": "",
+            "products_limit": 10,
+            "triangle_color": "#E5A88A"
+          }
+        },
+        "collection_tab_NHfyHe": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "MEN",
+            "collection": "",
+            "products_limit": 10,
+            "triangle_color": "#E5A88A"
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_cJVTG7",
+        "collection_tab_ebmFB7",
+        "collection_tab_NHfyHe"
+      ],
+      "name": "Sek Hand-Picked",
+      "settings": {
+        "heading": "HAND-PICKED FOR YOU",
+        "heading_font_size": 40,
+        "tab_font_size": 14,
+        "product_title_font_size": 20,
+        "section_bg_color": "#ffffff",
+        "spotlight_color": "#E5A88A",
+        "text_color": "#1a1a1a",
+        "tab_border_color": "#1a1a1a",
+        "tab_active_bg": "#1a1a1a",
+        "tab_active_text": "#ffffff",
+        "card_bg": "#e8e8e8",
+        "price_color": "#1a1a1a",
+        "compare_price_color": "#999999",
+        "arrow_bg_color": "#1a1a1a",
+        "arrow_icon_color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "sek_image_reveal_carousel_deimLT": {
+      "type": "sek-image-reveal-carousel",
+      "blocks": {
+        "card_864F6M": {
+          "type": "card",
+          "settings": {
+            "color_before_start": "#667eea",
+            "color_before_end": "#764ba2",
+            "color_after_start": "#f093fb",
+            "color_after_end": "#f5576c"
+          }
+        },
+        "card_i97Cya": {
+          "type": "card",
+          "settings": {
+            "color_before_start": "#2d3436",
+            "color_before_end": "#636e72",
+            "color_after_start": "#00b894",
+            "color_after_end": "#00cec9"
+          }
+        },
+        "card_X9VjYe": {
+          "type": "card",
+          "settings": {
+            "color_before_start": "#0c0c1d",
+            "color_before_end": "#1a1a3e",
+            "color_after_start": "#e17055",
+            "color_after_end": "#fdcb6e"
+          }
+        },
+        "card_j8czQi": {
+          "type": "card",
+          "settings": {
+            "color_before_start": "#2c3e50",
+            "color_before_end": "#3498db",
+            "color_after_start": "#e74c3c",
+            "color_after_end": "#f39c12"
+          }
+        },
+        "card_wPU7Qk": {
+          "type": "card",
+          "settings": {
+            "color_before_start": "#1e3c72",
+            "color_before_end": "#2a5298",
+            "color_after_start": "#e55d87",
+            "color_after_end": "#5fc3e4"
+          }
+        },
+        "card_eY9jRq": {
+          "type": "card",
+          "settings": {
+            "color_before_start": "#0f2027",
+            "color_before_end": "#203a43",
+            "color_after_start": "#fc4a1a",
+            "color_after_end": "#f7b733"
+          }
+        },
+        "card_QxUMXF": {
+          "type": "card",
+          "settings": {
+            "color_before_start": "#200122",
+            "color_before_end": "#6f0000",
+            "color_after_start": "#56ab2f",
+            "color_after_end": "#a8e063"
+          }
+        },
+        "card_D4KA89": {
+          "type": "card",
+          "settings": {
+            "color_before_start": "#141e30",
+            "color_before_end": "#243b55",
+            "color_after_start": "#f857a6",
+            "color_after_end": "#ff5858"
+          }
+        }
+      },
+      "block_order": [
+        "card_864F6M",
+        "card_i97Cya",
+        "card_X9VjYe",
+        "card_j8czQi",
+        "card_wPU7Qk",
+        "card_eY9jRq",
+        "card_QxUMXF",
+        "card_D4KA89"
+      ],
+      "name": "sek-image-reveal",
+      "settings": {
+        "heading": "Reveal Carousel",
+        "heading_size": 42,
+        "bg_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "line_color": "#d4976b",
+        "card_radius": 16,
+        "card_gap": 8,
+        "speed": 1,
+        "direction": "right",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "sek_video_carousel_MTY4pJ": {
+      "type": "sek-video-carousel",
+      "blocks": {
+        "video_card_hj3Xeb": {
+          "type": "video_card",
+          "settings": {
+            "title": "Eleanor B.",
+            "subtitle": "Fuchsia Silk Shirt",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_cnQFEU": {
+          "type": "video_card",
+          "settings": {
+            "title": "Sophie M.",
+            "subtitle": "Ivory Cashmere Top",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_gybQae": {
+          "type": "video_card",
+          "settings": {
+            "title": "Olivia R.",
+            "subtitle": "Navy Wool Blazer",
+            "stars": 4,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_hDFfpx": {
+          "type": "video_card",
+          "settings": {
+            "title": "Amelia K.",
+            "subtitle": "Emerald Satin Dress",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_7YamFP": {
+          "type": "video_card",
+          "settings": {
+            "title": "Charlotte W.",
+            "subtitle": "Blush Linen Blouse",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_YgCeFa": {
+          "type": "video_card",
+          "settings": {
+            "title": "Isabella D.",
+            "subtitle": "Charcoal Knit Sweater",
+            "stars": 4,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_txbUwr": {
+          "type": "video_card",
+          "settings": {
+            "title": "Grace L.",
+            "subtitle": "Burgundy Velvet Skirt",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        }
+      },
+      "block_order": [
+        "video_card_hj3Xeb",
+        "video_card_cnQFEU",
+        "video_card_gybQae",
+        "video_card_hDFfpx",
+        "video_card_7YamFP",
+        "video_card_YgCeFa",
+        "video_card_txbUwr"
+      ],
+      "name": "sek-video-carousel",
+      "settings": {
+        "caption": "Testimonials",
+        "caption_font_size": 14,
+        "caption_font_weight": "600",
+        "caption_font_family": "inherit",
+        "caption_color": "#888888",
+        "heading": "Video Carousel",
+        "heading_font_size": 42,
+        "heading_font_weight": "700",
+        "heading_font_family": "inherit",
+        "heading_color": "#1a1a1a",
+        "subheading": "See what our customers are saying",
+        "subheading_font_size": 16,
+        "subheading_font_weight": "400",
+        "subheading_font_family": "inherit",
+        "subheading_color": "#666666",
+        "card_title_font_size": 18,
+        "card_subtitle_font_size": 13,
+        "card_text_color": "#ffffff",
+        "card_subtitle_color": "#bbbbbb",
+        "star_color": "#f5a623",
+        "background_color": "#ffffff",
+        "nav_bg_color": "#ffffff",
+        "nav_icon_color": "#1a1a1a",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "sek_video_carousel_3_U87Lm6": {
+      "type": "sek-video-carousel-3",
+      "blocks": {
+        "video_card_W4Xk3X": {
+          "type": "video_card",
+          "settings": {
+            "title": "Olevier A.",
+            "show_verified": true,
+            "subtitle": "Unda 2.0 Eggshell",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_TKXQzL": {
+          "type": "video_card",
+          "settings": {
+            "title": "Sarah J.",
+            "show_verified": true,
+            "subtitle": "Unda 2.0 Stainless Steel",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_NNN9xr": {
+          "type": "video_card",
+          "settings": {
+            "title": "Laura G.",
+            "show_verified": true,
+            "subtitle": "Unda 2.0 Stainless Steel",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_cpFAcV": {
+          "type": "video_card",
+          "settings": {
+            "title": "Jack B.",
+            "show_verified": true,
+            "subtitle": "Unda 2.0 Stainless Steel",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_Kz9Rxp": {
+          "type": "video_card",
+          "settings": {
+            "title": "Paul F.",
+            "show_verified": true,
+            "subtitle": "Unda 2.0 Stainless Steel",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_cU7MgP": {
+          "type": "video_card",
+          "settings": {
+            "title": "Emma R.",
+            "show_verified": true,
+            "subtitle": "Unda 2.0 Midnight",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_Cd8BFa": {
+          "type": "video_card",
+          "settings": {
+            "title": "Mike T.",
+            "show_verified": true,
+            "subtitle": "Unda 2.0 Forest Green",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        }
+      },
+      "block_order": [
+        "video_card_W4Xk3X",
+        "video_card_TKXQzL",
+        "video_card_NNN9xr",
+        "video_card_cpFAcV",
+        "video_card_Kz9Rxp",
+        "video_card_cU7MgP",
+        "video_card_Cd8BFa"
+      ],
+      "name": "sek-video-carousel-3",
+      "settings": {
+        "caption": "Testimonials",
+        "caption_font_size": 14,
+        "caption_font_weight": "600",
+        "caption_font_family": "inherit",
+        "caption_color": "#888888",
+        "heading": "Video Carousel",
+        "heading_font_size": 42,
+        "heading_font_weight": "700",
+        "heading_font_family": "inherit",
+        "heading_color": "#1a1a1a",
+        "subheading": "See what our customers are saying",
+        "subheading_font_size": 16,
+        "subheading_font_weight": "400",
+        "subheading_font_family": "inherit",
+        "subheading_color": "#666666",
+        "card_title_font_size": 16,
+        "card_subtitle_font_size": 12,
+        "card_text_color": "#ffffff",
+        "subtitle_color": "#4ECDC4",
+        "star_color": "#f5a623",
+        "background_color": "#ffffff",
+        "nav_bg_color": "#8b2942",
+        "nav_icon_color": "#ffffff",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "sek_video_carousel_2_wtpFrV": {
+      "type": "sek-video-carousel-2",
+      "blocks": {
+        "video_card_jxRk6N": {
+          "type": "video_card",
+          "settings": {
+            "title": "Eleanor B.",
+            "subtitle": "Fuchsia Silk Shirt",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_kmTaiP": {
+          "type": "video_card",
+          "settings": {
+            "title": "Sophie M.",
+            "subtitle": "Ivory Cashmere Top",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_WJAEMH": {
+          "type": "video_card",
+          "settings": {
+            "title": "Olivia R.",
+            "subtitle": "Navy Wool Blazer",
+            "stars": 4,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_7AcQ7i": {
+          "type": "video_card",
+          "settings": {
+            "title": "Amelia K.",
+            "subtitle": "Emerald Satin Dress",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_YMi6Kz": {
+          "type": "video_card",
+          "settings": {
+            "title": "Charlotte W.",
+            "subtitle": "Blush Linen Blouse",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_G6bWED": {
+          "type": "video_card",
+          "settings": {
+            "title": "Isabella D.",
+            "subtitle": "Charcoal Knit Sweater",
+            "stars": 4,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_DryiJq": {
+          "type": "video_card",
+          "settings": {
+            "title": "Grace L.",
+            "subtitle": "Burgundy Velvet Skirt",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_RcKnHV": {
+          "type": "video_card",
+          "settings": {
+            "title": "Emma T.",
+            "subtitle": "Pearl White Jacket",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        },
+        "video_card_rqJRJK": {
+          "type": "video_card",
+          "settings": {
+            "title": "Lily H.",
+            "subtitle": "Midnight Blue Gown",
+            "stars": 5,
+            "autoplay": false,
+            "loop": true
+          }
+        }
+      },
+      "block_order": [
+        "video_card_jxRk6N",
+        "video_card_kmTaiP",
+        "video_card_WJAEMH",
+        "video_card_7AcQ7i",
+        "video_card_YMi6Kz",
+        "video_card_G6bWED",
+        "video_card_DryiJq",
+        "video_card_RcKnHV",
+        "video_card_rqJRJK"
+      ],
+      "name": "sek-video-carousel-2",
+      "settings": {
+        "caption": "Testimonials",
+        "caption_font_size": 14,
+        "caption_font_weight": "600",
+        "caption_font_family": "inherit",
+        "caption_color": "#888888",
+        "heading": "Video Carousel",
+        "heading_font_size": 42,
+        "heading_font_weight": "700",
+        "heading_font_family": "inherit",
+        "heading_color": "#1a1a1a",
+        "subheading": "See what our customers are saying",
+        "subheading_font_size": 16,
+        "subheading_font_weight": "400",
+        "subheading_font_family": "inherit",
+        "subheading_color": "#666666",
+        "card_title_font_size": 18,
+        "card_subtitle_font_size": 13,
+        "card_text_color": "#ffffff",
+        "card_subtitle_color": "#bbbbbb",
+        "star_color": "#f5a623",
+        "background_color": "#ffffff",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "sek_atelier_selection_LxG7qg": {
+      "type": "sek-atelier-selection",
+      "blocks": {
+        "collection_tab_phQAaJ": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "SIGNATURE",
+            "collection": "",
+            "products_limit": 10
+          }
+        },
+        "collection_tab_YxWy6Q": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "LIMITED EDITION",
+            "collection": "",
+            "products_limit": 10
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_phQAaJ",
+        "collection_tab_YxWy6Q"
+      ],
+      "name": "Sek Atelier Selection",
+      "settings": {
+        "heading": "The Atelier Selection.",
+        "subheading": "A curated release of limited-edition items and signature staples. Crafted for enduring elegance and modern expression.",
+        "view_button_text": "View Item",
+        "collection_button_text": "Explore Full Collection",
+        "background_color": "#1a1a1a",
+        "overlay_color": "#2d2d2d",
+        "accent_color": "#d4a84b",
+        "text_color": "#ffffff",
+        "subtext_color": "#999999",
+        "heading_font_size": 48,
+        "subtitle_font_size": 14,
+        "tab_font_size": 14,
+        "product_title_font_size": 28,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "sek_hand_picked_collection_jwbwyA",
+    "sek_image_reveal_carousel_deimLT",
+    "sek_video_carousel_MTY4pJ",
+    "sek_video_carousel_3_U87Lm6",
+    "sek_video_carousel_2_wtpFrV",
+    "sek_atelier_selection_LxG7qg"
   ]
 }
