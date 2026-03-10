@@ -19,6 +19,14 @@
     "scrolling_images_1_yXafg8": {
       "type": "scrolling-images-1",
       "blocks": {
+        "editorial_container_WJnz3H": {
+          "type": "editorial_container",
+          "settings": {}
+        },
+        "editorial_container_xhdMfT": {
+          "type": "editorial_container",
+          "settings": {}
+        },
         "editorial_container_Bf3nmx": {
           "type": "editorial_container",
           "settings": {
@@ -33,6 +41,8 @@
         }
       },
       "block_order": [
+        "editorial_container_WJnz3H",
+        "editorial_container_xhdMfT",
         "editorial_container_Bf3nmx"
       ],
       "name": "Scrolling Images 1",
@@ -772,7 +782,7 @@
         "product_D7Gdca": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "brightlink-4k60-4-4-4-hdr-hdmi-av-over-ip-decoder-receiver-any-size-matrix-av-distribution-system-poe-video-wall-cec-video-preview-arc-usb-2-0-kvm",
             "description": "This is a demonstration store. You can purchase...",
             "button_text": "ADD TO BOX",
             "show_variant_selector": false
@@ -800,7 +810,7 @@
           "type": "variant",
           "settings": {
             "title": "Box of 12",
-            "variant_product": "",
+            "variant_product": "nourishing-hair-repair-mask",
             "item_limit": 12
           }
         },
@@ -808,7 +818,7 @@
           "type": "variant",
           "settings": {
             "title": "Box of 6",
-            "variant_product": "",
+            "variant_product": "eye-treatment",
             "item_limit": 6
           }
         }
