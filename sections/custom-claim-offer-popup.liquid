@@ -192,6 +192,7 @@ width:100%;
 
 <button class="dynamic-offer-trigger" onclick="openDynamicPopup()">
 {{ section.settings.trigger_text }}
+<span onclick="event.stopPropagation(); this.closest('.dynamic-offer-trigger').style.display='none';">×</span>
 </button>
 
 
