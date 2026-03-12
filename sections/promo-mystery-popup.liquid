@@ -1,0 +1,510 @@
+<style>
+
+/* TRIGGER BUTTON */
+
+.md-trigger{
+position:fixed;
+z-index:999;
+padding:14px 30px;
+border-radius:40px;
+border:none;
+cursor:pointer;
+font-weight:600;
+background:{{ section.settings.trigger_bg }};
+color:{{ section.settings.trigger_text }};
+}
+
+/* Vertical position */
+
+{% if section.settings.vertical_position == "top" %}
+.md-trigger{ top:20px; }
+
+{% elsif section.settings.vertical_position == "center" %}
+.md-trigger{
+top:50%;
+transform:translateY(-50%);
+}
+
+{% else %}
+.md-trigger{ bottom:20px; }
+
+{% endif %}
+
+/* Horizontal position */
+
+{% case section.settings.horizontal_position %}
+{% when 'left' %}
+.md-trigger{ left:20px; }
+
+{% when 'center' %}
+.md-trigger{
+left:50%;
+transform:translateX(-50%);
+}
+
+{% when 'right' %}
+.md-trigger{ right:20px; }
+{% endcase %}
+
+
+/* OVERLAY */
+
+.md-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:none;
+background:rgba(0,0,0,0.35);
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+
+/* POPUP */
+
+.md-popup{
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(
+180deg,
+{{ section.settings.gradient_color_1 }},
+{{ section.settings.gradient_color_2 }}
+);
+position:relative;
+}
+
+
+/* CLOSE */
+
+.md-close{
+position:absolute;
+top:25px;
+left:25px;
+font-size:28px;
+cursor:pointer;
+color:{{ section.settings.close_color }};
+}
+
+
+/* WRAPPER */
+
+.md-wrapper{
+width:1200px;
+max-width:95%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin:auto;
+gap:40px;
+}
+
+
+/* LEFT CONTENT */
+
+.md-left{
+width:50%;
+max-width:540px;
+color:{{ section.settings.text_color }};
+display:flex;
+flex-direction:column;
+
+{% if section.settings.text_align == 'center' %}
+align-items:center;
+text-align:center;
+{% else %}
+align-items:flex-start;
+text-align:left;
+{% endif %}
+
+}
+
+
+/* LOGO */
+
+.md-logo{
+font-size:14px;
+opacity:.8;
+margin-bottom:20px;
+}
+
+
+/* HEADING */
+
+.md-title{
+font-size:48px;
+font-weight:700;
+color:{{ section.settings.heading_color }};
+line-height:1.2;
+margin-bottom:10px;
+}
+
+
+/* SUBHEADING */
+
+.md-subtitle{
+font-size:34px;
+font-weight:700;
+color:{{ section.settings.subheading_color }};
+margin-bottom:30px;
+}
+
+
+/* INPUT */
+
+.md-input{
+width:100%;
+max-width:520px;
+padding:18px 24px;
+border-radius:40px;
+border:none;
+margin-bottom:20px;
+font-size:16px;
+}
+
+
+/* BUTTON */
+
+.md-button{
+background:{{ section.settings.button_bg }};
+border:none;
+padding:14px 32px;
+border-radius:40px;
+color:{{ section.settings.button_text }};
+font-weight:600;
+cursor:pointer;
+}
+
+
+/* NO THANKS */
+
+.md-no{
+margin-top:15px;
+font-size:13px;
+cursor:pointer;
+opacity:.7;
+}
+
+
+/* NOTE */
+
+.md-note{
+font-size:11px;
+margin-top:10px;
+max-width:420px;
+opacity:.7;
+}
+
+
+/* RIGHT IMAGE */
+
+.md-right{
+width:50%;
+display:flex;
+justify-content:center;
+}
+
+.md-right img{
+max-width:100%;
+}
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.md-wrapper{
+flex-direction:column;
+text-align:center;
+}
+
+.md-left{
+width:100%;
+align-items:center;
+}
+
+.md-right{
+width:100%;
+margin-top:30px;
+}
+
+.md-title{
+font-size:30px;
+}
+
+.md-subtitle{
+font-size:22px;
+}
+
+}
+
+</style>
+
+
+<button class="md-trigger" onclick="openMDPopup()">
+{{ section.settings.trigger_text_label }}
+</button>
+
+
+
+<div class="md-overlay" id="mdPopup">
+
+<div class="md-popup">
+
+<div class="md-close" onclick="closeMDPopup()">✕</div>
+
+<div class="md-wrapper">
+
+<div class="md-left">
+
+<div class="md-logo">
+{{ section.settings.logo_text }}
+</div>
+
+<div class="md-title">
+{{ section.settings.heading }}
+</div>
+
+<div class="md-subtitle">
+{{ section.settings.subheading }}
+</div>
+
+<input
+class="md-input"
+type="email"
+placeholder="{{ section.settings.email_placeholder }}"
+>
+
+<button class="md-button">
+{{ section.settings.button_text_label }}
+</button>
+
+<div class="md-no" onclick="closeMDPopup()">
+{{ section.settings.no_text }}
+</div>
+
+<div class="md-note">
+{{ section.settings.note_text }}
+</div>
+
+</div>
+
+
+<div class="md-right">
+
+{% if section.settings.popup_image != blank %}
+<img src="{{ section.settings.popup_image | image_url: width:800 }}">
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+function openMDPopup(){
+document.getElementById("mdPopup").style.display="flex";
+document.body.style.overflow="hidden";
+}
+
+function closeMDPopup(){
+document.getElementById("mdPopup").style.display="none";
+document.body.style.overflow="auto";
+}
+
+</script>
+
+
+
+{% schema %}
+{
+"name":"Mystery Promo Popup",
+"settings":[
+
+{
+"type":"text",
+"id":"logo_text",
+"label":"Logo Text",
+"default":"pakstore664"
+},
+
+{
+"type":"text",
+"id":"trigger_text_label",
+"label":"Trigger Button Text",
+"default":"UNLOCK DISCOUNT ×"
+},
+
+{
+"type":"select",
+"id":"text_align",
+"label":"Text Alignment",
+"default":"left",
+"options":[
+{"value":"left","label":"Left"},
+{"value":"center","label":"Center"}
+]
+},
+
+{
+"type":"select",
+"id":"vertical_position",
+"label":"Vertical Position",
+"default":"top",
+"options":[
+{"value":"top","label":"Top"},
+{"value":"center","label":"Center"},
+{"value":"bottom","label":"Bottom"}
+]
+},
+
+{
+"type":"select",
+"id":"horizontal_position",
+"label":"Horizontal Position",
+"default":"left",
+"options":[
+{"value":"left","label":"Left"},
+{"value":"center","label":"Center"},
+{"value":"right","label":"Right"}
+]
+},
+
+{
+"type":"color",
+"id":"trigger_bg",
+"label":"Trigger Button Background",
+"default":"#ff8a00"
+},
+
+{
+"type":"color",
+"id":"trigger_text",
+"label":"Trigger Button Text Color",
+"default":"#ffffff"
+},
+
+{
+"type":"text",
+"id":"heading",
+"label":"Heading",
+"default":"YOU'VE GOT A MYSTERY DISCOUNT"
+},
+
+{
+"type":"text",
+"id":"subheading",
+"label":"Subheading",
+"default":"SIGN UP TO CLAIM"
+},
+
+{
+"type":"color",
+"id":"heading_color",
+"label":"Heading Color",
+"default":"#1f2b44"
+},
+
+{
+"type":"color",
+"id":"subheading_color",
+"label":"Subheading Color",
+"default":"#ffffff"
+},
+
+{
+"type":"color",
+"id":"text_color",
+"label":"Text Color",
+"default":"#1f2b44"
+},
+
+{
+"type":"text",
+"id":"email_placeholder",
+"label":"Email Placeholder",
+"default":"Your email address"
+},
+
+{
+"type":"text",
+"id":"button_text_label",
+"label":"Button Text",
+"default":"UNLOCK DISCOUNT"
+},
+
+{
+"type":"color",
+"id":"button_bg",
+"label":"Button Background",
+"default":"#ff8a00"
+},
+
+{
+"type":"color",
+"id":"button_text",
+"label":"Button Text Color",
+"default":"#ffffff"
+},
+
+{
+"type":"text",
+"id":"no_text",
+"label":"No Thanks Text",
+"default":"No, thanks"
+},
+
+{
+"type":"textarea",
+"id":"note_text",
+"label":"Disclaimer Text",
+"default":"By signing up you agree to receive email marketing. You can unsubscribe at any time."
+},
+
+{
+"type":"color",
+"id":"close_color",
+"label":"Close Icon Color",
+"default":"#000000"
+},
+
+{
+"type":"color",
+"id":"gradient_color_1",
+"label":"Gradient Color 1",
+"default":"#ff8a00"
+},
+
+{
+"type":"color",
+"id":"gradient_color_2",
+"label":"Gradient Color 2",
+"default":"#e7e089"
+},
+
+{
+"type":"image_picker",
+"id":"popup_image",
+"label":"Popup Image"
+}
+
+],
+
+"presets":[
+{
+"name":"Mystery Promo Popup"
+}
+]
+}
+{% endschema %}
