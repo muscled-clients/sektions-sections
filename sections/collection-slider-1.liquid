@@ -1,0 +1,722 @@
+{% comment %}
+Best Sellers Product Slider - With Hover Popup and Product Image Galleries
+{% endcomment %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<style>
+
+#best-sellers-{{ section.id }}{
+padding:60px 0;
+background:#fff;
+}
+
+.bs-container{
+    position: relative;
+    max-width: clamp(100px, var(--page-content-width, var(--page-width)), 100%);
+    padding-top: 36px;
+    padding-bottom: 36px;
+    margin: 0 auto;
+}
+
+.bs-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+    padding: 0px 5rem;
+}
+
+.bs-title{
+font-size:42px;
+font-weight:700;
+font-family: Caprasimo, sans-serif;
+margin:0;
+}
+
+.bs-button{
+background: #ff7a00;
+    color: white;
+    padding: 18px 32px;
+    text-decoration: none;
+    font-weight: 400;
+    transition: background .3s ease;
+    line-height: 14px;
+    font-size: 14px;
+}
+
+.bs-button:hover{
+    transition: all 0.3s ease 0s;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.bs-card{
+background:white;
+position:relative;
+text-align:center;
+padding:0px;
+overflow:hidden;
+aspect-ratio: 12 / 12;
+margin:0px;
+width:100%;
+}
+
+/* Product Gallery Styles */
+.bs-product-gallery{
+position:relative;
+width:100%;
+height:100%;
+overflow:hidden;
+}
+
+.bs-product-gallery .swiper-slide{
+width:100%;
+height:100%;
+}
+
+.bs-product-gallery .swiper-slide img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+/* Gallery Navigation Buttons */
+.bs-gallery-prev,
+.bs-gallery-next{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width: 32px;
+height: 32px;
+background:#ff7a00;
+border-radius: 50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+color:white;
+font-size: 22px;
+line-height: 1;
+padding: 0;
+border: none;
+z-index:15;
+opacity:0;
+transition:opacity .3s ease, background .3s ease;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.bs-gallery-prev svg,
+.bs-gallery-next svg{
+display:block;
+width: 18px;
+height: 18px;
+}
+
+.bs-card:hover .bs-gallery-prev.visible,
+.bs-card:hover .bs-gallery-next.visible{
+opacity:1;
+}
+
+.bs-gallery-prev{
+left:25px;
+}
+
+.bs-gallery-next{
+right:25px;
+}
+
+.bs-gallery-prev:hover,
+.bs-gallery-next:hover{
+background:#e56f00;
+}
+
+.bs-gallery-prev.swiper-button-disabled,
+.bs-gallery-next.swiper-button-disabled{
+opacity:0 !important;
+cursor:not-allowed;
+pointer-events:none;
+display:none !important;
+}
+
+.bs-badge{
+position:absolute;
+top:10px;
+left:10px;
+background:#ff7a00;
+color:white;
+font-size: 11px;
+padding: 6px 9px;
+text-transform:lowercase;
+z-index:20;
+font-family: Montserrat, sans-serif;
+font-weight: 500;
+font-style: normal;
+margin:0;
+line-height: 11px;
+}
+
+/* Hover Popup Styles */
+.bs-product-popup{
+position:absolute;
+bottom:12px;
+left:12px;
+right:12px;
+background:#ffffff;
+padding:10px 12px;
+display:flex;
+justify-content:space-between;
+align-items:end;
+gap:10px;
+transform:translateY(100%);
+transition:transform .5s ease;
+z-index:25;
+border-radius:0px;
+}
+
+.bs-card:hover .bs-product-popup{
+transform:translateY(0);
+}
+
+.bs-popup-title{
+margin:0;
+font-size:16px;
+font-weight:600;
+color:#000000;
+text-align:left;
+line-height:1.3;
+font-family: Caprasimo, sans-serif;
+}
+
+.bs-popup-price{
+margin:0;
+font-size:14px;
+font-weight:400;
+color:#070707;
+white-space:nowrap;
+}
+
+.bs-navigation{
+display:flex;
+gap:15px;
+justify-content:flex-end;
+margin-top:10px;
+padding: 0px 5rem;
+}
+
+.bs-prev,
+.bs-next{
+width:50px;
+height:50px;
+background:#ff7a00;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+color:white;
+transition:background .3s ease;
+border: none;
+padding: 0;
+}
+
+.bs-prev svg,
+.bs-next svg {
+width: 24px;
+height: 24px;
+display: block;
+}
+
+.bs-prev:hover,
+.bs-next:hover{
+background:#e56f00;
+}
+
+.bs-prev.swiper-button-disabled,
+.bs-next.swiper-button-disabled{
+opacity:0.5;
+cursor:not-allowed;
+background:#cccccc;
+}
+
+.swiper-slide{
+height:auto;
+margin:0px;
+}
+
+/* Placeholder SVG styling */
+.bs-card .placeholder-svg{
+width:100%;
+height:100%;
+background:#f5f5f5;
+display:block;
+object-fit:cover;
+}
+
+@media(max-width:900px){
+.bs-title{
+font-size:30px;
+}
+
+.bs-popup-title,
+.bs-popup-price{
+font-size:14px;
+}
+}
+
+@media(max-width:640px){
+.bs-card{
+padding:0px;
+}
+.bs-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+    padding: 0px 1.5rem;
+}
+
+.bs-navigation {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 10px;
+    padding: 0 1.5rem;
+}
+
+.bs-button {
+    background: #ff7a00;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    font-weight: 400;
+    transition: background .3s ease;
+    line-height: 14px;
+    font-size: 14px;
+}
+
+.bs-product-popup{
+padding:8px 10px;
+}
+
+.bs-gallery-prev,
+.bs-gallery-next{
+width:25px;
+height:25px;
+}
+
+.bs-gallery-prev svg,
+.bs-gallery-next svg {
+width: 14px;
+height: 14px;
+}
+
+.bs-gallery-prev{
+left:15px;
+}
+
+.bs-gallery-next{
+right:15px;
+}
+
+.bs-prev,
+.bs-next{
+width:40px;
+height:40px;
+}
+
+.bs-prev svg,
+.bs-next svg {
+width: 20px;
+height: 20px;
+}
+}
+
+</style>
+
+<section id="best-sellers-{{ section.id }}">
+
+<div class="bs-container">
+
+<div class="bs-header">
+
+<h2 class="bs-title">
+{{ section.settings.heading }}
+</h2>
+
+{% if section.settings.button_link != blank %}
+<a class="bs-button" href="{{ section.settings.button_link }}">
+{{ section.settings.button_label }}
+</a>
+{% endif %}
+
+</div>
+
+<div class="swiper bs-swiper-{{ section.id }}">
+
+<div class="swiper-wrapper">
+
+{% if section.settings.collection != blank %}
+
+{% for product in section.settings.collection.products limit: section.settings.products_to_show %}
+
+<div class="swiper-slide">
+
+<div class="bs-card">
+
+{% if product.available == false %}
+<span class="bs-badge">sold out</span>
+{% elsif product.compare_at_price > product.price %}
+<span class="bs-badge">sale</span>
+{% else %}
+<span class="bs-badge">selling fast</span>
+{% endif %}
+
+<a href="{{ product.url }}" class="bs-product-link">
+
+<!-- Product Gallery Swiper -->
+<div class="bs-product-gallery swiper product-gallery-{{ section.id }}-{{ forloop.index }}" data-product-gallery>
+<div class="swiper-wrapper">
+{% if product.images.size > 0 %}
+{% for image in product.images %}
+<div class="swiper-slide">
+<img 
+src="{{ image.src | image_url: width:600, height:600, crop: 'center' }}"
+alt="{{ image.alt | escape }}"
+loading="lazy"
+width="600"
+height="600"
+>
+</div>
+{% endfor %}
+{% else %}
+<div class="swiper-slide">
+<img 
+src="{{ product.featured_image | image_url: width:600, height:600, crop: 'center' }}"
+alt="{{ product.title }}"
+loading="lazy"
+width="600"
+height="600"
+>
+</div>
+{% endif %}
+</div>
+
+<!-- Gallery Navigation Buttons - Only show if more than one image -->
+{% if product.images.size > 1 %}
+<button class="bs-gallery-prev gallery-prev-{{ section.id }}-{{ forloop.index }}" aria-label="Previous image">
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+<path d="M15 6L9 12L15 18"
+stroke="white"
+stroke-width="4"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+</svg>
+</button>
+
+<button class="bs-gallery-next gallery-next-{{ section.id }}-{{ forloop.index }}" aria-label="Next image">
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+<path d="M9 6L15 12L9 18"
+stroke="white"
+stroke-width="4"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+</svg>
+</button>
+{% endif %}
+</div>
+
+<!-- Hover Popup with Title and Price -->
+<div class="bs-product-popup">
+<h4 class="bs-popup-title">{{ product.title }}</h4>
+<span class="bs-popup-price">{{ product.price | money }}</span>
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+{% for i in (1..4) %}
+
+<div class="swiper-slide">
+
+<div class="bs-card">
+
+<span class="bs-badge">selling fast</span>
+
+<a href="#" class="bs-product-link">
+
+<!-- Product Gallery Swiper for placeholder -->
+<div class="bs-product-gallery swiper product-gallery-{{ section.id }}-placeholder-{{ forloop.index }}" data-product-gallery>
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+</div>
+<div class="swiper-slide">
+{{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+</div>
+<div class="swiper-slide">
+{{ 'product-3' | placeholder_svg_tag: 'placeholder-svg' }}
+</div>
+</div>
+
+<!-- Gallery Navigation Buttons for placeholder -->
+<button class="bs-gallery-prev gallery-prev-{{ section.id }}-placeholder-{{ forloop.index }}" aria-label="Previous image">
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+<path d="M15 6L9 12L15 18"
+stroke="white"
+stroke-width="4"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+</svg>
+</button>
+<button class="bs-gallery-next gallery-next-{{ section.id }}-placeholder-{{ forloop.index }}" aria-label="Next image">
+<svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+<path d="M9 6L15 12L9 18"
+stroke="white"
+stroke-width="4"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+</svg>
+</button>
+</div>
+
+<!-- Hover Popup with Title and Price -->
+<div class="bs-product-popup">
+<h4 class="bs-popup-title">Sample Product</h4>
+<span class="bs-popup-price">$29.00</span>
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+</div>
+
+</div>
+
+<div class="bs-navigation">
+  
+<div class="bs-prev prev-{{ section.id }}">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+<path d="M15 6L9 12L15 18"
+stroke="white"
+stroke-width="4"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+</svg>
+</div>
+
+<div class="bs-next next-{{ section.id }}">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+<path d="M9 6L15 12L9 18"
+stroke="white"
+stroke-width="4"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+</svg>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+// Initialize main slider with mobile optimization
+new Swiper(".bs-swiper-{{ section.id }}",{
+slidesPerView:4,
+spaceBetween:0,
+loop:true,
+navigation:{
+nextEl:".next-{{ section.id }}",
+prevEl:".prev-{{ section.id }}"
+},
+breakpoints:{
+// Mobile (320px and up) - EXACTLY 1 CARD
+320:{ 
+slidesPerView:1,
+spaceBetween:0
+},
+// Tablet (640px and up)
+640:{ 
+slidesPerView:2,
+spaceBetween:0
+},
+// Small desktop (900px and up)
+900:{ 
+slidesPerView:3,
+spaceBetween:0
+},
+// Desktop (1200px and up)
+1200:{ 
+slidesPerView:4,
+spaceBetween:0
+}
+}
+});
+
+// Function to update button visibility based on slide position
+function updateGalleryButtons(swiper, prevButton, nextButton) {
+if (!swiper || !prevButton || !nextButton) return;
+  
+  const isBeginning = swiper.isBeginning;
+  const isEnd = swiper.isEnd;
+  
+  // Remove visible class from both buttons first
+  prevButton.classList.remove('visible');
+  nextButton.classList.remove('visible');
+  
+  // Show appropriate buttons based on position
+  if (!isBeginning) {
+    prevButton.classList.add('visible');
+  }
+  
+  if (!isEnd) {
+    nextButton.classList.add('visible');
+  }
+}
+
+{% if section.settings.collection != blank %}
+  {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
+    {% if product.images.size > 1 %}
+      (function() {
+        const prevButton = document.querySelector('.gallery-prev-{{ section.id }}-{{ forloop.index }}');
+        const nextButton = document.querySelector('.gallery-next-{{ section.id }}-{{ forloop.index }}');
+        
+        const gallerySwiper = new Swiper(".product-gallery-{{ section.id }}-{{ forloop.index }}", {
+          slidesPerView: 1,
+          spaceBetween: 0,
+          loop: false,
+          navigation: {
+            nextEl: ".gallery-next-{{ section.id }}-{{ forloop.index }}",
+            prevEl: ".gallery-prev-{{ section.id }}-{{ forloop.index }}",
+          },
+          autoplay: false,
+          speed: 500,
+          on: {
+            init: function() {
+              updateGalleryButtons(this, prevButton, nextButton);
+            },
+            slideChange: function() {
+              updateGalleryButtons(this, prevButton, nextButton);
+            },
+            reachBeginning: function() {
+              updateGalleryButtons(this, prevButton, nextButton);
+            },
+            reachEnd: function() {
+              updateGalleryButtons(this, prevButton, nextButton);
+            }
+          }
+        });
+        
+        if (prevButton) prevButton.swiper = gallerySwiper;
+        if (nextButton) nextButton.swiper = gallerySwiper;
+      })();
+    {% endif %}
+  {% endfor %}
+{% else %}
+  // Initialize placeholder galleries
+  {% for i in (1..4) %}
+    (function() {
+      const prevButton = document.querySelector('.gallery-prev-{{ section.id }}-placeholder-{{ forloop.index }}');
+      const nextButton = document.querySelector('.gallery-next-{{ section.id }}-placeholder-{{ forloop.index }}');
+      
+      const gallerySwiper = new Swiper(".product-gallery-{{ section.id }}-placeholder-{{ forloop.index }}", {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        loop: false,
+        navigation: {
+          nextEl: ".gallery-next-{{ section.id }}-placeholder-{{ forloop.index }}",
+          prevEl: ".gallery-prev-{{ section.id }}-placeholder-{{ forloop.index }}",
+        },
+        autoplay: false,
+        speed: 500,
+        on: {
+          init: function() {
+            updateGalleryButtons(this, prevButton, nextButton);
+          },
+          slideChange: function() {
+            updateGalleryButtons(this, prevButton, nextButton);
+          },
+          reachBeginning: function() {
+            updateGalleryButtons(this, prevButton, nextButton);
+          },
+          reachEnd: function() {
+            updateGalleryButtons(this, prevButton, nextButton);
+          }
+        }
+      });
+      
+      if (prevButton) prevButton.swiper = gallerySwiper;
+      if (nextButton) nextButton.swiper = gallerySwiper;
+    })();
+  {% endfor %}
+{% endif %}
+
+});
+
+</script>
+
+{% schema %}
+{
+"name": "Collection Slider 1",
+"settings": [
+{
+"type": "text",
+"id": "heading",
+"label": "Heading",
+"default": "Best Sellers"
+},
+{
+"type": "collection",
+"id": "collection",
+"label": "Collection"
+},
+{
+"type": "range",
+"id": "products_to_show",
+"label": "Products to show",
+"min": 4,
+"max": 12,
+"step": 1,
+"default": 8
+},
+{
+"type": "text",
+"id": "button_label",
+"label": "Button Label",
+"default": "Shop all"
+},
+{
+"type": "url",
+"id": "button_link",
+"label": "Button Link"
+}
+],
+"presets": [
+{
+"name": "Collection Slider 1"
+}
+]
+}
+{% endschema %}

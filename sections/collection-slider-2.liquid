@@ -1,5 +1,5 @@
 {% comment %}
-Best Sellers Product Slider - With Hover Popup and Product Image Galleries
+Collection Slider 2 - With Hover Popup and Product Image Galleries
 {% endcomment %}
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -9,17 +9,18 @@ Best Sellers Product Slider - With Hover Popup and Product Image Galleries
 #best-sellers-{{ section.id }}{
 padding:60px 0;
 background:#fff;
+width:100%;
 }
 
-.bs-container{
-    position: relative;
-    max-width: clamp(100px, var(--page-content-width, var(--page-width)), 100%);
-    padding-top: 36px;
-    padding-bottom: 36px;
-    margin: 0 auto;
+.bs2-container{
+max-width:100%;
+margin:auto;
+padding:0 0px;
+position:relative;
+width:100%;
 }
 
-.bs-header{
+.bs2-header{
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -27,125 +28,154 @@ margin-bottom:30px;
     padding: 0px 5rem;
 }
 
-.bs-title{
+.bs2-title{
 font-size:42px;
 font-weight:700;
 font-family: Caprasimo, sans-serif;
 margin:0;
 }
 
-.bs-button{
-background: #ff7a00;
-    color: white;
-    padding: 18px 32px;
-    text-decoration: none;
+.bs2-button{
+padding: 0px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    text-decoration: underline!important;
+    text-underline-offset: 4px;
+        font-family: "Bricolage Grotesque", sans-serif;
     font-weight: 400;
-    transition: background .3s ease;
-    line-height: 14px;
-    font-size: 14px;
-}
-
-.bs-button:hover{
+    font-style: normal;
+            padding: 16px 32px;
+            display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: fit-content;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    font-size: 18px;
+    color: #1b1916;
+    line-height: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    word-break: break-word;
+    padding: 16px 32px;
+    border-radius: 0px;
     transition: all 0.3s ease 0s;
-    background-color: #121212;
-    color: #ffffff;
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
-.bs-card{
+.bs2-button:hover{
+    transition: all 0.3s ease 0s;
+}
+
+.bs2-card{
 background:white;
 position:relative;
 text-align:center;
 padding:0px;
 overflow:hidden;
-aspect-ratio: 12 / 12;
+aspect-ratio: 9.6 / 13;
 margin:0px;
 width:100%;
 }
 
 /* Product Gallery Styles */
-.bs-product-gallery{
+.bs2-product-gallery{
 position:relative;
 width:100%;
 height:100%;
 overflow:hidden;
 }
 
-.bs-product-gallery .swiper-slide{
+.bs2-product-gallery .swiper-slide{
 width:100%;
 height:100%;
 }
 
-.bs-product-gallery .swiper-slide img{
+.bs2-product-gallery .swiper-slide img{
 width:100%;
 height:100%;
 object-fit:cover;
 display:block;
 }
 
-/* Gallery Navigation Buttons */
-.bs-gallery-prev,
-.bs-gallery-next{
+/* Gallery Navigation Buttons - UPDATED with currentColor */
+.bs2-gallery-prev,
+.bs2-gallery-next{
 position:absolute;
 top:50%;
 transform:translateY(-50%);
 width: 32px;
 height: 32px;
-background:#ff7a00;
-border-radius: 50%;
+background:#fff;
+border-radius: 4px;
 display:flex;
 align-items:center;
 justify-content:center;
 cursor:pointer;
-color:white;
+color: #000000; /* Black color for normal state */
+border: 1px solid #1b1916 !important;
 font-size: 22px;
 line-height: 1;
 padding: 0;
-border: none;
 z-index:15;
 opacity:0;
-transition:opacity .3s ease, background .3s ease;
+transition: opacity .3s ease, background .3s ease, color .3s ease;
 box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
-.bs-gallery-prev svg,
-.bs-gallery-next svg{
+.bs2-gallery-prev svg,
+.bs2-gallery-next svg{
 display:block;
 width: 18px;
 height: 18px;
 }
 
-.bs-card:hover .bs-gallery-prev.visible,
-.bs-card:hover .bs-gallery-next.visible{
+.bs2-gallery-prev svg path,
+.bs2-gallery-next svg path {
+transition: stroke 0.3s ease;
+}
+
+.bs2-card:hover .bs2-gallery-prev.visible,
+.bs2-card:hover .bs2-gallery-next.visible{
 opacity:1;
 }
 
-.bs-gallery-prev{
+.bs2-gallery-prev:hover,
+.bs2-gallery-next:hover{
+background:#000000;
+color: #ffffff; /* White color on hover */
+}
+
+.bs2-gallery-prev{
 left:25px;
 }
 
-.bs-gallery-next{
+.bs2-gallery-next{
 right:25px;
 }
 
-.bs-gallery-prev:hover,
-.bs-gallery-next:hover{
-background:#e56f00;
-}
-
-.bs-gallery-prev.swiper-button-disabled,
-.bs-gallery-next.swiper-button-disabled{
+.bs2-gallery-prev.swiper-button-disabled,
+.bs2-gallery-next.swiper-button-disabled{
 opacity:0 !important;
 cursor:not-allowed;
 pointer-events:none;
 display:none !important;
 }
 
-.bs-badge{
+.bs2-badge{
 position:absolute;
 top:10px;
 left:10px;
-background:#ff7a00;
-color:white;
+background-color: #ffffff;
+color: #1b1916;
+    border: 0px solid #1b1916;
 font-size: 11px;
 padding: 6px 9px;
 text-transform:lowercase;
@@ -157,8 +187,8 @@ margin:0;
 line-height: 11px;
 }
 
-/* Hover Popup Styles */
-.bs-product-popup{
+/* Hover Popup Styles - FIXED */
+.bs2-product-popup{
 position:absolute;
 bottom:12px;
 left:12px;
@@ -169,17 +199,17 @@ display:flex;
 justify-content:space-between;
 align-items:end;
 gap:10px;
-transform:translateY(100%);
+transform:translateY(calc(100% + 12px));
 transition:transform .5s ease;
 z-index:25;
 border-radius:0px;
 }
 
-.bs-card:hover .bs-product-popup{
+.bs2-card:hover .bs2-product-popup{
 transform:translateY(0);
 }
 
-.bs-popup-title{
+.bs2-popup-title{
 margin:0;
 font-size:16px;
 font-weight:600;
@@ -187,54 +217,69 @@ color:#000000;
 text-align:left;
 line-height:1.3;
 font-family: Caprasimo, sans-serif;
+/* Add truncation for long titles */
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+max-width: 100%;
+flex: 1;
 }
 
-.bs-popup-price{
+.bs2-popup-price{
 margin:0;
 font-size:14px;
 font-weight:400;
 color:#070707;
 white-space:nowrap;
+flex-shrink: 0;
 }
 
-.bs-navigation{
+.bs2-navigation{
 display:flex;
-gap:15px;
+gap:10px;
 justify-content:flex-end;
 margin-top:10px;
-padding: 0px 5rem;
+padding: 0 5rem;
 }
 
-.bs-prev,
-.bs-next{
-width:50px;
-height:50px;
-background:#ff7a00;
-border-radius:50%;
+/* Main Slider Navigation Buttons - UPDATED with currentColor */
+.bs2-prev,
+.bs2-next{
+width:32px;
+height:32px;
+background:#fff;
+border-radius:4px;
+border: 1px solid #1b1916!important;
 display:flex;
 align-items:center;
 justify-content:center;
 cursor:pointer;
-color:white;
-transition:background .3s ease;
+color: #000; /* Black color for normal state */
+transition: background .3s ease, color .3s ease;
 border: none;
 padding: 0;
 }
 
-.bs-prev svg,
-.bs-next svg {
-width: 24px;
-height: 24px;
+.bs2-prev svg,
+.bs2-next svg {
+width: 18px;
+height: 18px;
 display: block;
 }
 
-.bs-prev:hover,
-.bs-next:hover{
-background:#e56f00;
+.bs2-prev svg path,
+.bs2-next svg path {
+transition: stroke 0.3s ease;
 }
 
-.bs-prev.swiper-button-disabled,
-.bs-next.swiper-button-disabled{
+.bs2-prev:hover,
+.bs2-next:hover{
+background:#000000;
+color: #fff; /* White color on hover */
+}
+
+.bs2-prev.swiper-button-disabled,
+.bs2-next.swiper-button-disabled{
 opacity:0.5;
 cursor:not-allowed;
 background:#cccccc;
@@ -246,7 +291,7 @@ margin:0px;
 }
 
 /* Placeholder SVG styling */
-.bs-card .placeholder-svg{
+.bs2-card .placeholder-svg{
 width:100%;
 height:100%;
 background:#f5f5f5;
@@ -254,22 +299,36 @@ display:block;
 object-fit:cover;
 }
 
-@media(max-width:900px){
-.bs-title{
-font-size:30px;
+@media(min-width:1200px){
+.bs2-header{
+    padding: 0px 5rem;
+}
 }
 
-.bs-popup-title,
-.bs-popup-price{
+@media(max-width:1199px){
+.bs2-header{
+    padding: 0px 3rem;
+}
+}
+
+@media(max-width:900px){
+.bs2-title{
+font-size:30px;
+}
+.bs2-header{
+    padding: 0px 2rem;
+}
+.bs2-popup-title,
+.bs2-popup-price{
 font-size:14px;
 }
 }
 
 @media(max-width:640px){
-.bs-card{
+.bs2-card{
 padding:0px;
 }
-.bs-header{
+.bs2-header{
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -277,7 +336,7 @@ margin-bottom:30px;
     padding: 0px 1.5rem;
 }
 
-.bs-navigation {
+.bs2-navigation {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
@@ -285,7 +344,7 @@ margin-bottom:30px;
     padding: 0 1.5rem;
 }
 
-.bs-button {
+.bs2-button {
     background: #ff7a00;
     color: white;
     padding: 16px 32px;
@@ -296,38 +355,38 @@ margin-bottom:30px;
     font-size: 14px;
 }
 
-.bs-product-popup{
+.bs2-product-popup{
 padding:8px 10px;
 }
 
-.bs-gallery-prev,
-.bs-gallery-next{
+.bs2-gallery-prev,
+.bs2-gallery-next{
 width:25px;
 height:25px;
 }
 
-.bs-gallery-prev svg,
-.bs-gallery-next svg {
+.bs2-gallery-prev svg,
+.bs2-gallery-next svg {
 width: 14px;
 height: 14px;
 }
 
-.bs-gallery-prev{
+.bs2-gallery-prev{
 left:15px;
 }
 
-.bs-gallery-next{
+.bs2-gallery-next{
 right:15px;
 }
 
-.bs-prev,
-.bs-next{
+.bs2-prev,
+.bs2-next{
 width:40px;
 height:40px;
 }
 
-.bs-prev svg,
-.bs-next svg {
+.bs2-prev svg,
+.bs2-next svg {
 width: 20px;
 height: 20px;
 }
@@ -337,23 +396,23 @@ height: 20px;
 
 <section id="best-sellers-{{ section.id }}">
 
-<div class="bs-container">
+<div class="bs2-container">
 
-<div class="bs-header">
+<div class="bs2-header">
 
-<h2 class="bs-title">
+<h2 class="bs2-title">
 {{ section.settings.heading }}
 </h2>
 
 {% if section.settings.button_link != blank %}
-<a class="bs-button" href="{{ section.settings.button_link }}">
+<a class="bs2-button" href="{{ section.settings.button_link }}">
 {{ section.settings.button_label }}
 </a>
 {% endif %}
 
 </div>
 
-<div class="swiper bs-swiper-{{ section.id }}">
+<div class="swiper bs2-swiper-{{ section.id }}">
 
 <div class="swiper-wrapper">
 
@@ -363,20 +422,20 @@ height: 20px;
 
 <div class="swiper-slide">
 
-<div class="bs-card">
+<div class="bs2-card">
 
 {% if product.available == false %}
-<span class="bs-badge">sold out</span>
+<span class="bs2-badge">sold out</span>
 {% elsif product.compare_at_price > product.price %}
-<span class="bs-badge">sale</span>
+<span class="bs2-badge">sale</span>
 {% else %}
-<span class="bs-badge">selling fast</span>
+<span class="bs2-badge">selling fast</span>
 {% endif %}
 
-<a href="{{ product.url }}" class="bs-product-link">
+<a href="{{ product.url }}" class="bs2-product-link">
 
 <!-- Product Gallery Swiper -->
-<div class="bs-product-gallery swiper product-gallery-{{ section.id }}-{{ forloop.index }}" data-product-gallery>
+<div class="bs2-product-gallery swiper product-gallery-{{ section.id }}-{{ forloop.index }}" data-product-gallery>
 <div class="swiper-wrapper">
 {% if product.images.size > 0 %}
 {% for image in product.images %}
@@ -405,20 +464,20 @@ height="600"
 
 <!-- Gallery Navigation Buttons - Only show if more than one image -->
 {% if product.images.size > 1 %}
-<button class="bs-gallery-prev gallery-prev-{{ section.id }}-{{ forloop.index }}" aria-label="Previous image">
+<button class="bs2-gallery-prev gallery-prev-{{ section.id }}-{{ forloop.index }}" aria-label="Previous image">
 <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
 <path d="M15 6L9 12L15 18"
-stroke="white"
+stroke="currentColor"
 stroke-width="4"
 stroke-linecap="round"
 stroke-linejoin="round"/>
 </svg>
 </button>
 
-<button class="bs-gallery-next gallery-next-{{ section.id }}-{{ forloop.index }}" aria-label="Next image">
+<button class="bs2-gallery-next gallery-next-{{ section.id }}-{{ forloop.index }}" aria-label="Next image">
 <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
 <path d="M9 6L15 12L9 18"
-stroke="white"
+stroke="currentColor"
 stroke-width="4"
 stroke-linecap="round"
 stroke-linejoin="round"/>
@@ -428,9 +487,9 @@ stroke-linejoin="round"/>
 </div>
 
 <!-- Hover Popup with Title and Price -->
-<div class="bs-product-popup">
-<h4 class="bs-popup-title">{{ product.title }}</h4>
-<span class="bs-popup-price">{{ product.price | money }}</span>
+<div class="bs2-product-popup">
+<h4 class="bs2-popup-title">{{ product.title }}</h4>
+<span class="bs2-popup-price">{{ product.price | money }}</span>
 </div>
 
 </a>
@@ -443,18 +502,18 @@ stroke-linejoin="round"/>
 
 {% else %}
 
-{% for i in (1..4) %}
+{% for i in (1..10) %}
 
 <div class="swiper-slide">
 
-<div class="bs-card">
+<div class="bs2-card">
 
-<span class="bs-badge">selling fast</span>
+<span class="bs2-badge">selling fast</span>
 
-<a href="#" class="bs-product-link">
+<a href="#" class="bs2-product-link">
 
 <!-- Product Gallery Swiper for placeholder -->
-<div class="bs-product-gallery swiper product-gallery-{{ section.id }}-placeholder-{{ forloop.index }}" data-product-gallery>
+<div class="bs2-product-gallery swiper product-gallery-{{ section.id }}-placeholder-{{ forloop.index }}" data-product-gallery>
 <div class="swiper-wrapper">
 <div class="swiper-slide">
 {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -468,19 +527,19 @@ stroke-linejoin="round"/>
 </div>
 
 <!-- Gallery Navigation Buttons for placeholder -->
-<button class="bs-gallery-prev gallery-prev-{{ section.id }}-placeholder-{{ forloop.index }}" aria-label="Previous image">
+<button class="bs2-gallery-prev gallery-prev-{{ section.id }}-placeholder-{{ forloop.index }}" aria-label="Previous image">
 <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
 <path d="M15 6L9 12L15 18"
-stroke="white"
+stroke="currentColor"
 stroke-width="4"
 stroke-linecap="round"
 stroke-linejoin="round"/>
 </svg>
 </button>
-<button class="bs-gallery-next gallery-next-{{ section.id }}-placeholder-{{ forloop.index }}" aria-label="Next image">
+<button class="bs2-gallery-next gallery-next-{{ section.id }}-placeholder-{{ forloop.index }}" aria-label="Next image">
 <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
 <path d="M9 6L15 12L9 18"
-stroke="white"
+stroke="currentColor"
 stroke-width="4"
 stroke-linecap="round"
 stroke-linejoin="round"/>
@@ -489,9 +548,9 @@ stroke-linejoin="round"/>
 </div>
 
 <!-- Hover Popup with Title and Price -->
-<div class="bs-product-popup">
-<h4 class="bs-popup-title">Sample Product</h4>
-<span class="bs-popup-price">$29.00</span>
+<div class="bs2-product-popup">
+<h4 class="bs2-popup-title">Sample Product</h4>
+<span class="bs2-popup-price">$29.00</span>
 </div>
 
 </a>
@@ -508,22 +567,22 @@ stroke-linejoin="round"/>
 
 </div>
 
-<div class="bs-navigation">
+<div class="bs2-navigation">
   
-<div class="bs-prev prev-{{ section.id }}">
+<div class="bs2-prev prev-{{ section.id }}">
 <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
 <path d="M15 6L9 12L15 18"
-stroke="white"
+stroke="currentColor"
 stroke-width="4"
 stroke-linecap="round"
 stroke-linejoin="round"/>
 </svg>
 </div>
 
-<div class="bs-next next-{{ section.id }}">
+<div class="bs2-next next-{{ section.id }}">
 <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
 <path d="M9 6L15 12L9 18"
-stroke="white"
+stroke="currentColor"
 stroke-width="4"
 stroke-linecap="round"
 stroke-linejoin="round"/>
@@ -539,142 +598,227 @@ stroke-linejoin="round"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
-
-document.addEventListener("DOMContentLoaded", function(){
-
-// Initialize main slider with mobile optimization
-new Swiper(".bs-swiper-{{ section.id }}",{
-slidesPerView:4,
-spaceBetween:0,
-loop:true,
-navigation:{
-nextEl:".next-{{ section.id }}",
-prevEl:".prev-{{ section.id }}"
-},
-breakpoints:{
-// Mobile (320px and up) - EXACTLY 1 CARD
-320:{ 
-slidesPerView:1,
-spaceBetween:0
-},
-// Tablet (640px and up)
-640:{ 
-slidesPerView:2,
-spaceBetween:0
-},
-// Small desktop (900px and up)
-900:{ 
-slidesPerView:3,
-spaceBetween:0
-},
-// Desktop (1200px and up)
-1200:{ 
-slidesPerView:4,
-spaceBetween:0
-}
-}
-});
-
-// Function to update button visibility based on slide position
-function updateGalleryButtons(swiper, prevButton, nextButton) {
-if (!swiper || !prevButton || !nextButton) return;
+(function() {
+  // Store section ID for this instance
+  const sectionId = '{{ section.id }}';
+  const swiperSelector = `.bs2-swiper-${sectionId}`;
+  const prevSelector = `.prev-${sectionId}`;
+  const nextSelector = `.next-${sectionId}`;
   
-  const isBeginning = swiper.isBeginning;
-  const isEnd = swiper.isEnd;
-  
-  // Remove visible class from both buttons first
-  prevButton.classList.remove('visible');
-  nextButton.classList.remove('visible');
-  
-  // Show appropriate buttons based on position
-  if (!isBeginning) {
-    prevButton.classList.add('visible');
-  }
-  
-  if (!isEnd) {
-    nextButton.classList.add('visible');
-  }
-}
-
-{% if section.settings.collection != blank %}
-  {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
-    {% if product.images.size > 1 %}
-      (function() {
-        const prevButton = document.querySelector('.gallery-prev-{{ section.id }}-{{ forloop.index }}');
-        const nextButton = document.querySelector('.gallery-next-{{ section.id }}-{{ forloop.index }}');
-        
-        const gallerySwiper = new Swiper(".product-gallery-{{ section.id }}-{{ forloop.index }}", {
-          slidesPerView: 1,
-          spaceBetween: 0,
-          loop: false,
-          navigation: {
-            nextEl: ".gallery-next-{{ section.id }}-{{ forloop.index }}",
-            prevEl: ".gallery-prev-{{ section.id }}-{{ forloop.index }}",
-          },
-          autoplay: false,
-          speed: 500,
-          on: {
-            init: function() {
-              updateGalleryButtons(this, prevButton, nextButton);
-            },
-            slideChange: function() {
-              updateGalleryButtons(this, prevButton, nextButton);
-            },
-            reachBeginning: function() {
-              updateGalleryButtons(this, prevButton, nextButton);
-            },
-            reachEnd: function() {
-              updateGalleryButtons(this, prevButton, nextButton);
-            }
-          }
-        });
-        
-        if (prevButton) prevButton.swiper = gallerySwiper;
-        if (nextButton) nextButton.swiper = gallerySwiper;
-      })();
-    {% endif %}
-  {% endfor %}
-{% else %}
-  // Initialize placeholder galleries
-  {% for i in (1..4) %}
-    (function() {
-      const prevButton = document.querySelector('.gallery-prev-{{ section.id }}-placeholder-{{ forloop.index }}');
-      const nextButton = document.querySelector('.gallery-next-{{ section.id }}-placeholder-{{ forloop.index }}');
-      
-      const gallerySwiper = new Swiper(".product-gallery-{{ section.id }}-placeholder-{{ forloop.index }}", {
-        slidesPerView: 1,
-        spaceBetween: 0,
-        loop: false,
-        navigation: {
-          nextEl: ".gallery-next-{{ section.id }}-placeholder-{{ forloop.index }}",
-          prevEl: ".gallery-prev-{{ section.id }}-placeholder-{{ forloop.index }}",
+  function initSlider2() {
+    const swiperElement = document.querySelector(swiperSelector);
+    if (!swiperElement) return false;
+    
+    // Destroy existing Swiper instance if it exists
+    if (swiperElement.swiper) {
+      swiperElement.swiper.destroy(true, true);
+    }
+    
+    // Get window width to determine slides per view
+    const windowWidth = window.innerWidth;
+    let slidesPerView = 5; // Default for desktop - max 5 cards
+    
+    if (windowWidth < 480) {
+      slidesPerView = 2; // Mobile - exactly 2 cards
+    } else if (windowWidth < 768) {
+      slidesPerView = 2; // Small tablet - 2 cards
+    } else if (windowWidth < 1024) {
+      slidesPerView = 3; // Tablet - 3 cards
+    } else if (windowWidth < 1200) {
+      slidesPerView = 4; // Small desktop - 4 cards
+    } else {
+      slidesPerView = 5; // Large desktop - 5 cards max
+    }
+    
+    // Initialize new Swiper
+    const swiper = new Swiper(swiperSelector, {
+      slidesPerView: slidesPerView,
+      spaceBetween: 0,
+      loop: true,
+      navigation: {
+        nextEl: nextSelector,
+        prevEl: prevSelector,
+      },
+      on: {
+        init: function() {
+          // Force update after initialization
+          this.update();
         },
-        autoplay: false,
-        speed: 500,
-        on: {
-          init: function() {
-            updateGalleryButtons(this, prevButton, nextButton);
-          },
-          slideChange: function() {
-            updateGalleryButtons(this, prevButton, nextButton);
-          },
-          reachBeginning: function() {
-            updateGalleryButtons(this, prevButton, nextButton);
-          },
-          reachEnd: function() {
-            updateGalleryButtons(this, prevButton, nextButton);
+        resize: function() {
+          // Update on window resize
+          const width = window.innerWidth;
+          let newSlidesPerView = 5;
+          
+          if (width < 480) {
+            newSlidesPerView = 2;
+          } else if (width < 768) {
+            newSlidesPerView = 2;
+          } else if (width < 1024) {
+            newSlidesPerView = 3;
+          } else if (width < 1200) {
+            newSlidesPerView = 4;
+          } else {
+            newSlidesPerView = 5;
           }
+          
+          this.params.slidesPerView = newSlidesPerView;
+          this.update();
         }
-      });
-      
-      if (prevButton) prevButton.swiper = gallerySwiper;
-      if (nextButton) nextButton.swiper = gallerySwiper;
-    })();
-  {% endfor %}
-{% endif %}
+      }
+    });
+    
+    return true;
+  }
 
-});
+  // Function to update button visibility based on slide position
+  function updateGalleryButtons(swiper, prevButton, nextButton) {
+    if (!swiper || !prevButton || !nextButton) return;
+    
+    const isBeginning = swiper.isBeginning;
+    const isEnd = swiper.isEnd;
+    
+    // Remove visible class from both buttons first
+    prevButton.classList.remove('visible');
+    nextButton.classList.remove('visible');
+    
+    // Show appropriate buttons based on position
+    if (!isBeginning) {
+      prevButton.classList.add('visible');
+    }
+    
+    if (!isEnd) {
+      nextButton.classList.add('visible');
+    }
+  }
 
+  // Initialize product galleries (specific to this section)
+  function initProductGalleries2() {
+    {% if section.settings.collection != blank %}
+      {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
+        {% if product.images.size > 1 %}
+          (function() {
+            const prevButton = document.querySelector('.gallery-prev-{{ section.id }}-{{ forloop.index }}');
+            const nextButton = document.querySelector('.gallery-next-{{ section.id }}-{{ forloop.index }}');
+            
+            if (!prevButton || !nextButton) return;
+            
+            const gallerySwiper = new Swiper(".product-gallery-{{ section.id }}-{{ forloop.index }}", {
+              slidesPerView: 1,
+              spaceBetween: 0,
+              loop: false,
+              navigation: {
+                nextEl: ".gallery-next-{{ section.id }}-{{ forloop.index }}",
+                prevEl: ".gallery-prev-{{ section.id }}-{{ forloop.index }}",
+              },
+              autoplay: false,
+              speed: 500,
+              on: {
+                init: function() {
+                  updateGalleryButtons(this, prevButton, nextButton);
+                },
+                slideChange: function() {
+                  updateGalleryButtons(this, prevButton, nextButton);
+                },
+                reachBeginning: function() {
+                  updateGalleryButtons(this, prevButton, nextButton);
+                },
+                reachEnd: function() {
+                  updateGalleryButtons(this, prevButton, nextButton);
+                }
+              }
+            });
+            
+            if (prevButton) prevButton.swiper = gallerySwiper;
+            if (nextButton) nextButton.swiper = gallerySwiper;
+          })();
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      // Initialize placeholder galleries
+      {% for i in (1..10) %}
+        (function() {
+          const prevButton = document.querySelector('.gallery-prev-{{ section.id }}-placeholder-{{ forloop.index }}');
+          const nextButton = document.querySelector('.gallery-next-{{ section.id }}-placeholder-{{ forloop.index }}');
+          
+          if (!prevButton || !nextButton) return;
+          
+          const gallerySwiper = new Swiper(".product-gallery-{{ section.id }}-placeholder-{{ forloop.index }}", {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: false,
+            navigation: {
+              nextEl: ".gallery-next-{{ section.id }}-placeholder-{{ forloop.index }}",
+              prevEl: ".gallery-prev-{{ section.id }}-placeholder-{{ forloop.index }}",
+            },
+            autoplay: false,
+            speed: 500,
+            on: {
+              init: function() {
+                updateGalleryButtons(this, prevButton, nextButton);
+              },
+              slideChange: function() {
+                updateGalleryButtons(this, prevButton, nextButton);
+              },
+              reachBeginning: function() {
+                updateGalleryButtons(this, prevButton, nextButton);
+              },
+              reachEnd: function() {
+                updateGalleryButtons(this, prevButton, nextButton);
+              }
+            }
+          });
+          
+          if (prevButton) prevButton.swiper = gallerySwiper;
+          if (nextButton) nextButton.swiper = gallerySwiper;
+        })();
+      {% endfor %}
+    {% endif %}
+  }
+
+  // Initialize main slider with multiple attempts
+  function initWithRetry() {
+    // Try multiple times to ensure it works
+    setTimeout(initSlider2, 100);
+    setTimeout(initSlider2, 300);
+    setTimeout(initSlider2, 500);
+    
+    // Initialize product galleries after a delay
+    setTimeout(initProductGalleries2, 200);
+    setTimeout(initProductGalleries2, 400);
+  }
+
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWithRetry);
+  } else {
+    initWithRetry();
+  }
+
+  // Re-initialize when Shopify theme editor makes changes
+  document.addEventListener('shopify:section:load', function(e) {
+    if (e.detail && e.detail.sectionId === sectionId) {
+      setTimeout(initSlider2, 200);
+      setTimeout(initSlider2, 400);
+      setTimeout(initProductGalleries2, 300);
+      setTimeout(initProductGalleries2, 500);
+    }
+  });
+
+  document.addEventListener('shopify:section:select', function(e) {
+    if (e.detail && e.detail.sectionId === sectionId) {
+      setTimeout(initSlider2, 200);
+      setTimeout(initSlider2, 400);
+      setTimeout(initProductGalleries2, 300);
+      setTimeout(initProductGalleries2, 500);
+    }
+  });
+
+  // Listen for window resize
+  window.addEventListener('resize', function() {
+    setTimeout(initSlider2, 100);
+  });
+
+})();
 </script>
 
 {% schema %}
@@ -697,9 +841,9 @@ if (!swiper || !prevButton || !nextButton) return;
 "id": "products_to_show",
 "label": "Products to show",
 "min": 4,
-"max": 12,
+"max": 20,
 "step": 1,
-"default": 8
+"default": 10
 },
 {
 "type": "text",
