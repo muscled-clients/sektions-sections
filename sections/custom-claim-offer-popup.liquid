@@ -190,9 +190,9 @@ width:100%;
 
 
 
-<button class="dynamic-offer-trigger" onclick="openDynamicPopup()">
+<button class="dynamic-offer-trigger" onclick="if(!event.target.classList.contains('trigger-close')){openDynamicPopup()}">
 {{ section.settings.trigger_text }}
-<span onclick="event.stopPropagation(); this.closest('.dynamic-offer-trigger').style.display='none';">×</span>
+<span class="trigger-close" onclick="this.closest('.dynamic-offer-trigger').style.display='none';">×</span>
 </button>
 
 
