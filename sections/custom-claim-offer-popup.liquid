@@ -192,7 +192,6 @@ width:100%;
 
 <button class="dynamic-offer-trigger" onclick="openDynamicPopup()">
 {{ section.settings.trigger_text }}
-<span onclick="event.stopPropagation(); this.closest('.dynamic-offer-trigger').style.display='none';">✕</span>
 </button>
 
 
@@ -253,6 +252,7 @@ document.getElementById("dynamicPopup").style.display="flex";
 
 function closeDynamicPopup(){
 document.getElementById("dynamicPopup").style.display="none";
+document.querySelector(".dynamic-offer-trigger").style.display="none";
 }
 
 </script>
