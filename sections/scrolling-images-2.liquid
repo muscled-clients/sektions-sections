@@ -8,9 +8,6 @@
     margin-right: 0;
     border-radius: {{ section.settings.border_radius }}px;
     overflow: hidden;
-    background-color: {{ section.settings.section_bg_color }};
-    height: {{ section.settings.section_height_mobile }}px;
-    max-height: {{ section.settings.section_height_mobile }}px;
     width: 100%;
   }
 
@@ -20,125 +17,96 @@
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     padding-left: 0;
     padding-right: 0;
-    height: 100%;
-    display: flex;
-    align-items: center;
     width: 100%;
   }
 
-  .scrolling-wrapper-{{ section.id }} {
+  .scrolling-images-wrapper-{{ section.id }} {
     position: relative;
     overflow: hidden;
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     width: 100%;
-    height: 100%;
   }
 
-  .scrolling-track-{{ section.id }} {
+  .scrolling-images-track-{{ section.id }} {
     display: flex;
     width: max-content;
     will-change: transform;
     transform: translate3d(0, 0, 0);
     {%- if section.settings.scroll_direction == 'right' -%}
-      -webkit-animation: scrolling-{{ section.id }}-mobile-right {{ section.settings.scroll_speed }}s linear infinite;
-      animation: scrolling-{{ section.id }}-mobile-right {{ section.settings.scroll_speed }}s linear infinite;
+      -webkit-animation: scrolling-images-{{ section.id }}-mobile-right {{ section.settings.scroll_speed }}s linear infinite;
+      animation: scrolling-images-{{ section.id }}-mobile-right {{ section.settings.scroll_speed }}s linear infinite;
     {%- else -%}
-      -webkit-animation: scrolling-{{ section.id }}-mobile-left {{ section.settings.scroll_speed }}s linear infinite;
-      animation: scrolling-{{ section.id }}-mobile-left {{ section.settings.scroll_speed }}s linear infinite;
+      -webkit-animation: scrolling-images-{{ section.id }}-mobile-left {{ section.settings.scroll_speed }}s linear infinite;
+      animation: scrolling-images-{{ section.id }}-mobile-left {{ section.settings.scroll_speed }}s linear infinite;
     {%- endif -%}
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    height: 100%;
-    align-items: center;
   }
 
-  .scrolling-list-{{ section.id }} {
+  .scrolling-images-list-{{ section.id }} {
     flex: 0 0 auto;
     box-sizing: border-box;
     display: flex;
     gap: {{ section.settings.gap_between_containers_mobile }}px;
     padding-right: {{ section.settings.gap_between_containers_mobile }}px;
-    height: 100%;
-    align-items: center;
   }
 
-  .mosaic-container-{{ section.id }} {
+  .editorial-container-{{ section.id }} {
     flex: 0 0 auto;
     width: {{ section.settings.container_width_mobile }}px;
-    height: {{ section.settings.container_height_mobile }}px;
-    background-color: {{ section.settings.container_bg_color }};
+    background-color: {{ section.settings.container_background_color }};
     border-radius: {{ section.settings.container_border_radius }}px;
     border: {{ section.settings.container_border_size }}px solid {{ section.settings.container_border_color }};
     overflow: hidden;
     padding: {{ section.settings.container_padding }}px;
-    box-sizing: border-box;
   }
 
-  .mosaic-container-{{ section.id }} .grid-{{ section.id }} {
+  .editorial-container-{{ section.id }} .grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: {{ section.settings.grid_row_height_mobile }}px {{ section.settings.grid_row_height_mobile }}px;
     gap: {{ section.settings.gap_between_images_mobile }}px;
-    height: 100%;
-    width: 100%;
+    height: {{ section.settings.grid_row_height_mobile | times: 2 | plus: section.settings.gap_between_images_mobile }}px;
   }
 
-  .mosaic-container-{{ section.id }} .item-{{ section.id }} {
+  .editorial-container-{{ section.id }} .item {
     position: relative;
     overflow: hidden;
     border-radius: {{ section.settings.image_border_radius }}px;
     border: {{ section.settings.image_border_size }}px solid {{ section.settings.image_border_color }};
-    width: 100%;
-    height: 100%;
   }
 
-  .mosaic-container-{{ section.id }} .item-{{ section.id }} img {
+  .editorial-container-{{ section.id }} .item img {
     width: 100%;
     height: 100%;
     object-fit: fill;
     display: block;
-    border-radius: {{ section.settings.image_border_radius }}px;
   }
 
-  /* Grid Placement */
-  .mosaic-container-{{ section.id }} .big-{{ section.id }} {
-    grid-column: 1 / span 2;
-    grid-row: 1 / span 2;
+  /* Fixed Layout Positions */
+  .editorial-container-{{ section.id }} .item-left {
+    grid-column: 1;
+    grid-row: span 2;
   }
 
-  .mosaic-container-{{ section.id }} .small-top-{{ section.id }} {
-    grid-column: 3;
+  .editorial-container-{{ section.id }} .item-right {
+    grid-column: 5;
+    grid-row: span 2;
+  }
+
+  .editorial-container-{{ section.id }} .item-big-top {
+    grid-column: 3 / span 2;
     grid-row: 1;
   }
 
-  .mosaic-container-{{ section.id }} .tall-1-{{ section.id }} {
-    grid-column: 4;
-    grid-row: 1 / span 2;
-  }
-
-  .mosaic-container-{{ section.id }} .tall-2-{{ section.id }} {
-    grid-column: 5;
-    grid-row: 1 / span 2;
-  }
-
-  .mosaic-container-{{ section.id }} .tall-3-{{ section.id }} {
+  .editorial-container-{{ section.id }} .item-bottom-1 {
     grid-column: 3;
-    grid-row: 2 / span 2;
+    grid-row: 2;
   }
 
-  .mosaic-container-{{ section.id }} .small-bottom-1-{{ section.id }} {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .mosaic-container-{{ section.id }} .small-bottom-2-{{ section.id }} {
-    grid-column: 2;
-    grid-row: 3;
-  }
-
-  .mosaic-container-{{ section.id }} .wide-{{ section.id }} {
-    grid-column: 4 / span 2;
-    grid-row: 3;
+  .editorial-container-{{ section.id }} .item-bottom-2 {
+    grid-column: 4;
+    grid-row: 2;
   }
 
   @media(min-width: 1024px) {
@@ -148,8 +116,6 @@
       margin-left: 0;
       margin-right: 0;
       border-radius: {{ section.settings.border_radius_desktop }}px;
-      height: {{ section.settings.section_height_desktop }}px;
-      max-height: {{ section.settings.section_height_desktop }}px;
     }
 
     .section-{{ section.id }}-settings {
@@ -159,35 +125,36 @@
       padding-right: 0;
     }
 
-    .scrolling-track-{{ section.id }} {
+    .scrolling-images-track-{{ section.id }} {
       {%- if section.settings.scroll_direction == 'right' -%}
-        -webkit-animation-name: scrolling-{{ section.id }}-desktop-right;
-        animation-name: scrolling-{{ section.id }}-desktop-right;
+        -webkit-animation-name: scrolling-images-{{ section.id }}-desktop-right;
+        animation-name: scrolling-images-{{ section.id }}-desktop-right;
       {%- else -%}
-        -webkit-animation-name: scrolling-{{ section.id }}-desktop-left;
-        animation-name: scrolling-{{ section.id }}-desktop-left;
+        -webkit-animation-name: scrolling-images-{{ section.id }}-desktop-left;
+        animation-name: scrolling-images-{{ section.id }}-desktop-left;
       {%- endif -%}
       -webkit-animation-duration: {{ section.settings.scroll_speed }}s;
       animation-duration: {{ section.settings.scroll_speed }}s;
     }
 
-    .scrolling-list-{{ section.id }} {
+    .scrolling-images-list-{{ section.id }} {
       gap: {{ section.settings.gap_between_containers_desktop }}px;
       padding-right: {{ section.settings.gap_between_containers_desktop }}px;
     }
 
-    .mosaic-container-{{ section.id }} {
+    .editorial-container-{{ section.id }} {
       width: {{ section.settings.container_width_desktop }}px;
-      height: {{ section.settings.container_height_desktop }}px;
     }
 
-    .mosaic-container-{{ section.id }} .grid-{{ section.id }} {
+    .editorial-container-{{ section.id }} .grid {
+      grid-template-rows: {{ section.settings.grid_row_height_desktop }}px {{ section.settings.grid_row_height_desktop }}px;
       gap: {{ section.settings.gap_between_images_desktop }}px;
+      height: {{ section.settings.grid_row_height_desktop | times: 2 | plus: section.settings.gap_between_images_desktop }}px;
     }
   }
 
   {%- if section.settings.scroll_direction == 'right' -%}
-    @keyframes scrolling-{{ section.id }}-mobile-right {
+    @keyframes scrolling-images-{{ section.id }}-mobile-right {
       from {
         transform: translate3d(calc(-{{ section.settings.container_width_mobile }}px - {{ section.settings.gap_between_containers_mobile }}px), 0, 0);
       }
@@ -196,7 +163,7 @@
       }
     }
 
-    @keyframes scrolling-{{ section.id }}-desktop-right {
+    @keyframes scrolling-images-{{ section.id }}-desktop-right {
       from {
         transform: translate3d(calc(-{{ section.settings.container_width_desktop }}px - {{ section.settings.gap_between_containers_desktop }}px), 0, 0);
       }
@@ -205,7 +172,7 @@
       }
     }
   {%- else -%}
-    @keyframes scrolling-{{ section.id }}-mobile-left {
+    @keyframes scrolling-images-{{ section.id }}-mobile-left {
       from {
         transform: translate3d(0, 0, 0);
       }
@@ -214,7 +181,7 @@
       }
     }
 
-    @keyframes scrolling-{{ section.id }}-desktop-left {
+    @keyframes scrolling-images-{{ section.id }}-desktop-left {
       from {
         transform: translate3d(0, 0, 0);
       }
@@ -225,138 +192,115 @@
   {%- endif -%}
 {%- endstyle -%}
 
-<div class="section-{{ section.id }} scrolling-section-{{ section.id }}" style="background-color: {{ section.settings.section_bg_color }};">
+<div class="section-{{ section.id }} scrolling-images-{{ section.id }}" style="background-color: {{ section.settings.background_color }};">
   <div class="section-{{ section.id }}-settings">
-    <div class="scrolling-wrapper-{{ section.id }}">
-      <div class="scrolling-track-{{ section.id }}">
-        {%- for i in (1..20) -%}
-          <div class="scrolling-list-{{ section.id }}" data-ss-list-{{ section.id }}="{% if forloop.first %}base{% else %}clone{% endif %}" {% unless forloop.first %}aria-hidden="true"{% endunless %}>
+    <div class="scrolling-images-wrapper-{{ section.id }}">
+      <div class="scrolling-images-track-{{ section.id }}">
+        {%- assign clone_count = 30 -%}
+        {%- for i in (1..clone_count) -%}
+          <div class="scrolling-images-list-{{ section.id }}" data-ss-list="{% if forloop.first %}base{% else %}clone{% endif %}" {% unless forloop.first %}aria-hidden="true"{% endunless %}>
             {%- for block in section.blocks -%}
-              <div class="mosaic-container-{{ section.id }} mosaic-container-{{ block.id }}" {{ block.shopify_attributes }} style="background-color: {{ section.settings.container_bg_color }};">
-                <div class="grid-{{ section.id }}">
-                  
-                  <!-- Big Image (2x2) -->
-                  <div class="item-{{ section.id }} big-{{ section.id }}">
-                    {%- if block.settings.big_image != blank -%}
-                      <img src="{{ block.settings.big_image | image_url: width: 800 }}" 
-                           srcset="{{ block.settings.big_image | image_url: width: 400 }} 400w,
-                                   {{ block.settings.big_image | image_url: width: 800 }} 800w,
-                                   {{ block.settings.big_image | image_url: width: 1200 }} 1200w"
-                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 | times: 2 }}px, {{ section.settings.container_width_mobile | divided_by: 5 | times: 2 }}px"
+              <div class="editorial-container-{{ section.id }} editorial-container-{{ block.id }}" {{ block.shopify_attributes }}>
+                <div class="grid">
+                  <!-- Column 1 Tall -->
+                  <div class="item item-left">
+                    {%- if block.settings.left_image != blank -%}
+                      <img src="{{ block.settings.left_image | image_url: width: 800 }}" 
+                           srcset="{{ block.settings.left_image | image_url: width: 400 }} 400w,
+                                   {{ block.settings.left_image | image_url: width: 800 }} 800w,
+                                   {{ block.settings.left_image | image_url: width: 1200 }} 1200w"
+                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.big_image.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
+                           alt="{{ block.settings.left_image.alt | escape }}">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Small Top Image -->
-                  <div class="item-{{ section.id }} small-top-{{ section.id }}">
+                  <!-- Column 2 Top -->
+                  <div class="item">
                     {%- if block.settings.small_top != blank -%}
                       <img src="{{ block.settings.small_top | image_url: width: 600 }}" 
                            srcset="{{ block.settings.small_top | image_url: width: 300 }} 300w,
                                    {{ block.settings.small_top | image_url: width: 600 }} 600w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.small_top.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
+                           alt="{{ block.settings.small_top.alt | escape }}">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Tall Right Image 1 -->
-                  <div class="item-{{ section.id }} tall-1-{{ section.id }}">
-                    {%- if block.settings.tall_1 != blank -%}
-                      <img src="{{ block.settings.tall_1 | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.tall_1 | image_url: width: 300 }} 300w,
-                                   {{ block.settings.tall_1 | image_url: width: 600 }} 600w"
+                  <!-- Big Top (Columns 3-4) -->
+                  <div class="item item-big-top">
+                    {%- if block.settings.big_top != blank -%}
+                      <img src="{{ block.settings.big_top | image_url: width: 1200 }}" 
+                           srcset="{{ block.settings.big_top | image_url: width: 600 }} 600w,
+                                   {{ block.settings.big_top | image_url: width: 1200 }} 1200w"
+                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 2.5 }}px, {{ section.settings.container_width_mobile | divided_by: 2.5 }}px"
+                           loading="lazy"
+                           alt="{{ block.settings.big_top.alt | escape }}">
+                    {%- else -%}
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                  </div>
+
+                  <!-- Column 5 Tall -->
+                  <div class="item item-right">
+                    {%- if block.settings.right_image != blank -%}
+                      <img src="{{ block.settings.right_image | image_url: width: 800 }}" 
+                           srcset="{{ block.settings.right_image | image_url: width: 400 }} 400w,
+                                   {{ block.settings.right_image | image_url: width: 800 }} 800w,
+                                   {{ block.settings.right_image | image_url: width: 1200 }} 1200w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.tall_1.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
+                           alt="{{ block.settings.right_image.alt | escape }}">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Tall Right Image 2 -->
-                  <div class="item-{{ section.id }} tall-2-{{ section.id }}">
-                    {%- if block.settings.tall_2 != blank -%}
-                      <img src="{{ block.settings.tall_2 | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.tall_2 | image_url: width: 300 }} 300w,
-                                   {{ block.settings.tall_2 | image_url: width: 600 }} 600w"
+                  <!-- Column 2 Bottom -->
+                  <div class="item">
+                    {%- if block.settings.small_bottom != blank -%}
+                      <img src="{{ block.settings.small_bottom | image_url: width: 600 }}" 
+                           srcset="{{ block.settings.small_bottom | image_url: width: 300 }} 300w,
+                                   {{ block.settings.small_bottom | image_url: width: 600 }} 600w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.tall_2.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
+                           alt="{{ block.settings.small_bottom.alt | escape }}">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Tall Middle Image -->
-                  <div class="item-{{ section.id }} tall-3-{{ section.id }}">
-                    {%- if block.settings.tall_3 != blank -%}
-                      <img src="{{ block.settings.tall_3 | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.tall_3 | image_url: width: 300 }} 300w,
-                                   {{ block.settings.tall_3 | image_url: width: 600 }} 600w"
+                  <!-- Bottom Row Column 3 -->
+                  <div class="item item-bottom-1">
+                    {%- if block.settings.bottom_left != blank -%}
+                      <img src="{{ block.settings.bottom_left | image_url: width: 600 }}" 
+                           srcset="{{ block.settings.bottom_left | image_url: width: 300 }} 300w,
+                                   {{ block.settings.bottom_left | image_url: width: 600 }} 600w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.tall_3.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
+                           alt="{{ block.settings.bottom_left.alt | escape }}">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Bottom Small 1 -->
-                  <div class="item-{{ section.id }} small-bottom-1-{{ section.id }}">
-                    {%- if block.settings.small_bottom_1 != blank -%}
-                      <img src="{{ block.settings.small_bottom_1 | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.small_bottom_1 | image_url: width: 300 }} 300w,
-                                   {{ block.settings.small_bottom_1 | image_url: width: 600 }} 600w"
+                  <!-- Bottom Row Column 4 -->
+                  <div class="item item-bottom-2">
+                    {%- if block.settings.bottom_right != blank -%}
+                      <img src="{{ block.settings.bottom_right | image_url: width: 600 }}" 
+                           srcset="{{ block.settings.bottom_right | image_url: width: 300 }} 300w,
+                                   {{ block.settings.bottom_right | image_url: width: 600 }} 600w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.small_bottom_1.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
+                           alt="{{ block.settings.bottom_right.alt | escape }}">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
-
-                  <!-- Bottom Small 2 -->
-                  <div class="item-{{ section.id }} small-bottom-2-{{ section.id }}">
-                    {%- if block.settings.small_bottom_2 != blank -%}
-                      <img src="{{ block.settings.small_bottom_2 | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.small_bottom_2 | image_url: width: 300 }} 300w,
-                                   {{ block.settings.small_bottom_2 | image_url: width: 600 }} 600w"
-                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
-                           loading="lazy"
-                           alt="{{ block.settings.small_bottom_2.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
-                    {%- else -%}
-                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                    {%- endif -%}
-                  </div>
-
-                  <!-- Wide Bottom Image -->
-                  <div class="item-{{ section.id }} wide-{{ section.id }}">
-                    {%- if block.settings.wide_image != blank -%}
-                      <img src="{{ block.settings.wide_image | image_url: width: 800 }}" 
-                           srcset="{{ block.settings.wide_image | image_url: width: 400 }} 400w,
-                                   {{ block.settings.wide_image | image_url: width: 800 }} 800w,
-                                   {{ block.settings.wide_image | image_url: width: 1200 }} 1200w"
-                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 | times: 2 }}px, {{ section.settings.container_width_mobile | divided_by: 5 | times: 2 }}px"
-                           loading="lazy"
-                           alt="{{ block.settings.wide_image.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
-                    {%- else -%}
-                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                    {%- endif -%}
-                  </div>
-
                 </div>
               </div>
             {%- endfor -%}
@@ -370,47 +314,52 @@
 <script>
   (function () {
     const sectionId = '{{ section.id }}';
-    const sectionRoot = document.querySelector('.scrolling-section-' + sectionId);
+    const sectionRoot = document.querySelector('.scrolling-images-' + sectionId);
     if (!sectionRoot) return;
 
-    const wrapper = sectionRoot.querySelector('.scrolling-wrapper-' + sectionId);
-    const track = sectionRoot.querySelector('.scrolling-track-' + sectionId);
+    const wrapper = sectionRoot.querySelector('.scrolling-images-wrapper-' + sectionId);
+    const track = sectionRoot.querySelector('.scrolling-images-track-' + sectionId);
     if (!wrapper || !track) return;
 
-    function rebuildTrackCopies() {
-      // Don't remove clones - we already have enough from Liquid
-      // Just ensure smooth scrolling
-      const baseLists = Array.from(track.querySelectorAll('[data-ss-list-{{ section.id }}="base"]'));
-      if (baseLists.length === 0) return;
-      
-      // If track width is less than wrapper width * 2, we need more copies
+    function ensureFullWidth() {
+      // Calculate how many copies we need to fill the screen
       const containerWidth = {{ section.settings.container_width_desktop }} + {{ section.settings.gap_between_containers_desktop }};
-      const targetWidth = wrapper.clientWidth * 3; // Triple the width for smooth scrolling
+      const targetWidth = wrapper.clientWidth * 4; // 4x the wrapper width for smooth infinite scroll
       
-      // Calculate how many total lists we need
-      const totalWidth = track.scrollWidth;
+      // Count current lists
       const lists = Array.from(track.children);
-      const listCount = lists.length;
+      const currentCount = lists.length;
       
-      if (totalWidth < targetWidth && listCount < 50) {
-        // Add more clones dynamically if needed
-        baseLists.forEach((baseList) => {
+      // Calculate current total width
+      const totalWidth = currentCount * containerWidth;
+      
+      // If we don't have enough width, add more clones
+      if (totalWidth < targetWidth) {
+        const baseList = track.querySelector('[data-ss-list="base"]');
+        if (!baseList) return;
+        
+        const neededCopies = Math.ceil((targetWidth - totalWidth) / containerWidth) + 5;
+        
+        for (let i = 0; i < neededCopies; i++) {
           const clone = baseList.cloneNode(true);
-          clone.setAttribute('data-ss-list-{{ section.id }}', 'clone');
+          clone.setAttribute('data-ss-list', 'clone');
           clone.setAttribute('aria-hidden', 'true');
           track.appendChild(clone);
-        });
+        }
       }
     }
 
     let resizeFrame = null;
     function handleResize() {
       if (resizeFrame) cancelAnimationFrame(resizeFrame);
-      resizeFrame = requestAnimationFrame(rebuildTrackCopies);
+      resizeFrame = requestAnimationFrame(ensureFullWidth);
     }
 
-    // Initial rebuild after a short delay to ensure layout is complete
-    setTimeout(rebuildTrackCopies, 200);
+    // Run multiple times to ensure full coverage
+    setTimeout(ensureFullWidth, 100);
+    setTimeout(ensureFullWidth, 300);
+    setTimeout(ensureFullWidth, 500);
+    setTimeout(ensureFullWidth, 1000);
     
     window.addEventListener('resize', handleResize, { passive: true });
 
@@ -423,13 +372,17 @@
 
     document.addEventListener('shopify:section:load', function (event) {
       if (event.target && event.target.id === 'shopify-section-' + sectionId) {
-        setTimeout(rebuildTrackCopies, 200);
+        setTimeout(ensureFullWidth, 200);
+        setTimeout(ensureFullWidth, 400);
+        setTimeout(ensureFullWidth, 600);
       }
     });
 
     document.addEventListener('shopify:block:select', function (event) {
       if (event.target && event.target.id === 'shopify-section-' + sectionId) {
-        setTimeout(rebuildTrackCopies, 200);
+        setTimeout(ensureFullWidth, 200);
+        setTimeout(ensureFullWidth, 400);
+        setTimeout(ensureFullWidth, 600);
       }
     });
     {%- endif -%}
@@ -451,7 +404,7 @@
     },
     {
       "type": "color",
-      "id": "section_bg_color",
+      "id": "background_color",
       "label": "Section Background Color",
       "default": "#ffffff"
     },
@@ -521,37 +474,11 @@
     },
     {
       "type": "header",
-      "content": "Section Height"
-    },
-    {
-      "type": "range",
-      "id": "section_height_mobile",
-      "min": 200,
-      "max": 800,
-      "step": 10,
-      "unit": "px",
-      "label": "Section Height - Mobile",
-      "default": 400,
-      "info": "Set the exact height of the section"
-    },
-    {
-      "type": "range",
-      "id": "section_height_desktop",
-      "min": 300,
-      "max": 1000,
-      "step": 10,
-      "unit": "px",
-      "label": "Section Height - Desktop",
-      "default": 650,
-      "info": "Set the exact height of the section"
-    },
-    {
-      "type": "header",
       "content": "Container Settings"
     },
     {
       "type": "color",
-      "id": "container_bg_color",
+      "id": "container_background_color",
       "label": "Container Background Color",
       "default": "#ffffff"
     },
@@ -598,23 +525,23 @@
     {
       "type": "range",
       "id": "container_width_mobile",
-      "min": 200,
+      "min": 300,
       "max": 1000,
       "step": 10,
       "unit": "px",
       "label": "Container Width",
-      "default": 960
+      "default": 370,
+      "info": "Width of each container"
     },
     {
       "type": "range",
-      "id": "container_height_mobile",
-      "min": 200,
-      "max": 600,
+      "id": "grid_row_height_mobile",
+      "min": 100,
+      "max": 300,
       "step": 10,
       "unit": "px",
-      "label": "Container Height",
-      "default": 300,
-      "info": "Set to match section height minus padding"
+      "label": "Grid Row Height",
+      "default": 160
     },
     {
       "type": "range",
@@ -624,7 +551,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap Between Images in Container",
-      "default": 4
+      "default": 8
     },
     {
       "type": "range",
@@ -643,23 +570,23 @@
     {
       "type": "range",
       "id": "container_width_desktop",
-      "min": 300,
+      "min": 400,
       "max": 1600,
       "step": 20,
       "unit": "px",
       "label": "Container Width",
-      "default": 1260
+      "default": 480,
+      "info": "Width of each container"
     },
     {
       "type": "range",
-      "id": "container_height_desktop",
-      "min": 300,
-      "max": 800,
+      "id": "grid_row_height_desktop",
+      "min": 150,
+      "max": 400,
       "step": 10,
       "unit": "px",
-      "label": "Container Height",
-      "default": 500,
-      "info": "Set to match section height minus padding"
+      "label": "Grid Row Height",
+      "default": 240
     },
     {
       "type": "range",
@@ -669,7 +596,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap Between Images in Container",
-      "default": 6
+      "default": 12
     },
     {
       "type": "range",
@@ -709,7 +636,7 @@
       "step": 1,
       "unit": "px",
       "label": "Image Border Radius",
-      "default": 0
+      "default": 32
     },
     {
       "type": "header",
@@ -723,7 +650,7 @@
       "step": 1,
       "unit": "px",
       "label": "Padding Top",
-      "default": 0
+      "default": 27
     },
     {
       "type": "range",
@@ -733,7 +660,7 @@
       "step": 1,
       "unit": "px",
       "label": "Padding Bottom",
-      "default": 0
+      "default": 27
     },
     {
       "type": "range",
@@ -767,7 +694,7 @@
       "step": 1,
       "unit": "px",
       "label": "Padding Top",
-      "default": 0
+      "default": 36
     },
     {
       "type": "range",
@@ -777,7 +704,7 @@
       "step": 1,
       "unit": "px",
       "label": "Padding Bottom",
-      "default": 0
+      "default": 36
     },
     {
       "type": "range",
@@ -802,71 +729,60 @@
   ],
   "blocks": [
     {
-      "type": "mosaic_container",
-      "name": "Mosaic Container",
+      "type": "editorial_container",
+      "name": "Editorial Container",
       "limit": 1,
       "settings": [
         {
           "type": "header",
-          "content": "Images for 3x5 Mosaic Layout"
+          "content": "Images for 5-Column Layout"
         },
         {
           "type": "image_picker",
-          "id": "big_image",
-          "label": "Big Image (2x2)",
-          "info": "Top left corner, spans 2x2 grid cells"
+          "id": "left_image",
+          "label": "Left Tall Image (Column 1)",
+          "info": "Spans 2 rows"
         },
         {
           "type": "image_picker",
           "id": "small_top",
-          "label": "Small Top Image",
-          "info": "Column 3, Row 1"
+          "label": "Small Top Image (Column 2, Row 1)"
         },
         {
           "type": "image_picker",
-          "id": "tall_1",
-          "label": "Tall Right Image 1",
-          "info": "Column 4, spans Rows 1-2"
+          "id": "big_top",
+          "label": "Big Top Image (Columns 3-4, Row 1)"
         },
         {
           "type": "image_picker",
-          "id": "tall_2",
-          "label": "Tall Right Image 2",
-          "info": "Column 5, spans Rows 1-2"
+          "id": "right_image",
+          "label": "Right Tall Image (Column 5)",
+          "info": "Spans 2 rows"
         },
         {
           "type": "image_picker",
-          "id": "tall_3",
-          "label": "Tall Middle Image",
-          "info": "Column 3, spans Rows 2-3"
+          "id": "small_bottom",
+          "label": "Small Bottom Image (Column 2, Row 2)"
         },
         {
           "type": "image_picker",
-          "id": "small_bottom_1",
-          "label": "Bottom Small 1",
-          "info": "Column 1, Row 3"
+          "id": "bottom_left",
+          "label": "Bottom Left Image (Column 3, Row 2)"
         },
         {
           "type": "image_picker",
-          "id": "small_bottom_2",
-          "label": "Bottom Small 2",
-          "info": "Column 2, Row 3"
-        },
-        {
-          "type": "image_picker",
-          "id": "wide_image",
-          "label": "Wide Bottom Image",
-          "info": "Columns 4-5, Row 3 (spans 2 columns)"
+          "id": "bottom_right",
+          "label": "Bottom Right Image (Column 4, Row 2)"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Scrolling Images 2",
+      "name": "Scrolling Editorial Layout",
       "blocks": [
         {
-          "type": "mosaic_container"
+          "type": "editorial_container"
         }
       ]
     }

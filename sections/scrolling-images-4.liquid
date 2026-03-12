@@ -4,108 +4,130 @@
     border-bottom: solid {{ section.settings.border_color }} {{ section.settings.border_size }}px;
     margin-top: {{ section.settings.margin_top }}px;
     margin-bottom: {{ section.settings.margin_bottom }}px;
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: {{ section.settings.margin_left }}rem;
+    margin-right: {{ section.settings.margin_right }}rem;
     border-radius: {{ section.settings.border_radius }}px;
     overflow: hidden;
+    background-color: {{ section.settings.section_bg_color }};
+    height: {{ section.settings.section_height_mobile }}px;
+    max-height: {{ section.settings.section_height_mobile }}px;
     width: 100%;
   }
 
-  .section-{{ section.id }}-settings {
+.section-{{ section.id }}-settings {
     margin: 0 auto;
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-    padding-left: 0;
-    padding-right: 0;
-    width: 100%;
-  }
+    padding-left: {{ section.settings.padding_left_mobile }}rem;
+    padding-right: {{ section.settings.padding_right_mobile }}rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    max-width: clamp(100px, var(--page-content-width, var(--page-width)), 100%);
+}
 
-  .scrolling-images-wrapper-{{ section.id }} {
+  .scrolling-wrapper-{{ section.id }} {
     position: relative;
     overflow: hidden;
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     width: 100%;
+    height: 100%;
   }
 
-  .scrolling-images-track-{{ section.id }} {
+  .scrolling-track-{{ section.id }} {
     display: flex;
     width: max-content;
     will-change: transform;
     transform: translate3d(0, 0, 0);
     {%- if section.settings.scroll_direction == 'right' -%}
-      -webkit-animation: scrolling-images-{{ section.id }}-mobile-right {{ section.settings.scroll_speed }}s linear infinite;
-      animation: scrolling-images-{{ section.id }}-mobile-right {{ section.settings.scroll_speed }}s linear infinite;
+      -webkit-animation: scrolling-{{ section.id }}-mobile-right {{ section.settings.scroll_speed }}s linear infinite;
+      animation: scrolling-{{ section.id }}-mobile-right {{ section.settings.scroll_speed }}s linear infinite;
     {%- else -%}
-      -webkit-animation: scrolling-images-{{ section.id }}-mobile-left {{ section.settings.scroll_speed }}s linear infinite;
-      animation: scrolling-images-{{ section.id }}-mobile-left {{ section.settings.scroll_speed }}s linear infinite;
+      -webkit-animation: scrolling-{{ section.id }}-mobile-left {{ section.settings.scroll_speed }}s linear infinite;
+      animation: scrolling-{{ section.id }}-mobile-left {{ section.settings.scroll_speed }}s linear infinite;
     {%- endif -%}
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    height: 100%;
+    align-items: center;
   }
 
-  .scrolling-images-list-{{ section.id }} {
+  .scrolling-list-{{ section.id }} {
     flex: 0 0 auto;
     box-sizing: border-box;
     display: flex;
     gap: {{ section.settings.gap_between_containers_mobile }}px;
     padding-right: {{ section.settings.gap_between_containers_mobile }}px;
+    height: 100%;
+    align-items: center;
   }
 
-  .editorial-container-{{ section.id }} {
+  .grid-container-{{ section.id }} {
     flex: 0 0 auto;
     width: {{ section.settings.container_width_mobile }}px;
-    background-color: {{ section.settings.container_background_color }};
+    height: {{ section.settings.container_height_mobile }}px;
+    background-color: {{ section.settings.container_bg_color }};
     border-radius: {{ section.settings.container_border_radius }}px;
     border: {{ section.settings.container_border_size }}px solid {{ section.settings.container_border_color }};
     overflow: hidden;
     padding: {{ section.settings.container_padding }}px;
+    box-sizing: border-box;
   }
 
-  .editorial-container-{{ section.id }} .grid {
+  .grid-container-{{ section.id }} .grid-{{ section.id }} {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: {{ section.settings.grid_row_height_mobile }}px {{ section.settings.grid_row_height_mobile }}px;
+    grid-template-rows: 1fr 1fr;
     gap: {{ section.settings.gap_between_images_mobile }}px;
-    height: {{ section.settings.grid_row_height_mobile | times: 2 | plus: section.settings.gap_between_images_mobile }}px;
+    height: 100%;
+    width: 100%;
   }
 
-  .editorial-container-{{ section.id }} .item {
+  .grid-container-{{ section.id }} .item-{{ section.id }} {
     position: relative;
     overflow: hidden;
     border-radius: {{ section.settings.image_border_radius }}px;
     border: {{ section.settings.image_border_size }}px solid {{ section.settings.image_border_color }};
+    width: 100%;
+    height: 100%;
   }
 
-  .editorial-container-{{ section.id }} .item img {
+  .grid-container-{{ section.id }} .item-{{ section.id }} img {
     width: 100%;
     height: 100%;
     object-fit: fill;
     display: block;
+    border-radius: {{ section.settings.image_border_radius }}px;
   }
 
-  /* Fixed Layout Positions */
-  .editorial-container-{{ section.id }} .item-left {
+  /* Grid Placement */
+  .grid-container-{{ section.id }} .tall-{{ section.id }} {
     grid-column: 1;
     grid-row: span 2;
   }
 
-  .editorial-container-{{ section.id }} .item-right {
-    grid-column: 5;
-    grid-row: span 2;
-  }
-
-  .editorial-container-{{ section.id }} .item-big-top {
-    grid-column: 3 / span 2;
+  .grid-container-{{ section.id }} .small-left-top-{{ section.id }} {
+    grid-column: 2;
     grid-row: 1;
   }
 
-  .editorial-container-{{ section.id }} .item-bottom-1 {
-    grid-column: 3;
+  .grid-container-{{ section.id }} .small-left-bottom-{{ section.id }} {
+    grid-column: 2;
     grid-row: 2;
   }
 
-  .editorial-container-{{ section.id }} .item-bottom-2 {
-    grid-column: 4;
+  .grid-container-{{ section.id }} .wide-center-{{ section.id }} {
+    grid-column: 3 / span 2;
+    grid-row: span 2;
+  }
+
+  .grid-container-{{ section.id }} .small-right-top-{{ section.id }} {
+    grid-column: 5;
+    grid-row: 1;
+  }
+
+  .grid-container-{{ section.id }} .small-right-bottom-{{ section.id }} {
+    grid-column: 5;
     grid-row: 2;
   }
 
@@ -113,48 +135,49 @@
     .section-{{ section.id }} {
       margin-top: {{ section.settings.margin_top_desktop }}px;
       margin-bottom: {{ section.settings.margin_bottom_desktop }}px;
-      margin-left: 0;
-      margin-right: 0;
+      margin-left: {{ section.settings.margin_left_desktop }}rem;
+      margin-right: {{ section.settings.margin_right_desktop }}rem;
       border-radius: {{ section.settings.border_radius_desktop }}px;
+      height: {{ section.settings.section_height_desktop }}px;
+      max-height: {{ section.settings.section_height_desktop }}px;
     }
 
     .section-{{ section.id }}-settings {
       padding-top: {{ section.settings.padding_top_desktop }}px;
       padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
-      padding-left: 0;
-      padding-right: 0;
+      padding-left: {{ section.settings.padding_left_desktop }}rem;
+      padding-right: {{ section.settings.padding_right_desktop }}rem;
     }
 
-    .scrolling-images-track-{{ section.id }} {
+    .scrolling-track-{{ section.id }} {
       {%- if section.settings.scroll_direction == 'right' -%}
-        -webkit-animation-name: scrolling-images-{{ section.id }}-desktop-right;
-        animation-name: scrolling-images-{{ section.id }}-desktop-right;
+        -webkit-animation-name: scrolling-{{ section.id }}-desktop-right;
+        animation-name: scrolling-{{ section.id }}-desktop-right;
       {%- else -%}
-        -webkit-animation-name: scrolling-images-{{ section.id }}-desktop-left;
-        animation-name: scrolling-images-{{ section.id }}-desktop-left;
+        -webkit-animation-name: scrolling-{{ section.id }}-desktop-left;
+        animation-name: scrolling-{{ section.id }}-desktop-left;
       {%- endif -%}
       -webkit-animation-duration: {{ section.settings.scroll_speed }}s;
       animation-duration: {{ section.settings.scroll_speed }}s;
     }
 
-    .scrolling-images-list-{{ section.id }} {
+    .scrolling-list-{{ section.id }} {
       gap: {{ section.settings.gap_between_containers_desktop }}px;
       padding-right: {{ section.settings.gap_between_containers_desktop }}px;
     }
 
-    .editorial-container-{{ section.id }} {
+    .grid-container-{{ section.id }} {
       width: {{ section.settings.container_width_desktop }}px;
+      height: {{ section.settings.container_height_desktop }}px;
     }
 
-    .editorial-container-{{ section.id }} .grid {
-      grid-template-rows: {{ section.settings.grid_row_height_desktop }}px {{ section.settings.grid_row_height_desktop }}px;
+    .grid-container-{{ section.id }} .grid-{{ section.id }} {
       gap: {{ section.settings.gap_between_images_desktop }}px;
-      height: {{ section.settings.grid_row_height_desktop | times: 2 | plus: section.settings.gap_between_images_desktop }}px;
     }
   }
 
   {%- if section.settings.scroll_direction == 'right' -%}
-    @keyframes scrolling-images-{{ section.id }}-mobile-right {
+    @keyframes scrolling-{{ section.id }}-mobile-right {
       from {
         transform: translate3d(calc(-{{ section.settings.container_width_mobile }}px - {{ section.settings.gap_between_containers_mobile }}px), 0, 0);
       }
@@ -163,7 +186,7 @@
       }
     }
 
-    @keyframes scrolling-images-{{ section.id }}-desktop-right {
+    @keyframes scrolling-{{ section.id }}-desktop-right {
       from {
         transform: translate3d(calc(-{{ section.settings.container_width_desktop }}px - {{ section.settings.gap_between_containers_desktop }}px), 0, 0);
       }
@@ -172,7 +195,7 @@
       }
     }
   {%- else -%}
-    @keyframes scrolling-images-{{ section.id }}-mobile-left {
+    @keyframes scrolling-{{ section.id }}-mobile-left {
       from {
         transform: translate3d(0, 0, 0);
       }
@@ -181,7 +204,7 @@
       }
     }
 
-    @keyframes scrolling-images-{{ section.id }}-desktop-left {
+    @keyframes scrolling-{{ section.id }}-desktop-left {
       from {
         transform: translate3d(0, 0, 0);
       }
@@ -192,115 +215,109 @@
   {%- endif -%}
 {%- endstyle -%}
 
-<div class="section-{{ section.id }} scrolling-images-{{ section.id }}" style="background-color: {{ section.settings.background_color }};">
+<div class="section-{{ section.id }} scrolling-section-{{ section.id }}" style="background-color: {{ section.settings.section_bg_color }};">
   <div class="section-{{ section.id }}-settings">
-    <div class="scrolling-images-wrapper-{{ section.id }}">
-      <div class="scrolling-images-track-{{ section.id }}">
+    <div class="scrolling-wrapper-{{ section.id }}">
+      <div class="scrolling-track-{{ section.id }}">
         {%- assign clone_count = 30 -%}
         {%- for i in (1..clone_count) -%}
-          <div class="scrolling-images-list-{{ section.id }}" data-ss-list="{% if forloop.first %}base{% else %}clone{% endif %}" {% unless forloop.first %}aria-hidden="true"{% endunless %}>
+          <div class="scrolling-list-{{ section.id }}" data-ss-list-{{ section.id }}="{% if forloop.first %}base{% else %}clone{% endif %}" {% unless forloop.first %}aria-hidden="true"{% endunless %}>
             {%- for block in section.blocks -%}
-              <div class="editorial-container-{{ section.id }} editorial-container-{{ block.id }}" {{ block.shopify_attributes }}>
-                <div class="grid">
-                  <!-- Column 1 Tall -->
-                  <div class="item item-left">
-                    {%- if block.settings.left_image != blank -%}
-                      <img src="{{ block.settings.left_image | image_url: width: 800 }}" 
-                           srcset="{{ block.settings.left_image | image_url: width: 400 }} 400w,
-                                   {{ block.settings.left_image | image_url: width: 800 }} 800w,
-                                   {{ block.settings.left_image | image_url: width: 1200 }} 1200w"
+              <div class="grid-container-{{ section.id }} grid-container-{{ block.id }}" {{ block.shopify_attributes }} style="background-color: {{ section.settings.container_bg_color }};">
+                <div class="grid-{{ section.id }}">
+                  
+                  <!-- Tall Left Image -->
+                  <div class="item-{{ section.id }} tall-{{ section.id }}">
+                    {%- if block.settings.tall_image != blank -%}
+                      <img src="{{ block.settings.tall_image | image_url: width: 800 }}" 
+                           srcset="{{ block.settings.tall_image | image_url: width: 400 }} 400w,
+                                   {{ block.settings.tall_image | image_url: width: 800 }} 800w,
+                                   {{ block.settings.tall_image | image_url: width: 1200 }} 1200w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.left_image.alt | escape }}">
+                           alt="{{ block.settings.tall_image.alt | escape }}"
+                           style="border-radius: {{ section.settings.image_border_radius }}px;">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Column 2 Top -->
-                  <div class="item">
-                    {%- if block.settings.small_top != blank -%}
-                      <img src="{{ block.settings.small_top | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.small_top | image_url: width: 300 }} 300w,
-                                   {{ block.settings.small_top | image_url: width: 600 }} 600w"
+                  <!-- Small Left Top -->
+                  <div class="item-{{ section.id }} small-left-top-{{ section.id }}">
+                    {%- if block.settings.small_left_top != blank -%}
+                      <img src="{{ block.settings.small_left_top | image_url: width: 600 }}" 
+                           srcset="{{ block.settings.small_left_top | image_url: width: 300 }} 300w,
+                                   {{ block.settings.small_left_top | image_url: width: 600 }} 600w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.small_top.alt | escape }}">
+                           alt="{{ block.settings.small_left_top.alt | escape }}"
+                           style="border-radius: {{ section.settings.image_border_radius }}px;">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Big Top (Columns 3-4) -->
-                  <div class="item item-big-top">
-                    {%- if block.settings.big_top != blank -%}
-                      <img src="{{ block.settings.big_top | image_url: width: 1200 }}" 
-                           srcset="{{ block.settings.big_top | image_url: width: 600 }} 600w,
-                                   {{ block.settings.big_top | image_url: width: 1200 }} 1200w"
-                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 2.5 }}px, {{ section.settings.container_width_mobile | divided_by: 2.5 }}px"
+                  <!-- Wide Center Image -->
+                  <div class="item-{{ section.id }} wide-center-{{ section.id }}">
+                    {%- if block.settings.wide_center != blank -%}
+                      <img src="{{ block.settings.wide_center | image_url: width: 1200 }}" 
+                           srcset="{{ block.settings.wide_center | image_url: width: 600 }} 600w,
+                                   {{ block.settings.wide_center | image_url: width: 1200 }} 1200w,
+                                   {{ block.settings.wide_center | image_url: width: 1800 }} 1800w"
+                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 | times: 2 }}px, {{ section.settings.container_width_mobile | divided_by: 5 | times: 2 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.big_top.alt | escape }}">
+                           alt="{{ block.settings.wide_center.alt | escape }}"
+                           style="border-radius: {{ section.settings.image_border_radius }}px;">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Column 5 Tall -->
-                  <div class="item item-right">
-                    {%- if block.settings.right_image != blank -%}
-                      <img src="{{ block.settings.right_image | image_url: width: 800 }}" 
-                           srcset="{{ block.settings.right_image | image_url: width: 400 }} 400w,
-                                   {{ block.settings.right_image | image_url: width: 800 }} 800w,
-                                   {{ block.settings.right_image | image_url: width: 1200 }} 1200w"
+                  <!-- Small Right Top -->
+                  <div class="item-{{ section.id }} small-right-top-{{ section.id }}">
+                    {%- if block.settings.small_right_top != blank -%}
+                      <img src="{{ block.settings.small_right_top | image_url: width: 600 }}" 
+                           srcset="{{ block.settings.small_right_top | image_url: width: 300 }} 300w,
+                                   {{ block.settings.small_right_top | image_url: width: 600 }} 600w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.right_image.alt | escape }}">
+                           alt="{{ block.settings.small_right_top.alt | escape }}"
+                           style="border-radius: {{ section.settings.image_border_radius }}px;">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Column 2 Bottom -->
-                  <div class="item">
-                    {%- if block.settings.small_bottom != blank -%}
-                      <img src="{{ block.settings.small_bottom | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.small_bottom | image_url: width: 300 }} 300w,
-                                   {{ block.settings.small_bottom | image_url: width: 600 }} 600w"
+                  <!-- Small Left Bottom -->
+                  <div class="item-{{ section.id }} small-left-bottom-{{ section.id }}">
+                    {%- if block.settings.small_left_bottom != blank -%}
+                      <img src="{{ block.settings.small_left_bottom | image_url: width: 600 }}" 
+                           srcset="{{ block.settings.small_left_bottom | image_url: width: 300 }} 300w,
+                                   {{ block.settings.small_left_bottom | image_url: width: 600 }} 600w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.small_bottom.alt | escape }}">
+                           alt="{{ block.settings.small_left_bottom.alt | escape }}"
+                           style="border-radius: {{ section.settings.image_border_radius }}px;">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Bottom Row Column 3 -->
-                  <div class="item item-bottom-1">
-                    {%- if block.settings.bottom_left != blank -%}
-                      <img src="{{ block.settings.bottom_left | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.bottom_left | image_url: width: 300 }} 300w,
-                                   {{ block.settings.bottom_left | image_url: width: 600 }} 600w"
+                  <!-- Small Right Bottom -->
+                  <div class="item-{{ section.id }} small-right-bottom-{{ section.id }}">
+                    {%- if block.settings.small_right_bottom != blank -%}
+                      <img src="{{ block.settings.small_right_bottom | image_url: width: 600 }}" 
+                           srcset="{{ block.settings.small_right_bottom | image_url: width: 300 }} 300w,
+                                   {{ block.settings.small_right_bottom | image_url: width: 600 }} 600w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.bottom_left.alt | escape }}">
+                           alt="{{ block.settings.small_right_bottom.alt | escape }}"
+                           style="border-radius: {{ section.settings.image_border_radius }}px;">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Bottom Row Column 4 -->
-                  <div class="item item-bottom-2">
-                    {%- if block.settings.bottom_right != blank -%}
-                      <img src="{{ block.settings.bottom_right | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.bottom_right | image_url: width: 300 }} 300w,
-                                   {{ block.settings.bottom_right | image_url: width: 600 }} 600w"
-                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
-                           loading="lazy"
-                           alt="{{ block.settings.bottom_right.alt | escape }}">
-                    {%- else -%}
-                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                    {%- endif -%}
-                  </div>
                 </div>
               </div>
             {%- endfor -%}
@@ -314,11 +331,11 @@
 <script>
   (function () {
     const sectionId = '{{ section.id }}';
-    const sectionRoot = document.querySelector('.scrolling-images-' + sectionId);
+    const sectionRoot = document.querySelector('.scrolling-section-' + sectionId);
     if (!sectionRoot) return;
 
-    const wrapper = sectionRoot.querySelector('.scrolling-images-wrapper-' + sectionId);
-    const track = sectionRoot.querySelector('.scrolling-images-track-' + sectionId);
+    const wrapper = sectionRoot.querySelector('.scrolling-wrapper-' + sectionId);
+    const track = sectionRoot.querySelector('.scrolling-track-' + sectionId);
     if (!wrapper || !track) return;
 
     function ensureFullWidth() {
@@ -335,14 +352,14 @@
       
       // If we don't have enough width, add more clones
       if (totalWidth < targetWidth) {
-        const baseList = track.querySelector('[data-ss-list="base"]');
+        const baseList = track.querySelector('[data-ss-list-{{ section.id }}="base"]');
         if (!baseList) return;
         
         const neededCopies = Math.ceil((targetWidth - totalWidth) / containerWidth) + 5;
         
         for (let i = 0; i < neededCopies; i++) {
           const clone = baseList.cloneNode(true);
-          clone.setAttribute('data-ss-list', 'clone');
+          clone.setAttribute('data-ss-list-{{ section.id }}', 'clone');
           clone.setAttribute('aria-hidden', 'true');
           track.appendChild(clone);
         }
@@ -391,7 +408,7 @@
 
 {% schema %}
 {
-  "name": "Scrolling Images 1",
+  "name": "Scrolling Images 4",
   "tag": "section",
   "class": "section",
   "disabled_on": {
@@ -404,7 +421,7 @@
     },
     {
       "type": "color",
-      "id": "background_color",
+      "id": "section_bg_color",
       "label": "Section Background Color",
       "default": "#ffffff"
     },
@@ -474,11 +491,37 @@
     },
     {
       "type": "header",
+      "content": "Section Height"
+    },
+    {
+      "type": "range",
+      "id": "section_height_mobile",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Height - Mobile",
+      "default": 400,
+      "info": "Set the exact height of the section"
+    },
+    {
+      "type": "range",
+      "id": "section_height_desktop",
+      "min": 300,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Height - Desktop",
+      "default": 650,
+      "info": "Set the exact height of the section"
+    },
+    {
+      "type": "header",
       "content": "Container Settings"
     },
     {
       "type": "color",
-      "id": "container_background_color",
+      "id": "container_bg_color",
       "label": "Container Background Color",
       "default": "#ffffff"
     },
@@ -516,7 +559,7 @@
       "step": 2,
       "unit": "px",
       "label": "Container Inner Padding",
-      "default": 12
+      "default": 0
     },
     {
       "type": "header",
@@ -525,23 +568,23 @@
     {
       "type": "range",
       "id": "container_width_mobile",
-      "min": 300,
+      "min": 200,
       "max": 1000,
       "step": 10,
       "unit": "px",
       "label": "Container Width",
-      "default": 370,
-      "info": "Width of each container"
+      "default": 300
     },
     {
       "type": "range",
-      "id": "grid_row_height_mobile",
-      "min": 100,
-      "max": 300,
+      "id": "container_height_mobile",
+      "min": 200,
+      "max": 600,
       "step": 10,
       "unit": "px",
-      "label": "Grid Row Height",
-      "default": 160
+      "label": "Container Height",
+      "default": 300,
+      "info": "Set to match section height minus padding"
     },
     {
       "type": "range",
@@ -570,23 +613,23 @@
     {
       "type": "range",
       "id": "container_width_desktop",
-      "min": 400,
+      "min": 300,
       "max": 1600,
       "step": 20,
       "unit": "px",
       "label": "Container Width",
-      "default": 480,
-      "info": "Width of each container"
+      "default": 400
     },
     {
       "type": "range",
-      "id": "grid_row_height_desktop",
-      "min": 150,
-      "max": 400,
+      "id": "container_height_desktop",
+      "min": 300,
+      "max": 800,
       "step": 10,
       "unit": "px",
-      "label": "Grid Row Height",
-      "default": 240
+      "label": "Container Height",
+      "default": 500,
+      "info": "Set to match section height minus padding"
     },
     {
       "type": "range",
@@ -636,7 +679,7 @@
       "step": 1,
       "unit": "px",
       "label": "Image Border Radius",
-      "default": 32
+      "default": 0
     },
     {
       "type": "header",
@@ -650,7 +693,7 @@
       "step": 1,
       "unit": "px",
       "label": "Padding Top",
-      "default": 27
+      "default": 0
     },
     {
       "type": "range",
@@ -660,7 +703,27 @@
       "step": 1,
       "unit": "px",
       "label": "Padding Bottom",
-      "default": 27
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Padding Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Padding Right",
+      "default": 0
     },
     {
       "type": "range",
@@ -683,6 +746,26 @@
       "default": 0
     },
     {
+      "type": "range",
+      "id": "margin_left_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Margin Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_right_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Margin Right",
+      "default": 0
+    },
+    {
       "type": "header",
       "content": "Section Spacing - Desktop"
     },
@@ -694,7 +777,7 @@
       "step": 1,
       "unit": "px",
       "label": "Padding Top",
-      "default": 36
+      "default": 0
     },
     {
       "type": "range",
@@ -704,7 +787,27 @@
       "step": 1,
       "unit": "px",
       "label": "Padding Bottom",
-      "default": 36
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_desktop",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Padding Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Padding Right",
+      "default": 0
     },
     {
       "type": "range",
@@ -725,64 +828,83 @@
       "unit": "px",
       "label": "Margin Bottom",
       "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_left_desktop",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Margin Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_right_desktop",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Margin Right",
+      "default": 0
     }
   ],
   "blocks": [
     {
-      "type": "editorial_container",
-      "name": "Editorial Container",
+      "type": "grid_container",
+      "name": "Grid Container",
       "limit": 1,
       "settings": [
         {
           "type": "header",
-          "content": "Images for 5-Column Layout"
+          "content": "Images for 2 Row Wide Center Grid"
         },
         {
           "type": "image_picker",
-          "id": "left_image",
-          "label": "Left Tall Image (Column 1)",
-          "info": "Spans 2 rows"
+          "id": "tall_image",
+          "label": "Tall Left Image",
+          "info": "Column 1, spans 2 rows"
         },
         {
           "type": "image_picker",
-          "id": "small_top",
-          "label": "Small Top Image (Column 2, Row 1)"
+          "id": "small_left_top",
+          "label": "Small Left Top",
+          "info": "Column 2, Row 1"
         },
         {
           "type": "image_picker",
-          "id": "big_top",
-          "label": "Big Top Image (Columns 3-4, Row 1)"
+          "id": "small_left_bottom",
+          "label": "Small Left Bottom",
+          "info": "Column 2, Row 2"
         },
         {
           "type": "image_picker",
-          "id": "right_image",
-          "label": "Right Tall Image (Column 5)",
-          "info": "Spans 2 rows"
+          "id": "wide_center",
+          "label": "Wide Center Image",
+          "info": "Columns 3-4, spans 2 rows"
         },
         {
           "type": "image_picker",
-          "id": "small_bottom",
-          "label": "Small Bottom Image (Column 2, Row 2)"
+          "id": "small_right_top",
+          "label": "Small Right Top",
+          "info": "Column 5, Row 1"
         },
         {
           "type": "image_picker",
-          "id": "bottom_left",
-          "label": "Bottom Left Image (Column 3, Row 2)"
-        },
-        {
-          "type": "image_picker",
-          "id": "bottom_right",
-          "label": "Bottom Right Image (Column 4, Row 2)"
+          "id": "small_right_bottom",
+          "label": "Small Right Bottom",
+          "info": "Column 5, Row 2"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Scrolling Editorial Layout",
+      "name": "Scrolling Images 4",
       "blocks": [
         {
-          "type": "editorial_container"
+          "type": "grid_container"
         }
       ]
     }
