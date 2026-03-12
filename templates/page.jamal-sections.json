@@ -948,9 +948,86 @@
         "bundle_title": "Your bundle",
         "button_label": "ADD TO CART",
         "collection": "dummy-collection",
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "padding_top": 40,
         "padding_bottom": 40
+      }
+    },
+    "custom_claim_offer_popup_Am4Njq": {
+      "type": "custom-claim-offer-popup",
+      "name": "Claim Offer Popup",
+      "settings": {
+        "trigger_text": "Claim offer ✕",
+        "trigger_color": "#ff00cc",
+        "trigger_vertical": "top",
+        "trigger_horizontal": "left",
+        "text_align": "center",
+        "heading": "Unlock your optimal state",
+        "heading_color_1": "#ff2ea6",
+        "heading_color_2": "#8a4cff",
+        "description": "Fuel your focus with the galaxy's most potent brand. Get 15% off your first journey.",
+        "placeholder": "Your email",
+        "input_border": "#dddddd",
+        "button_text": "GET LIFT OFF",
+        "button_color_1": "#ff00cc",
+        "button_color_2": "#ff2ebf",
+        "button_text_color": "#ffffff",
+        "bg_color_1": "#f5f1f7",
+        "bg_color_2": "#f5f1f7",
+        "bg_color_3": "#cfa3eb",
+        "text_color": "#666666",
+        "close_color": "#ff00cc"
+      }
+    },
+    "popup_inner_circle_gbmkEH": {
+      "type": "popup-inner-circle",
+      "name": "Inner Circle Popup",
+      "settings": {
+        "trigger_text": "Sign Up for Updates",
+        "vertical_position": "top",
+        "horizontal_position": "center",
+        "trigger_bg": "#ffffff",
+        "trigger_text_color": "#000000",
+        "heading": "JOIN THE INNER CIRCLE",
+        "heading_color": "#ffffff",
+        "description": "Get 2026 early-access drops and member-only pricing delivered to your inbox.",
+        "placeholder": "Enter email",
+        "button_text": "GET ACCESS",
+        "popup_button_bg": "#ffffff",
+        "popup_button_text": "#000000",
+        "background_color": "#1a1b26",
+        "enable_gradient": true,
+        "gradient_color_1": "#272838",
+        "gradient_color_2": "#1a1b26",
+        "text_color": "#ffffff",
+        "color_scheme": ""
+      }
+    },
+    "promo_mystery_popup_CBaBaY": {
+      "type": "promo-mystery-popup",
+      "name": "Mystery Promo Popup",
+      "settings": {
+        "logo_text": "pakstore664",
+        "trigger_text_label": "UNLOCK DISCOUNT ×",
+        "text_align": "left",
+        "vertical_position": "top",
+        "horizontal_position": "left",
+        "trigger_bg": "#ff8a00",
+        "trigger_text": "#ffffff",
+        "heading": "YOU'VE GOT A MYSTERY DISCOUNT",
+        "subheading": "SIGN UP TO CLAIM",
+        "heading_color": "#1f2b44",
+        "subheading_color": "#ffffff",
+        "text_color": "#1f2b44",
+        "email_placeholder": "Your email address",
+        "button_text_label": "UNLOCK DISCOUNT",
+        "button_bg": "#ff8a00",
+        "button_text": "#ffffff",
+        "no_text": "No, thanks",
+        "note_text": "By signing up you agree to receive email marketing. You can unsubscribe at any time.",
+        "close_color": "#000000",
+        "gradient_color_1": "#ff8a00",
+        "gradient_color_2": "#e7e089"
       }
     }
   },
@@ -963,6 +1040,9 @@
     "testimonials_2_BCT3Ei",
     "testimonials_3_T78efB",
     "bundle_builder2_nwFXyB",
-    "bundle_builder_1_4c7aX8"
+    "bundle_builder_1_4c7aX8",
+    "custom_claim_offer_popup_Am4Njq",
+    "popup_inner_circle_gbmkEH",
+    "promo_mystery_popup_CBaBaY"
   ]
 }
