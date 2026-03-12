@@ -304,8 +304,10 @@ alt="popup image"
 
 <script>
 
-document.getElementById("icpTrigger").onclick=function(){
+document.getElementById("icpTrigger").onclick=function(e){
+if(!e.target.closest('.trigger-close')){
 document.getElementById("icpPopup").style.display="flex";
+}
 }
 
 document.getElementById("icpClose").onclick=function(){
