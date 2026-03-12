@@ -11,6 +11,7 @@
     background-color: {{ section.settings.section_bg_color }};
     height: {{ section.settings.section_height_mobile }}px;
     max-height: {{ section.settings.section_height_mobile }}px;
+    width: 100%;
   }
 
 .section-{{ section.id }}-settings {
@@ -218,7 +219,8 @@
   <div class="section-{{ section.id }}-settings">
     <div class="scrolling-wrapper-{{ section.id }}">
       <div class="scrolling-track-{{ section.id }}">
-        {%- for i in (1..4) -%}
+        {%- assign clone_count = 30 -%}
+        {%- for i in (1..clone_count) -%}
           <div class="scrolling-list-{{ section.id }}" data-ss-list-{{ section.id }}="{% if forloop.first %}base{% else %}clone{% endif %}" {% unless forloop.first %}aria-hidden="true"{% endunless %}>
             {%- for block in section.blocks -%}
               <div class="grid-container-{{ section.id }} grid-container-{{ block.id }}" {{ block.shopify_attributes }} style="background-color: {{ section.settings.container_bg_color }};">
@@ -336,31 +338,46 @@
     const track = sectionRoot.querySelector('.scrolling-track-' + sectionId);
     if (!wrapper || !track) return;
 
-    function rebuildTrackCopies() {
-      track.querySelectorAll('[data-ss-list-{{ section.id }}="clone"]').forEach((node) => node.remove());
-
-      const baseLists = Array.from(track.querySelectorAll('[data-ss-list-{{ section.id }}="base"]'));
-      if (baseLists.length < 2) return;
-
-      let guard = 0;
-      while (track.scrollWidth < wrapper.clientWidth * 2 && guard < 12) {
-        baseLists.forEach((baseList) => {
+    function ensureFullWidth() {
+      // Calculate how many copies we need to fill the screen
+      const containerWidth = {{ section.settings.container_width_desktop }} + {{ section.settings.gap_between_containers_desktop }};
+      const targetWidth = wrapper.clientWidth * 4; // 4x the wrapper width for smooth infinite scroll
+      
+      // Count current lists
+      const lists = Array.from(track.children);
+      const currentCount = lists.length;
+      
+      // Calculate current total width
+      const totalWidth = currentCount * containerWidth;
+      
+      // If we don't have enough width, add more clones
+      if (totalWidth < targetWidth) {
+        const baseList = track.querySelector('[data-ss-list-{{ section.id }}="base"]');
+        if (!baseList) return;
+        
+        const neededCopies = Math.ceil((targetWidth - totalWidth) / containerWidth) + 5;
+        
+        for (let i = 0; i < neededCopies; i++) {
           const clone = baseList.cloneNode(true);
           clone.setAttribute('data-ss-list-{{ section.id }}', 'clone');
           clone.setAttribute('aria-hidden', 'true');
           track.appendChild(clone);
-        });
-        guard += 1;
+        }
       }
     }
 
     let resizeFrame = null;
     function handleResize() {
       if (resizeFrame) cancelAnimationFrame(resizeFrame);
-      resizeFrame = requestAnimationFrame(rebuildTrackCopies);
+      resizeFrame = requestAnimationFrame(ensureFullWidth);
     }
 
-    rebuildTrackCopies();
+    // Run multiple times to ensure full coverage
+    setTimeout(ensureFullWidth, 100);
+    setTimeout(ensureFullWidth, 300);
+    setTimeout(ensureFullWidth, 500);
+    setTimeout(ensureFullWidth, 1000);
+    
     window.addEventListener('resize', handleResize, { passive: true });
 
     {%- if request.design_mode -%}
@@ -372,13 +389,17 @@
 
     document.addEventListener('shopify:section:load', function (event) {
       if (event.target && event.target.id === 'shopify-section-' + sectionId) {
-        setTimeout(rebuildTrackCopies, 100);
+        setTimeout(ensureFullWidth, 200);
+        setTimeout(ensureFullWidth, 400);
+        setTimeout(ensureFullWidth, 600);
       }
     });
 
     document.addEventListener('shopify:block:select', function (event) {
       if (event.target && event.target.id === 'shopify-section-' + sectionId) {
-        setTimeout(rebuildTrackCopies, 100);
+        setTimeout(ensureFullWidth, 200);
+        setTimeout(ensureFullWidth, 400);
+        setTimeout(ensureFullWidth, 600);
       }
     });
     {%- endif -%}
@@ -538,7 +559,7 @@
       "step": 2,
       "unit": "px",
       "label": "Container Inner Padding",
-      "default": 12
+      "default": 0
     },
     {
       "type": "header",
@@ -833,7 +854,7 @@
     {
       "type": "grid_container",
       "name": "Grid Container",
-      "limit": 10,
+      "limit": 1,
       "settings": [
         {
           "type": "header",
@@ -882,12 +903,6 @@
     {
       "name": "Scrolling Images 3",
       "blocks": [
-        {
-          "type": "grid_container"
-        },
-        {
-          "type": "grid_container"
-        },
         {
           "type": "grid_container"
         }

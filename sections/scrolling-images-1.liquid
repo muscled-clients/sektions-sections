@@ -4,24 +4,27 @@
     border-bottom: solid {{ section.settings.border_color }} {{ section.settings.border_size }}px;
     margin-top: {{ section.settings.margin_top }}px;
     margin-bottom: {{ section.settings.margin_bottom }}px;
-    margin-left: {{ section.settings.margin_left }}rem;
-    margin-right: {{ section.settings.margin_right }}rem;
+    margin-left: 0;
+    margin-right: 0;
     border-radius: {{ section.settings.border_radius }}px;
     overflow: hidden;
+    width: 100%;
   }
 
   .section-{{ section.id }}-settings {
     margin: 0 auto;
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-    padding-left: {{ section.settings.padding_left_mobile }}rem;
-    padding-right: {{ section.settings.padding_right_mobile }}rem;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
   }
 
   .scrolling-images-wrapper-{{ section.id }} {
     position: relative;
     overflow: hidden;
     -webkit-mask-image: -webkit-radial-gradient(white, black);
+    width: 100%;
   }
 
   .scrolling-images-track-{{ section.id }} {
@@ -110,16 +113,16 @@
     .section-{{ section.id }} {
       margin-top: {{ section.settings.margin_top_desktop }}px;
       margin-bottom: {{ section.settings.margin_bottom_desktop }}px;
-      margin-left: {{ section.settings.margin_left_desktop }}rem;
-      margin-right: {{ section.settings.margin_right_desktop }}rem;
+      margin-left: 0;
+      margin-right: 0;
       border-radius: {{ section.settings.border_radius_desktop }}px;
     }
 
     .section-{{ section.id }}-settings {
       padding-top: {{ section.settings.padding_top_desktop }}px;
       padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
-      padding-left: {{ section.settings.padding_left_desktop }}rem;
-      padding-right: {{ section.settings.padding_right_desktop }}rem;
+      padding-left: 0;
+      padding-right: 0;
     }
 
     .scrolling-images-track-{{ section.id }} {
@@ -193,7 +196,8 @@
   <div class="section-{{ section.id }}-settings">
     <div class="scrolling-images-wrapper-{{ section.id }}">
       <div class="scrolling-images-track-{{ section.id }}">
-        {%- for i in (1..4) -%}
+        {%- assign clone_count = 30 -%}
+        {%- for i in (1..clone_count) -%}
           <div class="scrolling-images-list-{{ section.id }}" data-ss-list="{% if forloop.first %}base{% else %}clone{% endif %}" {% unless forloop.first %}aria-hidden="true"{% endunless %}>
             {%- for block in section.blocks -%}
               <div class="editorial-container-{{ section.id }} editorial-container-{{ block.id }}" {{ block.shopify_attributes }}>
@@ -317,31 +321,46 @@
     const track = sectionRoot.querySelector('.scrolling-images-track-' + sectionId);
     if (!wrapper || !track) return;
 
-    function rebuildTrackCopies() {
-      track.querySelectorAll('[data-ss-list="clone"]').forEach((node) => node.remove());
-
-      const baseLists = Array.from(track.querySelectorAll('[data-ss-list="base"]'));
-      if (baseLists.length < 2) return;
-
-      let guard = 0;
-      while (track.scrollWidth < wrapper.clientWidth * 2 && guard < 12) {
-        baseLists.forEach((baseList) => {
+    function ensureFullWidth() {
+      // Calculate how many copies we need to fill the screen
+      const containerWidth = {{ section.settings.container_width_desktop }} + {{ section.settings.gap_between_containers_desktop }};
+      const targetWidth = wrapper.clientWidth * 4; // 4x the wrapper width for smooth infinite scroll
+      
+      // Count current lists
+      const lists = Array.from(track.children);
+      const currentCount = lists.length;
+      
+      // Calculate current total width
+      const totalWidth = currentCount * containerWidth;
+      
+      // If we don't have enough width, add more clones
+      if (totalWidth < targetWidth) {
+        const baseList = track.querySelector('[data-ss-list="base"]');
+        if (!baseList) return;
+        
+        const neededCopies = Math.ceil((targetWidth - totalWidth) / containerWidth) + 5;
+        
+        for (let i = 0; i < neededCopies; i++) {
           const clone = baseList.cloneNode(true);
           clone.setAttribute('data-ss-list', 'clone');
           clone.setAttribute('aria-hidden', 'true');
           track.appendChild(clone);
-        });
-        guard += 1;
+        }
       }
     }
 
     let resizeFrame = null;
     function handleResize() {
       if (resizeFrame) cancelAnimationFrame(resizeFrame);
-      resizeFrame = requestAnimationFrame(rebuildTrackCopies);
+      resizeFrame = requestAnimationFrame(ensureFullWidth);
     }
 
-    rebuildTrackCopies();
+    // Run multiple times to ensure full coverage
+    setTimeout(ensureFullWidth, 100);
+    setTimeout(ensureFullWidth, 300);
+    setTimeout(ensureFullWidth, 500);
+    setTimeout(ensureFullWidth, 1000);
+    
     window.addEventListener('resize', handleResize, { passive: true });
 
     {%- if request.design_mode -%}
@@ -353,13 +372,17 @@
 
     document.addEventListener('shopify:section:load', function (event) {
       if (event.target && event.target.id === 'shopify-section-' + sectionId) {
-        setTimeout(rebuildTrackCopies, 100);
+        setTimeout(ensureFullWidth, 200);
+        setTimeout(ensureFullWidth, 400);
+        setTimeout(ensureFullWidth, 600);
       }
     });
 
     document.addEventListener('shopify:block:select', function (event) {
       if (event.target && event.target.id === 'shopify-section-' + sectionId) {
-        setTimeout(rebuildTrackCopies, 100);
+        setTimeout(ensureFullWidth, 200);
+        setTimeout(ensureFullWidth, 400);
+        setTimeout(ensureFullWidth, 600);
       }
     });
     {%- endif -%}
@@ -508,7 +531,7 @@
       "unit": "px",
       "label": "Container Width",
       "default": 370,
-      "info": "Width of each container (like the 372px in your example)"
+      "info": "Width of each container"
     },
     {
       "type": "range",
@@ -553,7 +576,7 @@
       "unit": "px",
       "label": "Container Width",
       "default": 480,
-      "info": "Width of each container (like the 492px in your example)"
+      "info": "Width of each container"
     },
     {
       "type": "range",
@@ -613,7 +636,7 @@
       "step": 1,
       "unit": "px",
       "label": "Image Border Radius",
-      "default": 0
+      "default": 32
     },
     {
       "type": "header",
@@ -641,26 +664,6 @@
     },
     {
       "type": "range",
-      "id": "padding_left_mobile",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Padding Left",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding_right_mobile",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Padding Right",
-      "default": 0
-    },
-    {
-      "type": "range",
       "id": "margin_top_mobile",
       "min": 0,
       "max": 100,
@@ -677,26 +680,6 @@
       "step": 1,
       "unit": "px",
       "label": "Margin Bottom",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_left_mobile",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Margin Left",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_right_mobile",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Margin Right",
       "default": 0
     },
     {
@@ -725,26 +708,6 @@
     },
     {
       "type": "range",
-      "id": "padding_left_desktop",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Padding Left",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding_right_desktop",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Padding Right",
-      "default": 0
-    },
-    {
-      "type": "range",
       "id": "margin_top_desktop",
       "min": 0,
       "max": 100,
@@ -762,33 +725,13 @@
       "unit": "px",
       "label": "Margin Bottom",
       "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_left_desktop",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Margin Left",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_right_desktop",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Margin Right",
-      "default": 0
     }
   ],
   "blocks": [
     {
       "type": "editorial_container",
       "name": "Editorial Container",
-      "limit": 10,
+      "limit": 1,
       "settings": [
         {
           "type": "header",
@@ -797,58 +740,47 @@
         {
           "type": "image_picker",
           "id": "left_image",
-          "label": "Left Tall Image (Column 1, spans 2 rows)",
-          "info": "Recommended size: Square or portrait orientation"
+          "label": "Left Tall Image (Column 1)",
+          "info": "Spans 2 rows"
         },
         {
           "type": "image_picker",
           "id": "small_top",
-          "label": "Small Top Image (Column 2, Row 1)",
-          "info": "Recommended size: Square"
+          "label": "Small Top Image (Column 2, Row 1)"
         },
         {
           "type": "image_picker",
           "id": "big_top",
-          "label": "Big Top Image (Columns 3-4, Row 1)",
-          "info": "Recommended size: Landscape orientation"
+          "label": "Big Top Image (Columns 3-4, Row 1)"
         },
         {
           "type": "image_picker",
           "id": "right_image",
-          "label": "Right Tall Image (Column 5, spans 2 rows)",
-          "info": "Recommended size: Square or portrait orientation"
+          "label": "Right Tall Image (Column 5)",
+          "info": "Spans 2 rows"
         },
         {
           "type": "image_picker",
           "id": "small_bottom",
-          "label": "Small Bottom Image (Column 2, Row 2)",
-          "info": "Recommended size: Square"
+          "label": "Small Bottom Image (Column 2, Row 2)"
         },
         {
           "type": "image_picker",
           "id": "bottom_left",
-          "label": "Bottom Left Image (Column 3, Row 2)",
-          "info": "Recommended size: Square"
+          "label": "Bottom Left Image (Column 3, Row 2)"
         },
         {
           "type": "image_picker",
           "id": "bottom_right",
-          "label": "Bottom Right Image (Column 4, Row 2)",
-          "info": "Recommended size: Square"
+          "label": "Bottom Right Image (Column 4, Row 2)"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Scrolling Images 1",
+      "name": "Scrolling Editorial Layout",
       "blocks": [
-        {
-          "type": "editorial_container"
-        },
-        {
-          "type": "editorial_container"
-        },
         {
           "type": "editorial_container"
         }

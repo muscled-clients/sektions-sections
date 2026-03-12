@@ -4,24 +4,26 @@
     border-bottom: solid {{ section.settings.border_color }} {{ section.settings.border_size }}px;
     margin-top: {{ section.settings.margin_top }}px;
     margin-bottom: {{ section.settings.margin_bottom }}px;
-    margin-left: {{ section.settings.margin_left }}rem;
-    margin-right: {{ section.settings.margin_right }}rem;
+    margin-left: 0;
+    margin-right: 0;
     border-radius: {{ section.settings.border_radius }}px;
     overflow: hidden;
     background-color: {{ section.settings.section_bg_color }};
     height: {{ section.settings.section_height_mobile }}px;
     max-height: {{ section.settings.section_height_mobile }}px;
+    width: 100%;
   }
 
   .section-{{ section.id }}-settings {
     margin: 0 auto;
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-    padding-left: {{ section.settings.padding_left_mobile }}rem;
-    padding-right: {{ section.settings.padding_right_mobile }}rem;
+    padding-left: 0;
+    padding-right: 0;
     height: 100%;
     display: flex;
     align-items: center;
+    width: 100%;
   }
 
   .scrolling-wrapper-{{ section.id }} {
@@ -143,8 +145,8 @@
     .section-{{ section.id }} {
       margin-top: {{ section.settings.margin_top_desktop }}px;
       margin-bottom: {{ section.settings.margin_bottom_desktop }}px;
-      margin-left: {{ section.settings.margin_left_desktop }}rem;
-      margin-right: {{ section.settings.margin_right_desktop }}rem;
+      margin-left: 0;
+      margin-right: 0;
       border-radius: {{ section.settings.border_radius_desktop }}px;
       height: {{ section.settings.section_height_desktop }}px;
       max-height: {{ section.settings.section_height_desktop }}px;
@@ -153,8 +155,8 @@
     .section-{{ section.id }}-settings {
       padding-top: {{ section.settings.padding_top_desktop }}px;
       padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
-      padding-left: {{ section.settings.padding_left_desktop }}rem;
-      padding-right: {{ section.settings.padding_right_desktop }}rem;
+      padding-left: 0;
+      padding-right: 0;
     }
 
     .scrolling-track-{{ section.id }} {
@@ -227,7 +229,7 @@
   <div class="section-{{ section.id }}-settings">
     <div class="scrolling-wrapper-{{ section.id }}">
       <div class="scrolling-track-{{ section.id }}">
-        {%- for i in (1..4) -%}
+        {%- for i in (1..20) -%}
           <div class="scrolling-list-{{ section.id }}" data-ss-list-{{ section.id }}="{% if forloop.first %}base{% else %}clone{% endif %}" {% unless forloop.first %}aria-hidden="true"{% endunless %}>
             {%- for block in section.blocks -%}
               <div class="mosaic-container-{{ section.id }} mosaic-container-{{ block.id }}" {{ block.shopify_attributes }} style="background-color: {{ section.settings.container_bg_color }};">
@@ -376,20 +378,28 @@
     if (!wrapper || !track) return;
 
     function rebuildTrackCopies() {
-      track.querySelectorAll('[data-ss-list-{{ section.id }}="clone"]').forEach((node) => node.remove());
-
+      // Don't remove clones - we already have enough from Liquid
+      // Just ensure smooth scrolling
       const baseLists = Array.from(track.querySelectorAll('[data-ss-list-{{ section.id }}="base"]'));
-      if (baseLists.length < 2) return;
-
-      let guard = 0;
-      while (track.scrollWidth < wrapper.clientWidth * 2 && guard < 12) {
+      if (baseLists.length === 0) return;
+      
+      // If track width is less than wrapper width * 2, we need more copies
+      const containerWidth = {{ section.settings.container_width_desktop }} + {{ section.settings.gap_between_containers_desktop }};
+      const targetWidth = wrapper.clientWidth * 3; // Triple the width for smooth scrolling
+      
+      // Calculate how many total lists we need
+      const totalWidth = track.scrollWidth;
+      const lists = Array.from(track.children);
+      const listCount = lists.length;
+      
+      if (totalWidth < targetWidth && listCount < 50) {
+        // Add more clones dynamically if needed
         baseLists.forEach((baseList) => {
           const clone = baseList.cloneNode(true);
           clone.setAttribute('data-ss-list-{{ section.id }}', 'clone');
           clone.setAttribute('aria-hidden', 'true');
           track.appendChild(clone);
         });
-        guard += 1;
       }
     }
 
@@ -399,7 +409,9 @@
       resizeFrame = requestAnimationFrame(rebuildTrackCopies);
     }
 
-    rebuildTrackCopies();
+    // Initial rebuild after a short delay to ensure layout is complete
+    setTimeout(rebuildTrackCopies, 200);
+    
     window.addEventListener('resize', handleResize, { passive: true });
 
     {%- if request.design_mode -%}
@@ -411,13 +423,13 @@
 
     document.addEventListener('shopify:section:load', function (event) {
       if (event.target && event.target.id === 'shopify-section-' + sectionId) {
-        setTimeout(rebuildTrackCopies, 100);
+        setTimeout(rebuildTrackCopies, 200);
       }
     });
 
     document.addEventListener('shopify:block:select', function (event) {
       if (event.target && event.target.id === 'shopify-section-' + sectionId) {
-        setTimeout(rebuildTrackCopies, 100);
+        setTimeout(rebuildTrackCopies, 200);
       }
     });
     {%- endif -%}
@@ -591,7 +603,7 @@
       "step": 10,
       "unit": "px",
       "label": "Container Width",
-      "default": 300
+      "default": 960
     },
     {
       "type": "range",
@@ -612,7 +624,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap Between Images in Container",
-      "default": 8
+      "default": 4
     },
     {
       "type": "range",
@@ -636,7 +648,7 @@
       "step": 20,
       "unit": "px",
       "label": "Container Width",
-      "default": 400
+      "default": 1260
     },
     {
       "type": "range",
@@ -657,7 +669,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap Between Images in Container",
-      "default": 12
+      "default": 6
     },
     {
       "type": "range",
@@ -725,26 +737,6 @@
     },
     {
       "type": "range",
-      "id": "padding_left_mobile",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Padding Left",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding_right_mobile",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Padding Right",
-      "default": 0
-    },
-    {
-      "type": "range",
       "id": "margin_top_mobile",
       "min": 0,
       "max": 100,
@@ -761,26 +753,6 @@
       "step": 1,
       "unit": "px",
       "label": "Margin Bottom",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_left_mobile",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Margin Left",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_right_mobile",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Margin Right",
       "default": 0
     },
     {
@@ -809,26 +781,6 @@
     },
     {
       "type": "range",
-      "id": "padding_left_desktop",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Padding Left",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding_right_desktop",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Padding Right",
-      "default": 0
-    },
-    {
-      "type": "range",
       "id": "margin_top_desktop",
       "min": 0,
       "max": 100,
@@ -846,33 +798,13 @@
       "unit": "px",
       "label": "Margin Bottom",
       "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_left_desktop",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Margin Left",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "margin_right_desktop",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "rem",
-      "label": "Margin Right",
-      "default": 0
     }
   ],
   "blocks": [
     {
       "type": "mosaic_container",
       "name": "Mosaic Container",
-      "limit": 10,
+      "limit": 1,
       "settings": [
         {
           "type": "header",
@@ -933,12 +865,6 @@
     {
       "name": "Scrolling Images 2",
       "blocks": [
-        {
-          "type": "mosaic_container"
-        },
-        {
-          "type": "mosaic_container"
-        },
         {
           "type": "mosaic_container"
         }
