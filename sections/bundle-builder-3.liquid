@@ -1,0 +1,2162 @@
+{{ 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap' | stylesheet_tag }}
+
+<style data-shopify="">
+  {%- assign section_id = '#shopify-section-' | append: section.id -%}
+  
+  @font-face {
+    font-family: "Bricolage Grotesque";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("//section.store/cdn/fonts/bricolage_grotesque/bricolagegrotesque_n7.de5675dd7a8e145fdc4cb2cfe67a16cb085528d0.woff2") format("woff2"),
+         url("//section.store/cdn/fonts/bricolage_grotesque/bricolagegrotesque_n7.d701b766b46c76aceb10c78473f491dff9b09e5e.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Bricolage Grotesque";
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    src: url("//section.store/cdn/fonts/bricolage_grotesque/bricolagegrotesque_n6.17eeb21593c407cef2956fb34ef1600d7c579b0c.woff2") format("woff2"),
+         url("//section.store/cdn/fonts/bricolage_grotesque/bricolagegrotesque_n6.730eb5f49d56c0f7b763727330354d7315ee8a60.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Bricolage Grotesque";
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+    src: url("//section.store/cdn/fonts/bricolage_grotesque/bricolagegrotesque_n5.8c091e52a78b3e58ef96221ce55140a80a8253ff.woff2") format("woff2"),
+         url("//section.store/cdn/fonts/bricolage_grotesque/bricolagegrotesque_n5.fd299922888265641eb4cdf8883119ce0130018b.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Bricolage Grotesque";
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+    src: url("//section.store/cdn/fonts/bricolage_grotesque/bricolagegrotesque_n8.6b4643248f6cafd49733d179ce363f756812293c.woff2") format("woff2"),
+         url("//section.store/cdn/fonts/bricolage_grotesque/bricolagegrotesque_n8.6870e61ca4ac6456cdb292e6bd2fa689ac537968.woff") format("woff");
+  }
+  
+  .section-{{ section.id }} {
+    border-top: solid {{ section.settings.border_color }} 0px;
+    border-bottom: solid {{ section.settings.border_color }} 0px;
+    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
+    margin-left: 0rem;
+    margin-right: 0rem;
+    border-radius: 0px;
+  }
+  
+  .section-{{ section.id }}-settings {
+    margin: 0 auto;
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    max-width: {{ section.settings.max_width }}px;
+  }
+
+  .bundle-body-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bundle-content-{{ section.id }} {
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .bundle-sizes-wrapper-{{ section.id }},
+  .bundle-sizes-buttons-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+  }
+
+  .bundle-products-title-wrapper-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+  }
+
+  .bundle-sizes-buttons-{{ section.id }} {
+    margin: 0;
+  }
+
+  .bundle-size-title-{{ section.id }} {
+    margin: 0px;
+    font-size: 14px;
+    line-height: 130%;
+    color: {{ section.settings.text_color }};
+    text-transform: unset;
+    word-break: break-word;
+    font-weight: 700;
+  }
+
+  .bundle-size-button-{{ section.id }} {
+    position: relative;
+    padding: 16px 40px;
+    background-color: {{ section.settings.button_bg_color }};
+    border-radius: 0px;
+    border: 2px solid {{ section.settings.border_color }};
+    margin: 0px;
+    font-size: 14px;
+    line-height: 100%;
+    color: {{ section.settings.button_text_color }};
+    text-transform: unset;
+    word-break: break-word;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .bundle-size-button-image-{{ section.id }} {
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .bundle-products-{{ section.id }} {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .bundle-product-{{ section.id }} {
+    border-radius: 0px;
+    overflow: hidden;
+  }
+  
+  .bundle-product-{{ section.id }}.active {
+    background-color: {{ section.settings.accent_color }};
+  }
+
+  .bundle-product-image-{{ section.id }} { 
+    position: relative;
+    z-index: 1;
+    border: 1px solid {{ section.settings.border_color }};
+    border-radius: 0px;
+    overflow: hidden;
+    aspect-ratio: {{ section.settings.product_image_aspect_ratio }};
+  }
+
+  .bundle-product-image-{{ section.id }} img {
+    background: {{ section.settings.image_bg_color }}
+  }
+
+  .bundle-product-image-{{ section.id }} img,
+  .bundle-product-image-{{ section.id }} svg {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .bundle-product-image-{{ section.id }} svg {
+    background-color: #AFAFAF;
+  }
+  
+  .bundle-product-title-{{ section.id }} {
+    margin: 0;    
+    text-align: center;
+    text-transform: unset;
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 140%;
+    color: {{ section.settings.product_title_color }};  
+    word-break: break-word;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0px 10px;
+  }
+
+  .bundle-product-{{ section.id }}.active .bundle-product-title-{{ section.id }} {
+    color: {{ section.settings.active_product_text_color }};
+  }
+
+  .bundle-product-variant-selector-{{ section.id }} {
+    padding: 8px 10px 0;
+  }
+
+  .bundle-product-variant-select-{{ section.id }} {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 12px;
+    border: 2px solid {{ section.settings.border_color }};
+    border-radius: 0px;
+    background-color: {{ section.settings.select_bg_color }};
+    color: {{ section.settings.select_text_color }};
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z' fill='%23{{ section.settings.accent_color | remove_first: '#' }}'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 10px 6px;
+    padding-right: calc(14px + 20px);
+    font-family: 'Montserrat';
+    box-shadow: none;
+  }
+
+  .bundle-product-variant-select-{{ section.id }}:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .bundle-product-button-{{ section.id }} {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    font-size: 14px;
+    color: {{ section.settings.product_button_text_color }};
+    line-height: 100%;
+    text-align: center;
+    text-transform: unset;
+    text-decoration: none;
+    margin-top: 12px;
+    padding: 18px 14px;
+    border-radius: 0px;
+    transition: all 0.25s ease 0s;
+    background-color: {{ section.settings.product_button_bg_color }};
+    border: 2px solid {{ section.settings.border_color }};
+    cursor: pointer;
+    font-weight: 700;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .bundle-product-button-{{ section.id }}:hover {
+    color: {{ section.settings.product_button_hover_text_color }};
+    background-color: {{ section.settings.product_button_hover_bg_color }};
+    border: 2px solid {{ section.settings.product_button_hover_bg_color }};
+    transition: all 0.25s ease 0s;
+  }
+  
+  .bundle-product-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .bundle-product-{{ section.id }}.active .bundle-product-button-{{ section.id }} {
+    display: none;
+  }
+
+  .bundle-product-button-{{ section.id }}[disabled] {
+    cursor: no-drop;
+    opacity: .9;
+  }
+
+  .bundle-product-button-inner-{{ section.id }} {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .bundle-product-button-{{ section.id }} svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .bundle-product-button-{{ section.id }} svg path {
+    fill: {{ section.settings.product_button_text_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .bundle-product-button-{{ section.id }}:hover svg path {
+    fill: {{ section.settings.product_button_hover_text_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .bundle-product-quantity-wrapper-{{ section.id }} {
+    display: none;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 10px auto;
+    background-color: {{ section.settings.quantity_bg_color }};
+    border: 1px solid {{ section.settings.quantity_border_color }};
+    border-radius: 10px;
+    padding: 20px 10px;
+  }
+
+  .bundle-product-{{ section.id }}.active .bundle-product-quantity-wrapper-{{ section.id }} {
+    display: flex;
+  }
+
+  .bundle-product-quantity-minus-{{ section.id }},
+  .bundle-product-quantity-plus-{{ section.id }} {
+    background-color: transparent;
+    border: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease 0s;
+    z-index: 2;
+  }
+
+  .bundle-product-quantity-minus-{{ section.id }} svg,
+  .bundle-product-quantity-plus-{{ section.id }} svg {
+    width: 8px;
+    height: 8px;
+  }
+
+  .bundle-product-quantity-minus-{{ section.id }} svg rect,
+  .bundle-product-quantity-plus-{{ section.id }} svg path {
+    fill: {{ section.settings.quantity_icon_color }};
+  }
+
+  .bundle-product-quantity-{{ section.id }} {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    min-width: calc(36px + 14px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: {{ section.settings.quantity_text_color }};
+    line-height: 100%;
+    text-transform: unset;
+    font-weight: 700;
+    text-align: center;
+    aspect-ratio: 1/1;
+  }
+
+  .bundle-product-quantity-plus-{{ section.id }}[disabled] {
+    cursor: no-drop;
+    opacity: .6;
+    transition: all 0.25s ease 0s;
+  }
+
+  .bundle-sidebar-wrapper-{{ section.id }} {
+    background-color: {{ section.settings.sidebar_bg_color }};
+    padding: 20px;
+    position: relative;
+    order: -1;
+    margin-top: 20px;
+  }
+  
+  .bundle-sidebar-sticky-container-{{ section.id }} {
+    position: relative;
+  }
+
+  .bundle-sidebar-{{ section.id }} {
+    position: relative;
+  }
+
+  .bundle-sidebar-heading-{{ section.id }} * {
+    margin: 0;  
+    font-size: 20px;
+    color: {{ section.settings.sidebar_heading_color }};
+    line-height: 120%;
+    text-transform: unset;
+    text-decoration: none;
+    word-break: break-word;
+    font-weight: 700;
+  }
+  
+  .bundle-submit-button-{{ section.id }} {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    margin-top: 15px;
+    font-size: 15px;
+    color: {{ section.settings.submit_button_text_color }};
+    line-height: 100%;
+    text-align: center;
+    text-transform: unset;
+    text-decoration: none;
+    padding: 20px 32px;
+    border-radius: 0px;
+    border: 0px;
+    background-color: {{ section.settings.submit_button_bg_color }};
+    transition: all 0.25s ease 0s;
+    cursor: pointer;
+    box-shadow: none;
+    font-weight: 700;
+  }
+
+  .bundle-submit-button-{{ section.id }}:hover {
+    color: {{ section.settings.submit_button_hover_text_color }};
+    background-color: {{ section.settings.submit_button_hover_bg_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .bundle-submit-button-{{ section.id }}[disabled] {
+    opacity: .6;
+    cursor: not-allowed;
+  }
+
+  .bundle-submit-button-{{ section.id }} svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .bundle-submit-button-{{ section.id }} svg path {
+    fill: {{ section.settings.submit_button_text_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .bundle-submit-button-{{ section.id }}:hover svg path {
+    fill: {{ section.settings.submit_button_hover_text_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .bundle-sidebar-products-{{ section.id }} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .bundle-sidebar-product-{{ section.id }} {
+    display: flex;
+    align-items: stretch;
+    border: 2px solid {{ section.settings.border_color }};
+    border-radius: 0px;
+    overflow: hidden;
+    background-color: #FFFFFF;
+  }
+
+  .bundle-sidebar-product-content-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6px;
+    gap: 6px;
+    background-color: #FFFFFF;
+    width: 100%;
+  }
+
+  .bundle-sidebar-product-image-{{ section.id }} {
+    display: block !important;
+    width: 30%;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    aspect-ratio: {{ section.settings.sidebar_image_aspect_ratio }};
+  }
+
+  .bundle-sidebar-product-image-{{ section.id }} img,
+  .bundle-sidebar-product-image-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .bundle-sidebar-product-image-{{ section.id }} svg {
+    background-color: #AFAFAF;
+  }
+  
+  .bundle-sidebar-product-image-{{ section.id }}.empty {
+    background-color: #333333;
+  }
+
+  .bundle-sidebar-empty-content-{{ section.id }} {
+    display: block !important;
+    padding: 8px;
+    width: 100%;
+    background-color: #333333;
+    border-radius: .5rem;
+  }
+
+  .bundle-sidebar-product-quantity-badge-{{ section.id }} {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: {{ section.settings.accent_color }};
+    color: {{ section.settings.badge_text_color }};
+    width: 24px;
+    height: 34px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    z-index: 5;
+  }
+
+  .bundle-sidebar-price-{{ section.id }} {
+    padding: 30px;
+    border-radius: 0px;
+    background-color: {{ section.settings.price_bg_color }};
+    margin-top: 20px;
+  }
+
+  .bundle-sidebar-subtotal-{{ section.id }},
+  .bundle-sidebar-savings-{{ section.id }},
+  .bundle-sidebar-final-total-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+  }
+
+  .bundle-sidebar-subtotal-{{ section.id }} span,
+  .bundle-sidebar-final-total-{{ section.id }} span {
+    font-size: 16px;
+    color: {{ section.settings.price_text_color }};
+    line-height: 130%;
+    margin: 0;
+  }
+
+  .bundle-sidebar-savings-{{ section.id }} {
+    font-weight: 700;
+  }
+
+  .bundle-sidebar-savings-{{ section.id }} span {
+    font-size: 16px;
+    color: {{ section.settings.savings_color }};
+    line-height: 130%;
+    margin: 0;
+  }
+
+  .bundle-sidebar-final-total-{{ section.id }} {
+    font-weight: 700;
+    border-top: 1px solid {{ section.settings.border_color }};
+    padding-top: 12px;
+    margin-top: 8px;
+  }
+
+  .bundle-sidebar-remove-icon-{{ section.id }} {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s;
+  }
+
+  .bundle-sidebar-remove-icon-{{ section.id }} svg {
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+  }
+
+  .bundle-sidebar-remove-icon-{{ section.id }} svg path {
+    fill: {{ section.settings.accent_color }};
+  }
+
+  .bundle-sidebar-product-{{ section.id }} {
+    position: relative;
+    flex-direction: row;
+  }
+
+  .bundle-sidebar-product-title-{{ section.id }} {
+    margin-top: 10px;
+    display: block;
+    font-size: 13px;
+    color: {{ section.settings.sidebar_product_title_color }};
+    line-height: 140%;
+    text-align: center;
+    text-transform: unset;
+    text-decoration: none;
+    word-break: break-word;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .bundle-sidebar-product-link-{{ section.id }} {
+    font-size: 12px;
+    color: {{ section.settings.sidebar_product_link_color }};
+    line-height: 140%;
+    text-transform: unset;
+    word-break: break-word;
+    font-weight: 400;
+    margin: 0;
+    text-decoration: underline;
+    text-align: center;
+    transition: color 0.25s ease;
+  }
+
+  .bundle-sidebar-product-link-{{ section.id }}:hover {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .bundle-product-{{ section.id }}.limit {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  .bundle-tags-buttons-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .bundle-tag-button-{{ section.id }} {
+    position: relative;
+    padding: 14px 16px;
+    background-color: {{ section.settings.tag_button_bg_color }};
+    border-radius: 0px;
+    border: 2px solid {{ section.settings.border_color }};
+    margin: 0px;
+    font-size: 14px;
+    line-height: 100%;
+    color: {{ section.settings.tag_button_text_color }};
+    text-transform: unset;
+    word-break: break-word;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .bundle-size-button-{{ section.id }}.active {
+    background-color: {{ section.settings.accent_color }};
+    border-color: {{ section.settings.accent_color }};
+    color: {{ section.settings.active_button_text_color }};
+  }
+
+  .bundle-tag-button-{{ section.id }}.active {
+    background-color: {{ section.settings.accent_color }};
+    border-color: {{ section.settings.accent_color }};
+    color: {{ section.settings.active_button_text_color }};
+  }
+
+  .bundle-tag-button-{{ section.id }}:hover {
+    background-color: {{ section.settings.accent_color }};
+    border: 2px solid {{ section.settings.accent_color }};
+    color: {{ section.settings.active_button_text_color }};
+  }
+
+  .bundle-size-button-{{ section.id }}:hover {
+    background-color: {{ section.settings.accent_color }};
+    border: 2px solid {{ section.settings.accent_color }};
+    color: {{ section.settings.active_button_text_color }};
+  }
+
+  {% if section.settings.heading_text != blank %}
+    .bundle-heading-{{ section.id }} {
+      margin-top: 16px;
+    }
+  
+    .bundle-heading-{{ section.id }} * {
+      margin: 0;
+      font-size: {{ section.settings.heading_size_mobile }}px;
+      color: {{ section.settings.heading_color }};
+      line-height: 110%;
+      text-transform: unset;
+      text-decoration: none;
+      word-break: break-word;
+      font-weight: {{ section.settings.heading_weight }};
+    }
+
+    .bundle-heading-{{ section.id }} * strong {
+      color: {{ section.settings.accent_color }};
+    }
+
+    .bundle-heading-mobile-{{ section.id }} {
+      display: block;
+      padding: 0 20px;
+    }
+
+    .bundle-heading-desktop-{{ section.id }} {
+      display: none;
+    }
+  {% endif %}
+
+  {% if section.settings.subheading_text != blank %}
+    .bundle-text-{{ section.id }} {
+      margin-top: 16px;
+      position: relative;
+      z-index: 2;
+    }
+  
+    .bundle-text-{{ section.id }} * {
+      margin: 0;
+      font-size: {{ section.settings.subheading_size_mobile }}px;
+      color: {{ section.settings.subheading_color }};
+      line-height: 150%;
+      text-transform: unset;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .bundle-text-mobile-{{ section.id }} {
+      display: block;
+      padding: 0 20px;
+    }
+
+    .bundle-text-desktop-{{ section.id }} {
+      display: none;
+    }
+  {% endif %}
+
+  @media(min-width: 1024px) {
+    .section-{{ section.id }} {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+      margin-left: 0rem;
+      margin-right: 0rem;
+      border-radius: 0px;
+    }
+    
+    .section-{{ section.id }}-settings {
+      padding: 0 5rem;
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      padding-left: 0rem;
+      padding-right: 0rem;
+    }
+
+    .bundle-body-{{ section.id }} {
+      display: grid;
+      grid-template-columns: 1fr 40%;
+      flex-direction: row;
+    }
+
+    .bundle-content-{{ section.id }} {
+      padding: 40px;
+    }
+
+    .bundle-size-title-{{ section.id }} {
+      font-size: 18px;
+    }
+
+    .bundle-size-button-{{ section.id }} {
+      padding: 16px 40px;    
+      font-size: 14px;
+    }
+
+    .bundle-products-{{ section.id }} {
+      grid-template-columns: repeat({{ section.settings.products_per_row }}, 1fr);
+      gap: 16px;
+    }
+
+    .bundle-product-title-{{ section.id }} {
+      font-size: 13px;     
+      margin-top: 12px;
+    }
+
+    .bundle-sidebar-product-title-{{ section.id }} {
+      font-size: 13px;
+    }
+
+    .bundle-sidebar-product-link-{{ section.id }} {
+      font-size: 12px;
+    }
+    
+    .bundle-product-button-{{ section.id }} {
+      margin-top: 12px;
+      padding: 18px 14px;
+      font-size: 14px;
+    }
+
+    .bundle-sidebar-product-content-{{ section.id }} {
+      padding: 16px;
+    }
+    
+    .bundle-sidebar-product-{{ section.id }} {
+      flex-direction: column !important;
+    }
+
+    .bundle-sidebar-product-image-{{ section.id }} {
+      width: 100% !important;
+    }      
+    
+    .bundle-product-quantity-wrapper-{{ section.id }} {
+      margin-top: 12px;
+      height: calc(36px + 14px);
+    }
+
+    .bundle-product-quantity-{{ section.id }} {
+      font-size: 14px;
+      min-width: calc(36px + 14px);
+    }
+
+    .bundle-sidebar-wrapper-{{ section.id }} {
+      padding: 40px;
+      order: 0;
+      margin-top: 0;
+    }
+    
+    .bundle-sidebar-sticky-container-{{ section.id }} {
+      position: sticky;
+      top: 20px;
+      align-self: start;
+    }
+    
+    .bundle-sidebar-{{ section.id }} {
+      position: relative;
+    }
+
+    .bundle-sidebar-heading-{{ section.id }} * {
+      font-size: 22px;
+    }
+
+    .bundle-sidebar-products-{{ section.id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bundle-sidebar-subtotal-{{ section.id }} span,
+    .bundle-sidebar-final-total-{{ section.id }} span {
+      font-size: 16px;
+    }
+
+    .bundle-sidebar-savings-{{ section.id }} span {
+      font-size: 16px;
+    }
+
+    .bundle-tag-button-{{ section.id }} {
+      padding: 14px 16px;    
+      font-size: 14px;
+    }
+
+    .bundle-submit-button-{{ section.id }} {    
+      margin-top: 20px;
+      font-size: 15px;     
+      padding: 20px 32px;     
+    }
+
+    .bundle-product-variant-select-{{ section.id }} {
+      font-size: 12px;
+      padding: 10px 14px;   
+      background-position: right 14px center;
+      padding-right: calc(14px + 20px);
+    }
+
+    {% if section.settings.heading_text != blank %}
+      .bundle-heading-{{ section.id }} {
+        margin-top: 0px;
+      }
+    
+      .bundle-heading-{{ section.id }} * {
+        font-size: {{ section.settings.heading_size_desktop }}px;
+      }
+
+      .bundle-heading-mobile-{{ section.id }} {
+        display: none;
+      }
+
+      .bundle-heading-desktop-{{ section.id }} {
+        display: block;
+      }
+    {% endif %}
+
+    {% if section.settings.subheading_text != blank %}
+      .bundle-text-{{ section.id }} {
+        margin-top: 24px;
+      }
+  
+      .bundle-text-{{ section.id }} * {
+        font-size: {{ section.settings.subheading_size_desktop }}px;
+      }
+
+      .bundle-text-mobile-{{ section.id }} {
+        display: none;
+      }
+
+      .bundle-text-desktop-{{ section.id }} {
+        display: block;
+      }          
+    {% endif %}
+  }
+</style>
+
+{%- assign section_id = section.id -%}
+
+<div class="section-{{ section.id }} bundle-template-{{ section.id }}" style="background-color:{{ section.settings.background_color }};">
+  <div class="section-{{ section.id }}-settings">
+    
+    {% if section.settings.heading_text != blank %}
+      <div class="bundle-heading-{{ section.id }} bundle-heading-mobile-{{ section.id }}">
+        {{ section.settings.heading_text }}
+      </div>
+    {% endif %}
+    
+    {% if section.settings.subheading_text != blank %}
+      <div class="bundle-text-{{ section.id }} bundle-text-mobile-{{ section.id }}">
+        {{ section.settings.subheading_text }}
+      </div>
+    {% endif %}
+    
+    <div class="bundle-body-{{ section.id }}">
+      <div class="bundle-content-{{ section.id }}">
+        
+        {% if section.settings.heading_text != blank %}
+          <div class="bundle-heading-{{ section.id }} bundle-heading-desktop-{{ section.id }}">
+            {{ section.settings.heading_text }}
+          </div>
+        {% endif %}
+        
+        {% if section.settings.subheading_text != blank %}
+          <div class="bundle-text-{{ section.id }} bundle-text-desktop-{{ section.id }}">
+            {{ section.settings.subheading_text }}
+          </div>
+        {% endif %}
+        
+        <div class="bundle-sizes-wrapper-{{ section.id }}">
+          {% if section.settings.show_size_title %}
+            <p class="bundle-size-title-{{ section.id }}">{{ section.settings.size_title }}</p>
+          {% endif %}
+          <div class="bundle-sizes-buttons-{{ section.id }}">
+            {% for block in section.blocks %}
+              {% if block.type == 'size' %}
+                <div class="bundle-size-button-{{ section.id }} {% if forloop.first %}active{% endif %}" data-pack-size="{{ block.settings.pack_size }}" data-pack-discount="{{ block.settings.discount }}">
+                  {% if block.settings.image != blank %}
+                    <img src="{{ block.settings.image | img_url: '120x' }}" alt="{{ block.settings.title }}" class="bundle-size-button-image-{{ section.id }}" loading="lazy">
+                  {% endif %}
+                  {{ block.settings.title }}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        
+        <div class="bundle-products-title-wrapper-{{ section.id }}">
+          {% if section.settings.show_products_title %}
+            <p class="bundle-size-title-{{ section.id }}">{{ section.settings.products_title }}</p>
+          {% endif %}
+          {% if section.settings.show_tag_filters %}
+            <div class="bundle-tags-wrapper-{{ section.id }}">
+              <div class="bundle-tags-buttons-{{ section.id }}">
+                <div class="bundle-tag-button-{{ section.id }} active" data-tag="all">
+                  {{ section.settings.all_tag_text }}
+                </div>
+                {% for block in section.blocks %}
+                  {% if block.type == 'tag' %}
+                    <div class="bundle-tag-button-{{ section.id }}" data-tag="{{ block.settings.tag | downcase }}">
+                      {{ block.settings.tag_name }}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+       
+        <div class="bundle-products-wrapper-{{ section.id }}">             
+          <div class="bundle-products-{{ section.id }}">
+            {% for block in section.blocks %}
+              {% if block.type == 'product' %}
+                {% assign product = block.settings.product %}
+                {% if product != blank %}
+                  {% assign variant = product.selected_or_first_available_variant %}
+                  {% assign variants_json = product.variants | map: 'id' | json %}
+                  
+                  <div class="bundle-product-{{ section.id }}" 
+                       data-product-id="{{ variant.id }}" 
+                       data-product-handle="{{ product.handle }}" 
+                       data-price="{{ variant.price }}" 
+                       data-image="{{ product.featured_image | img_url: '200x' }}" 
+                       data-title="{{ product.title }}" 
+                       data-url="{{ product.url }}" 
+                       data-tags="{{ product.tags | join: ',' | downcase }}"
+                       data-variants='[
+                         {%- for v in product.variants -%}
+                           {
+                             "id": {{ v.id }},
+                             "title": {{ v.title | json }},
+                             "price": {{ v.price }},
+                             "available": {{ v.available }},
+                             "image": "{{ v.image.src | default: product.featured_image | img_url: '600x600_crop_center' }}"
+                           }{% unless forloop.last %},{% endunless %}
+                         {%- endfor -%}
+                       ]'>
+                    <div class="bundle-product-top-wrap-{{ section.id }}">
+                      <div class="bundle-product-image-{{ section.id }}">
+                        {% if product.featured_image != blank %}
+                          <img src="{{ product.featured_image | img_url: '750x' }}" alt="{{ product.title }}" loading="lazy" width="750" height="750">
+                        {% else %}
+                          {{ 'image' | placeholder_svg_tag }}
+                        {% endif %}                    
+                      </div>
+                      <p class="bundle-product-title-{{ section.id }}">{{ product.title }}</p>
+                    </div>
+
+                    <div>
+                      {% if product.variants.size > 1 %}
+                        <div class="bundle-product-variant-selector-{{ section.id }}">
+                          <select class="bundle-product-variant-select-{{ section.id }}">
+                            {% for v in product.variants %}
+                              {% if v.available %}
+                                <option value="{{ v.id }}" data-price="{{ v.price }}" data-image="{{ v.image.src | default: product.featured_image | img_url: '600x600_crop_center' }}">
+                                  {{ v.title }} - {{ v.price | money }}
+                                </option>
+                              {% endif %}
+                            {% endfor %}
+                          </select>
+                        </div>
+                      {% endif %}
+                      
+                      <div class="bundle-product-quantity-wrapper-{{ section.id }}">
+                        <button class="bundle-product-quantity-minus-{{ section.id }}" type="button">
+                          <svg width="12" height="2" viewBox="0 0 12 2" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="12" height="2" rx="1" fill="#121212"></rect></svg>
+                        </button>
+                        <p class="bundle-product-quantity-{{ section.id }}">1</p>
+                        <button class="bundle-product-quantity-plus-{{ section.id }}" type="button">
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.75 5.25V0.75C6.75 0.335786 6.41421 0 6 0C5.58579 0 5.25 0.335786 5.25 0.75V5.25H0.75C0.335786 5.25 0 5.58579 0 6C0 6.41421 0.335786 6.75 0.75 6.75H5.25V11.25C5.25 11.6642 5.58579 12 6 12C6.41421 12 6.75 11.6642 6.75 11.25V6.75H11.25C11.6642 6.75 12 6.41421 12 6C12 5.58579 11.6642 5.25 11.25 5.25H6.75Z" fill="#121212"></path></svg>
+                        </button>
+                      </div>
+
+                      <div class="bundle-product-button-{{ section.id }}" type="button">
+                        <p class="bundle-product-button-inner-{{ section.id }}">
+                          {{ section.settings.select_button_text }} - {{ variant.price | money }}
+                        </p>
+                      </div> 
+                    </div>
+                  </div>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      
+      <div class="bundle-sidebar-wrapper-{{ section.id }}">
+        <div class="bundle-sidebar-sticky-container-{{ section.id }}">
+          <div class="bundle-sidebar-{{ section.id }}">
+            {% if section.settings.sidebar_heading != blank %}
+              <div class="bundle-sidebar-heading-{{ section.id }}">
+                <h2>{{ section.settings.sidebar_heading }}</h2>
+              </div>
+            {% endif %}
+            
+            <div class="bundle-sidebar-products-wrapper-{{ section.id }}">
+              <div class="bundle-sidebar-products-{{ section.id }}">
+                {% for i in (1..section.settings.initial_empty_slots) %}
+                  <div class="bundle-sidebar-product-{{ section.id }} empty">
+                    <div class="bundle-sidebar-product-image-{{ section.id }} empty"></div>
+                    <div class="bundle-sidebar-product-content-{{ section.id }}">
+                      <div class="bundle-sidebar-empty-content-{{ section.id }}"></div>
+                      <div class="bundle-sidebar-empty-content-{{ section.id }}"></div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div> 
+            </div> 
+            
+            <div class="bundle-sidebar-price-{{ section.id }}">
+              <div class="bundle-sidebar-subtotal-{{ section.id }}">
+                <span>{{ section.settings.subtotal_text }}</span>
+                <span class="bundle-sidebar-subtotal-value-{{ section.id }}">-</span>
+              </div>
+              <div class="bundle-sidebar-savings-{{ section.id }}">
+                <span>{{ section.settings.savings_text }}</span>
+                <span class="bundle-sidebar-savings-value-{{ section.id }}">-</span>
+              </div>
+              <div class="bundle-sidebar-final-total-{{ section.id }}">
+                <span>{{ section.settings.total_text }}</span>
+                <span class="bundle-sidebar-total-value-{{ section.id }}">-</span>
+              </div>
+            </div>
+            
+            <form class="bundle-form-{{ section.id }}" method="post" action="/cart/add" accept-charset="UTF-8" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form">
+              <div class="bundle-submit-button-wrapper-{{ section.id }}">
+                <button disabled type="submit" class="bundle-submit-button-{{ section.id }}">
+                  {{ section.settings.submit_button_text }}
+                </button>
+              </div>              
+            </form>     
+          </div>
+        </div>
+      </div>
+    </div>   
+  </div>
+</div>
+
+<script>
+  (function() {
+    const REMOVE_ICON_SVG = '<svg id="Remove" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" role="img" aria-labelledby="iconCloseTitle"><title id="iconCloseTitle">Close Icon</title><path id="Fill_1" data-name="Fill 1" d="M32,32H0V0H32V32ZM16,18.121h0l5.333,5.333,2.121-2.121L18.122,16l5.333-5.334-2.121-2.12L16,13.877,10.667,8.545l-2.12,2.12L13.879,16,8.546,21.333l2.12,2.121L16,18.121Z" fill="#000"></path></svg>';
+
+    function formatMoney(cents, format) {
+      if (typeof cents == 'string') {
+        cents = cents.replace('.', '');
+      }
+      var value = '';
+      var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+      var formatString = format || (typeof Shopify !== 'undefined' && Shopify.money_format);
+
+      if (typeof formatString !== 'string') {
+        return '';
+      }
+
+      function defaultOption(opt, def) {
+        return (typeof opt == 'undefined' ? def : opt);
+      }
+
+      function formatWithDelimiters(number, precision, thousands, decimal) {
+        precision = defaultOption(precision, 2);
+        thousands = defaultOption(thousands, ',');
+        decimal = defaultOption(decimal, '.');
+
+        if (isNaN(number) || number == null) {
+          return 0;
+        }
+
+        number = (number / 100.0).toFixed(precision);
+
+        var parts = number.split('.'),
+          dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+          cents = parts[1] ? (decimal + parts[1]) : '';
+
+        return dollars + cents;
+      }
+
+      const matchResult = formatString.match(placeholderRegex);
+      if (!matchResult || !matchResult[1]) {
+        return formatWithDelimiters(cents, 2);
+      }
+
+      switch (matchResult[1]) {
+        case 'amount':
+          value = formatWithDelimiters(cents, 2);
+          break;
+        case 'amount_no_decimals':
+          value = formatWithDelimiters(cents, 0);
+          break;
+        case 'amount_with_comma_separator':
+          value = formatWithDelimiters(cents, 2, '.', ',');
+          break;
+        case 'amount_no_decimals_with_comma_separator':
+          value = formatWithDelimiters(cents, 0, '.', ',');
+          break;
+      }
+
+      return formatString.replace(placeholderRegex, value);
+    }
+
+    function initBundleBuilder() {
+      const sectionId = '{{ section.id }}';
+      
+      let sizeButtons = document.querySelectorAll('.bundle-size-button-' + sectionId);
+      let products = document.querySelectorAll('.bundle-product-' + sectionId);
+      let sidebarContainer = document.querySelector('.bundle-sidebar-products-' + sectionId);
+      
+      let subtotalElement = document.querySelector('.bundle-sidebar-subtotal-value-' + sectionId);
+      let savingsElement = document.querySelector('.bundle-sidebar-savings-value-' + sectionId);
+      let totalElement = document.querySelector('.bundle-sidebar-total-value-' + sectionId);
+      
+      let submitButton = document.querySelector('.bundle-submit-button-' + sectionId);
+      let form = document.querySelector('.bundle-form-' + sectionId);
+
+      const firstSizeButton = document.querySelector('.bundle-size-button-' + sectionId + '.active');
+      let currentPackSize = firstSizeButton ? parseInt(firstSizeButton.getAttribute('data-pack-size')) : 2;
+      let currentPackDiscount = firstSizeButton ? parseInt(firstSizeButton.getAttribute('data-pack-discount')) : 5;
+      
+      let selectedProducts = {};
+
+      let tagButtons = document.querySelectorAll('.bundle-tag-button-' + sectionId);
+      let currentFilterTag = 'all';
+
+      function filterProductsByTag(tag) {
+        currentFilterTag = tag;
+        
+        products.forEach(productEl => {
+          if (tag === 'all') {
+            productEl.style.display = '';
+            return;
+          }
+          
+          const productTagsRaw = productEl.getAttribute('data-tags');
+          
+          if (!productTagsRaw || productTagsRaw.trim() === '') {
+            productEl.style.display = 'none';
+            return;
+          }
+          
+          const productTags = productTagsRaw.toLowerCase().split(',').map(t => t.trim());
+          const hasTag = productTags.includes(tag.toLowerCase());
+          
+          productEl.style.display = hasTag ? '' : 'none';
+        });
+      }
+
+      if (tagButtons) {
+        tagButtons.forEach(btn => {
+          btn.addEventListener('click', function() {
+            tagButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const selectedTag = btn.getAttribute('data-tag');
+            filterProductsByTag(selectedTag);
+          });
+        });
+      }
+
+      function getTotalProductCount() {
+        let total = 0;
+        for (let id in selectedProducts) {
+          total += selectedProducts[id].quantity;
+        }
+        return total;
+      }
+
+      function updateProductLimitClasses() {
+        const totalCount = getTotalProductCount();
+        const isLimitReached = totalCount >= currentPackSize;
+        
+        products.forEach(productEl => {
+          const variantSelect = productEl.querySelector('.bundle-product-variant-select-' + sectionId);
+          const currentVariantId = variantSelect ? variantSelect.value : productEl.getAttribute('data-product-id');
+          const isSelected = selectedProducts.hasOwnProperty(currentVariantId);
+          
+          if (isLimitReached && !isSelected) {
+            productEl.classList.add('limit');
+          } else {
+            productEl.classList.remove('limit');
+          }
+        });
+      }
+
+      function updateQuantityDisplay(productEl, variantId) {
+        const quantityEl = productEl.querySelector('.bundle-product-quantity-' + sectionId);
+        if (quantityEl && selectedProducts[variantId]) {
+          quantityEl.textContent = selectedProducts[variantId].quantity;
+        }
+      }
+
+      function updateProductActiveState(productEl) {
+        const variantSelect = productEl.querySelector('.bundle-product-variant-select-' + sectionId);
+        const currentVariantId = variantSelect ? variantSelect.value : productEl.getAttribute('data-product-id');
+        
+        if (selectedProducts.hasOwnProperty(currentVariantId)) {
+          productEl.classList.add('active');
+          updateQuantityDisplay(productEl, currentVariantId);
+        } else {
+          productEl.classList.remove('active');
+        }
+      }
+
+      function renderSidebarSlots() {
+        if (!sidebarContainer) return;
+        
+        sidebarContainer.innerHTML = '';
+        
+        const totalCount = getTotalProductCount();
+        const emptySlots = currentPackSize - totalCount;
+        
+        for (let variantId in selectedProducts) {
+          const product = selectedProducts[variantId];
+          const slotDiv = document.createElement('div');
+          slotDiv.className = 'bundle-sidebar-product-' + sectionId;
+          
+          slotDiv.innerHTML = `
+            <div class="bundle-sidebar-product-image-${sectionId}">
+              <img src="${product.image}" alt="${product.title}" loading="lazy">
+              <span class="bundle-sidebar-product-quantity-badge-${sectionId}">${product.quantity}</span>
+            </div>
+            <div class="bundle-sidebar-product-content-${sectionId}">
+              <p class="bundle-sidebar-product-title-${sectionId}">${product.title}${product.variantTitle ? ' - ' + product.variantTitle : ''}</p>
+              <a href="${product.url}" target="_blank" class="bundle-sidebar-product-link-${sectionId}">View details</a>
+            </div>
+          `;
+
+          const removeButton = document.createElement('div');
+          removeButton.className = 'bundle-sidebar-remove-icon-' + sectionId;
+          removeButton.innerHTML = REMOVE_ICON_SVG;
+          removeButton.setAttribute('data-variant-id', variantId);
+          
+          removeButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = e.currentTarget.getAttribute('data-variant-id');
+            removeProductByVariantId(id);
+          });
+
+          slotDiv.appendChild(removeButton);
+          sidebarContainer.appendChild(slotDiv);
+        }
+        
+        for (let i = 0; i < emptySlots; i++) {
+          const emptyDiv = document.createElement('div');
+          emptyDiv.className = 'bundle-sidebar-product-' + sectionId + ' empty';
+          emptyDiv.innerHTML = `
+            <div class="bundle-sidebar-product-image-${sectionId} empty"></div>
+            <div class="bundle-sidebar-product-content-${sectionId}">
+              <div class="bundle-sidebar-empty-content-${sectionId}"></div>
+              <div class="bundle-sidebar-empty-content-${sectionId}"></div>
+            </div>
+          `;
+          sidebarContainer.appendChild(emptyDiv);
+        }
+      }
+
+      function removeProductByVariantId(variantId) {
+        if (selectedProducts[variantId]) {
+          delete selectedProducts[variantId];
+          
+          products.forEach(productEl => {
+            updateProductActiveState(productEl);
+          });
+          
+          renderSidebarSlots();
+          updateTotalPrice();
+          updateFormInputs();
+          updateProductLimitClasses();
+        }
+      }
+
+      function updateTotalPrice() {
+        let subtotal = 0;
+        
+        for (let id in selectedProducts) {
+          const product = selectedProducts[id];
+          subtotal += product.price * product.quantity;
+        }
+
+        const discountRate = currentPackDiscount / 100;
+        const savingsAmount = subtotal * discountRate;
+        const total = subtotal - savingsAmount;
+
+        if (subtotalElement) {
+          subtotalElement.textContent = subtotal > 0 ? formatMoney(subtotal, "${{amount}}") : '-';
+        }
+
+        if (savingsElement) {
+          if (savingsAmount > 0) {
+            savingsElement.textContent = '- ' + formatMoney(savingsAmount, "${{amount}}");
+          } else {
+            savingsElement.textContent = '-';
+          }
+        }
+
+        if (totalElement) {
+          totalElement.textContent = total > 0 ? formatMoney(total, "${{amount}}") : '-';
+        }
+
+        const totalCount = getTotalProductCount();
+        const allSlotsFilled = totalCount === currentPackSize;
+        
+        if (submitButton) {
+          submitButton.disabled = !allSlotsFilled;
+        }
+      }
+
+      function updateFormInputs() {
+        if (!form) return;
+        
+        const oldInputs = form.querySelectorAll('input[name^="items"]');
+        oldInputs.forEach(input => input.remove());
+
+        let index = 0;
+        for (let id in selectedProducts) {
+          const product = selectedProducts[id];
+          
+          const idInput = document.createElement('input');
+          idInput.type = 'hidden';
+          idInput.name = `items[${index}][id]`;
+          idInput.value = id;
+          form.appendChild(idInput);
+
+          const qtyInput = document.createElement('input');
+          qtyInput.type = 'hidden';
+          qtyInput.name = `items[${index}][quantity]`;
+          qtyInput.value = product.quantity;
+          form.appendChild(qtyInput);
+          
+          index++;
+        }
+      }
+
+      if (sizeButtons) {
+        sizeButtons.forEach(btn => {
+          btn.addEventListener('click', function() {
+            sizeButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            currentPackSize = parseInt(btn.getAttribute('data-pack-size'));
+            currentPackDiscount = parseInt(btn.getAttribute('data-pack-discount'));
+            
+            let totalCount = getTotalProductCount();
+            if (totalCount > currentPackSize) {
+              for (let id in selectedProducts) {
+                if (totalCount <= currentPackSize) break;
+                
+                const product = selectedProducts[id];
+                const reduceBy = Math.min(product.quantity, totalCount - currentPackSize);
+                product.quantity -= reduceBy;
+                totalCount -= reduceBy;
+                
+                if (product.quantity === 0) {
+                  delete selectedProducts[id];
+                }
+              }
+            }
+
+            products.forEach(productEl => {
+              updateProductActiveState(productEl);
+            });
+            
+            renderSidebarSlots();
+            updateTotalPrice();
+            updateFormInputs();
+            updateProductLimitClasses();
+          });
+        });
+      }
+
+      if (products) {
+        products.forEach(productEl => {
+          const productButton = productEl.querySelector('.bundle-product-button-' + sectionId);
+          const minusButton = productEl.querySelector('.bundle-product-quantity-minus-' + sectionId);
+          const plusButton = productEl.querySelector('.bundle-product-quantity-plus-' + sectionId);
+          const variantSelect = productEl.querySelector('.bundle-product-variant-select-' + sectionId);
+
+          if (productButton) {
+            productButton.addEventListener('click', function() {
+              if (productEl.classList.contains('limit')) {
+                return;
+              }
+
+              const currentVariantId = variantSelect ? variantSelect.value : productEl.getAttribute('data-product-id');
+              const totalCount = getTotalProductCount();
+              
+              if (totalCount >= currentPackSize) {
+                return;
+              }
+
+              const selectedOption = variantSelect ? variantSelect.options[variantSelect.selectedIndex] : null;
+              const productPrice = selectedOption ? parseInt(selectedOption.getAttribute('data-price')) : parseInt(productEl.getAttribute('data-price'));
+              let productImage = selectedOption && selectedOption.getAttribute('data-image') ? selectedOption.getAttribute('data-image') : productEl.getAttribute('data-image');
+              const productTitle = productEl.getAttribute('data-title');
+              const productUrl = productEl.getAttribute('data-url');
+              let variantTitle = '';
+              
+              if (variantSelect) {
+                variantTitle = selectedOption.textContent.trim();
+              }
+
+              if (productImage && productImage.includes('width=')) {
+                productImage = productImage.replace(/([?&]width=)(\d+)/, '$1600');
+                if (!productImage.includes('height=')) {
+                  productImage += '&height=600';
+                }
+                if (!productImage.includes('crop=')) {
+                  productImage += '&crop=center';
+                }
+              }
+
+              if (selectedProducts[currentVariantId]) {
+                selectedProducts[currentVariantId].quantity++;
+              } else {
+                selectedProducts[currentVariantId] = {
+                  id: currentVariantId,
+                  price: productPrice,
+                  image: productImage,
+                  title: productTitle,
+                  url: productUrl,
+                  variantTitle: variantTitle,
+                  quantity: 1
+                };
+              }
+
+              updateProductActiveState(productEl);
+              renderSidebarSlots();
+              updateTotalPrice();
+              updateFormInputs();
+              updateProductLimitClasses();
+            });
+          }
+
+          if (minusButton) {
+            minusButton.addEventListener('click', function(e) {
+              e.stopPropagation();
+              const currentVariantId = variantSelect ? variantSelect.value : productEl.getAttribute('data-product-id');
+              
+              if (selectedProducts[currentVariantId]) {
+                selectedProducts[currentVariantId].quantity--;
+                
+                if (selectedProducts[currentVariantId].quantity === 0) {
+                  delete selectedProducts[currentVariantId];
+                }
+
+                updateProductActiveState(productEl);
+                renderSidebarSlots();
+                updateTotalPrice();
+                updateFormInputs();
+                updateProductLimitClasses();
+              }
+            });
+          }
+
+          if (plusButton) {
+            plusButton.addEventListener('click', function(e) {
+              e.stopPropagation();
+              const currentVariantId = variantSelect ? variantSelect.value : productEl.getAttribute('data-product-id');
+              const totalCount = getTotalProductCount();
+              
+              if (totalCount >= currentPackSize) {
+                return;
+              }
+
+              if (selectedProducts[currentVariantId]) {
+                selectedProducts[currentVariantId].quantity++;
+                updateProductActiveState(productEl);
+                
+                renderSidebarSlots();
+                updateTotalPrice();
+                updateFormInputs();
+                updateProductLimitClasses();
+              }
+            });
+          }
+
+          if (variantSelect) {
+            variantSelect.addEventListener('change', function() {
+              const selectedOption = this.options[this.selectedIndex];
+              const newVariantId = selectedOption.value;
+              const newPrice = selectedOption.getAttribute('data-price');
+              const newImage = selectedOption.getAttribute('data-image') || productEl.getAttribute('data-image');
+              
+              productEl.setAttribute('data-product-id', newVariantId);
+              productEl.setAttribute('data-price', newPrice);
+              
+              const buttonInner = productEl.querySelector('.bundle-product-button-inner-' + sectionId);
+              if (buttonInner) {
+                const priceFormatted = formatMoney(newPrice, "${{amount}}");
+                buttonInner.innerHTML = '{{ section.settings.select_button_text }} - ' + priceFormatted + ' ';
+              }
+              
+              updateProductActiveState(productEl);
+            });
+          }
+        });
+      }
+
+      renderSidebarSlots();
+      updateTotalPrice();
+      updateProductLimitClasses();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initBundleBuilder);
+    } else {
+      initBundleBuilder();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Bundle Builder 3",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#ccff00"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max Width",
+      "min": 1000,
+      "max": 2000,
+      "step": 10,
+      "default": 1600,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Heading Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_text",
+      "label": "Heading Text",
+      "default": "<p>LIMITED EDITION DROPS</p>"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading Size (Desktop)",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "default": 42,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading Size (Mobile)",
+      "min": 16,
+      "max": 50,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading Font Weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra Bold" }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "header",
+      "content": "Subheading Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading_text",
+      "label": "Subheading Text",
+      "default": "<p>Cyber Week Exclusive: Build a 4-pack for 25% OFF.</p>"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_desktop",
+      "label": "Subheading Size (Desktop)",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "label": "Subheading Size (Mobile)",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Size Options Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_size_title",
+      "label": "Show Size Title",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "size_title",
+      "label": "Size Title",
+      "default": "Size"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "active_button_text_color",
+      "label": "Active Button Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Product Filters Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tag_filters",
+      "label": "Show Tag Filters",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_products_title",
+      "label": "Show Products Title",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "products_title",
+      "label": "Products Title",
+      "default": "Choose Gear"
+    },
+    {
+      "type": "text",
+      "id": "all_tag_text",
+      "label": "All Tag Text",
+      "default": "View Archive"
+    },
+    {
+      "type": "color",
+      "id": "tag_button_bg_color",
+      "label": "Tag Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "tag_button_text_color",
+      "label": "Tag Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Product Card Settings"
+    },
+    {
+      "type": "range",
+      "id": "products_per_row",
+      "label": "Products Per Row (Desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "product_image_aspect_ratio",
+      "label": "Product Image Aspect Ratio",
+      "default": "9.6/13",
+      "info": "Format: width/height (e.g., 1/1, 4/5, 9.6/13)"
+    },
+    {
+      "type": "color",
+      "id": "image_bg_color",
+      "label": "Image Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Product Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "active_product_text_color",
+      "label": "Active Product Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "select_button_text",
+      "label": "Select Button Text",
+      "default": "SELECT"
+    },
+    {
+      "type": "color",
+      "id": "product_button_bg_color",
+      "label": "Product Button Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "product_button_text_color",
+      "label": "Product Button Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "product_button_hover_bg_color",
+      "label": "Product Button Hover Background",
+      "default": "#ccff00"
+    },
+    {
+      "type": "color",
+      "id": "product_button_hover_text_color",
+      "label": "Product Button Hover Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "select_bg_color",
+      "label": "Variant Select Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "select_text_color",
+      "label": "Variant Select Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "quantity_bg_color",
+      "label": "Quantity Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "quantity_border_color",
+      "label": "Quantity Border",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "quantity_text_color",
+      "label": "Quantity Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "quantity_icon_color",
+      "label": "Quantity Icons",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Sidebar Settings"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_heading",
+      "label": "Sidebar Heading",
+      "default": "YOUR STASH"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_bg_color",
+      "label": "Sidebar Background",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_heading_color",
+      "label": "Sidebar Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_image_aspect_ratio",
+      "label": "Sidebar Image Aspect Ratio",
+      "default": "9.6/13",
+      "info": "Format: width/height (e.g., 1/1, 4/5, 9.6/13)"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_product_title_color",
+      "label": "Sidebar Product Title Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "sidebar_product_link_color",
+      "label": "Sidebar Product Link Color",
+      "default": "#aaaaaa"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Quantity Badge Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Price Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "price_bg_color",
+      "label": "Price Background Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "price_text_color",
+      "label": "Price Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "savings_color",
+      "label": "Savings Text Color",
+      "default": "#ccff00"
+    },
+    {
+      "type": "text",
+      "id": "subtotal_text",
+      "label": "Subtotal Text",
+      "default": "Subtotal"
+    },
+    {
+      "type": "text",
+      "id": "savings_text",
+      "label": "Savings Text",
+      "default": "YOU SAVE"
+    },
+    {
+      "type": "text",
+      "id": "total_text",
+      "label": "Total Text",
+      "default": "Total"
+    },
+    {
+      "type": "header",
+      "content": "Submit Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "submit_button_text",
+      "label": "Submit Button Text",
+      "default": "CHECKOUT NOW"
+    },
+    {
+      "type": "color",
+      "id": "submit_button_bg_color",
+      "label": "Submit Button Background",
+      "default": "#ccff00"
+    },
+    {
+      "type": "color",
+      "id": "submit_button_text_color",
+      "label": "Submit Button Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "submit_button_hover_bg_color",
+      "label": "Submit Button Hover Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "submit_button_hover_text_color",
+      "label": "Submit Button Hover Text",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Spacing Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "number",
+      "id": "initial_empty_slots",
+      "label": "Initial Empty Sidebar Slots",
+      "default": 2
+    }
+  ],
+  "blocks": [
+    {
+      "type": "size",
+      "name": "Size Option",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Button Title",
+          "default": "2 Pack"
+        },
+        {
+          "type": "number",
+          "id": "pack_size",
+          "label": "Pack Size (number of items)",
+          "default": 2
+        },
+        {
+          "type": "number",
+          "id": "discount",
+          "label": "Discount Percentage",
+          "default": 5
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Optional Badge Image"
+        }
+      ]
+    },
+    {
+      "type": "tag",
+      "name": "Filter Tag",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag_name",
+          "label": "Tag Display Name",
+          "default": "Exclusive"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag Value (lowercase)",
+          "default": "exclusive",
+          "info": "This should match the product tags"
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 20,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Builder 3",
+      "blocks": [
+        {
+          "type": "size",
+          "settings": {
+            "title": "2 Pack",
+            "pack_size": 2,
+            "discount": 5
+          }
+        },
+        {
+          "type": "size",
+          "settings": {
+            "title": "3 Pack",
+            "pack_size": 3,
+            "discount": 10
+          }
+        },
+        {
+          "type": "size",
+          "settings": {
+            "title": "4 Pack",
+            "pack_size": 4,
+            "discount": 25
+          }
+        },
+        {
+          "type": "tag",
+          "settings": {
+            "tag_name": "Exclusive",
+            "tag": "exclusive"
+          }
+        },
+        {
+          "type": "tag",
+          "settings": {
+            "tag_name": "Limited",
+            "tag": "limited"
+          }
+        },
+        {
+          "type": "tag",
+          "settings": {
+            "tag_name": "New",
+            "tag": "new"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
