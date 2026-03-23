@@ -1,0 +1,1020 @@
+{% liquid
+  assign section_id = section.id
+%}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<section id="eco-slideshow-{{ section_id }}" class="eco-slideshow-section">
+  <div class="eco-slideshow-container page-width">
+    <div class="eco-slideshow-shell">
+      <div class="eco-slideshow-swiper swiper">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="swiper-slide eco-slide" {{ block.shopify_attributes }}>
+              <div class="eco-slide-media">
+                {% if block.settings.desktop_image != blank %}
+                  <img
+                    class="eco-slide-image eco-slide-image--desktop"
+                    src="{{ block.settings.desktop_image | image_url: width: 2400 }}"
+                    srcset="
+                      {{ block.settings.desktop_image | image_url: width: 375 }} 375w,
+                      {{ block.settings.desktop_image | image_url: width: 550 }} 550w,
+                      {{ block.settings.desktop_image | image_url: width: 750 }} 750w,
+                      {{ block.settings.desktop_image | image_url: width: 1100 }} 1100w,
+                      {{ block.settings.desktop_image | image_url: width: 1500 }} 1500w,
+                      {{ block.settings.desktop_image | image_url: width: 1780 }} 1780w,
+                      {{ block.settings.desktop_image | image_url: width: 2000 }} 2000w,
+                      {{ block.settings.desktop_image | image_url: width: 2400 }} 2400w
+                    "
+                    sizes="100vw"
+                    alt="{{ block.settings.desktop_image.alt | escape }}"
+                    width="{{ block.settings.desktop_image.width }}"
+                    height="{{ block.settings.desktop_image.height }}"
+                    loading="lazy"
+                  >
+                {% endif %}
+
+                {% if block.settings.mobile_image != blank %}
+                  <img
+                    class="eco-slide-image eco-slide-image--mobile"
+                    src="{{ block.settings.mobile_image | image_url: width: 1600 }}"
+                    srcset="
+                      {{ block.settings.mobile_image | image_url: width: 375 }} 375w,
+                      {{ block.settings.mobile_image | image_url: width: 550 }} 550w,
+                      {{ block.settings.mobile_image | image_url: width: 750 }} 750w,
+                      {{ block.settings.mobile_image | image_url: width: 1100 }} 1100w,
+                      {{ block.settings.mobile_image | image_url: width: 1500 }} 1500w,
+                      {{ block.settings.mobile_image | image_url: width: 1600 }} 1600w
+                    "
+                    sizes="100vw"
+                    alt="{{ block.settings.mobile_image.alt | escape }}"
+                    width="{{ block.settings.mobile_image.width }}"
+                    height="{{ block.settings.mobile_image.height }}"
+                    loading="lazy"
+                  >
+                {% elsif block.settings.desktop_image != blank %}
+                  <img
+                    class="eco-slide-image eco-slide-image--mobile"
+                    src="{{ block.settings.desktop_image | image_url: width: 1600 }}"
+                    srcset="
+                      {{ block.settings.desktop_image | image_url: width: 375 }} 375w,
+                      {{ block.settings.desktop_image | image_url: width: 550 }} 550w,
+                      {{ block.settings.desktop_image | image_url: width: 750 }} 750w,
+                      {{ block.settings.desktop_image | image_url: width: 1100 }} 1100w,
+                      {{ block.settings.desktop_image | image_url: width: 1500 }} 1500w,
+                      {{ block.settings.desktop_image | image_url: width: 1600 }} 1600w
+                    "
+                    sizes="100vw"
+                    alt="{{ block.settings.desktop_image.alt | escape }}"
+                    width="{{ block.settings.desktop_image.width }}"
+                    height="{{ block.settings.desktop_image.height }}"
+                    loading="lazy"
+                  >
+                {% endif %}
+
+                <div class="eco-slide-overlay"></div>
+              </div>
+
+              <div class="eco-slide-content">
+                <div class="eco-slide-content-inner">
+                  {% if block.settings.badge != blank %}
+                    <div class="eco-slide-badge">
+                      {{ block.settings.badge }}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.heading != blank %}
+                    <div class="eco-slide-heading rte">
+                      {{ block.settings.heading }}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.review_text != blank %}
+                    <div class="eco-slide-review">
+                      <div class="eco-slide-stars" aria-hidden="true">
+                        {% for i in (1..5) %}
+                          <span class="eco-star">★</span>
+                        {% endfor %}
+                      </div>
+                      <div class="eco-slide-review-text">{{ block.settings.review_text }}</div>
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.text != blank %}
+                    <div class="eco-slide-text rte">
+                      {{ block.settings.text }}
+                    </div>
+                  {% endif %}
+
+                  {% assign has_features = false %}
+                  {% if block.settings.feature_1 != blank or block.settings.feature_2 != blank or block.settings.feature_3 != blank %}
+                    {% assign has_features = true %}
+                  {% endif %}
+
+                  {% if has_features %}
+                    <div class="eco-slide-features">
+                      {% if block.settings.feature_1 != blank %}
+                        <div class="eco-feature-pill">
+                          <span class="eco-feature-icon">●</span>
+                          <span>{{ block.settings.feature_1 }}</span>
+                        </div>
+                      {% endif %}
+
+                      {% if block.settings.feature_2 != blank %}
+                        <div class="eco-feature-pill">
+                          <span class="eco-feature-icon">●</span>
+                          <span>{{ block.settings.feature_2 }}</span>
+                        </div>
+                      {% endif %}
+
+                      {% if block.settings.feature_3 != blank %}
+                        <div class="eco-feature-pill">
+                          <span class="eco-feature-icon">●</span>
+                          <span>{{ block.settings.feature_3 }}</span>
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.button_label != blank %}
+                    <div class="eco-slide-button-wrap">
+                      <a
+                        {% if block.settings.button_link != blank %}
+                          href="{{ block.settings.button_link }}"
+                        {% else %}
+                          href="#"
+                        {% endif %}
+                        class="eco-slide-button"
+                      >
+                        <span>{{ block.settings.button_label }}</span>
+                        <span class="eco-slide-button-arrow">→</span>
+                      </a>
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.verified_text != blank %}
+                    <div class="eco-slide-verified">
+                      <span class="eco-slide-verified-icon">✓</span>
+                      <span>{{ block.settings.verified_text }}</span>
+                    </div>
+                  {% endif %}
+
+                  <div class="eco-slide-progress" data-progress></div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if section.blocks.size > 1 %}
+          <div class="eco-slideshow-nav">
+            <button class="eco-slideshow-prev" aria-label="Previous slide">
+              <span>‹</span>
+            </button>
+            <button class="eco-slideshow-next" aria-label="Next slide">
+              <span>›</span>
+            </button>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #eco-slideshow-{{ section_id }} {
+    margin-top: {{ section.settings.margin_top_mobile }}px;
+    margin-bottom: {{ section.settings.margin_bottom_mobile }}px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slideshow-container {
+    max-width: {{ section.settings.section_width }}px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slideshow-shell {
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ section.settings.radius_mobile }}px;
+    background: {{ section.settings.section_bg }};
+    border: 1px solid {{ section.settings.border_color }};
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slideshow-swiper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide {
+    position: relative;
+    min-height: {{ section.settings.height_mobile }}px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-media {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-image--desktop {
+    display: none;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-image--mobile {
+    display: block;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg,
+        rgba(247, 242, 234, {{ section.settings.overlay_opacity_left | times: 0.01 }}) 0%,
+        rgba(247, 242, 234, {{ section.settings.overlay_opacity_mid | times: 0.01 }}) 35%,
+        rgba(247, 242, 234, {{ section.settings.overlay_opacity_right | times: 0.01 }}) 65%,
+        rgba(247, 242, 234, 0.08) 100%);
+    z-index: 2;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: {{ section.settings.height_mobile }}px;
+    padding: 28px 20px 78px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-content-inner {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.24);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.08);
+    color: {{ section.settings.badge_text_color }};
+    font-size: 12px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-heading {
+    margin-bottom: 14px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-heading * {
+    margin: 0;
+    color: {{ section.settings.heading_color }};
+    line-height: 1.05;
+    font-size: {{ section.settings.heading_size_mobile }}px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-heading em,
+  #eco-slideshow-{{ section_id }} .eco-slide-heading i,
+  #eco-slideshow-{{ section_id }} .eco-slide-heading strong {
+    color: {{ section.settings.accent_color }};
+    font-style: italic;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-review {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-stars {
+    display: flex;
+    gap: 4px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-star {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    background: {{ section.settings.star_bg }};
+    color: {{ section.settings.star_color }};
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-review-text {
+    color: {{ section.settings.text_color }};
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-text {
+    margin-bottom: 16px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-text,
+  #eco-slideshow-{{ section_id }} .eco-slide-text * {
+    margin-top: 0;
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.text_size_mobile }}px;
+    line-height: 1.55;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-feature-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.24);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.08);
+    color: {{ section.settings.pill_text_color }};
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-feature-icon {
+    font-size: 8px;
+    line-height: 1;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-button-wrap {
+    margin-bottom: 14px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    background: linear-gradient(145deg, {{ section.settings.button_bg }}, {{ section.settings.button_bg_dark }});
+    color: {{ section.settings.button_text }};
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow:
+      0 8px 16px rgba(53, 94, 73, 0.20),
+      inset 0 1px 0 rgba(255,255,255,0.10);
+    transition: all 0.25s ease;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-button:hover {
+    transform: translateY(-2px);
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-button-arrow {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-verified {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: {{ section.settings.verified_color }};
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 18px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-verified-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: {{ section.settings.verified_icon_bg }};
+    color: {{ section.settings.verified_icon_color }};
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    flex: 0 0 16px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-progress {
+    width: 120px;
+    height: 2px;
+    background: {{ section.settings.progress_bg }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slide-progress::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--progress-width, 0%);
+    background: {{ section.settings.progress_fill }};
+    transition: width {{ section.settings.autoplay_seconds }}s linear;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slideshow-nav {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slideshow-prev,
+  #eco-slideshow-{{ section_id }} .eco-slideshow-next {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid {{ section.settings.nav_border }};
+    background: {{ section.settings.nav_bg }};
+    color: {{ section.settings.nav_icon }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slideshow-prev:hover,
+  #eco-slideshow-{{ section_id }} .eco-slideshow-next:hover {
+    background: {{ section.settings.nav_hover_bg }};
+  }
+
+  #eco-slideshow-{{ section_id }} .eco-slideshow-prev span,
+  #eco-slideshow-{{ section_id }} .eco-slideshow-next span {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  @media screen and (min-width: 750px) {
+    #eco-slideshow-{{ section_id }} {
+      margin-top: {{ section.settings.margin_top_desktop }}px;
+      margin-bottom: {{ section.settings.margin_bottom_desktop }}px;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slideshow-container {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slideshow-shell {
+      border-radius: {{ section.settings.radius_desktop }}px;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slide {
+      min-height: {{ section.settings.height_desktop }}px;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slide-image--desktop {
+      display: block;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slide-image--mobile {
+      display: none;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slide-content {
+      min-height: {{ section.settings.height_desktop }}px;
+      padding: 42px 64px 42px;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slide-content-inner {
+      max-width: 46%;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slide-heading * {
+      font-size: {{ section.settings.heading_size_desktop }}px;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slide-text,
+    #eco-slideshow-{{ section_id }} .eco-slide-text * {
+      font-size: {{ section.settings.text_size_desktop }}px;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slide-review-text,
+    #eco-slideshow-{{ section_id }} .eco-slide-verified {
+      font-size: 14px;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-feature-pill {
+      font-size: 14px;
+      padding: 9px 14px;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slide-button {
+      min-height: 56px;
+      padding: 0px 32px;
+      font-size: 15px;
+    }
+
+    #eco-slideshow-{{ section_id }} .eco-slideshow-nav {
+      right: 32px;
+      bottom: 32px;
+    }
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  (function() {
+    const section = document.querySelector('#eco-slideshow-{{ section_id }}');
+    if (!section) return;
+
+    const sliderEl = section.querySelector('.eco-slideshow-swiper');
+    if (!sliderEl) return;
+
+    if (sliderEl.swiper) {
+      sliderEl.swiper.destroy(true, true);
+    }
+
+    const autoplayDelay = {{ section.settings.autoplay_seconds | times: 1000 }};
+
+    function resetProgressBars(swiper) {
+      const bars = section.querySelectorAll('[data-progress]');
+      bars.forEach((bar) => {
+        bar.style.setProperty('--progress-width', '0%');
+        bar.classList.remove('is-active');
+      });
+
+      const activeSlide = swiper.slides[swiper.activeIndex];
+      if (!activeSlide) return;
+
+      const activeBar = activeSlide.querySelector('[data-progress]');
+      if (!activeBar) return;
+
+      activeBar.classList.add('is-active');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          activeBar.style.setProperty('--progress-width', '100%');
+        });
+      });
+    }
+
+    const swiper = new Swiper(sliderEl, {
+      loop: {{ section.settings.enable_loop }},
+      speed: {{ section.settings.transition_speed }},
+      slidesPerView: 1,
+      spaceBetween: 0,
+      navigation: {
+        nextEl: section.querySelector('.eco-slideshow-next'),
+        prevEl: section.querySelector('.eco-slideshow-prev')
+      },
+      autoplay: {{ section.settings.enable_autoplay }}
+        ? {
+            delay: autoplayDelay,
+            disableOnInteraction: false
+          }
+        : false,
+      on: {
+        init: function() {
+          resetProgressBars(this);
+        },
+        slideChangeTransitionStart: function() {
+          resetProgressBars(this);
+        }
+      }
+    });
+
+    document.addEventListener('shopify:block:select', function(event) {
+      const block = event.target.closest('.eco-slide');
+      if (!block || !section.contains(block)) return;
+      const index = Array.from(section.querySelectorAll('.eco-slide')).indexOf(block);
+      if (index >= 0 && sliderEl.swiper) {
+        sliderEl.swiper.slideToLoop(index);
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Eco Slideshow",
+  "settings": [
+    {
+      "type": "range",
+      "id": "section_width",
+      "label": "Section width",
+      "min": 1000,
+      "max": 1800,
+      "step": 20,
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "label": "Desktop height",
+      "min": 500,
+      "max": 1000,
+      "step": 20,
+      "default": 760
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Mobile height",
+      "min": 420,
+      "max": 900,
+      "step": 20,
+      "default": 680
+    },
+    {
+      "type": "range",
+      "id": "radius_desktop",
+      "label": "Desktop corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "radius_mobile",
+      "label": "Mobile corner radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "margin_top_desktop",
+      "label": "Desktop top spacing",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_desktop",
+      "label": "Desktop bottom spacing",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "label": "Mobile top spacing",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "label": "Mobile bottom spacing",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Desktop heading size",
+      "min": 32,
+      "max": 84,
+      "step": 2,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Mobile heading size",
+      "min": 24,
+      "max": 52,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "text_size_desktop",
+      "label": "Desktop text size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "default": 19
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Mobile text size",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity_left",
+      "label": "Overlay left opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity_mid",
+      "label": "Overlay middle opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity_right",
+      "label": "Overlay right opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "default": 50
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "label": "Enable loop",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_seconds",
+      "label": "Autoplay seconds",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "transition_speed",
+      "label": "Transition speed",
+      "min": 300,
+      "max": 2000,
+      "step": 100,
+      "default": 1200
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#f7f2ea"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#d8cbb7"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#13271d"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent heading color",
+      "default": "#4f765e"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#223a2c"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#1d3227"
+    },
+    {
+      "type": "color",
+      "id": "pill_text_color",
+      "label": "Feature pill text color",
+      "default": "#1d3227"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#355e49"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_dark",
+      "label": "Button background dark",
+      "default": "#274636"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text color",
+      "default": "#f7f2ea"
+    },
+    {
+      "type": "color",
+      "id": "verified_color",
+      "label": "Verified text color",
+      "default": "#1d3227"
+    },
+    {
+      "type": "color",
+      "id": "verified_icon_bg",
+      "label": "Verified icon background",
+      "default": "#1d3227"
+    },
+    {
+      "type": "color",
+      "id": "verified_icon_color",
+      "label": "Verified icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "progress_bg",
+      "label": "Progress background",
+      "default": "#d7cab7"
+    },
+    {
+      "type": "color",
+      "id": "progress_fill",
+      "label": "Progress fill",
+      "default": "#355e49"
+    },
+    {
+      "type": "color",
+      "id": "nav_bg",
+      "label": "Navigation background",
+      "default": "#f7f2ea"
+    },
+    {
+      "type": "color",
+      "id": "nav_hover_bg",
+      "label": "Navigation hover background",
+      "default": "#d8cbb7"
+    },
+    {
+      "type": "color",
+      "id": "nav_border",
+      "label": "Navigation border",
+      "default": "#d8cbb7"
+    },
+    {
+      "type": "color",
+      "id": "nav_icon",
+      "label": "Navigation icon color",
+      "default": "#1d3227"
+    },
+    {
+      "type": "color",
+      "id": "star_bg",
+      "label": "Star background",
+      "default": "#355e49"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#f7f2ea"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Desktop image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile image"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "The Sunlit Living Room"
+        },
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "<p>Design your home with <strong>low-impact essentials</strong></p>"
+        },
+        {
+          "type": "text",
+          "id": "review_text",
+          "label": "Review text",
+          "default": "4.9/5 from 8,200+ conscious homes"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Stone, bamboo, and organic waffle textures create a spa-like routine with fewer synthetics and more breathability.</p>"
+        },
+        {
+          "type": "text",
+          "id": "feature_1",
+          "label": "Feature 1",
+          "default": "Low-tox everyday materials"
+        },
+        {
+          "type": "text",
+          "id": "feature_2",
+          "label": "Feature 2",
+          "default": "Soft on skin"
+        },
+        {
+          "type": "text",
+          "id": "feature_3",
+          "label": "Feature 3",
+          "default": "Planet-kind sourcing"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop Eco Bath"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "text",
+          "id": "verified_text",
+          "label": "Verified text",
+          "default": "Ethically sourced and quality tested"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Eco Slideshow",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
