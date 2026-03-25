@@ -158,10 +158,383 @@
         "margin_top": 35,
         "margin_bottom": 35
       }
+    },
+    "product_details_01_DM9wqb": {
+      "type": "product-details-01",
+      "blocks": {
+        "faq_3nUYB7": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I connect my headphone to my device?",
+            "answer": "<p>1. Open the charging case, then press and hold the button. Wait for a blue light to pulse.<br>2. Select your headphones from your device's Bluetooth list.<br>3. On your device, download the Bluetooth app, and follow the in-app instructions to complete the set-up.</p>"
+          }
+        },
+        "faq_3QTMVg": {
+          "type": "faq",
+          "settings": {
+            "question": "How many devices can be paired at the same time?",
+            "answer": "<p>You can connect two devices at once to these headphones.</p>"
+          }
+        },
+        "faq_HxjQCm": {
+          "type": "faq",
+          "settings": {
+            "question": "What is active noise cancelling?",
+            "answer": "<p>Active Noise Cancellation is the technology that drowns out unwanted sounds when you are listening to your music. These headphones utilise four microphones to constantly measure the surrounding noise and automatically adjust the level of noise cancellation you need to focus.</p>"
+          }
+        },
+        "faq_7TLcbL": {
+          "type": "faq",
+          "settings": {
+            "question": "What is transparency mode?",
+            "answer": "<p>Transparency mode allows you to be more aware of the outside world, meaning if you’re having a conversation or are walking along busy roads, you’ll be able to keep track.</p>"
+          }
+        },
+        "feature_XPUrCC": {
+          "type": "feature",
+          "settings": {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 18 18\"><title>18 headset</title>\n<g fill=\"#212121\" class=\"nc-icon-wrapper\"><path d=\"M10.709,17h-1.959c-.414,0-.75-.336-.75-.75s.336-.75,.75-.75h1.959c.586,0,1.087-.399,1.219-.971l.343-1.451c.095-.403,.498-.65,.902-.558,.402,.095,.652,.5,.557,.902l-.342,1.447c-.287,1.253-1.39,2.131-2.679,2.131Z\" fill=\"#212121\" data-color=\"color-2\"></path><path d=\"M14.137,14h-1.137c-.227,0-.441-.103-.584-.279-.143-.176-.197-.408-.149-.629l1.084-5c.104-.422,.149-.762,.149-1.091,0-2.481-2.019-4.5-4.5-4.5s-4.5,2.019-4.5,4.5c0,.329,.046,.669,.145,1.071l1.089,5.02c.048,.222-.007,.453-.149,.629-.143,.177-.357,.279-.584,.279h-1.137c-1.285,0-2.416-.912-2.688-2.167l-.335-1.545c-.265-1.224,.332-2.473,1.449-3.037l.712-.359c.059-3.258,2.727-5.891,5.999-5.891s5.94,2.633,5.999,5.891l.712,.359c1.117,.564,1.714,1.813,1.449,3.037l-.335,1.545c-.272,1.256-1.403,2.167-2.688,2.167Z\" fill=\"#212121\"></path></g></svg>",
+            "title": "Hi-Fi attenuation"
+          }
+        },
+        "feature_qTCc7C": {
+          "type": "feature",
+          "settings": {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 18 18\"><title>18 shield check</title>\n<g fill=\"#212121\" class=\"nc-icon-wrapper\"><path d=\"M14.783,2.813l-5.25-1.68c-.349-.112-.718-.111-1.066,0L3.216,2.813c-.728,.233-1.216,.903-1.216,1.667v6.52c0,3.508,4.946,5.379,6.46,5.869,.177,.057,.358,.086,.54,.086s.362-.028,.538-.085c1.516-.49,6.462-2.361,6.462-5.869V4.48c0-.764-.489-1.434-1.217-1.667Zm-2.681,4.389l-3.397,4.5c-.128,.169-.322,.276-.534,.295-.021,.002-.043,.003-.065,.003-.189,0-.372-.071-.511-.201l-1.609-1.5c-.303-.283-.32-.757-.038-1.06,.284-.303,.758-.319,1.06-.038l1.001,.933,2.896-3.836c.25-.33,.72-.396,1.051-.146,.331,.25,.396,.72,.146,1.051Z\" fill=\"#212121\"></path></g></svg>",
+            "title": "20–25 dB protection"
+          }
+        },
+        "feature_A9h33H": {
+          "type": "feature",
+          "settings": {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 18 18\"><title>18 heart</title>\n<g fill=\"#212121\" class=\"nc-icon-wrapper\"><path d=\"M12.164,2c-1.195,.015-2.324,.49-3.164,1.306-.84-.815-1.972-1.291-3.178-1.306-2.53,.015-4.582,2.084-4.572,4.609,0,5.253,5.306,8.429,6.932,9.278,.256,.133,.537,.2,.818,.2s.562-.067,.817-.2c1.626-.848,6.933-4.024,6.933-9.275,.009-2.528-2.042-4.597-4.586-4.612Z\" fill=\"#212121\"></path></g></svg>",
+            "title": "All day comfort"
+          }
+        },
+        "product_Hiy3rL": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "custom_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_3nUYB7",
+        "faq_3QTMVg",
+        "faq_HxjQCm",
+        "faq_7TLcbL",
+        "feature_XPUrCC",
+        "feature_qTCc7C",
+        "feature_A9h33H",
+        "product_Hiy3rL"
+      ],
+      "name": "Product Details 01",
+      "settings": {
+        "background_color": "#f9f9f9",
+        "border_color": "#121212",
+        "border_radius": 0,
+        "border_radius_desktop": 0,
+        "margin_left_mobile": 0,
+        "margin_right_mobile": 0,
+        "margin_left_desktop": 0,
+        "margin_right_desktop": 0,
+        "max_width": 1400,
+        "grid_areas_mobile": "\"faq\" \"content\"",
+        "grid_areas_desktop": "\"faq content\"",
+        "grid_columns_desktop": "1fr 38%",
+        "grid_gap_mobile": 16,
+        "grid_gap_desktop": 70,
+        "faq_bg_color": "#ffffff",
+        "faq_border_width": 1,
+        "faq_border_color": "#dbdbdb",
+        "faq_border_radius": 12,
+        "faq_padding_vertical_mobile": 16,
+        "faq_padding_horizontal_mobile": 12,
+        "faq_padding_vertical_desktop": 16,
+        "faq_padding_horizontal_desktop": 16,
+        "faq_gap_mobile": 12,
+        "faq_gap_desktop": 16,
+        "faq_question_font": "'Open Sans', sans-serif",
+        "faq_question_weight": "600",
+        "faq_question_color": "#121212",
+        "faq_question_active_color": "#c16d0b",
+        "faq_question_size_mobile": 14,
+        "faq_question_size_desktop": 16,
+        "faq_answer_font": "'Open Sans', sans-serif",
+        "faq_answer_weight": "400",
+        "faq_answer_color": "#5f5f5f",
+        "faq_answer_size_mobile": 14,
+        "faq_answer_size_desktop": 14,
+        "faq_answer_margin_top": 20,
+        "icon_color": "#121212",
+        "icon_size": 14,
+        "icon_size_desktop": 14,
+        "features_heading": "<h3>Product features</h3>",
+        "heading_font": "'Open Sans', sans-serif",
+        "heading_weight": "600",
+        "heading_color": "#121212",
+        "heading_size_mobile": 18,
+        "heading_size_desktop": 18,
+        "heading_margin_bottom": 8,
+        "heading_margin_bottom_desktop": 8,
+        "heading_alignment_mobile": "left",
+        "heading_alignment_desktop": "left",
+        "feature_bg_color": "#c16d0b",
+        "feature_border_width": 0,
+        "feature_border_color": "#dbdbdb",
+        "feature_border_radius": 12,
+        "feature_padding_vertical": 8,
+        "feature_padding_horizontal": 16,
+        "feature_padding_vertical_desktop": 8,
+        "feature_padding_horizontal_desktop": 16,
+        "features_gap": 4,
+        "features_gap_desktop": 4,
+        "features_margin_bottom": 16,
+        "features_margin_bottom_desktop": 24,
+        "feature_icon_color": "#ffffff",
+        "feature_icon_size": 20,
+        "feature_icon_size_desktop": 20,
+        "feature_title_font": "'Open Sans', sans-serif",
+        "feature_title_weight": "600",
+        "feature_title_color": "#ffffff",
+        "feature_title_size_mobile": 14,
+        "feature_title_size_desktop": 14,
+        "products_heading": "<h3>Similar products</h3>",
+        "product_bg_color": "#ffffff",
+        "product_border_width": 0,
+        "product_border_color": "#dbdbdb",
+        "product_border_radius": 12,
+        "product_padding_vertical": 10,
+        "product_padding_horizontal": 10,
+        "product_padding_vertical_desktop": 10,
+        "product_padding_horizontal_desktop": 10,
+        "products_gap": 8,
+        "products_gap_desktop": 8,
+        "product_arrow_color": "#121212",
+        "product_image_aspect_ratio": "12/12",
+        "product_image_width": 100,
+        "product_image_border_radius": 12,
+        "product_image_border_width": 0,
+        "product_image_border_color": "#dbdbdb",
+        "product_title_font": "'Open Sans', sans-serif",
+        "product_title_weight": "400",
+        "product_title_color": "#121212",
+        "product_title_size_mobile": 14,
+        "product_title_size_desktop": 14,
+        "price_font": "'Open Sans', sans-serif",
+        "price_weight": "400",
+        "price_color": "#121212",
+        "compare_price_color": "#a4a4a4",
+        "price_size_mobile": 14,
+        "price_size_desktop": 14,
+        "price_margin_top": 8,
+        "price_margin_top_desktop": 8,
+        "price_alignment_mobile": "flex-start",
+        "price_alignment_desktop": "flex-start",
+        "padding_top": 35,
+        "padding_bottom": 35,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "product_details_02_fVNA9M": {
+      "type": "product-details-02",
+      "blocks": {
+        "faq_8zdCKQ": {
+          "type": "faq",
+          "settings": {
+            "question": "Description",
+            "answer": "<p>Our blankets offer comfort and warmth wherever it’s needed - draped over your bed, tossed on the couch, wrapped around you, or taken along for outdoor adventures.</p>"
+          }
+        },
+        "faq_n7mMea": {
+          "type": "faq",
+          "settings": {
+            "question": "Care guide",
+            "answer": "<p>Machine wash on cold mode. If this function is not available to you - it's best to hand wash them.</p>"
+          }
+        },
+        "faq_PEUiV7": {
+          "type": "faq",
+          "settings": {
+            "question": "Shipping & returns",
+            "answer": "<p>Free shipping on all orders. Delivery times will be calculated at checkout. We accept returns for a full refund within 30 days of delivery, so long as your order is in new, unused condition. We cover the cost of shipping for eligible blankets returned to NTL.</p>"
+          }
+        },
+        "feature_CBMWRa": {
+          "type": "feature",
+          "settings": {
+            "title": "Perfect for gifting"
+          }
+        },
+        "feature_BCnJcJ": {
+          "type": "feature",
+          "settings": {
+            "title": "Perfect for gifting"
+          }
+        },
+        "feature_VP7TWE": {
+          "type": "feature",
+          "settings": {
+            "title": "Perfect for gifting"
+          }
+        },
+        "feature_iEVMPX": {
+          "type": "feature",
+          "settings": {
+            "title": "Perfect for gifting"
+          }
+        },
+        "product_eH6enk": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "custom_title": "",
+            "custom_text": ""
+          }
+        },
+        "product_kbeBeN": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "custom_title": "",
+            "custom_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_8zdCKQ",
+        "faq_n7mMea",
+        "faq_PEUiV7",
+        "feature_CBMWRa",
+        "feature_BCnJcJ",
+        "feature_VP7TWE",
+        "feature_iEVMPX",
+        "product_eH6enk",
+        "product_kbeBeN"
+      ],
+      "name": "Product Details 02",
+      "settings": {
+        "background_color": "#ffffff",
+        "border_color": "#121212",
+        "border_radius": 0,
+        "border_radius_desktop": 0,
+        "margin_left_mobile": 0,
+        "margin_right_mobile": 0,
+        "margin_left_desktop": 0,
+        "margin_right_desktop": 0,
+        "max_width": 1500,
+        "grid_areas_mobile": "\"faq\" \"content\"",
+        "grid_areas_desktop": "\"faq content\"",
+        "grid_columns_desktop": "1fr 38%",
+        "grid_gap_mobile": 16,
+        "grid_gap_desktop": 24,
+        "faq_bg_color": "#fbf9f4",
+        "faq_border_width": 1,
+        "faq_border_color": "#e4e3da",
+        "faq_border_radius": 0,
+        "faq_padding_vertical_mobile": 16,
+        "faq_padding_horizontal_mobile": 12,
+        "faq_padding_vertical_desktop": 16,
+        "faq_padding_horizontal_desktop": 16,
+        "faq_gap_mobile": 12,
+        "faq_gap_desktop": 16,
+        "faq_question_font": "Helvetica, Arial, sans-serif",
+        "faq_question_weight": "400",
+        "faq_question_color": "#41441c",
+        "faq_question_active_color": "#41441c",
+        "faq_question_size_mobile": 14,
+        "faq_question_size_desktop": 16,
+        "faq_answer_font": "Helvetica, Arial, sans-serif",
+        "faq_answer_weight": "400",
+        "faq_answer_color": "#79795e",
+        "faq_answer_size_mobile": 14,
+        "faq_answer_size_desktop": 14,
+        "faq_answer_margin_top": 20,
+        "icon_color": "#41441c",
+        "icon_size": 14,
+        "icon_size_desktop": 14,
+        "features_heading": "<h3>Product features</h3>",
+        "heading_font": "Helvetica, Arial, sans-serif",
+        "heading_weight": "700",
+        "heading_color": "#41441c",
+        "heading_size_mobile": 18,
+        "heading_size_desktop": 18,
+        "heading_margin_bottom": 8,
+        "heading_margin_bottom_desktop": 8,
+        "heading_alignment_mobile": "left",
+        "heading_alignment_desktop": "left",
+        "feature_bg_color": "#fbf9f4",
+        "feature_border_width": 1,
+        "feature_border_color": "#e4e3da",
+        "feature_border_radius": 0,
+        "feature_padding_vertical": 8,
+        "feature_padding_horizontal": 8,
+        "feature_padding_vertical_desktop": 8,
+        "feature_padding_horizontal_desktop": 12,
+        "features_gap": 4,
+        "features_gap_desktop": 4,
+        "features_margin_bottom": 16,
+        "features_margin_bottom_desktop": 24,
+        "feature_icon_color": "#41441c",
+        "feature_icon_size": 16,
+        "feature_icon_size_desktop": 20,
+        "feature_title_font": "Helvetica, Arial, sans-serif",
+        "feature_title_weight": "400",
+        "feature_title_color": "#41441c",
+        "feature_title_size_mobile": 12,
+        "feature_title_size_desktop": 14,
+        "products_heading": "<h3>Similar products</h3>",
+        "product_bg_color": "#fbf9f4",
+        "product_border_width": 1,
+        "product_border_color": "#e4e3da",
+        "product_border_radius": 0,
+        "product_padding_vertical": 10,
+        "product_padding_horizontal": 10,
+        "product_padding_vertical_desktop": 10,
+        "product_padding_horizontal_desktop": 10,
+        "products_gap": 8,
+        "products_gap_desktop": 8,
+        "product_arrow_color": "#41441c",
+        "product_image_aspect_ratio": "12/12",
+        "product_image_width": 100,
+        "product_image_border_radius": 12,
+        "product_image_border_width": 0,
+        "product_image_border_color": "#e4e3da",
+        "product_title_font": "Helvetica, Arial, sans-serif",
+        "product_title_weight": "700",
+        "product_title_color": "#41441c",
+        "product_title_size_mobile": 14,
+        "product_title_size_desktop": 14,
+        "text_font": "Helvetica, Arial, sans-serif",
+        "text_weight": "400",
+        "text_color": "#79795e",
+        "text_size_mobile": 12,
+        "text_size_desktop": 12,
+        "text_margin_top": 4,
+        "text_margin_top_desktop": 4,
+        "price_font": "Helvetica, Arial, sans-serif",
+        "price_weight": "400",
+        "price_color": "#41441c",
+        "compare_price_color": "#79795e",
+        "price_size_mobile": 14,
+        "price_size_desktop": 14,
+        "price_margin_top": 8,
+        "price_margin_top_desktop": 8,
+        "price_alignment_mobile": "flex-start",
+        "price_alignment_desktop": "flex-start",
+        "padding_top": 35,
+        "padding_bottom": 35,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     }
   },
   "order": [
     "main",
-    "video_selling_03_wiKidQ"
+    "video_selling_03_wiKidQ",
+    "product_details_01_DM9wqb",
+    "product_details_02_fVNA9M"
   ]
 }
