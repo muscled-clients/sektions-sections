@@ -73,6 +73,49 @@
         "padding_bottom": 52
       }
     },
+    "sek_atelier_selection_LxG7qg": {
+      "type": "sek-atelier-selection",
+      "blocks": {
+        "collection_tab_phQAaJ": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "SIGNATURE",
+            "collection": "fashion",
+            "products_limit": 10
+          }
+        },
+        "collection_tab_YxWy6Q": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "LIMITED EDITION",
+            "collection": "fashion",
+            "products_limit": 10
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_phQAaJ",
+        "collection_tab_YxWy6Q"
+      ],
+      "name": "Sek Atelier Selection",
+      "settings": {
+        "heading": "The Atelier Selection.",
+        "subheading": "A curated release of limited-edition items and signature staples. Crafted for enduring elegance and modern expression.",
+        "view_button_text": "View Item",
+        "collection_button_text": "Explore Full Collection",
+        "background_color": "#1a1a1a",
+        "overlay_color": "#2d2d2d",
+        "accent_color": "#d4a84b",
+        "text_color": "#ffffff",
+        "subtext_color": "#999999",
+        "heading_font_size": 48,
+        "subtitle_font_size": 14,
+        "tab_font_size": 14,
+        "product_title_font_size": 28,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
     "sek_image_reveal_carousel_deimLT": {
       "type": "sek-image-reveal-carousel",
       "blocks": {
@@ -537,49 +580,6 @@
         "padding_bottom": 60
       }
     },
-    "sek_atelier_selection_LxG7qg": {
-      "type": "sek-atelier-selection",
-      "blocks": {
-        "collection_tab_phQAaJ": {
-          "type": "collection_tab",
-          "settings": {
-            "tab_title": "SIGNATURE",
-            "collection": "fashion",
-            "products_limit": 10
-          }
-        },
-        "collection_tab_YxWy6Q": {
-          "type": "collection_tab",
-          "settings": {
-            "tab_title": "LIMITED EDITION",
-            "collection": "fashion",
-            "products_limit": 10
-          }
-        }
-      },
-      "block_order": [
-        "collection_tab_phQAaJ",
-        "collection_tab_YxWy6Q"
-      ],
-      "name": "Sek Atelier Selection",
-      "settings": {
-        "heading": "The Atelier Selection.",
-        "subheading": "A curated release of limited-edition items and signature staples. Crafted for enduring elegance and modern expression.",
-        "view_button_text": "View Item",
-        "collection_button_text": "Explore Full Collection",
-        "background_color": "#1a1a1a",
-        "overlay_color": "#2d2d2d",
-        "accent_color": "#d4a84b",
-        "text_color": "#ffffff",
-        "subtext_color": "#999999",
-        "heading_font_size": 48,
-        "subtitle_font_size": 14,
-        "tab_font_size": 14,
-        "product_title_font_size": 28,
-        "padding_top": 60,
-        "padding_bottom": 60
-      }
-    },
     "sek_comparison_section_1_dVDxNt": {
       "type": "sek-comparison-section-1",
       "blocks": {
@@ -738,7 +738,7 @@
       "name": "sek Collection Carousel1",
       "settings": {
         "heading": "Slider #2 pro",
-        "collection": "",
+        "collection": "fashion",
         "products_limit": 9,
         "price_prefix": "Starting at",
         "button_text": "View",
@@ -905,11 +905,11 @@
   "order": [
     "main",
     "sek_hand_picked_collection_jwbwyA",
+    "sek_atelier_selection_LxG7qg",
     "sek_image_reveal_carousel_deimLT",
     "sek_video_carousel_MTY4pJ",
     "sek_video_carousel_3_U87Lm6",
     "sek_video_carousel_2_wtpFrV",
-    "sek_atelier_selection_LxG7qg",
     "sek_comparison_section_1_dVDxNt",
     "sek_comparison_section_2_N39rj8",
     "sek_collection_crousel_wJjhKT",
