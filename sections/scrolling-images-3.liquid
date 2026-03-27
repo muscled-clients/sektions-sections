@@ -4,8 +4,8 @@
     border-bottom: solid {{ section.settings.border_color }} {{ section.settings.border_size }}px;
     margin-top: {{ section.settings.margin_top }}px;
     margin-bottom: {{ section.settings.margin_bottom }}px;
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: {{ section.settings.margin_left }}rem;
+    margin-right: {{ section.settings.margin_right }}rem;
     border-radius: {{ section.settings.border_radius }}px;
     overflow: hidden;
     background-color: {{ section.settings.section_bg_color }};
@@ -14,17 +14,17 @@
     width: 100%;
   }
 
-  .section-{{ section.id }}-settings {
+.section-{{ section.id }}-settings {
     margin: 0 auto;
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: {{ section.settings.padding_left_mobile }}rem;
+    padding-right: {{ section.settings.padding_right_mobile }}rem;
     height: 100%;
     display: flex;
     align-items: center;
-    width: 100%;
-  }
+    max-width: clamp(100px, var(--page-content-width, var(--page-width)), 100%);
+}
 
   .scrolling-wrapper-{{ section.id }} {
     position: relative;
@@ -62,7 +62,7 @@
     align-items: center;
   }
 
-  .mosaic-container-{{ section.id }} {
+  .grid-container-{{ section.id }} {
     flex: 0 0 auto;
     width: {{ section.settings.container_width_mobile }}px;
     height: {{ section.settings.container_height_mobile }}px;
@@ -74,16 +74,16 @@
     box-sizing: border-box;
   }
 
-  .mosaic-container-{{ section.id }} .grid-{{ section.id }} {
+  .grid-container-{{ section.id }} .grid-{{ section.id }} {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     gap: {{ section.settings.gap_between_images_mobile }}px;
     height: 100%;
     width: 100%;
   }
 
-  .mosaic-container-{{ section.id }} .item-{{ section.id }} {
+  .grid-container-{{ section.id }} .item-{{ section.id }} {
     position: relative;
     overflow: hidden;
     border-radius: {{ section.settings.image_border_radius }}px;
@@ -92,7 +92,7 @@
     height: 100%;
   }
 
-  .mosaic-container-{{ section.id }} .item-{{ section.id }} img {
+  .grid-container-{{ section.id }} .item-{{ section.id }} img {
     width: 100%;
     height: 100%;
     object-fit: fill;
@@ -101,52 +101,42 @@
   }
 
   /* Grid Placement */
-  .mosaic-container-{{ section.id }} .big-{{ section.id }} {
-    grid-column: 1 / span 2;
-    grid-row: 1 / span 2;
+  .grid-container-{{ section.id }} .tall-{{ section.id }} {
+    grid-column: 1;
+    grid-row: span 2;
   }
 
-  .mosaic-container-{{ section.id }} .small-top-{{ section.id }} {
-    grid-column: 3;
+  .grid-container-{{ section.id }} .small-left-top-{{ section.id }} {
+    grid-column: 2;
     grid-row: 1;
   }
 
-  .mosaic-container-{{ section.id }} .tall-1-{{ section.id }} {
-    grid-column: 4;
-    grid-row: 1 / span 2;
-  }
-
-  .mosaic-container-{{ section.id }} .tall-2-{{ section.id }} {
-    grid-column: 5;
-    grid-row: 1 / span 2;
-  }
-
-  .mosaic-container-{{ section.id }} .tall-3-{{ section.id }} {
-    grid-column: 3;
-    grid-row: 2 / span 2;
-  }
-
-  .mosaic-container-{{ section.id }} .small-bottom-1-{{ section.id }} {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .mosaic-container-{{ section.id }} .small-bottom-2-{{ section.id }} {
+  .grid-container-{{ section.id }} .small-left-bottom-{{ section.id }} {
     grid-column: 2;
-    grid-row: 3;
+    grid-row: 2;
   }
 
-  .mosaic-container-{{ section.id }} .wide-{{ section.id }} {
-    grid-column: 4 / span 2;
-    grid-row: 3;
+  .grid-container-{{ section.id }} .wide-center-{{ section.id }} {
+    grid-column: 3 / span 2;
+    grid-row: span 2;
+  }
+
+  .grid-container-{{ section.id }} .small-right-top-{{ section.id }} {
+    grid-column: 5;
+    grid-row: 1;
+  }
+
+  .grid-container-{{ section.id }} .small-right-bottom-{{ section.id }} {
+    grid-column: 5;
+    grid-row: 2;
   }
 
   @media(min-width: 1024px) {
     .section-{{ section.id }} {
       margin-top: {{ section.settings.margin_top_desktop }}px;
       margin-bottom: {{ section.settings.margin_bottom_desktop }}px;
-      margin-left: 0;
-      margin-right: 0;
+      margin-left: {{ section.settings.margin_left_desktop }}rem;
+      margin-right: {{ section.settings.margin_right_desktop }}rem;
       border-radius: {{ section.settings.border_radius_desktop }}px;
       height: {{ section.settings.section_height_desktop }}px;
       max-height: {{ section.settings.section_height_desktop }}px;
@@ -155,8 +145,8 @@
     .section-{{ section.id }}-settings {
       padding-top: {{ section.settings.padding_top_desktop }}px;
       padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
-      padding-left: 0;
-      padding-right: 0;
+      padding-left: {{ section.settings.padding_left_desktop }}rem;
+      padding-right: {{ section.settings.padding_right_desktop }}rem;
     }
 
     .scrolling-track-{{ section.id }} {
@@ -176,12 +166,12 @@
       padding-right: {{ section.settings.gap_between_containers_desktop }}px;
     }
 
-    .mosaic-container-{{ section.id }} {
+    .grid-container-{{ section.id }} {
       width: {{ section.settings.container_width_desktop }}px;
       height: {{ section.settings.container_height_desktop }}px;
     }
 
-    .mosaic-container-{{ section.id }} .grid-{{ section.id }} {
+    .grid-container-{{ section.id }} .grid-{{ section.id }} {
       gap: {{ section.settings.gap_between_images_desktop }}px;
     }
   }
@@ -229,128 +219,99 @@
   <div class="section-{{ section.id }}-settings">
     <div class="scrolling-wrapper-{{ section.id }}">
       <div class="scrolling-track-{{ section.id }}">
-        {%- for i in (1..20) -%}
+        {%- assign clone_count = 30 -%}
+        {%- for i in (1..clone_count) -%}
           <div class="scrolling-list-{{ section.id }}" data-ss-list-{{ section.id }}="{% if forloop.first %}base{% else %}clone{% endif %}" {% unless forloop.first %}aria-hidden="true"{% endunless %}>
             {%- for block in section.blocks -%}
-              <div class="mosaic-container-{{ section.id }} mosaic-container-{{ block.id }}" {{ block.shopify_attributes }} style="background-color: {{ section.settings.container_bg_color }};">
+              <div class="grid-container-{{ section.id }} grid-container-{{ block.id }}" {{ block.shopify_attributes }} style="background-color: {{ section.settings.container_bg_color }};">
                 <div class="grid-{{ section.id }}">
                   
-                  <!-- Big Image (2x2) -->
-                  <div class="item-{{ section.id }} big-{{ section.id }}">
-                    {%- if block.settings.big_image != blank -%}
-                      <img src="{{ block.settings.big_image | image_url: width: 800 }}" 
-                           srcset="{{ block.settings.big_image | image_url: width: 400 }} 400w,
-                                   {{ block.settings.big_image | image_url: width: 800 }} 800w,
-                                   {{ block.settings.big_image | image_url: width: 1200 }} 1200w"
+                  <!-- Tall Left Image -->
+                  <div class="item-{{ section.id }} tall-{{ section.id }}">
+                    {%- if block.settings.tall_image != blank -%}
+                      <img src="{{ block.settings.tall_image | image_url: width: 800 }}" 
+                           srcset="{{ block.settings.tall_image | image_url: width: 400 }} 400w,
+                                   {{ block.settings.tall_image | image_url: width: 800 }} 800w,
+                                   {{ block.settings.tall_image | image_url: width: 1200 }} 1200w"
+                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
+                           loading="lazy"
+                           alt="{{ block.settings.tall_image.alt | escape }}"
+                           style="border-radius: {{ section.settings.image_border_radius }}px;">
+                    {%- else -%}
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                  </div>
+
+                  <!-- Small Left Top -->
+                  <div class="item-{{ section.id }} small-left-top-{{ section.id }}">
+                    {%- if block.settings.small_left_top != blank -%}
+                      <img src="{{ block.settings.small_left_top | image_url: width: 600 }}" 
+                           srcset="{{ block.settings.small_left_top | image_url: width: 300 }} 300w,
+                                   {{ block.settings.small_left_top | image_url: width: 600 }} 600w"
+                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
+                           loading="lazy"
+                           alt="{{ block.settings.small_left_top.alt | escape }}"
+                           style="border-radius: {{ section.settings.image_border_radius }}px;">
+                    {%- else -%}
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                  </div>
+
+                  <!-- Wide Center Image -->
+                  <div class="item-{{ section.id }} wide-center-{{ section.id }}">
+                    {%- if block.settings.wide_center != blank -%}
+                      <img src="{{ block.settings.wide_center | image_url: width: 1200 }}" 
+                           srcset="{{ block.settings.wide_center | image_url: width: 600 }} 600w,
+                                   {{ block.settings.wide_center | image_url: width: 1200 }} 1200w,
+                                   {{ block.settings.wide_center | image_url: width: 1800 }} 1800w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 | times: 2 }}px, {{ section.settings.container_width_mobile | divided_by: 5 | times: 2 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.big_image.alt | escape }}"
+                           alt="{{ block.settings.wide_center.alt | escape }}"
                            style="border-radius: {{ section.settings.image_border_radius }}px;">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Small Top Image -->
-                  <div class="item-{{ section.id }} small-top-{{ section.id }}">
-                    {%- if block.settings.small_top != blank -%}
-                      <img src="{{ block.settings.small_top | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.small_top | image_url: width: 300 }} 300w,
-                                   {{ block.settings.small_top | image_url: width: 600 }} 600w"
+                  <!-- Small Right Top -->
+                  <div class="item-{{ section.id }} small-right-top-{{ section.id }}">
+                    {%- if block.settings.small_right_top != blank -%}
+                      <img src="{{ block.settings.small_right_top | image_url: width: 600 }}" 
+                           srcset="{{ block.settings.small_right_top | image_url: width: 300 }} 300w,
+                                   {{ block.settings.small_right_top | image_url: width: 600 }} 600w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.small_top.alt | escape }}"
+                           alt="{{ block.settings.small_right_top.alt | escape }}"
                            style="border-radius: {{ section.settings.image_border_radius }}px;">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Tall Right Image 1 -->
-                  <div class="item-{{ section.id }} tall-1-{{ section.id }}">
-                    {%- if block.settings.tall_1 != blank -%}
-                      <img src="{{ block.settings.tall_1 | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.tall_1 | image_url: width: 300 }} 300w,
-                                   {{ block.settings.tall_1 | image_url: width: 600 }} 600w"
+                  <!-- Small Left Bottom -->
+                  <div class="item-{{ section.id }} small-left-bottom-{{ section.id }}">
+                    {%- if block.settings.small_left_bottom != blank -%}
+                      <img src="{{ block.settings.small_left_bottom | image_url: width: 600 }}" 
+                           srcset="{{ block.settings.small_left_bottom | image_url: width: 300 }} 300w,
+                                   {{ block.settings.small_left_bottom | image_url: width: 600 }} 600w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.tall_1.alt | escape }}"
+                           alt="{{ block.settings.small_left_bottom.alt | escape }}"
                            style="border-radius: {{ section.settings.image_border_radius }}px;">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                   </div>
 
-                  <!-- Tall Right Image 2 -->
-                  <div class="item-{{ section.id }} tall-2-{{ section.id }}">
-                    {%- if block.settings.tall_2 != blank -%}
-                      <img src="{{ block.settings.tall_2 | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.tall_2 | image_url: width: 300 }} 300w,
-                                   {{ block.settings.tall_2 | image_url: width: 600 }} 600w"
+                  <!-- Small Right Bottom -->
+                  <div class="item-{{ section.id }} small-right-bottom-{{ section.id }}">
+                    {%- if block.settings.small_right_bottom != blank -%}
+                      <img src="{{ block.settings.small_right_bottom | image_url: width: 600 }}" 
+                           srcset="{{ block.settings.small_right_bottom | image_url: width: 300 }} 300w,
+                                   {{ block.settings.small_right_bottom | image_url: width: 600 }} 600w"
                            sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
                            loading="lazy"
-                           alt="{{ block.settings.tall_2.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
-                    {%- else -%}
-                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                    {%- endif -%}
-                  </div>
-
-                  <!-- Tall Middle Image -->
-                  <div class="item-{{ section.id }} tall-3-{{ section.id }}">
-                    {%- if block.settings.tall_3 != blank -%}
-                      <img src="{{ block.settings.tall_3 | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.tall_3 | image_url: width: 300 }} 300w,
-                                   {{ block.settings.tall_3 | image_url: width: 600 }} 600w"
-                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
-                           loading="lazy"
-                           alt="{{ block.settings.tall_3.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
-                    {%- else -%}
-                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                    {%- endif -%}
-                  </div>
-
-                  <!-- Bottom Small 1 -->
-                  <div class="item-{{ section.id }} small-bottom-1-{{ section.id }}">
-                    {%- if block.settings.small_bottom_1 != blank -%}
-                      <img src="{{ block.settings.small_bottom_1 | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.small_bottom_1 | image_url: width: 300 }} 300w,
-                                   {{ block.settings.small_bottom_1 | image_url: width: 600 }} 600w"
-                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
-                           loading="lazy"
-                           alt="{{ block.settings.small_bottom_1.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
-                    {%- else -%}
-                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                    {%- endif -%}
-                  </div>
-
-                  <!-- Bottom Small 2 -->
-                  <div class="item-{{ section.id }} small-bottom-2-{{ section.id }}">
-                    {%- if block.settings.small_bottom_2 != blank -%}
-                      <img src="{{ block.settings.small_bottom_2 | image_url: width: 600 }}" 
-                           srcset="{{ block.settings.small_bottom_2 | image_url: width: 300 }} 300w,
-                                   {{ block.settings.small_bottom_2 | image_url: width: 600 }} 600w"
-                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 }}px, {{ section.settings.container_width_mobile | divided_by: 5 }}px"
-                           loading="lazy"
-                           alt="{{ block.settings.small_bottom_2.alt | escape }}"
-                           style="border-radius: {{ section.settings.image_border_radius }}px;">
-                    {%- else -%}
-                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                    {%- endif -%}
-                  </div>
-
-                  <!-- Wide Bottom Image -->
-                  <div class="item-{{ section.id }} wide-{{ section.id }}">
-                    {%- if block.settings.wide_image != blank -%}
-                      <img src="{{ block.settings.wide_image | image_url: width: 800 }}" 
-                           srcset="{{ block.settings.wide_image | image_url: width: 400 }} 400w,
-                                   {{ block.settings.wide_image | image_url: width: 800 }} 800w,
-                                   {{ block.settings.wide_image | image_url: width: 1200 }} 1200w"
-                           sizes="(min-width: 1024px) {{ section.settings.container_width_desktop | divided_by: 5 | times: 2 }}px, {{ section.settings.container_width_mobile | divided_by: 5 | times: 2 }}px"
-                           loading="lazy"
-                           alt="{{ block.settings.wide_image.alt | escape }}"
+                           alt="{{ block.settings.small_right_bottom.alt | escape }}"
                            style="border-radius: {{ section.settings.image_border_radius }}px;">
                     {%- else -%}
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -377,40 +338,45 @@
     const track = sectionRoot.querySelector('.scrolling-track-' + sectionId);
     if (!wrapper || !track) return;
 
-    function rebuildTrackCopies() {
-      // Don't remove clones - we already have enough from Liquid
-      // Just ensure smooth scrolling
-      const baseLists = Array.from(track.querySelectorAll('[data-ss-list-{{ section.id }}="base"]'));
-      if (baseLists.length === 0) return;
-      
-      // If track width is less than wrapper width * 2, we need more copies
+    function ensureFullWidth() {
+      // Calculate how many copies we need to fill the screen
       const containerWidth = {{ section.settings.container_width_desktop }} + {{ section.settings.gap_between_containers_desktop }};
-      const targetWidth = wrapper.clientWidth * 3; // Triple the width for smooth scrolling
+      const targetWidth = wrapper.clientWidth * 4; // 4x the wrapper width for smooth infinite scroll
       
-      // Calculate how many total lists we need
-      const totalWidth = track.scrollWidth;
+      // Count current lists
       const lists = Array.from(track.children);
-      const listCount = lists.length;
+      const currentCount = lists.length;
       
-      if (totalWidth < targetWidth && listCount < 50) {
-        // Add more clones dynamically if needed
-        baseLists.forEach((baseList) => {
+      // Calculate current total width
+      const totalWidth = currentCount * containerWidth;
+      
+      // If we don't have enough width, add more clones
+      if (totalWidth < targetWidth) {
+        const baseList = track.querySelector('[data-ss-list-{{ section.id }}="base"]');
+        if (!baseList) return;
+        
+        const neededCopies = Math.ceil((targetWidth - totalWidth) / containerWidth) + 5;
+        
+        for (let i = 0; i < neededCopies; i++) {
           const clone = baseList.cloneNode(true);
           clone.setAttribute('data-ss-list-{{ section.id }}', 'clone');
           clone.setAttribute('aria-hidden', 'true');
           track.appendChild(clone);
-        });
+        }
       }
     }
 
     let resizeFrame = null;
     function handleResize() {
       if (resizeFrame) cancelAnimationFrame(resizeFrame);
-      resizeFrame = requestAnimationFrame(rebuildTrackCopies);
+      resizeFrame = requestAnimationFrame(ensureFullWidth);
     }
 
-    // Initial rebuild after a short delay to ensure layout is complete
-    setTimeout(rebuildTrackCopies, 200);
+    // Run multiple times to ensure full coverage
+    setTimeout(ensureFullWidth, 100);
+    setTimeout(ensureFullWidth, 300);
+    setTimeout(ensureFullWidth, 500);
+    setTimeout(ensureFullWidth, 1000);
     
     window.addEventListener('resize', handleResize, { passive: true });
 
@@ -423,13 +389,17 @@
 
     document.addEventListener('shopify:section:load', function (event) {
       if (event.target && event.target.id === 'shopify-section-' + sectionId) {
-        setTimeout(rebuildTrackCopies, 200);
+        setTimeout(ensureFullWidth, 200);
+        setTimeout(ensureFullWidth, 400);
+        setTimeout(ensureFullWidth, 600);
       }
     });
 
     document.addEventListener('shopify:block:select', function (event) {
       if (event.target && event.target.id === 'shopify-section-' + sectionId) {
-        setTimeout(rebuildTrackCopies, 200);
+        setTimeout(ensureFullWidth, 200);
+        setTimeout(ensureFullWidth, 400);
+        setTimeout(ensureFullWidth, 600);
       }
     });
     {%- endif -%}
@@ -589,7 +559,7 @@
       "step": 2,
       "unit": "px",
       "label": "Container Inner Padding",
-      "default": 12
+      "default": 0
     },
     {
       "type": "header",
@@ -624,7 +594,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap Between Images in Container",
-      "default": 4
+      "default": 8
     },
     {
       "type": "range",
@@ -669,7 +639,7 @@
       "step": 2,
       "unit": "px",
       "label": "Gap Between Images in Container",
-      "default": 6
+      "default": 12
     },
     {
       "type": "range",
@@ -737,6 +707,26 @@
     },
     {
       "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Padding Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Padding Right",
+      "default": 0
+    },
+    {
+      "type": "range",
       "id": "margin_top_mobile",
       "min": 0,
       "max": 100,
@@ -753,6 +743,26 @@
       "step": 1,
       "unit": "px",
       "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_left_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Margin Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_right_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Margin Right",
       "default": 0
     },
     {
@@ -781,6 +791,26 @@
     },
     {
       "type": "range",
+      "id": "padding_left_desktop",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Padding Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Padding Right",
+      "default": 0
+    },
+    {
+      "type": "range",
       "id": "margin_top_desktop",
       "min": 0,
       "max": 100,
@@ -798,65 +828,73 @@
       "unit": "px",
       "label": "Margin Bottom",
       "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_left_desktop",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Margin Left",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_right_desktop",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "rem",
+      "label": "Margin Right",
+      "default": 0
     }
   ],
   "blocks": [
     {
-      "type": "mosaic_container",
-      "name": "Mosaic Container",
+      "type": "grid_container",
+      "name": "Grid Container",
       "limit": 1,
       "settings": [
         {
           "type": "header",
-          "content": "Images for 3x5 Mosaic Layout"
+          "content": "Images for 2 Row Wide Center Grid"
         },
         {
           "type": "image_picker",
-          "id": "big_image",
-          "label": "Big Image (2x2)",
-          "info": "Top left corner, spans 2x2 grid cells"
+          "id": "tall_image",
+          "label": "Tall Left Image",
+          "info": "Column 1, spans 2 rows"
         },
         {
           "type": "image_picker",
-          "id": "small_top",
-          "label": "Small Top Image",
-          "info": "Column 3, Row 1"
+          "id": "small_left_top",
+          "label": "Small Left Top",
+          "info": "Column 2, Row 1"
         },
         {
           "type": "image_picker",
-          "id": "tall_1",
-          "label": "Tall Right Image 1",
-          "info": "Column 4, spans Rows 1-2"
+          "id": "small_left_bottom",
+          "label": "Small Left Bottom",
+          "info": "Column 2, Row 2"
         },
         {
           "type": "image_picker",
-          "id": "tall_2",
-          "label": "Tall Right Image 2",
-          "info": "Column 5, spans Rows 1-2"
+          "id": "wide_center",
+          "label": "Wide Center Image",
+          "info": "Columns 3-4, spans 2 rows"
         },
         {
           "type": "image_picker",
-          "id": "tall_3",
-          "label": "Tall Middle Image",
-          "info": "Column 3, spans Rows 2-3"
+          "id": "small_right_top",
+          "label": "Small Right Top",
+          "info": "Column 5, Row 1"
         },
         {
           "type": "image_picker",
-          "id": "small_bottom_1",
-          "label": "Bottom Small 1",
-          "info": "Column 1, Row 3"
-        },
-        {
-          "type": "image_picker",
-          "id": "small_bottom_2",
-          "label": "Bottom Small 2",
-          "info": "Column 2, Row 3"
-        },
-        {
-          "type": "image_picker",
-          "id": "wide_image",
-          "label": "Wide Bottom Image",
-          "info": "Columns 4-5, Row 3 (spans 2 columns)"
+          "id": "small_right_bottom",
+          "label": "Small Right Bottom",
+          "info": "Column 5, Row 2"
         }
       ]
     }
@@ -866,7 +904,7 @@
       "name": "Scrolling Images 3",
       "blocks": [
         {
-          "type": "mosaic_container"
+          "type": "grid_container"
         }
       ]
     }
