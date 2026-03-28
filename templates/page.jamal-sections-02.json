@@ -170,7 +170,7 @@
           "type": "faq",
           "settings": {
             "question": "How do I connect my headphone to my device?",
-            "answer": "<p>1. Open the charging case, then press and hold the button. Wait for a blue light to pulse.<br>2. Select your headphones from your device's Bluetooth list.<br>3. On your device, download the Bluetooth app, and follow the in-app instructions to complete the set-up.</p>"
+            "answer": "<p>1. Open the charging case, then press and hold the button. Wait for a blue light to pulse.<br/>2. Select your headphones from your device's Bluetooth list.<br/>3. On your device, download the Bluetooth app, and follow the in-app instructions to complete the set-up.</p>"
           }
         },
         "faq_3QTMVg": {
@@ -1793,6 +1793,52 @@
         "nav_button_border_width": 0,
         "nav_button_border_color": "#121212"
       }
+    },
+    "scrolling_images_xCz4Td": {
+      "type": "scrolling-images",
+      "blocks": {
+        "editorial_container_7L8RWT": {
+          "type": "editorial_container",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "editorial_container_7L8RWT"
+      ],
+      "name": "Scrolling Editorial Layout",
+      "settings": {
+        "background_color": "#ffffff",
+        "border_color": "#121212",
+        "border_size": 0,
+        "border_radius": 0,
+        "border_radius_desktop": 0,
+        "scroll_speed": 30,
+        "scroll_direction": "left",
+        "container_background_color": "#ffffff",
+        "container_border_color": "#121212",
+        "container_border_size": 0,
+        "container_border_radius": 0,
+        "container_padding": 12,
+        "container_width_mobile": 960,
+        "grid_row_height_mobile": 160,
+        "gap_between_images_mobile": 8,
+        "gap_between_containers_mobile": 12,
+        "container_width_desktop": 1260,
+        "grid_row_height_desktop": 240,
+        "gap_between_images_desktop": 12,
+        "gap_between_containers_desktop": 12,
+        "image_border_size": 0,
+        "image_border_color": "#121212",
+        "image_border_radius": 32,
+        "padding_top_mobile": 27,
+        "padding_bottom_mobile": 27,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 36,
+        "padding_bottom_desktop": 36,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0
+      }
     }
   },
   "order": [
@@ -1807,6 +1853,7 @@
     "featured_collection_01_jBXq9N",
     "featured_collection_02_nNNTP9",
     "feature_collection_04_3agPef",
-    "featured_collection_video_RGfVpL"
+    "featured_collection_video_RGfVpL",
+    "scrolling_images_xCz4Td"
   ]
 }
