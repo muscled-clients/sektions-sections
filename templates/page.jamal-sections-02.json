@@ -2200,6 +2200,86 @@
         "nav_icon_color": "#ffffff",
         "nav_hover_bg": "#333333"
       }
+    },
+    "video_testimonials_round_FUaTEn": {
+      "type": "video-testimonials-round",
+      "blocks": {
+        "video_card_TBhCKB": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Paul F.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_card_4iKA3N": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Olevier A.",
+            "product_name": "Unda 2.0 Eggshell",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_card_wjGj6K": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Sarah J.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_card_jjdRi6": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Laura G.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_card_QM3RBb": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Jack B.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "video_card_TBhCKB",
+        "video_card_4iKA3N",
+        "video_card_wjGj6K",
+        "video_card_jjdRi6",
+        "video_card_QM3RBb"
+      ],
+      "name": "Video Testimonials Round",
+      "settings": {
+        "subheading": "What our customers say",
+        "heading": "Why people love our brand",
+        "description": "Don't just take our word for it, see what our customers are saying",
+        "background_color": "#ffffff",
+        "text_color": "#953034",
+        "subheading_color": "#953034",
+        "nav_button_color": "#953034",
+        "nav_icon_color": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -2221,6 +2301,7 @@
     "scrolling_images_4_7cfGYb",
     "atelier_selection_4i4hPh",
     "featured_collection_tabs_XNCpFw",
-    "handpicked_collection_RCeK8N"
+    "handpicked_collection_RCeK8N",
+    "video_testimonials_round_FUaTEn"
   ]
 }
