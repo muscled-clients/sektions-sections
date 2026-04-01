@@ -99,10 +99,19 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "ss_atc_button_3_XU7GRq": {
+      "type": "ss-atc-button-3",
+      "name": "SS - ATC Button #3",
+      "settings": {
+        "custom_class_selector": "",
+        "shake_type": "jiggle"
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "related-products",
+    "ss_atc_button_3_XU7GRq"
   ]
 }
