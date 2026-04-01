@@ -2385,6 +2385,82 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "video_testimonials_UTt6zM": {
+      "type": "video-testimonials",
+      "blocks": {
+        "video_card_fjyanV": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Sarah M.",
+            "product_name": "Classic Collection",
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_card_X9Y8gr": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "John D.",
+            "product_name": "Premium Series",
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_card_ckLryU": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Emily R.",
+            "product_name": "Essential Kit",
+            "show_stars": true,
+            "star_rating": 4
+          }
+        },
+        "video_card_3GjYbK": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Michael T.",
+            "product_name": "Signature Line",
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_card_TLRXWt": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Lisa K.",
+            "product_name": "Deluxe Bundle",
+            "show_stars": true,
+            "star_rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "video_card_fjyanV",
+        "video_card_X9Y8gr",
+        "video_card_ckLryU",
+        "video_card_3GjYbK",
+        "video_card_TLRXWt"
+      ],
+      "name": "Video Testimonials",
+      "settings": {
+        "subheading": "OUR TESTIMONIALS",
+        "heading": "Why people love our brand",
+        "description": "Don't just take our word for it, see what our customers are saying",
+        "card_border_radius": 12,
+        "background_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "subheading_color": "#666666",
+        "nav_button_color": "#ffffff",
+        "nav_icon_color": "#1a1a1a",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -2408,6 +2484,7 @@
     "featured_collection_tabs_XNCpFw",
     "handpicked_collection_RCeK8N",
     "video_testimonials_round_FUaTEn",
-    "video_testimonials_wide_gmptnq"
+    "video_testimonials_wide_gmptnq",
+    "video_testimonials_UTt6zM"
   ]
 }
