@@ -107,11 +107,50 @@
         "custom_class_selector": "",
         "shake_type": "jiggle"
       }
+    },
+    "ss_featured_review_slider_VLfJJG": {
+      "type": "ss-featured-review-slider",
+      "blocks": {
+        "quote_MN7bm7": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>\"</p><p>This rug is such good quality and makes me so happy every time I look at it.  I'm using this one for a top cover over my bedspread. It's a perfect  match for my room and linen. I have another that I use as a throw  for the lounge and a picnic rug! In LOVE.</p><p>- Barbara W.</p>"
+          }
+        },
+        "quote_eHVpKp": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>\"</p><p>The postage was incredibly quick and the quality and colours far exceeded what I thought. The pics don't do them justice. Truly unique rugs that I doubt will date anytime soon. I would recommend - beautiful rug and great customer service. </p><p>- Tanya E.</p>"
+          }
+        },
+        "quote_nU4QFJ": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>\"</p><p>My husband argued with me saying we didn’t need a new blanket. Once we received this one, he quickly changed his tune. It’s cozy, soft and warm. I love the design and boho vibe it adds to our home. High quality product at an affordable price.</p><p>- Bebe H.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "quote_MN7bm7",
+        "quote_eHVpKp",
+        "quote_nU4QFJ"
+      ],
+      "name": "SS - Review slider",
+      "settings": {
+        "example": "<div data-review-quote-slider-target></div>",
+        "pagination_color": "#db877b",
+        "bg_color": "#f4d9d5",
+        "text_color": "#d87e71",
+        "border_radius": 32,
+        "font_size": 16,
+        "custom_classes": ""
+      }
     }
   },
   "order": [
     "main",
     "related-products",
-    "ss_atc_button_3_XU7GRq"
+    "ss_atc_button_3_XU7GRq",
+    "ss_featured_review_slider_VLfJJG"
   ]
 }
