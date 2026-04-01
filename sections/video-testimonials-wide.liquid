@@ -1,0 +1,413 @@
+{{ 'video-testimonials.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="video-testimonials section-{{ section.id }}"
+  style="
+    --vt-bg-color: {{ section.settings.background_color }};
+    --vt-text-color: {{ section.settings.text_color }};
+    --vt-subheading-color: {{ section.settings.subheading_color }};
+    --vt-btn-bg: {{ section.settings.nav_button_color }};
+    --vt-btn-icon: {{ section.settings.nav_icon_color }};
+    --vt-card-radius: {{ section.settings.card_border_radius }}px;
+    --vt-padding-top: {{ section.settings.padding_top }}px;
+    --vt-padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="video-testimonials__container">
+    {%- if section.settings.subheading != blank or section.settings.heading != blank or section.settings.description != blank -%}
+      <div class="video-testimonials__header">
+        {%- if section.settings.subheading != blank -%}
+          <p class="video-testimonials__subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="video-testimonials__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="video-testimonials__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="video-testimonials__slider-wrapper">
+      <div class="swiper video-testimonials__swiper" id="vt-swiper-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {%- assign render_count = 2 -%}
+          {%- if section.blocks.size >= 10 -%}
+            {%- assign render_count = 1 -%}
+          {%- endif -%}
+          {%- for r in (1..render_count) -%}
+            {%- for block in section.blocks -%}
+              <div class="swiper-slide video-testimonials__slide" {% if r == 1 %}{{ block.shopify_attributes }}{% endif %}>
+                <div class="video-testimonials__card">
+                  <div class="video-testimonials__media">
+                    {%- if block.settings.video_url != blank -%}
+                      {%- assign video_url = block.settings.video_url -%}
+                      {%- if video_url contains 'youtube.com' or video_url contains 'youtu.be' -%}
+                        {%- if video_url contains 'youtu.be' -%}
+                          {%- assign yt_id = video_url | split: 'youtu.be/' | last | split: '?' | first -%}
+                        {%- else -%}
+                          {%- assign yt_id = video_url | split: 'v=' | last | split: '&' | first -%}
+                        {%- endif -%}
+                        <iframe
+                          class="video-testimonials__iframe"
+                          src="https://www.youtube.com/embed/{{ yt_id }}?autoplay=0&mute=1&loop=1&playlist={{ yt_id }}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+                          allow="autoplay; encrypted-media"
+                          allowfullscreen
+                          loading="lazy"
+                        ></iframe>
+                      {%- elsif video_url contains 'vimeo.com' -%}
+                        {%- assign vimeo_id = video_url | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | first -%}
+                        <iframe
+                          class="video-testimonials__iframe"
+                          src="https://player.vimeo.com/video/{{ vimeo_id }}?autoplay=0&muted=1&loop=1&background=1&playsinline=1"
+                          allow="autoplay; encrypted-media"
+                          allowfullscreen
+                          loading="lazy"
+                        ></iframe>
+                      {%- else -%}
+                        <video
+                          class="video-testimonials__video"
+                          src="{{ video_url }}"
+                          muted
+                          loop
+                          playsinline
+                          preload="none"
+                        ></video>
+                      {%- endif -%}
+                    {%- elsif block.settings.video != blank -%}
+                      <video
+                        class="video-testimonials__video"
+                        muted
+                        loop
+                        playsinline
+                        preload="none"
+                      >
+                        {%- for source in block.settings.video.sources -%}
+                          <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                        {%- endfor -%}
+                      </video>
+                    {%- endif -%}
+
+                    {%- if block.settings.poster_image != blank -%}
+                      <img
+                        class="video-testimonials__poster"
+                        src="{{ block.settings.poster_image | image_url: width: 600 }}"
+                        alt="{{ block.settings.customer_name | escape }}"
+                        width="600"
+                        height="750"
+                        loading="lazy"
+                      >
+                    {%- endif -%}
+
+                    <button class="video-testimonials__play-btn" aria-label="Play video">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </button>
+
+                    <div class="video-testimonials__gradient"></div>
+                  </div>
+
+                  <div class="video-testimonials__content">
+                    {%- if block.settings.customer_name != blank -%}
+                      <p class="video-testimonials__name">
+                        {{- block.settings.customer_name -}}
+                        {%- if block.settings.show_verified -%}
+                          <svg class="video-testimonials__verified" width="16" height="16" viewBox="0 0 24 24" fill="#1DA1F2"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"/></svg>
+                        {%- endif -%}
+                      </p>
+                    {%- endif -%}
+                    {%- if block.settings.product_name != blank -%}
+                      <p class="video-testimonials__product">{{ block.settings.product_name }}</p>
+                    {%- endif -%}
+                    {%- if block.settings.show_stars -%}
+                      <div class="video-testimonials__stars">
+                        {%- for i in (1..5) -%}
+                          {%- if i <= block.settings.star_rating -%}
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FFD700"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                          {%- else -%}
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+<script>
+  (function () {
+    var sectionId = '{{ section.id }}';
+
+    function initSection() {
+      var swiperEl = document.getElementById('vt-swiper-' + sectionId);
+      if (!swiperEl) return;
+
+      function initSwiper() {
+        if (typeof Swiper === 'undefined') {
+          setTimeout(initSwiper, 100);
+          return;
+        }
+
+        var swiper = new Swiper('#vt-swiper-' + sectionId, {
+          effect: 'coverflow',
+          centeredSlides: true,
+          speed: 600,
+          loop: true,
+          watchSlidesProgress: true,
+          breakpoints: {
+            320: {
+              slidesPerView: 1.4,
+              coverflowEffect: { rotate: 0, stretch: 0, depth: 200, modifier: 1, slideShadows: false },
+            },
+            768: {
+              slidesPerView: 2,
+              coverflowEffect: { rotate: 0, stretch: 0, depth: 250, modifier: 1, slideShadows: false },
+            },
+            1024: {
+              slidesPerView: 4,
+              coverflowEffect: { rotate: 0, stretch: 0, depth: 300, modifier: 1, slideShadows: false },
+            },
+            1200: {
+              slidesPerView: 4,
+              coverflowEffect: { rotate: 0, stretch: 0, depth: 300, modifier: 1, slideShadows: false },
+            },
+          },
+          on: {
+            setTranslate: function () {
+              this.slides.forEach(function (slide) {
+                var p = Math.abs(slide.progress);
+                slide.style.visibility = p > 3.5 ? 'hidden' : 'visible';
+              });
+            },
+          },
+        });
+      }
+
+      function pauseAllVideos(container) {
+        container.querySelectorAll('video').forEach(function (v) { v.pause(); });
+      }
+
+      swiperEl.addEventListener('click', function (e) {
+        var card = e.target.closest('.video-testimonials__card');
+        if (!card) return;
+
+        var video = card.querySelector('video');
+        var poster = card.querySelector('.video-testimonials__poster');
+        var playBtn = card.querySelector('.video-testimonials__play-btn');
+
+        if (video) {
+          if (video.paused) {
+            pauseAllVideos(swiperEl);
+            video.play();
+            if (poster) poster.style.opacity = '0';
+            if (playBtn) playBtn.style.opacity = '0';
+          } else {
+            video.pause();
+            if (playBtn) playBtn.style.opacity = '1';
+          }
+        }
+
+        var iframe = card.querySelector('iframe');
+        if (iframe && iframe.src) {
+          if (poster) poster.style.opacity = '0';
+          if (playBtn) playBtn.style.opacity = '0';
+          if (iframe.src.includes('youtube')) {
+            iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+          }
+        }
+      });
+
+      initSwiper();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSection);
+    } else {
+      initSection();
+    }
+
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.detail.sectionId === sectionId) initSection();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Video Testimonials Wide",
+  "tag": "section",
+  "class": "video-testimonials-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "OUR TESTIMONIALS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why people love our brand"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Don't just take our word for it, see what our customers are saying"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#fbf9f4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#41441c"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#41441c"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_color",
+      "label": "Navigation button color",
+      "default": "#fbf9f4"
+    },
+    {
+      "type": "color",
+      "id": "nav_icon_color",
+      "label": "Navigation icon color",
+      "default": "#41441c"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_card",
+      "name": "Video Card",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Upload a Shopify-hosted video"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL",
+          "info": "YouTube or Vimeo URL (used if no Shopify video is uploaded)"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_image",
+          "label": "Poster image",
+          "info": "Shown before the video plays"
+        },
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Customer name",
+          "default": "Jane Doe"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product name",
+          "default": "Product Name"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_verified",
+          "label": "Show verified badge",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_stars",
+          "label": "Show star rating",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "star_rating",
+          "label": "Star rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Testimonials Wide",
+      "blocks": [
+        { "type": "video_card", "settings": { "customer_name": "Emily D.", "product_name": "Sunflower Yellow", "star_rating": 4, "show_verified": true } },
+        { "type": "video_card", "settings": { "customer_name": "Jane D.", "product_name": "Sunset Green blanket", "star_rating": 5, "show_verified": true } },
+        { "type": "video_card", "settings": { "customer_name": "Paula H.", "product_name": "Solar Dawn blanket", "star_rating": 5, "show_verified": true } },
+        { "type": "video_card", "settings": { "customer_name": "James G.", "product_name": "Solar Dawn blanket", "star_rating": 5, "show_verified": true } },
+        { "type": "video_card", "settings": { "customer_name": "Linda R.", "product_name": "Sunset Terracotta blanket", "star_rating": 5, "show_verified": true } },
+        { "type": "video_card", "settings": { "customer_name": "Kelly O.", "product_name": "Solar Dusk blanket", "star_rating": 4, "show_verified": true } },
+        { "type": "video_card", "settings": { "customer_name": "Dane D.", "product_name": "Green blanket", "star_rating": 5, "show_verified": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

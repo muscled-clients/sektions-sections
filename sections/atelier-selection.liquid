@@ -1,0 +1,930 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+{%- style -%}
+  .as-section-{{ section.id }} {
+    overflow: hidden;
+    position: relative;
+    background: {{ section.settings.background_color }};
+  }
+
+  .as-settings-{{ section.id }} {
+    margin: 0 auto;
+    padding: 60px 1.5rem 50px;
+    overflow: hidden;
+  }
+
+  /* ===== TRIANGLE SHAPE ===== */
+  .as-shape-wrap-{{ section.id }} {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .as-shape-{{ section.id }} {
+    display: block !important;
+    position: absolute;
+    width: 1900px;
+    height: 1900px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-1600px) rotate(45deg);
+    transform-origin: center center;
+    z-index: 0;
+    border-radius: 100px;
+    transition: background-color 0.4s ease;
+    background-color: {{ section.settings.shape_color }};
+  }
+
+  @media(max-width: 1624px) {
+    .as-shape-{{ section.id }} { width: 1800px; height: 1800px; }
+  }
+  @media(max-width: 1224px) {
+    .as-shape-{{ section.id }} { width: 1700px; height: 1700px; }
+  }
+  @media(max-width: 768px) {
+    .as-shape-{{ section.id }} {
+      width: 700px;
+      height: 700px;
+      transform: translateX(-50%) translateY(-280px) rotate(45deg);
+    }
+  }
+
+  /* ===== HEADING ===== */
+  .as-heading-{{ section.id }} {
+    text-align: left;
+    position: relative;
+    z-index: 2;
+  }
+
+  .as-heading-{{ section.id }} * {
+    margin: 0;
+    font-size: 36px;
+    color: {{ section.settings.accent_color }};
+    line-height: 130%;
+    font-weight: 700;
+    font-family: "Playfair Display", serif;
+    font-style: normal;
+  }
+
+  .as-subheading-{{ section.id }} {
+    margin-top: 12px;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+
+  .as-subheading-{{ section.id }} * {
+    margin: 0;
+    font-size: 14px;
+    color: {{ section.settings.subheading_color }};
+    line-height: 160%;
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+  }
+
+  /* ===== TABS ===== */
+  .as-tabs-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 2;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+
+  .as-tab-{{ section.id }} {
+    margin: 0;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    background: none;
+    font-size: 13px;
+    line-height: 100%;
+    color: {{ section.settings.tab_inactive_color }};
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.25s ease;
+    font-family: "Inter", sans-serif;
+  }
+
+  .as-tab-{{ section.id }}:hover {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .as-tab-{{ section.id }}.active {
+    color: {{ section.settings.accent_color }};
+    border-bottom-color: {{ section.settings.accent_color }};
+  }
+
+  /* ===== SLIDER WRAPPER ===== */
+  .as-slider-wrapper-{{ section.id }} {
+    display: grid;
+    margin-top: 30px;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+
+  .as-slider-{{ section.id }} {
+    display: none !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .as-slider-{{ section.id }}.active {
+    display: flex !important;
+    flex-direction: column;
+    overflow: visible !important;
+    overflow-x: clip !important;
+  }
+
+  .as-slider-{{ section.id }}:not(.swiper-initialized) {
+    visibility: hidden;
+  }
+
+  .as-slider-{{ section.id }}.swiper-initialized {
+    visibility: visible;
+  }
+
+  /* ===== SLIDES ===== */
+  .as-slide-{{ section.id }} {
+    height: auto !important;
+    box-sizing: border-box !important;
+    transition: all 0.25s ease;
+    z-index: 1;
+    position: relative;
+  }
+
+  .as-slide-{{ section.id }}.swiper-slide-active {
+    z-index: 2;
+  }
+
+  .as-slide-inner-{{ section.id }} {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .as-images-{{ section.id }} {
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+  }
+
+  /* ===== IMAGE WITH WHITE BORDER ===== */
+  .as-image-{{ section.id }} {
+    overflow: hidden;
+    aspect-ratio: 9.6/12;
+    transition: all 0.25s ease;
+  }
+
+  .as-image-wrap-{{ section.id }} {
+    overflow: hidden;
+    transition: all 0.25s ease;
+    aspect-ratio: 9.6/10;
+    transform: translateY(10%);
+    background: {{ section.settings.image_border_color }};
+    padding: 6px;
+    position: relative;
+  }
+
+  .as-slide-{{ section.id }}.swiper-slide-active .as-image-wrap-{{ section.id }} {
+    aspect-ratio: 9.6/12;
+    transform: translateY(0);
+  }
+
+  .as-image-{{ section.id }} img,
+  .as-image-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .as-image-{{ section.id }} svg {
+    background-color: #e8e8e8;
+  }
+
+  .as-image-{{ section.id }} img.as-hover-img-{{ section.id }} {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .as-image-wrap-{{ section.id }}:hover img.as-hover-img-{{ section.id }} {
+    opacity: 1;
+  }
+
+  /* ===== SLIDE CONTENT ===== */
+  .as-slide-content-{{ section.id }} {
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    align-items: center;
+    padding: 18px 0 0;
+    pointer-events: none;
+    transition: opacity 0.1s ease;
+  }
+
+  .as-slide-{{ section.id }}.swiper-slide-active .as-slide-content-{{ section.id }} {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.4s ease 0.4s;
+  }
+
+  .as-title-{{ section.id }} {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: {{ section.settings.product_title_color }};
+    line-height: 130%;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+  }
+
+  .as-vendor-{{ section.id }} {
+    margin-top: 6px;
+    font-size: 13px;
+    color: {{ section.settings.product_vendor_color }};
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+  }
+
+  .as-price-{{ section.id }} {
+    margin-top: 10px;
+    font-size: 16px;
+    color: {{ section.settings.accent_color }};
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .as-product-btn-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 14px;
+    font-size: 12px;
+    color: {{ section.settings.accent_color }};
+    text-decoration: none;
+    padding: 10px 28px;
+    border-radius: 0;
+    background: transparent;
+    border: 1px solid {{ section.settings.accent_color }};
+    cursor: pointer;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+  }
+
+  .as-product-btn-{{ section.id }}:hover {
+    color: {{ section.settings.background_color }};
+    background: {{ section.settings.accent_color }};
+  }
+
+  /* ===== EXPLORE BUTTON ===== */
+  .as-explore-wrap-{{ section.id }} {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .as-explore-btn-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: {{ section.settings.accent_color }};
+    text-decoration: none;
+    padding: 14px 36px;
+    border-radius: 0;
+    background: transparent;
+    border: 1px solid {{ section.settings.accent_color }};
+    cursor: pointer;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+  }
+
+  .as-explore-btn-{{ section.id }}:hover {
+    color: {{ section.settings.background_color }};
+    background: {{ section.settings.accent_color }};
+  }
+
+  /* ===== NAV BUTTONS ===== */
+  .as-buttons-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .as-btn-prev-{{ section.id }},
+  .as-btn-next-{{ section.id }} {
+    display: none;
+    position: static !important;
+    width: 38px;
+    height: 38px;
+    border: 1px solid {{ section.settings.accent_color }};
+    border-radius: 0;
+    background: transparent;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+
+  .as-btn-prev-{{ section.id }} .as-arrow,
+  .as-btn-next-{{ section.id }} .as-arrow {
+    pointer-events: none;
+    display: grid;
+    place-items: center;
+    color: {{ section.settings.accent_color }};
+  }
+
+  .as-btn-prev-{{ section.id }} .as-arrow::before,
+  .as-btn-next-{{ section.id }} .as-arrow::before {
+    content: "";
+    grid-area: 1 / -1;
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+    box-sizing: border-box;
+    border: 0;
+    border-right: 2px solid currentColor;
+    border-top: 2px solid currentColor;
+    position: relative;
+    left: -1px;
+  }
+
+  .as-btn-prev-{{ section.id }} .as-arrow::before {
+    left: 1px;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+  }
+
+  .as-btn-prev-{{ section.id }}:hover,
+  .as-btn-next-{{ section.id }}:hover {
+    background: {{ section.settings.accent_color }};
+  }
+
+  .as-btn-prev-{{ section.id }}:hover .as-arrow,
+  .as-btn-next-{{ section.id }}:hover .as-arrow {
+    color: {{ section.settings.background_color }};
+  }
+
+  .as-btn-prev-{{ section.id }}.swiper-button-disabled,
+  .as-btn-next-{{ section.id }}.swiper-button-disabled {
+    opacity: 0.3;
+  }
+
+  /* ===== DESKTOP ===== */
+  @media(min-width: 1024px) {
+    .as-settings-{{ section.id }} {
+      padding: 70px 5rem 60px;
+    }
+
+    .as-heading-{{ section.id }} {
+      text-align: center;
+    }
+
+    .as-heading-{{ section.id }} * {
+      font-size: 52px;
+    }
+
+    .as-subheading-{{ section.id }} {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 60%;
+    }
+
+    .as-tabs-{{ section.id }} {
+      justify-content: center;
+    }
+
+    .as-slider-wrapper-{{ section.id }} {
+      margin-left: -5rem;
+      margin-right: -5rem;
+    }
+
+    .as-title-{{ section.id }} {
+      font-size: 20px;
+    }
+
+    .as-image-{{ section.id }} img {
+      transform: translateZ(0);
+      transition: transform 1.2s cubic-bezier(.4,0,0,1);
+    }
+
+    .as-image-{{ section.id }}:hover img {
+      transform: scale(1.05) translateZ(0);
+      transition: transform 1.2s cubic-bezier(.4,0,0,1);
+    }
+
+    .as-btn-prev-{{ section.id }},
+    .as-btn-next-{{ section.id }} {
+      display: flex;
+      margin: 0;
+      position: absolute !important;
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      bottom: 0;
+      top: auto;
+    }
+
+    .as-btn-prev-{{ section.id }} .as-arrow::before,
+    .as-btn-next-{{ section.id }} .as-arrow::before {
+      width: 10px;
+      height: 10px;
+    }
+
+    .as-btn-prev-{{ section.id }} {
+      left: 30%;
+    }
+
+    .as-btn-next-{{ section.id }} {
+      right: 30%;
+    }
+  }
+
+  /* ===== MOBILE ===== */
+  @media(max-width: 1023px) {
+    .as-tabs-{{ section.id }} {
+      gap: 20px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      scrollbar-width: none;
+      margin-left: -1.5rem;
+      margin-right: -1.5rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    .as-tabs-{{ section.id }}::-webkit-scrollbar { display: none; }
+
+    .as-slider-wrapper-{{ section.id }} {
+      margin-top: 130px;
+    }
+
+    .as-explore-wrap-{{ section.id }} {
+      margin-top: 20px;
+    }
+
+    .as-btn-prev-{{ section.id }},
+    .as-btn-next-{{ section.id }} {
+      display: none !important;
+    }
+  }
+{%- endstyle -%}
+
+<div class="as-section-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="as-shape-wrap-{{ section.id }}">
+    <div class="as-shape-{{ section.id }}" id="as-shape-{{ section.id }}"></div>
+  </div>
+  <div class="as-settings-{{ section.id }}">
+
+    {%- if section.settings.heading != blank -%}
+      <div class="as-heading-{{ section.id }}">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.subheading != blank -%}
+      <div class="as-subheading-{{ section.id }}">
+        <p>{{ section.settings.subheading }}</p>
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="as-tabs-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          <p
+            class="as-tab-{{ section.id }}{% if forloop.first %} active{% endif %}"
+            id="as-tab-{{ section.id }}-{{ block.id }}"
+            data-shape-color="{{ block.settings.shape_color | default: section.settings.shape_color }}"
+            {{ block.shopify_attributes }}
+          >
+            {{ block.settings.tab_label | default: block.settings.collection.title | default: 'Collection' }}
+          </p>
+        {%- endfor -%}
+      </div>
+
+      <div class="as-slider-wrapper-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          {%- assign collection = block.settings.collection -%}
+          {%- assign limit = block.settings.products_to_show | default: 10 -%}
+
+          <div
+            class="as-slider-{{ section.id }} swiper{% if forloop.first %} active{% endif %}"
+            data-id="as-tab-{{ section.id }}-{{ block.id }}"
+            data-view="{{ section.settings.slides_per_view_desktop }}"
+            data-view-mobile="{{ section.settings.slides_per_view_mobile }}"
+          >
+            <div class="swiper-wrapper">
+              {%- if collection != blank and collection.products.size > 0 -%}
+                {%- assign product_count = collection.products.size -%}
+                {%- if product_count > limit -%}
+                  {%- assign product_count = limit -%}
+                {%- endif -%}
+                {%- assign min_slides = 15 -%}
+                {%- assign repeat_count = min_slides | plus: product_count | minus: 1 | divided_by: product_count -%}
+                {%- if repeat_count < 3 -%}
+                  {%- assign repeat_count = 3 -%}
+                {%- endif -%}
+                {%- for repeat in (1..repeat_count) -%}
+                  {%- for product in collection.products limit: limit -%}
+                    <div class="as-slide-{{ section.id }} swiper-slide">
+                      <div class="as-slide-inner-{{ section.id }}">
+                        <a href="{{ product.url }}" class="as-images-{{ section.id }}">
+                          <div class="as-image-{{ section.id }}">
+                            <div class="as-image-wrap-{{ section.id }}">
+                              {%- if product.featured_image != blank -%}
+                                <img
+                                  src="{{ product.featured_image | image_url: width: 600 }}"
+                                  alt="{{ product.featured_image.alt | escape }}"
+                                  width="600"
+                                  height="{{ 600 | divided_by: product.featured_image.aspect_ratio | round }}"
+                                  loading="lazy"
+                                >
+                                {%- if product.images.size > 1 -%}
+                                  <img
+                                    src="{{ product.images[1] | image_url: width: 600 }}"
+                                    alt="{{ product.images[1].alt | escape }}"
+                                    class="as-hover-img-{{ section.id }}"
+                                    width="600"
+                                    height="{{ 600 | divided_by: product.images[1].aspect_ratio | round }}"
+                                    loading="lazy"
+                                  >
+                                {%- endif -%}
+                              {%- else -%}
+                                {{ 'product-1' | placeholder_svg_tag }}
+                              {%- endif -%}
+                            </div>
+                          </div>
+                        </a>
+                        <div class="as-slide-content-{{ section.id }}">
+                          <p class="as-title-{{ section.id }}">{{ product.title }}</p>
+                          <p class="as-vendor-{{ section.id }}">{{ product.vendor }}</p>
+                          <p class="as-price-{{ section.id }}">{{ product.price | money }}</p>
+                          <a href="{{ product.url }}" class="as-product-btn-{{ section.id }}">
+                            {{ section.settings.button_text | default: 'View Item' }}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                {%- endfor -%}
+              {%- else -%}
+                {%- for i in (1..15) -%}
+                  {%- assign placeholder_index = i | modulo: 6 -%}
+                  {%- if placeholder_index == 0 -%}{%- assign placeholder_index = 1 -%}{%- endif -%}
+                  <div class="as-slide-{{ section.id }} swiper-slide">
+                    <div class="as-slide-inner-{{ section.id }}">
+                      <a href="#" class="as-images-{{ section.id }}">
+                        <div class="as-image-{{ section.id }}">
+                          <div class="as-image-wrap-{{ section.id }}">
+                            {{ 'product-' | append: placeholder_index | placeholder_svg_tag }}
+                          </div>
+                        </div>
+                      </a>
+                      <div class="as-slide-content-{{ section.id }}">
+                        <p class="as-title-{{ section.id }}">Sample Product {{ i }}</p>
+                        <p class="as-vendor-{{ section.id }}">Sample Vendor</p>
+                        <p class="as-price-{{ section.id }}">$0.00</p>
+                        <a href="#" class="as-product-btn-{{ section.id }}">
+                          {{ section.settings.button_text | default: 'View Item' }}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+
+            <div class="as-buttons-{{ section.id }}">
+              <button class="as-btn-prev-{{ section.id }}" tabindex="0" aria-label="Previous slide">
+                <span class="as-arrow"></span>
+              </button>
+              <button class="as-btn-next-{{ section.id }}" tabindex="0" aria-label="Next slide">
+                <span class="as-arrow"></span>
+              </button>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="as-explore-wrap-{{ section.id }}">
+        <a href="{{ section.settings.explore_url | default: '#' }}" class="as-explore-btn-{{ section.id }}">
+          {{ section.settings.explore_text | default: 'Explore Full Collection' }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+<script>
+  function initAS_{{ section.id | replace: '-', '_' }}() {
+    var sid = '{{ section.id }}';
+    var sectionEl = document.querySelector('.as-section-' + sid);
+    if (!sectionEl) return;
+
+    var tabs = sectionEl.querySelectorAll('.as-tab-' + sid);
+    var sliders = sectionEl.querySelectorAll('.as-slider-' + sid);
+    var shape = document.getElementById('as-shape-' + sid);
+
+    if (tabs.length > 0 && sliders.length > 0) {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      sliders.forEach(function(s) { s.classList.remove('active'); });
+      tabs[0].classList.add('active');
+      sliders[0].classList.add('active');
+      updateShapeColor(tabs[0]);
+    }
+
+    function updateShapeColor(tab) {
+      if (!shape || !tab) return;
+      var color = tab.getAttribute('data-shape-color');
+      if (color) shape.style.backgroundColor = color;
+    }
+
+    function initSlider(sliderEl) {
+      if (!sliderEl || sliderEl.swiper) return;
+
+      var viewDesktop = parseFloat(sliderEl.dataset.view || 5);
+      var viewMobile = parseFloat(sliderEl.dataset.viewMobile || 1.6);
+      var prevBtn = sliderEl.querySelector('.as-btn-prev-' + sid);
+      var nextBtn = sliderEl.querySelector('.as-btn-next-' + sid);
+
+      new Swiper(sliderEl, {
+        speed: 300,
+        loop: true,
+        centeredSlides: true,
+        loopAdditionalSlides: 5,
+        navigation: {
+          nextEl: nextBtn,
+          prevEl: prevBtn,
+        },
+        breakpoints: {
+          320: {
+            spaceBetween: 0,
+            slidesPerView: viewMobile,
+          },
+          768: {
+            spaceBetween: 0,
+            slidesPerView: viewDesktop,
+          },
+          1024: {
+            spaceBetween: 0,
+            slidesPerView: viewDesktop,
+          }
+        }
+      });
+    }
+
+    function waitForSwiper() {
+      if (typeof Swiper === 'undefined') {
+        setTimeout(waitForSwiper, 100);
+        return;
+      }
+
+      sliders.forEach(function(sliderEl) {
+        if (sliderEl.classList.contains('active')) {
+          initSlider(sliderEl);
+        }
+      });
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          tabs.forEach(function(t) { t.classList.remove('active'); });
+          sliders.forEach(function(s) { s.classList.remove('active'); });
+
+          tab.classList.add('active');
+          updateShapeColor(tab);
+
+          sliders.forEach(function(slider) {
+            if (tab.id === slider.getAttribute('data-id')) {
+              slider.classList.add('active');
+              initSlider(slider);
+              var swiperInstance = slider.swiper;
+              if (swiperInstance) {
+                swiperInstance.update();
+              }
+            }
+          });
+        });
+      });
+    }
+
+    waitForSwiper();
+  }
+
+  document.addEventListener('DOMContentLoaded', initAS_{{ section.id | replace: '-', '_' }});
+
+  if (typeof Shopify !== 'undefined' && Shopify.designMode) {
+    document.addEventListener('shopify:section:load', function(e) {
+      if (e.detail.sectionId === '{{ section.id }}') {
+        initAS_{{ section.id | replace: '-', '_' }}();
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Atelier Selection",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Atelier Selection."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "A curated release of limited-edition items and signature staples. Crafted for enduring elegance and modern expression."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Product button text",
+      "default": "View Item"
+    },
+    {
+      "type": "text",
+      "id": "explore_text",
+      "label": "Explore button text",
+      "default": "Explore Full Collection"
+    },
+    {
+      "type": "url",
+      "id": "explore_url",
+      "label": "Explore button link"
+    },
+    {
+      "type": "header",
+      "content": "Slides"
+    },
+    {
+      "type": "range",
+      "id": "slides_per_view_desktop",
+      "label": "Slides per view (desktop)",
+      "min": 3,
+      "max": 7,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "slides_per_view_mobile",
+      "label": "Slides per view (mobile)",
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "default": 1.6
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "shape_color",
+      "label": "Triangle shape color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (gold)",
+      "default": "#d4a017"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "tab_inactive_color",
+      "label": "Tab inactive color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Product title color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "product_vendor_color",
+      "label": "Product vendor color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "image_border_color",
+      "label": "Image border color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_tab",
+      "name": "Collection Tab",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "info": "If empty, the collection title will be used"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "range",
+          "id": "products_to_show",
+          "label": "Products to show",
+          "min": 3,
+          "max": 25,
+          "step": 1,
+          "default": 10
+        },
+        {
+          "type": "color",
+          "id": "shape_color",
+          "label": "Triangle color for this tab",
+          "info": "Changes the triangle color when this tab is active"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Atelier Selection",
+      "blocks": [
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "SIGNATURE",
+            "shape_color": "#333333"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "LIMITED EDITION",
+            "shape_color": "#4a3728"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

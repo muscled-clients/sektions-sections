@@ -1,0 +1,1082 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+{%- style -%}
+  .fct-section-{{ section.id }} {
+    border-top: 0;
+    border-bottom: 0;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+    transition: background 0.4s ease;
+    background: {{ section.settings.background_color }};
+  }
+
+  .fct-settings-{{ section.id }} {
+    margin: 0 auto;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    overflow: hidden;
+  }
+
+  .fct-shape-wrap-{{ section.id }} {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .fct-shape-{{ section.id }} {
+    display: block !important;
+    position: absolute;
+    width: 1900px;
+    height: 1900px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-1600px) rotate(45deg);
+    transform-origin: center center;
+    z-index: 0;
+    border-radius: 100px;
+    transition: background-color 0.3s ease;
+    background-color: {{ section.settings.shape_color }};
+  }
+
+  @media(max-width: 1624px) {
+    .fct-shape-{{ section.id }} {
+      width: 1800px;
+      height: 1800px;
+    }
+  }
+
+  @media(max-width: 1224px) {
+    .fct-shape-{{ section.id }} {
+      width: 1700px;
+      height: 1700px;
+    }
+  }
+
+  @media(max-width: 768px) {
+    .fct-shape-{{ section.id }} {
+      width: 1000px;
+      height: 1000px;
+      transform: translateX(-50%) translateY(-550px) rotate(45deg);
+    }
+  }
+
+  .fct-heading-{{ section.id }} {
+    margin-top: 0;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .fct-heading-{{ section.id }} * {
+    margin: 0;
+    font-size: 32px;
+    color: {{ section.settings.heading_color }};
+    line-height: 130%;
+    text-transform: unset;
+    word-break: break-word;
+    font-weight: 700;
+    font-family: "DM Serif Display", serif;
+    font-style: normal;
+  }
+
+  .fct-subheading-{{ section.id }} {
+    margin-top: 10px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .fct-subheading-{{ section.id }} * {
+    margin: 0;
+    font-size: 16px;
+    color: {{ section.settings.subheading_color }};
+    line-height: 150%;
+    text-transform: unset;
+    font-family: "Open Sans Condensed", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .fct-tabs-{{ section.id }} {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    gap: 16px;
+    margin-top: 32px;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    margin-left: -1.5rem !important;
+    margin-right: -1.5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    scrollbar-width: none;
+  }
+
+  .fct-tabs-{{ section.id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fct-tab-{{ section.id }} {
+    margin: 0;
+    padding: 14px 40px;
+    border: 1px solid {{ section.settings.tab_bg_color }};
+    border-radius: 100px;
+    background-color: {{ section.settings.tab_bg_color }};
+    font-size: 16px;
+    line-height: 100%;
+    color: {{ section.settings.tab_text_color }};
+    text-transform: unset;
+    word-break: break-word;
+    font-weight: 400;
+    text-wrap: nowrap;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.25s ease 0s;
+    font-family: "Open Sans Condensed", sans-serif;
+    font-style: normal;
+  }
+
+  .fct-tab-{{ section.id }}:hover {
+    border: 1px solid {{ section.settings.tab_bg_color }};
+    background-color: {{ section.settings.tab_bg_color }};
+    color: {{ section.settings.tab_text_color }};
+  }
+
+  .fct-tab-{{ section.id }}.active {
+    border: 1px solid {{ section.settings.tab_bg_color }};
+    background-color: {{ section.settings.tab_active_bg_color }};
+    color: {{ section.settings.tab_active_text_color }};
+  }
+
+  .fct-slider-wrapper-{{ section.id }} {
+    display: grid;
+    margin-top: 0 !important;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+
+  .fct-slider-{{ section.id }} {
+    display: none !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .fct-slider-{{ section.id }}.active {
+    display: flex !important;
+    flex-direction: column;
+    overflow: visible !important;
+    overflow-x: clip !important;
+  }
+
+  .fct-slider-{{ section.id }}:not(.swiper-initialized) {
+    visibility: hidden;
+  }
+
+  .fct-slider-{{ section.id }}.swiper-initialized {
+    visibility: visible;
+  }
+
+  .fct-slide-{{ section.id }} {
+    height: auto !important;
+    box-sizing: border-box !important;
+    transition: all 0.25s ease 0s;
+    z-index: 1;
+    position: relative;
+  }
+
+  .fct-slide-{{ section.id }}.swiper-slide-active {
+    z-index: 2;
+  }
+
+  .fct-slide-inner-{{ section.id }} {
+    position: relative !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s ease 0s;
+  }
+
+  .fct-images-{{ section.id }} {
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .fct-image-{{ section.id }} {
+    overflow: hidden;
+    aspect-ratio: 9.6/16;
+    transition: all 0.25s ease 0s;
+  }
+
+  .fct-image-wrap-{{ section.id }} {
+    overflow: hidden;
+    transition: all 0.25s ease 0s;
+    aspect-ratio: 9.6/13;
+    transform: translateY(12%);
+  }
+
+  .fct-slide-{{ section.id }}.swiper-slide-active .fct-image-wrap-{{ section.id }} {
+    aspect-ratio: 9.6/16;
+    transform: translate(0);
+    transition: all 0.25s ease 0s;
+  }
+
+  .fct-image-{{ section.id }} img,
+  .fct-image-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .fct-image-{{ section.id }} svg {
+    background-color: #AFAFAF;
+  }
+
+  .fct-slide-content-{{ section.id }} {
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    align-items: center;
+    padding: 16px 0;
+    padding-bottom: 0;
+  }
+
+  .fct-slide-{{ section.id }}.swiper-slide-active .fct-slide-content-{{ section.id }} {
+    opacity: 1;
+    transition: all 0.4s ease 0.4s;
+  }
+
+  .fct-title-{{ section.id }} {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ section.settings.product_title_color }};
+    line-height: 120%;
+    text-align: center;
+    text-transform: unset;
+    word-break: break-word;
+    font-family: "DM Serif Display", serif;
+    font-style: normal;
+  }
+
+  .fct-desc-{{ section.id }} {
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  .fct-desc-{{ section.id }} * {
+    margin: 0;
+    font-size: 16px;
+    color: {{ section.settings.product_desc_color }};
+    line-height: 150%;
+    text-transform: unset;
+    word-break: break-word;
+    font-family: "Open Sans Condensed", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .fct-price-{{ section.id }} {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .fct-price-{{ section.id }} * {
+    margin: 0;
+    font-size: 16px;
+    color: {{ section.settings.product_title_color }};
+    line-height: 150%;
+    text-transform: unset;
+    font-style: normal;
+    font-family: "Open Sans Condensed", sans-serif;
+    font-weight: 400;
+  }
+
+  .fct-compare-price-{{ section.id }} {
+    text-decoration: line-through !important;
+  }
+
+  .fct-product-btn-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    margin-top: 20px;
+    font-size: 16px;
+    color: {{ section.settings.button_text_color }};
+    line-height: 100%;
+    text-align: center;
+    text-transform: unset;
+    text-decoration: none;
+    padding: 14px 40px;
+    border-radius: 100px;
+    transition: all 0.25s ease 0s;
+    background-color: {{ section.settings.button_bg_color }};
+    border: 1px solid {{ section.settings.button_bg_color }};
+    cursor: pointer;
+    font-weight: 700;
+    font-family: "Open Sans Condensed", sans-serif;
+    font-style: normal;
+  }
+
+  .fct-product-btn-inner-{{ section.id }} {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .fct-product-btn-{{ section.id }}:hover {
+    color: {{ section.settings.button_bg_color }};
+    background-color: rgba(0,0,0,0);
+    border: 1px solid {{ section.settings.button_bg_color }};
+  }
+
+  .fct-buttons-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .fct-btn-prev-{{ section.id }},
+  .fct-btn-next-{{ section.id }} {
+    display: none;
+    margin-top: 20px;
+    position: static !important;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 100px;
+    background: {{ section.settings.nav_button_color }};
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+
+  .fct-btn-prev-{{ section.id }} .fct-animate-icon,
+  .fct-btn-next-{{ section.id }} .fct-animate-icon {
+    pointer-events: none;
+    place-items: center;
+    display: grid;
+  }
+
+  .fct-btn-prev-{{ section.id }} .fct-animate-icon:before,
+  .fct-btn-next-{{ section.id }} .fct-animate-icon:before {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease;
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+    box-sizing: border-box;
+    border: 0;
+    border-right: 2px solid currentColor;
+    border-top: 2px solid currentColor;
+    position: relative;
+    left: -1px;
+  }
+
+  .fct-btn-prev-{{ section.id }} .fct-animate-icon:before {
+    left: unset;
+    right: -1px;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+  }
+
+  .fct-btn-prev-{{ section.id }} .fct-animate-icon:after,
+  .fct-btn-next-{{ section.id }} .fct-animate-icon:after {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease;
+    width: 7.7px;
+    height: 1.6px;
+    transform-origin: center;
+    opacity: 0;
+    background: currentColor;
+    transform: scaleX(.5);
+  }
+
+  .fct-btn-prev-{{ section.id }} span,
+  .fct-btn-next-{{ section.id }} span {
+    color: {{ section.settings.nav_icon_color }};
+  }
+
+  .fct-btn-prev-{{ section.id }}:hover,
+  .fct-btn-next-{{ section.id }}:hover {
+    background: {{ section.settings.nav_hover_bg }};
+  }
+
+  .fct-btn-prev-{{ section.id }}:hover .fct-animate-icon,
+  .fct-btn-next-{{ section.id }}:hover .fct-animate-icon {
+    color: {{ section.settings.nav_hover_icon }};
+  }
+
+  .fct-btn-prev-{{ section.id }}.swiper-button-disabled,
+  .fct-btn-next-{{ section.id }}.swiper-button-disabled {
+    opacity: 0;
+  }
+
+  @media(max-width: 1024px) {
+    .fct-product-btn-{{ section.id }} {
+      max-width: fit-content;
+    }
+  }
+
+  @media(min-width: 1024px) {
+    .fct-settings-{{ section.id }} {
+      padding: 0 5rem;
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+    .fct-heading-{{ section.id }} {
+      max-width: 70%;
+    }
+
+    .fct-heading-{{ section.id }} * {
+      font-size: 48px;
+    }
+
+    .fct-subheading-{{ section.id }} {
+      max-width: 70%;
+    }
+
+    .fct-tabs-{{ section.id }} {
+      justify-content: center;
+      overflow-x: hidden;
+      flex-wrap: wrap;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    .fct-slider-wrapper-{{ section.id }} {
+      margin-left: -5rem !important;
+      margin-right: -5rem !important;
+    }
+
+    .fct-slide-content-{{ section.id }} {
+      align-items: center;
+      padding: 20px 0;
+      padding-bottom: 0;
+    }
+
+    .fct-title-{{ section.id }} {
+      font-size: 28px;
+      text-align: center;
+    }
+
+    .fct-desc-{{ section.id }} {
+      text-align: center;
+    }
+
+    .fct-image-{{ section.id }} {
+      overflow: hidden;
+      transition: all 0.25s ease 0s;
+    }
+
+    .fct-image-{{ section.id }} img,
+    .fct-image-{{ section.id }} svg {
+      transform: translateZ(0);
+      transition: transform 1.2s cubic-bezier(.4,0,0,1);
+    }
+
+    .fct-image-{{ section.id }}:hover img,
+    .fct-image-{{ section.id }}:hover svg {
+      transform: scale(1.1) translateZ(0) !important;
+      transition: transform 1.2s cubic-bezier(.4,0,0,1) !important;
+    }
+
+    .fct-btn-prev-{{ section.id }},
+    .fct-btn-next-{{ section.id }} {
+      display: flex;
+      margin: 0;
+      position: absolute !important;
+      z-index: 2;
+      width: 48px;
+      height: 48px;
+      transition: all 0.25s ease 0s;
+      top: 70%;
+    }
+
+    .fct-btn-prev-{{ section.id }} .fct-animate-icon:before,
+    .fct-btn-next-{{ section.id }} .fct-animate-icon:before {
+      width: 10px;
+      height: 10px;
+    }
+
+    .fct-btn-prev-{{ section.id }} .fct-animate-icon:after,
+    .fct-btn-next-{{ section.id }} .fct-animate-icon:after {
+      width: 9.7px;
+    }
+
+    .fct-btn-prev-{{ section.id }} {
+      left: 30%;
+    }
+
+    .fct-btn-next-{{ section.id }} {
+      right: 30%;
+    }
+
+    .fct-product-btn-{{ section.id }} {
+      margin-top: 20px;
+      padding: 14px 40px;
+      font-size: 16px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="fct-section-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="fct-shape-wrap-{{ section.id }}">
+    <div class="fct-shape-{{ section.id }}" id="fct-shape-{{ section.id }}"></div>
+  </div>
+  <div class="fct-settings-{{ section.id }}">
+
+    {%- if section.settings.heading != blank -%}
+      <div class="fct-heading-{{ section.id }}">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.subheading != blank -%}
+      <div class="fct-subheading-{{ section.id }}">
+        <p>{{ section.settings.subheading }}</p>
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="fct-tabs-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          <p
+            class="fct-tab-{{ section.id }}{% if forloop.first %} active{% endif %}"
+            id="fct-tab-{{ section.id }}-{{ block.id }}"
+            data-bg-color="{{ block.settings.bg_color | default: section.settings.background_color }}"
+            {{ block.shopify_attributes }}
+          >
+            {{ block.settings.tab_label | default: block.settings.collection.title | default: 'Collection' }}
+          </p>
+        {%- endfor -%}
+      </div>
+
+      <div class="fct-slider-wrapper-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          {%- assign collection = block.settings.collection -%}
+          {%- assign limit = block.settings.products_to_show | default: 10 -%}
+
+          <div
+            class="fct-slider-{{ section.id }} swiper{% if forloop.first %} active{% endif %}"
+            data-id="fct-tab-{{ section.id }}-{{ block.id }}"
+            data-view="{{ section.settings.slides_per_view_desktop }}"
+            data-view-mobile="{{ section.settings.slides_per_view_mobile }}"
+          >
+            <div class="swiper-wrapper">
+              {%- if collection != blank and collection.products.size > 0 -%}
+                {%- assign product_count = collection.products.size -%}
+                {%- if product_count > limit -%}
+                  {%- assign product_count = limit -%}
+                {%- endif -%}
+                {%- assign min_slides = 15 -%}
+                {%- assign repeat_count = min_slides | plus: product_count | minus: 1 | divided_by: product_count -%}
+                {%- if repeat_count < 3 -%}
+                  {%- assign repeat_count = 3 -%}
+                {%- endif -%}
+                {%- assign shape_colors = '#d8abef,#f3d93f,#ff9a76,#a8d8ea,#b5e8a3,#e91e63,#ffc107,#8bc34a,#ff7043,#ce93d8' | split: ',' -%}
+                {%- assign shape_colors_size = shape_colors.size -%}
+                {%- for repeat in (1..repeat_count) -%}
+                  {%- for product in collection.products limit: limit -%}
+                    {%- assign color_index = forloop.index0 | modulo: shape_colors_size -%}
+                    {%- assign slide_bg = product.metafields.custom.shape_color | default: shape_colors[color_index] -%}
+                    <div
+                      class="fct-slide-{{ section.id }} swiper-slide"
+                      data-background="{{ slide_bg }}"
+                    >
+                      <div class="fct-slide-inner-{{ section.id }}">
+                        <a href="{{ product.url }}" class="fct-images-{{ section.id }}">
+                          <div class="fct-image-{{ section.id }}">
+                            <div class="fct-image-wrap-{{ section.id }}">
+                              {%- if product.featured_image != blank -%}
+                                <img
+                                  src="{{ product.featured_image | image_url: width: 600 }}"
+                                  alt="{{ product.featured_image.alt | escape }}"
+                                  width="600"
+                                  height="{{ 600 | divided_by: product.featured_image.aspect_ratio | round }}"
+                                  loading="lazy"
+                                >
+                              {%- else -%}
+                                {{ 'product-1' | placeholder_svg_tag }}
+                              {%- endif -%}
+                            </div>
+                          </div>
+                        </a>
+                        <div class="fct-slide-content-{{ section.id }}">
+                          <div class="fct-slide-top-{{ section.id }}">
+                            <p class="fct-title-{{ section.id }}">{{ product.title }}</p>
+                            {%- if product.description != blank -%}
+                              <div class="fct-desc-{{ section.id }}">
+                                <p>{{ product.description | strip_html | truncate: 150 }}</p>
+                              </div>
+                            {%- endif -%}
+                          </div>
+                          <a href="{{ product.url }}" class="fct-product-btn-{{ section.id }}">
+                            <p class="fct-product-btn-inner-{{ section.id }}">
+                              {{ section.settings.button_text | default: 'SHOP NOW' }}
+                            </p>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                {%- endfor -%}
+              {%- else -%}
+                {%- assign shape_colors = '#d8abef,#f3d93f,#ff9a76,#a8d8ea,#b5e8a3,#e91e63,#ffc107,#8bc34a,#ff7043,#ce93d8' | split: ',' -%}
+                {%- assign shape_colors_size = shape_colors.size -%}
+                {%- for i in (1..15) -%}
+                  {%- assign placeholder_index = i | modulo: 6 -%}
+                  {%- if placeholder_index == 0 -%}{%- assign placeholder_index = 1 -%}{%- endif -%}
+                  {%- assign color_index = i | minus: 1 | modulo: shape_colors_size -%}
+                  <div
+                    class="fct-slide-{{ section.id }} swiper-slide"
+                    data-background="{{ shape_colors[color_index] }}"
+                  >
+                    <div class="fct-slide-inner-{{ section.id }}">
+                      <a href="#" class="fct-images-{{ section.id }}">
+                        <div class="fct-image-{{ section.id }}">
+                          <div class="fct-image-wrap-{{ section.id }}">
+                            {{ 'product-' | append: placeholder_index | placeholder_svg_tag }}
+                          </div>
+                        </div>
+                      </a>
+                      <div class="fct-slide-content-{{ section.id }}">
+                        <div class="fct-slide-top-{{ section.id }}">
+                          <p class="fct-title-{{ section.id }}">Sample Product {{ i }}</p>
+                          <div class="fct-desc-{{ section.id }}">
+                            <p>This is a sample product description for placeholder {{ i }}.</p>
+                          </div>
+                        </div>
+                        <a href="#" class="fct-product-btn-{{ section.id }}">
+                          <p class="fct-product-btn-inner-{{ section.id }}">
+                            {{ section.settings.button_text | default: 'SHOP NOW' }}
+                          </p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+
+            <div class="fct-buttons-{{ section.id }}">
+              <button class="fct-btn-prev-{{ section.id }}" tabindex="0" aria-label="Previous slide">
+                <span class="fct-animate-icon"></span>
+              </button>
+              <button class="fct-btn-next-{{ section.id }}" tabindex="0" aria-label="Next slide">
+                <span class="fct-animate-icon"></span>
+              </button>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+<script>
+  function initFCT_{{ section.id | replace: '-', '_' }}() {
+    var sid = '{{ section.id }}';
+    var sectionEl = document.querySelector('.fct-section-' + sid);
+    if (!sectionEl) return;
+
+    var tabs = sectionEl.querySelectorAll('.fct-tab-' + sid);
+    var sliders = sectionEl.querySelectorAll('.fct-slider-' + sid);
+    var shape = document.getElementById('fct-shape-' + sid);
+
+    if (tabs.length > 0 && sliders.length > 0) {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      sliders.forEach(function(s) { s.classList.remove('active'); });
+      tabs[0].classList.add('active');
+      sliders[0].classList.add('active');
+      updateSectionBg(tabs[0]);
+    }
+
+    function updateSectionBg(tab) {
+      if (!sectionEl || !tab) return;
+      var color = tab.getAttribute('data-bg-color');
+      if (color) sectionEl.style.background = color;
+    }
+
+    function updateShapeColor(swiper) {
+      var activeSlide = swiper.slides[swiper.activeIndex];
+      var bg = activeSlide && activeSlide.dataset.background;
+      if (shape && bg) shape.style.backgroundColor = bg;
+    }
+
+    function initSlider(sliderEl) {
+      if (!sliderEl || sliderEl.swiper) return;
+
+      var viewDesktop = parseFloat(sliderEl.dataset.view || 5);
+      var viewMobile = parseFloat(sliderEl.dataset.viewMobile || 1.6);
+      var prevBtn = sliderEl.querySelector('.fct-btn-prev-' + sid);
+      var nextBtn = sliderEl.querySelector('.fct-btn-next-' + sid);
+
+      new Swiper(sliderEl, {
+        speed: 300,
+        loop: true,
+        centeredSlides: true,
+        loopAdditionalSlides: 5,
+        navigation: {
+          nextEl: nextBtn,
+          prevEl: prevBtn,
+        },
+        on: {
+          init: function() {
+            updateShapeColor(this);
+          },
+          slideChange: function() {
+            updateShapeColor(this);
+          }
+        },
+        breakpoints: {
+          320: {
+            spaceBetween: 0,
+            slidesPerView: viewMobile,
+          },
+          768: {
+            spaceBetween: 0,
+            slidesPerView: viewDesktop,
+          },
+          1024: {
+            spaceBetween: 0,
+            slidesPerView: viewDesktop,
+          }
+        }
+      });
+    }
+
+    function waitForSwiper() {
+      if (typeof Swiper === 'undefined') {
+        setTimeout(waitForSwiper, 100);
+        return;
+      }
+
+      sliders.forEach(function(sliderEl) {
+        if (sliderEl.classList.contains('active')) {
+          initSlider(sliderEl);
+        }
+      });
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          tabs.forEach(function(t) { t.classList.remove('active'); });
+          sliders.forEach(function(s) { s.classList.remove('active'); });
+
+          tab.classList.add('active');
+          updateSectionBg(tab);
+
+          sliders.forEach(function(slider) {
+            if (tab.id === slider.getAttribute('data-id')) {
+              slider.classList.add('active');
+              initSlider(slider);
+              var swiperInstance = slider.swiper;
+              if (swiperInstance) {
+                swiperInstance.update();
+                updateShapeColor(swiperInstance);
+              }
+            }
+          });
+        });
+      });
+    }
+
+    waitForSwiper();
+  }
+
+  document.addEventListener('DOMContentLoaded', initFCT_{{ section.id | replace: '-', '_' }});
+
+  if (typeof Shopify !== 'undefined' && Shopify.designMode) {
+    document.addEventListener('shopify:section:load', function(e) {
+      if (e.detail.sectionId === '{{ section.id }}') {
+        initFCT_{{ section.id | replace: '-', '_' }}();
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Featured Collection Tabs",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Hand-picked for you"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "We guarantee you will love them"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "header",
+      "content": "Slides"
+    },
+    {
+      "type": "range",
+      "id": "slides_per_view_desktop",
+      "label": "Slides per view (desktop)",
+      "min": 3,
+      "max": 7,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "slides_per_view_mobile",
+      "label": "Slides per view (mobile)",
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "default": 1.6
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#cceafa"
+    },
+    {
+      "type": "color",
+      "id": "shape_color",
+      "label": "Shape color",
+      "default": "#c9a0dc"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#393752"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#393752"
+    },
+    {
+      "type": "color",
+      "id": "tab_bg_color",
+      "label": "Tab background (inactive)",
+      "default": "#393752"
+    },
+    {
+      "type": "color",
+      "id": "tab_text_color",
+      "label": "Tab text (inactive)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg_color",
+      "label": "Tab background (active)",
+      "default": "#cceafa"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text_color",
+      "label": "Tab text (active)",
+      "default": "#393752"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Product title color",
+      "default": "#393752"
+    },
+    {
+      "type": "color",
+      "id": "product_desc_color",
+      "label": "Product description color",
+      "default": "#393752"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#393752"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_color",
+      "label": "Nav button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_icon_color",
+      "label": "Nav icon color",
+      "default": "#393752"
+    },
+    {
+      "type": "color",
+      "id": "nav_hover_bg",
+      "label": "Nav hover background",
+      "default": "#393752"
+    },
+    {
+      "type": "color",
+      "id": "nav_hover_icon",
+      "label": "Nav hover icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_tab",
+      "name": "Collection Tab",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "info": "If empty, the collection title will be used"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "range",
+          "id": "products_to_show",
+          "label": "Products to show",
+          "min": 3,
+          "max": 25,
+          "step": 1,
+          "default": 10
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Section background for this tab",
+          "info": "Changes the section background when this tab is active"
+        },
+        {
+          "type": "color",
+          "id": "shape_color",
+          "label": "Shape color for this tab",
+          "info": "Overrides the section-level shape color when this tab is active"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection Tabs",
+      "blocks": [
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Everyday",
+            "bg_color": "#cceafa"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Boost",
+            "bg_color": "#d2e6d2"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Night",
+            "bg_color": "#f5ecca"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Immune",
+            "bg_color": "#edbdbb"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
