@@ -82,32 +82,6 @@
         "padding_bottom": 12
       }
     },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "heading": "You may also like",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 36,
-        "padding_bottom": 28
-      }
-    },
-    "ss_atc_button_3_XU7GRq": {
-      "type": "ss-atc-button-3",
-      "name": "SS - ATC Button #3",
-      "settings": {
-        "custom_class_selector": "",
-        "shake_type": "jiggle"
-      }
-    },
     "ss_featured_review_slider_VLfJJG": {
       "type": "ss-featured-review-slider",
       "blocks": {
@@ -145,12 +119,38 @@
         "font_size": 16,
         "custom_classes": ""
       }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "ss_atc_button_3_XU7GRq": {
+      "type": "ss-atc-button-3",
+      "name": "SS - ATC Button #3",
+      "settings": {
+        "custom_class_selector": "",
+        "shake_type": "jiggle"
+      }
     }
   },
   "order": [
     "main",
+    "ss_featured_review_slider_VLfJJG",
     "related-products",
-    "ss_atc_button_3_XU7GRq",
-    "ss_featured_review_slider_VLfJJG"
+    "ss_atc_button_3_XU7GRq"
   ]
 }
