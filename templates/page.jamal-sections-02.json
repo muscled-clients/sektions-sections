@@ -2023,6 +2023,128 @@
         "margin_left_desktop": 0,
         "margin_right_desktop": 0
       }
+    },
+    "atelier_selection_4i4hPh": {
+      "type": "atelier-selection",
+      "blocks": {
+        "collection_tab_37mA4F": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "SIGNATURE",
+            "collection": "",
+            "products_to_show": 10,
+            "shape_color": "#333333"
+          }
+        },
+        "collection_tab_q6Lin9": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "LIMITED EDITION",
+            "collection": "",
+            "products_to_show": 10,
+            "shape_color": "#4a3728"
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_37mA4F",
+        "collection_tab_q6Lin9"
+      ],
+      "name": "Atelier Selection",
+      "settings": {
+        "heading": "The Atelier Selection.",
+        "subheading": "A curated release of limited-edition items and signature staples. Crafted for enduring elegance and modern expression.",
+        "button_text": "View Item",
+        "explore_text": "Explore Full Collection",
+        "explore_url": "",
+        "slides_per_view_desktop": 5,
+        "slides_per_view_mobile": 1.6,
+        "background_color": "#1a1a1a",
+        "shape_color": "#333333",
+        "accent_color": "#d4a017",
+        "subheading_color": "#999999",
+        "tab_inactive_color": "#888888",
+        "product_title_color": "#ffffff",
+        "product_vendor_color": "#888888",
+        "image_border_color": "#ffffff"
+      }
+    },
+    "featured_collection_tabs_XNCpFw": {
+      "type": "featured-collection-tabs",
+      "blocks": {
+        "collection_tab_nKawrq": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Everyday",
+            "collection": "",
+            "products_to_show": 10,
+            "bg_color": "#cceafa",
+            "shape_color": ""
+          }
+        },
+        "collection_tab_6h3WED": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Boost",
+            "collection": "",
+            "products_to_show": 10,
+            "bg_color": "#d2e6d2",
+            "shape_color": ""
+          }
+        },
+        "collection_tab_MGLc6A": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Night",
+            "collection": "",
+            "products_to_show": 10,
+            "bg_color": "#f5ecca",
+            "shape_color": ""
+          }
+        },
+        "collection_tab_E4wxmB": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Immune",
+            "collection": "",
+            "products_to_show": 10,
+            "bg_color": "#edbdbb",
+            "shape_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_nKawrq",
+        "collection_tab_6h3WED",
+        "collection_tab_MGLc6A",
+        "collection_tab_E4wxmB"
+      ],
+      "name": "Featured Collection Tabs",
+      "settings": {
+        "heading": "Hand-picked for you",
+        "subheading": "We guarantee you will love them",
+        "button_text": "SHOP NOW",
+        "slides_per_view_desktop": 5,
+        "slides_per_view_mobile": 1.6,
+        "background_color": "#cceafa",
+        "shape_color": "#c9a0dc",
+        "heading_color": "#393752",
+        "subheading_color": "#393752",
+        "tab_bg_color": "#393752",
+        "tab_text_color": "#ffffff",
+        "tab_active_bg_color": "#cceafa",
+        "tab_active_text_color": "#393752",
+        "product_title_color": "#393752",
+        "product_desc_color": "#393752",
+        "button_bg_color": "#393752",
+        "button_text_color": "#ffffff",
+        "nav_button_color": "#ffffff",
+        "nav_icon_color": "#393752",
+        "nav_hover_bg": "#393752",
+        "nav_hover_icon": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -2041,6 +2163,8 @@
     "scrolling_images_xCz4Td",
     "scrolling_images_2_q7RA9K",
     "scrolling_images_3_RW36Fx",
-    "scrolling_images_4_7cfGYb"
+    "scrolling_images_4_7cfGYb",
+    "atelier_selection_4i4hPh",
+    "featured_collection_tabs_XNCpFw"
   ]
 }
