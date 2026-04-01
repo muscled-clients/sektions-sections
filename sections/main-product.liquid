@@ -37,6 +37,54 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    /* Icon Accordion Block */
+    .ia-item { border-bottom: 1px solid rgba(0,0,0,0.12); }
+    .ia-item:first-child { border-top: 1px solid rgba(0,0,0,0.12); }
+    .ia-trigger {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 16px 0;
+      text-align: left;
+    }
+    .ia-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ia-icon-wrap svg { width: 22px; height: 22px; }
+    .ia-label {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .ia-plus {
+      font-size: 20px;
+      line-height: 1;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .ia-item.is-open .ia-plus { transform: rotate(45deg); }
+    .ia-content {
+      display: none;
+      padding: 0 0 16px 60px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .ia-item.is-open .ia-content { display: block; }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -227,6 +275,34 @@
                     </div>
                   </details>
                 </div>
+              {%- when 'icon_accordion' -%}
+                <div class="ia-item quick-add-hidden" id="ia-{{ block.id }}" {{ block.shopify_attributes }}>
+                  <button class="ia-trigger" onclick="iaToggle('ia-{{ block.id }}')">
+                    <div class="ia-icon-wrap">
+                      {% if block.settings.icon_svg != blank %}
+                        {{ block.settings.icon_svg }}
+                      {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"/>
+                          <line x1="12" y1="8" x2="12" y2="16"/>
+                          <line x1="8" y1="12" x2="16" y2="12"/>
+                        </svg>
+                      {% endif %}
+                    </div>
+                    <span class="ia-label">{{ block.settings.label }}</span>
+                    <span class="ia-plus">+</span>
+                  </button>
+                  {% if block.settings.content != blank %}
+                    <div class="ia-content">{{ block.settings.content }}</div>
+                  {% endif %}
+                </div>
+                <script>
+                if(typeof iaToggle==='undefined'){
+                  function iaToggle(id){
+                    document.getElementById(id).classList.toggle('is-open');
+                  }
+                }
+                </script>
               {%- when 'quantity_selector' -%}
                 <div
                   id="Quantity-Form-{{ section.id }}"
@@ -1161,6 +1237,30 @@
           "type": "page",
           "id": "page",
           "label": "t:sections.main-product.blocks.collapsible_tab.settings.page.label"
+        }
+      ]
+    },
+    {
+      "type": "icon_accordion",
+      "name": "Icon Accordion",
+      "settings": [
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Icon SVG code",
+          "info": "Paste SVG icon code. Leave blank for default circle-plus icon."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "PRODUCT DETAILS"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Add your content here.</p>"
         }
       ]
     },
