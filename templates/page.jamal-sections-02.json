@@ -2280,6 +2280,111 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "video_testimonials_wide_gmptnq": {
+      "type": "video-testimonials-wide",
+      "blocks": {
+        "video_card_D9Xqfh": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Emily D.",
+            "product_name": "Sunflower Yellow",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 4
+          }
+        },
+        "video_card_H9CipN": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Jane D.",
+            "product_name": "Sunset Green blanket",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_card_yY8iqk": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Paula H.",
+            "product_name": "Solar Dawn blanket",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_card_riBLVE": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "James G.",
+            "product_name": "Solar Dawn blanket",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_card_cJEbxX": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Linda R.",
+            "product_name": "Sunset Terracotta blanket",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
+          }
+        },
+        "video_card_X8NcLF": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Kelly O.",
+            "product_name": "Solar Dusk blanket",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 4
+          }
+        },
+        "video_card_Q9aUVA": {
+          "type": "video_card",
+          "settings": {
+            "video_url": "",
+            "customer_name": "Dane D.",
+            "product_name": "Green blanket",
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "video_card_D9Xqfh",
+        "video_card_H9CipN",
+        "video_card_yY8iqk",
+        "video_card_riBLVE",
+        "video_card_cJEbxX",
+        "video_card_X8NcLF",
+        "video_card_Q9aUVA"
+      ],
+      "name": "Video Testimonials Wide",
+      "settings": {
+        "subheading": "OUR TESTIMONIALS",
+        "heading": "Why people love our brand",
+        "description": "Don't just take our word for it, see what our customers are saying",
+        "card_border_radius": 0,
+        "background_color": "#fbf9f4",
+        "text_color": "#41441c",
+        "subheading_color": "#41441c",
+        "nav_button_color": "#fbf9f4",
+        "nav_icon_color": "#41441c",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -2302,6 +2407,7 @@
     "atelier_selection_4i4hPh",
     "featured_collection_tabs_XNCpFw",
     "handpicked_collection_RCeK8N",
-    "video_testimonials_round_FUaTEn"
+    "video_testimonials_round_FUaTEn",
+    "video_testimonials_wide_gmptnq"
   ]
 }
