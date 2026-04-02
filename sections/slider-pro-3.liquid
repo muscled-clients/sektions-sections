@@ -1,0 +1,569 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+{%- style -%}
+  /* ===== SECTION ===== */
+  .sp3-section-outer-{{ section.id }} {
+    overflow: hidden;
+    background: {{ section.settings.background_color }};
+  }
+
+  .sp3-section-{{ section.id }} {
+    position: relative;
+    padding: 60px 0;
+    width: 100%;
+  }
+
+  /* ===== SLIDER ===== */
+  .sp3-slider-wrapper-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .sp3-slider-{{ section.id }} {
+    overflow: visible !important;
+    padding: 20px 0;
+  }
+
+  /* ===== SLIDES ===== */
+  .sp3-slide-{{ section.id }} {
+    aspect-ratio: 9.6 / 12;
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+    cursor: default;
+  }
+
+  .sp3-slide-inner-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* ===== IMAGE ===== */
+  .sp3-slide-img-{{ section.id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ===== BADGE ===== */
+  .sp3-badge-{{ section.id }} {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 3;
+    padding: 8px 12px;
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  /* ===== CONTENT OVERLAY ===== */
+  .sp3-content-{{ section.id }} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .sp3-content-text-{{ section.id }} {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .sp3-title-{{ section.id }} {
+    font-size: 16px;
+    font-weight: 700;
+    color: {{ section.settings.title_color }};
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 130%;
+    text-align: left;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .sp3-subtitle-{{ section.id }} {
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 400;
+    color: {{ section.settings.subtitle_color }};
+    text-align: left;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .sp3-view-btn-{{ section.id }} {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-radius: 0;
+    background: transparent;
+    color: {{ section.settings.button_text_color }};
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid {{ section.settings.button_text_color }};
+    cursor: default;
+    font-family: "Montserrat", sans-serif;
+  }
+
+
+  /* ===== NAV BUTTONS ===== */
+  .sp3-btn-prev-{{ section.id }},
+  .sp3-btn-next-{{ section.id }} {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    border-radius: 0;
+    background: transparent;
+    border: 1px solid #ffffff;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+  }
+
+  .sp3-btn-prev-{{ section.id }} {
+    left: 4%;
+  }
+
+  .sp3-btn-next-{{ section.id }} {
+    right: 4%;
+  }
+
+  .sp3-btn-prev-{{ section.id }}:hover,
+  .sp3-btn-next-{{ section.id }}:hover {
+    background: #121212;
+    border-color: #121212;
+  }
+
+  /* Arrow icon — uses grid to stack chevron + line */
+  .sp3-nav-icon-{{ section.id }} {
+    display: grid;
+    place-items: center;
+    color: {{ section.settings.nav_icon_color }};
+    transition: color 0.3s ease;
+  }
+
+  /* Chevron */
+  .sp3-nav-icon-{{ section.id }}::before {
+    content: "";
+    grid-area: 1 / -1;
+    width: 10px;
+    height: 10px;
+    box-sizing: border-box;
+    border: 0;
+    border-right: 2px solid currentColor;
+    border-top: 2px solid currentColor;
+    transform: rotate(45deg);
+    position: relative;
+    left: -2px;
+  }
+
+  .sp3-btn-prev-{{ section.id }} .sp3-nav-icon-{{ section.id }}::before {
+    left: 2px;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+  }
+
+  .sp3-btn-prev-{{ section.id }}:hover .sp3-nav-icon-{{ section.id }},
+  .sp3-btn-next-{{ section.id }}:hover .sp3-nav-icon-{{ section.id }} {
+    color: #ffffff;
+  }
+
+  .sp3-btn-prev-{{ section.id }}.swiper-button-disabled,
+  .sp3-btn-next-{{ section.id }}.swiper-button-disabled {
+    opacity: 0.3;
+  }
+
+  /* ===== DESKTOP ===== */
+  @media (min-width: 1024px) {
+    .sp3-title-{{ section.id }} {
+      font-size: 18px;
+    }
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 1023px) {
+    .sp3-section-{{ section.id }} {
+      padding: 40px 0;
+    }
+
+    .sp3-btn-prev-{{ section.id }},
+    .sp3-btn-next-{{ section.id }} {
+      display: none !important;
+    }
+  }
+{%- endstyle -%}
+
+<div class="sp3-section-outer-{{ section.id }}">
+  <div class="sp3-section-{{ section.id }}" data-section-id="{{ section.id }}">
+    <div class="sp3-slider-wrapper-{{ section.id }}">
+      <div class="sp3-slider-{{ section.id }} swiper" id="sp3-slider-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {%- comment -%}Duplicate blocks to ensure enough slides for infinite loop with 5 visible{%- endcomment -%}
+          {%- assign min_slides = 15 -%}
+          {%- assign block_count = section.blocks.size -%}
+          {%- assign repeat_count = min_slides | plus: block_count | minus: 1 | divided_by: block_count -%}
+          {%- if repeat_count < 3 -%}
+            {%- assign repeat_count = 3 -%}
+          {%- endif -%}
+          {%- for repeat in (1..repeat_count) -%}
+            {%- for block in section.blocks -%}
+              {%- assign collection = block.settings.collection -%}
+              <div class="sp3-slide-{{ section.id }} swiper-slide" {% if repeat == 1 %}{{ block.shopify_attributes }}{% endif %}>
+                <div class="sp3-slide-inner-{{ section.id }}">
+                  {%- if block.settings.image != blank -%}
+                    <img
+                      class="sp3-slide-img-{{ section.id }}"
+                      src="{{ block.settings.image | image_url: width: 800 }}"
+                      alt="{{ block.settings.title | escape }}"
+                      width="800"
+                      height="{{ 800 | divided_by: block.settings.image.aspect_ratio | round }}"
+                      loading="lazy"
+                    >
+                  {%- elsif collection != blank and collection.image != blank -%}
+                    <img
+                      class="sp3-slide-img-{{ section.id }}"
+                      src="{{ collection.image | image_url: width: 800 }}"
+                      alt="{{ collection.title | escape }}"
+                      width="800"
+                      height="{{ 800 | divided_by: collection.image.aspect_ratio | round }}"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <div class="sp3-slide-img-{{ section.id }}" style="background:#333;width:100%;height:100%;"></div>
+                  {%- endif -%}
+
+                  {%- if block.settings.badge != blank -%}
+                    <div class="sp3-badge-{{ section.id }}">{{ block.settings.badge }}</div>
+                  {%- endif -%}
+
+                  {%- assign oc = block.settings.overlay_color | default: '#ffffff' -%}
+                  <div class="sp3-content-{{ section.id }}" style="background-color:{{ oc | color_modify: 'alpha', 0.5 }}">
+                    <div class="sp3-content-text-{{ section.id }}">
+                      <p class="sp3-title-{{ section.id }}">{{ block.settings.title | default: collection.title | default: 'Collection' }}</p>
+                      <p class="sp3-subtitle-{{ section.id }}">{{ block.settings.subtitle | default: '' }}</p>
+                    </div>
+                    {%- assign link_url = block.settings.link | default: collection.url | default: '#' -%}
+                    <a href="{{ link_url }}" class="sp3-view-btn-{{ section.id }}">
+                      {{ section.settings.button_text | default: 'View' }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <button class="sp3-btn-prev-{{ section.id }}" id="sp3-btn-prev-{{ section.id }}" tabindex="0" aria-label="Previous slide">
+        <span class="sp3-nav-icon-{{ section.id }}"></span>
+      </button>
+      <button class="sp3-btn-next-{{ section.id }}" id="sp3-btn-next-{{ section.id }}" tabindex="0" aria-label="Next slide">
+        <span class="sp3-nav-icon-{{ section.id }}"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+<script>
+  function initSP3_{{ section.id | replace: '-', '_' }}() {
+    var sid = '{{ section.id }}';
+
+    if (typeof Swiper === 'undefined') {
+      setTimeout(initSP3_{{ section.id | replace: '-', '_' }}, 100);
+      return;
+    }
+
+    var sliderEl = document.getElementById('sp3-slider-' + sid);
+    if (!sliderEl || sliderEl.swiper) return;
+
+    new Swiper(sliderEl, {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      loop: true,
+      speed: 400,
+      initialSlide: 1,
+      loopAdditionalSlides: 5,
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 400,
+        modifier: 1,
+        slideShadows: false,
+      },
+      on: {
+        setTranslate: function () {
+          this.slides.forEach(function (slide) {
+            var p = Math.abs(slide.progress);
+            slide.style.visibility = p > 2.5 ? 'hidden' : 'visible';
+          });
+        }
+      },
+      navigation: {
+        nextEl: '#sp3-btn-next-' + sid,
+        prevEl: '#sp3-btn-prev-' + sid,
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1.2,
+          coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 160,
+            modifier: 1,
+            slideShadows: false,
+          }
+        },
+        768: {
+          slidesPerView: 2,
+          coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 160,
+            modifier: 1,
+            slideShadows: false,
+          }
+        },
+        1024: {
+          slidesPerView: 3,
+          coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 400,
+            modifier: 1,
+            slideShadows: false,
+          }
+        }
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initSP3_{{ section.id | replace: '-', '_' }});
+
+  if (typeof Shopify !== 'undefined' && Shopify.designMode) {
+    document.addEventListener('shopify:section:load', function(e) {
+      if (e.detail.sectionId === '{{ section.id }}') {
+        initSP3_{{ section.id | replace: '-', '_' }}();
+      }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Slider Pro 3",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Card title color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Card subtitle color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text / border color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Button hover background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text",
+      "label": "Button hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_border_color",
+      "label": "Nav button border color",
+      "default": "#999999"
+    },
+    {
+      "type": "color",
+      "id": "nav_icon_color",
+      "label": "Nav icon color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 20,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "If empty, collection image will be used"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Used for link and fallback image/title"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "info": "If empty, collection title will be used"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge text",
+          "info": "Leave empty for no badge"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "If empty, collection URL will be used"
+        },
+        {
+          "type": "color",
+          "id": "overlay_color",
+          "label": "Content overlay color",
+          "default": "#ffffff"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slider Pro 3",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Jewelry",
+            "subtitle": "Timeless elegance",
+            "badge": "NEW IN",
+            "overlay_color": "#ffffff"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Occasionwear",
+            "subtitle": "Dress to impress",
+            "overlay_color": "#ffffff"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Footwear",
+            "subtitle": "Step into style",
+            "badge": "SELLING FAST",
+            "overlay_color": "#ffffff"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Dresses",
+            "subtitle": "Everyday essentials",
+            "overlay_color": "#ffffff"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Accessories",
+            "subtitle": "Complete the look",
+            "badge": "TRENDING",
+            "overlay_color": "#ffffff"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Coats & Jackets",
+            "subtitle": "Warm and stylish",
+            "overlay_color": "#ffffff"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Swimwear",
+            "subtitle": "Beach ready",
+            "badge": "NEW IN",
+            "overlay_color": "#ffffff"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
