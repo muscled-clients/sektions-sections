@@ -1,6 +1,5 @@
-{{ 'video-testimonials.css' | asset_url | stylesheet_tag }}
 {% style %}
-.video-testimonials {
+  .video-testimonials--round {
   background-color: var(--vt-bg-color, #ffffff);
   color: var(--vt-text-color, #1a1a1a);
   padding-top: var(--vt-padding-top, 36px);
@@ -8,18 +7,18 @@
   overflow: hidden;
 }
 
-.video-testimonials__container {
+.video-testimonials--round .video-testimonials__container {
   max-width: 100%;
 }
 
 /* Header */
-.video-testimonials__header {
+.video-testimonials--round .video-testimonials__header {
   text-align: center;
   margin-bottom: 2rem;
   padding: 0 1.5rem;
 }
 
-.video-testimonials__subheading {
+.video-testimonials--round .video-testimonials__subheading {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 2px;
@@ -28,65 +27,66 @@
   margin: 0 0 0.5rem;
 }
 
-.video-testimonials__heading {
+.video-testimonials--round .video-testimonials__heading {
   font-size: 26px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.3;
   margin: 0 0 0.75rem;
   color: var(--vt-text-color, #1a1a1a);
 }
 
-.video-testimonials__description {
+.video-testimonials--round .video-testimonials__description {
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--vt-subheading-color, #666);
   margin: 0 auto;
   max-width: 500px;
   font-style: italic;
 }
 
-/* Slider wrapper — mobile full-bleed */
-.video-testimonials__slider-wrapper {
+/* Slider wrapper */
+.video-testimonials--round .video-testimonials__slider-wrapper {
   position: relative;
   margin-left: -1.5rem;
   margin-right: -1.5rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  margin-top: 32px;
 }
 
 /* Swiper */
-.video-testimonials__swiper {
+.video-testimonials--round .video-testimonials__swiper {
   overflow: visible !important;
 }
 
-.video-testimonials__swiper .swiper-wrapper {
+.video-testimonials--round .video-testimonials__swiper .swiper-wrapper {
   align-items: stretch !important;
 }
 
-.video-testimonials__swiper .swiper-slide {
+.video-testimonials--round .video-testimonials__swiper .swiper-slide {
   height: auto;
   transition: transform 0.6s ease;
 }
 
-/* Card */
-.video-testimonials__card {
+/* Card — circular */
+.video-testimonials--round .video-testimonials__card {
   position: relative;
-  border-radius: var(--vt-card-radius, 12px);
+  border-radius: 999px;
   overflow: hidden;
   cursor: pointer;
   background: #000;
   aspect-ratio: 9.6 / 12;
 }
 
-.video-testimonials__media {
+.video-testimonials--round .video-testimonials__media {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-.video-testimonials__video,
-.video-testimonials__iframe {
+.video-testimonials--round .video-testimonials__video,
+.video-testimonials--round .video-testimonials__iframe {
   position: absolute;
   top: 0;
   left: 0;
@@ -96,7 +96,7 @@
   border: none;
 }
 
-.video-testimonials__poster {
+.video-testimonials--round .video-testimonials__poster {
   position: absolute;
   top: 0;
   left: 0;
@@ -107,168 +107,189 @@
   z-index: 1;
 }
 
-/* Play button */
-.video-testimonials__play-btn {
+/* Play button — circular with border */
+.video-testimonials--round .video-testimonials__play-btn {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.25);
-  border: 2px solid rgba(255, 255, 255, 0.6);
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 3;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  backdrop-filter: blur(4px);
+  padding: 0;
 }
 
-.video-testimonials__play-btn:hover {
+.video-testimonials--round .video-testimonials__play-btn:hover {
   transform: translate(-50%, -50%) scale(1.1);
   background: rgba(255, 255, 255, 0.35);
 }
 
 /* Gradient overlay */
-.video-testimonials__gradient {
+.video-testimonials--round .video-testimonials__gradient {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 50%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
   z-index: 2;
   pointer-events: none;
 }
 
 /* Content overlay */
-.video-testimonials__content {
+.video-testimonials--round .video-testimonials__content {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1rem;
+  padding: 36px 20px;
   z-index: 3;
 }
 
-.video-testimonials__name {
+.video-testimonials--round .video-testimonials__name {
   font-size: 16px;
   font-weight: 700;
   color: #fff;
-  margin: 0 0 2px;
+  margin: 0 0 4px;
   line-height: 1.3;
   text-align: center;
-}
-
-.video-testimonials__product {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0 0 6px;
-  line-height: 1.4;
-  text-align: center;
-}
-
-.video-testimonials__verified {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 4px;
-  flex-shrink: 0;
-}
-
-.video-testimonials__stars {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 8px;
+}
+
+.video-testimonials--round .video-testimonials__product {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 6px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.video-testimonials--round .video-testimonials__verified {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.video-testimonials--round .video-testimonials__stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 12px;
 }
 
 /* Navigation buttons */
-.video-testimonials__nav {
+.video-testimonials--round .video-testimonials__nav {
   display: none;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--vt-btn-bg, #fff);
-  color: var(--vt-btn-icon, #1a1a1a);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  background: var(--vt-btn-bg, #953034);
+  color: var(--vt-btn-icon, #ffffff);
+  border: none;
   cursor: pointer;
   align-items: center;
   justify-content: center;
   z-index: 10;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
 }
 
-.video-testimonials__nav:hover {
+.video-testimonials--round .video-testimonials__nav:hover {
   transform: translateY(-50%) scale(0.9);
 }
 
-.video-testimonials__nav--prev {
+.video-testimonials--round .video-testimonials__nav--prev {
   left: 5%;
 }
 
-.video-testimonials__nav--next {
+.video-testimonials--round .video-testimonials__nav--next {
   right: 5%;
 }
 
 /* Tablet */
 @media (min-width: 768px) {
-  .video-testimonials__heading {
+  .video-testimonials--round .video-testimonials__heading {
     font-size: 36px;
   }
 
-  .video-testimonials__content {
-    padding: 1.25rem;
-  }
-
-  .video-testimonials__name {
+  .video-testimonials--round .video-testimonials__name {
     font-size: 18px;
   }
 
-  .video-testimonials__product {
-    font-size: 13px;
+  .video-testimonials--round .video-testimonials__product {
+    font-size: 14px;
   }
 }
 
 /* Desktop */
 @media (min-width: 1024px) {
-  .video-testimonials__heading {
-    font-size: 48px;
+  .video-testimonials--round .video-testimonials__heading {
+    font-size: 52px;
   }
 
-  .video-testimonials__name {
+  .video-testimonials--round .video-testimonials__name {
     font-size: 20px;
   }
 
-  .video-testimonials__slider-wrapper {
+  .video-testimonials--round .video-testimonials__play-btn {
+    width: 64px;
+    height: 64px;
+  }
+
+  .video-testimonials--round .video-testimonials__slider-wrapper {
     margin-left: auto;
     margin-right: auto;
     padding-left: 0;
     padding-right: 0;
-    max-width: 1200px;
+    margin-top: 48px;
   }
 
-  .video-testimonials__nav {
+  .video-testimonials--round .video-testimonials__swiper {
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 2%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 98%);
+    mask-image: linear-gradient(to right, rgba(0,0,0,0) 2%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 98%);
+  }
+
+  .video-testimonials--round .video-testimonials__nav {
     display: flex;
+  }
+
+  .video-testimonials--round .video-testimonials__content {
+    padding: 36px 24px;
+  }
+
+  .video-testimonials--round .video-testimonials__header {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 {% endstyle %}
+
+{{ 'video-testimonials-round.css' | asset_url | stylesheet_tag }}
+
 <div
-  class="video-testimonials section-{{ section.id }}"
+  class="video-testimonials--round section-{{ section.id }}"
   style="
     --vt-bg-color: {{ section.settings.background_color }};
     --vt-text-color: {{ section.settings.text_color }};
     --vt-subheading-color: {{ section.settings.subheading_color }};
     --vt-btn-bg: {{ section.settings.nav_button_color }};
     --vt-btn-icon: {{ section.settings.nav_icon_color }};
-    --vt-card-radius: {{ section.settings.card_border_radius }}px;
     --vt-padding-top: {{ section.settings.padding_top }}px;
     --vt-padding-bottom: {{ section.settings.padding_bottom }}px;
   "
@@ -360,8 +381,8 @@
                     {%- endif -%}
 
                     <button class="video-testimonials__play-btn" aria-label="Play video">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                        <path d="M8 5v14l11-7z"/>
+                      <svg width="24" height="24" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.7461 23.4817V36.5201C21.7461 39.1905 24.6062 40.8663 26.8889 39.5311L32.4615 36.2749L38.034 33.005C40.3168 31.6699 40.3168 28.3319 38.034 26.9967L32.4615 23.7269L26.8889 20.4707C24.6062 19.1356 21.7461 20.7977 21.7461 23.4817Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
                     </button>
 
@@ -373,7 +394,10 @@
                       <p class="video-testimonials__name">
                         {{- block.settings.customer_name -}}
                         {%- if block.settings.show_verified -%}
-                          <svg class="video-testimonials__verified" width="16" height="16" viewBox="0 0 24 24" fill="#1DA1F2"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"/></svg>
+                          <svg class="video-testimonials__verified" width="16" height="16" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.4333 3.31047C13.2813 2.23047 14.8893 2.23047 15.7373 3.31047L16.8773 4.76247C17.3453 5.35847 18.0573 5.71447 18.8173 5.73847L20.6693 5.79447C22.0173 5.83847 23.0853 6.90647 23.1293 8.25447L23.1853 10.1065C23.2093 10.8665 23.5653 11.5785 24.1613 12.0465L25.6133 13.1865C26.6933 14.0345 26.6933 15.6425 25.6133 16.4905L24.1613 17.6305C23.5653 18.0985 23.2093 18.8105 23.1853 19.5705L23.1293 21.4225C23.0853 22.7705 22.0173 23.8385 20.6693 23.8825L18.8173 23.9385C18.0573 23.9625 17.3453 24.3185 16.8773 24.9145L15.7373 26.3665C14.8893 27.4465 13.2813 27.4465 12.4333 26.3665L11.2933 24.9145C10.8253 24.3185 10.1133 23.9625 9.35328 23.9385L7.50128 23.8825C6.15328 23.8385 5.08528 22.7705 5.04128 21.4225L4.98528 19.5705C4.96128 18.8105 4.60528 18.0985 4.00928 17.6305L2.55728 16.4905C1.47728 15.6425 1.47728 14.0345 2.55728 13.1865L4.00928 12.0465C4.60528 11.5785 4.96128 10.8665 4.98528 10.1065L5.04128 8.25447C5.08528 6.90647 6.15328 5.83847 7.50128 5.79447L9.35328 5.73847C10.1133 5.71447 10.8253 5.35847 11.2933 4.76247L12.4333 3.31047Z" fill="#4c8ae7" stroke="#4c8ae7" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.82031 13.8467L12.4792 16.5166L17.8081 11.1768" stroke="#ffffff" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
                         {%- endif -%}
                       </p>
                     {%- endif -%}
@@ -398,6 +422,17 @@
           {%- endfor -%}
         </div>
       </div>
+
+      <button class="video-testimonials__nav video-testimonials__nav--prev" aria-label="Previous slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button class="video-testimonials__nav video-testimonials__nav--next" aria-label="Next slide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
     </div>
   </div>
 </div>
@@ -413,6 +448,8 @@
       var swiperEl = document.getElementById('vt-swiper-' + sectionId);
       if (!swiperEl) return;
 
+      var wrapper = swiperEl.closest('.video-testimonials__slider-wrapper');
+
       function initSwiper() {
         if (typeof Swiper === 'undefined') {
           setTimeout(initSwiper, 100);
@@ -422,32 +459,36 @@
         var swiper = new Swiper('#vt-swiper-' + sectionId, {
           effect: 'coverflow',
           centeredSlides: true,
-          speed: 600,
+          speed: 300,
           loop: true,
           watchSlidesProgress: true,
+          navigation: {
+            nextEl: wrapper.querySelector('.video-testimonials__nav--next'),
+            prevEl: wrapper.querySelector('.video-testimonials__nav--prev'),
+          },
           breakpoints: {
             320: {
-              slidesPerView: 1.4,
-              coverflowEffect: { rotate: 0, stretch: 0, depth: 200, modifier: 1, slideShadows: false },
+              slidesPerView: 1.2,
+              coverflowEffect: { rotate: 0, stretch: 0, depth: 160, modifier: 1, slideShadows: false },
             },
             768: {
-              slidesPerView: 2,
-              coverflowEffect: { rotate: 0, stretch: 0, depth: 250, modifier: 1, slideShadows: false },
+              slidesPerView: 1.2,
+              coverflowEffect: { rotate: 0, stretch: 0, depth: 160, modifier: 1, slideShadows: false },
             },
             1024: {
-              slidesPerView: 4,
-              coverflowEffect: { rotate: 0, stretch: 0, depth: 300, modifier: 1, slideShadows: false },
+              slidesPerView: 3,
+              coverflowEffect: { rotate: 0, stretch: 0, depth: 400, modifier: 1, slideShadows: false },
             },
             1200: {
-              slidesPerView: 4,
-              coverflowEffect: { rotate: 0, stretch: 0, depth: 300, modifier: 1, slideShadows: false },
+              slidesPerView: 3,
+              coverflowEffect: { rotate: 0, stretch: 0, depth: 400, modifier: 1, slideShadows: false },
             },
           },
           on: {
             setTranslate: function () {
               this.slides.forEach(function (slide) {
                 var p = Math.abs(slide.progress);
-                slide.style.visibility = p > 3.5 ? 'hidden' : 'visible';
+                slide.style.visibility = p > 2.5 ? 'hidden' : 'visible';
               });
             },
           },
@@ -505,7 +546,7 @@
 
 {% schema %}
 {
-  "name": "Video Testimonials Wide",
+  "name": "Video Testimonials 2",
   "tag": "section",
   "class": "video-testimonials-section",
   "settings": [
@@ -513,7 +554,7 @@
       "type": "text",
       "id": "subheading",
       "label": "Subheading",
-      "default": "OUR TESTIMONIALS"
+      "default": "What our customers say"
     },
     {
       "type": "text",
@@ -528,16 +569,6 @@
       "default": "Don't just take our word for it, see what our customers are saying"
     },
     {
-      "type": "range",
-      "id": "card_border_radius",
-      "label": "Card border radius",
-      "min": 0,
-      "max": 30,
-      "step": 2,
-      "unit": "px",
-      "default": 0
-    },
-    {
       "type": "header",
       "content": "Colors"
     },
@@ -545,31 +576,31 @@
       "type": "color",
       "id": "background_color",
       "label": "Background color",
-      "default": "#fbf9f4"
+      "default": "#ffffff"
     },
     {
       "type": "color",
       "id": "text_color",
       "label": "Text color",
-      "default": "#41441c"
+      "default": "#953034"
     },
     {
       "type": "color",
       "id": "subheading_color",
       "label": "Subheading color",
-      "default": "#41441c"
+      "default": "#953034"
     },
     {
       "type": "color",
       "id": "nav_button_color",
       "label": "Navigation button color",
-      "default": "#fbf9f4"
+      "default": "#953034"
     },
     {
       "type": "color",
       "id": "nav_icon_color",
       "label": "Navigation icon color",
-      "default": "#41441c"
+      "default": "#ffffff"
     },
     {
       "type": "header",
@@ -657,15 +688,13 @@
   ],
   "presets": [
     {
-      "name": "Video Testimonials Wide",
+      "name": "Video Testimonials 2",
       "blocks": [
-        { "type": "video_card", "settings": { "customer_name": "Emily D.", "product_name": "Sunflower Yellow", "star_rating": 4, "show_verified": true } },
-        { "type": "video_card", "settings": { "customer_name": "Jane D.", "product_name": "Sunset Green blanket", "star_rating": 5, "show_verified": true } },
-        { "type": "video_card", "settings": { "customer_name": "Paula H.", "product_name": "Solar Dawn blanket", "star_rating": 5, "show_verified": true } },
-        { "type": "video_card", "settings": { "customer_name": "James G.", "product_name": "Solar Dawn blanket", "star_rating": 5, "show_verified": true } },
-        { "type": "video_card", "settings": { "customer_name": "Linda R.", "product_name": "Sunset Terracotta blanket", "star_rating": 5, "show_verified": true } },
-        { "type": "video_card", "settings": { "customer_name": "Kelly O.", "product_name": "Solar Dusk blanket", "star_rating": 4, "show_verified": true } },
-        { "type": "video_card", "settings": { "customer_name": "Dane D.", "product_name": "Green blanket", "star_rating": 5, "show_verified": true } }
+        { "type": "video_card", "settings": { "customer_name": "Paul F.", "product_name": "Unda 2.0 Stainless Steel", "star_rating": 5, "show_verified": true } },
+        { "type": "video_card", "settings": { "customer_name": "Olevier A.", "product_name": "Unda 2.0 Eggshell", "star_rating": 5, "show_verified": true } },
+        { "type": "video_card", "settings": { "customer_name": "Sarah J.", "product_name": "Unda 2.0 Stainless Steel", "star_rating": 5, "show_verified": true } },
+        { "type": "video_card", "settings": { "customer_name": "Laura G.", "product_name": "Unda 2.0 Stainless Steel", "star_rating": 5, "show_verified": true } },
+        { "type": "video_card", "settings": { "customer_name": "Jack B.", "product_name": "Unda 2.0 Stainless Steel", "star_rating": 5, "show_verified": true } }
       ]
     }
   ]
