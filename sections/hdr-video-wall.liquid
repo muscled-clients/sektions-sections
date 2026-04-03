@@ -107,12 +107,13 @@
             <div class="hvw__product-card" {{ block.shopify_attributes }}>
               <div class="hvw__product-img-wrap">
                 {%- if card_product != blank and card_product.featured_image -%}
+                  {%- assign _img_alt = card_product.featured_image.alt | escape -%}
                   {{
                     card_product.featured_image
                     | image_url: width: 200
                     | image_tag:
                       loading: 'lazy',
-                      alt: card_product.featured_image.alt | escape,
+                      alt: _img_alt,
                       class: 'hvw__product-img'
                   }}
                 {%- elsif block.settings.fallback_image -%}
