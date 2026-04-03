@@ -18,7 +18,6 @@
     },
     "comparison_section_01": {
       "type": "comparison-section-01",
-      "settings": {},
       "blocks": {
         "313f7143": {
           "type": "column",
@@ -57,13 +56,20 @@
           "settings": {
             "feature_label": "360 swivel cord",
             "column_1_type": "icon",
+            "column_1_value": "Only $150",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$400",
             "column_2_icon": "x",
             "column_3_type": "icon",
+            "column_3_value": "$600",
             "column_3_icon": "check",
             "column_4_type": "icon",
-            "column_4_icon": "x"
+            "column_4_value": "$550",
+            "column_4_icon": "x",
+            "column_5_type": "none",
+            "column_5_value": "Column 5 Text",
+            "column_5_icon": "check"
           }
         },
         "ac453e7d": {
@@ -71,13 +77,20 @@
           "settings": {
             "feature_label": "Anti-scald design",
             "column_1_type": "icon",
+            "column_1_value": "Only $150",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$400",
             "column_2_icon": "x",
             "column_3_type": "icon",
+            "column_3_value": "$600",
             "column_3_icon": "x",
             "column_4_type": "icon",
-            "column_4_icon": "x"
+            "column_4_value": "$550",
+            "column_4_icon": "x",
+            "column_5_type": "none",
+            "column_5_value": "Column 5 Text",
+            "column_5_icon": "check"
           }
         },
         "97598bd0": {
@@ -85,13 +98,20 @@
           "settings": {
             "feature_label": "No heat damage",
             "column_1_type": "icon",
+            "column_1_value": "Only $150",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$400",
             "column_2_icon": "x",
             "column_3_type": "icon",
+            "column_3_value": "$600",
             "column_3_icon": "x",
             "column_4_type": "icon",
-            "column_4_icon": "check"
+            "column_4_value": "$550",
+            "column_4_icon": "check",
+            "column_5_type": "none",
+            "column_5_value": "Column 5 Text",
+            "column_5_icon": "check"
           }
         },
         "fa98ffd6": {
@@ -99,13 +119,20 @@
           "settings": {
             "feature_label": "Cool airflow",
             "column_1_type": "icon",
+            "column_1_value": "Only $150",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$400",
             "column_2_icon": "x",
             "column_3_type": "icon",
+            "column_3_value": "$600",
             "column_3_icon": "check",
             "column_4_type": "icon",
-            "column_4_icon": "check"
+            "column_4_value": "$550",
+            "column_4_icon": "check",
+            "column_5_type": "none",
+            "column_5_value": "Column 5 Text",
+            "column_5_icon": "check"
           }
         },
         "a6874301": {
@@ -113,13 +140,20 @@
           "settings": {
             "feature_label": "Long lasting styles",
             "column_1_type": "icon",
+            "column_1_value": "Only $150",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$400",
             "column_2_icon": "x",
             "column_3_type": "icon",
+            "column_3_value": "$600",
             "column_3_icon": "x",
             "column_4_type": "icon",
-            "column_4_icon": "x"
+            "column_4_value": "$550",
+            "column_4_icon": "x",
+            "column_5_type": "none",
+            "column_5_value": "Column 5 Text",
+            "column_5_icon": "check"
           }
         },
         "841adc88": {
@@ -128,12 +162,19 @@
             "feature_label": "Price",
             "column_1_type": "text",
             "column_1_value": "Only $150",
+            "column_1_icon": "check",
             "column_2_type": "text",
             "column_2_value": "$400",
+            "column_2_icon": "x",
             "column_3_type": "text",
             "column_3_value": "$600",
+            "column_3_icon": "check",
             "column_4_type": "text",
-            "column_4_value": "$550"
+            "column_4_value": "$550",
+            "column_4_icon": "x",
+            "column_5_type": "none",
+            "column_5_value": "Column 5 Text",
+            "column_5_icon": "check"
           }
         }
       },
@@ -148,11 +189,81 @@
         "fa98ffd6",
         "a6874301",
         "841adc88"
-      ]
+      ],
+      "settings": {
+        "background_color": "#f4f1f0",
+        "border_color": "#000000",
+        "border_radius": 0,
+        "border_radius_desktop": 0,
+        "margin_left_mobile": 0,
+        "margin_right_mobile": 0,
+        "margin_left_desktop": 0,
+        "margin_right_desktop": 0,
+        "max_width": 1200,
+        "heading_text": "<p>See the Difference</p>",
+        "heading_font": "'EB Garamond', serif",
+        "heading_weight": "400",
+        "heading_color": "#706b5f",
+        "heading_size_mobile": 28,
+        "heading_size_desktop": 52,
+        "heading_alignment_mobile": "center",
+        "heading_alignment_desktop": "center",
+        "subheading_text": "<p>Order worry-free and experience the difference firsthand.*</p>",
+        "text_font": "Arimo, sans-serif",
+        "text_weight": "400",
+        "text_color": "#706b5f",
+        "text_size_mobile": 16,
+        "text_size_desktop": 20,
+        "text_margin_top_mobile": 16,
+        "text_margin_top_desktop": 16,
+        "text_alignment_mobile": "center",
+        "text_alignment_desktop": "center",
+        "table_min_width": 720,
+        "table_margin_top_mobile": 12,
+        "table_margin_top_desktop": 24,
+        "border_row_color": "#706b5f",
+        "column_bg_color": "#ffffff",
+        "active_column_bg_color": "#3f4538",
+        "active_column_text_color": "#ffffff",
+        "top_corner_radius": 50,
+        "bottom_corner_radius": 50,
+        "active_column_spacing": 10,
+        "active_column_spacing_desktop": 20,
+        "column_heading_font": "Arimo, sans-serif",
+        "column_heading_weight": "400",
+        "column_heading_color": "#3f4538",
+        "column_heading_size_mobile": 14,
+        "column_heading_size_desktop": 24,
+        "row_label_font": "Arimo, sans-serif",
+        "row_label_weight": "700",
+        "row_label_color": "#706b5f",
+        "row_label_size_mobile": 12,
+        "row_label_size_desktop": 18,
+        "value_font": "Arimo, sans-serif",
+        "value_weight": "400",
+        "value_color": "#3f4538",
+        "value_size_mobile": 14,
+        "value_size_desktop": 24,
+        "vs_icon_bg_color": "#6c6ab4",
+        "vs_icon_text_color": "#ffffff",
+        "bottom_text": "<p>*If you're not satisfied, just let us know within 30 days and we'll give you a full refund – no questions asked.</p>",
+        "bottom_text_font": "Arimo, sans-serif",
+        "bottom_text_weight": "400",
+        "bottom_text_color": "#706b5f",
+        "bottom_text_size_mobile": 12,
+        "bottom_text_size_desktop": 13,
+        "bottom_text_margin_top_mobile": 20,
+        "bottom_text_margin_top_desktop": 24,
+        "bottom_text_alignment_mobile": "center",
+        "bottom_text_alignment_desktop": "center",
+        "padding_top": 55,
+        "padding_bottom": 55,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     },
     "comparison_section_02": {
       "type": "comparison-section-02",
-      "settings": {},
       "blocks": {
         "d295f205": {
           "type": "column",
@@ -207,16 +318,22 @@
           "settings": {
             "feature_label": "Long-lasting results",
             "column_1_type": "icon",
+            "column_1_value": "Only $260",
             "column_1_icon": "x",
             "column_2_type": "icon",
+            "column_2_value": "$60,000",
             "column_2_icon": "check",
             "column_3_type": "icon",
+            "column_3_value": "$9,500",
             "column_3_icon": "x",
             "column_4_type": "icon",
+            "column_4_value": "$20,000",
             "column_4_icon": "check",
             "column_5_type": "icon",
+            "column_5_value": "$1,500",
             "column_5_icon": "check",
             "column_6_type": "icon",
+            "column_6_value": "$10,000",
             "column_6_icon": "x"
           }
         },
@@ -225,16 +342,22 @@
           "settings": {
             "feature_label": "Safe for skin",
             "column_1_type": "icon",
+            "column_1_value": "Only $260",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$60,000",
             "column_2_icon": "x",
             "column_3_type": "icon",
+            "column_3_value": "$9,500",
             "column_3_icon": "x",
             "column_4_type": "icon",
+            "column_4_value": "$20,000",
             "column_4_icon": "x",
             "column_5_type": "icon",
+            "column_5_value": "$1,500",
             "column_5_icon": "x",
             "column_6_type": "icon",
+            "column_6_value": "$10,000",
             "column_6_icon": "x"
           }
         },
@@ -243,16 +366,22 @@
           "settings": {
             "feature_label": "Nearly painless",
             "column_1_type": "icon",
+            "column_1_value": "Only $260",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$60,000",
             "column_2_icon": "x",
             "column_3_type": "icon",
+            "column_3_value": "$9,500",
             "column_3_icon": "x",
             "column_4_type": "icon",
+            "column_4_value": "$20,000",
             "column_4_icon": "x",
             "column_5_type": "icon",
+            "column_5_value": "$1,500",
             "column_5_icon": "x",
             "column_6_type": "icon",
+            "column_6_value": "$10,000",
             "column_6_icon": "check"
           }
         },
@@ -261,16 +390,22 @@
           "settings": {
             "feature_label": "Quick at-home sessions",
             "column_1_type": "icon",
+            "column_1_value": "Only $260",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$60,000",
             "column_2_icon": "x",
             "column_3_type": "icon",
+            "column_3_value": "$9,500",
             "column_3_icon": "check",
             "column_4_type": "icon",
+            "column_4_value": "$20,000",
             "column_4_icon": "x",
             "column_5_type": "icon",
+            "column_5_value": "$1,500",
             "column_5_icon": "check",
             "column_6_type": "icon",
+            "column_6_value": "$10,000",
             "column_6_icon": "check"
           }
         },
@@ -280,16 +415,22 @@
             "feature_label": "Lifetime cost",
             "column_1_type": "text",
             "column_1_value": "Only $260",
+            "column_1_icon": "check",
             "column_2_type": "text",
             "column_2_value": "$60,000",
+            "column_2_icon": "check",
             "column_3_type": "text",
             "column_3_value": "$9,500",
+            "column_3_icon": "x",
             "column_4_type": "text",
             "column_4_value": "$20,000",
+            "column_4_icon": "check",
             "column_5_type": "text",
             "column_5_value": "$1,500",
+            "column_5_icon": "x",
             "column_6_type": "text",
-            "column_6_value": "$10,000"
+            "column_6_value": "$10,000",
+            "column_6_icon": "x"
           }
         }
       },
@@ -305,13 +446,83 @@
         "a0bfd258",
         "16af50cf",
         "825bc180"
-      ]
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "border_color": "#000000",
+        "border_radius": 0,
+        "border_radius_desktop": 0,
+        "margin_left_mobile": 0,
+        "margin_right_mobile": 0,
+        "margin_left_desktop": 0,
+        "margin_right_desktop": 0,
+        "max_width": 1200,
+        "heading_text": "<p>How are we different from other brands?</p>",
+        "heading_font": "'Josefin Sans', sans-serif",
+        "heading_weight": "400",
+        "heading_color": "#000000",
+        "heading_size_mobile": 28,
+        "heading_size_desktop": 40,
+        "heading_alignment_mobile": "center",
+        "heading_alignment_desktop": "center",
+        "subheading_text": "<p>Learn what makes our brand unique with our detailed breakdown of key features.</p>",
+        "text_font": "Assistant, sans-serif",
+        "text_weight": "400",
+        "text_color": "#3f3636",
+        "text_size_mobile": 14,
+        "text_size_desktop": 18,
+        "text_margin_top_mobile": 16,
+        "text_margin_top_desktop": 16,
+        "text_alignment_mobile": "center",
+        "text_alignment_desktop": "center",
+        "table_min_width": 720,
+        "table_margin_top_mobile": 12,
+        "table_margin_top_desktop": 24,
+        "border_row_color": "#d9d9d9",
+        "column_bg_color": "#f9f9ff",
+        "active_column_bg_color": "#ffe0e9",
+        "active_column_text_color": "#e0004d",
+        "top_corner_radius": 20,
+        "bottom_corner_radius": 20,
+        "active_column_spacing": 10,
+        "active_column_spacing_desktop": 20,
+        "column_heading_font": "Montserrat, sans-serif",
+        "column_heading_weight": "400",
+        "column_heading_color": "#190a0a",
+        "column_heading_size_mobile": 14,
+        "column_heading_size_desktop": 20,
+        "row_label_font": "Montserrat, sans-serif",
+        "row_label_weight": "500",
+        "row_label_color": "#190a0a",
+        "row_label_size_mobile": 12,
+        "row_label_size_desktop": 18,
+        "value_font": "Assistant, sans-serif",
+        "value_weight": "400",
+        "value_color": "#190a0a",
+        "value_size_mobile": 14,
+        "value_size_desktop": 20,
+        "vs_icon_bg_color": "#6c6ab4",
+        "vs_icon_text_color": "#ffffff",
+        "bottom_text": "<p>* Average U.S. hair removal expense, according to American Laser Center</p>",
+        "bottom_text_font": "Assistant, sans-serif",
+        "bottom_text_weight": "400",
+        "bottom_text_color": "#afabab",
+        "bottom_text_size_mobile": 12,
+        "bottom_text_size_desktop": 12,
+        "bottom_text_margin_top_mobile": 20,
+        "bottom_text_margin_top_desktop": 24,
+        "bottom_text_alignment_mobile": "left",
+        "bottom_text_alignment_desktop": "center",
+        "padding_top": 55,
+        "padding_bottom": 55,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     },
-    "comparison_section_03": {
+    "comparison_section_03_7Udcjz": {
       "type": "comparison-section-03",
-      "settings": {},
       "blocks": {
-        "b34f25b2": {
+        "column_AGh6Ha": {
           "type": "column",
           "settings": {
             "title": "Our Brand",
@@ -319,7 +530,7 @@
             "show_vs_icon": true
           }
         },
-        "c320141a": {
+        "column_GNfwUA": {
           "type": "column",
           "settings": {
             "title": "Other 1",
@@ -327,7 +538,7 @@
             "show_vs_icon": false
           }
         },
-        "92b010a7": {
+        "column_ytW7MY": {
           "type": "column",
           "settings": {
             "title": "Other 2",
@@ -335,111 +546,445 @@
             "show_vs_icon": false
           }
         },
-        "55a70ac6": {
+        "row_HV8rDA": {
           "type": "row",
           "settings": {
             "feature_label": "FRAGRANCE FREE",
             "column_1_type": "icon",
+            "column_1_value": "Only $260",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$60,000",
             "column_2_icon": "x",
             "column_3_type": "icon",
-            "column_3_icon": "x"
+            "column_3_value": "$9,500",
+            "column_3_icon": "x",
+            "column_4_type": "icon",
+            "column_4_value": "$20,000",
+            "column_4_icon": "check",
+            "column_5_type": "none",
+            "column_5_value": "Column 5 Text",
+            "column_5_icon": "check"
           }
         },
-        "50cbf794": {
+        "row_zk8Ygm": {
           "type": "row",
           "settings": {
             "feature_label": "HYPOALLERGENIC",
             "column_1_type": "icon",
+            "column_1_value": "Only $260",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$60,000",
             "column_2_icon": "x",
             "column_3_type": "icon",
-            "column_3_icon": "check"
+            "column_3_value": "$9,500",
+            "column_3_icon": "check",
+            "column_4_type": "icon",
+            "column_4_value": "$20,000",
+            "column_4_icon": "check",
+            "column_5_type": "none",
+            "column_5_value": "Column 5 Text",
+            "column_5_icon": "check"
           }
         },
-        "36cd96ad": {
+        "row_dMCCXF": {
           "type": "row",
           "settings": {
             "feature_label": "SULFATES FREE",
             "column_1_type": "icon",
+            "column_1_value": "Only $260",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$60,000",
             "column_2_icon": "x",
             "column_3_type": "icon",
-            "column_3_icon": "check"
+            "column_3_value": "$9,500",
+            "column_3_icon": "check",
+            "column_4_type": "icon",
+            "column_4_value": "$20,000",
+            "column_4_icon": "check",
+            "column_5_type": "none",
+            "column_5_value": "Column 5 Text",
+            "column_5_icon": "check"
           }
         },
-        "0f1f5866": {
+        "row_Bh6ApG": {
           "type": "row",
           "settings": {
             "feature_label": "CRUELTY FREE",
             "column_1_type": "icon",
+            "column_1_value": "Only $260",
             "column_1_icon": "check",
             "column_2_type": "icon",
+            "column_2_value": "$60,000",
             "column_2_icon": "x",
             "column_3_type": "icon",
-            "column_3_icon": "x"
+            "column_3_value": "$9,500",
+            "column_3_icon": "x",
+            "column_4_type": "icon",
+            "column_4_value": "$20,000",
+            "column_4_icon": "check",
+            "column_5_type": "none",
+            "column_5_value": "Column 5 Text",
+            "column_5_icon": "check"
           }
         }
       },
       "block_order": [
-        "b34f25b2",
-        "c320141a",
-        "92b010a7",
-        "55a70ac6",
-        "50cbf794",
-        "36cd96ad",
-        "0f1f5866"
-      ]
+        "column_AGh6Ha",
+        "column_GNfwUA",
+        "column_ytW7MY",
+        "row_HV8rDA",
+        "row_zk8Ygm",
+        "row_dMCCXF",
+        "row_Bh6ApG"
+      ],
+      "name": "Comparison Section 03",
+      "settings": {
+        "background_color": "#f8f4ea",
+        "border_color": "#000000",
+        "border_radius": 0,
+        "border_radius_desktop": 0,
+        "margin_left_mobile": 0,
+        "margin_right_mobile": 0,
+        "margin_left_desktop": 0,
+        "margin_right_desktop": 0,
+        "max_width": 1200,
+        "heading_text": "<p>How are we different from other brands?</p>",
+        "heading_font": "'Josefin Sans', sans-serif",
+        "heading_weight": "400",
+        "heading_color": "#000000",
+        "heading_size_mobile": 28,
+        "heading_size_desktop": 40,
+        "heading_alignment_mobile": "left",
+        "heading_alignment_desktop": "left",
+        "subheading_text": "<p>Learn what makes our brand unique with our detailed breakdown of key features.</p>",
+        "text_font": "Assistant, sans-serif",
+        "text_weight": "400",
+        "text_color": "#000000",
+        "text_size_mobile": 14,
+        "text_size_desktop": 18,
+        "text_line_height": 170,
+        "text_margin_top_mobile": 16,
+        "text_margin_top_desktop": 20,
+        "text_alignment_mobile": "left",
+        "text_alignment_desktop": "left",
+        "table_min_width": 720,
+        "table_margin_top_mobile": 20,
+        "table_margin_top_desktop": 32,
+        "border_row_color": "#ffffff",
+        "column_bg_color": "#efa450",
+        "active_column_bg_color": "#efa450",
+        "active_column_text_color": "#ffffff",
+        "top_corner_radius": 0,
+        "bottom_corner_radius": 0,
+        "active_column_spacing": 10,
+        "active_column_spacing_desktop": 20,
+        "image_max_width": 120,
+        "image_max_width_desktop": 120,
+        "image_border_radius": 0,
+        "image_border_width": 0,
+        "image_border_color": "#000000",
+        "column_heading_font": "'Josefin Sans', sans-serif",
+        "column_heading_weight": "400",
+        "column_heading_color": "#000000",
+        "column_heading_size_mobile": 14,
+        "column_heading_size_desktop": 24,
+        "row_label_font": "'Josefin Sans', sans-serif",
+        "row_label_weight": "700",
+        "row_label_color": "#000000",
+        "row_label_size_mobile": 12,
+        "row_label_size_desktop": 18,
+        "value_font": "Assistant, sans-serif",
+        "value_weight": "400",
+        "value_color": "#000000",
+        "value_size_mobile": 14,
+        "value_size_desktop": 24,
+        "vs_icon_bg_color": "#facbbd",
+        "vs_icon_text_color": "#121212",
+        "bottom_text": "",
+        "bottom_text_font": "Assistant, sans-serif",
+        "bottom_text_weight": "400",
+        "bottom_text_color": "#afabab",
+        "bottom_text_size_mobile": 12,
+        "bottom_text_size_desktop": 12,
+        "bottom_text_margin_top_mobile": 20,
+        "bottom_text_margin_top_desktop": 24,
+        "bottom_text_alignment_mobile": "center",
+        "bottom_text_alignment_desktop": "center",
+        "padding_top": 55,
+        "padding_bottom": 55,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     },
     "custom_banner": {
       "type": "custom-banner",
-      "settings": {},
       "blocks": {
         "f3999163": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "caption": "Rest & Recover",
+            "heading_before": "Master your",
+            "heading_strong": "circadian",
+            "heading_after": "rhythm",
+            "body_text": "Enhance your nightly rest with the use of intelligent lighting and fabrics that promote deeper REM cycles.",
+            "review_text": "The science of superior sleep",
+            "feature_1_text": "REM+ Optimization",
+            "feature_2_text": "Active Cooling",
+            "feature_3_text": "",
+            "button_text": "Explore Sleep Tech",
+            "button_link": "",
+            "verified_text": "Clinically tested sleep results"
+          }
         },
         "5136d045": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "caption": "Rest & Recover",
+            "heading_before": "Master your",
+            "heading_strong": "circadian",
+            "heading_after": "rhythm",
+            "body_text": "Enhance your nightly rest with the use of intelligent lighting and fabrics that promote deeper REM cycles.",
+            "review_text": "The science of superior sleep",
+            "feature_1_text": "REM+ Optimization",
+            "feature_2_text": "Active Cooling",
+            "feature_3_text": "",
+            "button_text": "Explore Sleep Tech",
+            "button_link": "",
+            "verified_text": "Clinically tested sleep results"
+          }
         }
       },
       "block_order": [
         "f3999163",
         "5136d045"
-      ]
+      ],
+      "settings": {
+        "slideshow_height_desktop": 95,
+        "slideshow_height_mobile": 95,
+        "background_gradient": "linear-gradient(180deg, rgba(10, 17, 40, 1), rgba(18, 18, 18, 1) 100%)",
+        "autoplay_speed": 10,
+        "enable_autoplay": true,
+        "text_color": "#f0eee9",
+        "heading_color": "#f0eee9",
+        "subheading_color": "#cbd5e0",
+        "button_text_color": "#0a1128",
+        "button_gradient": "linear-gradient(145deg, #ffd700, #d9b700)",
+        "accent_color": "#00b67a",
+        "caption_font": "assistant_n4",
+        "heading_font": "assistant_n7",
+        "heading_italic_font": "times_new_roman_n4",
+        "body_font": "assistant_n4",
+        "heading_size_desktop": 48,
+        "heading_size_mobile": 36,
+        "body_size_desktop": 18,
+        "body_size_mobile": 14,
+        "padding_desktop": 35,
+        "padding_mobile": 25,
+        "max_width": 55,
+        "gradient_start": "#b0ae73",
+        "gradient_end": "#f1f2ba",
+        "nav_button_bg": "#f0eee9",
+        "nav_button_hover_bg": "#ffd700",
+        "nav_button_icon": "#0a1128",
+        "progress_bg": "#8b745b",
+        "progress_fill": "#ffffff"
+      }
     },
     "eco_slideshow": {
       "type": "eco-slideshow",
-      "settings": {},
       "blocks": {
         "ea6e6b33": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "badge": "The Sunlit Living Room",
+            "heading": "<p>Design your home with <strong>low-impact essentials</strong></p>",
+            "review_text": "4.9/5 from 8,200+ conscious homes",
+            "text": "<p>Stone, bamboo, and organic waffle textures create a spa-like routine with fewer synthetics and more breathability.</p>",
+            "feature_1": "Low-tox everyday materials",
+            "feature_2": "Soft on skin",
+            "feature_3": "Planet-kind sourcing",
+            "button_label": "Shop Eco Bath",
+            "button_link": "",
+            "verified_text": "Ethically sourced and quality tested"
+          }
         },
         "de62d55e": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "badge": "The Sunlit Living Room",
+            "heading": "<p>Design your home with <strong>low-impact essentials</strong></p>",
+            "review_text": "4.9/5 from 8,200+ conscious homes",
+            "text": "<p>Stone, bamboo, and organic waffle textures create a spa-like routine with fewer synthetics and more breathability.</p>",
+            "feature_1": "Low-tox everyday materials",
+            "feature_2": "Soft on skin",
+            "feature_3": "Planet-kind sourcing",
+            "button_label": "Shop Eco Bath",
+            "button_link": "",
+            "verified_text": "Ethically sourced and quality tested"
+          }
         },
         "2fb4763b": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "badge": "The Sunlit Living Room",
+            "heading": "<p>Design your home with <strong>low-impact essentials</strong></p>",
+            "review_text": "4.9/5 from 8,200+ conscious homes",
+            "text": "<p>Stone, bamboo, and organic waffle textures create a spa-like routine with fewer synthetics and more breathability.</p>",
+            "feature_1": "Low-tox everyday materials",
+            "feature_2": "Soft on skin",
+            "feature_3": "Planet-kind sourcing",
+            "button_label": "Shop Eco Bath",
+            "button_link": "",
+            "verified_text": "Ethically sourced and quality tested"
+          }
         }
       },
       "block_order": [
         "ea6e6b33",
         "de62d55e",
         "2fb4763b"
-      ]
+      ],
+      "settings": {
+        "section_width": 1400,
+        "height_desktop": 760,
+        "height_mobile": 680,
+        "radius_desktop": 24,
+        "radius_mobile": 16,
+        "margin_top_desktop": 48,
+        "margin_bottom_desktop": 48,
+        "margin_top_mobile": 24,
+        "margin_bottom_mobile": 24,
+        "heading_size_desktop": 60,
+        "heading_size_mobile": 36,
+        "text_size_desktop": 19,
+        "text_size_mobile": 15,
+        "overlay_opacity_left": 50,
+        "overlay_opacity_mid": 50,
+        "overlay_opacity_right": 50,
+        "enable_autoplay": true,
+        "enable_loop": true,
+        "autoplay_seconds": 6,
+        "transition_speed": 1200,
+        "section_bg": "#f7f2ea",
+        "border_color": "#d8cbb7",
+        "heading_color": "#13271d",
+        "accent_color": "#4f765e",
+        "text_color": "#223a2c",
+        "badge_text_color": "#1d3227",
+        "pill_text_color": "#1d3227",
+        "button_bg": "#355e49",
+        "button_bg_dark": "#274636",
+        "button_text": "#f7f2ea",
+        "verified_color": "#1d3227",
+        "verified_icon_bg": "#1d3227",
+        "verified_icon_color": "#ffffff",
+        "progress_bg": "#d7cab7",
+        "progress_fill": "#355e49",
+        "nav_bg": "#f7f2ea",
+        "nav_hover_bg": "#d8cbb7",
+        "nav_border": "#d8cbb7",
+        "nav_icon": "#1d3227",
+        "star_bg": "#355e49",
+        "star_color": "#f7f2ea"
+      }
     },
-    "product_info_01": {
-      "type": "product-info-01",
-      "settings": {},
+    "slideshow_pro_custom": {
+      "type": "slideshow-pro-custom",
       "blocks": {
-        "157a366c": {
+        "d0362891": {
+          "type": "slide",
+          "settings": {
+            "caption": "Smart Hydration",
+            "heading_before": "Fresh water",
+            "heading_strong": "every second",
+            "heading_after": "",
+            "body_text": "Molecularly filtered, chilled, and synced to your biometrics. Real-time electrolyte alerts delivered to your wearable.",
+            "review_text": "Endorsed by 15,000+ Elite Athletes",
+            "feature_1_text": "Nano-Filtered",
+            "feature_2_text": "Biometric Sync",
+            "feature_3_text": "Medical-Grade",
+            "button_text": "Upgrade Your Intake",
+            "button_link": "",
+            "verified_text": "2-Year Warranty Included"
+          }
+        },
+        "6f3953de": {
+          "type": "slide",
+          "settings": {
+            "caption": "Peak Performance Club",
+            "heading_before": "Vitality",
+            "heading_strong": "updated daily",
+            "heading_after": "",
+            "body_text": "Real-time hydration analytics tailored to your unique metabolic rate and activity load. Smart recovery, automated.",
+            "review_text": "Endorsed by 15,000+ Elite Athletes",
+            "feature_1_text": "Bluetooth 6.0 Sync",
+            "feature_2_text": "Global Cloud Backup",
+            "feature_3_text": "",
+            "button_text": "Start Your Protocol",
+            "button_link": "",
+            "verified_text": "Cancel or pause anytime"
+          }
+        }
+      },
+      "block_order": [
+        "d0362891",
+        "6f3953de"
+      ],
+      "settings": {
+        "desktop_height": 95,
+        "mobile_height": 85,
+        "max_width": 1600,
+        "content_side": "right",
+        "content_width": 45,
+        "padding_desktop": 36,
+        "side_padding_desktop": 96,
+        "padding_mobile": 24,
+        "heading_size_desktop": 56,
+        "heading_size_mobile": 36,
+        "text_size_desktop": 18,
+        "text_size_mobile": 14,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "border_radius_desktop": 0,
+        "border_radius_mobile": 0,
+        "overlay_opacity": 0,
+        "enable_autoplay": true,
+        "autoplay_speed": 10,
+        "section_bg": "#f4f9f2",
+        "badge_bg": "#ffffffcc",
+        "badge_border": "#cac4b4",
+        "badge_text": "#1a2e1a",
+        "heading_color": "#1a2e1a",
+        "heading_accent": "#83a37e",
+        "text_color": "#1a2e1a",
+        "review_text_color": "#1a2e1a",
+        "feature_bg": "#ffffff4d",
+        "feature_border": "#cac4b4",
+        "feature_text": "#1a2e1a",
+        "feature_icon_color": "#1a2e1a",
+        "button_bg": "#1a2e1a",
+        "button_text": "#ffffff",
+        "button_radius": 8,
+        "verified_text": "#ffffff",
+        "verified_icon": "#ffffff",
+        "star_bg": "#000000",
+        "star_icon": "#ffffff",
+        "nav_bg": "#ffffff",
+        "nav_bg_hover": "#83a37e",
+        "nav_icon": "#1a2e1a",
+        "progress_bg": "#121212",
+        "progress_fill": "#ffffff",
+        "progress_width_desktop": 55,
+        "progress_width_mobile": 70
+      }
+    },
+    "product_info_01_jrX8XF": {
+      "type": "product-info-01",
+      "blocks": {
+        "feature_prFy33": {
           "type": "feature",
           "settings": {
             "title": "ORGANIC GRASS-FED WHOLE MILK",
@@ -449,7 +994,7 @@
             "dot_y": 20
           }
         },
-        "366e5dc6": {
+        "feature_6VM8Dc": {
           "type": "feature",
           "settings": {
             "title": "WHEY PROTEIN",
@@ -459,7 +1004,7 @@
             "dot_y": 60
           }
         },
-        "7df5db0c": {
+        "feature_caxHz8": {
           "type": "feature",
           "settings": {
             "title": "ORGANIC FAT BLEND",
@@ -469,7 +1014,7 @@
             "dot_y": 25
           }
         },
-        "e071aec5": {
+        "feature_DmeJT4": {
           "type": "feature",
           "settings": {
             "title": "MFGM",
@@ -481,15 +1026,109 @@
         }
       },
       "block_order": [
-        "157a366c",
-        "366e5dc6",
-        "7df5db0c",
-        "e071aec5"
-      ]
+        "feature_prFy33",
+        "feature_6VM8Dc",
+        "feature_caxHz8",
+        "feature_DmeJT4"
+      ],
+      "name": "Product Info 01",
+      "settings": {
+        "background_color": "#ecebe9",
+        "border_color": "#121212",
+        "border_radius": 0,
+        "border_radius_desktop": 0,
+        "margin_left_mobile": 0,
+        "margin_right_mobile": 0,
+        "margin_left_desktop": 0,
+        "margin_right_desktop": 0,
+        "max_width": 1400,
+        "image_aspect_ratio": "auto",
+        "image_aspect_ratio_desktop": "auto",
+        "image_border_radius": 0,
+        "image_border_width": 0,
+        "image_border_color": "#121212",
+        "subheading_text": "<p>ORGANIC GENTLE INFANT FORMULA</p>",
+        "subheading_font": "Inter, sans-serif",
+        "subheading_weight": "500",
+        "subheading_color": "#13322b",
+        "subheading_size_mobile": 14,
+        "subheading_size_desktop": 16,
+        "subheading_margin_top_mobile": 24,
+        "subheading_margin_top_desktop": 24,
+        "subheading_alignment_mobile": "center",
+        "subheading_alignment_desktop": "left",
+        "heading_text": "<h2>Simple science is our <strong>secret </strong>ingredient</h2>",
+        "heading_font": "Cardo, serif",
+        "heading_weight": "400",
+        "heading_color": "#13322b",
+        "heading_highlight_color": "#00c65e",
+        "heading_size_mobile": 32,
+        "heading_size_desktop": 48,
+        "heading_margin_top_mobile": 12,
+        "heading_margin_top_desktop": 12,
+        "heading_alignment_mobile": "center",
+        "heading_alignment_desktop": "left",
+        "body_margin_top_mobile": 20,
+        "body_margin_top_desktop": 40,
+        "features_gap_desktop": 48,
+        "icon_size_mobile": 48,
+        "icon_size_desktop": 60,
+        "icon_border_radius": 50,
+        "icon_border_width": 3,
+        "icon_border_color": "#00c65e",
+        "title_font": "Inter, sans-serif",
+        "title_weight": "500",
+        "title_color": "#13322b",
+        "title_size_mobile": 12,
+        "title_size_desktop": 14,
+        "title_margin_top": 8,
+        "title_margin_top_desktop": 8,
+        "title_width": 90,
+        "title_width_desktop": 100,
+        "text_font": "Inter, sans-serif",
+        "text_weight": "300",
+        "text_color": "#13322b",
+        "text_size_mobile": 12,
+        "text_size_desktop": 14,
+        "text_line_height": 150,
+        "text_margin_top": 8,
+        "text_margin_top_desktop": 8,
+        "text_width": 90,
+        "text_width_desktop": 100,
+        "dot_color": "#00c65e",
+        "line_color": "#00c65e",
+        "nav_button_bg_color": "rgba(0,0,0,0)",
+        "nav_button_icon_color": "#13322b",
+        "nav_button_border_color": "#d7d2cb",
+        "button_text": "Try Now (Save 30%)",
+        "button_url": "",
+        "show_arrow": true,
+        "button_font": "Inter, sans-serif",
+        "button_weight": "400",
+        "button_bg_color": "rgba(0,0,0,0)",
+        "button_text_color": "#13322b",
+        "button_border_color": "#d7d2cb",
+        "button_border_width": 1,
+        "button_hover_bg_color": "#bce2db",
+        "button_hover_text_color": "#13322b",
+        "button_hover_border_color": "#bce2db",
+        "button_text_size_mobile": 18,
+        "button_text_size_desktop": 18,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal_mobile": 32,
+        "button_padding_vertical_desktop": 16,
+        "button_padding_horizontal_desktop": 32,
+        "button_border_radius": 100,
+        "button_margin_top_mobile": 40,
+        "button_margin_top_desktop": 40,
+        "padding_top": 35,
+        "padding_bottom": 35,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     },
     "product_info_02": {
       "type": "product-info-02",
-      "settings": {},
       "blocks": {
         "3e2c4aff": {
           "type": "feature",
@@ -537,11 +1176,99 @@
         "cf888099",
         "612620cd",
         "034cdb79"
-      ]
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "border_color": "#121212",
+        "border_radius": 0,
+        "border_radius_desktop": 0,
+        "margin_left_mobile": 0,
+        "margin_right_mobile": 0,
+        "margin_left_desktop": 0,
+        "margin_right_desktop": 0,
+        "max_width": 1400,
+        "heading_text": "<h2>Feel the <strong>difference</strong></h2>",
+        "heading_font": "'Josefin Sans', sans-serif",
+        "heading_weight": "700",
+        "heading_color": "#121212",
+        "heading_highlight_color": "#ffad70",
+        "heading_size_mobile": 32,
+        "heading_size_desktop": 56,
+        "heading_margin_top_mobile": 12,
+        "heading_margin_top_desktop": 12,
+        "heading_alignment_mobile": "center",
+        "heading_alignment_desktop": "center",
+        "image_aspect_ratio": "auto",
+        "image_aspect_ratio_desktop": "auto",
+        "image_border_radius": 0,
+        "image_border_width": 0,
+        "image_border_color": "#121212",
+        "body_margin_top_mobile": 32,
+        "body_margin_top_desktop": 40,
+        "features_gap_desktop": 48,
+        "icon_size_mobile": 60,
+        "icon_size_desktop": 90,
+        "icon_border_radius": 20,
+        "icon_border_width": 0,
+        "icon_border_color": "#121212",
+        "title_font": "'Josefin Sans', sans-serif",
+        "title_weight": "700",
+        "title_color": "#121212",
+        "title_size_mobile": 18,
+        "title_size_desktop": 22,
+        "title_margin_top": 10,
+        "title_margin_top_desktop": 14,
+        "title_width": 90,
+        "title_width_desktop": 100,
+        "title_alignment_desktop": "center",
+        "feature_alignment_desktop": "center",
+        "text_font": "'Josefin Sans', sans-serif",
+        "text_weight": "400",
+        "text_color": "#121212",
+        "text_size_mobile": 14,
+        "text_size_desktop": 14,
+        "text_line_height": 150,
+        "text_margin_top": 8,
+        "text_margin_top_desktop": 20,
+        "text_width": 90,
+        "text_width_desktop": 100,
+        "text_alignment_desktop": "center",
+        "dot_color": "#ffad70",
+        "line_color": "#ffad70",
+        "line_width": 3,
+        "nav_button_bg_color": "#f3f3f3",
+        "nav_button_icon_color": "#121212",
+        "nav_button_border_color": "#121212",
+        "nav_button_border_width": 0,
+        "button_text": "Try Now (Save 30%)",
+        "button_url": "",
+        "show_arrow": true,
+        "button_font": "'Josefin Sans', sans-serif",
+        "button_weight": "700",
+        "button_bg_color": "#ffad70",
+        "button_text_color": "#121212",
+        "button_border_color": "rgba(0,0,0,0)",
+        "button_border_width": 0,
+        "button_hover_bg_color": "#121212",
+        "button_hover_text_color": "#ffffff",
+        "button_hover_border_color": "rgba(0,0,0,0)",
+        "button_text_size_mobile": 18,
+        "button_text_size_desktop": 20,
+        "button_padding_vertical_mobile": 20,
+        "button_padding_horizontal_mobile": 36,
+        "button_padding_vertical_desktop": 20,
+        "button_padding_horizontal_desktop": 36,
+        "button_border_radius": 0,
+        "button_margin_top_mobile": 40,
+        "button_margin_top_desktop": 40,
+        "padding_top": 35,
+        "padding_bottom": 35,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     },
     "product_info_03": {
       "type": "product-info-03",
-      "settings": {},
       "blocks": {
         "1e770834": {
           "type": "feature",
@@ -611,81 +1338,159 @@
         "6a796e06",
         "239737a5",
         "c02a7740"
-      ]
-    },
-    "slideshow_pro_custom": {
-      "type": "slideshow-pro-custom",
-      "settings": {},
-      "blocks": {
-        "d0362891": {
-          "type": "slide",
-          "settings": {}
-        },
-        "6f3953de": {
-          "type": "slide",
-          "settings": {
-            "caption": "Peak Performance Club",
-            "heading_before": "Vitality",
-            "heading_strong": "updated daily",
-            "body_text": "Real-time hydration analytics tailored to your unique metabolic rate and activity load. Smart recovery, automated.",
-            "review_text": "Endorsed by 15,000+ Elite Athletes",
-            "feature_1_text": "Bluetooth 6.0 Sync",
-            "feature_2_text": "Global Cloud Backup",
-            "feature_3_text": "",
-            "button_text": "Start Your Protocol",
-            "verified_text": "Cancel or pause anytime"
-          }
-        }
-      },
-      "block_order": [
-        "d0362891",
-        "6f3953de"
-      ]
+      ],
+      "settings": {
+        "background_color": "#00c65e",
+        "border_color": "#121212",
+        "border_radius_mobile": 14,
+        "border_radius_desktop": 24,
+        "margin_left_mobile": 1.5,
+        "margin_right_mobile": 1.5,
+        "margin_left_desktop": 2,
+        "margin_right_desktop": 2,
+        "max_width": 1400,
+        "heading_text": "<h2>Feel the <strong>difference</strong></h2>",
+        "heading_font": "'Josefin Sans', sans-serif",
+        "heading_weight": "700",
+        "heading_color": "#13322b",
+        "heading_highlight_color": "#ffffff",
+        "heading_size_mobile": 38,
+        "heading_size_desktop": 56,
+        "heading_margin_top_mobile": 12,
+        "heading_margin_top_desktop": 12,
+        "heading_alignment_mobile": "center",
+        "heading_alignment_desktop": "center",
+        "subheading_text": "<p>Embedded screen behind reflective surface shows real-time weather, news, calendar updates, and multimedia without affecting reflection.</p>",
+        "subheading_font": "'Josefin Sans', sans-serif",
+        "subheading_weight": "400",
+        "subheading_color": "#121212",
+        "subheading_size_mobile": 14,
+        "subheading_size_desktop": 18,
+        "subheading_line_height": 170,
+        "subheading_margin_top_mobile": 16,
+        "subheading_margin_top_desktop": 20,
+        "subheading_width_desktop": 100,
+        "subheading_alignment_mobile": "center",
+        "subheading_alignment_desktop": "center",
+        "image_aspect_ratio": "auto",
+        "image_aspect_ratio_desktop": "auto",
+        "image_border_radius": 0,
+        "image_border_width": 0,
+        "image_border_color": "#121212",
+        "body_margin_top_mobile": 32,
+        "body_margin_top_desktop": 40,
+        "features_gap_desktop": 24,
+        "title_font": "'Josefin Sans', sans-serif",
+        "title_weight": "700",
+        "title_color": "#13322b",
+        "title_size_mobile": 24,
+        "title_size_desktop": 24,
+        "title_margin_top": 16,
+        "title_margin_top_desktop": 16,
+        "title_width": 90,
+        "title_width_desktop": 100,
+        "title_alignment_desktop": "left",
+        "feature_alignment_desktop": "flex-start",
+        "text_font": "'Josefin Sans', sans-serif",
+        "text_weight": "400",
+        "text_color": "#13322b",
+        "text_size_mobile": 12,
+        "text_size_desktop": 14,
+        "text_line_height": 170,
+        "text_margin_top": 8,
+        "text_margin_top_desktop": 12,
+        "text_width": 90,
+        "text_width_desktop": 100,
+        "text_alignment_desktop": "left",
+        "dot_color": "#ffffff",
+        "line_color": "#ffffff",
+        "line_width": 2,
+        "nav_button_bg_color": "#ffffff",
+        "nav_button_icon_color": "#13322b",
+        "nav_button_border_color": "#13322b",
+        "nav_button_border_width": 0,
+        "button_text": "Try Now (Save 30%)",
+        "button_url": "",
+        "show_arrow": true,
+        "button_font": "'Josefin Sans', sans-serif",
+        "button_weight": "700",
+        "button_bg_color": "#ffffff",
+        "button_text_color": "#13322b",
+        "button_border_color": "rgba(0,0,0,0)",
+        "button_border_width": 0,
+        "button_hover_bg_color": "#eef9f3",
+        "button_hover_text_color": "#13322b",
+        "button_hover_border_color": "rgba(0,0,0,0)",
+        "button_text_size_mobile": 16,
+        "button_text_size_desktop": 16,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal_mobile": 40,
+        "button_padding_vertical_desktop": 16,
+        "button_padding_horizontal_desktop": 40,
+        "button_border_radius": 12,
+        "button_margin_top_mobile": 40,
+        "button_margin_top_desktop": 40,
+        "padding_top": 35,
+        "padding_bottom": 35,
+        "margin_top": 35,
+        "margin_bottom": 35
+      }
     },
     "slider_pro_2": {
       "type": "slider-pro-2",
-      "settings": {},
       "blocks": {
         "bce4c9d9": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "Sleep Tape",
             "subtitle": "The #1 most recommended",
-            "badge": "\ud83d\udd25 Bestseller / Trending",
+            "badge": "🔥 Bestseller / Trending",
+            "link": "",
             "overlay_color": "#8b7355"
           }
         },
         "5105e4cf": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "LED Beauty Wand",
             "subtitle": "Red & Blue Light Therapy",
-            "badge": "\ud83d\udd25 Bestseller / Trending",
+            "badge": "🔥 Bestseller / Trending",
+            "link": "",
             "overlay_color": "#a0896e"
           }
         },
         "8c990bd8": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "Sculpting Roller",
             "subtitle": "Sculpt and contour",
+            "badge": "",
+            "link": "",
             "overlay_color": "#b09878"
           }
         },
         "01939d9e": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "LED Face Mask",
             "subtitle": "Red Light Therapy",
-            "badge": "\u26a1 Only 3 left in stock",
+            "badge": "⚡ Only 3 left in stock",
+            "link": "",
             "overlay_color": "#6b3040"
           }
         },
         "c0844de6": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "Gua Sha Roller",
             "subtitle": "Natural jade stone",
+            "badge": "",
+            "link": "",
             "overlay_color": "#c4a882"
           }
         }
@@ -696,69 +1501,99 @@
         "8c990bd8",
         "01939d9e",
         "c0844de6"
-      ]
+      ],
+      "settings": {
+        "button_text": "View",
+        "max_width": 1200,
+        "bg_color_top": "#ffffff",
+        "bg_color_bottom": "#f8cfc0",
+        "title_color": "#ffffff",
+        "subtitle_color": "#ffffffd9",
+        "button_bg": "#ffffff",
+        "button_text_color": "#1a1a1a",
+        "button_hover_bg": "#f0f0f0",
+        "nav_bg": "#ffffff",
+        "nav_icon": "#1a1a1a",
+        "nav_hover_bg": "#f0f0f0"
+      }
     },
     "slider_pro_3": {
       "type": "slider-pro-3",
-      "settings": {},
       "blocks": {
         "7f2159e3": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "Jewelry",
             "subtitle": "Timeless elegance",
             "badge": "NEW IN",
+            "link": "",
             "overlay_color": "#ffffff"
           }
         },
         "7ee12282": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "Occasionwear",
             "subtitle": "Dress to impress",
+            "badge": "",
+            "link": "",
             "overlay_color": "#ffffff"
           }
         },
         "c5b14dc6": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "Footwear",
             "subtitle": "Step into style",
             "badge": "SELLING FAST",
+            "link": "",
             "overlay_color": "#ffffff"
           }
         },
         "db1bd339": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "Dresses",
             "subtitle": "Everyday essentials",
+            "badge": "",
+            "link": "",
             "overlay_color": "#ffffff"
           }
         },
         "8c855fa0": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "Accessories",
             "subtitle": "Complete the look",
             "badge": "TRENDING",
+            "link": "",
             "overlay_color": "#ffffff"
           }
         },
         "820efe1e": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "Coats & Jackets",
             "subtitle": "Warm and stylish",
+            "badge": "",
+            "link": "",
             "overlay_color": "#ffffff"
           }
         },
         "10f8965b": {
           "type": "slide",
           "settings": {
+            "collection": "",
             "title": "Swimwear",
             "subtitle": "Beach ready",
             "badge": "NEW IN",
+            "link": "",
             "overlay_color": "#ffffff"
           }
         }
@@ -771,31 +1606,56 @@
         "8c855fa0",
         "820efe1e",
         "10f8965b"
-      ]
+      ],
+      "settings": {
+        "button_text": "View",
+        "background_color": "#000000",
+        "title_color": "#1a1a1a",
+        "subtitle_color": "#333333",
+        "button_text_color": "#1a1a1a",
+        "button_hover_bg": "#1a1a1a",
+        "button_hover_text": "#ffffff",
+        "nav_border_color": "#999999",
+        "nav_icon_color": "#ffffff"
+      }
     },
     "video_selling_01": {
       "type": "video-selling-01",
-      "settings": {},
       "blocks": {
         "22a9ea7d": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": ""
+          }
         },
         "70993be0": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": ""
+          }
         },
         "4336fe05": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": ""
+          }
         },
         "061ddeed": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": ""
+          }
         },
         "2fe7601b": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": ""
+          }
         }
       },
       "block_order": [
@@ -804,50 +1664,278 @@
         "4336fe05",
         "061ddeed",
         "2fe7601b"
-      ]
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "border_color": "#121212",
+        "max_width": 1500,
+        "preview_mode": true,
+        "content_alignment_mobile": "flex-start",
+        "content_alignment_desktop": "flex-start",
+        "subheading_text": "<h3>Bestsellers</h3>",
+        "subheading_font": "Inter, sans-serif",
+        "subheading_weight": "400",
+        "subheading_color": "#262425",
+        "subheading_size_mobile": 12,
+        "subheading_size_desktop": 12,
+        "subheading_alignment_mobile": "left",
+        "subheading_alignment_desktop": "left",
+        "subheading_margin_top_mobile": 0,
+        "subheading_margin_bottom_mobile": 0,
+        "subheading_margin_left_mobile": 0,
+        "subheading_margin_right_mobile": 0,
+        "subheading_margin_top_desktop": 0,
+        "subheading_margin_bottom_desktop": 0,
+        "subheading_margin_left_desktop": 0,
+        "subheading_margin_right_desktop": 0,
+        "heading_text": "<p><strong>BENI BEDS™</strong></p>",
+        "heading_font": "Inter, sans-serif",
+        "heading_weight": "900",
+        "heading_color": "#262425",
+        "heading_size_mobile": 32,
+        "heading_size_desktop": 32,
+        "heading_alignment_mobile": "left",
+        "heading_alignment_desktop": "left",
+        "heading_margin_top_mobile": 8,
+        "heading_margin_bottom_mobile": 0,
+        "heading_margin_left_mobile": 0,
+        "heading_margin_right_mobile": 0,
+        "heading_margin_top_desktop": 8,
+        "heading_margin_bottom_desktop": 0,
+        "heading_margin_left_desktop": 0,
+        "heading_margin_right_desktop": 0,
+        "paragraph_text": "<p>Experience cloud comfort wherever you unroll</p>",
+        "paragraph_font": "Inter, sans-serif",
+        "paragraph_weight": "400",
+        "paragraph_color": "#262425",
+        "paragraph_size_mobile": 14,
+        "paragraph_size_desktop": 14,
+        "paragraph_alignment_mobile": "left",
+        "paragraph_alignment_desktop": "left",
+        "paragraph_margin_top_mobile": 8,
+        "paragraph_margin_bottom_mobile": 0,
+        "paragraph_margin_left_mobile": 0,
+        "paragraph_margin_right_mobile": 0,
+        "paragraph_margin_top_desktop": 8,
+        "paragraph_margin_bottom_desktop": 0,
+        "paragraph_margin_left_desktop": 0,
+        "paragraph_margin_right_desktop": 0,
+        "slider_margin_top_mobile": 16,
+        "slider_margin_top_desktop": 24,
+        "gap_mobile": 8,
+        "gap_desktop": 8,
+        "slides_per_view_mobile": 1.4,
+        "slides_per_view_desktop": 5,
+        "video_aspect_ratio_mobile": "9.6/13",
+        "video_aspect_ratio_desktop": "9.6/13",
+        "slide_border_radius": 8,
+        "show_slide_shadow": true,
+        "product_card_bg_color": "#ffffff",
+        "product_card_padding_mobile": 12,
+        "product_card_padding_desktop": 16,
+        "product_image_aspect_ratio": "12/12",
+        "product_image_size_mobile": 44,
+        "product_image_size_desktop": 44,
+        "product_image_border_radius": 4,
+        "show_product_image_shadow": true,
+        "product_title_font": "Inter, sans-serif",
+        "product_title_weight": "700",
+        "product_title_color": "#262425",
+        "product_title_size_mobile": 14,
+        "product_title_size_desktop": 14,
+        "product_price_font": "Inter, sans-serif",
+        "product_price_weight": "700",
+        "product_price_color": "#262425",
+        "compare_price_color": "#f55656",
+        "product_price_size_mobile": 14,
+        "product_price_size_desktop": 14,
+        "button_text": "Shop Now",
+        "button_font": "Inter, sans-serif",
+        "button_font_weight": "400",
+        "button_bg_color": "#262425",
+        "button_text_color": "#ffffff",
+        "button_hover_bg_color": "#525151",
+        "button_hover_text_color": "#ffffff",
+        "button_text_size_mobile": 13,
+        "button_text_size_desktop": 13,
+        "button_padding_vertical_mobile": 12,
+        "button_padding_horizontal_mobile": 24,
+        "button_padding_vertical_desktop": 12,
+        "button_padding_horizontal_desktop": 24,
+        "button_border_radius": 4,
+        "nav_button_bg_color": "#f9f7ef",
+        "nav_button_icon_color": "#262425",
+        "nav_button_hover_bg_color": "#f9f7ef",
+        "nav_button_hover_icon_color": "#262425",
+        "padding_top": 35,
+        "padding_bottom": 35,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     },
     "video_selling_02": {
       "type": "video-selling-02",
-      "settings": {},
       "blocks": {
         "8b1a96e3": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": "",
+            "show_play_button": true
+          }
         },
         "e8a933e7": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": "",
+            "show_play_button": true
+          }
         },
         "ad52d208": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": "",
+            "show_play_button": true
+          }
         }
       },
       "block_order": [
         "8b1a96e3",
         "e8a933e7",
         "ad52d208"
-      ]
+      ],
+      "settings": {
+        "background_color": "#f9f8f6",
+        "border_color": "#121212",
+        "overlay_color": "rgba(0,0,0,0)",
+        "max_width": 1500,
+        "preview_mode": true,
+        "content_alignment_mobile": "flex-start",
+        "content_alignment_desktop": "center",
+        "subheading_text": "<h3>Community Highlights</h3>",
+        "subheading_font": "Montserrat, sans-serif",
+        "subheading_weight": "400",
+        "subheading_color": "#666666",
+        "subheading_size_mobile": 12,
+        "subheading_size_desktop": 11,
+        "subheading_alignment_mobile": "left",
+        "subheading_alignment_desktop": "center",
+        "subheading_margin_top_mobile": 0,
+        "subheading_margin_bottom_mobile": 0,
+        "subheading_margin_top_desktop": 0,
+        "subheading_margin_bottom_desktop": 0,
+        "heading_text": "<p><strong>MADE FOR MOMENTS</strong></p>",
+        "heading_font": "Inter, sans-serif",
+        "heading_weight": "900",
+        "heading_color": "#262425",
+        "heading_size_mobile": 32,
+        "heading_size_desktop": 28,
+        "heading_alignment_mobile": "left",
+        "heading_alignment_desktop": "center",
+        "heading_margin_top_mobile": 8,
+        "heading_margin_bottom_mobile": 0,
+        "heading_margin_top_desktop": 8,
+        "heading_margin_bottom_desktop": 0,
+        "slider_margin_top_mobile": 16,
+        "slider_margin_top_desktop": 24,
+        "gap_mobile": 8,
+        "gap_desktop": 20,
+        "slides_per_view_mobile": 1.1,
+        "slides_per_view_desktop": 3,
+        "video_aspect_ratio_mobile": "12/12",
+        "video_aspect_ratio_desktop": "12/12",
+        "slide_border_radius": 0,
+        "show_slide_shadow": false,
+        "product_card_bg_color": "#ffffff",
+        "product_card_padding_mobile": 12,
+        "product_card_padding_desktop": 16,
+        "product_image_aspect_ratio": "12/12",
+        "product_image_size_mobile": 44,
+        "product_image_size_desktop": 60,
+        "product_image_border_radius": 0,
+        "product_image_border_width": 2,
+        "product_image_border_color": "#e7e2d9",
+        "show_product_image_shadow": false,
+        "product_title_font": "Montserrat, sans-serif",
+        "product_title_weight": "600",
+        "product_title_color": "#262425",
+        "product_title_size_mobile": 14,
+        "product_title_size_desktop": 14,
+        "product_price_font": "Montserrat, sans-serif",
+        "product_price_weight": "600",
+        "product_price_color": "#262425",
+        "compare_price_color": "#cccccc",
+        "product_price_size_mobile": 14,
+        "product_price_size_desktop": 14,
+        "button_text": "Shop the Vibe",
+        "button_font": "Montserrat, sans-serif",
+        "button_font_weight": "400",
+        "button_bg_color": "#262425",
+        "button_text_color": "#ffffff",
+        "button_hover_bg_color": "#121212",
+        "button_hover_text_color": "#ffffff",
+        "button_margin_top": 10,
+        "button_margin_top_desktop": 10,
+        "button_text_size_mobile": 14,
+        "button_text_size_desktop": 14,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal_mobile": 24,
+        "button_padding_vertical_desktop": 16,
+        "button_padding_horizontal_desktop": 32,
+        "button_border_radius": 0,
+        "play_button_size": 36,
+        "play_button_size_desktop": 36,
+        "play_button_icon_size": 20,
+        "play_button_icon_size_desktop": 20,
+        "play_button_bg_color": "#6666664d",
+        "play_button_icon_color": "#ffffff",
+        "play_button_hover_bg_color": "#6666664d",
+        "play_button_hover_icon_color": "#ffffff",
+        "play_button_border_radius": 4,
+        "nav_button_size": 48,
+        "nav_button_size_desktop": 48,
+        "nav_button_bg_color": "#ffffff",
+        "nav_button_icon_color": "#121212",
+        "nav_button_hover_bg_color": "#f3f3f3",
+        "nav_button_hover_icon_color": "#121212",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
     },
     "video_selling_03": {
       "type": "video-selling-03",
-      "settings": {},
       "blocks": {
         "4a35bd1b": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": ""
+          }
         },
         "2a27c150": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": ""
+          }
         },
         "c82671a6": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": ""
+          }
         },
         "1ad930fd": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "product": "",
+            "video_url": ""
+          }
         }
       },
       "block_order": [
@@ -855,49 +1943,161 @@
         "2a27c150",
         "c82671a6",
         "1ad930fd"
-      ]
+      ],
+      "settings": {
+        "background_color": "#e0d7ff",
+        "border_color": "#121212",
+        "overlay_color": "rgba(0,0,0,0)",
+        "max_width": 1500,
+        "preview_mode": true,
+        "border_radius_mobile": 24,
+        "border_radius_desktop": 40,
+        "margin_left_mobile": 1.5,
+        "margin_right_mobile": 1.5,
+        "margin_left_desktop": 5,
+        "margin_right_desktop": 5,
+        "padding_left_mobile": 1.5,
+        "padding_right_mobile": 1.5,
+        "padding_left_desktop": 4,
+        "padding_right_desktop": 4,
+        "content_alignment_mobile": "flex-start",
+        "content_alignment_desktop": "center",
+        "subheading_text": "<h3>Trending Now</h3>",
+        "subheading_font": "Manrope, sans-serif",
+        "subheading_weight": "400",
+        "subheading_color": "#000000",
+        "subheading_size_mobile": 12,
+        "subheading_size_desktop": 14,
+        "subheading_alignment_mobile": "left",
+        "subheading_alignment_desktop": "center",
+        "subheading_margin_top_mobile": 0,
+        "subheading_margin_bottom_mobile": 0,
+        "subheading_margin_top_desktop": 0,
+        "subheading_margin_bottom_desktop": 0,
+        "heading_text": "<h2><strong>For Every Way You Drink</strong></h2>",
+        "heading_font": "'Bricolage Grotesque', sans-serif",
+        "heading_weight": "700",
+        "heading_color": "#000000",
+        "heading_size_mobile": 32,
+        "heading_size_desktop": 48,
+        "heading_alignment_mobile": "left",
+        "heading_alignment_desktop": "center",
+        "heading_margin_top_mobile": 0,
+        "heading_margin_bottom_mobile": 0,
+        "heading_margin_top_desktop": 0,
+        "heading_margin_bottom_desktop": 0,
+        "slider_margin_top_mobile": 16,
+        "slider_margin_top_desktop": 24,
+        "gap_mobile": 8,
+        "gap_desktop": 8,
+        "slides_per_view_mobile": 1.3,
+        "slides_per_view_desktop": 4,
+        "slide_border_radius": 40,
+        "slide_border_width": 3,
+        "slide_border_color": "#000000",
+        "show_slide_shadow": true,
+        "video_aspect_ratio_mobile": "9.6/13",
+        "video_aspect_ratio_desktop": "9.6/13",
+        "show_nav_buttons": "none",
+        "nav_button_size": 48,
+        "nav_button_size_desktop": 48,
+        "nav_button_bg_color": "#ffffff",
+        "nav_button_icon_color": "#121212",
+        "nav_button_hover_bg_color": "#f3f3f3",
+        "nav_button_hover_icon_color": "#121212",
+        "product_card_bg_color": "#ffffff",
+        "product_card_padding_mobile": 12,
+        "product_card_padding_desktop": 16,
+        "product_image_aspect_ratio": "12/12",
+        "product_image_size_mobile": 44,
+        "product_image_size_desktop": 44,
+        "product_image_border_radius": 20,
+        "product_image_border_width": 2,
+        "product_image_border_color": "#000000",
+        "show_product_image_shadow": true,
+        "product_title_font": "Manrope, sans-serif",
+        "product_title_weight": "700",
+        "product_title_color": "#121212",
+        "product_title_size_mobile": 14,
+        "product_title_size_desktop": 14,
+        "product_price_font": "Manrope, sans-serif",
+        "product_price_weight": "700",
+        "product_price_color": "#121212",
+        "compare_price_color": "#cccccc",
+        "product_price_size_mobile": 14,
+        "product_price_size_desktop": 14,
+        "button_text": "GRAB IT",
+        "button_font": "Manrope, sans-serif",
+        "button_font_weight": "700",
+        "button_bg_color": "#bcff00",
+        "button_text_color": "#000000",
+        "button_hover_bg_color": "#121212",
+        "button_hover_text_color": "#ffffff",
+        "button_margin_top": 10,
+        "button_margin_top_desktop": 10,
+        "button_text_size_mobile": 14,
+        "button_text_size_desktop": 14,
+        "button_padding_vertical_mobile": 12,
+        "button_padding_horizontal_mobile": 24,
+        "button_padding_vertical_desktop": 12,
+        "button_padding_horizontal_desktop": 24,
+        "button_border_radius": 100,
+        "padding_top": 35,
+        "padding_bottom": 35,
+        "margin_top": 35,
+        "margin_bottom": 35
+      }
     },
     "video_testimonials": {
       "type": "video-testimonials",
-      "settings": {},
       "blocks": {
         "4021128e": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Sarah M.",
             "product_name": "Classic Collection",
+            "show_stars": true,
             "star_rating": 5
           }
         },
         "7b701f6e": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "John D.",
             "product_name": "Premium Series",
+            "show_stars": true,
             "star_rating": 5
           }
         },
         "4ce949d7": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Emily R.",
             "product_name": "Essential Kit",
+            "show_stars": true,
             "star_rating": 4
           }
         },
         "3fda69dc": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Michael T.",
             "product_name": "Signature Line",
+            "show_stars": true,
             "star_rating": 5
           }
         },
         "a5d100ba": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Lisa K.",
             "product_name": "Deluxe Bundle",
+            "show_stars": true,
             "star_rating": 5
           }
         }
@@ -908,55 +2108,77 @@
         "4ce949d7",
         "3fda69dc",
         "a5d100ba"
-      ]
+      ],
+      "settings": {
+        "subheading": "OUR TESTIMONIALS",
+        "heading": "Why people love our brand",
+        "description": "Don't just take our word for it, see what our customers are saying",
+        "card_border_radius": 12,
+        "background_color": "#ffffff",
+        "text_color": "#1a1a1a",
+        "subheading_color": "#666666",
+        "nav_button_color": "#ffffff",
+        "nav_icon_color": "#1a1a1a",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "video_testimonials_2": {
       "type": "video-testimonials-2",
-      "settings": {},
       "blocks": {
         "eecced44": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Paul F.",
             "product_name": "Unda 2.0 Stainless Steel",
-            "star_rating": 5,
-            "show_verified": true
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
           }
         },
         "c99ae1ff": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Olevier A.",
             "product_name": "Unda 2.0 Eggshell",
-            "star_rating": 5,
-            "show_verified": true
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
           }
         },
         "2db33535": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Sarah J.",
             "product_name": "Unda 2.0 Stainless Steel",
-            "star_rating": 5,
-            "show_verified": true
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
           }
         },
         "22f08d96": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Laura G.",
             "product_name": "Unda 2.0 Stainless Steel",
-            "star_rating": 5,
-            "show_verified": true
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
           }
         },
         "ac869826": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Jack B.",
             "product_name": "Unda 2.0 Stainless Steel",
-            "star_rating": 5,
-            "show_verified": true
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
           }
         }
       },
@@ -966,55 +2188,76 @@
         "2db33535",
         "22f08d96",
         "ac869826"
-      ]
+      ],
+      "settings": {
+        "subheading": "What our customers say",
+        "heading": "Why people love our brand",
+        "description": "Don't just take our word for it, see what our customers are saying",
+        "background_color": "#ffffff",
+        "text_color": "#953034",
+        "subheading_color": "#953034",
+        "nav_button_color": "#953034",
+        "nav_icon_color": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "video_testimonials_round": {
       "type": "video-testimonials-round",
-      "settings": {},
       "blocks": {
         "8f330022": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Paul F.",
             "product_name": "Unda 2.0 Stainless Steel",
-            "star_rating": 5,
-            "show_verified": true
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
           }
         },
         "3716971d": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Olevier A.",
             "product_name": "Unda 2.0 Eggshell",
-            "star_rating": 5,
-            "show_verified": true
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
           }
         },
         "3d5d41e1": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Sarah J.",
             "product_name": "Unda 2.0 Stainless Steel",
-            "star_rating": 5,
-            "show_verified": true
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
           }
         },
         "a287b127": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Laura G.",
             "product_name": "Unda 2.0 Stainless Steel",
-            "star_rating": 5,
-            "show_verified": true
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
           }
         },
         "764e9791": {
           "type": "video_card",
           "settings": {
+            "video_url": "",
             "customer_name": "Jack B.",
             "product_name": "Unda 2.0 Stainless Steel",
-            "star_rating": 5,
-            "show_verified": true
+            "show_verified": true,
+            "show_stars": true,
+            "star_rating": 5
           }
         }
       },
@@ -1024,20 +2267,32 @@
         "3d5d41e1",
         "a287b127",
         "764e9791"
-      ]
+      ],
+      "settings": {
+        "subheading": "What our customers say",
+        "heading": "Why people love our brand",
+        "description": "Don't just take our word for it, see what our customers are saying",
+        "background_color": "#ffffff",
+        "text_color": "#953034",
+        "subheading_color": "#953034",
+        "nav_button_color": "#953034",
+        "nav_icon_color": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "main",
     "comparison_section_01",
     "comparison_section_02",
-    "comparison_section_03",
+    "comparison_section_03_7Udcjz",
     "custom_banner",
     "eco_slideshow",
-    "product_info_01",
+    "slideshow_pro_custom",
+    "product_info_01_jrX8XF",
     "product_info_02",
     "product_info_03",
-    "slideshow_pro_custom",
     "slider_pro_2",
     "slider_pro_3",
     "video_selling_01",
