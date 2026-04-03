@@ -18,71 +18,1013 @@
     },
     "comparison_section_01": {
       "type": "comparison-section-01",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "313f7143": {
+          "type": "column",
+          "settings": {
+            "title": "Our Brand",
+            "is_active": true,
+            "show_vs_icon": true
+          }
+        },
+        "bd67a9b9": {
+          "type": "column",
+          "settings": {
+            "title": "Other 1",
+            "is_active": false,
+            "show_vs_icon": false
+          }
+        },
+        "37bf9b03": {
+          "type": "column",
+          "settings": {
+            "title": "Other 2",
+            "is_active": false,
+            "show_vs_icon": false
+          }
+        },
+        "0c4e48b6": {
+          "type": "column",
+          "settings": {
+            "title": "Other 3",
+            "is_active": false,
+            "show_vs_icon": false
+          }
+        },
+        "99021670": {
+          "type": "row",
+          "settings": {
+            "feature_label": "360 swivel cord",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "check",
+            "column_4_type": "icon",
+            "column_4_icon": "x"
+          }
+        },
+        "ac453e7d": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Anti-scald design",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "x",
+            "column_4_type": "icon",
+            "column_4_icon": "x"
+          }
+        },
+        "97598bd0": {
+          "type": "row",
+          "settings": {
+            "feature_label": "No heat damage",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "x",
+            "column_4_type": "icon",
+            "column_4_icon": "check"
+          }
+        },
+        "fa98ffd6": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Cool airflow",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "check",
+            "column_4_type": "icon",
+            "column_4_icon": "check"
+          }
+        },
+        "a6874301": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Long lasting styles",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "x",
+            "column_4_type": "icon",
+            "column_4_icon": "x"
+          }
+        },
+        "841adc88": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Price",
+            "column_1_type": "text",
+            "column_1_value": "Only $150",
+            "column_2_type": "text",
+            "column_2_value": "$400",
+            "column_3_type": "text",
+            "column_3_value": "$600",
+            "column_4_type": "text",
+            "column_4_value": "$550"
+          }
+        }
+      },
+      "block_order": [
+        "313f7143",
+        "bd67a9b9",
+        "37bf9b03",
+        "0c4e48b6",
+        "99021670",
+        "ac453e7d",
+        "97598bd0",
+        "fa98ffd6",
+        "a6874301",
+        "841adc88"
+      ]
     },
     "comparison_section_02": {
       "type": "comparison-section-02",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "d295f205": {
+          "type": "column",
+          "settings": {
+            "title": "Our Brand",
+            "is_active": true,
+            "show_vs_icon": true
+          }
+        },
+        "481631e1": {
+          "type": "column",
+          "settings": {
+            "title": "Laser",
+            "is_active": false,
+            "show_vs_icon": false
+          }
+        },
+        "4729d587": {
+          "type": "column",
+          "settings": {
+            "title": "Cream",
+            "is_active": false,
+            "show_vs_icon": false
+          }
+        },
+        "96530985": {
+          "type": "column",
+          "settings": {
+            "title": "Waxing",
+            "is_active": false,
+            "show_vs_icon": false
+          }
+        },
+        "859a6958": {
+          "type": "column",
+          "settings": {
+            "title": "Epilation",
+            "is_active": false,
+            "show_vs_icon": false
+          }
+        },
+        "d1a49c57": {
+          "type": "column",
+          "settings": {
+            "title": "Shaving",
+            "is_active": false,
+            "show_vs_icon": false
+          }
+        },
+        "31ba6221": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Long-lasting results",
+            "column_1_type": "icon",
+            "column_1_icon": "x",
+            "column_2_type": "icon",
+            "column_2_icon": "check",
+            "column_3_type": "icon",
+            "column_3_icon": "x",
+            "column_4_type": "icon",
+            "column_4_icon": "check",
+            "column_5_type": "icon",
+            "column_5_icon": "check",
+            "column_6_type": "icon",
+            "column_6_icon": "x"
+          }
+        },
+        "a280a51f": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Safe for skin",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "x",
+            "column_4_type": "icon",
+            "column_4_icon": "x",
+            "column_5_type": "icon",
+            "column_5_icon": "x",
+            "column_6_type": "icon",
+            "column_6_icon": "x"
+          }
+        },
+        "a0bfd258": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Nearly painless",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "x",
+            "column_4_type": "icon",
+            "column_4_icon": "x",
+            "column_5_type": "icon",
+            "column_5_icon": "x",
+            "column_6_type": "icon",
+            "column_6_icon": "check"
+          }
+        },
+        "16af50cf": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Quick at-home sessions",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "check",
+            "column_4_type": "icon",
+            "column_4_icon": "x",
+            "column_5_type": "icon",
+            "column_5_icon": "check",
+            "column_6_type": "icon",
+            "column_6_icon": "check"
+          }
+        },
+        "825bc180": {
+          "type": "row",
+          "settings": {
+            "feature_label": "Lifetime cost",
+            "column_1_type": "text",
+            "column_1_value": "Only $260",
+            "column_2_type": "text",
+            "column_2_value": "$60,000",
+            "column_3_type": "text",
+            "column_3_value": "$9,500",
+            "column_4_type": "text",
+            "column_4_value": "$20,000",
+            "column_5_type": "text",
+            "column_5_value": "$1,500",
+            "column_6_type": "text",
+            "column_6_value": "$10,000"
+          }
+        }
+      },
+      "block_order": [
+        "d295f205",
+        "481631e1",
+        "4729d587",
+        "96530985",
+        "859a6958",
+        "d1a49c57",
+        "31ba6221",
+        "a280a51f",
+        "a0bfd258",
+        "16af50cf",
+        "825bc180"
+      ]
     },
     "comparison_section_03": {
       "type": "comparison-section-03",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "b34f25b2": {
+          "type": "column",
+          "settings": {
+            "title": "Our Brand",
+            "is_active": true,
+            "show_vs_icon": true
+          }
+        },
+        "c320141a": {
+          "type": "column",
+          "settings": {
+            "title": "Other 1",
+            "is_active": false,
+            "show_vs_icon": false
+          }
+        },
+        "92b010a7": {
+          "type": "column",
+          "settings": {
+            "title": "Other 2",
+            "is_active": false,
+            "show_vs_icon": false
+          }
+        },
+        "55a70ac6": {
+          "type": "row",
+          "settings": {
+            "feature_label": "FRAGRANCE FREE",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "x"
+          }
+        },
+        "50cbf794": {
+          "type": "row",
+          "settings": {
+            "feature_label": "HYPOALLERGENIC",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "check"
+          }
+        },
+        "36cd96ad": {
+          "type": "row",
+          "settings": {
+            "feature_label": "SULFATES FREE",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "check"
+          }
+        },
+        "0f1f5866": {
+          "type": "row",
+          "settings": {
+            "feature_label": "CRUELTY FREE",
+            "column_1_type": "icon",
+            "column_1_icon": "check",
+            "column_2_type": "icon",
+            "column_2_icon": "x",
+            "column_3_type": "icon",
+            "column_3_icon": "x"
+          }
+        }
+      },
+      "block_order": [
+        "b34f25b2",
+        "c320141a",
+        "92b010a7",
+        "55a70ac6",
+        "50cbf794",
+        "36cd96ad",
+        "0f1f5866"
+      ]
     },
     "custom_banner": {
       "type": "custom-banner",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "f3999163": {
+          "type": "slide",
+          "settings": {}
+        },
+        "5136d045": {
+          "type": "slide",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "f3999163",
+        "5136d045"
+      ]
     },
     "eco_slideshow": {
       "type": "eco-slideshow",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "ea6e6b33": {
+          "type": "slide",
+          "settings": {}
+        },
+        "de62d55e": {
+          "type": "slide",
+          "settings": {}
+        },
+        "2fb4763b": {
+          "type": "slide",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "ea6e6b33",
+        "de62d55e",
+        "2fb4763b"
+      ]
     },
     "product_info_01": {
       "type": "product-info-01",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "157a366c": {
+          "type": "feature",
+          "settings": {
+            "title": "ORGANIC GRASS-FED WHOLE MILK",
+            "text": "<p>The natural fat in whole milk contains fatty acids akin to those in breast milk, lessening the need for plant-based oils.</p>",
+            "position": "left",
+            "dot_x": 20,
+            "dot_y": 20
+          }
+        },
+        "366e5dc6": {
+          "type": "feature",
+          "settings": {
+            "title": "WHEY PROTEIN",
+            "text": "<p>Our protein blend features a 60:40 whey-to-casein ratio (just like breast milk) to support easy, comfortable digestion.</p>",
+            "position": "left",
+            "dot_x": 15,
+            "dot_y": 60
+          }
+        },
+        "7df5db0c": {
+          "type": "feature",
+          "settings": {
+            "title": "ORGANIC FAT BLEND",
+            "text": "<p>Our plant-based oils are expeller-pressed, delivering essential fatty acids without GMOs, pesticides, or chemical solvents.</p>",
+            "position": "right",
+            "dot_x": 40,
+            "dot_y": 25
+          }
+        },
+        "e071aec5": {
+          "type": "feature",
+          "settings": {
+            "title": "MFGM",
+            "text": "<p>Naturally-occurring milk fat globule membrane (MFGM) from whole milk to support brain development.</p>",
+            "position": "right",
+            "dot_x": 45,
+            "dot_y": 65
+          }
+        }
+      },
+      "block_order": [
+        "157a366c",
+        "366e5dc6",
+        "7df5db0c",
+        "e071aec5"
+      ]
     },
     "product_info_02": {
       "type": "product-info-02",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "3e2c4aff": {
+          "type": "feature",
+          "settings": {
+            "title": "Personalize",
+            "text": "<p>Customize your watch face to match your style, from classic analog to dynamic digital displays. Stay effortlessly organized and connected.</p>",
+            "position": "left",
+            "dot_x": 25,
+            "dot_y": 25
+          }
+        },
+        "cf888099": {
+          "type": "feature",
+          "settings": {
+            "title": "Metrics",
+            "text": "<p>Track your heart rate, steps, and calories burned to stay motivated and reach your fitness goals. Track your progress over time, and celebrate your achievements.</p>",
+            "position": "left",
+            "dot_x": 17,
+            "dot_y": 55
+          }
+        },
+        "612620cd": {
+          "type": "feature",
+          "settings": {
+            "title": "Waterproof",
+            "text": "<p>It's now also waterproof, ready for workouts, swimming, and everyday splashes. Enjoy the freedom to wear your smartwatch anywhere, anytime.</p>",
+            "position": "right",
+            "dot_x": 40,
+            "dot_y": 25
+          }
+        },
+        "034cdb79": {
+          "type": "feature",
+          "settings": {
+            "title": "Adjustable",
+            "text": "<p>It moves with you, ensuring comfort and security throughout your day, from workouts to relaxing evenings. Experience the perfect blend of comfort and style.</p>",
+            "position": "right",
+            "dot_x": 70,
+            "dot_y": 50
+          }
+        }
+      },
+      "block_order": [
+        "3e2c4aff",
+        "cf888099",
+        "612620cd",
+        "034cdb79"
+      ]
     },
     "product_info_03": {
       "type": "product-info-03",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "1e770834": {
+          "type": "feature",
+          "settings": {
+            "title": "Personalize",
+            "text": "<p>Customize your watch face to match your style, from classic analog to dynamic digital displays. Stay effortlessly organized and connected.</p>",
+            "position": "left",
+            "dot_x": 25,
+            "dot_y": 15
+          }
+        },
+        "746b60ba": {
+          "type": "feature",
+          "settings": {
+            "title": "Anti-Fog",
+            "text": "<p>A highly practical feature for bathrooms is Anti-Fog Technology, which uses a heating element to keep the mirror surface clear during steamy showers.</p>",
+            "position": "left",
+            "dot_x": 17,
+            "dot_y": 30
+          }
+        },
+        "22f6874d": {
+          "type": "feature",
+          "settings": {
+            "title": "Metrics",
+            "text": "<p>Track your heart rate, steps, and calories burned to stay motivated and reach your fitness goals. Track your progress over time, and celebrate your achievements.</p>",
+            "position": "left",
+            "dot_x": 17,
+            "dot_y": 55
+          }
+        },
+        "6a796e06": {
+          "type": "feature",
+          "settings": {
+            "title": "Waterproof",
+            "text": "<p>It's now also waterproof, ready for workouts, swimming, and everyday splashes. Enjoy the freedom to wear your smartwatch anywhere, anytime.</p>",
+            "position": "right",
+            "dot_x": 65,
+            "dot_y": 15
+          }
+        },
+        "239737a5": {
+          "type": "feature",
+          "settings": {
+            "title": "Music Streaming",
+            "text": "<p>Stream music or podcasts directly from popular services like Spotify or Apple Music (controlled hands-free via voice commands).</p>",
+            "position": "right",
+            "dot_x": 62,
+            "dot_y": 45
+          }
+        },
+        "c02a7740": {
+          "type": "feature",
+          "settings": {
+            "title": "Adjustable",
+            "text": "<p>It moves with you, ensuring comfort and security throughout your day, from workouts to relaxing evenings. Experience the perfect blend of comfort and style.</p>",
+            "position": "right",
+            "dot_x": 60,
+            "dot_y": 67
+          }
+        }
+      },
+      "block_order": [
+        "1e770834",
+        "746b60ba",
+        "22f6874d",
+        "6a796e06",
+        "239737a5",
+        "c02a7740"
+      ]
     },
     "slideshow_pro_custom": {
       "type": "slideshow-pro-custom",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "d0362891": {
+          "type": "slide",
+          "settings": {}
+        },
+        "6f3953de": {
+          "type": "slide",
+          "settings": {
+            "caption": "Peak Performance Club",
+            "heading_before": "Vitality",
+            "heading_strong": "updated daily",
+            "body_text": "Real-time hydration analytics tailored to your unique metabolic rate and activity load. Smart recovery, automated.",
+            "review_text": "Endorsed by 15,000+ Elite Athletes",
+            "feature_1_text": "Bluetooth 6.0 Sync",
+            "feature_2_text": "Global Cloud Backup",
+            "feature_3_text": "",
+            "button_text": "Start Your Protocol",
+            "verified_text": "Cancel or pause anytime"
+          }
+        }
+      },
+      "block_order": [
+        "d0362891",
+        "6f3953de"
+      ]
     },
     "slider_pro_2": {
       "type": "slider-pro-2",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "bce4c9d9": {
+          "type": "slide",
+          "settings": {
+            "title": "Sleep Tape",
+            "subtitle": "The #1 most recommended",
+            "badge": "\ud83d\udd25 Bestseller / Trending",
+            "overlay_color": "#8b7355"
+          }
+        },
+        "5105e4cf": {
+          "type": "slide",
+          "settings": {
+            "title": "LED Beauty Wand",
+            "subtitle": "Red & Blue Light Therapy",
+            "badge": "\ud83d\udd25 Bestseller / Trending",
+            "overlay_color": "#a0896e"
+          }
+        },
+        "8c990bd8": {
+          "type": "slide",
+          "settings": {
+            "title": "Sculpting Roller",
+            "subtitle": "Sculpt and contour",
+            "overlay_color": "#b09878"
+          }
+        },
+        "01939d9e": {
+          "type": "slide",
+          "settings": {
+            "title": "LED Face Mask",
+            "subtitle": "Red Light Therapy",
+            "badge": "\u26a1 Only 3 left in stock",
+            "overlay_color": "#6b3040"
+          }
+        },
+        "c0844de6": {
+          "type": "slide",
+          "settings": {
+            "title": "Gua Sha Roller",
+            "subtitle": "Natural jade stone",
+            "overlay_color": "#c4a882"
+          }
+        }
+      },
+      "block_order": [
+        "bce4c9d9",
+        "5105e4cf",
+        "8c990bd8",
+        "01939d9e",
+        "c0844de6"
+      ]
     },
     "slider_pro_3": {
       "type": "slider-pro-3",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "7f2159e3": {
+          "type": "slide",
+          "settings": {
+            "title": "Jewelry",
+            "subtitle": "Timeless elegance",
+            "badge": "NEW IN",
+            "overlay_color": "#ffffff"
+          }
+        },
+        "7ee12282": {
+          "type": "slide",
+          "settings": {
+            "title": "Occasionwear",
+            "subtitle": "Dress to impress",
+            "overlay_color": "#ffffff"
+          }
+        },
+        "c5b14dc6": {
+          "type": "slide",
+          "settings": {
+            "title": "Footwear",
+            "subtitle": "Step into style",
+            "badge": "SELLING FAST",
+            "overlay_color": "#ffffff"
+          }
+        },
+        "db1bd339": {
+          "type": "slide",
+          "settings": {
+            "title": "Dresses",
+            "subtitle": "Everyday essentials",
+            "overlay_color": "#ffffff"
+          }
+        },
+        "8c855fa0": {
+          "type": "slide",
+          "settings": {
+            "title": "Accessories",
+            "subtitle": "Complete the look",
+            "badge": "TRENDING",
+            "overlay_color": "#ffffff"
+          }
+        },
+        "820efe1e": {
+          "type": "slide",
+          "settings": {
+            "title": "Coats & Jackets",
+            "subtitle": "Warm and stylish",
+            "overlay_color": "#ffffff"
+          }
+        },
+        "10f8965b": {
+          "type": "slide",
+          "settings": {
+            "title": "Swimwear",
+            "subtitle": "Beach ready",
+            "badge": "NEW IN",
+            "overlay_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "7f2159e3",
+        "7ee12282",
+        "c5b14dc6",
+        "db1bd339",
+        "8c855fa0",
+        "820efe1e",
+        "10f8965b"
+      ]
     },
     "video_selling_01": {
       "type": "video-selling-01",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "22a9ea7d": {
+          "type": "slide",
+          "settings": {}
+        },
+        "70993be0": {
+          "type": "slide",
+          "settings": {}
+        },
+        "4336fe05": {
+          "type": "slide",
+          "settings": {}
+        },
+        "061ddeed": {
+          "type": "slide",
+          "settings": {}
+        },
+        "2fe7601b": {
+          "type": "slide",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "22a9ea7d",
+        "70993be0",
+        "4336fe05",
+        "061ddeed",
+        "2fe7601b"
+      ]
     },
     "video_selling_02": {
       "type": "video-selling-02",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "8b1a96e3": {
+          "type": "slide",
+          "settings": {}
+        },
+        "e8a933e7": {
+          "type": "slide",
+          "settings": {}
+        },
+        "ad52d208": {
+          "type": "slide",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "8b1a96e3",
+        "e8a933e7",
+        "ad52d208"
+      ]
     },
     "video_selling_03": {
       "type": "video-selling-03",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "4a35bd1b": {
+          "type": "slide",
+          "settings": {}
+        },
+        "2a27c150": {
+          "type": "slide",
+          "settings": {}
+        },
+        "c82671a6": {
+          "type": "slide",
+          "settings": {}
+        },
+        "1ad930fd": {
+          "type": "slide",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "4a35bd1b",
+        "2a27c150",
+        "c82671a6",
+        "1ad930fd"
+      ]
     },
     "video_testimonials": {
       "type": "video-testimonials",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "4021128e": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Sarah M.",
+            "product_name": "Classic Collection",
+            "star_rating": 5
+          }
+        },
+        "7b701f6e": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "John D.",
+            "product_name": "Premium Series",
+            "star_rating": 5
+          }
+        },
+        "4ce949d7": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Emily R.",
+            "product_name": "Essential Kit",
+            "star_rating": 4
+          }
+        },
+        "3fda69dc": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Michael T.",
+            "product_name": "Signature Line",
+            "star_rating": 5
+          }
+        },
+        "a5d100ba": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Lisa K.",
+            "product_name": "Deluxe Bundle",
+            "star_rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "4021128e",
+        "7b701f6e",
+        "4ce949d7",
+        "3fda69dc",
+        "a5d100ba"
+      ]
     },
     "video_testimonials_2": {
       "type": "video-testimonials-2",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "eecced44": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Paul F.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "c99ae1ff": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Olevier A.",
+            "product_name": "Unda 2.0 Eggshell",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "2db33535": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Sarah J.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "22f08d96": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Laura G.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "ac869826": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Jack B.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        }
+      },
+      "block_order": [
+        "eecced44",
+        "c99ae1ff",
+        "2db33535",
+        "22f08d96",
+        "ac869826"
+      ]
     },
     "video_testimonials_round": {
       "type": "video-testimonials-round",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "8f330022": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Paul F.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "3716971d": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Olevier A.",
+            "product_name": "Unda 2.0 Eggshell",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "3d5d41e1": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Sarah J.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "a287b127": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Laura G.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "764e9791": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Jack B.",
+            "product_name": "Unda 2.0 Stainless Steel",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        }
+      },
+      "block_order": [
+        "8f330022",
+        "3716971d",
+        "3d5d41e1",
+        "a287b127",
+        "764e9791"
+      ]
     }
   },
   "order": [

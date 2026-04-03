@@ -18,11 +18,68 @@
     },
     "atelier_selection": {
       "type": "atelier-selection",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "8d7e497d": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "SIGNATURE",
+            "shape_color": "#333333"
+          }
+        },
+        "5ee8932c": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "LIMITED EDITION",
+            "shape_color": "#4a3728"
+          }
+        }
+      },
+      "block_order": [
+        "8d7e497d",
+        "5ee8932c"
+      ]
     },
     "collection_cards_modern": {
       "type": "collection-cards-modern",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "4e87529d": {
+          "type": "card",
+          "settings": {
+            "title": "New Arrivals",
+            "text": "<p>Fresh products just added to the store.</p>",
+            "features": "<ul><li>Perfect for featuring the latest releases</li><li>Great for seasonal trend-led edits</li><li>Helps returning shoppers see what is new</li></ul>",
+            "button_text": "Shop new arrivals",
+            "button_link": "/collections/new-arrivals"
+          }
+        },
+        "63857779": {
+          "type": "card",
+          "settings": {
+            "title": "Best Sellers",
+            "text": "<p>Customer favorites shoppers love most.</p>",
+            "features": "<ul><li>Spotlight customer favorites</li><li>Ideal for first-time visitors</li><li>Supports faster purchase decisions</li></ul>",
+            "button_text": "Shop best sellers",
+            "button_link": "/collections/best-sellers"
+          }
+        },
+        "f5060a6d": {
+          "type": "card",
+          "settings": {
+            "title": "Everyday Essentials",
+            "text": "<p>Core staples made for everyday use.</p>",
+            "features": "<ul><li>Works well for staple products and basics</li><li>Makes year-round collections easy to shop</li><li>Encourages larger basket sizes</li></ul>",
+            "button_text": "Shop essentials",
+            "button_link": "/collections/essentials"
+          }
+        }
+      },
+      "block_order": [
+        "4e87529d",
+        "63857779",
+        "f5060a6d"
+      ]
     },
     "collection_video_02": {
       "type": "collection-video-02",
@@ -34,15 +91,123 @@
     },
     "featured_collection_01": {
       "type": "featured-collection-01",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "bbdc3e72": {
+          "type": "card",
+          "settings": {}
+        },
+        "f593c818": {
+          "type": "card",
+          "settings": {}
+        },
+        "b25f3fc0": {
+          "type": "card",
+          "settings": {}
+        },
+        "f984c0d0": {
+          "type": "card",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "bbdc3e72",
+        "f593c818",
+        "b25f3fc0",
+        "f984c0d0"
+      ]
     },
     "featured_collection_02": {
       "type": "featured-collection-02",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "fe66ef0e": {
+          "type": "card",
+          "settings": {
+            "title": "Covers",
+            "text": "<p>Experience luxurious comfort with the interchangeable covers</p>",
+            "features": "<ul><li>Skin safe OKEO-TEX certified</li><li>30-Day cosy guarantee</li><li>Machine wash easy clean</li></ul>",
+            "button_text": "Shop Beni Bed covers",
+            "button_link": "/collections/covers"
+          }
+        },
+        "d9d262ad": {
+          "type": "card",
+          "settings": {
+            "title": "Beni Beds\u2122",
+            "text": "<p>A bed that feels like home, wherever you unroll</p>",
+            "features": "<ul><li>Machine washable covers</li><li>Certified skin friendly dyes</li><li>Buy now pay later</li></ul>",
+            "button_text": "Shop Beni Beds\u2122",
+            "button_link": "/collections/beds"
+          }
+        },
+        "973e24e3": {
+          "type": "card",
+          "settings": {
+            "title": "Bundles",
+            "text": "<p>Deep cozy support, no more deflating mattresses</p>",
+            "features": "<ul><li>No electric pumps or inflation required</li><li>Marshmallow comfort for kids &amp; adults</li><li>Interchangeable pillow</li></ul>",
+            "button_text": "Shop Bundles",
+            "button_link": "/collections/bundles"
+          }
+        },
+        "780f2fbd": {
+          "type": "card",
+          "settings": {
+            "title": "Limited Edition",
+            "text": "<p>Certified Organic Cotton, softer after every wash</p>",
+            "features": "<ul><li>No electric pumps or inflation required</li><li>Marshmallow comfort for kids &amp; adults</li><li>Interchangeable pillow</li></ul>",
+            "button_text": "Shop Limited Edition",
+            "button_link": "/collections/limited"
+          }
+        }
+      },
+      "block_order": [
+        "fe66ef0e",
+        "d9d262ad",
+        "973e24e3",
+        "780f2fbd"
+      ]
     },
     "featured_collection_tabs": {
       "type": "featured-collection-tabs",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "002415f4": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Everyday",
+            "bg_color": "#cceafa"
+          }
+        },
+        "c4143268": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Boost",
+            "bg_color": "#d2e6d2"
+          }
+        },
+        "22c1d260": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Night",
+            "bg_color": "#f5ecca"
+          }
+        },
+        "594bcb3c": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Immune",
+            "bg_color": "#edbdbb"
+          }
+        }
+      },
+      "block_order": [
+        "002415f4",
+        "c4143268",
+        "22c1d260",
+        "594bcb3c"
+      ]
     },
     "featured_collection_video": {
       "type": "featured-collection-video",
@@ -50,39 +215,402 @@
     },
     "handpicked_collection": {
       "type": "handpicked-collection",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "b51e1c42": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "UNISEX",
+            "shape_color": "#d9d2b8"
+          }
+        },
+        "abfd5fa8": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "WOMEN",
+            "shape_color": "#c8bfa5"
+          }
+        },
+        "18d57546": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "MEN",
+            "shape_color": "#b8b095"
+          }
+        }
+      },
+      "block_order": [
+        "b51e1c42",
+        "abfd5fa8",
+        "18d57546"
+      ]
     },
     "product_details_01": {
       "type": "product-details-01",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "cdaf02fb": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I connect my headphone to my device?",
+            "answer": "<p>1. Open the charging case, then press and hold the button. Wait for a blue light to pulse.<br>2. Select your headphones from your device's Bluetooth list.<br>3. On your device, download the Bluetooth app, and follow the in-app instructions to complete the set-up.</p>"
+          }
+        },
+        "c917849b": {
+          "type": "faq",
+          "settings": {
+            "question": "How many devices can be paired at the same time?",
+            "answer": "<p>You can connect two devices at once to these headphones.</p>"
+          }
+        },
+        "fc2bb1b1": {
+          "type": "faq",
+          "settings": {
+            "question": "What is active noise cancelling?",
+            "answer": "<p>Active Noise Cancellation is the technology that drowns out unwanted sounds when you are listening to your music. These headphones utilise four microphones to constantly measure the surrounding noise and automatically adjust the level of noise cancellation you need to focus.</p>"
+          }
+        },
+        "301298b2": {
+          "type": "faq",
+          "settings": {
+            "question": "What is transparency mode?",
+            "answer": "<p>Transparency mode allows you to be more aware of the outside world, meaning if you\u2019re having a conversation or are walking along busy roads, you\u2019ll be able to keep track.</p>"
+          }
+        },
+        "bfd86c0b": {
+          "type": "feature",
+          "settings": {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 18 18\"><title>18 headset</title><g fill=\"#212121\" class=\"nc-icon-wrapper\"><path d=\"M10.709,17h-1.959c-.414,0-.75-.336-.75-.75s.336-.75,.75-.75h1.959c.586,0,1.087-.399,1.219-.971l.343-1.451c.095-.403,.498-.65,.902-.558,.402,.095,.652,.5,.557,.902l-.342,1.447c-.287,1.253-1.39,2.131-2.679,2.131Z\" fill=\"#212121\" data-color=\"color-2\"></path><path d=\"M14.137,14h-1.137c-.227,0-.441-.103-.584-.279-.143-.176-.197-.408-.149-.629l1.084-5c.104-.422,.149-.762,.149-1.091,0-2.481-2.019-4.5-4.5-4.5s-4.5,2.019-4.5,4.5c0,.329,.046,.669,.145,1.071l1.089,5.02c.048,.222-.007,.453-.149,.629-.143,.177-.357,.279-.584,.279h-1.137c-1.285,0-2.416-.912-2.688-2.167l-.335-1.545c-.265-1.224,.332-2.473,1.449-3.037l.712-.359c.059-3.258,2.727-5.891,5.999-5.891s5.94,2.633,5.999,5.891l.712,.359c1.117,.564,1.714,1.813,1.449,3.037l-.335,1.545c-.272,1.256-1.403,2.167-2.688,2.167Z\" fill=\"#212121\"></path></g></svg>",
+            "title": "Hi-Fi attenuation"
+          }
+        },
+        "f4b5878e": {
+          "type": "feature",
+          "settings": {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 18 18\"><title>18 shield check</title><g fill=\"#212121\" class=\"nc-icon-wrapper\"><path d=\"M14.783,2.813l-5.25-1.68c-.349-.112-.718-.111-1.066,0L3.216,2.813c-.728,.233-1.216,.903-1.216,1.667v6.52c0,3.508,4.946,5.379,6.46,5.869,.177,.057,.358,.086,.54,.086s.362-.028,.538-.085c1.516-.49,6.462-2.361,6.462-5.869V4.48c0-.764-.489-1.434-1.217-1.667Zm-2.681,4.389l-3.397,4.5c-.128,.169-.322,.276-.534,.295-.021,.002-.043,.003-.065,.003-.189,0-.372-.071-.511-.201l-1.609-1.5c-.303-.283-.32-.757-.038-1.06,.284-.303,.758-.319,1.06-.038l1.001,.933,2.896-3.836c.25-.33,.72-.396,1.051-.146,.331,.25,.396,.72,.146,1.051Z\" fill=\"#212121\"></path></g></svg>",
+            "title": "20\u201325 dB protection"
+          }
+        },
+        "ee0d5949": {
+          "type": "feature",
+          "settings": {
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 18 18\"><title>18 heart</title><g fill=\"#212121\" class=\"nc-icon-wrapper\"><path d=\"M12.164,2c-1.195,.015-2.324,.49-3.164,1.306-.84-.815-1.972-1.291-3.178-1.306-2.53,.015-4.582,2.084-4.572,4.609,0,5.253,5.306,8.429,6.932,9.278,.256,.133,.537,.2,.818,.2s.562-.067,.817-.2c1.626-.848,6.933-4.024,6.933-9.275,.009-2.528-2.042-4.597-4.586-4.612Z\" fill=\"#212121\"></path></g></svg>",
+            "title": "All day comfort"
+          }
+        },
+        "ae29a54a": {
+          "type": "product",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "cdaf02fb",
+        "c917849b",
+        "fc2bb1b1",
+        "301298b2",
+        "bfd86c0b",
+        "f4b5878e",
+        "ee0d5949",
+        "ae29a54a"
+      ]
     },
     "product_details_02": {
       "type": "product-details-02",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "7b23961b": {
+          "type": "faq",
+          "settings": {
+            "question": "Description",
+            "answer": "<p>Our blankets offer comfort and warmth wherever it\u2019s needed - draped over your bed, tossed on the couch, wrapped around you, or taken along for outdoor adventures.</p>"
+          }
+        },
+        "0f348184": {
+          "type": "faq",
+          "settings": {
+            "question": "Care guide",
+            "answer": "<p>Machine wash on cold mode. If this function is not available to you - it's best to hand wash them.</p>"
+          }
+        },
+        "20a5c49c": {
+          "type": "faq",
+          "settings": {
+            "question": "Shipping & returns",
+            "answer": "<p>Free shipping on all orders. Delivery times will be calculated at checkout. We accept returns for a full refund within 30 days of delivery, so long as your order is in new, unused condition. We cover the cost of shipping for eligible blankets returned to NTL.</p>"
+          }
+        },
+        "b81c597f": {
+          "type": "feature",
+          "settings": {}
+        },
+        "cf6bcea2": {
+          "type": "feature",
+          "settings": {}
+        },
+        "bb4337f4": {
+          "type": "feature",
+          "settings": {}
+        },
+        "388ca8e0": {
+          "type": "feature",
+          "settings": {}
+        },
+        "4208318e": {
+          "type": "product",
+          "settings": {}
+        },
+        "a61fae40": {
+          "type": "product",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "7b23961b",
+        "0f348184",
+        "20a5c49c",
+        "b81c597f",
+        "cf6bcea2",
+        "bb4337f4",
+        "388ca8e0",
+        "4208318e",
+        "a61fae40"
+      ]
     },
     "product_details_03": {
       "type": "product-details-03",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "6eb49ca9": {
+          "type": "faq",
+          "settings": {
+            "question": "How long will it take for order to arrive?",
+            "answer": "<p>Currently, orders can take 1-4 business days to process before shipping. From there, shipping times are dependent upon location. Check out our shipping page for more information on when to expect your package.</p>"
+          }
+        },
+        "95157473": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I track my order?",
+            "answer": "<p>Once your order ships, you\u2019ll receive a separate email providing you with a tracking number to track your order.* Sometimes this email gets sorted into spam or promotions folders, so be sure to take a look in there if it feels like you\u2019ve been waiting a little too long.</p>"
+          }
+        },
+        "90f9a8f7": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I make changes to my order?",
+            "answer": "<p>Unfortunately, we can't make changes or cancel an order after it's been submitteed. An item may only be canceled if it is on pre-order. If you would like to cancel a pre-ordered item, shoot an email with your order number and we'll handle that for you.</p>"
+          }
+        },
+        "ec6b7a8d": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I use Afterpay?",
+            "answer": "<p>Simply shop unitedbyblue.com and check out as usual. At checkout, choose Afterpay as your payment method. If it\u2019s your first time using Afterpay, you\u2019ll need to sign up and provide your payment details (Mastercard or Visa).</p>"
+          }
+        },
+        "20d9337a": {
+          "type": "feature",
+          "settings": {}
+        },
+        "0890a08f": {
+          "type": "feature",
+          "settings": {}
+        },
+        "f0bd65cb": {
+          "type": "feature",
+          "settings": {}
+        },
+        "fb9ab2dc": {
+          "type": "product",
+          "settings": {}
+        },
+        "640dacb9": {
+          "type": "product",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "6eb49ca9",
+        "95157473",
+        "90f9a8f7",
+        "ec6b7a8d",
+        "20d9337a",
+        "0890a08f",
+        "f0bd65cb",
+        "fb9ab2dc",
+        "640dacb9"
+      ]
     },
     "product_details_04": {
       "type": "product-details-04",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "987bae5d": {
+          "type": "faq",
+          "settings": {
+            "question": "Heading",
+            "answer": "<p>Tell a story, explain a product detail.</p>"
+          }
+        },
+        "b03f9888": {
+          "type": "faq",
+          "settings": {
+            "question": "Heading",
+            "answer": "<p>Tell a story, explain a product detail.</p>"
+          }
+        },
+        "d07da1d9": {
+          "type": "faq",
+          "settings": {
+            "question": "Heading",
+            "answer": "<p>Tell a story, explain a product detail.</p>"
+          }
+        },
+        "e5f86c6d": {
+          "type": "feature",
+          "settings": {}
+        },
+        "cadab6f2": {
+          "type": "feature",
+          "settings": {}
+        },
+        "a604fb0e": {
+          "type": "feature",
+          "settings": {}
+        },
+        "0d57e652": {
+          "type": "product",
+          "settings": {
+            "use_placeholder": true
+          }
+        }
+      },
+      "block_order": [
+        "987bae5d",
+        "b03f9888",
+        "d07da1d9",
+        "e5f86c6d",
+        "cadab6f2",
+        "a604fb0e",
+        "0d57e652"
+      ]
     },
     "scrolling_images_2": {
       "type": "scrolling-images-2",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "100aae2b": {
+          "type": "mosaic_container",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "100aae2b"
+      ]
     },
     "scrolling_images_3": {
       "type": "scrolling-images-3",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "4241d816": {
+          "type": "grid_container",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "4241d816"
+      ]
     },
     "scrolling_images_4": {
       "type": "scrolling-images-4",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "a5609762": {
+          "type": "grid_container",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "a5609762"
+      ]
     },
     "video_testimonials_wide": {
       "type": "video-testimonials-wide",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "f0114085": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Emily D.",
+            "product_name": "Sunflower Yellow",
+            "star_rating": 4,
+            "show_verified": true
+          }
+        },
+        "1efda7dc": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Jane D.",
+            "product_name": "Sunset Green blanket",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "5b04871f": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Paula H.",
+            "product_name": "Solar Dawn blanket",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "cb381509": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "James G.",
+            "product_name": "Solar Dawn blanket",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "0c62f340": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Linda R.",
+            "product_name": "Sunset Terracotta blanket",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        },
+        "3bb19c47": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Kelly O.",
+            "product_name": "Solar Dusk blanket",
+            "star_rating": 4,
+            "show_verified": true
+          }
+        },
+        "d1bad785": {
+          "type": "video_card",
+          "settings": {
+            "customer_name": "Dane D.",
+            "product_name": "Green blanket",
+            "star_rating": 5,
+            "show_verified": true
+          }
+        }
+      },
+      "block_order": [
+        "f0114085",
+        "1efda7dc",
+        "5b04871f",
+        "cb381509",
+        "0c62f340",
+        "3bb19c47",
+        "d1bad785"
+      ]
     }
   },
   "order": [
