@@ -32,7 +32,7 @@
           "type": "collection_tab",
           "settings": {
             "tab_label": "LIMITED EDITION",
-            "collection": "",
+            "collection": "fashion",
             "products_to_show": 10,
             "shape_color": "#4a3728"
           }
@@ -58,6 +58,82 @@
         "product_title_color": "#ffffff",
         "product_vendor_color": "#888888",
         "image_border_color": "#ffffff"
+      }
+    },
+    "featured_collection_tabs": {
+      "type": "featured-collection-tabs",
+      "blocks": {
+        "002415f4": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Everyday",
+            "collection": "",
+            "products_to_show": 10,
+            "bg_color": "#cceafa",
+            "shape_color": ""
+          }
+        },
+        "c4143268": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Boost",
+            "collection": "",
+            "products_to_show": 10,
+            "bg_color": "#d2e6d2",
+            "shape_color": ""
+          }
+        },
+        "22c1d260": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Night",
+            "collection": "",
+            "products_to_show": 10,
+            "bg_color": "#f5ecca",
+            "shape_color": ""
+          }
+        },
+        "594bcb3c": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Immune",
+            "collection": "",
+            "products_to_show": 10,
+            "bg_color": "#edbdbb",
+            "shape_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "002415f4",
+        "c4143268",
+        "22c1d260",
+        "594bcb3c"
+      ],
+      "settings": {
+        "heading": "Hand-picked for you",
+        "subheading": "We guarantee you will love them",
+        "button_text": "SHOP NOW",
+        "slides_per_view_desktop": 5,
+        "slides_per_view_mobile": 1.6,
+        "background_color": "#cceafa",
+        "shape_color": "#c9a0dc",
+        "heading_color": "#393752",
+        "subheading_color": "#393752",
+        "tab_bg_color": "#393752",
+        "tab_text_color": "#ffffff",
+        "tab_active_bg_color": "#cceafa",
+        "tab_active_text_color": "#393752",
+        "product_title_color": "#393752",
+        "product_desc_color": "#393752",
+        "button_bg_color": "#393752",
+        "button_text_color": "#ffffff",
+        "nav_button_color": "#ffffff",
+        "nav_icon_color": "#393752",
+        "nav_hover_bg": "#393752",
+        "nav_hover_icon": "#ffffff",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "collection_cards_modern": {
@@ -763,82 +839,6 @@
         "padding_bottom": 35,
         "margin_top": 25,
         "margin_bottom": 0
-      }
-    },
-    "featured_collection_tabs": {
-      "type": "featured-collection-tabs",
-      "blocks": {
-        "002415f4": {
-          "type": "collection_tab",
-          "settings": {
-            "tab_label": "Everyday",
-            "collection": "",
-            "products_to_show": 10,
-            "bg_color": "#cceafa",
-            "shape_color": ""
-          }
-        },
-        "c4143268": {
-          "type": "collection_tab",
-          "settings": {
-            "tab_label": "Boost",
-            "collection": "",
-            "products_to_show": 10,
-            "bg_color": "#d2e6d2",
-            "shape_color": ""
-          }
-        },
-        "22c1d260": {
-          "type": "collection_tab",
-          "settings": {
-            "tab_label": "Night",
-            "collection": "",
-            "products_to_show": 10,
-            "bg_color": "#f5ecca",
-            "shape_color": ""
-          }
-        },
-        "594bcb3c": {
-          "type": "collection_tab",
-          "settings": {
-            "tab_label": "Immune",
-            "collection": "",
-            "products_to_show": 10,
-            "bg_color": "#edbdbb",
-            "shape_color": ""
-          }
-        }
-      },
-      "block_order": [
-        "002415f4",
-        "c4143268",
-        "22c1d260",
-        "594bcb3c"
-      ],
-      "settings": {
-        "heading": "Hand-picked for you",
-        "subheading": "We guarantee you will love them",
-        "button_text": "SHOP NOW",
-        "slides_per_view_desktop": 5,
-        "slides_per_view_mobile": 1.6,
-        "background_color": "#cceafa",
-        "shape_color": "#c9a0dc",
-        "heading_color": "#393752",
-        "subheading_color": "#393752",
-        "tab_bg_color": "#393752",
-        "tab_text_color": "#ffffff",
-        "tab_active_bg_color": "#cceafa",
-        "tab_active_text_color": "#393752",
-        "product_title_color": "#393752",
-        "product_desc_color": "#393752",
-        "button_bg_color": "#393752",
-        "button_text_color": "#ffffff",
-        "nav_button_color": "#ffffff",
-        "nav_icon_color": "#393752",
-        "nav_hover_bg": "#393752",
-        "nav_hover_icon": "#ffffff",
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "featured_collection_video": {
@@ -1950,12 +1950,12 @@
   "order": [
     "main",
     "atelier_selection",
+    "featured_collection_tabs",
     "collection_cards_modern",
     "collection_video_02",
     "feature_collection_04",
     "featured_collection_01",
     "featured_collection_02",
-    "featured_collection_tabs",
     "featured_collection_video",
     "handpicked_collection",
     "product_details_01",
