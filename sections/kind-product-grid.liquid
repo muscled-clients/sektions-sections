@@ -15,7 +15,7 @@
 <section class="kpg kpg--{{ section.id }}">
   <div class="kpg__inner">
 
-    {%- if section.settings.heading != blank -%}
+    {%- if section.settings.show_heading and section.settings.heading != blank -%}
       <h2 class="kpg__heading">{{ section.settings.heading | escape }}</h2>
     {%- endif -%}
 
@@ -310,10 +310,16 @@
   "class": "kind-product-grid-section",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "show_heading",
+      "label": "Show section heading",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Section heading",
-      "placeholder": "e.g. Our Products"
+      "default": "Our Products"
     },
     {
       "type": "select",
