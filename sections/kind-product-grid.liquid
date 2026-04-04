@@ -58,6 +58,7 @@
             </a>
 
             {%- comment -%} Stars {%- endcomment -%}
+            {%- if block.settings.show_stars -%}
             <div class="kpg__stars" aria-label="{{ star_count }} out of 5 stars">
               {%- for i in (1..5) -%}
                 {%- if i <= star_count -%}
@@ -71,6 +72,7 @@
                 {%- endif -%}
               {%- endfor -%}
             </div>
+            {%- endif -%}
 
             {%- comment -%} Title {%- endcomment -%}
             <h3 class="kpg__title">
@@ -389,6 +391,12 @@
           "type": "product",
           "id": "product",
           "label": "Product"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_stars",
+          "label": "Show star rating",
+          "default": true
         },
         {
           "type": "range",
