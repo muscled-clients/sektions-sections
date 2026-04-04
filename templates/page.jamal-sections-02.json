@@ -1965,6 +1965,60 @@
         "margin_left_desktop": 0,
         "margin_right_desktop": 0
       }
+    },
+    "category_bento_grid_TkT7Ve": {
+      "type": "category-bento-grid",
+      "blocks": {
+        "category_card_hctjCT": {
+          "type": "category_card",
+          "settings": {
+            "title": "LCD Video Walls",
+            "description": "Lorem ipsum dolor sit amet",
+            "button_label": "SHOP NOW",
+            "button_url": ""
+          }
+        },
+        "category_card_GPLdQw": {
+          "type": "category_card",
+          "settings": {
+            "title": "HDMI & HDBaseT",
+            "description": "Lorem ipsum dolor sit amet",
+            "button_label": "SHOP NOW",
+            "button_url": ""
+          }
+        },
+        "category_card_bGkdbn": {
+          "type": "category_card",
+          "settings": {
+            "title": "Matrix Switchers",
+            "description": "Lorem ipsum dolor sit amet",
+            "button_label": "SHOP NOW",
+            "button_url": ""
+          }
+        },
+        "category_card_UdTmUm": {
+          "type": "category_card",
+          "settings": {
+            "title": "LED Video Walls",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "button_label": "SHOP NOW",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_card_hctjCT",
+        "category_card_GPLdQw",
+        "category_card_bGkdbn",
+        "category_card_UdTmUm"
+      ],
+      "name": "Category Bento Grid",
+      "settings": {
+        "subheading": "Categories",
+        "heading": "Shop Across Categories",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
@@ -1984,6 +2038,7 @@
     "product_details_04",
     "scrolling_images_2",
     "scrolling_images_3",
-    "scrolling_images_4"
+    "scrolling_images_4",
+    "category_bento_grid_TkT7Ve"
   ]
 }
