@@ -292,16 +292,18 @@
 @media screen and (max-width: 749px) {
   .kpg__grid--3col,
   .kpg__grid--4col { grid-template-columns: repeat(2, 1fr); }
-  .kpg__grid { row-gap: 32px; }
-  .kpg__title { font-size: 16px; line-height: 26px; }
-  .kpg__price-sale { font-size: 22px; }
-  .kpg__card { padding: 20px 16px; gap: 16px; }
+  .kpg__grid { row-gap: 24px; }
+  .kpg__card { padding: 24px 16px; gap: 12px; border-radius: 4px; }
+  .kpg__title { font-size: 18px; line-height: 1.4; }
+  .kpg__price-sale { font-size: 18px; }
+  .kpg__price-compare { font-size: 14px; }
 }
 
 @media screen and (max-width: 480px) {
   .kpg__grid--2col,
   .kpg__grid--3col,
   .kpg__grid--4col { grid-template-columns: 1fr; }
+  .kpg__card { padding: 24px 12px; }
 }
 </style>
 
