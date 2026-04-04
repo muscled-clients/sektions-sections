@@ -63,6 +63,22 @@
         "pause_on_hover": false
       }
     },
+    "ocean_countdown_bar_pHPWLA": {
+      "type": "ocean-countdown-bar",
+      "name": "Ocean Countdown Bar",
+      "settings": {
+        "message": "Ocean Breeze Price Drop. Limited Time Only!",
+        "link": "",
+        "end_date": "2025-12-31",
+        "end_time": "23:59",
+        "label_days": "days",
+        "label_hours": "hrs",
+        "label_mins": "min",
+        "label_secs": "sec",
+        "bg_color": "#235146",
+        "text_color": "#ffffff"
+      }
+    },
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
@@ -208,7 +224,7 @@
         "font_weight": "500",
         "letter_spacing": 1,
         "link_spacing": 20,
-        "outer_bg_color": "transparent",
+        "outer_bg_color": "rgba(0,0,0,0)",
         "bg_color": "#f5f5f5",
         "text_color": "#000000",
         "hover_color": "#666666",
@@ -227,6 +243,7 @@
   },
   "order": [
     "announcement_marquee_HPFki8",
+    "ocean_countdown_bar_pHPWLA",
     "announcement-bar",
     "scrolling_announcement_bar_r4PTFf",
     "header",
