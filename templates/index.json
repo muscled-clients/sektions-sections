@@ -424,73 +424,39 @@
     },
     "scrolling_images_xjDw6k": {
       "type": "scrolling-images",
-      "blocks": {
-        "image_dbPbaQ": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/352866888_1234930060541550_8374548221298115641_n.jpg"
-          }
-        },
-        "image_CN8nm4": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/355262913_273791138638760_2561072628436540503_n.webp"
-          }
-        },
-        "image_CWUKpd": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/353042517_1485476312205555_4606414770753393586_n.webp"
-          }
-        },
-        "image_e9iCmy": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/367007130_244835127927178_148393632398136921_n.webp"
-          }
-        },
-        "image_VyiYL7": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/367377790_1720549985056522_5359668055811931852_n.webp"
-          }
-        },
-        "image_e7GL8y": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/330203863_638013718084947_1357077150597762301_n.webp"
-          }
-        }
-      },
-      "block_order": [
-        "image_dbPbaQ",
-        "image_CN8nm4",
-        "image_CWUKpd",
-        "image_e9iCmy",
-        "image_VyiYL7",
-        "image_e7GL8y"
-      ],
       "name": "Scrolling Images",
       "settings": {
-        "image_width": 290,
-        "image_height": 50,
-        "image_gap": 10,
-        "mobile_image_width": 250,
-        "mobile_image_height": 40,
-        "mobile_image_gap": 8,
-        "scroll_speed": 30,
-        "pause_on_hover": true,
-        "auto_adjust_speed": false,
-        "overlay_text": "+12,000 people loves our natural wine",
-        "text_size": 20,
-        "text_color": "#000000",
-        "font_family": "system",
-        "font_weight": "400",
-        "overlay_background": "#ffffff",
-        "overlay_padding": 38,
-        "border_width": 1,
+        "background_color": "#ffffff",
         "border_color": "#000000",
-        "background_color": "#ffffff"
+        "border_size": 0,
+        "border_radius": 0,
+        "border_radius_desktop": 0,
+        "scroll_speed": 30,
+        "scroll_direction": "left",
+        "container_background_color": "#ffffff",
+        "container_border_color": "#121212",
+        "container_border_size": 0,
+        "container_border_radius": 0,
+        "container_padding": 12,
+        "container_width_mobile": 960,
+        "grid_row_height_mobile": 160,
+        "gap_between_images_mobile": 8,
+        "gap_between_containers_mobile": 12,
+        "container_width_desktop": 1260,
+        "grid_row_height_desktop": 240,
+        "gap_between_images_desktop": 12,
+        "gap_between_containers_desktop": 12,
+        "image_border_size": 0,
+        "image_border_color": "#121212",
+        "image_border_radius": 32,
+        "padding_top_mobile": 27,
+        "padding_bottom_mobile": 27,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top_desktop": 36,
+        "padding_bottom_desktop": 36,
+        "margin_top_desktop": 0,
+        "margin_bottom_desktop": 0
       }
     },
     "comfort_features_byGWX8": {
@@ -939,6 +905,60 @@
         "padding_top": 50,
         "padding_bottom": 50
       }
+    },
+    "category_bento_grid_4EJaXk": {
+      "type": "category-bento-grid",
+      "blocks": {
+        "category_card_zFVRej": {
+          "type": "category_card",
+          "settings": {
+            "title": "LCD Video Walls",
+            "description": "Lorem ipsum dolor sit amet",
+            "button_label": "SHOP NOW",
+            "button_url": ""
+          }
+        },
+        "category_card_7mUCmn": {
+          "type": "category_card",
+          "settings": {
+            "title": "HDMI & HDBaseT",
+            "description": "Lorem ipsum dolor sit amet",
+            "button_label": "SHOP NOW",
+            "button_url": ""
+          }
+        },
+        "category_card_AmVyEh": {
+          "type": "category_card",
+          "settings": {
+            "title": "Matrix Switchers",
+            "description": "Lorem ipsum dolor sit amet",
+            "button_label": "SHOP NOW",
+            "button_url": ""
+          }
+        },
+        "category_card_a4AQwF": {
+          "type": "category_card",
+          "settings": {
+            "title": "LED Video Walls",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "button_label": "SHOP NOW",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_card_zFVRej",
+        "category_card_7mUCmn",
+        "category_card_AmVyEh",
+        "category_card_a4AQwF"
+      ],
+      "name": "Category Bento Grid",
+      "settings": {
+        "subheading": "Categories",
+        "heading": "Shop Across Categories",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
@@ -959,6 +979,7 @@
     "vertical_sliders_DByPhV",
     "countdown_sale_gy7XDQ",
     "build_a_box_WMegYe",
-    "box_builder_custom_LHkgPr"
+    "box_builder_custom_LHkgPr",
+    "category_bento_grid_4EJaXk"
   ]
 }
