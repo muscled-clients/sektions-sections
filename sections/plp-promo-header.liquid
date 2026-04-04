@@ -1,0 +1,396 @@
+{% comment %}
+  PLP Promo Header
+  Promotional collection banner with event label, headline, badge offer,
+  subtitle, and decorative sparkle/starburst accents — Kind Laundry
+{% endcomment %}
+
+{%- style -%}
+  .pph--{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+{%- endstyle -%}
+
+<div class="pph pph--{{ section.id }}">
+
+  {%- comment -%} Decorative sparkles {%- endcomment -%}
+  <span class="pph__spark pph__spark--1" aria-hidden="true">
+    <svg width="101" height="82" viewBox="0 0 101 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="4"  x2="50" y2="20" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="50" y1="62" x2="50" y2="78" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="4"  y1="41" x2="20" y2="41" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="80" y1="41" x2="96" y2="41" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="17" y1="13" x2="28" y2="24" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="72" y1="58" x2="83" y2="69" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="83" y1="13" x2="72" y2="24" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="28" y1="58" x2="17" y2="69" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+  </span>
+
+  <span class="pph__spark pph__spark--2" aria-hidden="true">
+    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="36" y1="4"  x2="36" y2="16" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="36" y1="56" x2="36" y2="68" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="4"  y1="36" x2="16" y2="36" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="56" y1="36" x2="68" y2="36" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="12" y1="12" x2="21" y2="21" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="51" y1="51" x2="60" y2="60" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="60" y1="12" x2="51" y2="21" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="21" y1="51" x2="12" y2="60" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+  </span>
+
+  <span class="pph__spark pph__spark--3" aria-hidden="true">
+    <svg width="78" height="88" viewBox="0 0 78 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="39" y1="4"  x2="39" y2="18" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="39" y1="70" x2="39" y2="84" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="4"  y1="44" x2="18" y2="44" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="60" y1="44" x2="74" y2="44" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="13" y1="15" x2="24" y2="26" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="54" y1="62" x2="65" y2="73" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="65" y1="15" x2="54" y2="26" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="4" stroke-linecap="round"/>
+      <line x1="24" y1="62" x2="13" y2="73" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+  </span>
+
+  <span class="pph__spark pph__spark--4" aria-hidden="true">
+    <svg width="74" height="67" viewBox="0 0 74 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="37" y1="3"  x2="37" y2="15" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="37" y1="52" x2="37" y2="64" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="4"  y1="33" x2="16" y2="33" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="58" y1="33" x2="70" y2="33" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="12" y1="10" x2="21" y2="19" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="53" y1="48" x2="62" y2="57" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="62" y1="10" x2="53" y2="19" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="21" y1="48" x2="12" y2="57" stroke="{{ section.settings.sparkle_color_blue }}" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+  </span>
+
+  <span class="pph__spark pph__spark--5" aria-hidden="true">
+    <svg width="69" height="69" viewBox="0 0 69 69" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="34" y1="3"  x2="34" y2="15" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="34" y1="54" x2="34" y2="66" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="3"  y1="34" x2="15" y2="34" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="54" y1="34" x2="66" y2="34" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="11" y1="11" x2="20" y2="20" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="49" y1="49" x2="58" y2="58" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="57" y1="11" x2="48" y2="20" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="20" y1="49" x2="11" y2="58" stroke="{{ section.settings.sparkle_color_grey }}" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+  </span>
+
+  <span class="pph__spark pph__spark--6" aria-hidden="true">
+    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="36" y1="3"  x2="36" y2="16" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="36" y1="56" x2="36" y2="69" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="3"  y1="36" x2="16" y2="36" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="56" y1="36" x2="69" y2="36" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="11" y1="11" x2="21" y2="21" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="51" y1="51" x2="61" y2="61" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="61" y1="11" x2="51" y2="21" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="21" y1="51" x2="11" y2="61" stroke="{{ section.settings.sparkle_color_red }}" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+  </span>
+
+  {%- comment -%} Main content {%- endcomment -%}
+  <div class="pph__content">
+    {%- if section.settings.event_label != blank -%}
+      <p class="pph__event-label">{{ section.settings.event_label | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.headline != blank -%}
+      <h2 class="pph__headline">{{ section.settings.headline | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.badge_text != blank -%}
+      <div class="pph__badge-wrap">
+        {%- if section.settings.badge_url != blank -%}
+          <a href="{{ section.settings.badge_url }}" class="pph__badge">{{ section.settings.badge_text | escape }}</a>
+        {%- else -%}
+          <span class="pph__badge">{{ section.settings.badge_text | escape }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="pph__subtitle">{{ section.settings.subtitle | escape }}</p>
+    {%- endif -%}
+  </div>
+
+</div>
+
+<style>
+/* ── Root ──────────────────────────────────────────────────────────────────── */
+.pph {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  font-family: 'Gilroy', 'Arial Black', 'Helvetica Neue', sans-serif;
+}
+
+/* ── Content ───────────────────────────────────────────────────────────────── */
+.pph__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 80px;
+}
+
+.pph__event-label {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 800;
+  color: {{ section.settings.label_color }};
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.pph__headline {
+  margin: 0;
+  font-size: 64px;
+  font-weight: 800;
+  color: {{ section.settings.headline_color }};
+  text-transform: uppercase;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  transform: rotate(0.21deg);
+}
+
+.pph__badge-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.pph__badge {
+  display: inline-block;
+  background: {{ section.settings.badge_bg_color }};
+  color: {{ section.settings.badge_text_color }};
+  font-size: 36px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 15px 50px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+a.pph__badge:hover { opacity: 0.9; }
+
+.pph__subtitle {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 800;
+  color: {{ section.settings.subtitle_color }};
+  line-height: 1.3;
+}
+
+/* ── Sparkles ──────────────────────────────────────────────────────────────── */
+.pph__spark {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  line-height: 0;
+}
+
+/* Positions matching the Figma layout */
+/* Top-left blue (large) */
+.pph__spark--1 {
+  left: 6.28%;
+  top: 11.91%;
+  transform: rotate(80.91deg) skewX(1.23deg);
+}
+/* Top-right red */
+.pph__spark--2 {
+  right: 7%;
+  top: 14%;
+  transform: rotate(53.08deg) skewX(-1.56deg);
+}
+/* Left-center grey */
+.pph__spark--3 {
+  left: 7.41%;
+  bottom: 10.9%;
+  transform: rotate(167.67deg) skewX(-1.57deg);
+}
+/* Bottom-left blue */
+.pph__spark--4 {
+  left: 6.86%;
+  bottom: 0.16%;
+  transform: rotate(53.08deg) skewX(-1.56deg);
+}
+/* Bottom-right grey */
+.pph__spark--5 {
+  right: 3.24%;
+  top: 46.86%;
+  transform: rotate(152.14deg) skewX(-1.57deg);
+}
+/* Right-center red */
+.pph__spark--6 {
+  right: 13.42%;
+  bottom: 8.74%;
+  transform: rotate(53.08deg) skewX(-1.56deg);
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media screen and (max-width: 1024px) {
+  .pph__headline    { font-size: 48px; }
+  .pph__event-label,
+  .pph__badge,
+  .pph__subtitle    { font-size: 28px; }
+  .pph__badge       { padding: 12px 36px; }
+  .pph__content     { padding: 0 60px; }
+}
+
+@media screen and (max-width: 749px) {
+  .pph__content     { padding: 0 20px; }
+  .pph__event-label { font-size: 18px; }
+  .pph__headline    { font-size: 32px; }
+  .pph__badge       { font-size: 18px; padding: 10px 24px; }
+  .pph__subtitle    { font-size: 18px; }
+  /* Hide outer sparkles on mobile to avoid overflow */
+  .pph__spark--3,
+  .pph__spark--4,
+  .pph__spark--5,
+  .pph__spark--6    { display: none; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "PLP Promo Header",
+  "tag": "section",
+  "class": "plp-promo-header-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "event_label",
+      "label": "Event label",
+      "default": "4th Of July"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Main headline",
+      "default": "SUMMER READY SPECIAL"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "FREE Stain Fighting DUO"
+    },
+    {
+      "type": "url",
+      "id": "badge_url",
+      "label": "Badge link (optional)"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "with purchase of any bundle."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#faf2e9"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Event label color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "headline_color",
+      "label": "Headline color",
+      "default": "#293262"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge background",
+      "default": "#a8332d"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#4e4949"
+    },
+    {
+      "type": "header",
+      "content": "Sparkle Colors"
+    },
+    {
+      "type": "color",
+      "id": "sparkle_color_red",
+      "label": "Sparkle — red",
+      "default": "#a8332d"
+    },
+    {
+      "type": "color",
+      "id": "sparkle_color_blue",
+      "label": "Sparkle — blue",
+      "default": "#293262"
+    },
+    {
+      "type": "color",
+      "id": "sparkle_color_grey",
+      "label": "Sparkle — grey",
+      "default": "#c8c8c8"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "PLP Promo Header",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}
