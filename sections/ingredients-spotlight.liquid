@@ -1,0 +1,444 @@
+{% comment %}
+  Ingredients Spotlight — Kind Laundry
+  Two-column: left = large image, right = heading + description + clickable ingredient icons + active info box
+{% endcomment %}
+
+{%- style -%}
+  .igs--{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+{%- endstyle -%}
+
+<section class="igs igs--{{ section.id }}">
+  <div class="igs__inner">
+
+    {%- comment -%} Left — image {%- endcomment -%}
+    <div class="igs__image-col">
+      {%- if section.settings.main_image -%}
+        {%- assign _main_alt = section.settings.heading | default: 'Ingredients' | escape -%}
+        {{
+          section.settings.main_image
+          | image_url: width: 1366
+          | image_tag: loading: 'lazy', alt: _main_alt, class: 'igs__main-img'
+        }}
+      {%- else -%}
+        {{ 'collection-1' | placeholder_svg_tag: 'igs__main-img igs__main-img--placeholder' }}
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Right — content {%- endcomment -%}
+    <div class="igs__content-col">
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="igs__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <p class="igs__description">{{ section.settings.description | escape }}</p>
+      {%- endif -%}
+
+      {%- comment -%} Ingredient icons row {%- endcomment -%}
+      {%- if section.blocks.size > 0 -%}
+        <div class="igs__icons" role="list">
+          {%- for block in section.blocks -%}
+            {%- assign is_active = false -%}
+            {%- if block.settings.active_by_default or forloop.first -%}
+              {%- assign is_active = true -%}
+            {%- endif -%}
+            <button
+              class="igs__icon-btn{% if is_active %} igs__icon-btn--active{% endif %}"
+              type="button"
+              data-igs-btn
+              data-index="{{ forloop.index0 }}"
+              aria-pressed="{{ is_active }}"
+              role="listitem"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.icon -%}
+                {%- assign _icon_alt = block.settings.name | escape -%}
+                {{
+                  block.settings.icon
+                  | image_url: width: 104
+                  | image_tag: loading: 'lazy', alt: _icon_alt, class: 'igs__icon-img'
+                }}
+              {%- else -%}
+                <span class="igs__icon-placeholder" aria-hidden="true">
+                  <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+                    <circle cx="26" cy="26" r="24" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.4"/>
+                    <path d="M18 26c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                  </svg>
+                </span>
+              {%- endif -%}
+              {%- if block.settings.name != blank -%}
+                <span class="igs__icon-label">{{ block.settings.name | escape }}</span>
+              {%- endif -%}
+            </button>
+          {%- endfor -%}
+        </div>
+
+        {%- comment -%} Info box — content swapped by JS {%- endcomment -%}
+        <div class="igs__infobox" data-igs-infobox>
+          {%- for block in section.blocks -%}
+            {%- assign is_active = false -%}
+            {%- if block.settings.active_by_default or forloop.first -%}
+              {%- assign is_active = true -%}
+            {%- endif -%}
+            <p
+              class="igs__infobox-text"
+              data-igs-info="{{ forloop.index0 }}"
+              {% unless is_active %}hidden{% endunless %}
+            >
+              {{ block.settings.info | escape }}
+            </p>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* ── Root ──────────────────────────────────────────────────────────────────── */
+.igs {
+  font-family: 'Avenir', 'Nunito Sans', sans-serif;
+}
+
+.igs__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 37px;
+}
+
+/* ── Image column ──────────────────────────────────────────────────────────── */
+.igs__image-col {
+  flex: 0 0 683px;
+  height: 600px;
+  overflow: hidden;
+}
+.igs__main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.igs__main-img--placeholder {
+  width: 100%;
+  height: 100%;
+  background: #e8e8e8;
+}
+
+/* ── Content column ────────────────────────────────────────────────────────── */
+.igs__content-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding-right: 40px;
+}
+
+.igs__heading {
+  margin: 0 0 0 0.25px;
+  font-family: 'Gilroy', 'Arial Black', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: #222;
+  line-height: 1.3;
+}
+
+.igs__description {
+  margin: 59px 0 0;
+  font-size: 15px;
+  font-weight: 300;
+  color: #818181;
+  line-height: 1.6;
+  max-width: 548px;
+}
+
+/* ── Icons row ─────────────────────────────────────────────────────────────── */
+.igs__icons {
+  margin-top: 149px;
+  display: flex;
+  align-items: flex-start;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.igs__icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: transform 0.15s ease;
+}
+.igs__icon-btn:hover { transform: translateY(-2px); }
+.igs__icon-btn:focus-visible {
+  outline: 2px solid #009c9b;
+  outline-offset: 2px;
+}
+
+/* Inactive state */
+.igs__icon-img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  display: block;
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+.igs__icon-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  color: #adadad;
+}
+.igs__icon-label {
+  font-family: 'Gilroy', 'Arial Black', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: #adadad;
+  text-align: center;
+  max-width: 70px;
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+/* Active state */
+.igs__icon-btn--active .igs__icon-img {
+  opacity: 1;
+}
+.igs__icon-btn--active .igs__icon-label {
+  color: #009c9b;
+}
+
+/* ── Info box ──────────────────────────────────────────────────────────────── */
+.igs__infobox {
+  margin-top: 30px;
+  background: #fff;
+  border: 1px solid #009c9b;
+  border-radius: 3px;
+  min-height: 155px;
+  max-width: 600px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+.igs__infobox-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 300;
+  color: #818181;
+  line-height: 1.6;
+  max-width: 479px;
+}
+.igs__infobox-text[hidden] { display: none; }
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media screen and (max-width: 1100px) {
+  .igs__image-col { flex: 0 0 420px; height: 440px; }
+  .igs__icons { gap: 30px; margin-top: 60px; }
+  .igs__content-col { padding-right: 20px; }
+}
+
+@media screen and (max-width: 900px) {
+  .igs__inner { flex-direction: column; gap: 0; }
+  .igs__image-col { flex: none; width: 100%; height: 320px; }
+  .igs__content-col { padding: 40px 24px; }
+  .igs__description { margin-top: 24px; max-width: 100%; }
+  .igs__icons { margin-top: 40px; justify-content: center; }
+  .igs__infobox { max-width: 100%; }
+}
+
+@media screen and (max-width: 480px) {
+  .igs__image-col { height: 240px; }
+  .igs__heading { font-size: 26px; }
+  .igs__icons { gap: 20px; }
+  .igs__content-col { padding: 32px 16px; }
+}
+</style>
+
+<script>
+(function () {
+  var section = document.querySelector('.igs--{{ section.id }}');
+  if (!section) return;
+
+  var btns  = section.querySelectorAll('[data-igs-btn]');
+  var infos = section.querySelectorAll('[data-igs-info]');
+
+  function activate(index) {
+    btns.forEach(function (btn) {
+      var active = parseInt(btn.getAttribute('data-index')) === index;
+      btn.classList.toggle('igs__icon-btn--active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    infos.forEach(function (info) {
+      var active = parseInt(info.getAttribute('data-igs-info')) === index;
+      if (active) {
+        info.removeAttribute('hidden');
+      } else {
+        info.setAttribute('hidden', '');
+      }
+    });
+  }
+
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      activate(parseInt(btn.getAttribute('data-index')));
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Ingredients Spotlight",
+  "tag": "section",
+  "class": "ingredients-spotlight-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Left image"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Main Ingredients"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Strong cleaning power made with plant-derived formula. This means it is a gentler alternative to synthetic, chemical-based products on the market. It is so gentle that even those with the most sensitive skin can use it."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image (52×52px)"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Ingredient name",
+          "default": "Ingredient Name"
+        },
+        {
+          "type": "textarea",
+          "id": "info",
+          "label": "Info box description",
+          "default": "Describe this ingredient and its benefits here."
+        },
+        {
+          "type": "checkbox",
+          "id": "active_by_default",
+          "label": "Highlighted by default",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredients Spotlight",
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Sodium Dodecyl Sulfate",
+            "info": "A surfactant that helps to remove dirt and oils from surfaces. It creates the lather that helps lift and wash away grime from your clothes effectively."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Fatty Alcohol Polyglycol Ether",
+            "info": "The perfect partner in crime to Coconut Oil Alcohol - they bring out the best in each other. Combined in our laundry sheets, they make an incredible stain-fighting duo. Plant-derived doesn't mean ineffective and we challenge any spot or stain to resist this winning combination.",
+            "active_by_default": true
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Polyvinyl Alcohol",
+            "info": "A water-soluble synthetic polymer that acts as the base film for our laundry sheets, dissolving completely in water and leaving no residue on your clothes."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Tea Seed Oil",
+            "info": "Derived from the seeds of the tea plant, this natural oil helps soften fabrics and provides a gentle, pleasant scent while being kind to sensitive skin."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Deionized Water",
+            "info": "Purified water with minerals removed, used as a pure carrier for our active ingredients to ensure maximum effectiveness and consistency in every sheet."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
