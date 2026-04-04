@@ -2053,6 +2053,7 @@
           "type": "product_card",
           "settings": {
             "product": "down-to-earth-graphic-tee",
+            "show_stars": true,
             "star_rating": 5,
             "custom_title": "Eco-Friendly Laundry Detergent Sheets",
             "custom_price": "$54.00 USD"
@@ -2062,6 +2063,7 @@
           "type": "product_card",
           "settings": {
             "product": "",
+            "show_stars": true,
             "star_rating": 5,
             "custom_title": "Eco-Friendly Laundry Detergent Sheets",
             "custom_price": "$54.00 USD"
@@ -2071,6 +2073,7 @@
           "type": "product_card",
           "settings": {
             "product": "",
+            "show_stars": true,
             "star_rating": 5,
             "custom_title": "Eco-Friendly Laundry Detergent Sheets",
             "custom_price": "$54.00 USD"
@@ -2080,6 +2083,7 @@
           "type": "product_card",
           "settings": {
             "product": "",
+            "show_stars": true,
             "star_rating": 5,
             "custom_title": "Eco-Friendly Laundry Detergent Sheets",
             "custom_price": "$54.00 USD"
@@ -2089,6 +2093,7 @@
           "type": "product_card",
           "settings": {
             "product": "",
+            "show_stars": true,
             "star_rating": 5,
             "custom_title": "Eco-Friendly Laundry Detergent Sheets",
             "custom_price": "$54.00 USD"
@@ -2098,6 +2103,7 @@
           "type": "product_card",
           "settings": {
             "product": "",
+            "show_stars": true,
             "star_rating": 5,
             "custom_title": "Eco-Friendly Laundry Detergent Sheets",
             "custom_price": "$54.00 USD"
@@ -2114,6 +2120,7 @@
       ],
       "name": "Kind Product Grid",
       "settings": {
+        "show_heading": true,
         "heading": "",
         "columns": "3",
         "bg_color": "#ffffff",
@@ -2122,6 +2129,24 @@
         "view_all_label": "View All",
         "padding_top": 56,
         "padding_bottom": 56
+      }
+    },
+    "video_with_text_kind_WepC7P": {
+      "type": "video-with-text-kind",
+      "name": "Video With Text",
+      "settings": {
+        "heading_highlight": "Eco-Friendly",
+        "heading": "Laundry Detergent Sheets",
+        "paragraph_1": "<p>Kind Laundry laundry detergent sheets are an eco-friendly alternative to the traditional detergents in the market today. Also, the recyclable packaging has a dramatically smaller eco-footprint on the environment.</p>",
+        "paragraph_2": "<p>Furthermore, our laundry detergent sheets are made with a mostly plant-derived formula. This also makes our laundry detergent sheets a much gentler and safer alternative to synthetic, chemical-based detergents.</p>",
+        "quote": "\"Their sheets contain no harsh chemicals, yet still, harness the strong cleaning power of my regular laundry detergents\"",
+        "author_name": "Karen Aplin",
+        "author_role": "Verified Customer",
+        "video_url": "",
+        "video_button_text": "Watch Video - Learn how Kind Laundry works",
+        "bg_color": "#ffffff",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },
@@ -2145,6 +2170,7 @@
     "scrolling_images_4",
     "category_bento_grid_TkT7Ve",
     "plp_promo_header_DgzFyy",
-    "kind_product_grid_WYygJW"
+    "kind_product_grid_WYygJW",
+    "video_with_text_kind_WepC7P"
   ]
 }
