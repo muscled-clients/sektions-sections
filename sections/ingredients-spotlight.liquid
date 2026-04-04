@@ -41,10 +41,17 @@
 
       {%- comment -%} Ingredient icons row {%- endcomment -%}
       {%- if section.blocks.size > 0 -%}
+        {%- comment -%} Find if any block has active_by_default set {%- endcomment -%}
+        {%- assign _has_default = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.active_by_default -%}{%- assign _has_default = true -%}{%- endif -%}
+        {%- endfor -%}
         <div class="igs__icons" role="list">
           {%- for block in section.blocks -%}
             {%- assign is_active = false -%}
-            {%- if block.settings.active_by_default or forloop.first -%}
+            {%- if block.settings.active_by_default -%}
+              {%- assign is_active = true -%}
+            {%- elsif forloop.first and _has_default == false -%}
               {%- assign is_active = true -%}
             {%- endif -%}
             <button
@@ -82,7 +89,9 @@
         <div class="igs__infobox" data-igs-infobox>
           {%- for block in section.blocks -%}
             {%- assign is_active = false -%}
-            {%- if block.settings.active_by_default or forloop.first -%}
+            {%- if block.settings.active_by_default -%}
+              {%- assign is_active = true -%}
+            {%- elsif forloop.first and _has_default == false -%}
               {%- assign is_active = true -%}
             {%- endif -%}
             <p
@@ -230,9 +239,8 @@
   border-radius: 3px;
   min-height: 155px;
   max-width: 600px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
+  padding: 20px 24px;
+  display: block;
 }
 .igs__infobox-text {
   margin: 0;
@@ -412,8 +420,7 @@
           "type": "ingredient",
           "settings": {
             "name": "Fatty Alcohol Polyglycol Ether",
-            "info": "The perfect partner in crime to Coconut Oil Alcohol - they bring out the best in each other. Combined in our laundry sheets, they make an incredible stain-fighting duo. Plant-derived doesn't mean ineffective and we challenge any spot or stain to resist this winning combination.",
-            "active_by_default": true
+            "info": "The perfect partner in crime to Coconut Oil Alcohol - they bring out the best in each other. Combined in our laundry sheets, they make an incredible stain-fighting duo. Plant-derived doesn't mean ineffective and we challenge any spot or stain to resist this winning combination."
           }
         },
         {
