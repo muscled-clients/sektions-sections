@@ -2045,6 +2045,84 @@
         "padding_top": 64,
         "padding_bottom": 64
       }
+    },
+    "kind_product_grid_WYygJW": {
+      "type": "kind-product-grid",
+      "blocks": {
+        "product_card_xLtwhU": {
+          "type": "product_card",
+          "settings": {
+            "product": "down-to-earth-graphic-tee",
+            "star_rating": 5,
+            "custom_title": "Eco-Friendly Laundry Detergent Sheets",
+            "custom_price": "$54.00 USD"
+          }
+        },
+        "product_card_Nzca3A": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "star_rating": 5,
+            "custom_title": "Eco-Friendly Laundry Detergent Sheets",
+            "custom_price": "$54.00 USD"
+          }
+        },
+        "product_card_JNaM4w": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "star_rating": 5,
+            "custom_title": "Eco-Friendly Laundry Detergent Sheets",
+            "custom_price": "$54.00 USD"
+          }
+        },
+        "product_card_atFbR3": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "star_rating": 5,
+            "custom_title": "Eco-Friendly Laundry Detergent Sheets",
+            "custom_price": "$54.00 USD"
+          }
+        },
+        "product_card_8bA3i8": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "star_rating": 5,
+            "custom_title": "Eco-Friendly Laundry Detergent Sheets",
+            "custom_price": "$54.00 USD"
+          }
+        },
+        "product_card_Dft7TH": {
+          "type": "product_card",
+          "settings": {
+            "product": "",
+            "star_rating": 5,
+            "custom_title": "Eco-Friendly Laundry Detergent Sheets",
+            "custom_price": "$54.00 USD"
+          }
+        }
+      },
+      "block_order": [
+        "product_card_xLtwhU",
+        "product_card_Nzca3A",
+        "product_card_JNaM4w",
+        "product_card_atFbR3",
+        "product_card_8bA3i8",
+        "product_card_Dft7TH"
+      ],
+      "name": "Kind Product Grid",
+      "settings": {
+        "heading": "",
+        "columns": "3",
+        "bg_color": "#ffffff",
+        "show_view_all": false,
+        "view_all_url": "",
+        "view_all_label": "View All",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -2066,6 +2144,7 @@
     "scrolling_images_3",
     "scrolling_images_4",
     "category_bento_grid_TkT7Ve",
-    "plp_promo_header_DgzFyy"
+    "plp_promo_header_DgzFyy",
+    "kind_product_grid_WYygJW"
   ]
 }
