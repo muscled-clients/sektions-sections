@@ -247,16 +247,43 @@ a.pph__badge:hover { opacity: 0.9; }
 }
 
 @media screen and (max-width: 749px) {
-  .pph__content     { padding: 0 20px; }
-  .pph__event-label { font-size: 18px; }
-  .pph__headline    { font-size: 32px; }
-  .pph__badge       { font-size: 18px; padding: 10px 24px; }
-  .pph__subtitle    { font-size: 18px; }
-  /* Hide outer sparkles on mobile to avoid overflow */
+  .pph__content     { padding: 0 68px; }
+  .pph__event-label { font-size: 14px; }
+  .pph__headline    { font-size: 24px; letter-spacing: 0; }
+  .pph__badge       { font-size: 14px; padding: 6px 33px; }
+  .pph__subtitle    { font-size: 14px; }
+
+  /* Hide all desktop sparkles */
+  .pph__spark--1,
+  .pph__spark--2,
   .pph__spark--3,
   .pph__spark--4,
   .pph__spark--5,
   .pph__spark--6    { display: none; }
+
+  /* Show only 2 small sparkles at badge level */
+  .pph__spark--2,
+  .pph__spark--1    { display: block; }
+
+  /* Red sparkle — left of badge */
+  .pph__spark--2 {
+    left: 7.2%;
+    right: auto;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%) rotate(53.08deg) skewX(-1.56deg);
+  }
+  .pph__spark--2 svg { width: 32px; height: 32px; }
+
+  /* Blue sparkle — right of badge */
+  .pph__spark--1 {
+    right: 6.18%;
+    left: auto;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%) rotate(89.76deg) skewX(-1.56deg);
+  }
+  .pph__spark--1 svg { width: 32px; height: 32px; }
 }
 </style>
 
