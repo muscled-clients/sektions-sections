@@ -2148,6 +2148,49 @@
         "padding_top": 64,
         "padding_bottom": 64
       }
+    },
+    "ingredients_spotlight_XUBHGW": {
+      "type": "ingredients-spotlight",
+      "blocks": {
+        "ingredient_byaM4B": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Sodium Dodecyl Sulfate",
+            "info": "A surfactant that helps to remove dirt and oils from surfaces. It creates the lather that helps lift and wash away grime from your clothes effectively.",
+            "active_by_default": false
+          }
+        },
+        "ingredient_tLxCKF": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Fatty Alcohol Polyglycol Ether",
+            "info": "The perfect partner in crime to Coconut Oil Alcohol - they bring out the best in each other. Combined in our laundry sheets, they make an incredible stain-fighting duo. Plant-derived doesn't mean ineffective and we challenge any spot or stain to resist this winning combination.",
+            "active_by_default": true
+          }
+        },
+        "ingredient_3jeXmY": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Polyvinyl Alcohol",
+            "info": "A water-soluble synthetic polymer that acts as the base film for our laundry sheets, dissolving completely in water and leaving no residue on your clothes.",
+            "active_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_byaM4B",
+        "ingredient_tLxCKF",
+        "ingredient_3jeXmY"
+      ],
+      "name": "Ingredients Spotlight",
+      "settings": {
+        "main_image": "shopify://shop_images/lpg-natural-plant_1.png",
+        "heading": "Main Ingredients",
+        "description": "Strong cleaning power made with plant-derived formula. This means it is a gentler alternative to synthetic, chemical-based products on the market. It is so gentle that even those with the most sensitive skin can use it.",
+        "bg_color": "#f8f8f8",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
@@ -2171,6 +2214,7 @@
     "category_bento_grid_TkT7Ve",
     "plp_promo_header_DgzFyy",
     "kind_product_grid_WYygJW",
-    "video_with_text_kind_WepC7P"
+    "video_with_text_kind_WepC7P",
+    "ingredients_spotlight_XUBHGW"
   ]
 }
