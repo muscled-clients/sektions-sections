@@ -1,0 +1,575 @@
+{% comment %}
+  Video With Text — Kind Laundry
+  Two-column layout: left = heading + body + testimonial, right = video thumbnail with play button modal
+{% endcomment %}
+
+{%- style -%}
+  .vwt--{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+{%- endstyle -%}
+
+<section class="vwt vwt--{{ section.id }}">
+  <div class="vwt__inner">
+
+    {%- comment -%} Left column {%- endcomment -%}
+    <div class="vwt__left">
+
+      {%- comment -%} Heading {%- endcomment -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="vwt__heading">
+          {%- if section.settings.heading_highlight != blank -%}
+            <span class="vwt__heading-highlight">{{ section.settings.heading_highlight | escape }}</span>
+          {%- endif -%}
+          {{ section.settings.heading | escape }}
+        </h2>
+      {%- endif -%}
+
+      {%- comment -%} Body paragraphs {%- endcomment -%}
+      <div class="vwt__body">
+        {%- if section.settings.paragraph_1 != blank -%}
+          <p class="vwt__para">{{ section.settings.paragraph_1 }}</p>
+        {%- endif -%}
+        {%- if section.settings.paragraph_2 != blank -%}
+          <p class="vwt__para">{{ section.settings.paragraph_2 }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Testimonial quote {%- endcomment -%}
+      {%- if section.settings.quote != blank -%}
+        <div class="vwt__testimonial">
+          <p class="vwt__quote">{{ section.settings.quote | escape }}</p>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Author {%- endcomment -%}
+      {%- if section.settings.author_name != blank -%}
+        <div class="vwt__author">
+          {%- if section.settings.author_image -%}
+            {%- assign _author_alt = section.settings.author_name | escape -%}
+            <div class="vwt__author-avatar">
+              {{
+                section.settings.author_image
+                | image_url: width: 144
+                | image_tag: loading: 'lazy', alt: _author_alt, class: 'vwt__author-img'
+              }}
+            </div>
+          {%- endif -%}
+          <div class="vwt__author-info">
+            <p class="vwt__author-name">{{ section.settings.author_name | escape }}</p>
+            {%- if section.settings.author_role != blank -%}
+              <p class="vwt__author-role">{{ section.settings.author_role | escape }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+    </div>
+
+    {%- comment -%} Right column — video thumbnail {%- endcomment -%}
+    <div class="vwt__right">
+      <div class="vwt__video-wrap">
+
+        {%- comment -%} Background image + overlay {%- endcomment -%}
+        {%- if section.settings.video_thumbnail -%}
+          {%- assign _thumb_alt = section.settings.video_button_text | default: 'Watch video' | escape -%}
+          {{
+            section.settings.video_thumbnail
+            | image_url: width: 1440
+            | image_tag: loading: 'lazy', alt: _thumb_alt, class: 'vwt__thumb-img'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'vwt__thumb-img vwt__thumb-img--placeholder' }}
+        {%- endif -%}
+        <div class="vwt__thumb-overlay"></div>
+
+        {%- comment -%} Play button {%- endcomment -%}
+        {%- if section.settings.video_url != blank -%}
+          <button
+            class="vwt__play-btn"
+            type="button"
+            data-vwt-play
+            data-video-url="{{ section.settings.video_url | escape }}"
+            aria-label="Play video"
+          >
+            <span class="vwt__play-icon" aria-hidden="true">
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30" cy="30" r="29" stroke="white" stroke-width="2"/>
+                <path d="M24 20L44 30L24 40V20Z" fill="white"/>
+              </svg>
+            </span>
+            {%- if section.settings.video_button_text != blank -%}
+              <span class="vwt__play-label">{{ section.settings.video_button_text | escape }}</span>
+            {%- endif -%}
+          </button>
+        {%- endif -%}
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{%- comment -%} Video modal {%- endcomment -%}
+{%- if section.settings.video_url != blank -%}
+<div class="vwt-modal" id="vwt-modal-{{ section.id }}" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+  <div class="vwt-modal__backdrop" data-vwt-close></div>
+  <div class="vwt-modal__box">
+    <button class="vwt-modal__close" type="button" data-vwt-close aria-label="Close video">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M2 2l16 16M18 2L2 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="vwt-modal__iframe-wrap">
+      <iframe
+        class="vwt-modal__iframe"
+        id="vwt-iframe-{{ section.id }}"
+        src=""
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        title="{{ section.settings.video_button_text | default: 'Video' | escape }}"
+      ></iframe>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+<style>
+/* ── Root ──────────────────────────────────────────────────────────────────── */
+.vwt {
+  font-family: 'Avenir', 'Nunito Sans', sans-serif;
+}
+
+.vwt__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 207px;
+  padding: 0 60px;
+}
+
+/* ── Left column ───────────────────────────────────────────────────────────── */
+.vwt__left {
+  flex: 0 0 393px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.vwt__heading {
+  margin: 0 0 108px 6px;
+  font-family: 'Gilroy', 'Arial Black', sans-serif;
+  font-size: 35px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #222;
+}
+.vwt__heading-highlight {
+  color: #00a9a7;
+}
+
+.vwt__body {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  margin-bottom: 28px;
+}
+.vwt__para {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 300;
+  color: #222;
+  line-height: 1.6;
+  width: 393px;
+}
+
+.vwt__testimonial {
+  background: #f8f8f8;
+  border-radius: 5px;
+  padding: 10px;
+  width: 393px;
+  min-height: 104px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.vwt__quote {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 300;
+  color: #222;
+  line-height: 1.6;
+  width: 310px;
+}
+
+.vwt__author {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.vwt__author-avatar {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.vwt__author-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.vwt__author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.vwt__author-name {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 300;
+  color: #222;
+  line-height: 1.4;
+}
+.vwt__author-role {
+  margin: 0;
+  font-size: 9px;
+  font-weight: 300;
+  color: #818181;
+  line-height: 1.4;
+}
+
+/* ── Right column ──────────────────────────────────────────────────────────── */
+.vwt__right {
+  flex: 1;
+  min-width: 0;
+}
+
+.vwt__video-wrap {
+  position: relative;
+  width: 100%;
+  height: 706px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vwt__thumb-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.vwt__thumb-img--placeholder {
+  width: 100%;
+  height: 100%;
+  background: #1a2a3a;
+}
+.vwt__thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 42, 61, 0.8);
+  pointer-events: none;
+}
+
+.vwt__play-btn {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+.vwt__play-btn:hover { transform: scale(1.06); }
+.vwt__play-btn:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.vwt__play-icon { display: block; line-height: 0; }
+
+.vwt__play-label {
+  font-family: 'Gilroy', 'Arial Black', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  line-height: 1.35;
+  width: 373px;
+}
+
+/* ── Modal ─────────────────────────────────────────────────────────────────── */
+.vwt-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vwt-modal[hidden] { display: none; }
+
+.vwt-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+}
+
+.vwt-modal__box {
+  position: relative;
+  z-index: 1;
+  width: 90vw;
+  max-width: 960px;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.vwt-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.vwt-modal__close:hover { background: rgba(0,0,0,0.9); }
+
+.vwt-modal__iframe-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+.vwt-modal__iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media screen and (max-width: 1200px) {
+  .vwt__inner { gap: 60px; padding: 0 40px; }
+  .vwt__left { flex: 0 0 340px; }
+  .vwt__para,
+  .vwt__testimonial { width: 100%; }
+}
+
+@media screen and (max-width: 900px) {
+  .vwt__inner { flex-direction: column; gap: 48px; padding: 0 24px; }
+  .vwt__left { flex: none; width: 100%; }
+  .vwt__heading { margin-bottom: 32px; }
+  .vwt__body { gap: 24px; }
+  .vwt__video-wrap { height: 56vw; min-height: 280px; }
+  .vwt__play-label { width: auto; font-size: 16px; }
+}
+
+@media screen and (max-width: 480px) {
+  .vwt__inner { padding: 0 16px; }
+  .vwt__heading { font-size: 26px; margin-bottom: 24px; }
+  .vwt__para { font-size: 14px; }
+  .vwt__video-wrap { height: 240px; }
+  .vwt__play-label { font-size: 14px; }
+}
+</style>
+
+<script>
+(function () {
+  var section = document.querySelector('.vwt--{{ section.id }}');
+  if (!section) return;
+
+  var modal   = document.getElementById('vwt-modal-{{ section.id }}');
+  var iframe  = document.getElementById('vwt-iframe-{{ section.id }}');
+  var playBtn = section.querySelector('[data-vwt-play]');
+  if (!modal || !iframe || !playBtn) return;
+
+  function getEmbedUrl(url) {
+    // YouTube
+    var yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?/]+)/);
+    if (yt) return 'https://www.youtube.com/embed/' + yt[1] + '?autoplay=1&rel=0';
+    // Vimeo
+    var vm = url.match(/vimeo\.com\/(\d+)/);
+    if (vm) return 'https://player.vimeo.com/video/' + vm[1] + '?autoplay=1';
+    // Return raw URL as fallback
+    return url;
+  }
+
+  function openModal() {
+    var rawUrl = playBtn.getAttribute('data-video-url');
+    iframe.src = getEmbedUrl(rawUrl);
+    modal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    modal.querySelector('.vwt-modal__close').focus();
+  }
+
+  function closeModal() {
+    modal.setAttribute('hidden', '');
+    iframe.src = '';
+    document.body.style.overflow = '';
+    playBtn.focus();
+  }
+
+  playBtn.addEventListener('click', openModal);
+
+  modal.querySelectorAll('[data-vwt-close]').forEach(function (el) {
+    el.addEventListener('click', closeModal);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !modal.hasAttribute('hidden')) closeModal();
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Video With Text",
+  "tag": "section",
+  "class": "video-with-text-kind-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading highlight (teal)",
+      "default": "Eco-Friendly"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (dark)",
+      "default": "Laundry Detergent Sheets"
+    },
+    {
+      "type": "header",
+      "content": "Body"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "<p>Kind Laundry laundry detergent sheets are an eco-friendly alternative to the traditional detergents in the market today. Also, the recyclable packaging has a dramatically smaller eco-footprint on the environment.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "<p>Furthermore, our laundry detergent sheets are made with a mostly plant-derived formula. This also makes our laundry detergent sheets a much gentler and safer alternative to synthetic, chemical-based detergents.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Testimonial"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "\"Their sheets contain no harsh chemicals, yet still, harness the strong cleaning power of my regular laundry detergents\""
+    },
+    {
+      "type": "image_picker",
+      "id": "author_image",
+      "label": "Author avatar"
+    },
+    {
+      "type": "text",
+      "id": "author_name",
+      "label": "Author name",
+      "default": "Karen Aplin"
+    },
+    {
+      "type": "text",
+      "id": "author_role",
+      "label": "Author role",
+      "default": "Verified Customer"
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_thumbnail",
+      "label": "Video thumbnail image"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL (YouTube or Vimeo)",
+      "info": "e.g. https://www.youtube.com/watch?v=XXXX"
+    },
+    {
+      "type": "text",
+      "id": "video_button_text",
+      "label": "Play button label",
+      "default": "Watch Video - Learn how Kind Laundry works"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video With Text",
+      "category": "Video"
+    }
+  ]
+}
+{% endschema %}
