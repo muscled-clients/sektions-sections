@@ -364,6 +364,69 @@
         "play_btn_color": "#ffffff"
       }
     },
+    "scrolling_videos_2_qUtRXd": {
+      "type": "scrolling-videos-2",
+      "blocks": {
+        "video_8pazie": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_3BCxRN": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_CYmkY6": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_cdCYej": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_8pazie",
+        "video_3BCxRN",
+        "video_CYmkY6",
+        "video_cdCYej"
+      ],
+      "name": "Scrolling Videos 2",
+      "settings": {
+        "section_label": "Scrolling Videos",
+        "bg_color": "#fff9ed",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "padding_top_desktop": 52,
+        "padding_bottom_desktop": 52,
+        "card_width_mobile": 240,
+        "card_width_desktop": 260,
+        "gap": 32,
+        "border_size": 4,
+        "border_radius": 16,
+        "gradient_angle": 90,
+        "gradient_start": "#e8ad23",
+        "gradient_mid": "",
+        "gradient_end": "#f8e233",
+        "aspect_ratio_w": 9,
+        "aspect_ratio_h": 16,
+        "scroll_direction": "left",
+        "speed_mobile": 100,
+        "speed_desktop": 140,
+        "close_btn_bg": "#ffffff",
+        "close_btn_color": "#000000",
+        "play_btn_color": "#ffffff"
+      }
+    },
     "slider_14_NLaEww": {
       "type": "slider-14",
       "blocks": {
@@ -510,6 +573,7 @@
     "glacier_slider_new_6BMbrz",
     "glacier_slider_2_Aep7NN",
     "scrolling_videos_fTizea",
+    "scrolling_videos_2_qUtRXd",
     "slider_14_NLaEww",
     "favorites_slider_npMmed"
   ]
