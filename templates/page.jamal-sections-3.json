@@ -178,12 +178,134 @@
         "thumb_active_bg": "#75857d",
         "thumb_active_text": "#fff7f0"
       }
+    },
+    "glacier_slider_new_6BMbrz": {
+      "type": "glacier-slider-new",
+      "blocks": {
+        "slide_fGMdy4": {
+          "type": "slide",
+          "settings": {
+            "title": "Oils",
+            "btn_text": "View",
+            "link": ""
+          }
+        },
+        "slide_yRVdd3": {
+          "type": "slide",
+          "settings": {
+            "title": "Serums",
+            "btn_text": "View",
+            "link": ""
+          }
+        },
+        "slide_cKJ94p": {
+          "type": "slide",
+          "settings": {
+            "title": "Cleansing",
+            "btn_text": "View",
+            "link": ""
+          }
+        },
+        "slide_CHJBgW": {
+          "type": "slide",
+          "settings": {
+            "title": "Moisturizers",
+            "btn_text": "View",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_fGMdy4",
+        "slide_yRVdd3",
+        "slide_cKJ94p",
+        "slide_CHJBgW"
+      ],
+      "name": "Glacier Slider New",
+      "settings": {
+        "heading": "Your perfect routine",
+        "bg_color": "#e2f5f9",
+        "heading_color": "#155dd7",
+        "title_color": "#ffffff",
+        "btn_bg_color": "#ffffff",
+        "btn_text_color": "#155dd7",
+        "btn_bg_hover": "#155dd7",
+        "btn_text_hover": "#deff5b",
+        "nav_bg_color": "#deff5b",
+        "nav_border_color": "#155dd7",
+        "nav_arrow_color": "#155dd7"
+      }
+    },
+    "scrolling_videos_fTizea": {
+      "type": "scrolling-videos",
+      "blocks": {
+        "video_AJMqK7": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_k4gWcy": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_rL8h8J": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_tig4DK": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_AJMqK7",
+        "video_k4gWcy",
+        "video_rL8h8J",
+        "video_tig4DK"
+      ],
+      "name": "Scrolling Videos",
+      "settings": {
+        "section_label": "Scrolling Videos",
+        "bg_color": "#fff9ed",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "padding_top_desktop": 52,
+        "padding_bottom_desktop": 52,
+        "card_width_mobile": 240,
+        "card_width_desktop": 260,
+        "gap": 32,
+        "border_size": 4,
+        "border_radius": 16,
+        "gradient_angle": 90,
+        "gradient_start": "#e8ad23",
+        "gradient_mid": "",
+        "gradient_end": "#f8e233",
+        "aspect_ratio_w": 9,
+        "aspect_ratio_h": 16,
+        "scroll_direction": "left",
+        "speed_mobile": 100,
+        "speed_desktop": 140,
+        "close_btn_bg": "#ffffff",
+        "close_btn_color": "#000000",
+        "play_btn_color": "#ffffff"
+      }
     }
   },
   "order": [
     "main",
     "feature_15_i8CMqh",
     "feature_15_v2_4hCe8t",
-    "feature_15_v3_E6i4Nj"
+    "feature_15_v3_E6i4Nj",
+    "glacier_slider_new_6BMbrz",
+    "scrolling_videos_fTizea"
   ]
 }
