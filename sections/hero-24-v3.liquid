@@ -1,0 +1,630 @@
+{{ 'section-hero-24-v3.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #Hero-24-v3-{{ section.id }} {
+    --hero-v3-overlay: {{ section.settings.overlay_color }};
+    --hero-v3-heading-color: {{ section.settings.heading_color }};
+    --hero-v3-text-color: {{ section.settings.text_color }};
+    --hero-v3-btn-bg: {{ section.settings.button_bg }};
+    --hero-v3-btn-text: {{ section.settings.button_text_color }};
+    --hero-v3-btn-border: {{ section.settings.button_border_color }};
+    --hero-v3-btn-hover-bg: {{ section.settings.button_hover_bg }};
+    --hero-v3-btn-hover-text: {{ section.settings.button_hover_text }};
+    --hero-v3-underline-color: {{ section.settings.underline_color }};
+    --hero-v3-review-text: {{ section.settings.review_text_color }};
+    --hero-v3-avatar-border: {{ section.settings.avatar_border_color }};
+  }
+{%- endstyle -%}
+
+<div id="Hero-24-v3-{{ section.id }}" class="hero-24-v3__wrapper">
+  <div class="hero-24-v3__container">
+    {%- if section.settings.image_desktop != blank -%}
+      <picture class="hero-24-v3__media">
+        {%- if section.settings.image_mobile != blank -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ section.settings.image_mobile | image_url: width: 750 }} 750w,
+                    {{ section.settings.image_mobile | image_url: width: 1100 }} 1100w"
+            sizes="100vw"
+          >
+        {%- endif -%}
+        <source
+          media="(min-width: 750px)"
+          srcset="{{ section.settings.image_desktop | image_url: width: 1200 }} 1200w,
+                  {{ section.settings.image_desktop | image_url: width: 1800 }} 1800w,
+                  {{ section.settings.image_desktop | image_url: width: 2400 }} 2400w"
+          sizes="100vw"
+        >
+        {{ section.settings.image_desktop | image_url: width: 1800 | image_tag:
+          class: 'hero-24-v3__image',
+          loading: 'lazy',
+          sizes: '100vw',
+          widths: '750, 1100, 1200, 1800, 2400'
+        }}
+      </picture>
+    {%- endif -%}
+
+    <div class="hero-24-v3__overlay"></div>
+
+    <div class="hero-24-v3__content">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+
+          {%- when 'review' -%}
+            <div class="hero-24-v3__review" {{ block.shopify_attributes }}>
+              <div class="hero-24-v3__avatars">
+                {%- for i in (1..5) -%}
+                  {%- assign avatar_key = 'avatar_' | append: i -%}
+                  {%- if block.settings[avatar_key] != blank -%}
+                    <div class="hero-24-v3__avatar" style="z-index: {{ 6 | minus: i }};">
+                      {{ block.settings[avatar_key] | image_url: width: 84 | image_tag:
+                        class: 'hero-24-v3__avatar-img',
+                        loading: 'lazy',
+                        width: 42,
+                        height: 42
+                      }}
+                    </div>
+                  {%- else -%}
+                    <div class="hero-24-v3__avatar hero-24-v3__avatar--placeholder" style="z-index: {{ 6 | minus: i }};">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="8" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 17.5c0-3.5 3-6 6.5-6s6.5 2.5 6.5 6" stroke="currentColor" stroke-width="1.2"/></svg>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+              <div class="hero-24-v3__review-info">
+                <span class="hero-24-v3__review-count">{{ block.settings.review_text }}</span>
+                <div class="hero-24-v3__stars-row">
+                  <div class="hero-24-v3__stars">
+                    {%- assign full_stars = block.settings.rating | floor -%}
+                    {%- assign remainder = block.settings.rating | minus: full_stars -%}
+                    {%- for i in (1..5) -%}
+                      {%- if i <= full_stars -%}
+                        <svg class="hero-24-v3__star hero-24-v3__star--full" viewBox="0 0 24 24" fill="#00b67a"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+                      {%- assign next_star = full_stars | plus: 1 -%}
+                      {%- elsif i == next_star and remainder > 0 -%}
+                        <svg class="hero-24-v3__star hero-24-v3__star--half" viewBox="0 0 24 24"><defs><linearGradient id="half-star-{{ section.id }}-{{ forloop.index }}"><stop offset="50%" stop-color="#00b67a"/><stop offset="50%" stop-color="#dcdce6"/></linearGradient></defs><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="url(#half-star-{{ section.id }}-{{ forloop.index }})"/></svg>
+                      {%- else -%}
+                        <svg class="hero-24-v3__star hero-24-v3__star--empty" viewBox="0 0 24 24" fill="#dcdce6"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                  <span class="hero-24-v3__rating-text">{{ block.settings.rating_label }}</span>
+                </div>
+              </div>
+            </div>
+
+          {%- when 'heading' -%}
+            <{{ block.settings.heading_tag }} class="hero-24-v3__heading" {{ block.shopify_attributes }}>
+              {{ block.settings.heading }}
+            </{{ block.settings.heading_tag }}>
+
+          {%- when 'text' -%}
+            <div class="hero-24-v3__text" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </div>
+
+          {%- when 'button' -%}
+            <div class="hero-24-v3__button-wrap" {{ block.shopify_attributes }}>
+              <a
+                {% if block.settings.button_link != blank %}href="{{ block.settings.button_link }}"{% endif %}
+                class="hero-24-v3__button"
+                {% if block.settings.button_link == blank %}role="link" aria-disabled="true"{% endif %}
+              >
+                {{ block.settings.button_label | escape }}
+              </a>
+            </div>
+
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Hero 24 V3 — Scoped to #Hero-24-v3-{{ section.id }} ── */
+
+  #Hero-24-v3-{{ section.id }} * ,
+  #Hero-24-v3-{{ section.id }} *::before,
+  #Hero-24-v3-{{ section.id }} *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  #Hero-24-v3-{{ section.id }}.hero-24-v3__wrapper {
+    padding: 30px 1.5rem;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__container {
+    position: relative;
+    max-width: 1800px;
+    margin: 0 auto;
+    height: 650px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ── Background image ── */
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ── Overlay ── */
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--hero-v3-overlay);
+    pointer-events: none;
+  }
+
+  /* ── Content ── */
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 30px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  /* ── Review block ── */
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__review {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--hero-v3-avatar-border);
+    overflow: hidden;
+    position: relative;
+    background: #f0ece6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    flex-shrink: 0;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__avatar + .hero-24-v3__avatar {
+    margin-left: -12px;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__review-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__review-count {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--hero-v3-review-text);
+    line-height: 1.3;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__stars-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__stars {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__star {
+    width: 14px;
+    height: 14px;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__rating-text {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--hero-v3-review-text);
+    line-height: 1;
+  }
+
+  /* ── Heading ── */
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__heading {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--hero-v3-heading-color);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__heading strong {
+    text-decoration: underline;
+    text-decoration-color: var(--hero-v3-underline-color);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 3px;
+    font-weight: 700;
+  }
+
+  /* ── Text ── */
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__text {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--hero-v3-text-color);
+    max-width: 520px;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__text p {
+    margin: 0;
+  }
+
+  /* ── Button ── */
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__button-wrap {
+    margin-top: 32px;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__button {
+    display: inline-block;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 26px 62px;
+    background: var(--hero-v3-btn-bg);
+    color: var(--hero-v3-btn-text);
+    border: 1px solid var(--hero-v3-btn-border);
+    border-radius: 0px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  #Hero-24-v3-{{ section.id }} .hero-24-v3__button:hover {
+    background: var(--hero-v3-btn-hover-bg);
+    color: var(--hero-v3-btn-hover-text);
+  }
+
+  /* ── Desktop (750px+) ── */
+  @media (min-width: 750px) {
+    #Hero-24-v3-{{ section.id }}.hero-24-v3__wrapper {
+      padding: 40px 3rem;
+    }
+
+    #Hero-24-v3-{{ section.id }} .hero-24-v3__container {
+      height: 650px;
+      border-radius: 20px;
+    }
+
+    #Hero-24-v3-{{ section.id }} .hero-24-v3__content {
+      max-width: 42%;
+      text-align: left;
+      align-items: flex-start;
+      padding: 40px 60px;
+    }
+
+    #Hero-24-v3-{{ section.id }} .hero-24-v3__avatar {
+      width: 42px;
+      height: 42px;
+    }
+
+    #Hero-24-v3-{{ section.id }} .hero-24-v3__avatar + .hero-24-v3__avatar {
+      margin-left: -12.6px;
+    }
+
+    #Hero-24-v3-{{ section.id }} .hero-24-v3__review-count {
+      font-size: 16px;
+    }
+
+    #Hero-24-v3-{{ section.id }} .hero-24-v3__star {
+      width: 14px;
+      height: 14px;
+    }
+
+    #Hero-24-v3-{{ section.id }} .hero-24-v3__heading {
+      font-size: 54px;
+    }
+
+    #Hero-24-v3-{{ section.id }} .hero-24-v3__heading strong {
+      text-decoration-thickness: 4px;
+      text-underline-offset: 6px;
+    }
+
+    #Hero-24-v3-{{ section.id }} .hero-24-v3__text {
+      font-size: 18px;
+    }
+
+    #Hero-24-v3-{{ section.id }} .hero-24-v3__button-wrap {
+      margin-top: 40px;
+    }
+  }
+
+  /* ── Design mode ── */
+  .shopify-design-mode #Hero-24-v3-{{ section.id }} .hero-24-v3__container {
+    min-height: 650px;
+  }
+
+  .shopify-design-mode #Hero-24-v3-{{ section.id }} [data-shopify-editor-block] {
+    outline: none;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero 24 V3",
+  "tag": "section",
+  "class": "section-hero-24-v3",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "rgba(238,232,225,0.1)"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#272425"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#272425"
+    },
+    {
+      "type": "color",
+      "id": "underline_color",
+      "label": "Underline color (strong)",
+      "default": "#17c87c"
+    },
+    {
+      "type": "color",
+      "id": "review_text_color",
+      "label": "Review text color",
+      "default": "#272425"
+    },
+    {
+      "type": "color",
+      "id": "avatar_border_color",
+      "label": "Avatar border color",
+      "default": "#eee8e1"
+    },
+    {
+      "type": "header",
+      "content": "Button colors"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#272425"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#fff8eb"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button border",
+      "default": "#272425"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Button hover background",
+      "default": "#fff8eb"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text",
+      "label": "Button hover text",
+      "default": "#272425"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar_1",
+          "label": "Avatar 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_2",
+          "label": "Avatar 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_3",
+          "label": "Avatar 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_4",
+          "label": "Avatar 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_5",
+          "label": "Avatar 5"
+        },
+        {
+          "type": "text",
+          "id": "review_text",
+          "label": "Review text",
+          "default": "250 + Happy customers"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star rating",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "default": 4.5
+        },
+        {
+          "type": "text",
+          "id": "rating_label",
+          "label": "Rating label",
+          "default": "Excellent 4.9"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "<p>ROLL-OUT BEDS</p>"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading tag",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" }
+          ],
+          "default": "h2"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Designed to create calm moments and peaceful sleep for your little ones.</p>"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "SHOP BENI BEDS"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero 24 V3",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "review_text": "250 + Happy customers",
+            "rating": 4.5,
+            "rating_label": "Excellent 4.9"
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>ROLL-OUT BEDS</p>"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Designed to create calm moments and peaceful sleep for your little ones.</p>"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "button_label": "SHOP BENI BEDS"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

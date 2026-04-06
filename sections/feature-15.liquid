@@ -1,0 +1,627 @@
+{{ 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' | stylesheet_tag }}
+
+<style>
+  .ft15-section-{{ section.id }} {
+    border-top: solid {{ section.settings.border_color }} 0px;
+    border-bottom: solid {{ section.settings.border_color }} 0px;
+    margin: 0;
+    border-radius: 0px;
+    overflow: hidden;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  .ft15-inner-{{ section.id }} {
+    margin: 0 auto;
+    max-width: 120rem;
+    padding: 27px 3.5rem;
+  }
+
+  .ft15-heading-{{ section.id }} {
+    text-align: center;
+  }
+
+  .ft15-heading-{{ section.id }} h2 {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: {{ section.settings.heading_color }};
+    line-height: 130%;
+  }
+
+  /* Thumbs */
+  .ft15-thumbs-{{ section.id }} {
+    margin-top: 24px !important;
+    border-radius: 6px;
+    border: 1px solid {{ section.settings.thumb_border_color }};
+    overflow: hidden !important;
+  }
+
+  .ft15-thumb-{{ section.id }} {
+    width: calc(100% / {{ section.blocks.size }}) !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    margin: 0;
+    background-color: {{ section.settings.bg_color }};
+    text-decoration: none;
+    padding: 10px 14px !important;
+    transition: all 0.25s ease 0s;
+    box-sizing: border-box !important;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .ft15-thumb-{{ section.id }}:hover,
+  .ft15-thumb-{{ section.id }}.swiper-slide-thumb-active {
+    background-color: {{ section.settings.thumb_active_bg }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .ft15-thumb-icon-{{ section.id }} {
+    flex: 0 0 24px;
+  }
+
+  .ft15-thumb-icon-{{ section.id }} img,
+  .ft15-thumb-icon-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ft15-thumb-text-{{ section.id }} {
+    display: none;
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: {{ section.settings.heading_color }};
+    line-height: 100%;
+    transition: all 0.25s ease 0s;
+  }
+
+  /* Main slider wrapper */
+  .ft15-slider-wrap-{{ section.id }} {
+    margin-top: 40px;
+    position: relative;
+  }
+
+  .ft15-slide-{{ section.id }} {
+    box-sizing: border-box !important;
+  }
+
+  .ft15-slide-img-wrap-{{ section.id }} {
+    margin-top: 20px;
+    border-radius: 12px;
+    border: 0px solid #000;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 12/10;
+  }
+
+  .ft15-slide-img-wrap-{{ section.id }} img,
+  .ft15-slide-img-wrap-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ft15-slide-img-wrap-{{ section.id }} svg {
+    background-color: #AFAFAF;
+  }
+
+  .ft15-subheading-{{ section.id }} {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: {{ section.settings.heading_color }};
+    line-height: 130%;
+  }
+
+  .ft15-text-{{ section.id }} {
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  .ft15-text-{{ section.id }} * {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: {{ section.settings.text_color }};
+    line-height: 150%;
+  }
+
+  .ft15-text-{{ section.id }} li:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  /* Nav buttons */
+  .ft15-prev-{{ section.id }},
+  .ft15-next-{{ section.id }} {
+    position: absolute;
+    z-index: 2;
+    top: 35%;
+    transform: translateY(-50%);
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border: 1px solid {{ section.settings.nav_border_color }};
+    border-radius: 50%;
+    background: transparent;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    -webkit-appearance: none;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.15);
+  }
+
+  .ft15-prev-{{ section.id }} { left: 10px !important; }
+  .ft15-next-{{ section.id }} { right: 10px !important; }
+
+  .ft15-prev-{{ section.id }} span,
+  .ft15-next-{{ section.id }} span {
+    color: {{ section.settings.nav_arrow_color }};
+    transition: all 0.3s ease 0s;
+  }
+
+  .ft15-prev-{{ section.id }}.swiper-button-disabled,
+  .ft15-next-{{ section.id }}.swiper-button-disabled {
+    opacity: 0;
+  }
+
+  .ft15-prev-{{ section.id }} .animate-icon,
+  .ft15-next-{{ section.id }} .animate-icon {
+    pointer-events: none;
+    place-items: center;
+    display: grid;
+  }
+
+  .ft15-next-{{ section.id }} .animate-icon:before {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease-in-out;
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+    box-sizing: border-box;
+    border: 0px;
+    border-right: 2px solid currentColor;
+    border-top: 2px solid currentColor;
+    position: relative;
+    left: -1px;
+  }
+
+  .ft15-prev-{{ section.id }} .animate-icon:before {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease-in-out;
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+    box-sizing: border-box;
+    border: 0px;
+    border-bottom: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+    position: relative;
+    right: -1px;
+  }
+
+  .ft15-prev-{{ section.id }} .animate-icon:after,
+  .ft15-next-{{ section.id }} .animate-icon:after {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease-in-out;
+    width: 7.7px;
+    height: 1.6px;
+    transform-origin: center;
+    opacity: 0;
+    background: currentColor;
+    transform: scaleX(.5);
+  }
+
+  .ft15-next-{{ section.id }}:hover .animate-icon:before {
+    transform: translate(0.125rem) rotate(45deg);
+  }
+
+  .ft15-prev-{{ section.id }}:hover .animate-icon:before {
+    transform: translate(-0.125rem) rotate(45deg);
+  }
+
+  .ft15-prev-{{ section.id }}:hover .animate-icon:after,
+  .ft15-next-{{ section.id }}:hover .animate-icon:after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  /* Desktop/Mobile helpers */
+  .ft15-desktop-{{ section.id }} { display: none !important; }
+
+  @media(min-width: 1024px) {
+    .ft15-inner-{{ section.id }} {
+      padding: 36px 9rem;
+    }
+
+    .ft15-heading-{{ section.id }} {
+      text-align: left;
+    }
+
+    .ft15-heading-{{ section.id }} h2 {
+      font-size: 52px;
+    }
+
+    .ft15-thumbs-{{ section.id }} {
+      margin-top: 0px !important;
+    }
+
+    .ft15-thumb-{{ section.id }} {
+      padding: 10px 16px !important;
+    }
+
+    .ft15-thumb-text-{{ section.id }} {
+      display: block;
+    }
+
+    .ft15-slider-wrap-{{ section.id }} {
+      margin-top: 40px;
+    }
+
+    .ft15-slide-{{ section.id }} {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .ft15-slide-img-wrap-{{ section.id }} {
+      margin-top: 0;
+      aspect-ratio: 12/10;
+    }
+
+    .ft15-subheading-{{ section.id }} {
+      margin-top: 20px;
+      text-align: left;
+      font-size: 32px;
+    }
+
+    .ft15-text-{{ section.id }} {
+      margin-top: 16px;
+      text-align: left;
+    }
+
+    .ft15-text-{{ section.id }} * {
+      font-size: 14px;
+    }
+
+    .ft15-prev-{{ section.id }},
+    .ft15-next-{{ section.id }} {
+      width: 48px;
+      height: 48px;
+      top: 50%;
+      transition: all 0.25s ease 0s;
+    }
+
+    .ft15-prev-{{ section.id }}.swiper-button-disabled,
+    .ft15-next-{{ section.id }}.swiper-button-disabled {
+      opacity: 0 !important;
+    }
+
+    .ft15-prev-{{ section.id }} { left: -8rem !important; }
+    .ft15-next-{{ section.id }} { right: -8rem !important; }
+
+    .ft15-mobile-{{ section.id }} { display: none !important; }
+    .ft15-desktop-{{ section.id }} { display: block !important; }
+
+    .ft15-content-{{ section.id }} { order: 1; }
+    .ft15-image-{{ section.id }} { order: 2; }
+  }
+</style>
+
+<div class="ft15-section-{{ section.id }}">
+  <div class="ft15-inner-{{ section.id }}">
+
+    {%- if section.settings.heading != blank -%}
+      <div class="ft15-heading-{{ section.id }} ft15-mobile-{{ section.id }}">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <!-- Thumbs -->
+    <div class="ft15-thumbs-{{ section.id }} swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="ft15-thumb-{{ section.id }} swiper-slide" {{ block.shopify_attributes }}>
+            <div class="ft15-thumb-icon-{{ section.id }}">
+              {%- if block.settings.icon != blank -%}
+                <img src="{{ block.settings.icon | image_url: width: 48 }}" alt="{{ block.settings.tab_label | escape }}" loading="lazy" width="24" height="24">
+              {%- else -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.tab_label != blank -%}
+              <p class="ft15-thumb-text-{{ section.id }}">{{ block.settings.tab_label }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Main Slider -->
+    <div class="ft15-slider-wrap-{{ section.id }}">
+      <div class="ft15-main-slider-{{ section.id }} swiper">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="ft15-slide-{{ section.id }} swiper-slide" {{ block.shopify_attributes }}>
+
+              <!-- Content (left on desktop) -->
+              <div class="ft15-content-{{ section.id }}">
+                {%- if section.settings.heading != blank -%}
+                  <div class="ft15-heading-{{ section.id }} ft15-desktop-{{ section.id }}">
+                    <h2>{{ section.settings.heading }}</h2>
+                  </div>
+                {%- endif -%}
+
+                {%- if block.settings.subheading != blank -%}
+                  <p class="ft15-subheading-{{ section.id }} ft15-desktop-{{ section.id }}">{{ block.settings.subheading }}</p>
+                {%- endif -%}
+
+                {%- if block.settings.text != blank -%}
+                  <div class="ft15-text-{{ section.id }} ft15-desktop-{{ section.id }}">
+                    {{ block.settings.text }}
+                  </div>
+                {%- endif -%}
+              </div>
+
+              <!-- Image (right on desktop) -->
+              <div class="ft15-image-{{ section.id }}">
+                {%- if block.settings.subheading != blank -%}
+                  <p class="ft15-subheading-{{ section.id }} ft15-mobile-{{ section.id }}">{{ block.settings.subheading }}</p>
+                {%- endif -%}
+
+                <div class="ft15-slide-img-wrap-{{ section.id }}">
+                  {%- if block.settings.image != blank -%}
+                    <img
+                      src="{{ block.settings.image | image_url: width: 800 }}"
+                      srcset="{{ block.settings.image | image_url: width: 375 }} 375w,
+                              {{ block.settings.image | image_url: width: 550 }} 550w,
+                              {{ block.settings.image | image_url: width: 750 }} 750w,
+                              {{ block.settings.image | image_url: width: 1000 }} 1000w"
+                      alt="{{ block.settings.subheading | escape }}"
+                      loading="lazy"
+                      width="{{ block.settings.image.width }}"
+                      height="{{ block.settings.image.height }}">
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag }}
+                  {%- endif -%}
+                </div>
+
+                {%- if block.settings.text != blank -%}
+                  <div class="ft15-text-{{ section.id }} ft15-mobile-{{ section.id }}">
+                    {{ block.settings.text }}
+                  </div>
+                {%- endif -%}
+              </div>
+
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <button class="ft15-prev-{{ section.id }}" tabindex="0" aria-label="Previous slide">
+        <span class="animate-icon"></span>
+      </button>
+      <button class="ft15-next-{{ section.id }}" tabindex="0" aria-label="Next slide">
+        <span class="animate-icon"></span>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  (function() {
+    var sectionId = '{{ section.id }}';
+
+    function initFeature15_{{ section.id | replace: '-', '_' }}() {
+      var thumbsEl = document.querySelector('.ft15-thumbs-' + sectionId);
+      var mainEl = document.querySelector('.ft15-main-slider-' + sectionId);
+      if (!thumbsEl || !mainEl) return;
+
+      var thumbsSwiper = new Swiper(thumbsEl, {
+        slidesPerView: 'auto',
+        threshold: 2,
+        direction: 'horizontal',
+        watchSlidesProgress: true,
+        slideToClickedSlide: true
+      });
+
+      setTimeout(function() {
+        var mainSwiper = new Swiper(mainEl, {
+          speed: 300,
+          spaceBetween: 20,
+          effect: 'fade',
+          fadeEffect: { crossFade: true },
+          loop: true,
+          autoHeight: true,
+          watchOverflow: true,
+          navigation: {
+            nextEl: '.ft15-next-' + sectionId,
+            prevEl: '.ft15-prev-' + sectionId
+          },
+          thumbs: {
+            swiper: thumbsSwiper
+          }
+        });
+
+        var thumbSlides = thumbsEl.querySelectorAll('.swiper-slide');
+        thumbSlides.forEach(function(slide, index) {
+          slide.addEventListener('click', function() {
+            mainSwiper.slideTo(index);
+          });
+        });
+      }, 100);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFeature15_{{ section.id | replace: '-', '_' }});
+    } else {
+      initFeature15_{{ section.id | replace: '-', '_' }}();
+    }
+
+    {% if request.design_mode %}
+      document.addEventListener('shopify:section:load', function(event) {
+        if (event.detail.sectionId === sectionId) {
+          initFeature15_{{ section.id | replace: '-', '_' }}();
+        }
+      });
+    {% endif %}
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Feature 15",
+  "tag": "section",
+  "class": "feature-15-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What makes it special?"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fff8ec"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#262425"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#262425"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#262425"
+    },
+    {
+      "type": "color",
+      "id": "thumb_border_color",
+      "label": "Tabs Border Color",
+      "default": "#dfdfdf"
+    },
+    {
+      "type": "color",
+      "id": "thumb_active_bg",
+      "label": "Tab Active Background",
+      "default": "#ede6db"
+    },
+    {
+      "type": "color",
+      "id": "nav_border_color",
+      "label": "Nav Button Border",
+      "default": "#262425"
+    },
+    {
+      "type": "color",
+      "id": "nav_arrow_color",
+      "label": "Nav Arrow Color",
+      "default": "#262425"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Tab Icon (24x24)"
+        },
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab Label",
+          "default": "Feature"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Feature Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>Describe this feature in detail. Explain what makes it unique and valuable to the customer.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature 15",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "tab_label": "Soft as a cloud",
+            "subheading": "Soft as a cloud",
+            "text": "<p>The BENI BED is a pillowy, roll-up bed that you can take anywhere. Sun-drenched beach days, starlit camping trips, picnics in the park, or movie nights at home.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "tab_label": "Optimal Support",
+            "subheading": "Optimal Support",
+            "text": "<p>The BENI BED measures 190cm x 90cm and weighs 6.5kg. Once rolled, it fits in a large boot of a car.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "tab_label": "Sustainability",
+            "subheading": "Sustainability",
+            "text": "<p>The covers are machine washable, made from regenerative Good Earth Cotton. The inners are filled with soft fluff made from recycled plastic water bottles.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "tab_label": "Care guide",
+            "subheading": "Care guide",
+            "text": "<p>Keeping your BENI BED fluffy is easy. Just like you would with your doona or pillows, it's as simple as giving it a good shake.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,563 @@
+{{ 'https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&display=swap' | stylesheet_tag }}
+
+{%- style -%}
+  #Hero-{{ section.id }} {
+    --hero-bg: {{ section.settings.background_color | default: '#1a1a2e' }};
+    --hero-text: {{ section.settings.text_color | default: '#ffffff' }};
+    --hero-accent: {{ section.settings.accent_color | default: '#f8b16b' }};
+    --hero-accent-hover: {{ section.settings.accent_hover_color | default: '#e79e55' }};
+    --hero-heading: {{ section.settings.heading_color | default: '#ffffff' }};
+    --hero-subtext: {{ section.settings.subtext_color | default: '#cccccc' }};
+
+    position: relative;
+    width: 100%;
+    min-height: 570px;
+    background-color: var(--hero-bg);
+    overflow: hidden;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  #Hero-{{ section.id }} * {
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  #Hero-{{ section.id }} .hero-bg-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  #Hero-{{ section.id }} .hero-bg-desktop {
+    display: none;
+  }
+
+  #Hero-{{ section.id }} .hero-bg-mobile {
+    display: block;
+  }
+
+  #Hero-{{ section.id }} .hero-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    min-height: 570px;
+    display: flex;
+    align-items: center;
+  }
+
+  #Hero-{{ section.id }} .hero-content {
+    width: 100%;
+    text-align: start;
+  }
+
+  /* Review block */
+  #Hero-{{ section.id }} .hero-review {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  #Hero-{{ section.id }} .hero-review-avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  #Hero-{{ section.id }} .hero-review-avatars img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid var(--hero-bg);
+    object-fit: cover;
+  }
+
+  #Hero-{{ section.id }} .hero-review-avatars img + img {
+    margin-left: -11.4px;
+  }
+
+  #Hero-{{ section.id }} .hero-review-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  #Hero-{{ section.id }} .hero-review-stars {
+    color: var(--hero-accent);
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  #Hero-{{ section.id }} .hero-review-text {
+    color: var(--hero-text);
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  #Hero-{{ section.id }} .hero-review-subtext {
+    color: var(--hero-subtext);
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  /* Heading */
+  #Hero-{{ section.id }} .hero-heading {
+    color: var(--hero-heading);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 16px;
+  }
+
+  #Hero-{{ section.id }} .hero-heading strong {
+    text-decoration: underline;
+    text-decoration-color: var(--hero-accent);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 3px;
+  }
+
+  /* Text */
+  #Hero-{{ section.id }} .hero-text {
+    color: var(--hero-subtext);
+    font-size: 13px;
+    line-height: 170%;
+    margin: 0 0 24px;
+    max-width: 500px;
+  }
+
+  /* Buttons */
+  #Hero-{{ section.id }} .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  #Hero-{{ section.id }} .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 16px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    line-height: 1;
+  }
+
+  #Hero-{{ section.id }} .hero-btn--primary {
+    background-color: var(--hero-accent);
+    color: #ffffff;
+    border: 2px solid var(--hero-accent);
+  }
+
+  #Hero-{{ section.id }} .hero-btn--primary:hover {
+    background-color: var(--hero-accent-hover);
+    border-color: var(--hero-accent-hover);
+  }
+
+  #Hero-{{ section.id }} .hero-btn--secondary {
+    background-color: transparent;
+    color: var(--hero-accent);
+    border: 2px solid var(--hero-accent);
+  }
+
+  #Hero-{{ section.id }} .hero-btn--secondary:hover {
+    background-color: transparent;
+    color: var(--hero-accent-hover);
+    border-color: var(--hero-accent-hover);
+  }
+
+  /* Desktop */
+  @media (min-width: 750px) {
+    #Hero-{{ section.id }} {
+      min-height: 600px;
+    }
+
+    #Hero-{{ section.id }} .hero-bg-desktop {
+      display: block;
+    }
+
+    #Hero-{{ section.id }} .hero-bg-mobile {
+      display: none;
+    }
+
+    #Hero-{{ section.id }} .hero-container {
+      min-height: 600px;
+    }
+
+    #Hero-{{ section.id }} .hero-content {
+      max-width: 50%;
+      margin-left: auto;
+      text-align: end;
+    }
+
+    #Hero-{{ section.id }} .hero-review {
+      justify-content: end;
+    }
+
+    #Hero-{{ section.id }} .hero-review-avatars img {
+      width: 48px;
+      height: 48px;
+    }
+
+    #Hero-{{ section.id }} .hero-review-avatars img + img {
+      margin-left: -14.4px;
+    }
+
+    #Hero-{{ section.id }} .hero-review-text {
+      font-size: 16px;
+    }
+
+    #Hero-{{ section.id }} .hero-review-subtext {
+      font-size: 13px;
+    }
+
+    #Hero-{{ section.id }} .hero-review-stars {
+      font-size: 16px;
+    }
+
+    #Hero-{{ section.id }} .hero-heading {
+      font-size: 56px;
+    }
+
+    #Hero-{{ section.id }} .hero-text {
+      font-size: 18px;
+      margin-left: auto;
+    }
+
+    #Hero-{{ section.id }} .hero-buttons {
+      justify-content: end;
+    }
+
+    #Hero-{{ section.id }} .hero-btn {
+      font-size: 15px;
+      padding: 16px 24px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="Hero-{{ section.id }}" class="hero-24-v2">
+  {%- if section.settings.image_desktop != blank -%}
+    {{
+      section.settings.image_desktop
+      | image_url: width: 1920
+      | image_tag: class: 'hero-bg-image hero-bg-desktop', loading: 'lazy', widths: '960, 1280, 1600, 1920'
+    }}
+  {%- endif -%}
+
+  {%- if section.settings.image_mobile != blank -%}
+    {{
+      section.settings.image_mobile
+      | image_url: width: 960
+      | image_tag: class: 'hero-bg-image hero-bg-mobile', loading: 'lazy', widths: '480, 640, 750, 960'
+    }}
+  {%- elsif section.settings.image_desktop != blank -%}
+    {{
+      section.settings.image_desktop
+      | image_url: width: 960
+      | image_tag: class: 'hero-bg-image hero-bg-mobile', loading: 'lazy', widths: '480, 640, 750, 960'
+    }}
+  {%- endif -%}
+
+  <div class="hero-container">
+    <div class="hero-content">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'review' -%}
+            <div class="hero-review" {{ block.shopify_attributes }}>
+              {%- if block.settings.avatar_1 != blank
+                or block.settings.avatar_2 != blank
+                or block.settings.avatar_3 != blank
+              -%}
+                <div class="hero-review-avatars">
+                  {%- if block.settings.avatar_1 != blank -%}
+                    {{ block.settings.avatar_1 | image_url: width: 96 | image_tag: widths: '48, 72, 96' }}
+                  {%- endif -%}
+                  {%- if block.settings.avatar_2 != blank -%}
+                    {{ block.settings.avatar_2 | image_url: width: 96 | image_tag: widths: '48, 72, 96' }}
+                  {%- endif -%}
+                  {%- if block.settings.avatar_3 != blank -%}
+                    {{ block.settings.avatar_3 | image_url: width: 96 | image_tag: widths: '48, 72, 96' }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+              <div class="hero-review-info">
+                {%- if block.settings.stars > 0 -%}
+                  <div class="hero-review-stars">
+                    {%- for i in (1..block.settings.stars) -%}&#9733;{%- endfor -%}
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.review_text != blank -%}
+                  <span class="hero-review-text">{{ block.settings.review_text }}</span>
+                {%- endif -%}
+                {%- if block.settings.review_subtext != blank -%}
+                  <span class="hero-review-subtext">{{ block.settings.review_subtext }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+
+          {%- when 'heading' -%}
+            <h2 class="hero-heading" {{ block.shopify_attributes }}>
+              {{ block.settings.heading }}
+            </h2>
+
+          {%- when 'text' -%}
+            {%- if block.settings.text != blank -%}
+              <div class="hero-text" {{ block.shopify_attributes }}>
+                {{ block.settings.text }}
+              </div>
+            {%- endif -%}
+
+          {%- when 'button_primary' -%}
+            {%- comment -%} Collect buttons into a flex row - open wrapper if first button {%- endcomment -%}
+            {%- unless hero_buttons_open -%}
+              {%- assign hero_buttons_open = true -%}
+              <div class="hero-buttons">
+            {%- endunless -%}
+            <a
+              href="{{ block.settings.link }}"
+              class="hero-btn hero-btn--primary"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.label }}
+            </a>
+            {%- comment -%} Check if next block is not a button to close wrapper {%- endcomment -%}
+            {%- assign next_index = forloop.index -%}
+            {%- assign close_buttons = true -%}
+            {%- for next_block in section.blocks -%}
+              {%- if forloop.index0 == next_index -%}
+                {%- if next_block.type == 'button_primary' or next_block.type == 'button_secondary' -%}
+                  {%- assign close_buttons = false -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if close_buttons or forloop.last -%}
+              </div>
+              {%- assign hero_buttons_open = false -%}
+            {%- endif -%}
+
+          {%- when 'button_secondary' -%}
+            {%- unless hero_buttons_open -%}
+              {%- assign hero_buttons_open = true -%}
+              <div class="hero-buttons">
+            {%- endunless -%}
+            <a
+              href="{{ block.settings.link }}"
+              class="hero-btn hero-btn--secondary"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.label }}
+            </a>
+            {%- assign next_index = forloop.index -%}
+            {%- assign close_buttons = true -%}
+            {%- for next_block in section.blocks -%}
+              {%- if forloop.index0 == next_index -%}
+                {%- if next_block.type == 'button_primary' or next_block.type == 'button_secondary' -%}
+                  {%- assign close_buttons = false -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if close_buttons or forloop.last -%}
+              </div>
+              {%- assign hero_buttons_open = false -%}
+            {%- endif -%}
+
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero 24 V2",
+  "tag": "section",
+  "class": "hero-24-v2-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Background image (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Background image (mobile)"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1a1a2e"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#f8b16b"
+    },
+    {
+      "type": "color",
+      "id": "accent_hover_color",
+      "label": "Accent hover color",
+      "default": "#e79e55"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar_1",
+          "label": "Avatar 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_2",
+          "label": "Avatar 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar_3",
+          "label": "Avatar 3"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Star rating",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "review_text",
+          "label": "Review text",
+          "default": "200+ Happy Customers"
+        },
+        {
+          "type": "text",
+          "id": "review_subtext",
+          "label": "Review subtext",
+          "default": "Excellent 4.9"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "<p>Which <strong>AirPods</strong> are right for you?</p>"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Discover the perfect AirPods for your lifestyle. Immersive sound, comfort, and seamless connectivity.</p>"
+        }
+      ]
+    },
+    {
+      "type": "button_primary",
+      "name": "Button (primary)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Shop AirPods"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "button_secondary",
+      "name": "Button (secondary)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Shop Accessories"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero 24 V2",
+      "blocks": [
+        {
+          "type": "review"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button_primary"
+        },
+        {
+          "type": "button_secondary"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,692 @@
+{{ 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' | stylesheet_tag }}
+
+<style>
+  @font-face {
+    font-family: "Josefin Sans";
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url("https://fonts.gstatic.com/s/josefinsans/v32/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhKg.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Josefin Sans";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("https://fonts.gstatic.com/s/josefinsans/v32/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_ArXbMZhKg.woff2") format("woff2");
+  }
+
+  .s14-section-{{ section.id }} {
+    border-top: solid #121212 0px;
+    border-bottom: solid #121212 0px;
+    margin-top: 27px;
+    margin-bottom: 27px;
+    margin-left: 0rem;
+    margin-right: 0rem;
+    border-radius: 17px;
+    overflow: hidden;
+    background-image: {{ section.settings.bg_gradient }};
+  }
+
+  .s14-inner-{{ section.id }} {
+    margin: 0 auto;
+    max-width: var(--page-width);
+    padding-top: 27px;
+    padding-bottom: 27px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    position: relative;
+  }
+
+  .s14-heading-{{ section.id }} {
+    width: 100%;
+    text-align: center;
+  }
+
+  .s14-heading-{{ section.id }} h2 {
+    margin: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: {{ section.settings.heading_color }};
+    line-height: 130%;
+    word-break: break-word;
+  }
+
+  .s14-swiper-{{ section.id }} {
+    display: flex !important;
+    align-items: end !important;
+    position: relative !important;
+    min-height: 480px !important;
+    margin-left: -1.5rem !important;
+    margin-right: -1.5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  .s14-swiper-{{ section.id }} .swiper-wrapper {
+    align-items: end !important;
+  }
+
+  .s14-slide-{{ section.id }} {
+    position: relative !important;
+    box-sizing: border-box !important;
+    transform: translateY(0) !important;
+    transition: transform 0.7s ease 0s !important;
+    text-decoration: none;
+    display: block;
+  }
+
+  .s14-slide-wrap-{{ section.id }} {
+    position: relative;
+    height: 360px !important;
+    border: 0px solid #121212 !important;
+    border-radius: 30px !important;
+    overflow: hidden !important;
+    padding: 30px 0px;
+    transition: all 0.4s ease 0s;
+  }
+
+  .s14-slide-{{ section.id }}.swiper-slide-active {
+    transform: translateY(-60px) !important;
+    transition: transform 0.7s ease 0s !important;
+  }
+
+  .s14-slide-{{ section.id }}.transparent-slide .s14-slide-wrap-{{ section.id }} {
+    opacity: 0.5;
+    transition: all 0.4s ease 0s;
+  }
+
+  .s14-slide-{{ section.id }}.swiper-slide-next {
+    transform: translateY(-30px) !important;
+    transition: transform 0.7s ease 0s !important;
+  }
+
+  .s14-slide-wrap-{{ section.id }} > img,
+  .s14-slide-wrap-{{ section.id }} > svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .s14-slide-wrap-{{ section.id }} > svg {
+    background-color: #AFAFAF;
+  }
+
+  .s14-slide-wrap-{{ section.id }}:after {
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .4));
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .s14-slide-content-{{ section.id }} {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 16px 16px;
+    align-items: center;
+  }
+
+  .s14-slide-content-left-{{ section.id }} {
+    flex: 1 1 auto;
+  }
+
+  .s14-slide-title-{{ section.id }} {
+    margin: 0;
+    text-align: center;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: {{ section.settings.title_color }};
+    line-height: 130%;
+    word-break: break-word;
+    transition: all 0.4s ease 0s;
+  }
+
+  .s14-btn-slide-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: fit-content;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    margin-top: 16px;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: {{ section.settings.btn_text_color }};
+    line-height: 100%;
+    text-align: center;
+    padding: 16px 24px;
+    border-radius: 100px;
+    transition: all 0.25s ease 0s;
+    background-color: {{ section.settings.btn_bg_color }};
+    border: 0px;
+    cursor: pointer;
+    min-width: max-content;
+    text-decoration: none;
+  }
+
+  .s14-btn-slide-{{ section.id }}:hover {
+    background-color: {{ section.settings.btn_bg_hover }};
+    color: {{ section.settings.btn_text_hover }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .s14-btn-slide-inner-{{ section.id }} {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .s14-nav-{{ section.id }} {
+    position: absolute;
+    z-index: 3;
+    display: none;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    justify-content: center;
+    left: 0;
+    bottom: 0px;
+  }
+
+  .s14-prev-{{ section.id }},
+  .s14-next-{{ section.id }} {
+    z-index: 2;
+    display: flex;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border: 1px solid {{ section.settings.nav_border_color }};
+    border-radius: 6px;
+    background: {{ section.settings.nav_bg_color }};
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+
+  .s14-prev-{{ section.id }}:hover,
+  .s14-next-{{ section.id }}:hover {
+    transition: all 0.3s ease 0s;
+    border: 1px solid {{ section.settings.nav_border_color }};
+    background: {{ section.settings.nav_border_color }};
+  }
+
+  .s14-prev-{{ section.id }}:hover .animate-icon,
+  .s14-next-{{ section.id }}:hover .animate-icon {
+    color: {{ section.settings.nav_bg_color }};
+  }
+
+  .s14-prev-{{ section.id }}.swiper-button-disabled,
+  .s14-next-{{ section.id }}.swiper-button-disabled {
+    opacity: 0.5;
+  }
+
+  .s14-prev-{{ section.id }}.swiper-button-lock,
+  .s14-next-{{ section.id }}.swiper-button-lock {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .s14-prev-{{ section.id }} span,
+  .s14-next-{{ section.id }} span {
+    color: {{ section.settings.nav_arrow_color }};
+  }
+
+  .s14-prev-{{ section.id }} .animate-icon,
+  .s14-next-{{ section.id }} .animate-icon {
+    pointer-events: none;
+    place-items: center;
+    display: grid;
+  }
+
+  .s14-next-{{ section.id }} .animate-icon:before {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    box-sizing: border-box;
+    border: 0px;
+    border-right: 2px solid currentColor;
+    border-top: 2px solid currentColor;
+    position: relative;
+    left: -1px;
+  }
+
+  .s14-prev-{{ section.id }} .animate-icon:before {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    box-sizing: border-box;
+    border: 0px;
+    border-bottom: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+    position: relative;
+    right: -1px;
+  }
+
+  .s14-prev-{{ section.id }} .animate-icon:after,
+  .s14-next-{{ section.id }} .animate-icon:after {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease;
+    width: 9.7px;
+    height: 1.6px;
+    transform-origin: center;
+    opacity: 0;
+    background: currentColor;
+    transform: scaleX(.5);
+  }
+
+  .s14-next-{{ section.id }}:hover .animate-icon:before {
+    transform: translate(0.125rem) rotate(45deg);
+  }
+
+  .s14-prev-{{ section.id }}:hover .animate-icon:before {
+    transform: translate(-0.125rem) rotate(45deg);
+  }
+
+  .s14-prev-{{ section.id }}:hover .animate-icon:after,
+  .s14-next-{{ section.id }}:hover .animate-icon:after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  @media(min-width: 1024px) {
+    .s14-section-{{ section.id }} {
+      margin-top: 36px;
+      margin-bottom: 36px;
+      margin-left: 1rem;
+      margin-right: 1rem;
+      border-radius: 28px;
+    }
+
+    .s14-inner-{{ section.id }} {
+      padding-top: 36px;
+      padding-bottom: 36px;
+      padding-left: 0rem;
+      padding-right: 0rem;
+    }
+
+    .s14-heading-{{ section.id }} {
+      text-align: center;
+      margin-left: 0px;
+      margin-right: auto;
+    }
+
+    .s14-heading-{{ section.id }} h2 {
+      font-size: 48px;
+    }
+
+    .s14-swiper-{{ section.id }} {
+      min-height: 550px !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    .s14-slide-wrap-{{ section.id }} {
+      height: 400px !important;
+    }
+
+    .s14-slide-content-{{ section.id }} {
+      padding: 36px 20px;
+      align-items: center;
+    }
+
+    .s14-slide-{{ section.id }}.swiper-slide-active {
+      transform: translateY(-100px) !important;
+      transition: transform 0.7s ease 0s !important;
+    }
+
+    .s14-slide-{{ section.id }}.swiper-slide-next {
+      transform: translateY(-40px) !important;
+      transition: transform 0.7s ease 0s !important;
+    }
+
+    .s14-slide-title-{{ section.id }} {
+      transform: translateY(64px);
+      text-align: center;
+      font-size: 22px;
+    }
+
+    .s14-slide-{{ section.id }}:hover .s14-slide-title-{{ section.id }} {
+      transform: translateY(0);
+      transition: all 0.4s ease 0s;
+    }
+
+    .s14-slide-content-{{ section.id }} .s14-btn-slide-{{ section.id }} {
+      opacity: 0;
+      transition: all 0.3s ease 0s;
+    }
+
+    .s14-slide-{{ section.id }}:hover .s14-slide-content-{{ section.id }} .s14-btn-slide-{{ section.id }} {
+      opacity: 1;
+      transition: all 0.3s ease 0s;
+    }
+
+    .s14-slide-{{ section.id }}:hover .s14-slide-wrap-{{ section.id }} {
+      border-radius: 100px !important;
+      transition: all 0.4s ease 0s;
+    }
+
+    .s14-nav-{{ section.id }} {
+      display: flex;
+      bottom: 30px;
+    }
+
+    .s14-prev-{{ section.id }},
+    .s14-next-{{ section.id }} {
+      width: 50px;
+      height: 50px;
+      transition: all 0.25s ease 0s;
+    }
+
+    .s14-btn-slide-{{ section.id }} {
+      margin-top: 16px;
+      padding: 16px 24px;
+      font-size: 16px;
+    }
+  }
+</style>
+
+<div class="s14-section-{{ section.id }}" style="{% unless section.settings.use_gradient %}background-color: {{ section.settings.bg_color }}; background-image: none;{% endunless %}">
+  <div class="s14-inner-{{ section.id }}">
+
+    {% if section.settings.heading != blank %}
+      <div class="s14-heading-{{ section.id }}">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="s14-swiper-{{ section.id }} swiper">
+      <div class="swiper-wrapper">
+        {% assign min_slides = 9 %}
+        {% assign block_count = section.blocks.size %}
+        {% if block_count > 0 %}
+          {% assign repeat_count = min_slides | divided_by: block_count | plus: 1 %}
+          {% if repeat_count < 2 %}
+            {% assign repeat_count = 2 %}
+          {% endif %}
+        {% else %}
+          {% assign repeat_count = 1 %}
+        {% endif %}
+
+        {% for r in (1..repeat_count) %}
+          {% for block in section.blocks %}
+            {% if block.type == 'slide' %}
+              <{% if block.settings.link != blank %}a href="{{ block.settings.link }}"{% else %}div{% endif %} class="s14-slide-{{ section.id }} swiper-slide" {% if r == 1 %}{{ block.shopify_attributes }}{% endif %}>
+                <div class="s14-slide-wrap-{{ section.id }}">
+                  {% if block.settings.image != blank %}
+                    <img
+                      src="{{ block.settings.image | image_url: width: 800 }}"
+                      srcset="{{ block.settings.image | image_url: width: 375 }} 375w,
+                              {{ block.settings.image | image_url: width: 550 }} 550w,
+                              {{ block.settings.image | image_url: width: 750 }} 750w"
+                      width="{{ block.settings.image.width }}"
+                      height="{{ block.settings.image.height }}"
+                      alt="{{ block.settings.title | escape }}"
+                      loading="lazy">
+                  {% else %}
+                    {{ 'collection-1' | placeholder_svg_tag }}
+                  {% endif %}
+                  <div class="s14-slide-content-{{ section.id }}">
+                    <div class="s14-slide-content-left-{{ section.id }}"></div>
+                    {% if block.settings.title != blank %}
+                      <p class="s14-slide-title-{{ section.id }}">{{ block.settings.title }}</p>
+                    {% endif %}
+                    {% if block.settings.btn_text != blank %}
+                      <div class="s14-btn-slide-{{ section.id }}">
+                        <p class="s14-btn-slide-inner-{{ section.id }}">{{ block.settings.btn_text }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </{% if block.settings.link != blank %}a{% else %}div{% endif %}>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+
+      <div class="s14-nav-{{ section.id }}">
+        <button class="s14-prev-{{ section.id }}" tabindex="0" aria-label="Previous slide">
+          <span class="animate-icon"></span>
+        </button>
+        <button class="s14-next-{{ section.id }}" tabindex="0" aria-label="Next slide">
+          <span class="animate-icon"></span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const slider{{ section.id | replace: '-', '_' }} = new Swiper(".s14-swiper-{{ section.id }}", {
+      speed: 500,
+      centeredSlides: true,
+      loop: true,
+      navigation: {
+        nextEl: '.s14-next-{{ section.id }}',
+        prevEl: '.s14-prev-{{ section.id }}',
+      },
+      on: {
+        slideChange: function () {
+          const activeIndex = this.activeIndex;
+          this.slides.forEach((slide, index) => {
+            slide.classList.remove('transparent-slide');
+            if (index < activeIndex) {
+              slide.classList.add('transparent-slide');
+            }
+          });
+        },
+      },
+      breakpoints: {
+        320: {
+          spaceBetween: 24,
+          slidesPerView: 1.2
+        },
+        768: {
+          spaceBetween: 24,
+          slidesPerView: 2
+        },
+        1024: {
+          spaceBetween: 32,
+          slidesPerView: 3
+        }
+      }
+    });
+  });
+
+  {% if request.design_mode %}
+    document.addEventListener('shopify:section:load', function (event) {
+      if (event.detail.sectionId === '{{ section.id }}') {
+        const slider{{ section.id | replace: '-', '_' }} = new Swiper(".s14-swiper-{{ section.id }}", {
+          speed: 500,
+          centeredSlides: true,
+          loop: true,
+          navigation: {
+            nextEl: '.s14-next-{{ section.id }}',
+            prevEl: '.s14-prev-{{ section.id }}',
+          },
+          on: {
+            slideChange: function () {
+              const activeIndex = this.activeIndex;
+              this.slides.forEach((slide, index) => {
+                slide.classList.remove('transparent-slide');
+                if (index < activeIndex) {
+                  slide.classList.add('transparent-slide');
+                }
+              });
+            },
+          },
+          breakpoints: {
+            320: { spaceBetween: 24, slidesPerView: 1.2 },
+            768: { spaceBetween: 24, slidesPerView: 2 },
+            1024: { spaceBetween: 32, slidesPerView: 3 }
+          }
+        });
+      }
+    });
+  {% endif %}
+</script>
+
+{% schema %}
+{
+  "name": "Slider 14",
+  "tag": "section",
+  "class": "slider-14-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Slider #14"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_gradient",
+      "label": "Use Gradient Background",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient",
+      "label": "Background Gradient CSS",
+      "default": "linear-gradient(46deg, rgba(52, 133, 236, 1) 13%, rgba(170, 248, 219, 1) 86%)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color (if no gradient)",
+      "default": "#3485ec"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Slide Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_hover",
+      "label": "Button Hover Background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_hover",
+      "label": "Button Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_bg_color",
+      "label": "Nav Button Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_border_color",
+      "label": "Nav Button Border",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "nav_arrow_color",
+      "label": "Nav Arrow Color",
+      "default": "#121212"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Button Text",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slider 14",
+      "blocks": [
+        { "type": "slide", "settings": { "title": "Title", "btn_text": "Shop now" } },
+        { "type": "slide", "settings": { "title": "Title", "btn_text": "Shop now" } },
+        { "type": "slide", "settings": { "title": "Title", "btn_text": "Shop now" } },
+        { "type": "slide", "settings": { "title": "Title", "btn_text": "Shop now" } },
+        { "type": "slide", "settings": { "title": "Title", "btn_text": "Shop now" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

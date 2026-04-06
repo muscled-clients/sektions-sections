@@ -1,0 +1,442 @@
+{{ 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' | stylesheet_tag }}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+  .ft15v3-section-{{ section.id }} {
+    margin: 0;
+    border-radius: 0px;
+    overflow: hidden;
+    background-color: {{ section.settings.bg_color }};
+    {% if section.settings.use_gradient %}background-image: {{ section.settings.bg_gradient }};{% endif %}
+  }
+
+  .ft15v3-inner-{{ section.id }} {
+    margin: 0 auto;
+    max-width: 120rem;
+    padding: 27px 1.5rem;
+  }
+
+  .ft15v3-heading-{{ section.id }} { text-align: center; }
+  .ft15v3-heading-{{ section.id }} h2 {
+    margin: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: {{ section.settings.heading_color }};
+    line-height: 130%;
+  }
+
+  /* Thumbs */
+  .ft15v3-thumbs-{{ section.id }} {
+    margin-top: 24px !important;
+    border-radius: 0px;
+    border: 0px solid transparent;
+    overflow: hidden !important;
+  }
+
+  .ft15v3-thumb-{{ section.id }} {
+    width: calc(100% / {{ section.blocks.size }}) !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    margin: 0;
+    background-color: {{ section.settings.thumb_bg }};
+    text-decoration: none;
+    padding: 10px 14px !important;
+    transition: all 0.25s ease 0s;
+    box-sizing: border-box !important;
+    cursor: pointer;
+  }
+
+  .ft15v3-thumb-{{ section.id }}:hover {
+    background-color: {{ section.settings.thumb_hover_bg }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .ft15v3-thumb-{{ section.id }}.swiper-slide-thumb-active {
+    background-color: {{ section.settings.thumb_active_bg }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .ft15v3-thumb-icon-{{ section.id }} { flex: 0 0 24px; }
+  .ft15v3-thumb-icon-{{ section.id }} img,
+  .ft15v3-thumb-icon-{{ section.id }} svg {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+  }
+
+  .ft15v3-thumb-icon-{{ section.id }} svg path {
+    transition: all 0.25s ease 0s;
+    fill: {{ section.settings.icon_color }};
+  }
+
+  .ft15v3-thumb-{{ section.id }}.swiper-slide-thumb-active .ft15v3-thumb-icon-{{ section.id }} svg path {
+    fill: {{ section.settings.thumb_active_text }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .ft15v3-thumb-text-{{ section.id }} {
+    display: none;
+    margin: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: {{ section.settings.icon_color }};
+    line-height: 100%;
+    transition: all 0.25s ease 0s;
+  }
+
+  .ft15v3-thumb-{{ section.id }}:hover .ft15v3-thumb-text-{{ section.id }} {
+    color: {{ section.settings.icon_color }};
+  }
+
+  .ft15v3-thumb-{{ section.id }}.swiper-slide-thumb-active .ft15v3-thumb-text-{{ section.id }} {
+    color: {{ section.settings.thumb_active_text }};
+    transition: all 0.25s ease 0s;
+  }
+
+  /* Slider */
+  .ft15v3-slider-wrap-{{ section.id }} { margin-top: 40px; position: relative; }
+  .ft15v3-slide-{{ section.id }} { box-sizing: border-box !important; }
+
+  .ft15v3-slide-img-wrap-{{ section.id }} {
+    margin-top: 20px;
+    border-radius: 0px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 12/10;
+  }
+
+  .ft15v3-slide-img-wrap-{{ section.id }} img,
+  .ft15v3-slide-img-wrap-{{ section.id }} svg {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+  }
+
+  .ft15v3-slide-img-wrap-{{ section.id }} svg { background-color: #AFAFAF; }
+
+  .ft15v3-subheading-{{ section.id }} {
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: {{ section.settings.subheading_color }};
+    line-height: 130%;
+  }
+
+  .ft15v3-text-{{ section.id }} { margin-top: 16px; text-align: left; }
+  .ft15v3-text-{{ section.id }} * {
+    margin: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: {{ section.settings.text_color }};
+    line-height: 170%;
+  }
+
+  .ft15v3-text-{{ section.id }} li:not(:first-child) { margin-top: 10px; }
+
+  .ft15v3-text-{{ section.id }} ul { padding: 0px; text-decoration: none; }
+
+  {% if section.settings.check_icon != blank %}
+  .ft15v3-text-{{ section.id }} li:before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('{{ section.settings.check_icon | image_url: width: 48 }}');
+    margin-right: 5px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  {% endif %}
+
+  /* No nav buttons */
+  .ft15v3-prev-{{ section.id }},
+  .ft15v3-next-{{ section.id }} { display: none; }
+
+  .ft15v3-desktop-{{ section.id }} { display: none !important; }
+
+  @media(min-width: 1024px) {
+    .ft15v3-inner-{{ section.id }} { padding: 36px 10rem; }
+    .ft15v3-heading-{{ section.id }} { text-align: left; }
+    .ft15v3-heading-{{ section.id }} h2 { font-size: 54px; }
+    .ft15v3-thumbs-{{ section.id }} { margin-top: 0px !important; }
+    .ft15v3-thumb-text-{{ section.id }} { display: block; }
+    .ft15v3-slider-wrap-{{ section.id }} { margin-top: 40px; }
+
+    .ft15v3-slide-{{ section.id }} {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .ft15v3-slide-img-wrap-{{ section.id }} { margin-top: 0; }
+    .ft15v3-subheading-{{ section.id }} { margin-top: 20px; text-align: left; font-size: 32px; }
+    .ft15v3-text-{{ section.id }} { margin-top: 16px; text-align: left; }
+
+    .ft15v3-text-{{ section.id }} li:before { width: 24px; height: 24px; }
+
+    .ft15v3-mobile-{{ section.id }} { display: none !important; }
+    .ft15v3-desktop-{{ section.id }} { display: block !important; }
+    .ft15v3-content-{{ section.id }} { order: 1; }
+    .ft15v3-image-{{ section.id }} { order: 2; }
+  }
+</style>
+
+<div class="ft15v3-section-{{ section.id }}">
+  <div class="ft15v3-inner-{{ section.id }}">
+
+    {%- if section.settings.heading != blank -%}
+      <div class="ft15v3-heading-{{ section.id }} ft15v3-mobile-{{ section.id }}">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="ft15v3-thumbs-{{ section.id }} swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="ft15v3-thumb-{{ section.id }} swiper-slide" {{ block.shopify_attributes }}>
+            <div class="ft15v3-thumb-icon-{{ section.id }}">
+              {%- if block.settings.icon != blank -%}
+                <img src="{{ block.settings.icon | image_url: width: 48 }}" alt="{{ block.settings.tab_label | escape }}" loading="lazy" width="24" height="24">
+              {%- else -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.tab_label != blank -%}
+              <p class="ft15v3-thumb-text-{{ section.id }}">{{ block.settings.tab_label }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="ft15v3-slider-wrap-{{ section.id }}">
+      <div class="ft15v3-main-{{ section.id }} swiper">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="ft15v3-slide-{{ section.id }} swiper-slide" {{ block.shopify_attributes }}>
+              <div class="ft15v3-content-{{ section.id }}">
+                {%- if section.settings.heading != blank -%}
+                  <div class="ft15v3-heading-{{ section.id }} ft15v3-desktop-{{ section.id }}">
+                    <h2>{{ section.settings.heading }}</h2>
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.subheading != blank -%}
+                  <p class="ft15v3-subheading-{{ section.id }} ft15v3-desktop-{{ section.id }}">{{ block.settings.subheading }}</p>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="ft15v3-text-{{ section.id }} ft15v3-desktop-{{ section.id }}">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+              <div class="ft15v3-image-{{ section.id }}">
+                {%- if block.settings.subheading != blank -%}
+                  <p class="ft15v3-subheading-{{ section.id }} ft15v3-mobile-{{ section.id }}">{{ block.settings.subheading }}</p>
+                {%- endif -%}
+                <div class="ft15v3-slide-img-wrap-{{ section.id }}">
+                  {%- if block.settings.image != blank -%}
+                    <img src="{{ block.settings.image | image_url: width: 800 }}" srcset="{{ block.settings.image | image_url: width: 375 }} 375w, {{ block.settings.image | image_url: width: 550 }} 550w, {{ block.settings.image | image_url: width: 750 }} 750w, {{ block.settings.image | image_url: width: 1000 }} 1000w" alt="{{ block.settings.subheading | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag }}
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.text != blank -%}
+                  <div class="ft15v3-text-{{ section.id }} ft15v3-mobile-{{ section.id }}">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+(function(){
+  var sid='{{ section.id }}';
+  function init(){
+    var tEl=document.querySelector('.ft15v3-thumbs-'+sid);
+    var mEl=document.querySelector('.ft15v3-main-'+sid);
+    if(!tEl||!mEl)return;
+    var tS=new Swiper(tEl,{slidesPerView:'auto',threshold:2,direction:'horizontal',watchSlidesProgress:true,slideToClickedSlide:true});
+    setTimeout(function(){
+      var mS=new Swiper(mEl,{speed:300,spaceBetween:20,effect:'fade',fadeEffect:{crossFade:true},loop:true,autoHeight:true,watchOverflow:true,thumbs:{swiper:tS}});
+      tEl.querySelectorAll('.swiper-slide').forEach(function(s,i){s.addEventListener('click',function(){mS.slideTo(i)})});
+    },100);
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init)}else{init()}
+  {% if request.design_mode %}
+  document.addEventListener('shopify:section:load',function(e){if(e.detail.sectionId===sid)init()});
+  {% endif %}
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Feature 15 V3",
+  "tag": "section",
+  "class": "feature-15-v3-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What makes it special?"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#bdc6a8"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_gradient",
+      "label": "Use Gradient Background",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "bg_gradient",
+      "label": "Background Gradient CSS",
+      "default": "linear-gradient(180deg, rgba(189, 198, 168, 1) 6%, rgba(251, 250, 232, 1) 100%)"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#283934"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#283934"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#283934"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon/Tab Text Color",
+      "default": "#283934"
+    },
+    {
+      "type": "color",
+      "id": "thumb_bg",
+      "label": "Tab Background",
+      "default": "#fff7f0"
+    },
+    {
+      "type": "color",
+      "id": "thumb_hover_bg",
+      "label": "Tab Hover Background",
+      "default": "#e6d5bd"
+    },
+    {
+      "type": "color",
+      "id": "thumb_active_bg",
+      "label": "Tab Active Background",
+      "default": "#75857d"
+    },
+    {
+      "type": "color",
+      "id": "thumb_active_text",
+      "label": "Tab Active Text/Icon",
+      "default": "#fff7f0"
+    },
+    {
+      "type": "image_picker",
+      "id": "check_icon",
+      "label": "List Check Icon (optional)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Tab Icon (24x24)"
+        },
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab Label",
+          "default": "Feature"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Feature Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<ul><li>First feature point here</li><li>Second feature point here</li></ul>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature 15 V3",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "tab_label": "Camping Essential",
+            "subheading": "Camping Essential",
+            "text": "<ul><li>Single serving or feeding a crowd, we have the ideal set for you</li><li>Curated collections boast space-saving designs and durable materials</li></ul>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "tab_label": "Versatile",
+            "subheading": "Versatile",
+            "text": "<ul><li>Built to withstand the elements for even heat distribution</li><li>Simmer stews, sear steaks, or boil water – cook anything you desire</li></ul>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "tab_label": "Lightweight",
+            "subheading": "Lightweight",
+            "text": "<ul><li>Ultralight: compact, powerful, and efficient</li><li>Enjoy gourmet camp cuisine without adding unnecessary weight</li></ul>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "tab_label": "Travel Ready",
+            "subheading": "Travel Ready",
+            "text": "<ul><li>Perfect for those spontaneous picnics in the countryside</li><li>Camping on the beach and summer festivals</li></ul>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

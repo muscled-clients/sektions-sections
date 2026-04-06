@@ -1,0 +1,673 @@
+{% comment %}
+  Scrolling Videos Section
+  - Infinite horizontal marquee of video thumbnail cards
+  - Gradient border cards with play button overlay
+  - Click to open video in modal popup
+  - Hover to pause scrolling & lift card
+  - Fully scoped per section instance (independent settings)
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+<div id="section-{{ sid }}" class="sv-section">
+  <div class="sv-section__inner">
+    <div class="sv-marquee" data-section-id="{{ sid }}">
+      {%- for i in (1..5) -%}
+        <div class="sv-marquee__list" aria-hidden="{% if i > 1 %}true{% else %}false{% endif %}">
+          {%- for block in section.blocks -%}
+            <div class="sv-card" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+              <div class="sv-card__media">
+                {%- if block.settings.thumbnail != blank -%}
+                  <img
+                    src="{{ block.settings.thumbnail | image_url: width: 480 }}"
+                    alt="{{ block.settings.thumbnail.alt | escape }}"
+                    loading="lazy"
+                    width="480"
+                    height="{{ 480 | divided_by: block.settings.thumbnail.aspect_ratio | round }}"
+                  >
+                {%- else -%}
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'sv-card__placeholder' }}
+                {%- endif -%}
+              </div>
+              <button class="sv-card__play" aria-label="Play video">
+                <svg xmlns="http://www.w3.org/2000/svg" width="67" height="68" viewBox="0 0 67 68" fill="none">
+                  <circle cx="33.4857" cy="33.9598" r="31.6009" stroke="currentColor" stroke-width="3"/>
+                  <path d="M47.0352 33.9592L26.7102 45.6938L26.7102 22.2245L47.0352 33.9592Z" fill="currentColor"/>
+                </svg>
+              </button>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- for block in section.blocks -%}
+    <div class="sv-modal" data-modal-id="{{ block.id }}" aria-hidden="true">
+      <div class="sv-modal__inner">
+        {%- if block.settings.video_url != blank -%}
+          {%- assign video_url = block.settings.video_url -%}
+          {%- if video_url contains 'youtube.com' or video_url contains 'youtu.be' -%}
+            {%- if video_url contains 'youtu.be' -%}
+              {%- assign yt_id = video_url | split: 'youtu.be/' | last | split: '?' | first -%}
+            {%- else -%}
+              {%- assign yt_id = video_url | split: 'v=' | last | split: '&' | first -%}
+            {%- endif -%}
+            <iframe
+              data-src="https://www.youtube.com/embed/{{ yt_id }}?autoplay=1&mute=1&loop=1&playlist={{ yt_id }}"
+              data-src-empty="about:blank"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+            ></iframe>
+          {%- elsif video_url contains 'vimeo.com' -%}
+            {%- assign vimeo_id = video_url | split: 'vimeo.com/' | last | split: '?' | first -%}
+            <iframe
+              data-src="https://player.vimeo.com/video/{{ vimeo_id }}?autoplay=1&muted=1&loop=1"
+              data-src-empty="about:blank"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+            ></iframe>
+          {%- else -%}
+            <video data-src="{{ video_url }}" playsinline preload="none" loop></video>
+          {%- endif -%}
+        {%- elsif block.settings.video_file != blank -%}
+          {%- for source in block.settings.video_file.sources -%}
+            {%- if source.mime_type contains 'mp4' -%}
+              <video data-src="{{ source.url }}" playsinline preload="none" loop></video>
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        <button class="sv-modal__close" aria-label="Close video">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  {%- endfor -%}
+</div>
+
+<style>
+  /* ===== UNIQUE KEYFRAMES FOR THIS SECTION ===== */
+  @keyframes sv-scroll-left-{{ sid }} {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
+  @keyframes sv-scroll-right-{{ sid }} {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+  }
+
+  /* ===== ALL STYLES SCOPED TO #section-{{ sid }} ===== */
+  #section-{{ sid }}.sv-section {
+    background-color: {{ section.settings.bg_color }};
+    overflow: hidden;
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+  }
+
+  #section-{{ sid }} .sv-section__inner {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  #section-{{ sid }} .sv-marquee {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: {{ section.settings.gap }}px;
+    position: relative;
+  }
+
+  #section-{{ sid }} .sv-marquee__list {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: {{ section.settings.gap }}px;
+    white-space: nowrap;
+    animation: sv-scroll-{{ section.settings.scroll_direction }}-{{ sid }} {{ section.settings.speed_mobile }}s linear infinite;
+  }
+
+  #section-{{ sid }} .sv-marquee:hover .sv-marquee__list {
+    animation-play-state: paused;
+  }
+
+  #section-{{ sid }} .sv-card {
+    position: relative;
+    flex-shrink: 0;
+    width: {{ section.settings.card_width_mobile }}px;
+    aspect-ratio: {{ section.settings.aspect_ratio_w }} / {{ section.settings.aspect_ratio_h }};
+    padding: {{ section.settings.border_size }}px;
+    background: linear-gradient({{ section.settings.gradient_angle }}deg, {{ section.settings.gradient_start }}{% if section.settings.gradient_mid != blank %}, {{ section.settings.gradient_mid }}{% endif %}, {{ section.settings.gradient_end }});
+    border-radius: {{ section.settings.border_radius }}px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+  }
+
+  #section-{{ sid }} .sv-card:hover {
+    transform: translateY(-10px);
+  }
+
+  #section-{{ sid }} .sv-card__media {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: {{ section.settings.border_radius | minus: section.settings.border_size }}px;
+  }
+
+  #section-{{ sid }} .sv-card__media img,
+  #section-{{ sid }} .sv-card__media svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0;
+  }
+
+  #section-{{ sid }} .sv-card__placeholder {
+    background-color: #ababab;
+  }
+
+  #section-{{ sid }} .sv-card__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 52px;
+    height: 52px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: {{ section.settings.play_btn_color }};
+    pointer-events: none;
+  }
+
+  #section-{{ sid }} .sv-card__play svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ===== MODAL ===== */
+  #section-{{ sid }} .sv-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background-color: rgba(0,0,0,0.4);
+    padding: 10px;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  #section-{{ sid }} .sv-modal.active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 9999;
+  }
+
+  #section-{{ sid }} .sv-modal__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-height: 70vh;
+    width: 96%;
+    aspect-ratio: {{ section.settings.aspect_ratio_w }} / {{ section.settings.aspect_ratio_h }};
+  }
+
+  #section-{{ sid }} .sv-modal__inner video,
+  #section-{{ sid }} .sv-modal__inner iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    border-radius: 24px;
+    box-shadow: none;
+  }
+
+  #section-{{ sid }} .sv-modal__close {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12px;
+    background-color: {{ section.settings.close_btn_bg }};
+    color: {{ section.settings.close_btn_color }};
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    z-index: 2;
+  }
+
+  #section-{{ sid }} .sv-modal__close svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+
+  /* ===== DESKTOP ===== */
+  @media (min-width: 1024px) {
+    #section-{{ sid }} .sv-section__inner {
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+
+    #section-{{ sid }} .sv-marquee__list {
+      animation-duration: {{ section.settings.speed_desktop }}s;
+    }
+
+    #section-{{ sid }} .sv-card {
+      width: {{ section.settings.card_width_desktop }}px;
+    }
+
+    #section-{{ sid }} .sv-card__play {
+      width: 56px;
+      height: 56px;
+    }
+
+    #section-{{ sid }} .sv-modal__inner {
+      width: 66%;
+    }
+
+    #section-{{ sid }} .sv-modal__close {
+      position: absolute;
+      margin: 0;
+      top: 12px;
+      right: -12px;
+      left: unset;
+      transform: translateX(-50%);
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const sectionId = '{{ sid }}';
+    const section = document.getElementById('section-' + sectionId);
+    if (!section) return;
+
+    function init() {
+      section.querySelectorAll('.sv-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const blockId = card.getAttribute('data-block-id');
+          const modal = section.querySelector('.sv-modal[data-modal-id="' + blockId + '"]');
+          if (!modal) return;
+
+          modal.classList.add('active');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+
+          const video = modal.querySelector('video');
+          const iframe = modal.querySelector('iframe');
+
+          if (video) {
+            const src = video.getAttribute('data-src');
+            if (src && !video.src) video.src = src;
+            video.play();
+          }
+
+          if (iframe) {
+            const src = iframe.getAttribute('data-src');
+            if (src) iframe.src = src;
+          }
+        });
+      });
+
+      section.querySelectorAll('.sv-modal__close').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          closeModal(btn.closest('.sv-modal'));
+        });
+      });
+
+      section.querySelectorAll('.sv-modal').forEach(modal => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            closeModal(modal);
+          }
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const activeModal = section.querySelector('.sv-modal.active');
+          if (activeModal) closeModal(activeModal);
+        }
+      });
+    }
+
+    function closeModal(modal) {
+      if (!modal) return;
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      const video = modal.querySelector('video');
+      const iframe = modal.querySelector('iframe');
+
+      if (video) video.pause();
+      if (iframe) iframe.src = 'about:blank';
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    if (typeof Shopify !== 'undefined' && Shopify.designMode) {
+      document.addEventListener('shopify:section:load', (e) => {
+        if (e.detail.sectionId === sectionId) init();
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Scrolling Videos",
+  "tag": "section",
+  "class": "scrolling-videos-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Style"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Section Label",
+      "default": "Scrolling Videos",
+      "info": "For your reference only — helps identify this section in the editor"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fff9ed"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding Top (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Padding Top (Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Padding Bottom (Desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 52,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Card Settings"
+    },
+    {
+      "type": "range",
+      "id": "card_width_mobile",
+      "label": "Card Width (Mobile)",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "default": 240,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "card_width_desktop",
+      "label": "Card Width (Desktop)",
+      "min": 150,
+      "max": 500,
+      "step": 10,
+      "default": 260,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap Between Cards",
+      "min": 8,
+      "max": 64,
+      "step": 4,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_size",
+      "label": "Border Size",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border Radius",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 16,
+      "unit": "px",
+      "info": "Set to 200 for fully circular cards"
+    },
+    {
+      "type": "range",
+      "id": "gradient_angle",
+      "label": "Gradient Angle",
+      "min": 0,
+      "max": 360,
+      "step": 10,
+      "default": 90,
+      "unit": "deg"
+    },
+    {
+      "type": "color",
+      "id": "gradient_start",
+      "label": "Gradient Start Color",
+      "default": "#e8ad23"
+    },
+    {
+      "type": "color",
+      "id": "gradient_mid",
+      "label": "Gradient Middle Color (Optional)",
+      "info": "Leave empty for 2-color gradient"
+    },
+    {
+      "type": "color",
+      "id": "gradient_end",
+      "label": "Gradient End Color",
+      "default": "#f8e233"
+    },
+    {
+      "type": "header",
+      "content": "Aspect Ratio"
+    },
+    {
+      "type": "range",
+      "id": "aspect_ratio_w",
+      "label": "Width Ratio",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 9
+    },
+    {
+      "type": "range",
+      "id": "aspect_ratio_h",
+      "label": "Height Ratio",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Scrolling Settings"
+    },
+    {
+      "type": "select",
+      "id": "scroll_direction",
+      "label": "Scroll Direction",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "speed_mobile",
+      "label": "Speed Mobile (seconds)",
+      "min": 20,
+      "max": 300,
+      "step": 10,
+      "default": 100,
+      "unit": "s"
+    },
+    {
+      "type": "range",
+      "id": "speed_desktop",
+      "label": "Speed Desktop (seconds)",
+      "min": 20,
+      "max": 300,
+      "step": 10,
+      "default": 140,
+      "unit": "s"
+    },
+    {
+      "type": "header",
+      "content": "Modal Settings"
+    },
+    {
+      "type": "color",
+      "id": "close_btn_bg",
+      "label": "Close Button Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "close_btn_color",
+      "label": "Close Button Icon Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "play_btn_color",
+      "label": "Play Button Color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Thumbnail Image"
+        },
+        {
+          "type": "video",
+          "id": "video_file",
+          "label": "Video File (Shopify Hosted)"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (YouTube / Vimeo / MP4)",
+          "info": "Use this OR the Video File above. Supports YouTube, Vimeo, and direct MP4 links."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling Videos",
+      "blocks": [
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" },
+        { "type": "video" }
+      ]
+    }
+  ]
+}
+{% endschema %}

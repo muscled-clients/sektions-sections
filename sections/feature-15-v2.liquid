@@ -1,0 +1,606 @@
+{{ 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' | stylesheet_tag }}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+  .ft15v2-section-{{ section.id }} {
+    margin: 0;
+    border-radius: 0px;
+    overflow: hidden;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  .ft15v2-inner-{{ section.id }} {
+    margin: 0 auto;
+    max-width: 120rem;
+    padding: 27px 1.5rem;
+  }
+
+  .ft15v2-heading-{{ section.id }} {
+    text-align: center;
+  }
+
+  .ft15v2-heading-{{ section.id }} h2 {
+    margin: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: {{ section.settings.heading_color }};
+    line-height: 130%;
+  }
+
+  /* Thumbs */
+  .ft15v2-thumbs-{{ section.id }} {
+    margin-top: 24px !important;
+    border-radius: 6px;
+    border: 0px solid transparent;
+    overflow: hidden !important;
+  }
+
+  .ft15v2-thumb-{{ section.id }} {
+    width: calc(100% / {{ section.blocks.size }}) !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    margin: 0;
+    background-color: {{ section.settings.thumb_bg }};
+    text-decoration: none;
+    padding: 10px 14px !important;
+    transition: all 0.25s ease 0s;
+    box-sizing: border-box !important;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .ft15v2-thumb-{{ section.id }}:hover {
+    background-color: {{ section.settings.thumb_hover_bg }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .ft15v2-thumb-{{ section.id }}.swiper-slide-thumb-active {
+    background-color: {{ section.settings.thumb_active_bg }};
+    color: {{ section.settings.thumb_active_text }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .ft15v2-thumb-icon-{{ section.id }} {
+    flex: 0 0 24px;
+  }
+
+  .ft15v2-thumb-icon-{{ section.id }} img,
+  .ft15v2-thumb-icon-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ft15v2-thumb-icon-{{ section.id }} svg path {
+    transition: all 0.25s ease 0s;
+    fill: {{ section.settings.icon_color }};
+  }
+
+  .ft15v2-thumb-{{ section.id }}:hover .ft15v2-thumb-icon-{{ section.id }} svg path {
+    fill: {{ section.settings.icon_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .ft15v2-thumb-{{ section.id }}.swiper-slide-thumb-active .ft15v2-thumb-icon-{{ section.id }} svg path {
+    fill: {{ section.settings.thumb_active_text }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .ft15v2-thumb-text-{{ section.id }} {
+    display: none;
+    margin: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: {{ section.settings.icon_color }};
+    line-height: 100%;
+    transition: all 0.25s ease 0s;
+  }
+
+  .ft15v2-thumb-{{ section.id }}:hover .ft15v2-thumb-text-{{ section.id }} {
+    color: {{ section.settings.icon_color }};
+    transition: all 0.25s ease 0s;
+  }
+
+  .ft15v2-thumb-{{ section.id }}.swiper-slide-thumb-active .ft15v2-thumb-text-{{ section.id }} {
+    color: {{ section.settings.thumb_active_text }};
+    transition: all 0.25s ease 0s;
+  }
+
+  /* Main slider */
+  .ft15v2-slider-wrap-{{ section.id }} {
+    margin-top: 40px;
+    position: relative;
+  }
+
+  .ft15v2-slide-{{ section.id }} {
+    box-sizing: border-box !important;
+  }
+
+  .ft15v2-slide-img-wrap-{{ section.id }} {
+    margin-top: 20px;
+    border-radius: {{ section.settings.image_radius }}px;
+    border: 0px solid #000;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 1/1;
+  }
+
+  .ft15v2-slide-img-wrap-{{ section.id }} img,
+  .ft15v2-slide-img-wrap-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ft15v2-slide-img-wrap-{{ section.id }} svg {
+    background-color: #AFAFAF;
+  }
+
+  .ft15v2-subheading-{{ section.id }} {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: {{ section.settings.subheading_color }};
+    line-height: 130%;
+  }
+
+  .ft15v2-text-{{ section.id }} {
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  .ft15v2-text-{{ section.id }} * {
+    margin: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: {{ section.settings.text_color }};
+    line-height: 170%;
+  }
+
+  .ft15v2-text-{{ section.id }} li:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  /* Nav */
+  .ft15v2-prev-{{ section.id }},
+  .ft15v2-next-{{ section.id }} {
+    position: absolute;
+    z-index: 2;
+    top: 35%;
+    transform: translateY(-50%);
+    display: flex;
+    width: 48px;
+    height: 48px;
+    border: 1px solid {{ section.settings.nav_color }};
+    border-radius: 50%;
+    background: {{ section.settings.bg_color }};
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    -webkit-appearance: none;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.15);
+  }
+
+  .ft15v2-prev-{{ section.id }}:hover,
+  .ft15v2-next-{{ section.id }}:hover {
+    background: {{ section.settings.nav_hover_bg }};
+    border: 1px solid {{ section.settings.nav_color }};
+    transition: all 0.3s ease 0s;
+  }
+
+  .ft15v2-prev-{{ section.id }} { left: 10px !important; }
+  .ft15v2-next-{{ section.id }} { right: 10px !important; }
+
+  .ft15v2-prev-{{ section.id }} span,
+  .ft15v2-next-{{ section.id }} span {
+    color: {{ section.settings.nav_color }};
+    transition: all 0.3s ease 0s;
+  }
+
+  .ft15v2-prev-{{ section.id }}.swiper-button-disabled,
+  .ft15v2-next-{{ section.id }}.swiper-button-disabled {
+    opacity: 0;
+  }
+
+  .ft15v2-prev-{{ section.id }} .animate-icon,
+  .ft15v2-next-{{ section.id }} .animate-icon {
+    pointer-events: none;
+    place-items: center;
+    display: grid;
+  }
+
+  .ft15v2-next-{{ section.id }} .animate-icon:before {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease-in-out;
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+    box-sizing: border-box;
+    border: 0px;
+    border-right: 2px solid currentColor;
+    border-top: 2px solid currentColor;
+    position: relative;
+    left: -1px;
+  }
+
+  .ft15v2-prev-{{ section.id }} .animate-icon:before {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease-in-out;
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+    box-sizing: border-box;
+    border: 0px;
+    border-bottom: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+    position: relative;
+    right: -1px;
+  }
+
+  .ft15v2-prev-{{ section.id }} .animate-icon:after,
+  .ft15v2-next-{{ section.id }} .animate-icon:after {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease-in-out;
+    width: 7.7px;
+    height: 1.6px;
+    transform-origin: center;
+    opacity: 0;
+    background: currentColor;
+    transform: scaleX(.5);
+  }
+
+  .ft15v2-next-{{ section.id }}:hover .animate-icon:before {
+    transform: translate(0.125rem) rotate(45deg);
+  }
+
+  .ft15v2-prev-{{ section.id }}:hover .animate-icon:before {
+    transform: translate(-0.125rem) rotate(45deg);
+  }
+
+  .ft15v2-prev-{{ section.id }}:hover .animate-icon:after,
+  .ft15v2-next-{{ section.id }}:hover .animate-icon:after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .ft15v2-desktop-{{ section.id }} { display: none !important; }
+
+  @media(min-width: 1024px) {
+    .ft15v2-inner-{{ section.id }} {
+      padding: 36px 10rem;
+    }
+
+    .ft15v2-heading-{{ section.id }} {
+      text-align: left;
+    }
+
+    .ft15v2-heading-{{ section.id }} h2 {
+      font-size: 54px;
+    }
+
+    .ft15v2-thumbs-{{ section.id }} {
+      margin-top: 0px !important;
+    }
+
+    .ft15v2-thumb-text-{{ section.id }} {
+      display: block;
+    }
+
+    .ft15v2-slider-wrap-{{ section.id }} {
+      margin-top: 40px;
+    }
+
+    .ft15v2-slide-{{ section.id }} {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .ft15v2-slide-img-wrap-{{ section.id }} {
+      margin-top: 0;
+    }
+
+    .ft15v2-subheading-{{ section.id }} {
+      margin-top: 20px;
+      text-align: left;
+      font-size: 32px;
+    }
+
+    .ft15v2-text-{{ section.id }} {
+      margin-top: 16px;
+      text-align: left;
+    }
+
+    .ft15v2-prev-{{ section.id }},
+    .ft15v2-next-{{ section.id }} {
+      width: 48px;
+      height: 48px;
+      top: 50%;
+      transition: all 0.25s ease 0s;
+    }
+
+    .ft15v2-prev-{{ section.id }}.swiper-button-disabled,
+    .ft15v2-next-{{ section.id }}.swiper-button-disabled {
+      opacity: 0 !important;
+    }
+
+    .ft15v2-prev-{{ section.id }} { left: -9rem !important; }
+    .ft15v2-next-{{ section.id }} { right: -9rem !important; }
+
+    .ft15v2-mobile-{{ section.id }} { display: none !important; }
+    .ft15v2-desktop-{{ section.id }} { display: block !important; }
+
+    .ft15v2-content-{{ section.id }} { order: 1; }
+    .ft15v2-image-{{ section.id }} { order: 2; }
+  }
+</style>
+
+<div class="ft15v2-section-{{ section.id }}">
+  <div class="ft15v2-inner-{{ section.id }}">
+
+    {%- if section.settings.heading != blank -%}
+      <div class="ft15v2-heading-{{ section.id }} ft15v2-mobile-{{ section.id }}">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <!-- Thumbs -->
+    <div class="ft15v2-thumbs-{{ section.id }} swiper">
+      <div class="swiper-wrapper">
+        {%- for block in section.blocks -%}
+          <div class="ft15v2-thumb-{{ section.id }} swiper-slide" {{ block.shopify_attributes }}>
+            <div class="ft15v2-thumb-icon-{{ section.id }}">
+              {%- if block.settings.icon != blank -%}
+                <img src="{{ block.settings.icon | image_url: width: 48 }}" alt="{{ block.settings.tab_label | escape }}" loading="lazy" width="24" height="24">
+              {%- else -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.tab_label != blank -%}
+              <p class="ft15v2-thumb-text-{{ section.id }}">{{ block.settings.tab_label }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Main Slider -->
+    <div class="ft15v2-slider-wrap-{{ section.id }}">
+      <div class="ft15v2-main-{{ section.id }} swiper">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="ft15v2-slide-{{ section.id }} swiper-slide" {{ block.shopify_attributes }}>
+              <div class="ft15v2-content-{{ section.id }}">
+                {%- if section.settings.heading != blank -%}
+                  <div class="ft15v2-heading-{{ section.id }} ft15v2-desktop-{{ section.id }}">
+                    <h2>{{ section.settings.heading }}</h2>
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.subheading != blank -%}
+                  <p class="ft15v2-subheading-{{ section.id }} ft15v2-desktop-{{ section.id }}">{{ block.settings.subheading }}</p>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="ft15v2-text-{{ section.id }} ft15v2-desktop-{{ section.id }}">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+              <div class="ft15v2-image-{{ section.id }}">
+                {%- if block.settings.subheading != blank -%}
+                  <p class="ft15v2-subheading-{{ section.id }} ft15v2-mobile-{{ section.id }}">{{ block.settings.subheading }}</p>
+                {%- endif -%}
+                <div class="ft15v2-slide-img-wrap-{{ section.id }}">
+                  {%- if block.settings.image != blank -%}
+                    <img src="{{ block.settings.image | image_url: width: 800 }}" srcset="{{ block.settings.image | image_url: width: 375 }} 375w, {{ block.settings.image | image_url: width: 550 }} 550w, {{ block.settings.image | image_url: width: 750 }} 750w, {{ block.settings.image | image_url: width: 1000 }} 1000w" alt="{{ block.settings.subheading | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag }}
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.text != blank -%}
+                  <div class="ft15v2-text-{{ section.id }} ft15v2-mobile-{{ section.id }}">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      <button class="ft15v2-prev-{{ section.id }}" tabindex="0" aria-label="Previous slide"><span class="animate-icon"></span></button>
+      <button class="ft15v2-next-{{ section.id }}" tabindex="0" aria-label="Next slide"><span class="animate-icon"></span></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+(function(){
+  var sid = '{{ section.id }}';
+  function init(){
+    var tEl = document.querySelector('.ft15v2-thumbs-'+sid);
+    var mEl = document.querySelector('.ft15v2-main-'+sid);
+    if(!tEl||!mEl) return;
+    var tS = new Swiper(tEl,{slidesPerView:'auto',threshold:2,direction:'horizontal',watchSlidesProgress:true,slideToClickedSlide:true});
+    setTimeout(function(){
+      var mS = new Swiper(mEl,{speed:300,spaceBetween:20,effect:'fade',fadeEffect:{crossFade:true},loop:true,autoHeight:true,watchOverflow:true,navigation:{nextEl:'.ft15v2-next-'+sid,prevEl:'.ft15v2-prev-'+sid},thumbs:{swiper:tS}});
+      tEl.querySelectorAll('.swiper-slide').forEach(function(s,i){s.addEventListener('click',function(){mS.slideTo(i)})});
+    },100);
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init)}else{init()}
+  {% if request.design_mode %}
+  document.addEventListener('shopify:section:load',function(e){if(e.detail.sectionId===sid)init()});
+  {% endif %}
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Feature 15 V2",
+  "tag": "section",
+  "class": "feature-15-v2-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What makes it special?"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fcfaf8"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#d0b38c"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#ff581d"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "thumb_bg",
+      "label": "Tab Background",
+      "default": "#f8efe8"
+    },
+    {
+      "type": "color",
+      "id": "thumb_hover_bg",
+      "label": "Tab Hover Background",
+      "default": "#f3dbf1"
+    },
+    {
+      "type": "color",
+      "id": "thumb_active_bg",
+      "label": "Tab Active Background",
+      "default": "#ff581d"
+    },
+    {
+      "type": "color",
+      "id": "thumb_active_text",
+      "label": "Tab Active Text/Icon",
+      "default": "#fcfaf8"
+    },
+    {
+      "type": "color",
+      "id": "nav_color",
+      "label": "Nav Button Color",
+      "default": "#ff581d"
+    },
+    {
+      "type": "color",
+      "id": "nav_hover_bg",
+      "label": "Nav Hover Background",
+      "default": "#f3dbf1"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image Border Radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Tab Icon (24x24)"
+        },
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab Label",
+          "default": "Feature"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Feature Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>Describe this feature in detail.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature 15 V2",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "tab_label": "Farm-to-Table",
+            "subheading": "Farm-to-Table",
+            "text": "<p>Our commitment to farm-to-table means we partner with local farmers and artisans.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "tab_label": "Handpicked",
+            "subheading": "Handpicked",
+            "text": "<p>Quality begins with selection, and every product we offer is handpicked for its superior taste and texture.</p>"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "tab_label": "Ethically Sourced",
+            "subheading": "Ethically Sourced",
+            "text": "<p>Our commitment to sustainability means all our ingredients are ethically sourced from environmentally responsible suppliers.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
