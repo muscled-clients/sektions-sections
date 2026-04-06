@@ -2191,6 +2191,198 @@
         "padding_top": 40,
         "padding_bottom": 16
       }
+    },
+    "hero_24_v1_tgNNdU": {
+      "type": "hero-24-v1",
+      "blocks": {
+        "review_7Cdijr": {
+          "type": "review",
+          "settings": {
+            "review_text": "50K+ Happy Customers",
+            "rating_stars": 4,
+            "last_star_fill": 80,
+            "rating_count_text": "Based on 2,400+ reviews"
+          }
+        },
+        "heading_QBgqxd": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>It's all about the <strong>crave</strong></p>",
+            "underline_color": "#ffffff"
+          }
+        },
+        "text_FqQhxP": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Discover our range of delicious, handcrafted snacks made with premium ingredients.</p>"
+          }
+        },
+        "button_cFtj9M": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop bars",
+            "button_link": "",
+            "button_text_color": "#ffffff",
+            "button_bg_color": "#121212",
+            "button_border_color": "#121212",
+            "button_border_width": 2,
+            "button_border_radius": 6,
+            "button_padding_y": 14,
+            "button_padding_x": 32,
+            "button_hover_text_color": "#121212"
+          }
+        },
+        "button_kNjiWF": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop chips",
+            "button_link": "",
+            "button_text_color": "#ffffff",
+            "button_bg_color": "#121212",
+            "button_border_color": "#121212",
+            "button_border_width": 2,
+            "button_border_radius": 6,
+            "button_padding_y": 14,
+            "button_padding_x": 32,
+            "button_hover_text_color": "#121212"
+          }
+        },
+        "footer_text_WxBEdk": {
+          "type": "footer_text",
+          "settings": {
+            "text": "<p>Free shipping on orders over $50</p>"
+          }
+        }
+      },
+      "block_order": [
+        "review_7Cdijr",
+        "heading_QBgqxd",
+        "text_FqQhxP",
+        "button_cFtj9M",
+        "button_kNjiWF",
+        "footer_text_WxBEdk"
+      ],
+      "name": "Hero 24 V1",
+      "settings": {
+        "overlay_color": "#ffffff",
+        "overlay_opacity": 10,
+        "section_height_mobile": 480,
+        "section_height_desktop": 700,
+        "content_max_width": 36,
+        "content_vertical_alignment": "center",
+        "content_horizontal_position": "left",
+        "heading_color": "#121212",
+        "text_color": "#121212",
+        "bg_color": "#ffffff"
+      }
+    },
+    "hero_24_v2_BBef38": {
+      "type": "hero-24-v2",
+      "blocks": {
+        "review_mfdCdW": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "review_text": "200+ Happy Customers",
+            "review_subtext": "Excellent 4.9"
+          }
+        },
+        "heading_HHbYUB": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Which <strong>AirPods</strong> are right for you?</p>"
+          }
+        },
+        "text_LWVPaB": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Discover the perfect AirPods for your lifestyle. Immersive sound, comfort, and seamless connectivity.</p>"
+          }
+        },
+        "button_primary_pVDgma": {
+          "type": "button_primary",
+          "settings": {
+            "label": "Shop AirPods",
+            "link": ""
+          }
+        },
+        "button_secondary_9nghMQ": {
+          "type": "button_secondary",
+          "settings": {
+            "label": "Shop Accessories",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_mfdCdW",
+        "heading_HHbYUB",
+        "text_LWVPaB",
+        "button_primary_pVDgma",
+        "button_secondary_9nghMQ"
+      ],
+      "name": "Hero 24 V2",
+      "settings": {
+        "background_color": "#1a1a2e",
+        "text_color": "#ffffff",
+        "heading_color": "#ffffff",
+        "subtext_color": "#cccccc",
+        "accent_color": "#f8b16b",
+        "accent_hover_color": "#e79e55"
+      }
+    },
+    "hero_24_v3_NW4BwD": {
+      "type": "hero-24-v3",
+      "blocks": {
+        "review_QBrCEi": {
+          "type": "review",
+          "settings": {
+            "review_text": "250 + Happy customers",
+            "rating": 4.5,
+            "rating_label": "Excellent 4.9"
+          }
+        },
+        "heading_pxYM8A": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>ROLL-OUT BEDS</p>",
+            "heading_tag": "h2"
+          }
+        },
+        "text_Ce49N9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Designed to create calm moments and peaceful sleep for your little ones.</p>"
+          }
+        },
+        "button_g7khMk": {
+          "type": "button",
+          "settings": {
+            "button_label": "SHOP BENI BEDS",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_QBrCEi",
+        "heading_pxYM8A",
+        "text_Ce49N9",
+        "button_g7khMk"
+      ],
+      "name": "Hero 24 V3",
+      "settings": {
+        "overlay_color": "rgba(238,232,225,0.1)",
+        "heading_color": "#272425",
+        "text_color": "#272425",
+        "underline_color": "#17c87c",
+        "review_text_color": "#272425",
+        "avatar_border_color": "#eee8e1",
+        "button_bg": "#272425",
+        "button_text_color": "#fff8eb",
+        "button_border_color": "#272425",
+        "button_hover_bg": "#fff8eb",
+        "button_hover_text": "#272425"
+      }
     }
   },
   "order": [
@@ -2215,6 +2407,9 @@
     "plp_promo_header_DgzFyy",
     "kind_product_grid_WYygJW",
     "video_with_text_kind_WepC7P",
-    "ingredients_spotlight_XUBHGW"
+    "ingredients_spotlight_XUBHGW",
+    "hero_24_v1_tgNNdU",
+    "hero_24_v2_BBef38",
+    "hero_24_v3_NW4BwD"
   ]
 }
