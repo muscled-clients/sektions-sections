@@ -1,4 +1,4 @@
-{{ 'section-hero-24-v3.css' | asset_url | stylesheet_tag }}
+{%- comment -%} Styles inlined below — external CSS file removed {%- endcomment -%}
 
 {%- style -%}
   #Hero-24-v3-{{ section.id }} {
@@ -61,7 +61,8 @@
                         class: 'hero-24-v3__avatar-img',
                         loading: 'lazy',
                         width: 42,
-                        height: 42
+                        height: 42,
+                        alt: 'Customer avatar'
                       }}
                     </div>
                   {%- else -%}

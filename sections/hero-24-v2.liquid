@@ -280,13 +280,13 @@
               -%}
                 <div class="hero-review-avatars">
                   {%- if block.settings.avatar_1 != blank -%}
-                    {{ block.settings.avatar_1 | image_url: width: 96 | image_tag: widths: '48, 72, 96' }}
+                    {{ block.settings.avatar_1 | image_url: width: 96 | image_tag: widths: '48, 72, 96', alt: 'Customer avatar' }}
                   {%- endif -%}
                   {%- if block.settings.avatar_2 != blank -%}
-                    {{ block.settings.avatar_2 | image_url: width: 96 | image_tag: widths: '48, 72, 96' }}
+                    {{ block.settings.avatar_2 | image_url: width: 96 | image_tag: widths: '48, 72, 96', alt: 'Customer avatar' }}
                   {%- endif -%}
                   {%- if block.settings.avatar_3 != blank -%}
-                    {{ block.settings.avatar_3 | image_url: width: 96 | image_tag: widths: '48, 72, 96' }}
+                    {{ block.settings.avatar_3 | image_url: width: 96 | image_tag: widths: '48, 72, 96', alt: 'Customer avatar' }}
                   {%- endif -%}
                 </div>
               {%- endif -%}
