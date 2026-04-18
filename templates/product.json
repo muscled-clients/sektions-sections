@@ -38,6 +38,17 @@
           "type": "quantity_selector",
           "settings": {}
         },
+        "bl_quote_app_product_warranty_mdN9By": {
+          "type": "shopify://apps/bl-quote-app/blocks/product-warranty/019d774c-b3b9-7f8b-9a3f-f8be8262133d",
+          "settings": {
+            "title": "Extended Warranty",
+            "warranty_label": "Extended Warranty",
+            "show_description": true,
+            "description": "Protect your purchase with extended warranty coverage.",
+            "show_details": false,
+            "details_text": "Our warranty covers manufacturing defects, component failures, and normal wear and tear for the duration of the coverage period. Contact our support team for claims."
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -62,6 +73,7 @@
         "price",
         "variant_picker",
         "quantity_selector",
+        "bl_quote_app_product_warranty_mdN9By",
         "buy_buttons",
         "description",
         "share"
